@@ -132,7 +132,7 @@ public class MemberController {
 		return returnMap; 
 	}
 	
-	//인코딩
+	//인코딩  
 	public String encodeBcrypt(String planeText, int strength) {
 		  return new BCryptPasswordEncoder(strength).encode(planeText);
 	}

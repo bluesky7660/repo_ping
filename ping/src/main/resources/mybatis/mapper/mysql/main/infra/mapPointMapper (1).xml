@@ -1,0 +1,115 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lalaping.complaint.ComplaintDao">
+	<resultMap type="com.lalaping.complaint.ComplaintDto" id="resultMapObj"></resultMap>
+	
+	<sql id="selectCommon2">
+        FROM mapPoint a
+        
+        WHERE 1=1
+        <if test="shValue != null and !shValue.equals('')">
+            <choose>
+                <when test="shOption == null">
+                    AND(
+                        a.mpTitle LIKE CONCAT('%', #{shValue}, '%')
+                        OR a.mpText LIKE CONCAT('%', #{shValue}, '%')
+                    )
+                </when>
+                <when test="shOption == 1 and shOption != null and shOption != ''">
+                    AND a.mpTitle = #{shValue}
+                </when>
+                <when test="shOption == 2 and shOption != null and shOption != ''">
+                    AND a.mpText LIKE CONCAT('%', #{shValue}, '%')
+                </when>
+                <when test="shOption == 3 and shOption != null and shOption != ''">
+                    AND a.mpAddress LIKE CONCAT('%', #{shValue}, '%')
+                </when>
+            </choose>
+        </if>
+        <if test="shDelNy != null and !shDelNy.equals('')">
+            AND a.mpDelNy = #{shDelNy}
+        </if>
+        <if test="shType != null and !shType.equals('')">
+            AND a.mpType = #{shType}
+        </if>
+        <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
+        	<choose>
+        		<when test="shOptionDate == 1"> AND a.mpRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+           	</choose>
+        </if>
+       
+    </sql>
+    
+    <select id="selectList" resultMap="resultMapObj">
+    	<include refid="base.selectListUpperForMysql"/>
+    	SELECT
+    		a.mpSeq
+    		,a.mpTitle
+    		,a.mpText
+    		,a.mpAddress
+    		,a.mpType
+    		,a.mpDelNy
+    		,a.mpRegDate
+   		<include refid="selectCommon2"/>
+   		ORDER BY
+     	a.mpRegDate DESC
+		<include refid="base.selectListLowerForMysql"/>
+    </select>
+    
+    <insert id="insert">
+    	INSERT INTO mapPoint(
+    		mpTitle
+    		,mpText
+    		,mpAddress
+    		,mpType
+    		,mpDelNy
+    		,mpRegDate
+    	)VALUES(
+    		#{mpTitle}
+    		,#{mpText}
+    		,#{mpAddress}
+    		,#{mpType}
+    		,0
+    		,now()
+    	)
+    </insert>
+    
+    <select id="selectOne">
+    	SELECT
+    		a.mpSeq
+    		,a.mpTitle
+    		,a.mpText
+    		,a.mpAddress
+    		,a.mpType
+    		,a.mpDelNy
+    		,a.mpRegDate
+   		FROM mapPoint a
+   		WHERE 1=1
+   		AND mpSeq = #{mpSeq}
+    </select>
+    
+    <update id="update">
+    	UPDATE mapPoint
+    	SET
+    		mpTitle = #{mpTitle}
+    		,mpText = #{mpText}
+    		,mpAddress = #{mpAddress}
+    		,mpType = #{mpType}
+		WHERE 1=1
+		AND mpSeq = #{mpSeq}
+    </update>
+    
+    <update id="uelect">
+  		UPDATE mapPoint
+  		SET
+  			mpDelNy = 1
+		WHERE 1=1
+		AND mpSeq = #{mpSeq}
+    </update>
+    
+    <delete id="delect">
+    	 DELETE FROM mapPoint
+        WHERE mpSeq = #{mpSeq}
+    </delete>
+	
+</mapper>
