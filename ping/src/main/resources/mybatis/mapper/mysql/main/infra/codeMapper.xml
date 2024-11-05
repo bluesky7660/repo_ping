@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lalaping.infra.code.CodeDao">
+<!-- namespace:mapper와 연결될 dao파일  -->
+<!-- xml에서 주석 단축키 : ctrl + shift + c -->
+
+	<resultMap type="com.lalaping.infra.code.CodeDto" id="resultMapObj"></resultMap>
+	<sql id="selectCommon">
+		FROM
+			commoncode a
+			left join codegroup b on a.codeGroup_cgSeq = b.cgSeq
+		where 1=1
+			<if test="shDelNy != null and !shDelNy.equals('')">AND a.delNy = #{sDelNy}</if>
+			<if test="shUseNy != null and !shUseNy.equals('')">AND a.useNy = #{sUseNy}</if>
+			<if test="shValue != null and !shValue.equals('')">
+				<choose>
+					<when test="shOption == null">
+						AND(
+							a.cdSeq Like CONCAT('%',#{shValue},'%')
+							OR b.cgName Like CONCAT('%',#{shValue},'%')
+							OR b.cgSeq Like CONCAT('%',#{shValue},'%')
+							OR a.cdName Like CONCAT('%',#{shValue},'%')
+						)
+					</when>
+					<when test="shOption == 1">AND a.cdSeq = #{shValue}</when>
+					<when test="shOption == 2">AND a.cdName Like CONCAT('%',#{shValue},'%') </when>
+					<when test="shOption == 3">AND b.cgSeq Like CONCAT('%',#{shValue},'%')</when>
+					<when test="shOption == 4">AND b.cgName Like CONCAT('%',#{shValue},'%')</when>
+				</choose>
+			</if>
+			<choose>
+				<when test="shOptionDate == 1"> AND a.cdRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2"> AND a.cdModDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			</choose>
+	</sql>
+	<select id="selectList">
+		<include refid="base.selectListUpperForMysql"/>
+		select
+			a.cdSeq
+		    ,a.cdName
+		    ,a.cdOrder
+		    ,a.cdDesc
+		    ,a.cdUseNy
+		    ,a.cdDelNy
+		    ,a.cdRegDate
+		    ,a.cdModDate
+		    ,a.codeGroup_cgSeq
+		    ,b.cgSeq
+		    ,b.cgName
+	    <include refid="selectCommon"/>
+	    ORDER BY
+			a.cdOrder desc
+		<include refid="base.selectListLowerForMysql"/>
+	</select>
+	<select id="listCount" resultType="int">
+        SELECT COUNT(*) 
+        <include refid="selectCommon"/>
+    </select>
+	<insert id="insert">
+		INSERT INTO commonCode(
+			cdName
+			,cdOrder
+			,cdDesc
+			,cdUseNy
+		    ,cdDelNy
+		    ,cdRegDate
+		    ,cdModDate
+		    ,codeGroup_cgSeq
+		)VALUES(
+			#{cdName}
+		    ,#{cdOrder}
+		    ,#{cdDesc}
+		    ,#{cdUseNy}
+		    ,0
+		    ,now()
+		    ,now()
+		    ,#{codeGroup_cgSeq}
+		    )
+	</insert>
+	<select id="selectOne" resultMap="resultMapObj">
+		select
+			b.cdSeq
+		    ,b.cdName
+		    ,b.cdOrder
+		    ,b.cdDesc
+		    ,b.cdUseNy
+		    ,b.cdDelNy
+		    ,b.cdRegDate
+		    ,b.cdModDate
+		    ,b.codeGroup_cgSeq
+		    ,a.cgSeq
+		    ,a.cgName
+	    FROM commonCode b
+	    LEFT JOIN codeGroup a
+	    ON b.codeGroup_cgSeq = a.cgSeq
+	    WHERE 1=1
+	    AND b.cdSeq = #{cdSeq}
+	</select>
+	<update id="update">
+		UPDATE commonCode 
+		set
+			cdName = #{cdName}
+			,cdUseNy = #{cdUseNy}
+			,cdOrder = #{cdOrder}
+			,cdDesc = #{cdDesc}
+			,cdModDate = now()
+			,codeGroup_cgSeq = #{codeGroup_cgSeq}
+		WHERE 1=1
+			AND cdSeq = #{cdSeq}
+	</update>
+	<update id="uelete">
+		update commonCode
+		set
+			cdDelNy = 1
+		where 1=1
+			and cdSeq = #{cdSeq}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM commonCode
+		where 1=1
+			and cdSeq = #{cdSeq}
+	</delete>
+	<select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
+		SELECT 
+			cdSeq
+			, cdName
+			, codeGroup_cgSeq
+		FROM
+			commoncode
+		WHERE 1=1
+			AND cdDelNy = 0
+		    AND cdUseNy = 1
+   	</select>
+</mapper>

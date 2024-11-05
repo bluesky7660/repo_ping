@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Meta -->
+		<meta name="description" content="Best Bootstrap Admin Dashboards">
+		<meta name="author" content="Bootstrap Gallery" />
+		<link rel="canonical" href="https://www.bootstrap.gallery/">
+		<meta property="og:url" content="https://www.bootstrap.gallery">
+		<meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
+		<meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
+		<meta property="og:type" content="Website">
+		<meta property="og:site_name" content="Bootstrap Gallery">
+		<link rel="shortcut icon" href="/xdm/v1/template/arise-v1.0/assets/images/favicon.svg">
+
+		<!-- Title -->
+		<title>직원회원</title>
+
+
+		<!-- *************
+			************ Common Css Files *************
+		************ -->
+		<!-- Animated css -->
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/css/animate.css">
+
+		<!-- Bootstrap font icons css -->
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/fonts/bootstrap/bootstrap-icons.css">
+
+		<!-- Main css -->
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/css/main.min.css">
+
+
+		<!-- *************
+			************ Vendor Css Files *************
+		************ -->
+
+		<!-- Scrollbar CSS -->
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/vendor/overlay-scroll/OverlayScrollbars.min.css">
+
+		<!-- Data Tables -->
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/vendor/datatables/dataTables.bs5.css" />
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/vendor/datatables/dataTables.bs5-custom.css" />
+		<!-- Date Range CSS -->
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/vendor/daterange/daterange.css">
+
+		<!-- by developer -->
+		<link rel="stylesheet" href="/xdm/v1/css/datetimepicker/jquery.datetimepicker.min.css">
+		<link rel="stylesheet" href="/xdm/v1/css/commonXdm.css">
+		<style>
+		</style>
+	</head>
+
+	<body>
+
+		<!-- Loading wrapper start -->
+		<!-- <div id="loading-wrapper">
+			<div class="spinner">
+                <div class="line1"></div>
+				<div class="line2"></div>
+				<div class="line3"></div>
+				<div class="line4"></div>
+				<div class="line5"></div>
+				<div class="line6"></div>
+            </div>
+		</div> -->
+		<!-- Loading wrapper end -->
+
+		<!-- Page wrapper start -->
+		<div class="page-wrapper">
+
+			<!-- Sidebar wrapper start -->
+			<div th:replace="~{xdm/v1/infra/include/head :: sidebar-wrapper}"></div>
+			<!-- Sidebar wrapper end -->
+
+			<!-- *************
+				************ Main container start *************
+			************* -->
+			<div class="main-container">
+
+				<!-- Page header starts -->
+				<div class="page-header">
+
+					<div class="toggle-sidebar" id="toggle-sidebar"><i class="bi bi-list"></i></div>
+
+					<!-- Breadcrumb start -->
+					<ol class="breadcrumb d-md-flex d-none">
+						<li class="breadcrumb-item">
+							<i class="bi bi-house"></i>
+							<a href="../../infra/index/indexXdmView">Home</a>
+						</li>
+						<li class="breadcrumb-item">Page2</li>
+						<li class="breadcrumb-item breadcrumb-active" aria-current="page">Data</li>
+					</ol>
+					<!-- Breadcrumb end -->
+
+					<!-- Header actions ccontainer start -->
+					<div class="header-actions-container">
+
+						<!-- Search container start -->
+						<div class="search-container">
+
+							<!-- Search input group start -->
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Search anything">
+								<button class="btn" type="button">
+									<i class="bi bi-search"></i>
+								</button>
+							</div>
+							<!-- Search input group end -->
+
+						</div>
+						<!-- Search container end -->
+
+						<!-- Leads start -->
+						<a href="orders.html" class="leads d-none d-xl-flex">
+							<div class="lead-details">You have <span class="count"> 21 </span> new leads </div>
+							<span class="lead-icon"><i
+									class="bi bi-bell-fill animate__animated animate__swing animate__infinite infinite"></i><b
+									class="dot animate__animated animate__heartBeat animate__infinite"></b></span>
+						</a>
+						<!-- Leads end -->
+
+						<!-- Header actions start -->
+						<ul class="header-actions">
+							<li class="dropdown d-none d-md-block">
+								<a href="#" id="countries" data-toggle="dropdown" aria-haspopup="true">
+									<img src="/xdm/v1/template/arise-v1.0/assets/images/flags/1x1/br.svg" class="flag-img" alt="Admin Panels" />
+								</a>
+								<div class="dropdown-menu dropdown-menu-end mini" aria-labelledby="countries">
+									<div class="country-container">
+										<a href="../../infra/index/indexXdmView">
+											<img src="/xdm/v1/template/arise-v1.0/assets/images/flags/1x1/us.svg" alt="Clean Admin Dashboards" />
+										</a>
+										<a href="../../infra/index/indexXdmView">
+											<img src="/xdm/v1/template/arise-v1.0/assets/images/flags/1x1/in.svg" alt="Google Dashboards" />
+										</a>
+										<a href="../../infra/index/indexXdmView">
+											<img src="/xdm/v1/template/arise-v1.0/assets/images/flags/1x1/gb.svg" alt="AI Admin Dashboards" />
+										</a>
+										<a href="../../infra/index/indexXdmView">
+											<img src="/xdm/v1/template/arise-v1.0/assets/images/flags/1x1/tr.svg" alt="Modern Dashboards" />
+										</a>
+										<a href="../../infra/index/indexXdmView">
+											<img src="/xdm/v1/template/arise-v1.0/assets/images/flags/1x1/ca.svg" alt="Best Admin Dashboards" />
+										</a>
+									</div>
+								</div>
+							</li>
+							<li class="dropdown">
+								<a href="#" id="userSettings" class="user-settings" data-toggle="dropdown" aria-haspopup="true">
+									<span class="user-name d-none d-md-block" th:text="${session.sessNameXdm}"></span>
+									<span class="avatar">
+										<img src="/xdm/v1/template/arise-v1.0/assets/images/user.png" alt="Admin Templates">
+										<span class="status online"></span>
+									</span>
+								</a>
+								<div class="dropdown-menu dropdown-menu-end" aria-labelledby="userSettings">
+									<div class="header-profile-actions">
+										<a href="profile.html">Profile</a>
+										<a href="account-settings.html">Settings</a>
+										<button class="btn" type="button" id="logoutBtn">Logout</button>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<!-- Header actions end -->
+
+					</div>
+					<!-- Header actions ccontainer end -->
+
+				</div>
+				<!-- Page header ends -->
+
+				<!-- Content wrapper scroll start -->
+				<div class="content-wrapper-scroll">
+
+					<!-- Content wrapper start -->
+					<div class="content-wrapper">
+
+						<!-- Row start -->
+						<div class="row">
+							<div class="col-sm-12 col-12">
+								<!-- Card start -->
+								<div class="card border">
+									<div class="card-header bg-light">
+										<h2 class="card-title">
+											직원회원
+										</h2>
+										<div>
+											<form name class="row gx-3 align-items-center" method="post" autocomplete="off" action="/v1/member/staffMemberXdmList">
+												<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
+												<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
+												<div class="row gy-3">
+													<div class="col-12 col-md-6 col-lg-4 col-xl ">
+														<label class="visually-hidden" for="selectDelNy">삭제검색</label>
+														<select class="form-select" id="selectDelNy" name="shDelNy">
+															<option value="" selected>삭제여부를 선택하세요</option>
+															<option value="1" th:selected="${vo.shDelNy == 1}">Y</option>
+															<option value="0" th:selected="${vo.shDelNy == 0}">N</option>
+														</select>
+													</div>
+													<div class="col-12 col-md-6 col-lg-4 col-xl">
+														<label class="visually-hidden" for="selectDateType">검색날짜 종류</label>
+														<select class="form-select" id="selectDateType" name="shOptionDate">
+															<option value="" selected>날짜종류 선택하세요</option>
+															<option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option>
+															<option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
+														</select>
+													</div>
+													<div class="col-12 col-md-6 col-lg-4 col-xl">
+														<label class="visually-hidden" for="inputDateStart">시작일</label>
+														<input type="text" class="form-control" id="inputDateStart" name="shDateStart" th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="시작일을 선택하세요" value="">
+													</div>
+													<div class="col-12 col-md-6 col-lg-4 col-xl">
+														<label class="visually-hidden" for="inputDateEnd">종료일</label>
+														<input type="text" class="form-control" id="inputDateEnd" name="shDateEnd" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="종료일을 선택하세요" value="">
+													</div>
+													<div class="col-12 col-md-6 col-lg-4 col-xl">
+													</div>
+												</div>
+												<div class="row gy-3 mt-0">
+													<div class="col-12 col-md-6 col-lg-4 col-xl">
+														<label class="visually-hidden" for="selectKeywordType">검색어 종류</label>
+														<select class="form-select" id="selectKeywordType" name="shOption">
+															<option value="" selected>상세 검색구분</option>
+															<option value="1" th:selected="${vo.shOption == 1}">직원코드</option>
+															<option value="2" th:selected="${vo.shOption == 2}">직원이름</option>
+															<option value="3" th:selected="${vo.shOption == 3}">아이디</option>
+															<option value="4" th:selected="${vo.shOption == 4}">성별</option>
+															<option value="5" th:selected="${vo.shOption == 5}">이메일</option>
+															<option value="6" th:selected="${vo.shOption == 6}">전화번호</option>
+															<option value="7" th:selected="${vo.shOption == 7}">생년월일</option>
+															<option value="8" th:selected="${vo.shOption == 8}">부서</option>
+														</select> 
+													</div> 
+													<div class="col-12 col-md-6 col-lg-4 col-xl">
+														<label class="visually-hidden" for="inputKeyword">검색어</label> 
+														<input type="text" class="form-control" id="inputKeyword" name="shValue" th:value="${vo.shValue}" placeholder="검색어">
+													</div> 
+													
+													<div class="col-12 col-lg-4 col-xl "> 
+														<button type="submit" class="btn btn-info "><i class="bi bi-search"></i></button>
+														<button type="button" class="btn btn-info float-md-none float-end"><i class="bi bi-arrow-clockwise"></i></button>
+													</div> 
+													<div class="col"> 
+													</div> 
+													<div class="col"> 
+													</div>
+													
+												</div>
+											</form>
+										</div>
+									</div>
+									<div class="card-body">
+										<div class="row justify-content-between">
+											<div class="col-6 col-lg-3">Total: <span th:text="${vo.totalRows}"></span></div>
+											<div class="col-4 col-xs-3 col-lg-2 dataTable-dropdown dataTables_length">
+												<select class="dataTable-selector form-select" id="rowNumToShowSelect" name="rowNumToShow">
+													<option value="2" th:selected="${vo.rowNumToShow == 2}">2</option>
+													<option value="3" th:selected="${vo.rowNumToShow == 3}">3</option>
+													<option value="5" th:selected="${vo.rowNumToShow == 5}">5</option>
+													<option value="10" th:selected="${vo.rowNumToShow == 10}">10</option>
+													<option value="20" th:selected="${vo.rowNumToShow == 20}">20</option>
+													<option value="100" th:selected="${vo.rowNumToShow == 100}">100</option>
+												</select>
+											</div>
+										</div>
+										<div class="scrolltable">
+											<table class="table dataTable table-hover" id="">
+												<thead>
+													<tr>
+														<th>
+															<input type="checkbox">
+														</th>
+														<th><span>#</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">직원 코드</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">부서</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">직원 이름</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">아이디</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">성별</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">이메일</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">전화번호</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">생년월일</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">삭제여부</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">등록일</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">수정일</span></th>
+													</tr>
+												</thead>
+												<tbody>
+												<tr th:if="${#lists.isEmpty(list)}" class="nodata">
+													<td colspan="12">
+														<p>There are no data</p>
+													</td>
+												</tr>
+												
+												<tr th:if="${!#lists.isEmpty(list)}" th:each="list : ${list}">
+													<td>
+														<input class="form-check-input" type="checkbox"
+														value="" id="flexCheckDefault">
+													</td>
+													<td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}" class="align-middle"></td>
+													<td th:text="${list.sfSeq}"></td>
+													<td th:text = "${@codeService.selectOneCachedCode(list.sfDept)}"></td>
+													<td class="td_spotlight">
+														<a th:href="@{/v1/member/staffMemberXdmMfom(sfSeq=${list.sfSeq})}" th:text="${list.sfName}"></a>
+													</td>
+													<td th:text="${list.sfId}"></td>
+													<td th:text = "${@codeService.selectOneCachedCode(list.sfGender)}"></td>
+													<td th:text = "${list.sfEmail}"></td>
+													<td th:text="${#strings.substring(list.sfTel, 0, 3)} + '-' + ${#strings.substring(list.sfTel, 3, 7)} + '-' + ${#strings.substring(list.sfTel, 7, 11)}"></td>
+													<td th:text ="${#dates.format(list.sfBirthDay, 'yyyy-MM-dd')}"></td>
+													<td th:if="${list.sfDelNy eq false }">N</td>
+													<td th:unless ="${list.sfDelNy eq false }">Y</td>
+													<td th:text="${#dates.format(list.sfRegDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+													<td th:text="${#dates.format(list.sfModDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+												</tr>
+											</tbody>
+											</table>
+										</div>
+										<div class="dataTable-bottom">
+											<nav class="dataTable-pagination mt-5" aria-label="dataTable-pagination">
+												<!-- paging s  -->
+												
+												<ul class="dataTable-pagination-list pagination pagination-primary justify-content-center">
+													<li class="paginate_button page-item" th:classappend="${vo.thisPage > 1} ? '' : 'disabled'">
+														<a class="page-link" th:attr="onclick=|goList('1')|" href="javascript:goList(1)" th:if="${vo.thisPage > 1}">
+															<span aria-hidden="true"><i class="bi bi-chevron-double-left"></i></span>
+														</a>
+														<a class="page-link" th:if="${vo.thisPage <= 1}">
+															<span aria-hidden="true"><i class="bi bi-chevron-double-left"></i></span>
+														</a>
+													</li>
+													<li class="paginate_button previous page-item" id="previousPage" th:classappend="${vo.thisPage > 1} ? '' : 'disabled'">
+														<a class="page-link" th:attr="onclick=|goList('${vo.thisPage - 1}')|" href="javascript:goList(${vo.thisPage - 1})" th:if="${vo.thisPage > 1}">
+															<span aria-hidden="true"><i class="bi bi-chevron-left"></i></span>
+														</a>
+														<a class="page-link" th:if="${vo.thisPage <= 1}">
+															<span aria-hidden="true"><i class="bi bi-chevron-left"></i></span>
+														</a>
+													</li>
+													<li th:each="i : ${#numbers.sequence(
+																		vo.thisPage == 1 ? 1 : 
+																		vo.thisPage == 2 ? 1 : 
+																		vo.thisPage == vo.totalPages - 1 ? vo.thisPage - 3 : 
+																		vo.thisPage == vo.totalPages ? vo.thisPage - 4 : 
+																		vo.thisPage - 2, 
+																		
+																		vo.thisPage == 1 ? 5 : 
+																		vo.thisPage == 2 ? 5 : 
+																		vo.thisPage == vo.totalPages - 1 ? vo.totalPages : 
+																		vo.thisPage == vo.totalPages ? vo.totalPages : 
+																		vo.thisPage + 2
+																	)}"
+														class="paginate_button page-item"
+														th:if="${i > 0 && i <= vo.totalPages}" 
+														th:classappend="${i == vo.thisPage} ? 'active' : ''">
+														<a class="page-link" th:attr="onclick=|goList('${i}')|" th:text="${i}"></a>
+													</li>
+													<li class="paginate_button next page-item" id="nextPage" th:classappend="${vo.thisPage < vo.totalPages} ? '' : 'disabled'">
+														<a class="page-link" th:attr="onclick=|goList('${vo.thisPage + 1}')|" href="javascript:goList(${vo.thisPage + 1})" th:if="${vo.thisPage < vo.totalPages}">
+															<span aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
+														</a>
+														<a class="page-link" th:if="${vo.thisPage >= vo.totalPages}">
+															<span aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
+														</a>
+													</li>
+													<li class="paginate_button page-item" th:classappend="${vo.thisPage < vo.totalPages} ? '' : 'disabled'">
+														<a class="page-link" th:attr="onclick=|goList('${vo.totalPages}')|" href="javascript:goList(${vo.totalPages})" th:if="${vo.thisPage < vo.totalPages}">
+															<span aria-hidden="true"><i class="bi bi-chevron-double-right"></i></span>
+														</a>
+														<a class="page-link" th:if="${vo.thisPage >= vo.totalPages}">
+															<span aria-hidden="true"><i class="bi bi-chevron-double-right"></i></span>
+														</a>
+													</li>
+												</ul>
+												<!-- paging e  -->	
+											</nav>
+										</div>
+										<div th:replace="~{xdm/v1/infra/include/link :: list-link}"></div>
+									</div>
+								</div>
+								<!-- Card end -->
+							</div>
+						</div>
+						<!-- Row end -->
+
+					</div>
+					<!-- Content wrapper end -->
+
+					<!-- App Footer start -->
+					<div class="app-footer">
+						<span>© Arise admin 2023</span>
+					</div>
+					<!-- App footer end -->
+
+				</div>
+				<!-- Content wrapper scroll end -->
+				<!-- modals -->
+				<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="deleteModalLabel">데이터 삭제</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<span>선택한 데이터를 삭제하시겠습니까?</span>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-dark" data-bs-dismiss="modal">취소</button>
+								<button type="button" class="btn btn-success" data-bs-dismiss="modal">삭제 실행</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- *************
+				************ Main container end *************
+			************* -->
+
+		</div>
+		<!-- Page wrapper end -->
+
+		<!-- *************
+			************ Required JavaScript Files *************
+		************* -->
+		
+		<script type="text/javascript">
+			
+			window.addEventListener('load',function() {
+				$.datetimepicker.setLocale('ko');
+				$("#inputDateStart,#inputDateEnd").datetimepicker({
+					timepicker:false,
+					format:'Y-m-d'
+				});
+				var form = document.querySelector("form");
+				var pageSizeSelect = document.getElementById('rowNumToShowSelect');
+				var rowNumToShow = document.querySelector("input[name=rowNumToShow]");
+				var url = form.action;
+				function updatePageSize() {
+					if (form && pageSizeSelect) {
+						// 선택된 pageSizes 값을 가져옵니다.
+						var pageSizes = pageSizeSelect.value;
+						rowNumToShow.value = pageSizes;
+						form.action = url;
+						form.submit();
+					} else {
+						console.error('Form or pageSizeSelect element not found.');
+					}
+				}
+
+				console.log('value: ');
+				
+				if (pageSizeSelect) {
+					pageSizeSelect.addEventListener('change', updatePageSize);
+				}
+
+				goList = function (thisPage) {
+					console.log("값: "+thisPage);
+					document.querySelector("input[name=thisPage]").value = thisPage;
+					console.log("thisPage값: "+document.querySelector("input[name=thisPage]").value);
+					form.action = url;
+					form.submit();
+				}
+			});
+			
+		</script>
+		
+		<!-- Required jQuery first, then Bootstrap Bundle JS -->
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/jquery.min.js"></script>
+		<!-- <script src="/xdm/v1/jquery/jquery/jquery-3.7.1.min.js"></script> -->
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/bootstrap.bundle.min.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/modernizr.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/moment.js"></script>
+
+		<!-- *************
+			************ Vendor Js Files *************
+		************* -->
+
+		<!-- Overlay Scroll JS -->
+		<script src="/xdm/v1/template/arise-v1.0/assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/vendor/overlay-scroll/custom-scrollbar.js"></script>
+
+		<!-- Data Tables -->
+		<script src="/xdm/v1/template/arise-v1.0/assets/vendor/datatables/dataTables.min.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/vendor/datatables/dataTables.bootstrap.min.js"></script>
+
+		<!-- Custom Data tables -->
+		<script src="/xdm/v1/template/arise-v1.0/assets/vendor/datatables/custom/custom-datatables.js"></script>
+
+		<!-- Date Range JS -->
+		<script src="/xdm/v1/template/arise-v1.0/assets/vendor/daterange/daterange.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/vendor/daterange/custom-daterange.js"></script>
+
+		<!-- Main Js Required -->
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/main.js"></script>
+
+		<!-- by developer -->
+		<script src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
+		<script src="/xdm/v1/js/commonXdm.js"></script>
+	</body>
+
+</html>
