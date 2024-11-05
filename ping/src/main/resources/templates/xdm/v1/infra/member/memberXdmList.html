@@ -188,6 +188,7 @@
 														</th>
 														<th><span>#</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">코드</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">관리자</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">유저 이름</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">아이디[이메일]</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">성별</span></th>
@@ -212,6 +213,8 @@
 													</td>
 													<td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}" class="align-middle"></td>
 													<td th:text="${list.mmSeq}"></td>
+													<td th:if="${list.mmAdminNy eq false }">N</td>
+													<td th:unless ="${list.mmAdminNy eq false }">Y</td>
 													<td class="td_spotlight">
 														<a th:href="@{/v1/member/memberXdmMfom(mmSeq=${list.mmSeq})}" th:text="${list.mmName}"></a>
 													</td>

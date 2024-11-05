@@ -114,6 +114,12 @@ public class MemberController {
 			}else {
 				returnMap.put("rt", "fail");
 			}
+//			httpSession.setMaxInactiveInterval(60 * 30); 
+//			httpSession.setAttribute("sessIdXdm", rtLogin.getMmEmail()); 
+//			httpSession.setAttribute("sessSeqXdm", rtLogin.getMmSeq()); 
+//			httpSession.setAttribute("sessNameXdm", rtLogin.getMmName());
+//
+//			returnMap.put("rt", "success"); 
 		} else { 
 			System.out.println("로그인 실패: " + memberDto.getMmEmail()); 
 			returnMap.put("rt", "fail"); 
