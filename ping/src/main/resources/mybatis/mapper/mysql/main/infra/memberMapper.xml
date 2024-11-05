@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lalaping.infra.member.MemberDao">
+
+    <!-- StaffMember 영역 -->
+    <resultMap type="com.lalaping.infra.member.StaffMemberDto" id="staffResultMapObj"></resultMap>
+    <sql id="staffSelectCommon">
+        FROM staffMember a
+        LEFT JOIN commonCode c ON a.sfGender = c.cdSeq 
+        WHERE 1=1
+        <if test="shValue != null and !shValue.equals('')">
+            <choose>
+                <when test="shOption == null">
+                    AND(
+                    a.sfId LIKE CONCAT('%', #{shValue}, '%')
+                    OR a.sfName LIKE CONCAT('%', #{shValue}, '%')
+                    )
+                </when>
+                <when test="shOption == 1 and shOption != null and shOption != ''">
+                    AND a.sfSeq = #{shValue}
+                </when>
+                <when test="shOption == 2 and shOption != null and shOption != ''">
+                    AND a.sfName LIKE CONCAT('%', #{shValue}, '%')
+                </when>
+ 				<when test="shOption == 3">
+                	AND a.sfId LIKE CONCAT('%', #{shValue}, '%')
+            	</when>
+            	<when test="shOption == 4">
+            		AND c.cdName LIKE CONCAT('%', #{shValue}, '%')
+				</when>
+            	<when test="shOption == 5">
+              		AND a.sfEmail LIKE CONCAT('%', #{shValue}, '%')
+	            </when>
+	            <when test="shOption == 6">
+	          		AND a.sfTel LIKE CONCAT('%', #{shValue}, '%')
+	            </when>
+	            <when test="shOption == 7">
+	                AND a.sfBirthDay = #{shValue} 
+	            </when>
+	            <when test="shOption == 8">
+            		AND c.cdName LIKE CONCAT('%', #{shValue}, '%')
+				</when>
+            </choose>
+        </if>
+        <if test="shDelNy != null and !shDelNy.equals('')">
+            AND a.sfDelNy = #{shDelNy}
+        </if>
+        <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
+            <choose>
+                <when test="shOptionDate == 1">
+                    AND a.sfRegDate BETWEEN #{shDateStart} AND #{shDateEnd}
+                </when>
+                <when test="shOptionDate == 2">
+                    AND a.sfModDate BETWEEN #{shDateStart} AND #{shDateEnd}
+                </when>
+            </choose>
+        </if>
+    </sql>
+    
+    <select id="staffSelectList" resultMap="staffResultMapObj">
+    	<include refid="base.selectListUpperForMysql"/>
+        SELECT
+	        a.sfSeq,
+	        a.sfId,
+	        a.sfName,
+	        a.sfTel,
+	        a.sfBirthDay,
+	        a.sfDelNy,
+	        a.sfRegDate,
+	        a.sfModDate,
+	        a.sfEmail,
+	        a.sfGender,
+	        a.sfDept
+        <include refid="staffSelectCommon" />
+        ORDER BY a.sfSeq DESC
+        <include refid="base.selectListLowerForMysql"/>
+    </select>
+    <select id="staffSelectOne" resultMap="staffResultMapObj">
+		SELECT
+			a.sfSeq,
+	        a.sfId,
+	        a.sfName,
+	        a.sfTel,
+	        a.sfBirthDay,
+	        a.sfDelNy,
+	        a.sfRegDate,
+	        a.sfModDate,
+	        a.sfEmail,
+	        a.sfDept,
+	        a.sfGender
+		FROM
+		staffMember a
+		WHERE 1=1
+		AND a.sfSeq = #{sfSeq}
+	</select>
+    <select id="staffSeqList" resultMap="staffResultMapObj">
+        SELECT
+	        sfSeq
+	        ,sfName
+        FROM staffMember
+        WHERE 1=1
+    </select>
+    <select id="staffListCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="staffSelectCommon" />
+    </select>
+    <insert id="insertStaffMember">
+        INSERT INTO staffMember (
+	        sfId,
+	        sfPasswd,
+	        sfName,
+	        sfTel,
+	        sfBirthDay,
+	        sfDelNy,
+	        sfRegDate,
+	        sfModDate,
+	        sfEmail,
+	        sfGender,
+	        sfDept
+        ) VALUES (
+	        #{sfId},
+	        #{sfPasswd},
+	        #{sfName},
+	        #{sfTel},
+	        #{sfBirthDay},
+	        0,
+	        now(),
+	        now(),
+	        #{sfEmail},
+	        #{sfGender},
+	        #{sfDept}
+        )
+        <selectKey resultType="String" keyProperty="sfSeq" order="AFTER">
+            SELECT last_insert_id()
+        </selectKey>
+    </insert>
+    <update id="updateStaffMember">
+        UPDATE staffMember
+        SET
+	        sfId = #{sfId},
+	        sfName = #{sfName},
+	        <!-- sfPasswd = #{sfPasswd}, -->
+	        sfTel = #{sfTel},
+	        sfBirthDay = #{sfBirthDay},
+	        sfDept = #{sfDept},
+	        sfEmail = #{sfEmail},
+	        sfGender = #{sfGender},
+	        sfDept = #{sfDept}
+        WHERE sfSeq = #{sfSeq}
+    </update>
+    <delete id="deleteStaffMember">
+        DELETE FROM staffMember
+        WHERE sfSeq = #{sfSeq}
+    </delete>
+    <update id="ueleteStaffMember">
+        UPDATE staffMember
+        SET
+        	sfDelNy = 1
+        WHERE sfSeq = #{sfSeq}
+    </update>
+    
+    <select id="selectStaffOneCount" resultType="Integer">
+		SELECT COUNT(*)
+		<include refid="staffSelectCommon" />
+	</select>
+
+    <!-- UserMember 영역 -->
+    <resultMap type="com.lalaping.infra.member.UserMemberDto" id="userResultMapObj"></resultMap>
+    <sql id="userSelectCommon">
+        FROM userMember a
+        LEFT JOIN commonCode c ON a.umGender = c.cdSeq
+        WHERE 1=1
+        <if test="shValue != null and !shValue.equals('')">
+            <choose>
+                <when test="shOption == null">
+                    AND(
+                    a.umId LIKE CONCAT('%', #{shValue}, '%')
+                    OR a.umName LIKE CONCAT('%', #{shValue}, '%')
+                    )
+                </when>
+                <when test="shOption == 1 and shOption != null and shOption != ''">
+                    AND a.umSeq = #{shValue}
+                </when>
+                <when test="shOption == 2 and shOption != null and shOption != ''">
+                    AND a.umName LIKE CONCAT('%', #{shValue}, '%')
+                </when>
+                <when test="shOption == 3">
+                	AND a.umId LIKE CONCAT('%', #{shValue}, '%')
+            	</when>
+            	<when test="shOption == 4">
+            		AND c.cdName LIKE CONCAT('%', #{shValue}, '%')
+				</when>
+            	<when test="shOption == 5">
+              		AND a.umEmail LIKE CONCAT('%', #{shValue}, '%')
+	            </when>
+	            <when test="shOption == 6">
+                  	AND a.umTel LIKE CONCAT('%', #{shValue}, '%')
+	            </when>
+	            <when test="shOption == 7">
+	                AND a.umBirthDay = #{shValue} 
+	            </when>
+            </choose>
+        </if>
+        <if test="shDelNy != null and !shDelNy.equals('')">
+            AND a.umDelNy = #{shDelNy}
+        </if>
+        <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
+            <choose>
+                <when test="shOptionDate == 1">
+                    AND a.umRegDate BETWEEN #{shDateStart} AND #{shDateEnd}
+                </when>
+                <when test="shOptionDate == 2">
+                    AND a.umModDate BETWEEN #{shDateStart} AND #{shDateEnd}
+                </when>
+            </choose>
+        </if>
+    </sql>
+    <select id="userSelectList" resultMap="userResultMapObj">
+        <include refid="base.selectListUpperForMysql"/>
+        SELECT
+	        a.umSeq,
+	        a.umId,
+	        a.umName,
+	        a.umTel,
+	        a.umBirthDay,
+	        a.umDelNy,
+	        a.umRegDate,
+	        a.umModDate,
+	        a.umEmail,
+	        a.umGender
+        <include refid="userSelectCommon" />
+        ORDER BY a.umSeq DESC
+        <include refid="base.selectListLowerForMysql"/>
+    </select>
+    <select id="userSelectOne" resultMap="userResultMapObj">
+		SELECT
+			a.umSeq,
+	        a.umId,
+	        a.umName,
+	        a.umTel,
+	        a.umBirthDay,
+	        a.umDelNy,
+	        a.umRegDate,
+	        a.umModDate,
+	        a.umEmail,
+	        a.umGender
+		FROM
+		userMember a
+		WHERE 1=1
+		AND a.umSeq = #{umSeq}
+	</select>
+	<select id="userSeqList" resultMap="userResultMapObj">
+        SELECT
+	        umSeq
+	        ,umName
+        FROM userMember
+        WHERE 1=1
+    </select>
+    <select id="userListCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="userSelectCommon" />
+    </select>
+    <insert id="insertUserMember">
+        INSERT INTO userMember (
+	        umId,
+	        umPasswd,
+	        umName,
+	        umTel,
+	        umBirthDay,
+	        umDelNy,
+	        umRegDate,
+	        umModDate,
+	        umEmail,
+	        umGender
+        ) VALUES (
+	        #{umId},
+	        #{umPasswd},
+	        #{umName},
+	        #{umTel},
+	        #{umBirthDay},
+	        0,
+	        now(),
+	        now(),
+	        #{umEmail},
+	        #{umGender}
+        )
+        <selectKey resultType="String" keyProperty="umSeq" order="AFTER">
+            SELECT last_insert_id()
+        </selectKey>
+    </insert>
+    <update id="updateUserMember">
+        UPDATE userMember
+        SET
+	        umId = #{umId},
+	        <!-- umPasswd = #{umPasswd}, -->
+	        umName = #{umName},
+	        umTel = #{umTel},
+	        umBirthDay = #{umBirthDay},
+	        umEmail = #{umEmail},
+	        umGender = #{umGender}
+        WHERE umSeq = #{umSeq}
+    </update>
+    <delete id="deleteUserMember">
+        DELETE FROM userMember
+        WHERE umSeq = #{umSeq}
+    </delete>
+    <update id="ueleteUserMember">
+        UPDATE userMember
+        SET
+        	umDelNy = 1
+        WHERE umSeq = #{umSeq}
+    </update>
+
+</mapper>

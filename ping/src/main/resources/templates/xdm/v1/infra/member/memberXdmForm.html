@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Meta -->
+		<meta name="description" content="Best Bootstrap Admin Dashboards">
+		<meta name="author" content="Bootstrap Gallery" />
+		<link rel="canonical" href="https://www.bootstrap.gallery/">
+		<meta property="og:url" content="https://www.bootstrap.gallery">
+		<meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
+		<meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
+		<meta property="og:type" content="Website">
+		<meta property="og:site_name" content="Bootstrap Gallery">
+		<link rel="shortcut icon" href="/xdm/v1/template/arise-v1.0/assets/images/favicon.svg">
+
+		<!-- Title -->
+		<title>Bootstrap Admin Dashboards</title>
+
+
+		<!-- *************
+			************ Common Css Files *************
+		************ -->
+
+		<!-- Animated css -->
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/css/animate.css">
+
+		<!-- Bootstrap font icons css -->
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/fonts/bootstrap/bootstrap-icons.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+		<!-- Main css -->
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/css/main.min.css">
+
+
+		<!-- *************
+			************ Vendor Css Files *************
+		************ -->
+		<!--<div style="background-color: red;"></div>-->
+		<!-- Scrollbar CSS -->
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/vendor/overlay-scroll/OverlayScrollbars.min.css">
+		
+		<!-- by developer -->
+		<link rel="stylesheet" href="/xdm/v1/css/datetimepicker/jquery.datetimepicker.min.css">
+		<link rel="stylesheet" href="/xdm/v1/css/commonXdm.css">
+		<style>
+			.form-label{
+				margin-left: 10px;
+			}
+			.required .form-label::after{
+				content: " *";
+				color: red;
+			}
+			/* .card{
+				border:1px;
+			} */
+		</style>
+	</head>
+
+	<body>
+
+		<!-- Loading wrapper start -->
+		<!-- <div id="loading-wrapper">
+			<div class="spinner">
+                <div class="line1"></div>
+				<div class="line2"></div>
+				<div class="line3"></div>
+				<div class="line4"></div>
+				<div class="line5"></div>
+				<div class="line6"></div>
+            </div>
+		</div> -->
+		<!-- Loading wrapper end -->
+
+		<!-- Page wrapper start -->
+		<div class="page-wrapper">
+
+			<!-- Sidebar wrapper start -->
+			<div th:replace="~{xdm/v1/infra/include/head :: sidebar-wrapper}"></div>
+			<!-- Sidebar wrapper end -->
+
+			<!-- *************
+				************ Main container start *************
+			************* -->
+			<div class="main-container">
+
+				<!-- Page header starts -->
+				<div th:replace="~{xdm/v1/infra/include/head :: page-header}"></div>
+				<!-- Page header ends -->
+
+				<!-- Content wrapper scroll start -->
+				<div class="content-wrapper-scroll">
+
+					<!-- Content wrapper start -->
+					<div class="content-wrapper">
+						<div class="page-title">
+							<div>
+								<div class="pb-4">
+									<!-- Breadcrumb start -->
+									<ol class="breadcrumb d-md-flex order-md-1 order-2">
+										<li class="breadcrumb-item">
+											<i class="bi bi-house"></i>
+											<a href="../../infra/index/indexXdmView">Home</a>
+										</li>
+										<li class="breadcrumb-item">Page</li>
+										<li class="breadcrumb-item breadcrumb-active" aria-current="page">Form</li>
+									</ol>
+									<!-- Breadcrumb end -->
+								</div>
+								<div class="pb-4">
+									<h2>직원회원</h2>
+								</div>
+							</div>
+						</div>
+						<!-- Row start -->
+						<div class="row">
+							<div class="col-sm-12 col-12">
+
+								<!-- Card start -->
+								<div class="card border">
+									<div class="card-header border-bottom">
+										<div class="card-title">기본정보</div>
+									</div>
+									<div class="card-body">
+										<form class="needs-validation" method="post" autocomplete="off" action="/v1/member/staffMemberXdmInst" novalidate>
+											<!-- Row start -->
+											<div class="row">
+												
+												
+												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+													<div class="mb-3">
+														<label for="inputName" class="form-label">코드</label>
+														<input type="text" class="form-control" id="inputSfSeq" name="sfSeq" placeholder="자동생성" readonly="readonly">
+													</div>
+												</div>
+												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+													<div class="mb-3">	
+														<label for="inputUseNy" class="form-label">성별</label>
+														<select class="form-select validate-this valid-gender" id="inputSfGender" name="sfGender" required>
+															<option value="" selected disabled>선택하세요</option>
+															<option th:each="list : ${@codeService.selectListCachedCode(1)}" th:value="${list.cdSeq}" th:text="${list.cdName}"></option>
+														</select>
+														<div class="invalid-feedback">
+															성별을 선택해주세요.
+														</div>
+													</div>
+												</div>
+												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+													<div class="mb-3">	
+														<label for="inputUseNy" class="form-label">부서</label>
+														<select class="form-select validate-this valid-dept" id="inputSfDept" name="sfDept" required>
+															<option value="" selected disabled>선택하세요</option>
+															<option th:each="list : ${@codeService.selectListCachedCode(4)}" th:value="${list.cdSeq}" th:text="${list.cdName}"></option>
+														</select>
+														<div class="invalid-feedback">
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+													<div class="mb-3">
+														<label for="inputSfId" class="form-label">아이디</label>
+														<input type="text" class="valid-id form-control validate-this" id="inputSfId" name="sfId" placeholder="영대소문자, 숫자" required>
+														<div class="invalid-feedback">
+															아이디를 적어주세요.
+														</div>
+													</div>
+												</div>
+												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+													<div class="mb-3">
+														<label for="inputSfPasswd" class="form-label">비밀번호</label>
+														<input type="text" class="valid-password form-control validate-this" id="inputSfPasswd" name="sfPasswd" placeholder="8~15자, 최소 1개의 숫자, 영문자, 특수문자포함해야함" required>
+														<div class="invalid-feedback">
+															비밀번호를 적어주세요.
+														</div>
+													</div>
+												</div>
+												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+													<div class="mb-3">
+														<label for="inputCodeName" class="form-label">이름</label>
+														<input type="text" class="valid-user-name form-control validate-this" id="inputSfName" name="sfName" placeholder="한글" required>
+														<div class="invalid-feedback">
+															이름을 적어주세요.
+														</div>
+													</div>
+												</div>
+												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+													<div class="mb-3">
+														<label for="inputCodeName" class="form-label">전화번호</label>
+														<input type="text" class="valid-phone-num form-control validate-this" id="inputSfTel" name="sfTel" placeholder="예)01012345678" required>
+														<div class="invalid-feedback">
+															전화번호을 적어주세요.
+														</div>
+													</div>
+												</div>
+												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+													<div class="mb-3">
+														<label for="inputSfBirthDay" class="form-label">생년월일</label>
+														<input type="text" class="valid-birth-num form-control validate-this" id="inputSfBirthDay" name="sfBirthDay" placeholder="예)1999-01-01" required>
+														<!-- <input type="date" class="valid-birth-num form-control validate-this" id="inputumBirthDay" name="sfBirthDay" placeholder="예)1999-01-01" required> -->
+														<div class="invalid-feedback">
+															생일을 적어주세요.
+														</div>
+													</div>
+												</div>
+												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+													<div class="mb-3">
+														<label for="inputSfEmail" class="form-label">이메일</label>
+														<input type="text" class="valid-email form-control validate-this" id="inputSfEmail" name="sfEmail" placeholder="예)qwer1234@naver.com" required>
+														<div class="invalid-feedback">
+															이메일을 적어주세요.
+														</div>
+													</div>
+												</div>
+												
+												
+												
+											</div>
+											
+											<!-- Row end -->
+											<!-- Form actions footer start -->
+											<div th:replace="~{xdm/v1/infra/include/link :: form-link}"></div>
+											<!-- Form actions footer end -->
+										</form>
+										
+
+									</div>
+								</div>
+								<!-- Card end -->
+
+							</div>
+
+						</div>
+						<!-- Row end -->
+
+					</div>
+					<!-- Content wrapper end -->
+
+					<!-- App Footer start -->
+					<div class="app-footer">
+						<span>© Arise admin 2023</span>
+					</div>
+					<!-- App footer end -->
+
+				</div>
+				<!-- Content wrapper scroll end -->
+
+			</div>
+			<!-- *************
+				************ Main container end *************
+			************* -->
+
+		</div>
+		<!-- Page wrapper end -->
+
+		<!-- *************
+			************ Required JavaScript Files *************
+		************* -->
+		<!-- Required jQuery first, then Bootstrap Bundle JS -->
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/jquery.min.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/bootstrap.bundle.min.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/modernizr.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/moment.js"></script>
+
+		<!-- *************
+			************ Vendor Js Files *************
+		************* -->
+
+		<!-- Overlay Scroll JS -->
+		<script src="/xdm/v1/template/arise-v1.0/assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/vendor/overlay-scroll/custom-scrollbar.js"></script>
+
+		<!-- Main Js Required -->
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/main.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/validations.js"></script>
+		<!-- by developer -->
+		<script src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
+		<script src="/xdm/v1/js/commonXdm.js"></script>
+		<script>
+			window.addEventListener('load',function() {
+				$.datetimepicker.setLocale('ko');
+				$("#inputSfBirthDay").datetimepicker({
+					timepicker:false,
+					format:'Y-m-d'
+				});
+			})
+		</script>
+	</body>
+
+</html>

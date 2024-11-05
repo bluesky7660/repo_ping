@@ -1,13 +1,12 @@
 package com.lalaping.infra.code;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.lalaping.common.base.BaseVo;
 
-public class CodeDto {
+public class CodeVo extends BaseVo {
 	private String cdSeq;
 	private String cdName;
 	private Integer cdOrder;
@@ -21,10 +20,7 @@ public class CodeDto {
 	private String codeGroup_cgSeq;
 	private String cgSeq;
 	private String cgName;
-	
-	//for cache
-	public static List<CodeDto> cachedCodeArrayList = new ArrayList<CodeDto>();
-//	---------------------
+//-----------------------------
 	public String getCdSeq() {
 		return cdSeq;
 	}
@@ -92,8 +88,4 @@ public class CodeDto {
 		this.cgName = cgName;
 	}
 	
-
-	
-	
-
 }
