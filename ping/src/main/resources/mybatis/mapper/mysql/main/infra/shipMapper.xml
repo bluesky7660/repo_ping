@@ -1,0 +1,136 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lalaping.complaint.ComplaintDao">
+	<resultMap type="com.lalaping.complaint.ComplaintDto" id="resultMapObj"></resultMap>
+	
+	<sql id="selectCommon">
+        FROM ship a
+        
+        WHERE 1=1
+        <if test="shValue != null and !shValue.equals('')">
+            <choose>
+                <when test="shOption == null">
+                    AND(
+                        a.spName LIKE CONCAT('%', #{shValue}, '%')
+                        OR a.spPrice LIKE CONCAT('%', #{shValue}, '%')
+                        OR a.spTotal LIKE CONCAT('%', #{shValue}, '%')
+                    )
+                </when>
+                <when test="shOption == 1 and shOption != null and shOption != ''">
+                    AND a.spName = #{shValue}
+                </when>
+                <when test="shOption == 2 and shOption != null and shOption != ''">
+                    AND a.spPrice LIKE CONCAT('%', #{shValue}, '%')
+                </when>
+                <when test="shOption == 3 and shOption != null and shOption != ''">
+                    AND a.Total LIKE CONCAT('%', #{shValue}, '%')
+                </when>
+            </choose>
+        </if>
+        <if test="shDelNy != null and !shDelNy.equals('')">
+            AND a.spDelNy = #{shDelNy}
+        </if>
+        <if test="shArea != null and !shArea.equals('')">
+            AND a.spArea = #{shArea}
+        </if>
+        <if test="shPort != null and !shPort.equals('')">
+            AND a.spPort = #{shPort}
+        </if>
+        <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
+        	<choose>
+        		<when test="shOptionDate == 1"> AND a.spRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+            	<when test="shOptionDate == 2]">AND a.spRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+           	</choose>
+        </if>
+       
+    </sql>
+	<select id="selectList">
+		<include refid="base.selectListUpperForMysql"/>
+		SELECT
+			a.spSeq
+			,a.spName
+			,a.spPrice
+			,a.spDesc
+			,a.spTotal
+			,a.spStart
+			,a.spDelNy
+			,a.spArea
+			,a.spPort
+			,a.spRegDate
+		<include refid="selectCommon"/>
+	 ORDER BY
+     	a.spRegDate DESC
+		<include refid="base.selectListLowerForMysql"/>
+	</select>
+	 
+	<insert id="insert">
+		INSERT INTO ship(
+			spName
+			,spPrice
+			,spDesc
+			,spTotal
+			,spStart
+			,spDelNy
+			,spArea
+			,spPort
+			,spRegDate
+		)VALUES(
+			#{spName}
+			,#{spPrice}
+			,#{spDesc}
+			,#{spTotal}
+			,#{spStart}
+			,0
+			,#{spArea}
+			,#{spPort}
+			,now()
+		)
+	</insert>
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT
+			a.spSeq
+			,a.spName
+			,a.spPrice
+			,a.spDesc
+			,a.spTotal
+			,a.spStart
+			,a.spDelNy
+			,a.spArea
+			,a.spPort
+			,a.spRegDate
+		FROM ship a
+		WHERE 1=1
+		AND a.spSeq = #{spSeq}
+	</select>
+		
+	<update id="update">
+		UPDATE ship
+		SET
+			spName = #{spName}
+			,spPrice = #{spPrice}
+			,spDEsc = #{spDesc}
+			,spTotal = #{spTotal}
+			,spStart = #{spStart}
+			,spArea = #{spArea}
+			,spPort = #{spRegDate}
+		WHERE 1=1
+		AND spSeq = #{spSeq}
+	</update>
+	
+	<update id="uelect">
+		UPDATE ship
+		SET 
+			spDelNy = 1
+		WHERE 1=1
+		AND spSeq = #{spSeq}
+	</update>
+	
+	<delete id="delete">
+        DELETE FROM ship
+        WHERE spSeq = #{spSeq}
+    </delete>
+	
+	
+	
+	
+</mapper>
