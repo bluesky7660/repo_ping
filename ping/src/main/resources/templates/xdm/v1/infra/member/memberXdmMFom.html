@@ -100,14 +100,14 @@
 							<div>
 								<div class="pb-4">
 									<!-- Breadcrumb start -->
-									<ol class="breadcrumb d-md-flex order-md-1 order-2">
+									<!-- <ol class="breadcrumb d-md-flex order-md-1 order-2">
 										<li class="breadcrumb-item">
 											<i class="bi bi-house"></i>
 											<a href="../../infra/index/indexXdmView">Home</a>
 										</li>
 										<li class="breadcrumb-item">Page</li>
 										<li class="breadcrumb-item breadcrumb-active" aria-current="page">Form</li>
-									</ol>
+									</ol> -->
 									<!-- Breadcrumb end -->
 								</div>
 								<div class="pb-4">
@@ -131,30 +131,18 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputName" class="form-label">코드</label>
-														<input type="text" class="form-control" id="inputSfSeq" name="sfSeq" th:value="${item.sfSeq}" placeholder="자동생성" readonly="readonly">
+														<input type="text" class="form-control" id="inputMmSeq" name="mmSeq" th:value="${item.mmSeq}" placeholder="자동생성" readonly="readonly">
 													</div>
 												</div>
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">	
 														<label for="inputUseNy" class="form-label">성별</label>
-														<select class="form-select validate-this valid-gender" id="inputSfGender" name="sfGender" th:value="${item.sfGender}" required>
+														<select class="form-select validate-this valid-gender" id="inputMmGender" name="mmGender" th:value="${item.mmGender}" required>
 															<option value="" selected disabled>선택하세요</option>
-															<option th:each="list : ${@codeService.selectListCachedCode(1)}" th:value="${list.cdSeq}" th:text="${list.cdName}" th:selected="${list.cdSeq} == ${item.sfGender}"></option>
+															<option th:each="list : ${@codeService.selectListCachedCode(1)}" th:value="${list.cdSeq}" th:text="${list.cdName}" th:selected="${list.cdSeq} == ${item.mmGender}"></option>
 														</select>
 														<div class="invalid-feedback">
 															성별을 선택해주세요.
-														</div>
-													</div>
-												</div>
-												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-													<div class="mb-3">	
-														<label for="inputUseNy" class="form-label">부서</label>
-														<select class="form-select validate-this valid-dept" id="inputSfDept" name="sfDept" th:value="${item.sfDept}" required>
-															<option value="" selected disabled>선택하세요</option>
-															<option th:each="list : ${@codeService.selectListCachedCode(4)}" th:value="${list.cdSeq}" th:text="${list.cdName}" th:selected="${list.cdSeq} == ${item.sfDept}"></option>
-														</select>
-														<div class="invalid-feedback">
-															부서를 선택해주세요.
 														</div>
 													</div>
 												</div>
@@ -163,17 +151,17 @@
 											<div class="row">
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
-														<label for="inputCodeName" class="form-label">아이디</label>
-														<input type="text" class="valid-id form-control validate-this" id="inputSfId" name="sfId" th:value="${item.sfId}" placeholder="영대소문자, 숫자" required>
+														<label for="inputCodeName" class="form-label">이메일</label>
+														<input type="text" class="valid-email form-control validate-this" id="inputMmEmail" name="mmEmail" th:value="${item.mmEmail}" placeholder="예)qwer1234@naver.com" required>
 														<div class="invalid-feedback">
-															아이디를 적어주세요.
+															이메일을 적어주세요.
 														</div>
 													</div>
 												</div>
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputCodeName" class="form-label">이름</label>
-														<input type="text" class="valid-user-name form-control validate-this" id="inputSfName" name="sfName" th:value="${item.sfName}" placeholder="한글" required>
+														<input type="text" class="valid-user-name form-control validate-this" id="inputMmName" name="mmName" th:value="${item.mmName}" placeholder="한글" required>
 														<div class="invalid-feedback">
 															이름을 적어주세요.
 														</div>
@@ -182,7 +170,7 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputCodeName" class="form-label">전화번호</label>
-														<input type="text" class="valid-phone-num form-control validate-this" id="inputSfTel" name="sfTel" th:value="${item.sfTel}" placeholder="예)01012345678" required>
+														<input type="text" class="valid-phone-num form-control validate-this" id="inputMmTel" name="mmTel" th:value="${item.mmTel}" placeholder="예)01012345678" required>
 														<div class="invalid-feedback">
 															전화번호을 적어주세요.
 														</div>
@@ -191,23 +179,13 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputCodeName" class="form-label">생일</label>
-														<input type="text" class="valid-birth-num form-control validate-this" id="inputSfBirthDay" name="sfBirthDay" th:value="${#dates.format(item.sfBirthDay,'yyyy-MM-dd')}" placeholder="예)1999-01-01" required>
-														<!-- <input type="date" class="valid-birth-num form-control validate-this" id="inputSfBirthDay" name="sfBirthDay" th:value="${#dates.format(item.sfBirthDay,'yyyy-MM-dd')}" placeholder="예)1999-01-01" required> -->
+														<input type="text" class="valid-birth-num form-control validate-this" id="inputMmBirthDay" name="mmBirthDay" th:value="${#dates.format(item.mmBirthDay,'yyyy-MM-dd')}" placeholder="예)1999-01-01" required>
+														<!-- <input type="date" class="valid-birth-num form-control validate-this" id="inputMmBirthDay" name="mmBirthDay" th:value="${#dates.format(item.mmBirthDay,'yyyy-MM-dd')}" placeholder="예)1999-01-01" required> -->
 														<div class="invalid-feedback">
 															생일을 적어주세요.
 														</div>
 													</div>
 												</div>
-												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-													<div class="mb-3">
-														<label for="inputCodeName" class="form-label">이메일</label>
-														<input type="text" class="valid-email form-control validate-this" id="inputSfEmail" name="sfEmail" th:value="${item.sfEmail}" placeholder="예)qwer1234@naver.com" required>
-														<div class="invalid-feedback">
-															이메일을 적어주세요.
-														</div>
-													</div>
-												</div>
-												
 											</div>
 											
 											<!-- Row end -->
@@ -272,7 +250,7 @@
 		<script>
 			window.addEventListener('load',function() {
 				$.datetimepicker.setLocale('ko');
-				$("#inputSfBirthDay").datetimepicker({
+				$("#inputMmBirthDay").datetimepicker({
 					timepicker:false,
 					format:'Y-m-d'
 				});
