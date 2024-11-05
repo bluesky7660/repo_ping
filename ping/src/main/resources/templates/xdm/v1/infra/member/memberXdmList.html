@@ -18,7 +18,7 @@
 		<link rel="shortcut icon" href="/xdm/v1/template/arise-v1.0/assets/images/favicon.svg">
 
 		<!-- Title -->
-		<title>직원회원</title>
+		<title>회원관리</title>
 
 
 		<!-- *************
@@ -82,97 +82,7 @@
 			<div class="main-container">
 
 				<!-- Page header starts -->
-				<div class="page-header">
-
-					<div class="toggle-sidebar" id="toggle-sidebar"><i class="bi bi-list"></i></div>
-
-					<!-- Breadcrumb start -->
-					<ol class="breadcrumb d-md-flex d-none">
-						<li class="breadcrumb-item">
-							<i class="bi bi-house"></i>
-							<a href="../../infra/index/indexXdmView">Home</a>
-						</li>
-						<li class="breadcrumb-item">Page2</li>
-						<li class="breadcrumb-item breadcrumb-active" aria-current="page">Data</li>
-					</ol>
-					<!-- Breadcrumb end -->
-
-					<!-- Header actions ccontainer start -->
-					<div class="header-actions-container">
-
-						<!-- Search container start -->
-						<div class="search-container">
-
-							<!-- Search input group start -->
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search anything">
-								<button class="btn" type="button">
-									<i class="bi bi-search"></i>
-								</button>
-							</div>
-							<!-- Search input group end -->
-
-						</div>
-						<!-- Search container end -->
-
-						<!-- Leads start -->
-						<a href="orders.html" class="leads d-none d-xl-flex">
-							<div class="lead-details">You have <span class="count"> 21 </span> new leads </div>
-							<span class="lead-icon"><i
-									class="bi bi-bell-fill animate__animated animate__swing animate__infinite infinite"></i><b
-									class="dot animate__animated animate__heartBeat animate__infinite"></b></span>
-						</a>
-						<!-- Leads end -->
-
-						<!-- Header actions start -->
-						<ul class="header-actions">
-							<li class="dropdown d-none d-md-block">
-								<a href="#" id="countries" data-toggle="dropdown" aria-haspopup="true">
-									<img src="/xdm/v1/template/arise-v1.0/assets/images/flags/1x1/br.svg" class="flag-img" alt="Admin Panels" />
-								</a>
-								<div class="dropdown-menu dropdown-menu-end mini" aria-labelledby="countries">
-									<div class="country-container">
-										<a href="../../infra/index/indexXdmView">
-											<img src="/xdm/v1/template/arise-v1.0/assets/images/flags/1x1/us.svg" alt="Clean Admin Dashboards" />
-										</a>
-										<a href="../../infra/index/indexXdmView">
-											<img src="/xdm/v1/template/arise-v1.0/assets/images/flags/1x1/in.svg" alt="Google Dashboards" />
-										</a>
-										<a href="../../infra/index/indexXdmView">
-											<img src="/xdm/v1/template/arise-v1.0/assets/images/flags/1x1/gb.svg" alt="AI Admin Dashboards" />
-										</a>
-										<a href="../../infra/index/indexXdmView">
-											<img src="/xdm/v1/template/arise-v1.0/assets/images/flags/1x1/tr.svg" alt="Modern Dashboards" />
-										</a>
-										<a href="../../infra/index/indexXdmView">
-											<img src="/xdm/v1/template/arise-v1.0/assets/images/flags/1x1/ca.svg" alt="Best Admin Dashboards" />
-										</a>
-									</div>
-								</div>
-							</li>
-							<li class="dropdown">
-								<a href="#" id="userSettings" class="user-settings" data-toggle="dropdown" aria-haspopup="true">
-									<span class="user-name d-none d-md-block" th:text="${session.sessNameXdm}"></span>
-									<span class="avatar">
-										<img src="/xdm/v1/template/arise-v1.0/assets/images/user.png" alt="Admin Templates">
-										<span class="status online"></span>
-									</span>
-								</a>
-								<div class="dropdown-menu dropdown-menu-end" aria-labelledby="userSettings">
-									<div class="header-profile-actions">
-										<a href="profile.html">Profile</a>
-										<a href="account-settings.html">Settings</a>
-										<button class="btn" type="button" id="logoutBtn">Logout</button>
-									</div>
-								</div>
-							</li>
-						</ul>
-						<!-- Header actions end -->
-
-					</div>
-					<!-- Header actions ccontainer end -->
-
-				</div>
+				<div th:replace="~{xdm/v1/infra/include/head :: page-header}"></div>
 				<!-- Page header ends -->
 
 				<!-- Content wrapper scroll start -->
@@ -188,7 +98,7 @@
 								<div class="card border">
 									<div class="card-header bg-light">
 										<h2 class="card-title">
-											직원회원
+											회원관리
 										</h2>
 										<div>
 											<form name class="row gx-3 align-items-center" method="post" autocomplete="off" action="/v1/member/staffMemberXdmList">
@@ -277,12 +187,10 @@
 															<input type="checkbox">
 														</th>
 														<th><span>#</span></th>
-														<th class="sorting sorting_asc"><span class="dataTable-sorter">직원 코드</span></th>
-														<th class="sorting sorting_asc"><span class="dataTable-sorter">부서</span></th>
-														<th class="sorting sorting_asc"><span class="dataTable-sorter">직원 이름</span></th>
-														<th class="sorting sorting_asc"><span class="dataTable-sorter">아이디</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">코드</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">유저 이름</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">아이디[이메일]</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">성별</span></th>
-														<th class="sorting sorting_asc"><span class="dataTable-sorter">이메일</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">전화번호</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">생년월일</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">삭제여부</span></th>
@@ -303,20 +211,18 @@
 														value="" id="flexCheckDefault">
 													</td>
 													<td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}" class="align-middle"></td>
-													<td th:text="${list.sfSeq}"></td>
-													<td th:text = "${@codeService.selectOneCachedCode(list.sfDept)}"></td>
+													<td th:text="${list.mmSeq}"></td>
 													<td class="td_spotlight">
-														<a th:href="@{/v1/member/staffMemberXdmMfom(sfSeq=${list.sfSeq})}" th:text="${list.sfName}"></a>
+														<a th:href="@{/v1/member/memberXdmMfom(mmSeq=${list.mmSeq})}" th:text="${list.mmName}"></a>
 													</td>
-													<td th:text="${list.sfId}"></td>
-													<td th:text = "${@codeService.selectOneCachedCode(list.sfGender)}"></td>
-													<td th:text = "${list.sfEmail}"></td>
-													<td th:text="${#strings.substring(list.sfTel, 0, 3)} + '-' + ${#strings.substring(list.sfTel, 3, 7)} + '-' + ${#strings.substring(list.sfTel, 7, 11)}"></td>
-													<td th:text ="${#dates.format(list.sfBirthDay, 'yyyy-MM-dd')}"></td>
-													<td th:if="${list.sfDelNy eq false }">N</td>
-													<td th:unless ="${list.sfDelNy eq false }">Y</td>
-													<td th:text="${#dates.format(list.sfRegDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-													<td th:text="${#dates.format(list.sfModDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+													<td th:text="${list.mmEmail}"></td>
+													<td th:text = "${@codeService.selectOneCachedCode(list.mmGender)}"></td>
+													<td th:text="${#strings.substring(list.mmTel, 0, 3)} + '-' + ${#strings.substring(list.mmTel, 3, 7)} + '-' + ${#strings.substring(list.mmTel, 7, 11)}"></td>
+													<td th:text ="${#dates.format(list.mmBirthDay, 'yyyy-MM-dd')}"></td>
+													<td th:if="${list.mmDelNy eq false }">N</td>
+													<td th:unless ="${list.mmDelNy eq false }">Y</td>
+													<td th:text="${#dates.format(list.mmRegDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+													<td th:text="${#dates.format(list.mmModDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
 												</tr>
 											</tbody>
 											</table>

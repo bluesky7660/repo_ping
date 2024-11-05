@@ -1,0 +1,260 @@
+/*xdm용*/
+#logoutBtn{
+    width: 100%;
+    font-weight: bold;
+}
+.card .card-header{
+    display: block;
+    padding: 1rem 1.25rem ;
+}
+.card .card-header h2.card-title {
+    font-size: 2.5rem;
+}
+.table td{
+    text-align: center;
+}.table tr th{
+    text-align: center;
+    white-space: nowrap;
+}
+.table.dataTable tr th{
+    padding-left:30px;
+}
+.table tr>* {
+    padding: 1rem;
+    vertical-align: middle;
+}
+table.dataTable>thead .sorting:before, table.dataTable>thead .sorting:after, table.dataTable>thead .sorting_asc:before, table.dataTable>thead .sorting_asc:after, table.dataTable>thead .sorting_desc:before, table.dataTable>thead .sorting_desc:after, table.dataTable>thead .sorting_asc_disabled:before, table.dataTable>thead .sorting_asc_disabled:after, table.dataTable>thead .sorting_desc_disabled:before, table.dataTable>thead .sorting_desc_disabled:after{
+    bottom: 50%;
+    transform: translateY(50%);
+}
+.page-item:not(.active) a:hover {
+    background-color: #3688fa;
+    opacity: 0.5;
+    color: #fff;
+}
+.page-item.active .page-link {
+    border: 0;
+}
+.page-item.disabled .page-link {
+    border: 0;
+    opacity: 0;
+}
+.page-item .page-link{
+    border: 0;
+}
+.page-link:hover, .page-link:focus {
+    color: #fff;
+}
+.page-item a {
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+    opacity: 1;
+}
+
+.page-item:not(.active) a:hover {
+    background-color: #3688fa;
+    opacity: 0.5;
+    color: #fff;
+}
+.form-control:read-only:not([type="checkbox"]) {
+    background-color: #f0f0f0;
+    color: #6c757d;
+    border: 1px solid #ccc;
+    cursor: not-allowed;
+}
+.scrolltable{
+	overflow-x: auto;
+}
+.scrolltable th:nth-child(1),.scrolltable th:nth-child(2){
+    width: 20px;
+    padding-left:20px;
+    padding-right:20px !important;
+}
+.scrolltable th:nth-child(3){
+    width: 100px;
+    padding: 20px 30px;
+}
+.scrolltable td{
+    white-space: nowrap;
+}
+.graph_area{
+    align-items: stretch;
+}
+.graphs_box .card-body{
+    display: flex;
+    flex-direction: column;
+    gap: 150px;
+}
+
+.graphs_box .card-body>div{
+    width: fit-content;
+    margin: 0 auto 30px;
+}
+.graphs_box .card-body>div>div>svg{
+    width: 400px;
+}
+
+.graphs_box .card-body,.graphs_box .card{
+    width: 100%;
+    height: calc(100% - 24px);
+}
+.graphs_box .card-body{
+    /* padding: 1rem 0; */
+    min-height: 300px;
+    width: 100%;
+}
+.complaint_list_view .card-header{
+    display: flex;
+    justify-content: space-between;
+}
+.complaint_list_view .card-header a{
+    font-size: 16px;
+    font-weight: bold;
+}
+.complaint_list_view .card-header a:hover{
+   text-decoration: underline;
+}
+.list_types{
+    gap: 12px;
+    flex-wrap: nowrap;
+}
+.list_types>div{
+    flex-shrink: 1;
+}
+.list_types .stats-tile{
+    margin-bottom: 12px;
+    padding: 1rem;
+}
+.list_types .stats-tile p{
+    font-weight: bold;
+    margin-top: 10px;
+}
+.list_types >div{
+    padding:0;
+}
+.qna_list .stats-tile{
+    border: 1px solid #efefef ;
+    background-color: #efefef;
+}
+.top_row{
+    gap: 12px;
+    padding: 12px;
+}
+.top_row>div{
+    padding: 0;
+}
+.top_row .stats-tile{
+    font-weight: bold;
+    /* padding: 18px; */
+}
+.top_row .stats-tile h3{
+    font-size: 1.8rem;
+}
+/* .top_row .stats-tile p::after{
+    content:" 팀장"
+} */
+table .td_spotlight,table .td_spotlight a{
+	color: rgb(0, 110, 255);
+    font-weight: bold;
+}
+table .td_spotlight a:hover{
+	text-decoration: underline;
+}
+.dataTable-pagination-list{
+    gap: 10px;
+}
+.login-box .login-form .btn{
+    margin-left: 0;
+}
+.login-logo{
+    cursor: pointer;
+}
+.sidebar-wrapper .sidebar-menu ul li.active a span{
+    color: #3688fa;
+    font-weight: bold;
+}
+.sidebar-wrapper .sidebar-menu ul li a:hover i{
+    color: #3688fa;
+    font-weight: bold;
+}
+.graphs_box .card-body>.row{
+    
+}
+
+/*index*/
+.pageCategory{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+.pageCategory div{
+    width: 100%;
+    flex-shrink: 1;
+    /* border: 1px solid #aaa; */
+    /* border-radius: 30px; */
+    padding: 0;
+    
+    box-shadow: 0 3px 5px rgba(0, 10, 10, .05);
+    text-align: center;
+}
+.pageCategory div a{
+    display: inline-block;
+    width: 100%;
+    padding:30px;
+    background-color: #fff;
+    color:#13181e;
+    transition: all .5s ease;
+}
+.pageCategory div a:hover{
+    background-color: #13181e;
+    color:#fff;
+}
+/*로그인*/
+.login-box .login-form .login-form-actions{
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+.login-box .login-form .btn{
+    width: 100%;
+    padding: 5px 15px 5px 3px;
+}
+.login-box .login-form .btn img.login-icon{
+    margin-right: 10px;
+}
+#kakaoLoginBtn{
+    background-color: rgba(254, 229, 0,0.5);
+}
+ 
+/*페이징관련*/
+.page-item .page-link {
+    cursor: pointer;
+}
+
+/*작가리스트관련*/
+.authorList{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.authorTag{
+    width: fit-content;
+    padding: 5px 10px;
+    border: 1px solid #c3cbd6;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all .5s ease;
+    cursor: pointer;
+}
+.authorTag:hover{
+    background-color: #000;
+    border-color: #000;
+    color:#fff;
+}
+.authorTag:after{
+    content: "✕";
+    margin-left: 5px;
+    vertical-align: text-bottom;
+}

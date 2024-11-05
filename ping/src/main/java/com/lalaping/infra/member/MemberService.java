@@ -41,6 +41,10 @@ public class MemberService {
     public int ueleteMember(MemberDto memberDto) {
         return memberDao.ueleteMember(memberDto);
     }
-
+    
+    //로그인
+    public MemberDto selectOneLogin(MemberDto memberDto) {
+		return memberDao.selectOneLogin(memberDto);
+	}
 
 }

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Meta -->
+		<meta name="description" content="Best Bootstrap Admin Dashboards">
+		<meta name="author" content="Bootstrap Gallery" />
+		<link rel="canonical" href="https://www.bootstrap.gallery/">
+		<meta property="og:url" content="https://www.bootstrap.gallery">
+		<meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
+		<meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
+		<meta property="og:type" content="Website">
+		<meta property="og:site_name" content="Bootstrap Gallery">
+		<link rel="shortcut icon" href="/xdm/v1/template/arise-v1.0/assets/images/favicon.svg">
+
+		<!-- Title -->
+		<title>Bootstrap Admin Dashboards</title>
+
+
+		<!-- *************
+			************ Common Css Files *************
+		************ -->
+
+		<!-- Animated css -->
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/css/animate.css">
+
+		<!-- Bootstrap font icons css -->
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/fonts/bootstrap/bootstrap-icons.css">
+
+		<!-- Main css -->
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/css/main.min.css">
+		<!-- by developer -->
+		<link rel="stylesheet" href="/xdm/v1/css/commonXdm.css">
+
+	</head>
+
+	<body class="login-container">
+
+		<!-- Loading wrapper start -->
+		<!-- <div id="loading-wrapper">
+			<div class="spinner">
+                <div class="line1"></div>
+				<div class="line2"></div>
+				<div class="line3"></div>
+				<div class="line4"></div>
+				<div class="line5"></div>
+				<div class="line6"></div>
+            </div>
+		</div> -->
+		<!-- Loading wrapper end -->
+
+		<!-- Login box start -->
+		<form name="form" method="post" action="loginXdmProc" class="needs-validation" novalidate>
+			<div class="login-box">
+				<div class="login-form">
+					<div class="login-logo" onclick="window.location.href='/v1/dashboard'">
+						<img src="/xdm/v1/template/arise-v1.0/assets/images/logo.svg" alt="Vico Admin" />
+					</div>
+					<div class="login-welcome">
+						다시 오신 것을 환영합니다, <br />Arise 관리자 계정에 로그인하세요.
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Id</label>
+						<input id="userId" type="text" class="form-control valid-email validate-this" name="userId" value="sky7660@gmail.com" required>
+					</div>
+					<div class="mb-3">
+						<div class="d-flex justify-content-between">
+							<label class="form-label">Password</label>
+							<a href="forgot-password" class="btn-link ml-auto">Forgot password?</a>
+						</div>
+						<input id="userPassword" type="password" class="form-control valid-password validate-this" name="userPassword" value="123456abc@!" required>
+						
+					</div>
+					<div class="invalid-box mb-3">
+						<div class="invalid-child"></div>
+						<div class="invalid-feedback">
+							아이디(로그인 전화번호, 로그인 전용 아이디) 또는 비밀번호가 잘못 되었습니다. 아이디와 비밀번호를 정확히 입력해 주세요.
+						</div>
+					</div>
+					<div class="login-form-actions">
+						
+						<button type="button" id="loginBtn" class="btn"> 
+							<span class="icon"> <i class="bi bi-arrow-right-circle"></i> </span>
+							로그인loginBtn
+						</button>
+						<!-- <button type="button" id="btnSubmit" class="btn"> 
+							<span class="icon"> <i class="bi bi-arrow-right-circle"></i> </span>
+							로그인btnSubmit
+						</button> -->
+					</div>
+					<!-- <div class="login-form-actions">
+						<button type="button" id="googleLoginBtn" class="btn"> 
+							<img src="/xdm/v1/template/arise-v1.0/assets/images/google.svg" class="login-icon"
+								alt="Login with Google">
+							구글 로그인
+						</button>
+						<button type="button" id="kakaoLoginBtn" class="btn"> 
+							<img src="/xdm/v1/template/arise-v1.0/assets/images/kakao.svg" class="login-icon"
+								alt="Login with Kakao">
+							카카오 로그인
+						</button>
+						<button type="submit" class="btn"> <img src="/xdm/v1/template/arise-v1.0/assets/images/facebook.svg" class="login-icon"
+								alt="Login with Facebook">
+							Login with Facebook</button>
+					</div> -->
+					<div class="login-form-footer">
+						<div class="additional-link">
+							아직 계정이 없으신가요? <a href="/v1/signupXdm"> 회원가입</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!-- Login box end -->
+		<!-- modals -->
+		<div class="modal fade" id="modalAlert" tabindex="-1" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalAlertTitle"></h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-square	"></i></button>
+					</div>
+					<div class="modal-body" >
+						<p id="modalAlertBody"></p>
+					</div>
+					<div class="modal-footer">
+						<button type="button"  class="btn btn-success" data-bs-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- *************
+			************ Required JavaScript Files *************
+		************* -->
+		<!-- Required jQuery first, then Bootstrap Bundle JS -->
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/jquery.min.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/bootstrap.bundle.min.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/modernizr.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/moment.js"></script>
+
+		<!-- *************
+			************ Vendor Js Files *************
+		************* -->
+
+		<!-- Main Js Required -->
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/main.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/validations.js"></script>
+		<!-- by developer -->
+		<script src="/xdm/v1/js/commonXdm.js"></script>
+		<script>
+// 		document.getElementById("loginBtn").onclick = function() {
+// 			// 		alert(document.getElementById("ifcgName").value);
+// 			// 로그인 유효성 검사
+// 			validateAndSubmit(); // 추가한 영역 시작
+// 		}
+		
+// 			window.addEventListener('load', function() {
+// 				var ifcgNameRegExp = /^[ㄱ-ㅎ가-힣A-Za-z0-9]+$/;
+// 				if(!ifcgNameRegExp.test(ifcgNameValue)){
+// 					alert("이름은 한국, 영대소문자, 숮자만 입력해 주세요");
+// 					ifcgName.focus();
+// 					return false;
+// 				} else {
+// 					//by pass
+// 				}
+// 			})
+		</script>
+	</body>
+
+</html>

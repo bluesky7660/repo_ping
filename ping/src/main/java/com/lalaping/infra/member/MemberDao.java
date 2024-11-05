@@ -19,4 +19,7 @@ public interface MemberDao {
 	public int deleteMember(MemberDto memberDto);
 	
 	public int selectOneCount(MemberVo memberVo);
+	
+	public MemberDto selectOneLogin(MemberDto memberDto); 
+	
 }
