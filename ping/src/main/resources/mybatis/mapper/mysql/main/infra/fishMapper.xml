@@ -1,0 +1,99 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lalaping.infra.fish.FishDao">
+	<resultMap type="com.lalaping.infra.fish.FishDto" id="resultMapObj"></resultMap>
+	
+	<sql id="selectCommon">
+        FROM fish a
+        WHERE 1=1
+        <if test="shValue != null and !shValue.equals('')">
+            <choose>
+                <when test="shOption == null">
+                    AND(
+                        a.fsName LIKE CONCAT('%', #{shValue}, '%')
+                    )
+                </when>
+                <when test="shOption == 1 and shOption != null and shOption != ''">
+                    AND a.fsName = #{shValue}
+                </when>
+            </choose>
+        </if>
+        <if test="shDelNy != null and !shDelNy.equals('')">
+            AND a.fsDelNy = #{shDelNy}
+        </if>
+        <if test="shSeason != null and !shSeason.equals('')">
+            AND a.fsSeason = #{fsSeason}
+        </if>
+        <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
+        	<choose>
+        		<when test="shOptionDate == 1"> AND a.fsRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+           	</choose>
+        </if>
+       
+    </sql>
+    
+    <select id="selectList" resultMap="resultMapObj">
+		<include refid="base.selectListUpperForMysql"/>
+		SELECT
+			a.fsSeq
+			,a.fsName
+			,a.fsSeason
+			,a.fsDelNy
+			,a.fsRegDate
+		<include refid="selectCommon"/>
+	 ORDER BY
+     	a.fsRegDate DESC
+		<include refid="base.selectListLowerForMysql"/>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO fish(
+			fsName
+			,fsSeason
+			,fsDelNy
+			,fsRegDate
+		)values(
+			#{fsName}
+			,#{fsSeason}
+			,0
+			,now()	
+		)	
+	</insert>
+	
+	<select id="selectOne">
+		SELECT
+			a.fsSeq
+			,a.fsName
+			,a.fsSeason
+			,a.fsDelNy
+			,a.fsRegDate
+		FROM fish a
+		WHERE 1=1
+		AND fsSeq = #{fsSeq}
+	</select>
+	
+	<update id="update">
+		UPDATE fish
+		SET
+			fsName = #{fsName}
+			,fsSeason = #{fsSeason}
+	</update>
+	
+	<update id="uelete">
+		UPDATE fish
+		SET
+			fsDelNy = 1
+		WHERE 1=1
+		AND fsSeq = #{fsSeq}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM fish
+        WHERE fsSeq = #{fsSeq}
+	</delete>
+	
+	
+    
+    
+	
+</mapper>
