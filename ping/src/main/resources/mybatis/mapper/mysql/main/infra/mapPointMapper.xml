@@ -1,7 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.lalaping.complaint.ComplaintDao">
-	<resultMap type="com.lalaping.complaint.ComplaintDto" id="resultMapObj"></resultMap>
+<mapper namespace="com.lalaping.infra.mapPoint.MapPointDao">
+	<resultMap type="com.lalaping.infra.mapPoint.MapPointDto" id="resultMapObj"></resultMap>
 	
 	<sql id="selectCommon2">
         FROM mapPoint a
@@ -99,7 +99,7 @@
 		AND mpSeq = #{mpSeq}
     </update>
     
-    <update id="uelect">
+    <update id="uelete">
   		UPDATE mapPoint
   		SET
   			mpDelNy = 1

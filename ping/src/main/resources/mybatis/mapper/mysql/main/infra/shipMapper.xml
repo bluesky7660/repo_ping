@@ -1,7 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.lalaping.complaint.ComplaintDao">
-	<resultMap type="com.lalaping.complaint.ComplaintDto" id="resultMapObj"></resultMap>
+<mapper namespace="com.lalaping.infra.ship.ShipDao">
+	<resultMap type="com.lalaping.infra.ship.ShipDto" id="resultMapObj"></resultMap>
 	
 	<sql id="selectCommon">
         FROM ship a
@@ -23,7 +23,7 @@
                     AND a.spPrice LIKE CONCAT('%', #{shValue}, '%')
                 </when>
                 <when test="shOption == 3 and shOption != null and shOption != ''">
-                    AND a.Total LIKE CONCAT('%', #{shValue}, '%')
+                    AND a.spTotal LIKE CONCAT('%', #{shValue}, '%')
                 </when>
             </choose>
         </if>
@@ -57,6 +57,7 @@
 			,a.spArea
 			,a.spPort
 			,a.spRegDate
+			,a.port_ptSeq
 		<include refid="selectCommon"/>
 	 ORDER BY
      	a.spRegDate DESC
@@ -74,6 +75,7 @@
 			,spArea
 			,spPort
 			,spRegDate
+			,port_ptSeq
 		)VALUES(
 			#{spName}
 			,#{spPrice}
@@ -84,6 +86,7 @@
 			,#{spArea}
 			,#{spPort}
 			,now()
+			,#{port_ptSeq}
 		)
 	</insert>
 	<select id="selectOne" resultMap="resultMapObj">
@@ -98,6 +101,7 @@
 			,a.spArea
 			,a.spPort
 			,a.spRegDate
+			,a.port_ptSeq
 		FROM ship a
 		WHERE 1=1
 		AND a.spSeq = #{spSeq}
@@ -113,11 +117,12 @@
 			,spStart = #{spStart}
 			,spArea = #{spArea}
 			,spPort = #{spRegDate}
+			,port_ptSeq = #{port_ptSeq}
 		WHERE 1=1
 		AND spSeq = #{spSeq}
 	</update>
 	
-	<update id="uelect">
+	<update id="uelete">
 		UPDATE ship
 		SET 
 			spDelNy = 1
