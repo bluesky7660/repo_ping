@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Meta -->
+		<meta name="description" content="Best Bootstrap Admin Dashboards">
+		<meta name="author" content="Bootstrap Gallery" />
+		<link rel="canonical" href="https://www.bootstrap.gallery/">
+		<meta property="og:url" content="https://www.bootstrap.gallery">
+		<meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
+		<meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
+		<meta property="og:type" content="Website">
+		<meta property="og:site_name" content="Bootstrap Gallery">
+		<link rel="shortcut icon" href="/xdm/v1/template/arise-v1.0/assets/images/favicon.svg">
+
+		<!-- Title -->
+		<title>Bootstrap Admin Dashboards</title>
+
+
+		<!-- *************
+			************ Common Css Files *************
+		************ -->
+
+		<!-- Animated css -->
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/css/animate.css">
+
+		<!-- Bootstrap font icons css -->
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/fonts/bootstrap/bootstrap-icons.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+		<!-- Main css -->
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/css/main.min.css">
+
+
+		<!-- *************
+			************ Vendor Css Files *************
+		************ -->
+		<!--<div style="background-color: red;"></div>-->
+		<!-- Scrollbar CSS -->
+		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/vendor/overlay-scroll/OverlayScrollbars.min.css">
+		
+		<!-- by developer -->
+		<link rel="stylesheet" href="/xdm/v1/css/commonXdm.css">
+		<style>
+			.form-label{
+				margin-left: 10px;
+			}
+			.required .form-label::after{
+				content: " *";
+				color: red;
+			}
+			/* .card{
+				border:1px;
+			} */
+		</style>
+	</head>
+
+	<body>
+
+		<!-- Loading wrapper start -->
+		<!-- <div id="loading-wrapper">
+			<div class="spinner">
+                <div class="line1"></div>
+				<div class="line2"></div>
+				<div class="line3"></div>
+				<div class="line4"></div>
+				<div class="line5"></div>
+				<div class="line6"></div>
+            </div>
+		</div> -->
+		<!-- Loading wrapper end -->
+
+		<!-- Page wrapper start -->
+		<div class="page-wrapper">
+
+			<!-- Sidebar wrapper start -->
+			<div th:replace="~{xdm/v1/infra/include/head :: sidebar-wrapper}"></div>
+			<!-- Sidebar wrapper end -->
+
+			<!-- *************
+				************ Main container start *************
+			************* -->
+			<div class="main-container">
+
+				<!-- Page header starts -->
+				<div th:replace="~{xdm/v1/infra/include/head :: page-header}"></div>
+				<!-- Page header ends -->
+
+				<!-- Content wrapper scroll start -->
+				<div class="content-wrapper-scroll">
+
+					<!-- Content wrapper start -->
+					<div class="content-wrapper">
+						<div class="page-title">
+							<div>
+								<div class="pb-4">
+									<!-- Breadcrumb start -->
+									<ol class="breadcrumb d-md-flex order-md-1 order-2">
+										<li class="breadcrumb-item">
+											<i class="bi bi-house"></i>
+											<a href="../../infra/index/indexXdmView">Home</a>
+										</li>
+										<li class="breadcrumb-item">Page</li>
+										<li class="breadcrumb-item breadcrumb-active" aria-current="page">Form</li>
+									</ol>
+									<!-- Breadcrumb end -->
+								</div>
+								<div class="pb-4">
+									<h2>낚시포인트</h2>
+								</div>
+							</div>
+						</div>
+						<!-- Row start -->
+						<div class="row">
+							<div class="col-sm-12 col-12">
+
+								<!-- Card start -->
+								<div class="card border">
+									<div class="card-header border-bottom">
+										<div class="card-title">기본정보</div>
+									</div>
+									<div class="card-body">
+										<form class="needs-validation" method="post" autocomplete="off" action="/v1/infra/fish/fishXdmUpdt" novalidate>
+											<!-- Row start -->
+											<div class="row">
+												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+													<div class="mb-3">
+														<label for="inputName" class="form-label">물고기번호</label>
+														<input type="text" class="form-control" id="inputFsSeq" name="fsSeq" th:value="${item.fsSeq}" placeholder="자동생성" readonly="readonly">
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+													<div class="mb-3">
+														<label for="inputCodeName" class="form-label">물고기이름</label>
+														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputFsName" name="fsName" th:value="${item.fsName}" placeholder="한글, 영대소문자, 숫자" required>
+														<div class="invalid-feedback">
+															코드이름을 적어주세요.
+														</div>
+													</div>
+												</div>
+												<!-- <div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+													<div class="mb-3">	
+														<label for="inputUseNy" class="form-label">사용여부</label>
+														<select class="form-select validate-this" id="inputUseNy" name="cgUseNy" required>
+															<option value="" selected disabled>선택하세요</option>
+															<option value="1">사용</option>
+															<option value="0">사용안함</option>
+														</select>
+														<div class="invalid-feedback">
+															사용여부을 선택해주세요.
+														</div>
+													</div>
+												</div> -->
+												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+													<div class="mb-3">
+														<label for="inputCodeName" class="form-label">시즌</label>
+														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputFsSeason" name="fsSeason" th:value="${item.fsSeason}" placeholder="숫자임의입력" required>
+														<div class="invalid-feedback">
+															코드이름을 적어주세요.
+														</div>
+													</div>
+												</div>
+												<!-- <div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+													<div class="mb-3">
+														<label for="inputCodeOrder" class="form-label">주소</label>
+														<input type="text" class="form-control" id="inputMpAddress" name="mpAddress" placeholder="주소입력" required>
+														<div class="invalid-feedback">
+															순서를 적어주세요.
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-xl-6 col-md-8 col-12">
+													<div class="mb-3">
+														<label for="inputCodeDesc" class="form-label">포인트글</label>
+														<textarea class="form-control exclude-validation" id="inputMpText" name="mpText" placeholder="" rows="3"></textarea>
+													</div>
+												</div>
+											</div> -->
+											
+											<!-- Row end -->
+											<!-- Form actions footer start -->
+											<div th:replace="~{xdm/v1/infra/include/link :: mform-link}"></div>
+											<!-- Form actions footer end -->
+										</form>
+										
+
+									</div>
+								</div>
+								<!-- Card end -->
+
+							</div>
+
+						</div>
+						<!-- Row end -->
+
+					</div>
+					<!-- Content wrapper end -->
+
+					<!-- App Footer start -->
+					<div class="app-footer">
+						<span>© Arise admin 2023</span>
+					</div>
+					<!-- App footer end -->
+
+				</div>
+				<!-- Content wrapper scroll end -->
+
+			</div>
+			<!-- *************
+				************ Main container end *************
+			************* -->
+
+		</div>
+		<!-- Page wrapper end -->
+
+		<!-- *************
+			************ Required JavaScript Files *************
+		************* -->
+		<!-- Required jQuery first, then Bootstrap Bundle JS -->
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/jquery.min.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/bootstrap.bundle.min.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/modernizr.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/moment.js"></script>
+
+		<!-- *************
+			************ Vendor Js Files *************
+		************* -->
+
+		<!-- Overlay Scroll JS -->
+		<script src="/xdm/v1/template/arise-v1.0/assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/vendor/overlay-scroll/custom-scrollbar.js"></script>
+
+		<!-- Main Js Required -->
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/main.js"></script>
+		<script src="/xdm/v1/template/arise-v1.0/assets/js/validations.js"></script>
+		<script>
+			
+		</script>
+		<!-- by developer -->
+		<script src="/xdm/v1/js/commonXdm.js"></script>
+	</body>
+
+</html>

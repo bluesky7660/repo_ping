@@ -19,9 +19,6 @@
                     AND a.mpTitle = #{shValue}
                 </when>
                 <when test="shOption == 2 and shOption != null and shOption != ''">
-                    AND a.mpText LIKE CONCAT('%', #{shValue}, '%')
-                </when>
-                <when test="shOption == 3 and shOption != null and shOption != ''">
                     AND a.mpAddress LIKE CONCAT('%', #{shValue}, '%')
                 </when>
             </choose>

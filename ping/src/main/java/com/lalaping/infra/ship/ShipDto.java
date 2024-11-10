@@ -2,6 +2,8 @@ package com.lalaping.infra.ship;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class ShipDto {
 	private String fsSeq;
 	private String fsName;
@@ -10,9 +12,10 @@ public class ShipDto {
 	private String spPrice;
 	private String spDesc;
 	private String spTotal;
+	@DateTimeFormat(pattern = "yyyyMMdd")
 	private Date spStart;
 	private Integer spDelNy;
-	private Integer Area;
+	private Integer spArea;
 	private Integer spRentalNy;
 	private Integer spEatNy;
 	private Date spRegDate;
@@ -74,11 +77,12 @@ public class ShipDto {
 	public void setSpDelNy(Integer spDelNy) {
 		this.spDelNy = spDelNy;
 	}
-	public Integer getArea() {
-		return Area;
+	
+	public Integer getSpArea() {
+		return spArea;
 	}
-	public void setArea(Integer area) {
-		Area = area;
+	public void setSpArea(Integer spArea) {
+		this.spArea = spArea;
 	}
 	public Integer getSpRentalNy() {
 		return spRentalNy;
@@ -104,6 +108,7 @@ public class ShipDto {
 	public void setPort_ptSeq(String port_ptSeq) {
 		this.port_ptSeq = port_ptSeq;
 	}
+	
 	
 
 	
