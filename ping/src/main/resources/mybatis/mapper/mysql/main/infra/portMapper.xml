@@ -26,8 +26,8 @@
         <if test="shDelNy != null and !shDelNy.equals('')">
             AND a.ptDelNy = #{shDelNy}
         </if>
-        <if test="shArea != null and !shArea.equals('')">
-            AND a.ptType = #{ptType}
+        <if test="shPtArea != null and !shArea.equals('')">
+            AND a.ptArea = #{shPtArea}
         </if>
         <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
         	<choose>
@@ -40,9 +40,9 @@
 		<include refid="base.selectListUpperForMysql"/>
 		SELECT
 			a.ptSeq
-			,a.ptType
+			,a.ptArea
 			,a.ptName
-			,a.portDesc
+			,a.ptDesc
 			,a.ptAddress
 			,a.ptDelNy
 			,a.ptRegDate
@@ -53,19 +53,17 @@
 	</select>
 	<insert id="insert">
 		INSERT INTO port(
-			ptType
+			ptArea
 			,ptName
 			,ptDesc
 			,ptAddress
-			,ptName
 			,ptDelNy
 			,ptRegDate
 		)values(
-			#{ptType}
+			#{ptArea}
 			,#{ptName}
 			,#{ptDesc}
 			,#{ptAddress}
-			,#{ptName}
 			,0
 			,now()	
 		)	
@@ -73,9 +71,9 @@
 	<select id="selectOne">
 		SELECT
 			a.ptSeq
-			,a.ptType
+			,a.ptArea
 			,a.ptName
-			,a.portDesc
+			,a.ptDesc
 			,a.ptAddress
 			,a.ptDelNy
 			,a.ptRegDate
@@ -86,7 +84,7 @@
 	<update id="update">
 		UPDATE port
 		SET
-			ptType = #{ptType}
+			ptArea = #{ptArea}
 			,ptName = #{ptName}
 			,ptDesc = #{ptDesc}
 			,ptAddress = #{ptAddress}

@@ -22,7 +22,7 @@
             AND a.fsDelNy = #{shDelNy}
         </if>
         <if test="shSeason != null and !shSeason.equals('')">
-            AND a.fsSeason = #{fsSeason}
+            AND a.fsSeason = #{shSeason}
         </if>
         <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
         	<choose>
@@ -77,6 +77,8 @@
 		SET
 			fsName = #{fsName}
 			,fsSeason = #{fsSeason}
+		WHERE 1=1
+		AND fsSeq = #{fsSeq}
 	</update>
 	
 	<update id="uelete">
@@ -89,7 +91,8 @@
 	
 	<delete id="delete">
 		DELETE FROM fish
-        WHERE fsSeq = #{fsSeq}
+        WHERE 1=1
+        AND fsSeq = #{fsSeq}
 	</delete>
 	
 	
