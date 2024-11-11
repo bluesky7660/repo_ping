@@ -14,39 +14,41 @@ public class FishController {
 	@Autowired
 	public FishService fishService;
 	
-	@RequestMapping(value = "/v1/infra/fish/fishXdmList")
+	@RequestMapping(value = "/v1/fish/fishXdmList")
 	public String fishXdmList(Model model,@ModelAttribute("vo") FishVo vo){
 		model.addAttribute("list",fishService.selectList(vo));
-		return "/xdm/v1/infra/fish/fishXdmList";
+		model.addAttribute("formLink", "fishXdmForm");
+		return "/xdm/v1/fish/fishXdmList";
 	}
-	@RequestMapping(value = "/v1/infra/fish/fishXdmForm")
-	public String fishXdmForm() {
-		return "/xdm/v1/infra/fish/fishXdmForm";
+	@RequestMapping(value = "/v1/fish/fishXdmForm")
+	public String fishXdmForm(Model model) {
+		model.addAttribute("listLink", "fishXdmList");
+		return "/xdm/v1/fish/fishXdmForm";
 	}
-	@RequestMapping(value = "/v1/infra/fish/fishXdmInst")
+	@RequestMapping(value = "/v1/fish/fishXdmInst")
 	public String fishXdmInst(FishDto fishDto) {
 		fishService.insert(fishDto);
-		return "redirect:/v1/infra/fish/fishXdmList";
+		return "redirect:/v1/fish/fishXdmList";
 	}
-	@RequestMapping(value = "/v1/infra/fish/fishXdmMFom")
+	@RequestMapping(value = "/v1/fish/fishXdmMFom")
 	public String fishXdmMFom(Model model,FishDto fishDto) {
 		model.addAttribute("item",fishService.selectOne(fishDto));
-		return "/xdm/v1/infra/fish/fishXdmMFom";
+		return "/xdm/v1/fish/fishXdmMFom";
 	}
-	@RequestMapping(value="/v1/infra/fish/fishXdmUpdt")
+	@RequestMapping(value="/v1/fish/fishXdmUpdt")
 	public String fishXdmUpdt(FishDto fishDto) {
 		fishService.update(fishDto);
-		return "redirect:/v1/infra/fish/fishXdmList";
+		return "redirect:/v1/fish/fishXdmList";
 	}
-	@RequestMapping(value="/v1/infra/fish/fishXdmUelt")
+	@RequestMapping(value="/v1/fish/fishXdmUelt")
 	public String fishXdmUelt(FishDto fishDto) {
 		fishService.uelete(fishDto);
-		return "redirect:/v1/infra/fish/fishXdmList";
+		return "redirect:/v1/fish/fishXdmList";
 	}
-	@RequestMapping(value="/v1/infra/fish/fishXdmDelt")
+	@RequestMapping(value="/v1/fish/fishXdmDelt")
 	public String fishXdmDelt(FishDto fishDto) {
 		fishService.delete(fishDto);
-		return "redirect:/v1/infra/fish/fishXdmList";
+		return "redirect:/v1/fish/fishXdmList";
 	}
 
 }

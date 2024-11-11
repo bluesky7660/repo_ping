@@ -1,0 +1,218 @@
+<th:block th:fragment="page-header">
+    <header id="ts-header" class="fixed-top">
+
+        <!-- SECONDARY NAVIGATION
+        =============================================================================================================-->
+    
+        <!--PRIMARY NAVIGATION
+        =============================================================================================================-->
+        <nav id="ts-primary-navigation" class="navbar navbar-expand-md navbar-light">
+            <div class="container">
+    
+                <!--Brand Logo-->
+                <a class="navbar-brand" href="ping_index.html">
+                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/FishOn3.png" alt="로고">
+                </a>
+    
+                <!--Responsive Collapse Button-->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPrimary" aria-controls="navbarPrimary" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <!--Collapsing Navigation-->
+                <div class="collapse navbar-collapse" id="navbarPrimary">
+    
+                    <!--LEFT NAVIGATION MAIN LEVEL
+                    =================================================================================================-->
+                    <ul class="navbar-nav">
+    
+                        <!--HOME (Main level)
+                        =============================================================================================-->
+                        <li class="nav-item ts-has-child">
+    
+                            <!--Main level link-->
+                            <a class="nav-link active" href="javascript:void(0);">
+                                낚시포인트
+                                <span class="sr-only">(current)</span>
+                            </a>
+    
+                            <!-- List (1st level) -->
+                            <ul class="ts-child">
+                                <!-- MAP (1st level)
+                                =====================================================================================-->
+                                <li class="nav-item">
+    
+                                    <a href="ping_mapPointDetail.html" class="nav-link">낚시 포인트 상세</a>
+    
+                                </li>
+                                <!--end MAP (1st level)-->
+    
+                                <!-- SLIDER (1st level)
+                                =====================================================================================-->
+                                <li class="nav-item">
+    
+                                    <a href="ping_mapPoint_add.html;" class="nav-link">낚시 포인트 생성</a>
+    
+                                </li>
+                                <li class="nav-item">
+    
+                                    <a href="ping_weatherPoint.html" class="nav-link">바다 포인트 날씨</a>
+    
+                                </li>
+                                <!--end SLIDER (1st level)-->
+    
+                            </ul>
+                            <!--end List (1st level) -->
+    
+                        </li>
+                        <!--end HOME nav-item-->
+    
+                        <!--LISTING (Main level)
+                        =============================================================================================-->
+                        <li class="nav-item ts-has-child">
+    
+                            <!--Main level link-->
+                            <a class="nav-link" href="#">선상낚시</a>
+    
+                            <!-- List (1st level) -->
+                            <ul class="ts-child">
+    
+                                <!-- CATEGORY ICONS (1st level)
+                                =====================================================================================-->
+                                <li class="nav-item">
+    
+                                    <a href="ping_portList.html" class="nav-link">항구</a>
+    
+                                </li>
+                                <!--end CATEGORY ICONS (1st level)-->
+                                <li class="nav-item">
+    
+                                    <a href="ping_portDetail.html" class="nav-link">항구 상세</a>
+    
+                                </li>
+                                <li class="nav-item">
+    
+                                    <a href="ping_shipList.html" class="nav-link">선상</a>
+    
+                                </li>
+                                <li class="nav-item">
+    
+                                    <a href="ping_shipDetail.html" class="nav-link">선상 상세</a>
+    
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a href="javascript:void(0);" class="nav-link">선상낚시 예약</a>
+                                </li>
+    
+                                <!-- PROPERTY (1st level)
+                                =====================================================================================-->
+                                <!--end PROPERTY (1st level)-->
+    
+                            </ul>
+                            <!--end List (1st level) -->
+    
+                        </li>
+                        <!--end LISTING nav-item-->
+    
+                        <!--PAGES (Main level)
+                        =============================================================================================-->
+                        <!-- <li class="nav-item ts-has-child">
+    
+                            <a class="nav-link" href="#">낚시날씨</a>
+    
+                        </li> -->
+                        <!--end PAGES nav-item-->
+    
+                        <!--PAGES (Main level)
+                        =============================================================================================-->
+                        <li class="nav-item ts-has-child">
+    
+                            <!--Main level link-->
+                            <a class="nav-link" href="#">회원정보</a>
+    
+                            <!-- List (1st level) -->
+                            <ul class="ts-child">
+                                <li class="nav-item">
+                                    <a href="ping_editMember.html" class="nav-link">회원수정</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="ping_orderList.html" class="nav-link">예약목록</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="ping_orderReturn.html" class="nav-link">환불목록</a>
+                                </li>
+                                <!-- LOGIN (1st level)
+                                =====================================================================================-->
+                                <li class="nav-item">
+                                    <a href="ping_login.html" class="nav-link">로그인</a>
+                                </li>
+                                <!--end LOGIN (1st level)-->
+    
+                                <!-- REGISTER (1st level)
+                                =====================================================================================-->
+                                <li class="nav-item">
+                                    <a href="ping_register.html" class="nav-link">회원가입</a>
+                                </li>
+                                <!--end REGISTER (1st level)-->
+    
+                            </ul>
+                            <!--end List (1st level) -->
+    
+                        </li>
+                        <!--end PAGES nav-item-->
+    
+                        <!--ABOUT US (Main level)
+                        =============================================================================================-->
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="about-us.html">About Us</a>
+                        </li> -->
+                        <!--end ABOUT US nav-item-->
+    
+                        <!--CONTACT (Main level)
+                        =============================================================================================-->
+                        <!-- <li class="nav-item">
+                            <a class="nav-link mr-2" href="contact.html">Contact</a>
+                        </li> -->
+                        <!--end CONTACT nav-item-->
+    
+                    </ul>
+                    <!--end Left navigation main level-->
+    
+                    <!--RIGHT NAVIGATION MAIN LEVEL
+                    =================================================================================================-->
+                    <ul class="navbar-nav ml-auto">
+    
+                        <!--LOGIN (Main level)
+                        =============================================================================================-->
+                        <li class="nav-item">
+                            <a class="nav-link" href="ping_login.html">로그인</a>
+                        </li>
+    
+                        <!--REGISTER (Main level)
+                        =============================================================================================-->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="ping_register.html">회원가입</a>
+                        </li>
+    
+                        <!--SUBMIT (Main level)
+                        =============================================================================================-->
+                        <li class="nav-item">
+                            <a class="btn btn-outline-primary btn-sm m-1 px-3" href="ping_mapPoint_add.html">
+                                <i class="fa fa-plus small mr-2"></i>
+                                낚시 포인트 추가
+                            </a>
+                        </li>
+    
+                    </ul>
+                    <!--end Right navigation-->
+    
+                </div>
+                <!--end navbar-collapse-->
+            </div>
+            <!--end container-->
+        </nav>
+        <!--end #ts-primary-navigation.navbar-->
+    
+    </header>
+</th:block>

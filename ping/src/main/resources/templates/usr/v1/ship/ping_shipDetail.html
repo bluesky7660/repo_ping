@@ -2,23 +2,27 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="author" content="ThemeStarz">
+    <meta name="author" content="ThemeStarz">
 
     <!--CSS -->
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/font-awesome/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/leaflet.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/style.css">
 
-	<title>MyHouse - Advanced Real Estate HTML Template by ThemeStarz</title>
+    <!-- dev -->
+    <link rel="stylesheet" href="/usr/v1/css/common.css">
+
+    <title>MyHouse - Advanced Real Estate HTML Template by ThemeStarz</title>
 
 </head>
 
 <body>
 
 <!-- WRAPPER
-=====================================================================================================================-->
+    =================================================================================================================-->
 <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
 
     <!--*********************************************************************************************************-->
@@ -78,7 +82,7 @@
 
                 <!--Brand Logo-->
                 <a class="navbar-brand" href="index-map-leaflet-fullscreen.html">
-                    <img src="assets/img/logo.png" alt="">
+                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/logo.png" alt="">
                 </a>
 
                 <!--Responsive Collapse Button-->
@@ -655,252 +659,381 @@
         <section id="page-title">
             <div class="container">
 
-                <div class="ts-title">
-                    <h1>Agencies List</h1>
+                <div class="d-block d-sm-flex justify-content-between">
+
+                    <!--Title-->
+                    <div class="ts-title mb-0">
+                        <h1>누리호</h1>
+                        <h5 class="ts-opacity__90">
+                            <i class="fa fa-map-marker text-primary"></i>
+                            인천항
+                        </h5>
+                    </div>
+
+                    <!--Price-->
+                    <div class="col-sm-2">
+                        <select class="custom-select my-2" id="type" name="type">
+                            <option value="">인원</option>
+                            <option value="1">1인</option>
+                            <option value="2">2인</option>
+                            <option value="3">3인</option>
+                            <option value="4">4인</option>
+                            <option value="5">5인</option>
+                            <option value="6">6인</option>
+                            <option value="7">7인</option>
+                            <option value="8">8인</option>
+                            <option value="9">9인</option>
+                            <option value="10">10인</option>
+                        </select>
+                        <h3 class="col-1">
+                            <span class="badge badge-primary p-3 font-weight-normal ts-shadow__sm">예약하기</span>
+                        </h3>
+                    </div>
+                    
+
                 </div>
 
             </div>
         </section>
 
-        <!--AGENCIES LIST
+        <!--GALLERY CAROUSEL
             =========================================================================================================-->
-        <section id="agencies-list">
+        <section id="gallery-carousel">
+
+            <div class="owl-carousel ts-gallery-carousel ts-gallery-carousel__multi" data-owl-dots="1" data-owl-items="3" data-owl-center="1" data-owl-loop="1">
+
+                <!--Slide-->
+                <div class="slide">
+                    <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-01.jpg">
+                        <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-01.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a>
+                    </div>
+                </div>
+
+                <!--Slide-->
+                <div class="slide">
+                    <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-02.jpg">
+                        <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-02.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a>
+                    </div>
+                </div>
+
+                <!--Slide-->
+                <div class="slide">
+                    <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-05.jpg">
+                        <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-03.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a>
+                    </div>
+                </div>
+
+                <!--Slide-->
+                <div class="slide">
+                    <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-04.jpg">
+                        <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-04.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a>
+                    </div>
+                </div>
+
+                <!--Slide-->
+                <div class="slide">
+                    <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-03.jpg">
+                        <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-05.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--CONTENT
+            =========================================================================================================-->
+        <section id="content">
             <div class="container">
+                <div class="row flex-wrap-reverse d-flex justify-content-center align-items-center">
 
-                <!--DISPLAY CONTROL
-                    =================================================================================================-->
-                <section id="display-control" class="clearfix">
+                    <!--LEFT SIDE 왼쪽바
+                        =============================================================================================-->
+                    <!-- <div class="col-md-5 col-lg-4">
+                        
+                        
 
-                    <!--Display selector on the left-->
-                    <div class="float-left">
-                        <a href="#" class="btn btn-outline-secondary px-3 mr-2 mb-2 ts-btn-border-muted">
-                            <i class="fa fa-th-large"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-secondary active px-3 mb-2 ts-btn-border-muted">
-                            <i class="fa fa-th-list"></i>
-                        </a>
-                    </div>
+                    </div> -->
+                    <!--end col-md-4-->
 
-                    <!--Display selector on the right-->
-                    <div class="float-none float-sm-right pl-2 ts-center__vertical">
-                        <label for="sorting" class="mb-0 mr-2 text-nowrap">Sort by:</label>
-                        <select class="custom-select bg-transparent" id="sorting" name="sorting">
-                            <option value="">Default</option>
-                            <option value="1">Price lowest first</option>
-                            <option value="2">Price highest first</option>
-                            <option value="3">Distance</option>
-                        </select>
-                    </div>
+                    <!--RIGHT SIDE
+                        =============================================================================================-->
+                    <div class="col-md-7 col-lg-8">
 
-                </section>
+                        <!--QUICK INFO
+                            =========================================================================================-->
+                        <section id="quick-info">
+                            <h3>Quick Info</h3>
 
-                <!--AGENCIES
-                    =================================================================================================-->
-                <section id="agencies">
+                            <!--Quick Info-->
+                            <div class="ts-quick-info ts-box">
 
-                    <!--Agency-->
-                    <div class="card ts-item ts-item__list ts-item__company ts-card">
+                                <!--Row-->
+                                <div class="row no-gutters">
 
-                        <!--Ribbon-->
-                        <div class="ts-ribbon">
-                            <i class="fa fa-thumbs-up"></i>
-                        </div>
-
-                        <!--Card Image-->
-                        <a href="agency-detail.html" class="card-img">
-                            <img src="assets/img/logo-agency-01.png" alt="">
-                        </a>
-
-                        <!--Card Body-->
-                        <div class="card-body">
-
-                            <figure class="ts-item__info">
-                                <h4>Weston Porperties</h4>
-                                <aside>
-                                    <i class="fa fa-map-marker mr-2"></i>
-                                    1350 Arbutus Drive
-                                </aside>
-                            </figure>
-
-                            <div class="ts-company-info">
-
-                                <div class="ts-company-contact mb-2 mb-sm-0">
-                                    <div>
-                                        <i class="fa fa-phone"></i>
-                                        <span>310-338-8339</span>
+                                    <!--Bathrooms-->
+                                    <div class="col-sm-3">
+                                        <div class="ts-quick-info__item" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/icon-quick-info-shower.png">
+                                            <h6>최대인원</h6>
+                                            <figure>10</figure>
+                                        </div>
                                     </div>
 
-                                    <div>
-                                        <i class="fa fa-envelope"></i>
-                                        <a href="#">hello@example.com</a>
+                                    <!--Bedrooms-->
+                                    <div class="col-sm-3">
+                                        <div class="ts-quick-info__item" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/icon-quick-info-bed.png">
+                                            <h6>남은자리</h6>
+                                            <figure>4</figure>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>Properties</dt>
-                                        <dd>64</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>Agents</dt>
-                                        <dd>12</dd>
-                                    </dl>
+                                    <!--Area-->
+                                    <div class="col-sm-3">
+                                        <div class="ts-quick-info__item" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/icon-quick-info-area.png">
+                                            <h6>출조비용 1인당</h6>
+                                            <figure>220,000원</figure>
+                                        </div>
+                                    </div>
+
+                                    <!--Garages-->
+                                    <div class="col-sm-3">
+                                        <div class="ts-quick-info__item" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/icon-quick-info-garages.png">
+                                            <h6>어종</h6>
+                                            <figure>갈치</figure>
+                                        </div>
+                                    </div>
+
                                 </div>
+                                <!--end row-->
 
                             </div>
-                        </div>
+                            <!--end ts-quick-info-->
 
-                        <!--Card Footer-->
-                        <div class="card-footer">
-                            <a href="agency-detail.html" class="ts-btn-arrow">Detail</a>
-                        </div>
+                        </section>
 
-                    </div>
-                    <!--end agency-->
+                        <!--DESCRIPTION
+                            =========================================================================================-->
+                        <section id="description">
 
-                    <!--Agency-->
-                    <div class="card ts-item ts-item__list ts-item__company ts-card">
+                            <h3>출항시간</h3>
 
-                        <!--Card Image-->
-                        <a href="agency-detail.html" class="card-img">
-                            <img src="assets/img/logo-agency-02.png" alt="">
-                        </a>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dictum ac augue et suscipit.
+                                Vivamus ac tellus ut massa bibendum aliquam vitae ac diam. Aenean in enim volutpat,
+                                accumsan erat non, porta massa. Nulla ac porta orci. Quisque condimentum fermentum
+                                isl, lacinia tempor erat venenatis non. Integer ut malesuada est, nec pulvinar magna.
+                                Vestibulum tincidunt malesuada mi eget mattis. Phasellus quis purus porta, auctor dolor
+                                sed, eleifend tortor. Vestibulum placerat tristique turpis, eu suscipit nulla elementum
+                                porttitor. Duis eu varius libero.
+                            </p>
 
-                        <!--Card Body-->
-                        <div class="card-body">
+                        </section>
 
-                            <figure class="ts-item__info">
-                                <h4>Bristol Houses</h4>
-                                <aside>
-                                    <i class="fa fa-map-marker mr-2"></i>
-                                    1350 Arbutus Drive
-                                </aside>
-                            </figure>
+                        
 
-                            <div class="ts-company-info">
+                        <!--MAP
+                            =========================================================================================-->
+                        <section id="map-location">
 
-                                <div class="ts-company-contact mb-2 mb-sm-0">
-                                    <div>
-                                        <i class="fa fa-phone"></i>
-                                        <span>310-338-8339</span>
-                                    </div>
+                            <h3>Map</h3>
 
-                                    <div>
-                                        <i class="fa fa-envelope"></i>
-                                        <a href="#">hello@example.com</a>
-                                    </div>
-                                </div>
+                            <div class="ts-map ts-map__detail ts-border-radius__sm ts-shadow__sm" id="ts-map-simple"
+                                 data-ts-map-leaflet-provider="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
+                                 data-ts-map-zoom="12"
+                                 data-ts-map-center-latitude="40.702411"
+                                 data-ts-map-center-longitude="-73.556842"
+                                 data-ts-map-scroll-wheel="0"
+                                 data-ts-map-controls="0"></div>
 
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>Properties</dt>
-                                        <dd>64</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>Agents</dt>
-                                        <dd>12</dd>
-                                    </dl>
-                                </div>
+                        </section>
 
-                            </div>
-                        </div>
 
-                        <!--Card Footer-->
-                        <div class="card-footer">
-                            <a href="agency-detail.html" class="ts-btn-arrow">Detail</a>
-                        </div>
+                        <!--FLOOR PLANS
+                            =========================================================================================-->
+                        
 
-                    </div>
-                    <!--end agency-->
+                        <!--VIDEO
+                        =============================================================================================-->
 
-                    <!--Agency-->
-                    <div class="card ts-item ts-item__list ts-item__company ts-card">
+                    
 
-                        <!--Card Image-->
-                        <a href="agency-detail.html" class="card-img">
-                            <img src="assets/img/logo-agency-03.png" alt="">
-                        </a>
+                        <!--AMENITIES
+                            =========================================================================================-->
+                        <section id="amenities">
 
-                        <!--Card Body-->
-                        <div class="card-body">
+                            <h3>Amenities</h3>
 
-                            <figure class="ts-item__info">
-                                <h4>Bright Ideas</h4>
-                                <aside>
-                                    <i class="fa fa-map-marker mr-2"></i>
-                                    1350 Arbutus Drive
-                                </aside>
-                            </figure>
-
-                            <div class="ts-company-info">
-
-                                <div class="ts-company-contact mb-2 mb-sm-0">
-                                    <div>
-                                        <i class="fa fa-phone"></i>
-                                        <span>310-338-8339</span>
-                                    </div>
-
-                                    <div>
-                                        <i class="fa fa-envelope"></i>
-                                        <a href="#">hello@example.com</a>
-                                    </div>
-                                </div>
-
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>Properties</dt>
-                                        <dd>64</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>Agents</dt>
-                                        <dd>12</dd>
-                                    </dl>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <!--Card Footer-->
-                        <div class="card-footer">
-                            <a href="agency-detail.html" class="ts-btn-arrow">Detail</a>
-                        </div>
-
-                    </div>
-                    <!--end agency-->
-
-                </section>
-                <!--end #agencies-->
-
-                <!--PAGINATION
-                    =================================================================================================-->
-                <section id="pagination">
-                    <div class="container">
-
-                        <!--Pagination-->
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination ts-center__horizontal">
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link ts-btn-arrow" href="#">Next</a>
-                                </li>
+                            <ul class="ts-list-colored-bullets ts-text-color-light ts-column-count-3 ts-column-count-md-2">
+                                <li>식사제공</li>
+                                <li>낚시대 대여</li>
+                               
                             </ul>
-                        </nav>
+
+                        </section>
 
                     </div>
-                </section>
+                    <!--end col-md-8-->
 
+                </div>
+                <!--end row-->
             </div>
             <!--end container-->
         </section>
-        <!--end #items-list-->
+
+        <!--SIMILAR PROPERTIES
+        =============================================================================================================-->
+        <section id="similar-properties">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <!-- 이 div를 col-lg-8로 설정하여 가운데 정렬 유지 -->
+                    <div class="col-sm-12 col-lg-8">
+        
+                        <hr class="mb-5">
+                        <h3>Similar Properties</h3>
+        
+                        <!-- 첫 번째 아이템 -->
+                        <div class="card ts-item ts-item__list ts-card">
+
+                            <!--Ribbon-->
+                            <div class="ts-ribbon">
+                                <i class="fa fa-thumbs-up"></i>
+                            </div>
+
+                            <!--Card Image-->
+                            <a href="detail-01.html" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg"></a>
+
+                            <!--Card Body-->
+                            <div class="card-body">
+
+                                <figure class="ts-item__info">
+                                    <h4>Big Luxury Apartment</h4>
+                                    <aside>
+                                        <i class="fa fa-map-marker mr-2"></i>
+                                        1350 Arbutus Drive
+                                    </aside>
+                                </figure>
+
+                                <div class="ts-item__info-badge">
+                                    $350,000
+                                </div>
+
+                                <div class="ts-description-lists">
+                                    <dl>
+                                        <dt>Area</dt>
+                                        <dd>325m<sup>2</sup></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>Bedrooms</dt>
+                                        <dd>2</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>Bathrooms</dt>
+                                        <dd>1</dd>
+                                    </dl>
+                                </div>
+                            </div>
+
+                            <!--Card Footer-->
+                            <a href="detail-01.html" class="card-footer">
+                                <span class="ts-btn-arrow">Detail</span>
+                            </a>
+
+                        </div>
+
+                        <!--Item-->
+                        <div class="card ts-item ts-item__list ts-card">
+
+                            <!--Ribbon-->
+                            <div class="ts-ribbon-corner">
+                                <span>Updated</span>
+                            </div>
+
+                            <!--Card Image-->
+                            <a href="detail-01.html" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-02.jpg"></a>
+
+                            <!--Card Body-->
+                            <div class="card-body ts-item__body">
+
+                                <figure class="ts-item__info">
+                                    <h4>Cozy Design Studio</h4>
+                                    <aside>
+                                        <i class="fa fa-map-marker mr-2"></i>
+                                        4831 Worthington Drive
+                                    </aside>
+                                </figure>
+
+                                <div class="ts-item__info-badge">$125,000</div>
+
+                                <div class="ts-description-lists">
+                                    <dl>
+                                        <dt>Area</dt>
+                                        <dd>325m<sup>2</sup></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>Bedrooms</dt>
+                                        <dd>2</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>Bathrooms</dt>
+                                        <dd>1</dd>
+                                    </dl>
+                                </div>
+                            </div>
+
+                            <!--Card Footer-->
+                            <a href="detail-01.html" class="card-footer ts-item__footer">
+                                <span class="ts-btn-arrow">Detail</span>
+                            </a>
+
+                        </div>
+
+                        <!--Item-->
+                        <div class="card ts-item ts-item__list ts-card">
+
+                            <!--Card Image-->
+                            <a href="detail-01.html" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-03.jpg"></a>
+
+                            <!--Card Body-->
+                            <div class="card-body ts-item__body">
+
+                                <figure class="ts-item__info">
+                                    <h4>Family Villa</h4>
+                                    <aside>
+                                        <i class="fa fa-map-marker mr-2"></i>
+                                        4127 Winding Way
+                                    </aside>
+                                </figure>
+
+                                <div class="ts-item__info-badge">$45,900</div>
+
+                                <div class="ts-description-lists">
+                                    <dl>
+                                        <dt>Area</dt>
+                                        <dd>325m<sup>2</sup></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>Bedrooms</dt>
+                                        <dd>2</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>Bathrooms</dt>
+                                        <dd>1</dd>
+                                    </dl>
+                                </div>
+                            </div>
+
+                            <!--Card Footer-->
+                            <a href="detail-01.html" class="card-footer ts-item__footer">
+                                <span class="ts-btn-arrow">Detail</span>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
 
     </main>
     <!--end #ts-main-->
@@ -920,7 +1053,7 @@
                     <!--Brand and description-->
                     <div class="col-md-6">
                         <a href="#" class="brand">
-                            <img src="assets/img/logo.png" alt="">
+                            <img src="/usr/v1/template/themeforest-v1.0/assets/img/logo.png" alt="">
                         </a>
                         <p class="mb-4">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec placerat tempor sapien.
@@ -1010,11 +1143,14 @@
 </div>
 <!--end page-->
 
-<script src="assets/js/jquery-3.3.1.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/js/custom.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/owl.carousel.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
 
 </body>
 </html>
-

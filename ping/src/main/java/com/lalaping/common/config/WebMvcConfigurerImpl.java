@@ -13,7 +13,7 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer{
 
 		registry.addInterceptor(new CheckLoginSessionInterceptor()).order(1)
 				
-				.addPathPatterns("/*/*/*/*Xdm*") 
+				.addPathPatterns("/*/*/*/*Xdm*","/*/*/*Xdm*") 
 				
 				.excludePathPatterns(
 						"/resources/**",

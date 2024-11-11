@@ -1,0 +1,61 @@
+#ts-primary-navigation{
+    padding: .5rem 1rem;
+    font-size: 1rem;
+}
+
+/*custom*/
+.navbar-brand,.brand{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.navbar-brand img,.brand img{
+    width: 80px;
+}
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+.weather_menu h3{
+    margin-bottom: 0;
+}
+#main_weather p,#local_weather p,#sea_weather p{
+    font-size: 14px;
+    white-space: nowrap;
+}
+#main_weather th,#local_weather th,#local_weather td,#local_weather td>*{
+    text-align: center;
+}
+#main_weather td,#local_weather td{
+    vertical-align: middle;
+}
+#local_weather td,#local_weather td>*{
+    text-align: center;
+}
+.weather_menu ul li a>*{
+    font-size: 20px;
+}
+img[alt="날씨이미지"]{
+    width: 40px;
+    height: auto;
+}
+#main_weather table *,#local_weather table *,#sea_weather table *{
+    text-align: center;
+}
+.seasonalTabs  ul{
+    width: 100%;
+    /* gap: 30px; */
+    flex-wrap: nowrap;
+}
+.seasonalTabs li{
+    width: calc((100% / 12));
+    padding:20px 10px;
+    text-align: center;
+    border: 1px solid transparent;
+    border-bottom: 0;
+    white-space: nowrap;
+    transition: all .5s ease;
+}
+.seasonalTabs .nav-item.active{
+    border-color:#dee2e6;background-color: rgb(164, 222, 255);
+    cursor: pointer;
+}
