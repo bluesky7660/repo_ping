@@ -30,16 +30,18 @@
         <if test="shDelNy != null and !shDelNy.equals('')">
             AND a.spDelNy = #{shDelNy}
         </if>
+        <if test="shEatNy != null and !shEatNy.equals('')">
+            AND a.spEatNy = #{shEatNy}
+        </if>
+        <if test="shRentalNy != null and !shRentalNy.equals('')">
+            AND a.spRentalNy = #{shRentalNy}
+        </if>
         <if test="shArea != null and !shArea.equals('')">
             AND a.spArea = #{shArea}
-        </if>
-        <if test="shPort != null and !shPort.equals('')">
-            AND a.spPort = #{shPort}
         </if>
         <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
         	<choose>
         		<when test="shOptionDate == 1"> AND a.spRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-            	<when test="shOptionDate == 2]">AND a.spRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
            	</choose>
         </if>
        
@@ -55,7 +57,8 @@
 			,a.spStart
 			,a.spDelNy
 			,a.spArea
-			,a.spPort
+			,a.spEatNy
+			,a.spRentalNy
 			,a.spRegDate
 			,a.port_ptSeq
 		<include refid="selectCommon"/>
@@ -73,7 +76,8 @@
 			,spStart
 			,spDelNy
 			,spArea
-			,spPort
+			,spEatNy
+			,spRentalNy
 			,spRegDate
 			,port_ptSeq
 		)VALUES(
@@ -84,7 +88,8 @@
 			,#{spStart}
 			,0
 			,#{spArea}
-			,#{spPort}
+			,#{spEatNy}
+			,#{spRentalNy}
 			,now()
 			,#{port_ptSeq}
 		)
@@ -99,7 +104,8 @@
 			,a.spStart
 			,a.spDelNy
 			,a.spArea
-			,a.spPort
+			,a.spEatNy
+			,a.spRentalNy
 			,a.spRegDate
 			,a.port_ptSeq
 		FROM ship a
@@ -116,7 +122,9 @@
 			,spTotal = #{spTotal}
 			,spStart = #{spStart}
 			,spArea = #{spArea}
-			,spPort = #{spRegDate}
+			,spEatNy = #{spEatNy}
+			,spRentalNy = #{spRentalNy}
+			,spRegDate = #{spRegDate}
 			,port_ptSeq = #{port_ptSeq}
 		WHERE 1=1
 		AND spSeq = #{spSeq}
