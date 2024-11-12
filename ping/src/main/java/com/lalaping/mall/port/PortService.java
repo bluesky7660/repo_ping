@@ -1,4 +1,4 @@
-package com.lalaping.infra.port;
+package com.lalaping.mall.port;
 
 import java.util.List;
 

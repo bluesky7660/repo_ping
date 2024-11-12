@@ -1,11 +1,9 @@
-package com.lalaping.infra.ship;
+package com.lalaping.mall.ship;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.lalaping.infra.port.PortDto;
-import com.lalaping.infra.port.PortVo;
 
 @Repository
 public interface ShipDao {

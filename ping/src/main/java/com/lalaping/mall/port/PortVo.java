@@ -1,4 +1,4 @@
-package com.lalaping.infra.port;
+package com.lalaping.mall.port;
 
 import com.lalaping.common.base.BaseVo;
 

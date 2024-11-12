@@ -1,10 +1,12 @@
-package com.lalaping.infra.port;
+package com.lalaping.mall.port;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.lalaping.mall.ship.ShipVo;
 
 @Controller
 public class PortController {
@@ -46,6 +48,18 @@ public class PortController {
 	public String portXdmDelt(PortDto portDto) {
 		portService.delete(portDto);
 		return "redirect:/v1/port/portXdmList";
+	}
+	
+	/*usr*/
+	@RequestMapping(value = "/v1/port/portList")
+	public String portList(Model model,@ModelAttribute("vo") PortVo vo){
+		model.addAttribute("list",portService.selectList(vo));
+		return "/usr/v1/port/ping_portList";
+	}
+	@RequestMapping(value = "/v1/port/portDetail")
+	public String portDetail(Model model,@ModelAttribute("vo") PortVo vo){
+//		model.addAttribute("list",shipService.selectList(vo));
+		return "/usr/v1/port/ping_portDetail";
 	}
 
 }

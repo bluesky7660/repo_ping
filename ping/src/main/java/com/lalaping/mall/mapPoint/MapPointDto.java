@@ -1,4 +1,4 @@
-package com.lalaping.infra.mapPoint;
+package com.lalaping.mall.mapPoint;
 
 import java.util.Date;
 

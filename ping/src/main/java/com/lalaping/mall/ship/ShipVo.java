@@ -1,4 +1,4 @@
-package com.lalaping.infra.ship;
+package com.lalaping.mall.ship;
 
 import com.lalaping.common.base.BaseVo;
 

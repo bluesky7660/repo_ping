@@ -1,4 +1,4 @@
-package com.lalaping.infra.ship;
+package com.lalaping.mall.ship;
 
 import java.util.Date;
 

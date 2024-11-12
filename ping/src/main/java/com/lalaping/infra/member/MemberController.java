@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lalaping.common.util.Constants;
 import com.lalaping.common.util.UtilDateTime;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -21,6 +23,17 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
+	//인코딩  
+	public String encodeBcrypt(String planeText, int strength) {
+		  return new BCryptPasswordEncoder(strength).encode(planeText);
+	}
+
+			
+	public boolean matchesBcrypt(String planeText, String hashValue, int strength) {
+	  BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(strength);
+	  return passwordEncoder.matches(planeText, hashValue);
+	}
+	
 	// Member 영역
 	@RequestMapping(value = "/v1/member/memberXdmList")
 	public String memberXdmList(@ModelAttribute("vo") MemberVo memberVo, Model model) {
@@ -138,15 +151,61 @@ public class MemberController {
 		return returnMap; 
 	}
 	
-	//인코딩  
-	public String encodeBcrypt(String planeText, int strength) {
-		  return new BCryptPasswordEncoder(strength).encode(planeText);
+	//usr
+	@RequestMapping(value = "/v1/login")
+	public String login() {
+		return "/usr/v1/etc/ping_login";
 	}
-
+	@RequestMapping(value = "/v1/register")
+	public String register() {
+		return "/usr/v1/etc/ping_register";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "loginUsrProc")
+	public Map<String, Object> loginUsrProc(MemberDto memberDto, HttpSession httpSession,HttpServletRequest request) throws Exception {
+		
+		System.out.println("loginUsrProc");
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		MemberDto rtMember = memberService.selectOne(memberDto);
+		System.out.println("rtMember: " + rtMember);
+		if (rtMember != null) {
+			if(matchesBcrypt(memberDto.getMmPasswd(), rtMember.getMmPasswd(), 10)) {
+//			if(true) {
+				httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60second * 30 = 30minute
+				httpSession.setAttribute("sessSeqXdm", rtMember.getMmSeq());
+				httpSession.setAttribute("sessIdXdm", rtMember.getMmEmail());
+				httpSession.setAttribute("sessNameXdm", rtMember.getMmName());
+				
+				String prevPage = (String) httpSession.getAttribute("prevPage");
+				System.out.println("주소테스트: "+prevPage);
+				httpSession.removeAttribute("prevPage"); 
+				returnMap.put("redirectUrl", prevPage != null ? prevPage : "/index");
+				
+				System.out.println("성공");
+				
+				returnMap.put("rt", "success");
+			}else {
+				returnMap.put("rt", "fail");
+			}
 			
-	public boolean matchesBcrypt(String planeText, String hashValue, int strength) {
-	  BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(strength);
-	  return passwordEncoder.matches(planeText, hashValue);
+		} else {
+			System.out.println("실패");
+			returnMap.put("rt", "fail");
+		}
+		return returnMap;
 	}
+	@ResponseBody
+	@RequestMapping(value = "logoutUsrProc")
+	public Map<String, Object> logoutUsrProc(HttpSession httpSession) throws Exception {
+		System.out.println("logoutUsrProc");
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		httpSession.invalidate();
+		returnMap.put("rt", "success");
+		return returnMap;
+	}
+	
+	
 
 }
