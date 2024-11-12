@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="ThemeStarz">
+
+    <!--CSS -->
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/leaflet.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/style.css">
+
+    <!-- dev -->
+    <link rel="stylesheet" href="/usr/v1/css/common.css">
+
+	<title>MyHouse - Advanced Real Estate HTML Template by ThemeStarz</title>
+
+</head>
+
+<body>
+
+<!-- WRAPPER
+    =================================================================================================================-->
+<div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
+
+    <!--*********************************************************************************************************-->
+    <!--HEADER **************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
+    <!--end Header-->
+
+    <!--*********************************************************************************************************-->
+    <!-- MAIN ***************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <main id="ts-main">
+
+        <!--BREADCRUMB
+            =========================================================================================================-->
+        <section id="breadcrumb">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Library</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!--PAGE TITLE
+            =========================================================================================================-->
+        <section id="page-title">
+            <div class="container">
+
+                <div class="ts-title">
+                    <h1>배 리스트</h1>
+                </div>
+
+            </div>
+        </section>
+
+        <!--ITEMS AND SIDEBAR
+            =========================================================================================================-->
+        <section id="items-grid-and-sidebar">
+            <div class="container">
+                <div class="row">
+
+                    <!--LEFT SIDE (SIDEBAR)
+                        =============================================================================================-->
+                    <div class="col-md-4 navbar-expand-md">
+
+                        <button class="btn bg-white mb-4 w-100 d-block d-md-none" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="float-left">
+                                    <i class="fa fa-search mr-2"></i>
+                                    Redefine Search
+                                </span>
+                            <span class="float-right">
+                                    <i class="fa fa-plus small ts-opacity__30"></i>
+                                </span>
+                        </button>
+
+                        <aside id="sidebar" class="ts-sidebar collapse navbar-collapse">
+
+                            <!--SEARCH FORM
+                                =========================================================================================-->
+                            <section id="sidebar-search-form">
+
+                                <h3>검색</h3>
+
+                                <form id="form-search" class="ts-form">
+
+                                    <!--Keyword-->
+                                    <div class="form-group">
+                                        <label>배이름 검색</label>
+                                        <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Address, City or ZIP">
+                                    </div>
+
+                                    <!--Type-->
+                                    <div class="form-group">
+                                        <label>지역</label>
+                                        <select class="custom-select" id="type" name="type">
+                                            <option value="">지역</option>
+                                            <option value="1">서울</option>
+                                            <option value="2">제주</option>
+                                            <option value="3">강원</option>
+                                            <option value="4">울릉도</option>
+                                        </select>
+                                    </div>
+
+                                    <!--Status-->
+                                    <div class="form-group">
+                                        <label>인원</label>
+                                        <select class="custom-select" id="status" name="status">
+                                            <option value="">인원</option>
+                                            <option value="1">Rent</option>
+                                            <option value="2">Sale</option>
+                                        </select>
+                                    </div>
+
+                                    
+
+                                    <!--Row - Min price & Max price-->
+                                    <div class="row">
+
+                                        <!--Min Price-->
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control border-right-0" id="min-price" name="min_price" placeholder="최소가격">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text bg-white border-left-0">$</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--Max Price-->
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control border-right-0" id="max-price" name="max_price" placeholder="최대가격">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text bg-white border-left-0">$</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>물고기로 검색</label>
+                                        <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Address, City or ZIP">
+                                    </div>
+
+                                    <!--Submit button-->
+                                    <div class="form-group my-2">
+                                        <button type="submit" class="btn btn-primary w-100" id="search-btn">Search
+                                        </button>
+                                    </div>
+
+                                    <!--More Options Button-->
+                                    <a href="#more-options-collapse" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="more-options-collapse">
+                                        <i class="fa fa-plus-circle ts-text-color-primary mr-2"></i>
+                                        검색 더하기
+                                    </a>
+
+                                    <!--Hidden Form-->
+                                    <div class="collapse" id="more-options-collapse">
+
+                                        <!--Padding-->
+                                        <div class="py-4">
+
+                                            <!--Row-->
+                                            <div class="form-row">
+
+                                                <!--Bedrooms-->
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <input type="number" class="form-control" id="bedrooms" name="bedrooms" min="0" placeholder="날짜">
+                                                    </div>
+                                                </div>
+
+                                                <!--Bathrooms-->
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <input type="number" class="form-control" id="bathrooms" name="bathrooms" min="0" placeholder="날짜">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!--end row-->
+
+                                            <!--Checkboxes-->
+                                            <div id="features-checkboxes" class="w-100">
+                                                <h6 class="mb-3"></h6>
+
+                                                <div class="ts-column-count-2">
+
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="ch_1" name="features[]" value="ch_1">
+                                                        <label class="custom-control-label" for="ch_1">
+                                                            식사제공</label>
+                                                    </div>
+
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="ch_2" name="features[]" value="ch_2">
+                                                        <label class="custom-control-label" for="ch_2">낚시대 대여</label>
+                                                    </div>
+
+                                                    <!-- <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="ch_3" name="features[]" value="ch_3">
+                                                        <label class="custom-control-label" for="ch_3">Heating</label>
+                                                    </div>
+
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="ch_4" name="features[]" value="ch_4">
+                                                        <label class="custom-control-label" for="ch_4">Internet</label>
+                                                    </div>
+
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="ch_5" name="features[]" value="ch_5">
+                                                        <label class="custom-control-label" for="ch_5">Microwave</label>
+                                                    </div>
+
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="ch_6" name="features[]" value="ch_6">
+                                                        <label class="custom-control-label" for="ch_6">Smoking
+                                                            allowed</label>
+                                                    </div>
+
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="ch_7" name="features[]" value="ch_7">
+                                                        <label class="custom-control-label" for="ch_7">Terrace</label>
+                                                    </div>
+
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="ch_8" name="features[]" value="ch_8">
+                                                        <label class="custom-control-label" for="ch_8">Balcony</label>
+                                                    </div>
+
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="ch_9" name="features[]" value="ch_9">
+                                                        <label class="custom-control-label" for="ch_9">Iron</label>
+                                                    </div>
+
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="ch_10" name="features[]" value="ch_10">
+                                                        <label class="custom-control-label" for="ch_10">Hi-Fi</label>
+                                                    </div>
+
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="ch_11" name="features[]" value="ch_11">
+                                                        <label class="custom-control-label" for="ch_11">Beach</label>
+                                                    </div>
+
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="ch_12" name="features[]" value="ch_12">
+                                                        <label class="custom-control-label" for="ch_12">Parking</label>
+                                                    </div> -->
+
+                                                </div>
+                                                <!--end ts-column-count-3-->
+
+                                            </div>
+                                            <!--end #features-checkboxes-->
+
+                                        </div>
+                                        <!--end Padding-->
+                                    </div>
+                                    <!--end more-options-collapse-->
+
+                                </form>
+                                <!--end #form-search-->
+                            </section>
+                            <!--end #sidebar-search-form-->
+
+                            
+                        </aside>
+                        <!--end #sidebar-->
+                    </div>
+                    <!--end Right Side / col-md-4-->
+
+                    <!--RIGHT SIDE (ITEMS)
+                        =============================================================================================-->
+                    <div class="col-md-8">
+
+                        <!--DISPLAY CONTROL
+                            =========================================================================================-->
+                        <section id="display-control" class="clearfix">
+
+                            <!--Display selector on the left-->
+                            <div class="float-left">
+                                <a href="#" class="btn btn-outline-secondary px-3 mr-2 mb-2 ts-btn-border-muted">
+                                    <i class="fa fa-th-large"></i>
+                                </a>
+                                <a href="#" class="btn btn-outline-secondary active px-3 mb-2 ts-btn-border-muted">
+                                    <i class="fa fa-th-list"></i>
+                                </a>
+                            </div>
+
+                            <!--Display selector on the right-->
+                            <div class="float-none float-sm-right pl-2 ts-center__vertical">
+                                <label for="sorting" class="mb-0 mr-2 text-nowrap">Sort by:</label>
+                                <select class="custom-select bg-transparent" id="sorting" name="sorting">
+                                    <option value="">Default</option>
+                                    <option value="1">Price lowest first</option>
+                                    <option value="2">Price highest first</option>
+                                    <option value="3">Distance</option>
+                                </select>
+                            </div>
+
+                        </section>
+
+                        <!--ITEMS LIST
+                            =========================================================================================-->
+                        <section id="ts-items-list">
+
+                            <!--Item-->
+                            <div class="card ts-item ts-item__list ts-card">
+
+                                <!--Card Image-->
+                                <a href="detail-01.html" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg"></a>
+
+                                <!--Card Body-->
+                                <div class="card-body">
+
+                                    <figure class="ts-item__info">
+                                        <h4>누리호</h4>
+                                        <aside>
+                                            <i class="fa fa-map-marker mr-2"></i>
+                                            인천항 주소
+                                        </aside>
+                                    </figure>
+
+                                    <div class="ts-item__info-badge">
+                                        220,000원
+                                    </div>
+
+                                    <div class="ts-description-lists">
+                                        <dl>
+                                            <dt>최대인원</dt>
+                                            <dd>10명</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>예약가능인원</dt>
+                                            <dd>4명</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>출발날짜</dt>
+                                            <dd>2024-10-10</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+
+                                <!--Card Footer-->
+                                <a href="detail-01.html" class="card-footer">
+                                    <span>대상어종: 갈치</span>
+                                </a>
+
+                            </div>
+
+                            <!--Item-->
+                            <div class="card ts-item ts-item__list ts-card">
+
+                                <!--Ribbon-->
+                                <div class="ts-ribbon-corner">
+                                    <span>Updated</span>
+                                </div>
+
+                                <!--Card Image-->
+                                <a href="detail-01.html" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-02.jpg"></a>
+
+                                <!--Card Body-->
+                                <div class="card-body ts-item__body">
+
+                                    <figure class="ts-item__info">
+                                        <h4>Cozy Design Studio</h4>
+                                        <aside>
+                                            <i class="fa fa-map-marker mr-2"></i>
+                                            4831 Worthington Drive
+                                        </aside>
+                                    </figure>
+
+                                    <div class="ts-item__info-badge">$125,000</div>
+
+                                    <div class="ts-description-lists">
+                                        <dl>
+                                            <dt>Area</dt>
+                                            <dd>325m<sup>2</sup></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Bedrooms</dt>
+                                            <dd>2</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Bathrooms</dt>
+                                            <dd>1</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+
+                                <!--Card Footer-->
+                                <a href="detail-01.html" class="card-footer ts-item__footer">
+                                    <span class="ts-btn-arrow">Detail</span>
+                                </a>
+
+                            </div>
+
+                            <!--Item-->
+                            <div class="card ts-item ts-item__list ts-card">
+
+                                <!--Card Image-->
+                                <a href="detail-01.html" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-03.jpg"></a>
+
+                                <!--Card Body-->
+                                <div class="card-body ts-item__body">
+
+                                    <figure class="ts-item__info">
+                                        <h4>Family Villa</h4>
+                                        <aside>
+                                            <i class="fa fa-map-marker mr-2"></i>
+                                            4127 Winding Way
+                                        </aside>
+                                    </figure>
+
+                                    <div class="ts-item__info-badge">$45,900</div>
+
+                                    <div class="ts-description-lists">
+                                        <dl>
+                                            <dt>Area</dt>
+                                            <dd>325m<sup>2</sup></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Bedrooms</dt>
+                                            <dd>2</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Bathrooms</dt>
+                                            <dd>1</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+
+                                <!--Card Footer-->
+                                <a href="detail-01.html" class="card-footer ts-item__footer">
+                                    <span class="ts-btn-arrow">Detail</span>
+                                </a>
+
+                            </div>
+
+                            <!--Item-->
+                            <div class="card ts-item ts-item__list ts-card">
+
+                                <!--Card Image-->
+                                <a href="detail-01.html" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-04.jpg"></a>
+
+                                <!--Card Body-->
+                                <div class="card-body">
+
+                                    <figure class="ts-item__info">
+                                        <h4>Traditional Restaurant</h4>
+                                        <aside>
+                                            <i class="fa fa-map-marker mr-2"></i>
+                                            1350 Arbutus Drive
+                                        </aside>
+                                    </figure>
+
+                                    <div class="ts-item__info-badge">$860,000</div>
+
+                                    <div class="ts-description-lists">
+                                        <dl>
+                                            <dt>Area</dt>
+                                            <dd>325m<sup>2</sup></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Bedrooms</dt>
+                                            <dd>2</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Bathrooms</dt>
+                                            <dd>1</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+
+                                <!--Card Footer-->
+                                <a href="detail-01.html" class="card-footer">
+                                    <span class="ts-btn-arrow">Detail</span>
+                                </a>
+
+                            </div>
+
+                            <!--Item-->
+                            <div class="card ts-item ts-item__list ts-card">
+
+                                <!--Card Image-->
+                                <a href="detail-01.html" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-05.jpg"></a>
+
+                                <!--Card Body-->
+                                <div class="card-body ts-item__body">
+
+                                    <figure class="ts-item__info">
+                                        <h4>White Cubes Resort</h4>
+                                        <aside>
+                                            <i class="fa fa-map-marker mr-2"></i>
+                                            4831 Worthington Drive
+                                        </aside>
+                                    </figure>
+
+                                    <div class="ts-item__info-badge">$435,000</div>
+
+                                    <div class="ts-description-lists">
+                                        <dl>
+                                            <dt>Area</dt>
+                                            <dd>325m<sup>2</sup></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Bedrooms</dt>
+                                            <dd>2</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Bathrooms</dt>
+                                            <dd>1</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+
+                                <!--Card Footer-->
+                                <a href="detail-01.html" class="card-footer ts-item__footer">
+                                    <span class="ts-btn-arrow">Detail</span>
+                                </a>
+
+                            </div>
+
+                            <!--Item-->
+                            <div class="card ts-item ts-item__list ts-card">
+
+                                <!--Card Image-->
+                                <a href="detail-01.html" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-06.jpg"></a>
+
+                                <!--Card Body-->
+                                <div class="card-body ts-item__body">
+
+                                    <figure class="ts-item__info">
+                                        <h4>Bristol Tower Complex</h4>
+                                        <aside>
+                                            <i class="fa fa-map-marker mr-2"></i>
+                                            4127 Winding Way
+                                        </aside>
+                                    </figure>
+
+                                    <div class="ts-item__info-badge">$85,900</div>
+
+                                    <div class="ts-description-lists">
+                                        <dl>
+                                            <dt>Area</dt>
+                                            <dd>325m<sup>2</sup></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Bedrooms</dt>
+                                            <dd>2</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Bathrooms</dt>
+                                            <dd>1</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+
+                                <!--Card Footer-->
+                                <a href="detail-01.html" class="card-footer ts-item__footer">
+                                    <span class="ts-btn-arrow">Detail</span>
+                                </a>
+
+                            </div>
+
+                            <!--Item-->
+                            <div class="card ts-item ts-item__list ts-card">
+
+                                <!--Card Image-->
+                                <a href="detail-01.html" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-07.jpg"></a>
+
+                                <!--Card Body-->
+                                <div class="card-body">
+
+                                    <figure class="ts-item__info">
+                                        <h4>River Apartments</h4>
+                                        <aside>
+                                            <i class="fa fa-map-marker mr-2"></i>
+                                            1350 Arbutus Drive
+                                        </aside>
+                                    </figure>
+
+                                    <div class="ts-item__info-badge">$120,000</div>
+
+                                    <div class="ts-description-lists">
+                                        <dl>
+                                            <dt>Area</dt>
+                                            <dd>325m<sup>2</sup></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Bedrooms</dt>
+                                            <dd>2</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Bathrooms</dt>
+                                            <dd>1</dd>
+                                        </dl>
+                                    </div>
+
+                                </div>
+
+                                <!--Card Footer-->
+                                <a href="detail-01.html" class="card-footer">
+                                    <span class="ts-btn-arrow">Detail</span>
+                                </a>
+
+                            </div>
+
+                            <!--Item-->
+                            <div class="card ts-item ts-item__list ts-card">
+
+                                <div class="badge badge-primary">Rent</div>
+
+                                <!--Card Image-->
+                                <a href="detail-01.html" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-08.jpg"></a>
+
+                                <!--Card Body-->
+                                <div class="card-body ts-item__body">
+
+                                    <figure class="ts-item__info">
+                                        <h4>Apartment for Rent</h4>
+                                        <aside>
+                                            <i class="fa fa-map-marker mr-2"></i>
+                                            4831 Worthington Drive
+                                        </aside>
+                                    </figure>
+
+                                    <div class="ts-item__info-badge">$480</div>
+
+                                    <div class="ts-description-lists">
+                                        <dl>
+                                            <dt>Area</dt>
+                                            <dd>325m<sup>2</sup></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Bedrooms</dt>
+                                            <dd>2</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Bathrooms</dt>
+                                            <dd>1</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+
+                                <!--Card Footer-->
+                                <a href="detail-01.html" class="card-footer ts-item__footer">
+                                    <span class="ts-btn-arrow">Detail</span>
+                                </a>
+
+                            </div>
+
+                        </section>
+                        <!--end row-->
+
+                        <!--PAGINATION
+                            =========================================================================================-->
+                        <section id="pagination">
+                            <div class="container">
+
+                                <!--Pagination-->
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination ts-center__horizontal">
+                                        <li class="page-item active">
+                                            <a class="page-link" href="#">1</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">2</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">3</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link ts-btn-arrow" href="#">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+
+                            </div>
+                        </section>
+
+                    </div>
+                    <!--end Right Side / col-md-8-->
+
+                </div>
+                <!--end row-->
+            </div>
+            <!--end container-->
+        </section>
+        <!--end #items-list-->
+
+    </main>
+    <!--end #ts-main-->
+
+    <!--*********************************************************************************************************-->
+    <!--************ FOOTER *************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
+    <!--end #ts-footer-->
+
+</div>
+<!--end page-->
+
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="http://maps.google.com/maps/api/js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script src="/usr/v1/js/script.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
+
+</body>
+</html>
+

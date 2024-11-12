@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="ThemeStarz">
+
+    <!--CSS -->
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/style.css">
+
+    <!-- dev -->
+    <link rel="stylesheet" href="/usr/v1/css/common.css">
+
+	<title>MyHouse - Advanced Real Estate HTML Template by ThemeStarz</title>
+
+</head>
+
+<body>
+
+<!-- WRAPPER
+=====================================================================================================================-->
+<div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
+
+    <!--*********************************************************************************************************-->
+    <!--HEADER **************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
+    <!--end Header-->
+
+    <!--*********************************************************************************************************-->
+    <!-- MAIN ***************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <main id="ts-main">
+
+        <!--BREADCRUMB
+            =========================================================================================================-->
+        <section id="breadcrumb">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Library</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!--PAGE TITLE
+            =========================================================================================================-->
+        <section id="page-title">
+            <div class="container">
+
+                <div class="ts-title">
+                    <h1>항구리스트</h1>
+                </div>
+
+            </div>
+        </section>
+
+        <!--AGENCIES LIST
+            =========================================================================================================-->
+        <section id="agencies-list">
+            <div class="container">
+
+                <!--DISPLAY CONTROL
+                    =================================================================================================-->
+                <section id="display-control" class="clearfix">
+
+                    <!--Display selector on the left-->
+                    <!-- <div class="float-left">
+                        <a href="#" class="btn btn-outline-secondary px-3 mr-2 mb-2 ts-btn-border-muted">
+                            <i class="fa fa-th-large"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-secondary active px-3 mb-2 ts-btn-border-muted">
+                            <i class="fa fa-th-list"></i>
+                        </a>
+                    </div> -->
+
+                    <!--Display selector on the right-->
+                    <div class="float-none float-sm-right pl-2 ts-center__vertical">
+                        <label for="sorting" class="mb-0 mr-2 text-nowrap">Sort by:</label>
+                        <select class="custom-select bg-transparent" id="sorting" name="sorting">
+                            <option value="">Default</option>
+                            <option value="1">Price lowest first</option>
+                            <option value="2">Price highest first</option>
+                            <option value="3">Distance</option>
+                        </select>
+                    </div>
+
+                </section>
+
+                <!--AGENCIES
+                    =================================================================================================-->
+                <section id="agencies">
+
+                    <!--Agency-->
+                    <div class="card ts-item ts-item__list ts-item__company ts-card" th:each="list:${list}">
+
+                        <!--Ribbon-->
+                        <!-- <div class="ts-ribbon">
+                            <i class="fa fa-thumbs-up"></i>
+                        </div> -->
+
+                        <!--Card Image-->
+                        <!-- <a th:href="@{/v1/prot/portDetail(ptSeq=${list.ptSeq})}" class="card-img">
+                            
+                            <img src="/usr/v1/template/themeforest-v1.0/assets/img/logo-agency-01.png" alt="">
+                        </a> -->
+                        <a th:href="@{/v1/port/portDetail(ptSeq=${list.ptSeq})}">
+                            <div class="card-img">
+                                <img src="/usr/v1/template/themeforest-v1.0/assets/img/logo-agency-01.png" alt="">  
+                            </div>
+
+                            <!--Card Body-->
+                            <div class="card-body">
+
+                                <figure class="ts-item__info">
+                                    <h4 th:text="${list.ptName}"></h4>
+                                    <aside>
+                                        <i class="fa fa-map-marker mr-2"></i>
+                                        <span th:text="${list.ptAddress}"></span>
+                                    </aside>
+                                </figure>
+
+                                <div class="ts-company-info">
+
+                                    <div class="ts-company-contact mb-2 mb-sm-0">
+                                        <div>
+                                            <i class="fa fa-phone"></i>
+                                            <span th:text="${@codeService.selectOneCachedCode(list.ptArea)}">인천</span>
+                                        </div>
+
+                                        <div>
+                                            <i class="fa fa-envelope"></i>
+                                            <span th:text="${list.ptDesc}"></span>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="ts-description-lists">
+                                        <dl>
+                                            <dt>Properties</dt>
+                                            <dd>64</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Agents</dt>
+                                            <dd>12</dd>
+                                        </dl>
+                                    </div> -->
+
+                                </div>
+                            </div>
+
+                            <!--Card Footer-->
+                            <div class="card-footer">
+                                <!-- <a th:href="@{/v1/prot/portDetail(ptSeq=${list.ptSeq})}" class="ts-btn-arrow">자세히</a> -->
+                                <span class="ts-btn-arrow">자세히</span>
+                            </div>
+                        </a>
+
+                    </div>
+                    <!--end agency-->
+
+                </section>
+                <!--end #agencies-->
+
+                <!--PAGINATION
+                    =================================================================================================-->
+                <section id="pagination">
+                    <div class="container">
+
+                        <!--Pagination-->
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination ts-center__horizontal">
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">3</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link ts-btn-arrow" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                    </div>
+                </section>
+
+            </div>
+            <!--end container-->
+        </section>
+        <!--end #items-list-->
+
+    </main>
+    <!--end #ts-main-->
+
+    <!--*********************************************************************************************************-->
+    <!--************ FOOTER *************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
+    <!--end #ts-footer-->
+
+</div>
+<!--end page-->
+
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script src="/usr/v1/js/script.js"></script>
+
+</body>
+</html>
+

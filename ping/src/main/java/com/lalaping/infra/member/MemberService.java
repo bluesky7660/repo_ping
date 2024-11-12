@@ -21,6 +21,9 @@ public class MemberService {
     public MemberDto selectOne(MemberDto memberDto) {
     	return memberDao.selectOne(memberDto);
     }
+    public MemberDto selectUsrOne(MemberDto memberDto) {
+    	return memberDao.selectUsrOne(memberDto);
+    }
     public int listCount(MemberVo memberVo) {
         return memberDao.listCount(memberVo);
     }

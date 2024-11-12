@@ -50,7 +50,7 @@
 		    ,b.cgName
 	    <include refid="selectCommon"/>
 	    ORDER BY
-			a.cdOrder desc
+	    	a.cdSeq desc
 		<include refid="base.selectListLowerForMysql"/>
 	</select>
 	<select id="listCount" resultType="int">

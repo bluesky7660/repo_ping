@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="ThemeStarz">
+
+    <!--CSS -->
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/leaflet.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/style.css">
+
+    <!-- dev -->
+    <link rel="stylesheet" href="/usr/v1/css/common.css">
+
+    <title>MyHouse - Advanced Real Estate HTML Template by ThemeStarz</title>
+
+</head>
+
+<body>
+
+<!-- WRAPPER
+    =================================================================================================================-->
+<div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
+
+    <!--*********************************************************************************************************-->
+    <!--HEADER **************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
+    <!--end Header-->
+
+    <!--*********************************************************************************************************-->
+    <!-- MAIN ***************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <main id="ts-main">
+
+        <!--BREADCRUMB
+            =========================================================================================================-->
+        <section id="breadcrumb">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Library</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!--PAGE TITLE
+            =========================================================================================================-->
+        <section id="page-title">
+            <div class="container">
+                <div class="ts-title">
+                    <h1>내정보수정</h1>
+                </div>
+            </div>
+        </section>
+
+        <!--MAP
+            =========================================================================================================-->
+    
+
+        <!--CONTACT INFO & FORM
+            =========================================================================================================-->
+        <section id="contact-form">
+            <div class="container">
+                <div class="row">
+
+                    <!--CONTACTS (LEFT SIDE)
+                        =============================================================================================-->
+                        <div class="col-lg-4">
+                            <div class="rounded-4 border osahan-sidebar bg-white mb-4">
+                                <div class="text-center p-4 border-bottom">
+                                    <h3 class="fw-bold mb-1" >ooo님</h3>
+                                    <p class="m-0 text-muted">qwer1234</p>
+                                </div>
+                                <div class="p-4 osahan-sidebar-links">
+                                    <a class="dropdown-item" href="/usr/v1/infra/order/OrderList"><i class="ri-file-list-line me-2"></i> 주문목록 </a>
+                                    <a class="dropdown-item" href="/usr/v1/infra/editmember/editMemberForm"></i> 환불목록</a>
+                                    <a class="dropdown-item" href="/usr/v1/infra/editmember/editMemberForm"></i> 내정보 수정 </a>
+                                    <a class="dropdown-item" id="logout" href="/usr/v1/infra/login/loginUsrForm"><i class="ri-logout-circle-line me-2"></i> 로그아웃</a>
+                                </div>
+                            </div>
+                        </div>
+                    <!--end col-md-4-->
+
+                    <!--FORM (RIGHT SIDE)
+                        =============================================================================================-->
+                    <div class="col-md-8">
+
+                        <!--Title-->
+                        <h3>내정보 수정</h3>
+
+                        <!--Form-->
+                        
+                        <div class="row">
+
+                            <!--Name-->
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="form-contact-name">이름</label>
+                                  <h5>김선우<h5>
+                                </div>
+                            </div>
+                            <!--Email-->
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="form-contact-email">생년월일</label>
+                                    <h5>1990년9월20일<h5>
+                                </div>
+                            </div>
+                        </div>
+                            <!--Row-->
+                            <div class="row">
+
+                                <!--Name-->
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="form-contact-name">이메일</label>
+                                        <input type="text" class="form-control" id="form-contact-name" name="name" placeholder="변경할 이메일명" required>
+                                    </div>
+                                </div>
+
+                                <!--Email-->
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="form-contact-email">전화번호</label>
+                                        <input type="email" class="form-control" id="form-contact-email" name="email" placeholder="변경할 전화번호" required>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--end row -->
+                            <!--Submit button-->
+                            <div class="form-group clearfix">
+                                <button type="submit" class="btn btn-primary" id="form-contact-submit">
+                                    변경하기
+                                </button>
+                            </div>
+
+                            <div class="form-contact-status"></div>
+                            <hr class="my-5">
+                            <div>
+                                <!-- heading -->
+                                <h3>비밀번호 변경</h3>
+                                <form method="" action="" class="row row-cols-1 row-cols-lg-2">
+                                    <!-- input -->
+                                    <div class="mb-4 col">
+                                        <label class="form-label">새로운 비밀번호설정</label>
+                                        <input type="password" class="form-control" placeholder="" name="mmPasswd">
+                                    </div>
+                                    <!-- input -->
+                                    <div class="mb-4 col">
+                                        <label class="form-label">비밀번호 재입력</label>
+                                        <input type="password" class="form-control" placeholder="">
+                                    </div>
+                                    <!-- input -->
+                                    <div class="col-12">
+                                        <!-- <p class="mb-4">Can’t remember your current password?<a href="#"> Reset your password.</a></p> -->
+                                        <button type="submit" class="btn btn-primary" id="form-contact-submit">
+                                            비밀번호 변경
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                      
+                        <!--end form-contact -->
+                    </div>
+                    <!--end col-md-8-->
+
+                </div>
+                <!--end row-->
+            </div>
+            <!--end container-->
+        </section>
+
+    </main>
+    <!--end #ts-main-->
+
+    <!--*********************************************************************************************************-->
+    <!--************ FOOTER *************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
+    <!--end #ts-footer-->
+
+</div>
+<!--end page-->
+
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script src="/usr/v1/js/script.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="ThemeStarz">
+
+    <!--CSS -->
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/leaflet.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/style.css">
+
+    <!-- dev -->
+    <link rel="stylesheet" href="/usr/v1/css/common.css">
+
+	<title>MyHouse - Advanced Real Estate HTML Template by ThemeStarz</title>
+
+</head>
+
+<body>
+
+<!-- WRAPPER
+    =================================================================================================================-->
+<div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
+
+    <!--*********************************************************************************************************-->
+    <!--HEADER **************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
+
+    <!--end Header-->
+
+    <!--*********************************************************************************************************-->
+    <!-- MAIN ***************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <main id="ts-main">
+
+        <!--BREADCRUMB
+            =========================================================================================================-->
+        <section id="breadcrumb">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Library</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!--PAGE TITLE
+            =========================================================================================================-->
+        <section id="page-title">
+            <div class="container">
+
+                <div class="ts-title">
+                    <h1>낚시포인트 상세</h1>
+                </div>
+
+            </div>
+        </section>
+
+        <!--AGENT INFO
+            =========================================================================================================-->
+        <section id="agent-info">
+            <div class="container">
+
+                <!--Box-->
+                <div class="ts-box ts-has-talk-arrow">
+
+                    <!--Row-->
+                    <div class="row">
+
+                        <!--Brand-->
+                        <div class="col-md-4 ts-center__both">
+                            <div class="ts-circle__xxl ts-shadow__md" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-person-02.jpg"></div>
+                        </div>
+
+                        <!--Description-->
+                        <div class="col-md-8">
+
+                            <div class="py-4">
+
+                                <!--Title-->
+                                <div class="ts-title mb-3">
+                                    <h2 class="mb-1" th:text="${item.mpTitle}"></h2> 
+                                    <h5>
+                                        <i class="fa fa-sun-o mr-2"></i>
+                                        <span th:text="${item.mpAddress}"></span>
+                                    </h5>
+                                   <a href ="/ping_weatherPoint.html">
+                                        <figure class="mb-1">
+                                            <i class="fa fa-certificate"></i>
+                                            <span th:text="${item.mpTitle}"></span>상세날씨
+                                        </figure>
+                                    </a>
+                                </div>
+
+                                <!--Row-->
+                                <div class="row">
+
+                                    <div class="col-md-7">
+                                        <p th:text="${item.mpText}">
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-5 ts-opacity__50">
+
+                                        <!--Phone-->
+                                        <!-- <figure class="mb-1">
+                                            <i class="fa fa-phone-square mr-2"></i>
+                                            031-403-8217
+                                        </figure> -->
+
+                                        <!--Mail-->
+                                        <!-- <figure class="mb-1">
+                                            <i class="fa fa-envelope mr-2"></i>
+                                            <a href="#">없음</a>
+                                        </figure> -->
+
+                                        
+
+                                    </div>
+
+                                </div>
+                                <!--end row-->
+                            </div>
+                            <!--end p-4-->
+
+                            <div class="ts-bg-light p-3 ts-border-radius__md d-block d-sm-flex ts-center__vertical justify-content-between ts-xs-text-center">
+                                <span class="d-sm-inline-block mb-2 mb-sm-0">대상어종: <span>베스</span></span>
+                                <small>등록일 <span th:text="${#dates.format(item.mpRegDate,'yyyy-MM-dd')}"></span></small>
+                            </div>
+
+                        </div>
+                        <!--end col-md-8-->
+                    </div>
+                    <!--end row-->
+                </div>
+                <!--end ts-box-->
+
+            </div>
+            <!--end container-->
+        </section>
+        <!--end #agent-info-->
+
+        <!--ITEMS LISTING & SEARCH
+            =========================================================================================================-->
+        <section id="items-listing-and-search">
+            <div class="container">
+                <div class="row flex-wrap-reverse">
+
+                    <!--LEFT SIDE
+                        =============================================================================================-->
+                    <div class="col-md-8">
+                        <h3 class="mb-4 pb-4">포인트 디테일 주소</h3>
+
+                        <!--MAP RESULTS
+                            =========================================================================================-->
+                        <section id="map-results">
+
+                            <div class="position-relative ts-border-radius__sm ts-shadow__sm">
+                                <div id="collapse-map" class="collapse show">
+                                    <div id="ts-map-simple" class="ts-map ts-min-h__30vh"
+                                         data-ts-map-leaflet-provider="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
+                                         data-ts-map-zoom="14"
+                                         th:data-ts-map-center-latitude="${item.mpLatitude}"
+                                         th:data-ts-map-center-longitude="${item.mpLongitude}"
+                                         data-ts-map-scroll-wheel="1"
+                                         data-ts-map-controls="0"></div>
+                                </div>
+                                <a href="#collapse-map" class="d-block bg-white p-2 text-center text-dark" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapse-map">
+                                    <i class="fa fa-map ts-opacity__20 mr-2"></i>
+                                    지도 가리기
+                                </a>
+                            </div>
+
+                        </section>
+
+                        <!--DISPLAY CONTROL
+                            =========================================================================================-->
+                        <section id="display-control-agents">
+                            <div class="clearfix">
+
+                                <!--Display selector on the left-->
+                                <!-- <div class="float-left">
+                                    <a href="#" class="btn btn-outline-secondary active px-3 mr-2 mb-2 ts-btn-border-muted">
+                                        <i class="fa fa-th-large"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-outline-secondary px-3 mb-2 ts-btn-border-muted">
+                                        <i class="fa fa-th-list"></i>
+                                    </a>
+                                </div> -->
+
+                                <!--Display selector on the right-->
+                                <!-- <div class="float-none float-sm-right pl-2 ts-center__vertical">
+                                    <label for="sorting" class="mb-0 mr-2 text-nowrap">Sort by:</label>
+                                    <select class="custom-select bg-transparent" id="sorting" name="sorting">
+                                        <option value="">Default</option>
+                                        <option value="1">Price lowest first</option>
+                                        <option value="2">Price highest first</option>
+                                        <option value="3">Distance</option>
+                                    </select>
+                                </div> -->
+
+                            </div>
+                            <!--end container-->
+                        </section>
+
+                        <!--ITEMS LISTING
+                            =================================================================================-->
+                        <section id="items-listing">
+                            <h3 class="mb-4 pb-4"> 낚시포인트</h3>
+                            <div class="row">
+                                
+
+                                <!--Item-->
+                                <div class="col-sm-6">
+                                    
+
+                                    <div class="card ts-item ts-card ts-item__lg">
+
+                                        <!--Ribbon-->
+                                        <div class="ts-ribbon">
+                                            <i class="fa fa-thumbs-up"></i>
+                                        </div>
+
+                                        <!--Card Image-->
+                                        <a href="#" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
+                                            
+                                            <figure class="ts-item__info">
+                                                <h4>이름</h4>
+                                                <aside>
+                                                    <i class="fa fa-map-marker mr-2"></i>
+                                                   주소
+                                                </aside>
+                                            </figure>
+                                        </a>
+
+                                        <!--Card Body-->
+                                        <div class="card-body">
+                                            <div class="ts-description-lists">
+                                                <dl>
+                                                    <dt>지역</dt>
+                                                    <dd>경기도</dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>대상어종</dt>
+                                                    <dd>베스</dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>등록일or대상과의 거리</dt>
+                                                    <dd>1</dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+
+                                        <!--Card Footer-->
+                                        <a href="detail-01.html" class="card-footer">
+                                            <span class="ts-btn-arrow">상세정보</span>
+                                        </a>
+
+                                    </div>
+                                    <!--end ts-item-->
+                                </div>
+                                <!--end Item col-md-4-->
+
+                                <!--Item-->
+                                <div class="col-sm-6">
+
+                                    <div class="card ts-item ts-card ts-item__lg">
+
+                                        <!--Ribbon-->
+                                        <div class="ts-ribbon-corner">
+                                            <span>Updated</span>
+                                        </div>
+
+                                        <!--Card Image-->
+                                        <a href="#" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-02.jpg">
+                                            <figure class="ts-item__info">
+                                                <h4>Cozy Design Studio</h4>
+                                                <aside>
+                                                    <i class="fa fa-map-marker mr-2"></i>
+                                                    4831 Worthington Drive
+                                                </aside>
+                                            </figure>
+                                            <div class="ts-item__info-badge">$125,000</div>
+                                        </a>
+
+                                        <!--Card Body-->
+                                        <div class="card-body ts-item__body">
+                                            <div class="ts-description-lists">
+                                                <dl>
+                                                    <dt>Area</dt>
+                                                    <dd>325m<sup>2</sup></dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>Bedrooms</dt>
+                                                    <dd>2</dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>Bathrooms</dt>
+                                                    <dd>1</dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+
+                                        <!--Card Footer-->
+                                        <a href="detail-01.html" class="card-footer">
+                                            <span class="ts-btn-arrow">Detail</span>
+                                        </a>
+
+                                    </div>
+                                    <!--end ts-item ts-card-->
+                                </div>
+                                <!--end Item col-md-4-->
+
+                                <!--Item-->
+                                <div class="col-sm-6">
+
+                                    <div class="card ts-item ts-card ts-item__lg">
+
+                                        <!--Card Image-->
+                                        <a href="#" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-03.jpg">
+                                            <figure class="ts-item__info">
+                                                <h4>Family Villa</h4>
+                                                <aside>
+                                                    <i class="fa fa-map-marker mr-2"></i>
+                                                    4127 Winding Way
+                                                </aside>
+                                            </figure>
+                                            <div class="ts-item__info-badge">$45,900</div>
+                                        </a>
+
+                                        <!--Card Body-->
+                                        <div class="card-body ts-item__body">
+                                            <div class="ts-description-lists">
+                                                <dl>
+                                                    <dt>Area</dt>
+                                                    <dd>325m<sup>2</sup></dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>Bedrooms</dt>
+                                                    <dd>2</dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>Bathrooms</dt>
+                                                    <dd>1</dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+
+                                        <!--Card Footer-->
+                                        <a href="detail-01.html" class="card-footer">
+                                            <span class="ts-btn-arrow">Detail</span>
+                                        </a>
+
+                                    </div>
+                                    <!--end ts-item ts-card-->
+                                </div>
+                                <!--end Item col-md-4-->
+
+                                <!--Item-->
+                                <div class="col-sm-6">
+                                    <div class="card ts-item ts-card ts-item__lg">
+
+                                        <!--Card Image-->
+                                        <a href="#" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-04.jpg">
+                                            <div class="ts-item__info-badge">
+                                                $860,000
+                                            </div>
+                                            <figure class="ts-item__info">
+                                                <h4>Traditional Restaurant</h4>
+                                                <aside>
+                                                    <i class="fa fa-map-marker mr-2"></i>
+                                                    1350 Arbutus Drive
+                                                </aside>
+                                            </figure>
+                                        </a>
+
+                                        <!--Card Body-->
+                                        <div class="card-body">
+                                            <div class="ts-description-lists">
+                                                <dl>
+                                                    <dt>Area</dt>
+                                                    <dd>325m<sup>2</sup></dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>Bedrooms</dt>
+                                                    <dd>2</dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>Bathrooms</dt>
+                                                    <dd>1</dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+
+                                        <!--Card Footer-->
+                                        <a href="detail-01.html" class="card-footer">
+                                            <span class="ts-btn-arrow">Detail</span>
+                                        </a>
+
+                                    </div>
+                                    <!--end ts-item-->
+                                </div>
+                                <!--end Item col-md-4-->
+
+                            </div>
+                            <!--end row-->
+                        </section>
+
+                        <!--PAGINATION
+                            =================================================================================-->
+                        <section id="pagination">
+                            <div class="container">
+
+                                <!--Pagination-->
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination ts-center__horizontal">
+                                        <li class="page-item active">
+                                            <a class="page-link" href="#">1</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">2</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">3</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link ts-btn-arrow" href="#">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+
+                            </div>
+                        </section>
+
+                    </div>
+                    <!--end col-md-8 / left side -->
+
+                    <!--RIGHT SIDE (SIDEBAR)
+                        =============================================================================================-->
+                    <div class="col-md-4 navbar-expand-md">
+
+                        <!--COLLAPSE BUTTON on small screens
+                            =========================================================================================-->
+                        <button class="btn bg-white mb-4 w-100 d-block d-md-none" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                                <span class="float-left">
+                                    <i class="fa fa-comment mr-2"></i>
+                                  댓글
+                                </span>
+                            <span class="float-right">
+                                    <i class="fa fa-plus small ts-opacity__30"></i>
+                                </span>
+                        </button>
+
+                        <!--SIDEBAR COLLAPSABLE CONTENT
+                            =========================================================================================-->
+                        <aside id="sidebar" class="ts-sidebar collapse navbar-collapse">
+
+                            <!--REVIEWS
+                                =====================================================================================-->
+                            <section id="reviews">
+                                <h3></h3>
+
+                                <!--Reviews carousel-->
+                                <div class="owl-carousel" data-owl-dots="1">
+
+                                    <!--Slide-->
+                                    <div class="slide">
+
+                                        <!--Review-->
+                                        <div class="ts-box mb-4 ts-has-talk-arrow">
+                                            <p class="mb-0">좋아요</p>
+                                        </div>
+
+                                        <!--Author-->
+                                        <div class="mx-2 ts-center__vertical">
+                                            <div class="ts-circle p-4 mr-3" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-person-02.jpg"></div>
+                                            <div>
+                                                <h6 class="mb-0"><strong>맴버이름</strong></h6>
+                                                <small class="ts-opacity__30">
+                                                    <i class="fa fa-map-marker"></i>
+                                                    등록일
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!--end slide-->
+
+                                    <!--Slide-->
+                                    <div class="slide">
+
+                                        <!--Review-->
+                                        <div class="ts-box mb-4 ts-has-talk-arrow">
+                                            <h6>
+                                                <strong>Satisfied</strong>
+                                            </h6>
+                                            <p class="mb-0">
+                                                Pellentesque lectus sapien, porta quis lacus at, pretium tincidunt
+                                                purus.
+                                                Sed eget velit ligula. Cras enim enim, blandit quis
+                                            </p>
+                                        </div>
+
+                                        <!--Author-->
+                                        <div class="mx-2 ts-center__vertical">
+                                            <div class="ts-circle p-4 mr-3" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-person-03.jpg"></div>
+                                            <div>
+                                                <h6 class="mb-0"><strong>John Peters</strong></h6>
+                                                <small class="ts-opacity__30">
+                                                    <i class="fa fa-map-marker"></i>
+                                                    Paris
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!--end slide-->
+
+                                </div>
+                                <!--end owl-carousel-->
+
+                            </section>
+
+                            <!--REVIEW FORM
+                                =====================================================================================-->
+                            <section id="review-form">
+                                <h2>댓글 작성</h2>
+
+                                <!--Form-->
+                                <form id="form-contact" method="post" class="clearfix ts-form ts-form-email" data-php-path="/usr/v1/template/themeforest-v1.0/assets/php/email.php">
+
+                                    <!--Name-->
+                                    <!-- <div class="form-group">
+                                        <input type="text" class="form-control" id="form-contact-name" name="name" placeholder="Your Name" required>
+                                    </div> -->
+
+                                    <!--Email-->
+                                    <!-- <div class="form-group">
+                                        <input type="email" class="form-control" id="form-contact-email" name="email" placeholder="Your Email" required>
+                                    </div> -->
+
+                                    <!--Message-->
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="form-contact-message" rows="4" name="message" placeholder="댓글을 작성해주세요." required></textarea>
+                                    </div>
+
+                                    <!--Submit button-->
+                                    <div class="form-group clearfix">
+                                        <button type="submit" class="btn btn-primary float-right" id="form-contact-submit">댓글 등록
+                                        </button>
+                                    </div>
+
+                                    <div class="form-contact-status"></div>
+
+                                </form>
+                                <!--end form-contact -->
+
+                            </section>
+
+
+                        </aside>
+                        <!--end #sidebar-->
+                    </div>
+                    <!--end Right Side / col-md-4-->
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <!--end #ts-main-->
+
+    <!--*********************************************************************************************************-->
+    <!--************ FOOTER *************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
+    <!--end #ts-footer-->
+
+</div>
+<!--end page-->
+
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/owl.carousel.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script src="/usr/v1/js/script.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
+
+</body>
+</html>
+

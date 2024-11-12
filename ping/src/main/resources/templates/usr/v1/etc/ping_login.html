@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="ThemeStarz">
+
+    <!--CSS -->
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/style.css">
+
+    <!-- dev -->
+    <link rel="stylesheet" href="/usr/v1/css/common.css">
+
+    <title>MyHouse - Advanced Real Estate HTML Template by ThemeStarz</title>
+
+</head>
+
+<body>
+
+<!-- WRAPPER
+    =================================================================================================================-->
+<div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
+
+    <!--*********************************************************************************************************-->
+    <!--HEADER **************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
+    <!--end Header-->
+
+    <!--*********************************************************************************************************-->
+    <!-- MAIN ***************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <main id="ts-main">
+
+        <!--BREADCRUMB
+            =========================================================================================================-->
+        <section id="breadcrumb">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Library</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!--PAGE TITLE
+            =========================================================================================================-->
+        <section id="page-title">
+            <div class="container">
+                <div class="ts-title">
+                    <h1>로그인</h1>
+                </div>
+            </div>
+        </section>
+
+        <!--LOGIN / REGISTER SECTION
+            =========================================================================================================-->
+        <section id="login-register">
+            <div class="container">
+                <div class="row">
+
+                    <div class="offset-md-2 col-md-8 offset-lg-3 col-lg-6">
+
+                        
+
+                        <!--TAB CONTENT
+                            =========================================================================================-->
+                        <div class="tab-content">
+
+                            <!--LOGIN TAB
+                                =====================================================================================-->
+                            <div class="tab-pane active" id="login" role="tabpanel" aria-labelledby="login-tab">
+
+                                <!--로그인 form-->
+                                <form class="ts-form" id="form-login">
+
+                                    <!--Email-->
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="login_email" placeholder="Email" value="sky7660@gmail.com" required>
+                                    </div>
+
+                                    <!--Password-->
+                                    <div class="input-group ts-has-password-toggle">
+                                        <input type="password" class="form-control border-right-0" id="login_password" placeholder="Password" value="123456abc@!" required>
+                                        <div class="input-group-append">
+                                            <a href="#" class="input-group-text bg-white border-left-0 ts-password-toggle">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="invalid-box mb-3">
+                                        <div class="invalid-child"></div>
+                                        <div class="invalid-feedback">
+                                            아이디(이메일) 또는 비밀번호가 잘못 되었습니다. 아이디와 비밀번호를 정확히 입력해 주세요.
+                                        </div>
+                                    </div>
+                                    <!--Checkbox and Submit button-->
+                                    <div class="ts-center__vertical justify-content-between">
+
+                                        <!--Remember checkbox-->
+                                        <div class="custom-control custom-checkbox mb-0">
+                                            <input type="checkbox" class="custom-control-input" id="login-check">
+                                            <label class="custom-control-label" for="login-check">자동로그인</label>
+                                        </div>
+
+                                        <!--Submit button-->
+                                        <button type="button" class="btn btn-primary" id="loginBtn">로그인</button>
+
+                                    </div>
+
+                                    <hr>
+
+                                    <!--Forgot password link-->
+                                    <!-- <a href="#" class="ts-text-small">
+                                        <i class="fa fa-sync-alt ts-text-color-primary mr-2"></i>
+                                        <span class="ts-text-color-light">I have forgot my password</span>
+                                    </a> -->
+
+                                </form>
+
+                            </div>
+                            <!--end #login.tab-pane-->
+                        </div>
+                        <!--end tab-content-->
+
+                    </div>
+                    <!--end offset-4.col-md-4-->
+
+                </div>
+                <!--end row-->
+            </div>
+            <!--end container-->
+        </section>
+
+    </main>
+    <!--end #ts-main-->
+
+    <!--*********************************************************************************************************-->
+    <!--************ FOOTER *************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div>    
+    <!--end #ts-footer-->
+
+</div>
+<!--end page-->
+<!-- modals -->
+<div class="modal fade" id="modalAlert" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAlertTitle"></h5>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-square	"></i></button> -->
+            </div>
+            <div class="modal-body" >
+                <p id="modalAlertBody"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button"  class="btn btn-success" data-dismiss="modal">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script src="/usr/v1/js/script.js"></script>
+
+</body>
+</html>

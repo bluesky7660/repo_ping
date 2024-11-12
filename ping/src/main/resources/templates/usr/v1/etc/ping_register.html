@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="ThemeStarz">
+
+    <!--CSS -->
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/style.css">
+
+    <!-- dev -->
+    <link rel="stylesheet" href="/usr/v1/css/common.css">
+
+    <title>MyHouse - Advanced Real Estate HTML Template by ThemeStarz</title>
+
+</head>
+
+<body>
+
+<!-- WRAPPER
+    =================================================================================================================-->
+<div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
+
+    <!--*********************************************************************************************************-->
+    <!--HEADER **************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
+    <!--end Header-->
+
+    <!--*********************************************************************************************************-->
+    <!-- MAIN ***************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <main id="ts-main">
+
+        <!--BREADCRUMB
+            =========================================================================================================-->
+        <section id="breadcrumb">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Library</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!--PAGE TITLE
+            =========================================================================================================-->
+        <section id="page-title">
+            <div class="container">
+                <div class="ts-title">
+                    <h1>회원가입</h1>
+                </div>
+            </div>
+        </section>
+
+        <!--LOGIN / REGISTER SECTION
+            =========================================================================================================-->
+        <section id="login-register">
+            <div class="container">
+                <div class="row">
+
+                    <div class="offset-md-2 col-md-8 offset-lg-3 col-lg-6">
+
+                        <!--LOGIN / REGISTER TABS
+                            =========================================================================================-->
+                        <ul class="nav nav-tabs" id="login-register-tabs" role="tablist">
+
+                            <!--Login tab-->
+                            <li class="nav-item">
+                                <a class="nav-link" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">
+                                    <h3>Login</h3>
+                                </a>
+                            </li>
+
+                            <!--Register tab-->
+                            <li class="nav-item">
+                                <a class="nav-link active" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">
+                                    <h3>회원가입</h3>
+                                </a>
+                            </li>
+
+                        </ul>
+
+                        <!--TAB CONTENT
+                            =========================================================================================-->
+                        <div class="tab-content">
+
+                            
+
+                            <!--REGISTER TAB
+                                =====================================================================================-->
+                            <div class="tab-pane active" id="register" role="tabpanel" aria-labelledby="register-tab">
+
+                                <!--Register tab-->
+                                <form class="ts-form" id="form-register">
+
+                                    <!--Name-->
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="register-name" placeholder="한글 이름" required>
+                                    </div>
+
+                                    <!--Email-->
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="register-email" placeholder="ex) example@gmail.com" required>
+                                    </div>
+
+                                    <!--Password-->
+                                    <div class="input-group ts-has-password-toggle">
+                                        <input type="password" class="form-control border-right-0" placeholder="ex) 123456abc@!" required>
+                                        <div class="input-group-append">
+                                            <a href="javascript:void(0);" class="input-group-text bg-white border-left-0 ts-password-toggle">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <p class="ts-text-small">※ 8~15자 사이여야 하며, 최소 1개의 숫자, 영문자, 특수문자를 포함해야 합니다.</p>
+
+                                    <!--Repeat Password-->
+                                    <div class="input-group ts-has-password-toggle">
+                                        <input type="password" class="form-control border-right-0" placeholder="Repeat Password" required>
+                                        <div class="input-group-append">
+                                            <a href="javascript:void(0);" class="input-group-text bg-white border-left-0 ts-password-toggle">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!--Gender-->
+                                    <div class="form-group">
+                                        <select class="custom-select border-left" id="register-gender" name="gender" required>
+                                            <option value="">성별을 선택하세요.</option>
+                                            <option value="1">남성</option>
+                                            <option value="2">여성</option>
+                                            <option value="3">기타</option>
+                                        </select>
+                                    </div>
+
+                                    <!--Tel-->
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="register-tel" placeholder="ex) 01012345678" required>
+                                    </div>
+
+                                    <!--BirthDay-->
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="register-birthDay" placeholder="ex) 1999-11-11" required>
+                                    </div>
+
+                                    <!--Checkbox-->
+                                    <!-- <div class="custom-control custom-checkbox mb-4">
+                                        <input type="checkbox" class="custom-control-input" id="register-check" required>
+                                        <label class="custom-control-label" for="register-check">I Agree With <a href="ja" class="btn-link">Terms and Conditions</a></label>
+                                    </div> -->
+
+                                    <!--Submit button-->
+                                    <button type="button" class="btn btn-primary">회원가입</button>
+
+                                </form>
+
+                            </div>
+                            <!--end #register.tab-pane-->
+                        </div>
+                        <!--end tab-content-->
+
+                    </div>
+                    <!--end offset-4.col-md-4-->
+
+                </div>
+                <!--end row-->
+            </div>
+            <!--end container-->
+        </section>
+
+    </main>
+    <!--end #ts-main-->
+
+    <!--*********************************************************************************************************-->
+    <!--************ FOOTER *************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
+    <!--end #ts-footer-->
+
+</div>
+<!--end page-->
+
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script src="/usr/v1/js/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="ThemeStarz">
+
+    <!--CSS -->
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/leaflet.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/style.css">
+
+    <!-- dev -->
+    <link rel="stylesheet" href="/usr/v1/css/common.css">
+
+    <title>MyHouse - Advanced Real Estate HTML Template by ThemeStarz</title>
+
+</head>
+
+<body>
+
+<!-- WRAPPER
+    =================================================================================================================-->
+<div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
+
+    <!--*********************************************************************************************************-->
+    <!--HEADER **************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
+    <!--end Header-->
+
+    <!--*********************************************************************************************************-->
+    <!-- MAIN ***************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <main id="ts-main">
+
+        <!--BREADCRUMB
+            =========================================================================================================-->
+        <section id="breadcrumb">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Library</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!--PAGE TITLE
+            =========================================================================================================-->
+        <section id="page-title">
+            <div class="container">
+                <div class="ts-title">
+                    <h1>주문목록</h1>
+                </div>
+            </div>
+        </section>
+
+        <!--MAP
+            =========================================================================================================-->
+    
+
+        <!--CONTACT INFO & FORM
+            =========================================================================================================-->
+        <section id="contact-form">
+            <div class="container">
+                <div class="row">
+
+                    <!--CONTACTS (LEFT SIDE)
+                        =============================================================================================-->
+                        <div class="col-lg-4">
+                            <div class="rounded-4 border osahan-sidebar bg-white mb-4">
+                                <div class="text-center p-4 border-bottom">
+                                    <h3 class="fw-bold mb-1" >ooo님</h3>
+                                    <p class="m-0 text-muted">qwer1234</p>
+                                </div>
+                                <div class="p-4 osahan-sidebar-links">
+                                    <a class="dropdown-item" href="/usr/v1/infra/order/OrderList"><i class="ri-file-list-line me-2"></i> 주문목록</a>
+                                    <a class="dropdown-item" href="/usr/v1/infra/editmember/editMemberForm"></i> 환불목록</a>
+                                    <a class="dropdown-item" href="/usr/v1/infra/editmember/editMemberForm"></i> 내정보 수정 </a>
+                                    <a class="dropdown-item" id="logout" href="/usr/v1/infra/login/loginUsrForm"><i class="ri-logout-circle-line me-2"></i> 로그아웃</a>
+                                </div>
+                            </div>
+                        </div>
+                    <!--end col-md-4-->
+
+                    <!--FORM (RIGHT SIDE)
+                        =============================================================================================-->
+                    <div class="col-md-8">
+
+                        <!--Title-->
+                        <h3>주문목록</h3>
+                            <!--Row-->
+                            <div class="row card ts-item ts-item__list ts-card">
+                                    
+                                    <!--Card Image-->
+                                    <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
+                                        <input type="radio" name="odSeq">
+                                    </div>
+    
+                                    <!--Card Body-->
+                                  
+                                    <div class="card-body">
+    
+                                        <figure class="ts-item__info">
+                                            <a href="#"><h4>누리호</h4></a>
+                                        </figure>
+                                        <div class="ts-description-lists">
+                                            <dl>
+                                                <dt>결제가격</dt>
+                                                <dd>220,000원</dd>
+                                            </dl>
+                                            <dl>
+                                                <dt>출항날짜</dt>
+                                                <dd>2024-10-25</dd>
+                                            </dl>
+                                            <dl>
+                                                <dt>결제일</dt>
+                                                <dd>2024-10-12</dd>
+                                            </dl>
+                                        </div>
+                                           
+                                    </div>  
+                                    <a href="#" class="card-footer">
+                                        <span class="ts-btn-arrow">환불하기</span>
+                                    </a>           
+                            </div>
+                            <div class="row card ts-item ts-item__list ts-card"> 
+                                <!--Card Image-->
+                                <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
+                                    <input type="radio" name="odSeq">
+                                </div>
+                                <!--Card Body-->
+                                <div class="card-body">
+                                    <figure class="ts-item__info">
+                                        <h4>누리호</h4>
+                                    </figure>
+                                    <div class="ts-description-lists">
+                                        <dl>
+                                            <dt>결제가격</dt>
+                                            <dd>220,000원</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>결제일</dt>
+                                            <dd>2024-10-12</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>출항날짜</dt>
+                                            <dd>2024-10-25</dd>
+                                        </dl>
+                                    </div>  
+                                </div>  
+                                <a href="#" class="card-footer">
+                                    <span class="ts-btn-arrow">환불하기</span>
+                                </a>           
+                        </div>
+                            
+                        <!--end form-contact -->
+                    </div>
+                    <!--end col-md-8-->
+
+                </div>
+                <!--end row-->
+            </div>
+            <!--end container-->
+        </section>
+
+    </main>
+    <!--end #ts-main-->
+
+    <!--*********************************************************************************************************-->
+    <!--************ FOOTER *************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
+    <!--end #ts-footer-->
+
+</div>
+<!--end page-->
+
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script src="/usr/v1/js/script.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
+
+</body>
+</html>

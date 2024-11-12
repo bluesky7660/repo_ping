@@ -7,10 +7,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MemberDao {
 	
-	// StaffMember
+	//Member
 	public List<MemberDto> selectList(MemberVo memberVo);
 	public List<MemberDto> seqList();
 	public MemberDto selectOne(MemberDto memberDto);
+	public MemberDto selectUsrOne(MemberDto memberDto);
 	public int listCount(MemberVo memberVo);
 
 	public int insertMember(MemberDto memberDto);
