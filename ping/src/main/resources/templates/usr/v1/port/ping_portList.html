@@ -99,7 +99,7 @@
                 <section id="agencies">
 
                     <!--Agency-->
-                    <div class="card ts-item ts-item__list ts-item__company ts-card">
+                    <div class="card ts-item ts-item__list ts-item__company ts-card" th:each="list:${list}">
 
                         <!--Ribbon-->
                         <!-- <div class="ts-ribbon">
@@ -107,163 +107,60 @@
                         </div> -->
 
                         <!--Card Image-->
-                        <a href="agency-detail.html" class="card-img">
+                        <!-- <a th:href="@{/v1/prot/portDetail(ptSeq=${list.ptSeq})}" class="card-img">
+                            
                             <img src="/usr/v1/template/themeforest-v1.0/assets/img/logo-agency-01.png" alt="">
-                        </a>
-
-                        <!--Card Body-->
-                        <div class="card-body">
-
-                            <figure class="ts-item__info">
-                                <h4>인천항</h4>
-                                <aside>
-                                    <i class="fa fa-map-marker mr-2"></i>
-                                    주소
-                                </aside>
-                            </figure>
-
-                            <div class="ts-company-info">
-
-                                <div class="ts-company-contact mb-2 mb-sm-0">
-                                    <div>
-                                        <i class="fa fa-phone"></i>
-                                        <span>인천</span>
-                                    </div>
-
-                                    <div>
-                                        <i class="fa fa-envelope"></i>
-                                        <a href="#">인천항 설명</a>
-                                    </div>
-                                </div>
-
-                                <!-- <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>Properties</dt>
-                                        <dd>64</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>Agents</dt>
-                                        <dd>12</dd>
-                                    </dl>
-                                </div> -->
-
+                        </a> -->
+                        <a th:href="@{/v1/port/portDetail(ptSeq=${list.ptSeq})}">
+                            <div class="card-img">
+                                <img src="/usr/v1/template/themeforest-v1.0/assets/img/logo-agency-01.png" alt="">  
                             </div>
-                        </div>
 
-                        <!--Card Footer-->
-                        <div class="card-footer">
-                            <a href="agency-detail.html" class="ts-btn-arrow">Detail</a>
-                        </div>
+                            <!--Card Body-->
+                            <div class="card-body">
 
-                    </div>
-                    <!--end agency-->
+                                <figure class="ts-item__info">
+                                    <h4 th:text="${list.ptName}"></h4>
+                                    <aside>
+                                        <i class="fa fa-map-marker mr-2"></i>
+                                        <span th:text="${list.ptAddress}"></span>
+                                    </aside>
+                                </figure>
 
-                    <!--Agency-->
-                    <div class="card ts-item ts-item__list ts-item__company ts-card">
+                                <div class="ts-company-info">
 
-                        <!--Card Image-->
-                        <a href="agency-detail.html" class="card-img">
-                            <img src="/usr/v1/template/themeforest-v1.0/assets/img/logo-agency-02.png" alt="">
-                        </a>
+                                    <div class="ts-company-contact mb-2 mb-sm-0">
+                                        <div>
+                                            <i class="fa fa-phone"></i>
+                                            <span th:text="${@codeService.selectOneCachedCode(list.ptArea)}">인천</span>
+                                        </div>
 
-                        <!--Card Body-->
-                        <div class="card-body">
-
-                            <figure class="ts-item__info">
-                                <h4>Bristol Houses</h4>
-                                <aside>
-                                    <i class="fa fa-map-marker mr-2"></i>
-                                    1350 Arbutus Drive
-                                </aside>
-                            </figure>
-
-                            <div class="ts-company-info">
-
-                                <div class="ts-company-contact mb-2 mb-sm-0">
-                                    <div>
-                                        <i class="fa fa-phone"></i>
-                                        <span>310-338-8339</span>
+                                        <div>
+                                            <i class="fa fa-envelope"></i>
+                                            <span th:text="${list.ptDesc}"></span>
+                                        </div>
                                     </div>
 
-                                    <div>
-                                        <i class="fa fa-envelope"></i>
-                                        <a href="#">hello@example.com</a>
-                                    </div>
-                                </div>
+                                    <!-- <div class="ts-description-lists">
+                                        <dl>
+                                            <dt>Properties</dt>
+                                            <dd>64</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Agents</dt>
+                                            <dd>12</dd>
+                                        </dl>
+                                    </div> -->
 
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>Properties</dt>
-                                        <dd>64</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>Agents</dt>
-                                        <dd>12</dd>
-                                    </dl>
                                 </div>
-
                             </div>
-                        </div>
 
-                        <!--Card Footer-->
-                        <div class="card-footer">
-                            <a href="agency-detail.html" class="ts-btn-arrow">Detail</a>
-                        </div>
-
-                    </div>
-                    <!--end agency-->
-
-                    <!--Agency-->
-                    <div class="card ts-item ts-item__list ts-item__company ts-card">
-
-                        <!--Card Image-->
-                        <a href="agency-detail.html" class="card-img">
-                            <img src="/usr/v1/template/themeforest-v1.0/assets/img/logo-agency-03.png" alt="">
-                        </a>
-
-                        <!--Card Body-->
-                        <div class="card-body">
-
-                            <figure class="ts-item__info">
-                                <h4>Bright Ideas</h4>
-                                <aside>
-                                    <i class="fa fa-map-marker mr-2"></i>
-                                    1350 Arbutus Drive
-                                </aside>
-                            </figure>
-
-                            <div class="ts-company-info">
-
-                                <div class="ts-company-contact mb-2 mb-sm-0">
-                                    <div>
-                                        <i class="fa fa-phone"></i>
-                                        <span>310-338-8339</span>
-                                    </div>
-
-                                    <div>
-                                        <i class="fa fa-envelope"></i>
-                                        <a href="#">hello@example.com</a>
-                                    </div>
-                                </div>
-
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>Properties</dt>
-                                        <dd>64</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>Agents</dt>
-                                        <dd>12</dd>
-                                    </dl>
-                                </div>
-
+                            <!--Card Footer-->
+                            <div class="card-footer">
+                                <!-- <a th:href="@{/v1/prot/portDetail(ptSeq=${list.ptSeq})}" class="ts-btn-arrow">자세히</a> -->
+                                <span class="ts-btn-arrow">자세히</span>
                             </div>
-                        </div>
-
-                        <!--Card Footer-->
-                        <div class="card-footer">
-                            <a href="agency-detail.html" class="ts-btn-arrow">Detail</a>
-                        </div>
+                        </a>
 
                     </div>
                     <!--end agency-->
@@ -319,6 +216,7 @@
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script src="/usr/v1/js/script.js"></script>
 
 </body>
 </html>

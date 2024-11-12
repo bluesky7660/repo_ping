@@ -6,12 +6,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.lalaping.mall.ship.ShipService;
 import com.lalaping.mall.ship.ShipVo;
 
 @Controller
 public class PortController {
 	@Autowired
 	public PortService portService;
+	
+	@Autowired
+	ShipService shipService;
 	
 	@RequestMapping(value = "/v1/port/portXdmList")
 	public String portXdmList(Model model,@ModelAttribute("vo") PortVo vo){
@@ -57,8 +61,10 @@ public class PortController {
 		return "/usr/v1/port/ping_portList";
 	}
 	@RequestMapping(value = "/v1/port/portDetail")
-	public String portDetail(Model model,@ModelAttribute("vo") PortVo vo){
+	public String portDetail(Model model, ShipVo shipVo){
 //		model.addAttribute("list",shipService.selectList(vo));
+//		shipVo.setPort_ptSeq();
+		model.addAttribute("ship", shipService.selectList(shipVo));
 		return "/usr/v1/port/ping_portDetail";
 	}
 

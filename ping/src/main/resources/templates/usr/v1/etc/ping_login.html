@@ -83,19 +83,24 @@
 
                                     <!--Email-->
                                     <div class="form-group">
-                                        <input type="email" class="form-control" id="login-email" placeholder="Email" value="sky7660@gmail.com" required>
+                                        <input type="email" class="form-control" id="login_email" placeholder="Email" value="sky7660@gmail.com" required>
                                     </div>
 
                                     <!--Password-->
                                     <div class="input-group ts-has-password-toggle">
-                                        <input type="password" class="form-control border-right-0" placeholder="Password" value="123456abc@!" required>
+                                        <input type="password" class="form-control border-right-0" id="login_password" placeholder="Password" value="123456abc@!" required>
                                         <div class="input-group-append">
                                             <a href="#" class="input-group-text bg-white border-left-0 ts-password-toggle">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         </div>
                                     </div>
-
+                                    <div class="invalid-box mb-3">
+                                        <div class="invalid-child"></div>
+                                        <div class="invalid-feedback">
+                                            아이디(이메일) 또는 비밀번호가 잘못 되었습니다. 아이디와 비밀번호를 정확히 입력해 주세요.
+                                        </div>
+                                    </div>
                                     <!--Checkbox and Submit button-->
                                     <div class="ts-center__vertical justify-content-between">
 
@@ -106,7 +111,7 @@
                                         </div>
 
                                         <!--Submit button-->
-                                        <button type="submit" class="btn btn-primary">로그인</button>
+                                        <button type="button" class="btn btn-primary" id="loginBtn">로그인</button>
 
                                     </div>
 
@@ -145,11 +150,28 @@
 
 </div>
 <!--end page-->
-
+<!-- modals -->
+<div class="modal fade" id="modalAlert" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAlertTitle"></h5>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-square	"></i></button> -->
+            </div>
+            <div class="modal-body" >
+                <p id="modalAlertBody"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button"  class="btn btn-success" data-dismiss="modal">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script src="/usr/v1/js/script.js"></script>
 
 </body>
 </html>

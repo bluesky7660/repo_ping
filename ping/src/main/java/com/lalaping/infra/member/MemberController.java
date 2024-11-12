@@ -160,6 +160,14 @@ public class MemberController {
 	public String register() {
 		return "/usr/v1/etc/ping_register";
 	}
+	@RequestMapping(value = "/v1/member/editMember")
+	public String editMember() {
+		return "/usr/v1/member/ping_editMember";
+	}
+	@RequestMapping(value = "/v1/member/ping_orderList")
+	public String ping_orderList() {
+		return "/usr/v1/member/ping_ping_orderList";
+	}
 	
 	@ResponseBody
 	@RequestMapping(value = "loginUsrProc")
@@ -168,7 +176,7 @@ public class MemberController {
 		System.out.println("loginUsrProc");
 		Map<String, Object> returnMap = new HashMap<>();
 		
-		MemberDto rtMember = memberService.selectOne(memberDto);
+		MemberDto rtMember = memberService.selectOneLogin(memberDto);
 		System.out.println("rtMember: " + rtMember);
 		if (rtMember != null) {
 			if(matchesBcrypt(memberDto.getMmPasswd(), rtMember.getMmPasswd(), 10)) {
@@ -177,11 +185,12 @@ public class MemberController {
 				httpSession.setAttribute("sessSeqXdm", rtMember.getMmSeq());
 				httpSession.setAttribute("sessIdXdm", rtMember.getMmEmail());
 				httpSession.setAttribute("sessNameXdm", rtMember.getMmName());
+//				httpSession.setAttribute("loginType", "usr");
 				
 				String prevPage = (String) httpSession.getAttribute("prevPage");
 				System.out.println("주소테스트: "+prevPage);
 				httpSession.removeAttribute("prevPage"); 
-				returnMap.put("redirectUrl", prevPage != null ? prevPage : "/index");
+				returnMap.put("redirectUrl", prevPage != null ? prevPage : "/v1/index");
 				
 				System.out.println("성공");
 				

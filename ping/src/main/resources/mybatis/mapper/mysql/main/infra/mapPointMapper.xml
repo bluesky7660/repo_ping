@@ -80,6 +80,8 @@
     		,a.mpType
     		,a.mpDelNy
     		,a.mpRegDate
+    		,a.mpLatitude
+    		,a.mpLongitude
    		FROM mapPoint a
    		WHERE 1=1
    		AND mpSeq = #{mpSeq}

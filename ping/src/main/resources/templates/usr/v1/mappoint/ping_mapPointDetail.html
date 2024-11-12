@@ -87,24 +87,24 @@
 
                                 <!--Title-->
                                 <div class="ts-title mb-3">
-                                    <h2 class="mb-1">물왕저수지</h2> 
+                                    <h2 class="mb-1" th:text="${item.mpTitle}"></h2> 
                                     <h5>
                                         <i class="fa fa-sun-o mr-2"></i>
-                                        경기 시흥시 동서로857번길 28-13 (물왕동)
+                                        <span th:text="${item.mpAddress}"></span>
                                     </h5>
-                                   <a href ="/ping_weatherPoint.html"><figure class="mb-1">
-                                        <i class="fa fa-certificate"></i>
-                                        물왕저수지 상세날씨
-                                    </figure> </a>
-                                    
+                                   <a href ="/ping_weatherPoint.html">
+                                        <figure class="mb-1">
+                                            <i class="fa fa-certificate"></i>
+                                            <span th:text="${item.mpTitle}"></span>상세날씨
+                                        </figure>
+                                    </a>
                                 </div>
 
                                 <!--Row-->
                                 <div class="row">
 
                                     <div class="col-md-7">
-                                        <p>
-                                            경기도 시흥시 물왕동에 있는 호수. 총면적은 58만㎡, 몽리면적(저수지를 이용하는 논의 면적)은 866만 5000㎡, 담수량은 189만 4000톤, 만수 때 수심은 7.2m이다. 공식 명칭은 '흥부저수지'이지만 이명인 '물왕저수지'로 더 널리 알려져 있다.
+                                        <p th:text="${item.mpText}">
                                         </p>
                                     </div>
 
@@ -132,9 +132,8 @@
                             <!--end p-4-->
 
                             <div class="ts-bg-light p-3 ts-border-radius__md d-block d-sm-flex ts-center__vertical justify-content-between ts-xs-text-center">
-                                <span class="d-sm-inline-block mb-2 mb-sm-0">
-                                      대상어종: 베스</span>
-                                <small>등록일 2024-10-12</small>
+                                <span class="d-sm-inline-block mb-2 mb-sm-0">대상어종: <span>베스</span></span>
+                                <small>등록일 <span th:text="${#dates.format(item.mpRegDate,'yyyy-MM-dd')}"></span></small>
                             </div>
 
                         </div>
@@ -168,9 +167,9 @@
                                 <div id="collapse-map" class="collapse show">
                                     <div id="ts-map-simple" class="ts-map ts-min-h__30vh"
                                          data-ts-map-leaflet-provider="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
-                                         data-ts-map-zoom="12"
-                                         data-ts-map-center-latitude="40.702411"
-                                         data-ts-map-center-longitude="-73.556842"
+                                         data-ts-map-zoom="14"
+                                         th:data-ts-map-center-latitude="${item.mpLatitude}"
+                                         th:data-ts-map-center-longitude="${item.mpLongitude}"
                                          data-ts-map-scroll-wheel="1"
                                          data-ts-map-controls="0"></div>
                                 </div>
@@ -215,7 +214,7 @@
                         <!--ITEMS LISTING
                             =================================================================================-->
                         <section id="items-listing">
-                            <h3 class="mb-4 pb-4">주변 낚시포인트</h3>
+                            <h3 class="mb-4 pb-4"> 낚시포인트</h3>
                             <div class="row">
                                 
 
@@ -596,6 +595,7 @@
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/owl.carousel.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script src="/usr/v1/js/script.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
 
 </body>

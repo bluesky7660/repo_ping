@@ -50,9 +50,14 @@ public class MapPointController {
 	/*usr*/
 	
 	@RequestMapping(value = "/v1/mapPoint/mapPointDetail")
-	public String mapPointDetail(Model model,@ModelAttribute("vo") MapPointVo vo){
-//		model.addAttribute("list",mapPointService.selectList(vo));
+	public String mapPointDetail(Model model, MapPointDto mapPointDto){
+		model.addAttribute("item",mapPointService.selectOne(mapPointDto));
 		return "/usr/v1/mapPoint/ping_mapPointDetail";
+	}
+	@RequestMapping(value = "/v1/mapPoint/mapPointAdd")
+	public String mapPointAdd(Model model,@ModelAttribute("vo") MapPointVo vo){
+//		model.addAttribute("list",mapPointService.selectList(vo));
+		return "/usr/v1/mapPoint/ping_mapPoint_add";
 	}
 
 }

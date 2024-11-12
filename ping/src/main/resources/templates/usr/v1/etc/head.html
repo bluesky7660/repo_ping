@@ -42,7 +42,7 @@
                                 =====================================================================================-->
                                 <li class="nav-item">
     
-                                    <a href="/v1/mapPoint/mapPointDetail" class="nav-link">낚시 포인트 상세</a>
+                                    <a href="/v1/mapPoint/mapPointDetail?mpSeq=1" class="nav-link">낚시 포인트</a>
     
                                 </li>
                                 <!--end MAP (1st level)-->
@@ -51,7 +51,7 @@
                                 =====================================================================================-->
                                 <li class="nav-item">
     
-                                    <a href="/v1/mapPoint/mapPoint_add" class="nav-link">낚시 포인트 생성</a>
+                                    <a href="/v1/mapPoint/mapPointAdd" class="nav-link">낚시 포인트 생성</a>
     
                                 </li>
                                 <li class="nav-item">
@@ -134,13 +134,13 @@
                             <!-- List (1st level) -->
                             <ul class="ts-child">
                                 <li class="nav-item">
-                                    <a href="/v1/editMember" class="nav-link">회원수정</a>
+                                    <a href="/v1/member/editMember" class="nav-link">회원수정</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/v1/orderList" class="nav-link">예약목록</a>
+                                    <a href="/v1/member/orderList" class="nav-link">예약목록</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/v1/orderReturn" class="nav-link">환불목록</a>
+                                    <a href="/v1/member/orderReturn" class="nav-link">환불목록</a>
                                 </li>
                                 <!-- LOGIN (1st level)
                                 =====================================================================================-->
@@ -181,18 +181,27 @@
     
                     <!--RIGHT NAVIGATION MAIN LEVEL
                     =================================================================================================-->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto" >
     
                         <!--LOGIN (Main level)
                         =============================================================================================-->
-                        <li class="nav-item">
+                        <li class="nav-item" th:unless="${session != null and session.sessNameXdm != null}">
                             <a class="nav-link" href="/v1/login">로그인</a>
                         </li>
     
                         <!--REGISTER (Main level)
                         =============================================================================================-->
-                        <li class="nav-item">
+                        <li class="nav-item" th:unless="${session != null and session.sessNameXdm != null}">
                             <a class="nav-link text-dark" href="/v1/register">회원가입</a>
+                        </li>
+
+                        <li class="nav-item" th:if="${session != null and session.sessNameXdm != null}">
+                            <a class="nav-link" href="/v1/member/editMember" th:text="${session.sessNameXdm}"></a>
+                            <input type="hidden" th:value="${session.sessSeqXdm}" id="sessSeqXdm">
+                            <input type="hidden" th:value="${session.sessIdXdm}" id="sessIdXdm">
+                        </li>
+                        <li class="nav-item" th:if="${session != null and session.sessNameXdm != null}">
+                            <a class="nav-link logoutBtn" href="javascript:void(0);">로그아웃</a>
                         </li>
     
                         <!--SUBMIT (Main level)

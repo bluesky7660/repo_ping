@@ -8,6 +8,8 @@ public class MapPointDto {
 	private String mpText;
 	private String mpAddress;
 	private Integer mpType;
+	private Double mpLatitude;
+	private Double mpLongitude;
 	private Integer mpDelNy;
 	private Date mpRegDate;
 	
@@ -55,11 +57,17 @@ public class MapPointDto {
 	public void setMpRegDate(Date mpRegDate) {
 		this.mpRegDate = mpRegDate;
 	}
-	
-
-	
-	
-	
-	
+	public Double getMpLatitude() {
+		return mpLatitude;
+	}
+	public void setMpLatitude(Double mpLatitude) {
+		this.mpLatitude = mpLatitude;
+	}
+	public Double getMpLongitude() {
+		return mpLongitude;
+	}
+	public void setMpLongitude(Double mpLongitude) {
+		this.mpLongitude = mpLongitude;
+	}
 
 }

@@ -17,6 +17,10 @@ public class CheckLoginSessionInterceptor implements HandlerInterceptor{
 			String requestURL = request.getRequestURL().toString();
 			String refererURL = request.getHeader("referer");
 			String queryString = request.getQueryString();
+			System.out.println("requestURL: "+ requestURL);
+			System.out.println("refererURL: "+ refererURL);
+			System.out.println("queryString: "+ queryString);
+			System.out.println("주소: " + session.getAttribute("prevPage"));
 			System.out.println("현재 세션 ID: " + request.getSession().getId());
 			System.out.println("세션의 sessIdXdm: " + request.getSession().getAttribute("sessIdXdm"));
 

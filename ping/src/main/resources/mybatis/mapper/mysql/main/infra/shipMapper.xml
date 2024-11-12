@@ -7,6 +7,9 @@
         FROM ship a
         
         WHERE 1=1
+        <if test="port_ptSeq != null and !port_ptSeq.equals('')">
+       		AND a.port_ptSeq = #{port_ptSeq}
+        </if>
         <if test="shValue != null and !shValue.equals('')">
             <choose>
                 <when test="shOption == null">
