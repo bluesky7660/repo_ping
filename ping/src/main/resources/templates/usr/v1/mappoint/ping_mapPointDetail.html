@@ -92,7 +92,7 @@
                                         <i class="fa fa-sun-o mr-2"></i>
                                         <span th:text="${item.mpAddress}"></span>
                                     </h5>
-                                   <a href ="/ping_weatherPoint.html">
+                                   <a th:href="@{/v1/weather/weatherPoint(mpSeq=${item.mpSeq})}">
                                         <figure class="mb-1">
                                             <i class="fa fa-certificate"></i>
                                             <span th:text="${item.mpTitle}"></span>상세날씨

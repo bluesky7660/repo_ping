@@ -20,9 +20,6 @@
         .ts-page-wrapper {
             overflow-x: visible;
         }
-        .weather_menu{
-            top:150px;
-        }
     </style>
 </head>
 
@@ -63,7 +60,7 @@
         <section id="page-title">
             <div class="container">
                 <div class="ts-title">
-                    <h1>지역 날씨</h1>
+                    <h1>포인트 날씨</h1>
                 </div>
             </div>
         </section>
@@ -77,20 +74,21 @@
 
                     <!--Address on map-->
                     <address class="position-absolute ts-bottom__0 ts-left__0 text-white m-3 p-4 ts-z-index__2" data-bg-color="rgba(0,0,0,.8)">
-                        <strong>Real Estate Agency</strong>
-                        <br>
+                        <strong th:text="${item.mpTitle}">Real Estate Agency</strong><br>
+                        <span th:text="${item.mpAddress}"></span>
+                        <!-- <br>
                         2501 Rosemont Avenue
                         <br>
-                        Orlando, FL 32801
+                        Orlando, FL 32801 -->
                     </address>
 
                     <!--Map-->
                     <div id="ts-map-simple" class="h-100 ts-z-index__1"
                          data-ts-map-leaflet-provider="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
                          data-ts-map-zoom="14"
-                         data-ts-map-center-latitude="40.702411"
-                         data-ts-map-center-longitude="-73.556842"
-                         data-ts-map-scroll-wheel="1"
+                         th:data-ts-map-center-latitude="${item.mpLatitude}"
+                         th:data-ts-map-center-longitude="${item.mpLongitude}"
+                         data-ts-map-scroll-wheel="0"
                          data-ts-map-controls="0"></div>
                 </div>
             </div>
@@ -108,19 +106,19 @@
                     <div class="col-md-2">
                         <div class="sticky-top weather_menu">
                             <!--Title-->
-                            <h3>물왕저수지</h3>
+                            <h3 th:text="${item.mpTitle}">물왕저수지</h3>
 
-                            <p>
+                            <p th:text="${item.mpAddress}">
                                 경기 시흥시 동서로857번길 28-13 (물왕동)
                             </p>
                             <ul class="nav nav-pills flex-column" >
                                 <!--로그인 tab-->
-                                <li class="nav-item">
+                                <li class="nav-item" th:if="${item.mpType == 5}">
                                     <a class="nav-link" id="main-tab" href="#main_weather">
                                         <h3>물 때표</h3>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item" th:if="${item.mpType == 5}">
                                     <a class="nav-link" id="sea-tab" href="#sea_weather">
                                         <h3>바다 날씨</h3>
                                     </a>
@@ -130,15 +128,12 @@
                                         <h3>지역 날씨</h3>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item" th:if="${item.mpType == 5}">
                                     <a class="nav-link" id="temperature-tab" href="#sea_temperature">
                                         <h3>바다 수온</h3>
                                     </a>
                                 </li>
                             </ul>
-                            <div class="">
-                                
-                            </div>
                         </div>
                     </div>
                     <!--end col-md-4-->
@@ -153,7 +148,7 @@
                         <!--row-->
                         <div id="weather_area" class="weather_area">
                             <!--Row-->
-                            <div class="" id="main_weather">
+                            <div class="" id="main_weather" th:if="${item.mpType == 5}">
                                 <h4>물때 표</h4>
                                 <p class="ts-text-small">2주단위로 나옵니다.</p>
                                 <table class="table">
@@ -187,6 +182,7 @@
                                                         <div id="waterFlow" class="progress-bar progress-bar-striped progress-bar-animated progress-bar-water" role="progressbar" style="width: 0%; background-color: aqua;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </td>
                                         <td>
@@ -213,7 +209,7 @@
                             </div>
                             <!--end row -->
                             <!--Row-->
-                            <div class="row" id="sea_weather">
+                            <div class="row" id="sea_weather" th:if="${item.mpType == 5}">
                                 <h4>바다 날씨</h4>
                                 <p>경기북부앞바다</p>
                                 <table class="table">
@@ -232,12 +228,13 @@
                                                     <div>오전</div>
                                                     <div>오후</div>
                                                 </div>
+
                                             </div>
                                         </td>
                                         <td>
                                             <div>
                                                 <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지">
+                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
                                                 <p>맑음</p>
                                             </div>
@@ -268,12 +265,13 @@
                                                     <div>오전</div>
                                                     <div>오후</div>
                                                 </div>
+
                                             </div>
                                         </td>
                                         <td>
                                             <div>
                                                 <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지">
+                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
                                                 <p>맑음</p>
                                             </div>
@@ -304,12 +302,13 @@
                                                     <div>오전</div>
                                                     <div>오후</div>
                                                 </div>
+
                                             </div>
                                         </td>
                                         <td>
                                             <div>
                                                 <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지">
+                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
                                                 <p>맑음</p>
                                             </div>
@@ -351,46 +350,41 @@
                                         <td>
                                             <div>
                                                 <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지">
+                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
                                                 <p>맑음</p>
-                                            </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
                                                 <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지">
+                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
                                                 <p>맑음</p>
-                                            </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
                                                 <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지">
+                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
                                                 <p>맑음</p>
-                                            </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
                                                 <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지">
+                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
                                                 <p>맑음</p>
-                                            </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
                                                 <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지">
+                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
                                                 <p>맑음</p>
-                                            </div>
                                             </div>
                                         </td>
                                     </tr>
@@ -455,10 +449,9 @@
                                         <td>
                                             <div>
                                                 <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지">
+                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
                                                 <p>맑음</p>
-                                            </div>
                                             </div>
                                         </td>
                                         <td>
@@ -522,10 +515,9 @@
                                         <td>
                                             <div>
                                                 <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지">
+                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
                                                 <p>맑음</p>
-                                            </div>
                                             </div>
                                         </td>
                                         <td>
@@ -589,10 +581,9 @@
                                         <td>
                                             <div>
                                                 <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지">
+                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
                                                 <p>맑음</p>
-                                            </div>
                                             </div>
                                         </td>
                                         <td>
@@ -656,10 +647,9 @@
                                         <td>
                                             <div>
                                                 <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지">
+                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
                                                 <p>맑음</p>
-                                            </div>
                                             </div>
                                         </td>
                                         <td>
@@ -723,10 +713,9 @@
                                         <td>
                                             <div>
                                                 <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지">
+                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
                                                 <p>맑음</p>
-                                            </div>
                                             </div>
                                         </td>
                                         <td>
@@ -790,10 +779,9 @@
                                         <td>
                                             <div>
                                                 <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지">
+                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
                                                 <p>맑음</p>
-                                            </div>
                                             </div>
                                         </td>
                                         <td>
@@ -857,10 +845,9 @@
                                         <td>
                                             <div>
                                                 <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지">
+                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
                                                 <p>맑음</p>
-                                            </div>
                                             </div>
                                         </td>
                                         <td>
@@ -920,7 +907,7 @@
                             </div>
                             <!--end row -->
                             <!--Row-->
-                            <div class="row" id="sea_temperature">
+                            <div class="row" id="sea_temperature" th:if="${item.mpType == 5}">
                                 <div class="w-100">
                                     <h4>바다 수온</h4>
                                     <div>

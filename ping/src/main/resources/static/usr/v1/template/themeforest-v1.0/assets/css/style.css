@@ -1907,7 +1907,7 @@ label:not(.custom-control-label) {
 
 .custom-checkbox .custom-control-label:after {
     top: .125rem;
-    left: -1.8125rem;
+    left: -1.8525rem;
 }
 
 .custom-checkbox .custom-control-label:before {

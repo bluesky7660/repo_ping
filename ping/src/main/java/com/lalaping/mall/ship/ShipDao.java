@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 public interface ShipDao {
 	public List<ShipDto> selectList(ShipVo vo);
 	public List<ShipDto> selectUsrList(ShipVo vo);
+	public List<ShipDto> portSelectList(ShipVo vo);
+	public int listCount(ShipVo vo);
+	public int portListCount(ShipVo vo);
 	public int insert(ShipDto shipDto);
 	public ShipDto selectOne(ShipDto shipDto);
 	public int update(ShipDto shipDto);

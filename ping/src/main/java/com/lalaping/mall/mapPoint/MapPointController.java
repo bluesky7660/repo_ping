@@ -6,11 +6,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.lalaping.mall.fish.FishService;
+import com.lalaping.mall.fish.FishVo;
+
 
 @Controller
 public class MapPointController {
 	@Autowired
 	public MapPointService mapPointService;
+	@Autowired
+	FishService fishService;
 	
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmList")
 	public String mapPointXdmList(Model model,@ModelAttribute("vo") MapPointVo vo){
@@ -55,8 +60,9 @@ public class MapPointController {
 		return "/usr/v1/mapPoint/ping_mapPointDetail";
 	}
 	@RequestMapping(value = "/v1/mapPoint/mapPointAdd")
-	public String mapPointAdd(Model model,@ModelAttribute("vo") MapPointVo vo){
+	public String mapPointAdd(Model model,FishVo fishVo){
 //		model.addAttribute("list",mapPointService.selectList(vo));
+		model.addAttribute("fishList",fishService.selectList(fishVo));
 		return "/usr/v1/mapPoint/ping_mapPoint_add";
 	}
 

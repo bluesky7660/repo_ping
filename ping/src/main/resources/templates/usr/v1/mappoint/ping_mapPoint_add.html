@@ -179,12 +179,12 @@
                                     <!--Checkboxes-->
                                     <div class="ts-column-count-3">
 
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="ch_1" name="features[]" value="ch_1">
-                                            <label class="custom-control-label" for="ch_1">Air conditioning</label>
+                                        <div class="custom-control custom-checkbox" th:each="fishList:${fishList}">
+                                            <input type="checkbox" class="custom-control-input" th:id="${'ch_'+fishListStat.count}" name="features[]" th:value="${'ch_'+fishListStat.count}">
+                                            <label class="custom-control-label" th:for="${'ch_'+fishListStat.count}" th:text="${fishList.fsName}"></label>
                                         </div>
 
-                                        <div class="custom-control custom-checkbox">
+                                        <!-- <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="ch_2" name="features[]" value="ch_2">
                                             <label class="custom-control-label" for="ch_2">Bedding</label>
                                         </div>
@@ -237,7 +237,7 @@
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="ch_12" name="features[]" value="ch_12">
                                             <label class="custom-control-label" for="ch_12">Parking</label>
-                                        </div>
+                                        </div> -->
 
                                     </div>
                                     <!--end ts-column-count-3-->
