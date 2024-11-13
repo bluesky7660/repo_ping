@@ -317,349 +317,61 @@
                         <section id="ts-items-list">
 
                             <!--Item-->
-                            <div class="card ts-item ts-item__list ts-card">
-
-                                <!--Card Image-->
-                                <a href="detail-01.html" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg"></a>
-
-                                <!--Card Body-->
-                                <div class="card-body">
-
-                                    <figure class="ts-item__info">
-                                        <h4>누리호</h4>
-                                        <aside>
-                                            <i class="fa fa-map-marker mr-2"></i>
-                                            인천항 주소
-                                        </aside>
-                                    </figure>
-
-                                    <div class="ts-item__info-badge">
-                                        220,000원
+                            <div class="card ts-item ts-item__list ts-card" th:each="list:${list}">
+                                <a th:href="@{/v1/ship/shipDetail(spSeq=${list.spSeq})}">
+                                    <!--Ribbon-->
+                                    <div class="ts-ribbon-corner">
+                                        <span>Updated</span>
                                     </div>
 
-                                    <div class="ts-description-lists">
-                                        <dl>
-                                            <dt>최대인원</dt>
-                                            <dd>10명</dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>예약가능인원</dt>
-                                            <dd>4명</dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>출발날짜</dt>
-                                            <dd>2024-10-10</dd>
-                                        </dl>
-                                    </div>
-                                </div>
+                                    <!--Card Image-->
+                                    <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg"></div>
 
-                                <!--Card Footer-->
-                                <a href="detail-01.html" class="card-footer">
-                                    <span>대상어종: 갈치</span>
+                                    <!--Card Body-->
+                                    <div class="card-body">
+
+                                        <figure class="ts-item__info">
+                                            <h4 th:text="${list.spName}">누리호</h4>
+                                            <aside>
+                                                <i class="fa fa-map-marker mr-2"></i>
+                                                항구 주소
+                                            </aside>
+                                        </figure>
+
+                                        <div class="ts-item__info-badge" th:text="${#numbers.formatInteger(list.spPrice,1,'COMMA') + ' 원'}">
+                                            220,000원
+                                        </div>
+
+                                        <div class="ts-description-lists">
+                                            <dl>
+                                                <dt>최대인원</dt>
+                                                <dd th:text="${list.spTotal+'명'}">10명</dd>
+                                            </dl>
+                                            <dl>
+                                                <dt>예약가능인원</dt>
+                                                <dd >4명</dd>
+                                            </dl>
+                                            <dl>
+                                                <dt>출발날짜</dt>
+                                                <dd th:text="${#dates.format(list.spStart,'yyyy-MM-dd')}">2024-10-10</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+
+                                    <!--Card Footer-->
+                                    <div  class="card-footer">
+                                        <!-- <span>
+                                            대상어종: 
+                                            <span th:each="fish, iterStat : ${list.fsNameList}" 
+                                                    th:text="${iterStat.index == 0 ? fish : ', ' + fish}"> 
+                                            </span>
+                                        </span> -->
+                                        <span>대상어종: <span th:text="${#strings.substring(list.fsNameList, 1, #strings.length(list.fsNameList) - 1)}"></span></span>
+                                        <!-- <span th:text="${#lists.join(list.fsNameList, ', ')}"></span>
+                                        <span th:text="${#strings.join(list.fsNameList, ', ')}"></span> -->
+                                        <!-- <span>대상어종: <span th:each="fish : ${#lists.size(list.fsSeqList)}"th:text="${list.fsNameList[fishStat.index]}">갈치</span></span> -->
+                                    </div>
                                 </a>
-
-                            </div>
-
-                            <!--Item-->
-                            <div class="card ts-item ts-item__list ts-card">
-
-                                <!--Ribbon-->
-                                <div class="ts-ribbon-corner">
-                                    <span>Updated</span>
-                                </div>
-
-                                <!--Card Image-->
-                                <a href="detail-01.html" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-02.jpg"></a>
-
-                                <!--Card Body-->
-                                <div class="card-body ts-item__body">
-
-                                    <figure class="ts-item__info">
-                                        <h4>Cozy Design Studio</h4>
-                                        <aside>
-                                            <i class="fa fa-map-marker mr-2"></i>
-                                            4831 Worthington Drive
-                                        </aside>
-                                    </figure>
-
-                                    <div class="ts-item__info-badge">$125,000</div>
-
-                                    <div class="ts-description-lists">
-                                        <dl>
-                                            <dt>Area</dt>
-                                            <dd>325m<sup>2</sup></dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>Bedrooms</dt>
-                                            <dd>2</dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>Bathrooms</dt>
-                                            <dd>1</dd>
-                                        </dl>
-                                    </div>
-                                </div>
-
-                                <!--Card Footer-->
-                                <a href="detail-01.html" class="card-footer ts-item__footer">
-                                    <span class="ts-btn-arrow">Detail</span>
-                                </a>
-
-                            </div>
-
-                            <!--Item-->
-                            <div class="card ts-item ts-item__list ts-card">
-
-                                <!--Card Image-->
-                                <a href="detail-01.html" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-03.jpg"></a>
-
-                                <!--Card Body-->
-                                <div class="card-body ts-item__body">
-
-                                    <figure class="ts-item__info">
-                                        <h4>Family Villa</h4>
-                                        <aside>
-                                            <i class="fa fa-map-marker mr-2"></i>
-                                            4127 Winding Way
-                                        </aside>
-                                    </figure>
-
-                                    <div class="ts-item__info-badge">$45,900</div>
-
-                                    <div class="ts-description-lists">
-                                        <dl>
-                                            <dt>Area</dt>
-                                            <dd>325m<sup>2</sup></dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>Bedrooms</dt>
-                                            <dd>2</dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>Bathrooms</dt>
-                                            <dd>1</dd>
-                                        </dl>
-                                    </div>
-                                </div>
-
-                                <!--Card Footer-->
-                                <a href="detail-01.html" class="card-footer ts-item__footer">
-                                    <span class="ts-btn-arrow">Detail</span>
-                                </a>
-
-                            </div>
-
-                            <!--Item-->
-                            <div class="card ts-item ts-item__list ts-card">
-
-                                <!--Card Image-->
-                                <a href="detail-01.html" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-04.jpg"></a>
-
-                                <!--Card Body-->
-                                <div class="card-body">
-
-                                    <figure class="ts-item__info">
-                                        <h4>Traditional Restaurant</h4>
-                                        <aside>
-                                            <i class="fa fa-map-marker mr-2"></i>
-                                            1350 Arbutus Drive
-                                        </aside>
-                                    </figure>
-
-                                    <div class="ts-item__info-badge">$860,000</div>
-
-                                    <div class="ts-description-lists">
-                                        <dl>
-                                            <dt>Area</dt>
-                                            <dd>325m<sup>2</sup></dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>Bedrooms</dt>
-                                            <dd>2</dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>Bathrooms</dt>
-                                            <dd>1</dd>
-                                        </dl>
-                                    </div>
-                                </div>
-
-                                <!--Card Footer-->
-                                <a href="detail-01.html" class="card-footer">
-                                    <span class="ts-btn-arrow">Detail</span>
-                                </a>
-
-                            </div>
-
-                            <!--Item-->
-                            <div class="card ts-item ts-item__list ts-card">
-
-                                <!--Card Image-->
-                                <a href="detail-01.html" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-05.jpg"></a>
-
-                                <!--Card Body-->
-                                <div class="card-body ts-item__body">
-
-                                    <figure class="ts-item__info">
-                                        <h4>White Cubes Resort</h4>
-                                        <aside>
-                                            <i class="fa fa-map-marker mr-2"></i>
-                                            4831 Worthington Drive
-                                        </aside>
-                                    </figure>
-
-                                    <div class="ts-item__info-badge">$435,000</div>
-
-                                    <div class="ts-description-lists">
-                                        <dl>
-                                            <dt>Area</dt>
-                                            <dd>325m<sup>2</sup></dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>Bedrooms</dt>
-                                            <dd>2</dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>Bathrooms</dt>
-                                            <dd>1</dd>
-                                        </dl>
-                                    </div>
-                                </div>
-
-                                <!--Card Footer-->
-                                <a href="detail-01.html" class="card-footer ts-item__footer">
-                                    <span class="ts-btn-arrow">Detail</span>
-                                </a>
-
-                            </div>
-
-                            <!--Item-->
-                            <div class="card ts-item ts-item__list ts-card">
-
-                                <!--Card Image-->
-                                <a href="detail-01.html" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-06.jpg"></a>
-
-                                <!--Card Body-->
-                                <div class="card-body ts-item__body">
-
-                                    <figure class="ts-item__info">
-                                        <h4>Bristol Tower Complex</h4>
-                                        <aside>
-                                            <i class="fa fa-map-marker mr-2"></i>
-                                            4127 Winding Way
-                                        </aside>
-                                    </figure>
-
-                                    <div class="ts-item__info-badge">$85,900</div>
-
-                                    <div class="ts-description-lists">
-                                        <dl>
-                                            <dt>Area</dt>
-                                            <dd>325m<sup>2</sup></dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>Bedrooms</dt>
-                                            <dd>2</dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>Bathrooms</dt>
-                                            <dd>1</dd>
-                                        </dl>
-                                    </div>
-                                </div>
-
-                                <!--Card Footer-->
-                                <a href="detail-01.html" class="card-footer ts-item__footer">
-                                    <span class="ts-btn-arrow">Detail</span>
-                                </a>
-
-                            </div>
-
-                            <!--Item-->
-                            <div class="card ts-item ts-item__list ts-card">
-
-                                <!--Card Image-->
-                                <a href="detail-01.html" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-07.jpg"></a>
-
-                                <!--Card Body-->
-                                <div class="card-body">
-
-                                    <figure class="ts-item__info">
-                                        <h4>River Apartments</h4>
-                                        <aside>
-                                            <i class="fa fa-map-marker mr-2"></i>
-                                            1350 Arbutus Drive
-                                        </aside>
-                                    </figure>
-
-                                    <div class="ts-item__info-badge">$120,000</div>
-
-                                    <div class="ts-description-lists">
-                                        <dl>
-                                            <dt>Area</dt>
-                                            <dd>325m<sup>2</sup></dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>Bedrooms</dt>
-                                            <dd>2</dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>Bathrooms</dt>
-                                            <dd>1</dd>
-                                        </dl>
-                                    </div>
-
-                                </div>
-
-                                <!--Card Footer-->
-                                <a href="detail-01.html" class="card-footer">
-                                    <span class="ts-btn-arrow">Detail</span>
-                                </a>
-
-                            </div>
-
-                            <!--Item-->
-                            <div class="card ts-item ts-item__list ts-card">
-
-                                <div class="badge badge-primary">Rent</div>
-
-                                <!--Card Image-->
-                                <a href="detail-01.html" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-08.jpg"></a>
-
-                                <!--Card Body-->
-                                <div class="card-body ts-item__body">
-
-                                    <figure class="ts-item__info">
-                                        <h4>Apartment for Rent</h4>
-                                        <aside>
-                                            <i class="fa fa-map-marker mr-2"></i>
-                                            4831 Worthington Drive
-                                        </aside>
-                                    </figure>
-
-                                    <div class="ts-item__info-badge">$480</div>
-
-                                    <div class="ts-description-lists">
-                                        <dl>
-                                            <dt>Area</dt>
-                                            <dd>325m<sup>2</sup></dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>Bedrooms</dt>
-                                            <dd>2</dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>Bathrooms</dt>
-                                            <dd>1</dd>
-                                        </dl>
-                                    </div>
-                                </div>
-
-                                <!--Card Footer-->
-                                <a href="detail-01.html" class="card-footer ts-item__footer">
-                                    <span class="ts-btn-arrow">Detail</span>
-                                </a>
-
                             </div>
 
                         </section>

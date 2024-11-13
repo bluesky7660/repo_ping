@@ -1,7 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.lalaping.infra.fish.FishDao">
-	<resultMap type="com.lalaping.infra.fish.FishDto" id="resultMapObj"></resultMap>
+<mapper namespace="com.lalaping.mall.fish.FishDao">
+	<resultMap type="com.lalaping.mall.fish.FishDto" id="resultMapObj"></resultMap>
 	
 	<sql id="selectCommon">
         FROM fish a
@@ -41,11 +41,38 @@
 			,a.fsDelNy
 			,a.fsRegDate
 		<include refid="selectCommon"/>
-	 ORDER BY
-     	a.fsRegDate DESC
+		 ORDER BY
+	     	a.fsRegDate DESC
 		<include refid="base.selectListLowerForMysql"/>
 	</select>
-	
+	<!-- <select id="shipFishList" resultMap="resultMapObj">
+		SELECT
+			a.fsSeq
+			,a.fsName
+			,a.fsSeason
+			,a.fsDelNy
+			,a.fsRegDate
+		FROM fish a
+			join fishandship b on b.fish_fsSeq = a.fsSeq
+            join ship c on c.spSeq = b.ship_spSeq
+        WHERE 1=1
+			and b.ship_spSeq = #{spSeq}
+	 	ORDER BY
+     		a.fsRegDate DESC
+
+	</select> -->
+	<select id="shipFishList" resultMap="resultMapObj">
+		SELECT
+			a.fsSeq
+			,a.fsName
+			,a.fsDelNy
+            ,b.ship_spSeq
+		FROM fishandship b
+            join fish a on b.fish_fsSeq = a.fsSeq
+        WHERE 1=1
+	 	ORDER BY
+     		a.fsRegDate DESC
+	</select>
 	<insert id="insert">
 		INSERT INTO fish(
 			fsName

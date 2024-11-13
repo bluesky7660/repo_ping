@@ -61,10 +61,10 @@ public class PortController {
 		return "/usr/v1/port/ping_portList";
 	}
 	@RequestMapping(value = "/v1/port/portDetail")
-	public String portDetail(Model model, ShipVo shipVo){
-//		model.addAttribute("list",shipService.selectList(vo));
+	public String portDetail(Model model, PortDto portDto){
+		model.addAttribute("item",portService.selectOne(portDto));
 //		shipVo.setPort_ptSeq();
-		model.addAttribute("ship", shipService.selectList(shipVo));
+//		model.addAttribute("ship", shipService.selectList(shipVo));
 		return "/usr/v1/port/ping_portDetail";
 	}
 

@@ -1,8 +1,13 @@
 package com.lalaping.mall.ship;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.lalaping.mall.fish.FishDto;
 
 public class ShipDto {
 	private String fsSeq;
@@ -20,6 +25,14 @@ public class ShipDto {
 	private Integer spEatNy;
 	private Date spRegDate;
 	private String port_ptSeq;
+	
+	private String ptName;
+	
+//	private List<FishDto> fishList;
+	private List<String> fsSeqList;
+	private List<String> fsNameList;
+	private String fsNames;
+
 	
 //	-------------------------------
 	
@@ -108,13 +121,34 @@ public class ShipDto {
 	public void setPort_ptSeq(String port_ptSeq) {
 		this.port_ptSeq = port_ptSeq;
 	}
-	
-	
 
-	
-	
-	
-	
+	public List<String> getFsSeqList() {
+		return fsSeqList;
+	}
+	public void setFsSeqList(String fsSeqList) {
+        if (fsSeqList != null && !fsSeqList.isEmpty()) {
+            this.fsSeqList = Arrays.asList(fsSeqList.split(","));
+        } else {
+            this.fsSeqList = new ArrayList<>();
+        }
+    }
+	public List<String> getFsNameList() {
+		return fsNameList;
+	}
+	public void setFsNameList(String fsNameList) {
+        if (fsNameList != null && !fsNameList.isEmpty()) {
+            this.fsNameList = Arrays.asList(fsNameList.split(","));
+        } else {
+            this.fsNameList = new ArrayList<>();
+        }
+    }
+	public String getPtName() {
+		return ptName;
+	}
+	public void setPtName(String ptName) {
+		this.ptName = ptName;
+	}
+
 	
 
 }

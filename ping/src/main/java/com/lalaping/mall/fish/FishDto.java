@@ -1,4 +1,4 @@
-package com.lalaping.infra.fish;
+package com.lalaping.mall.fish;
 
 import java.util.Date;
 
@@ -8,6 +8,8 @@ public class FishDto {
 	private Integer fsSeason;
 	private Integer fsDelNy;
 	private Date fsRegDate;
+	
+	private String ship_spSeq;
 	
 //	------------------------------ 
 	
@@ -41,11 +43,11 @@ public class FishDto {
 	public void setFsRegDate(Date fsRegDate) {
 		this.fsRegDate = fsRegDate;
 	}
-	
-
-	
-	
-	
-	
+	public String getShip_spSeq() {
+		return ship_spSeq;
+	}
+	public void setShip_spSeq(String ship_spSeq) {
+		this.ship_spSeq = ship_spSeq;
+	}
 
 }
