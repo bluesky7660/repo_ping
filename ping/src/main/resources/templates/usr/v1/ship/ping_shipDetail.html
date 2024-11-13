@@ -60,10 +60,10 @@
 
                     <!--Title-->
                     <div class="ts-title mb-0">
-                        <h1 th:text="${item.spName}">누리호</h1>
+                        <h1 th:text="${item.spName}"></h1>
                         <h5 class="ts-opacity__90">
                             <i class="fa fa-map-marker text-primary"></i>
-                            <span th:text="${item.ptName}">인천항</span>
+                            <a th:href="@{/v1/port/portDetail(ptSeq=${item.port_ptSeq})}" th:text="${item.ptName}"></a>
                         </h5>
                     </div>
 

@@ -9,4 +9,5 @@ public class BaseController {
 	public String dashBoardXdm() {
 		return "/xdm/v1/infra/base/index";
 	}
+
 }

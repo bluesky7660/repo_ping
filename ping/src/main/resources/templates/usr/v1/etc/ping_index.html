@@ -243,160 +243,76 @@
 
                 <!--Title-->
                 <div class="ts-title text-center">
-                    <h2>추천 낚시포인트</h2>
+                    <h2>추천 선상낚시</h2>
                 </div>
 
                 <div class="row">
 
                     <!--Item-->
-                    <div class="col-sm-6 col-lg-4">
+                    <div class="col-sm-6 col-lg-4" th:each="ships:${ships}">
 
                         <div class="card ts-item ts-card ts-item__lg">
-
-                            <!--Ribbon-->
-                            <div class="ts-ribbon">
-                                <i class="fa fa-thumbs-up"></i>
-                            </div>
-
-                            <!--Card Image-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
-                                <figure class="ts-item__info">
-                                    <h4>태안 쭈꾸미와 고등어, 삼치 한방에~ 백사장과 드르니 포인트</h4>
-                                    <aside>
-                                        <i class="fa fa-map-marker mr-2"></i>
-                                        1350 태안 백사장
-                                    </aside>
-                                </figure>
-                            </a>
-
-                            <!--Card Body-->
-                            <div class="card-body ts-item__body">
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>생성일</dt>
-                                        <dd>2024-11-08</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>어종</dt>
-                                        <dd>삼치, 고등어, 쭈꾸미</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>낚시방법</dt>
-                                        <dd>쇼어루어, 쭈꾸미루어</dd>
-                                    </dl>
+                            <a th:href="@{/v1/ship/shipDetail(spSeq=${ships.spSeq})}">
+                                <!--Ribbon-->
+                                <div class="ts-ribbon">
+                                    <i class="fa fa-thumbs-up"></i>
                                 </div>
-                            </div>
 
-                            <!--Card Footer-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-footer">
-                                <span class="ts-btn-arrow">상세보기</span>
+                                <!--Card Image-->
+                                <div class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
+                                    <div class="ts-item__info-badge" th:text="${#numbers.formatInteger(ships.spPrice,1,'COMMA') + ' 원'}"></div>
+                                    <figure class="ts-item__info">
+                                        <h4 th:text="${ships.spName}"></h4>
+                                        <aside>
+                                            <i class="fa fa-map-marker mr-2"></i>
+                                            <span th:text="${@codeService.selectOneCachedCode(ships.spArea)}"></span>
+                                        </aside>
+                                    </figure>
+                                </div>
+
+                                <!--Card Body-->
+                                <div class="card-body ts-item__body">
+                                    <div class="ts-description-lists">
+                                        <dl>
+                                            <dt>출발일</dt>
+                                            <dd th:text="${#dates.format(ships.spStart,'yyyy-MM-dd')}"></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>최대인원</dt>
+                                            <dd th:text="${ships.spTotal+'명'}"></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>추가서비스</dt>
+                                            <dd>
+                                                <i th:classappend="${ships.spRentalNy == 1} ? 'fas fa-check-square' : 'fas fa-times-square'"
+                                                   th:style="${ships.spRentalNy == 1} ? 'color: green;' : 'color: red;'"></i> 낚시대 대여
+                                            </dd>                                            
+                                            <dd>
+                                                <i th:classappend="${ships.spEatNy == 1} ? 'fas fa-check-circle' : 'fas fa-times-circle'"
+                                                th:style="${ships.spEatNy == 1} ? 'color: green;' : 'color: red;'"></i> 식사제공
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>어종</dt>
+                                            <dd>삼치, 고등어, 쭈꾸미</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+
+                                <!--Card Footer-->
+                                <div class="card-footer">
+                                    <span class="ts-btn-arrow">상세보기</span>
+                                </div>
                             </a>
-
                         </div>
                         <!--end ts-item-->
                     </div>
                     <!--end Item col-md-4-->
-
-                    <!--Item-->
-                    <div class="col-sm-6 col-lg-4">
-
-                        <div class="card ts-item ts-card ts-item__lg">
-
-                            <!--Ribbon-->
-                            <div class="ts-ribbon-corner">
-                                <span>Updated</span>
-                            </div>
-
-                            <!--Card Image-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-02.jpg">
-                                <figure class="ts-item__info">
-                                    <h4>태안 쭈꾸미와 고등어, 삼치 한방에~ 백사장과 드르니 포인트</h4>
-                                    <aside>
-                                        <i class="fa fa-map-marker mr-2"></i>
-                                        1350 태안 백사장
-                                    </aside>
-                                </figure>
-                            </a>
-
-                            <!--Card Body-->
-                            <div class="card-body ts-item__body">
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>생성일</dt>
-                                        <dd>2024-11-08</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>어종</dt>
-                                        <dd>삼치, 고등어, 쭈꾸미</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>낚시방법</dt>
-                                        <dd>쇼어루어, 쭈꾸미루어</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <!--Card Footer-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-footer">
-                                <span class="ts-btn-arrow">상세보기</span>
-                            </a>
-
-                        </div>
-                        <!--end ts-item ts-card-->
-                    </div>
-                    <!--end Item col-md-4-->
-
-                    <!--Item-->
-                    <div class="col-sm-6 col-lg-4">
-
-                        <div class="card ts-item ts-card ts-item__lg">
-
-                            <!--Card Image-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-03.jpg">
-                                <figure class="ts-item__info">
-                                    <h4>태안 쭈꾸미와 고등어, 삼치 한방에~ 백사장과 드르니 포인트</h4>
-                                    <aside>
-                                        <i class="fa fa-map-marker mr-2"></i>
-                                        1350 태안 백사장
-                                    </aside>
-                                </figure>
-                            </a>
-
-                            <!--Card Body-->
-                            <div class="card-body ts-item__body">
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>생성일</dt>
-                                        <dd>2024-11-08</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>어종</dt>
-                                        <dd>삼치, 고등어, 쭈꾸미</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>낚시방법</dt>
-                                        <dd>쇼어루어, 쭈꾸미루어</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <!--Card Footer-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-footer">
-                                <span class="ts-btn-arrow">상세보기</span>
-                            </a>
-
-                        </div>
-                        <!--end ts-item ts-card-->
-                    </div>
-                    <!--end Item col-md-4-->
-
-                </div>
-                <!--end row-->
-
+                </div>    
                 <!--All properties button-->
                 <div class="text-center mt-3">
                     <!-- <a href="listing-category-icons.html" class="btn btn-outline-dark ts-btn-border-muted">모든 낚시 포인트 보러가기</a> -->
-                    <a href="listing-category-icons.html" class="btn btn-outline-dark">모든 낚시 포인트 보러가기</a>
+                    <a href="/v1/ship/shipList" class="btn btn-outline-dark">모든 선상낚시 보러가기</a>
                 </div>
 
             </div>
@@ -839,59 +755,52 @@
 
             <!--Title-->
             <div class="ts-title text-center">
-                <h2>선상낚시</h2>
+                <h2>낚시 포인트</h2>
             </div>
 
             <!--Carousel-->
-            <div class="owl-carousel ts-items-carousel" data-owl-items="5" data-owl-dots="1">
+            <div class="owl-carousel ts-items-carousel" data-owl-items="4" data-owl-dots="1">
 
                 <!--Item-->
-                <div class="slide">
+                <div class="slide" th:each="mapPoint:${mapPoint}">
 
                     <div class="card ts-item ts-card ts-item__lg">
-
-                        <!--Ribbon-->
-                        <div class="ts-ribbon">
-                            <i class="fa fa-thumbs-up"></i>
-                        </div>
-
-                        <!--Card Image-->
-                        <a href="/v1/mapPoint/mapPointDetail" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
-                            <div class="ts-item__info-badge">
-                                350,000원
+                        <a th:href="@{/v1/mapPoint/mapPointDetail(mpSeq=${mapPoint.mpSeq})}">
+                            <!--Ribbon-->
+                            <div class="ts-ribbon">
+                                <i class="fa fa-thumbs-up"></i>
                             </div>
-                            <figure class="ts-item__info">
-                                <h4>Big Luxury Apartment</h4>
-                                <aside>
-                                    <i class="fa fa-map-marker mr-2"></i>
-                                    1350 Arbutus Drive
-                                </aside>
-                            </figure>
-                        </a>
 
-                        <!--Card Body-->
-                        <div class="card-body">
-                            <div class="ts-description-lists">
-                                <dl>
-                                    <dt>출발일</dt>
-                                    <dd>2024-11-08</dd>
-                                </dl>
-                                <dl>
-                                    <dt>최대 인원</dt>
-                                    <dd>10명</dd>
-                                </dl>
-                                <dl>
-                                    <dt>어종</dt>
-                                    <dd>삼치, 고등어, 쭈꾸미</dd>
-                                </dl>
+                            <!--Card Image-->
+                            <div class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
+                                <figure class="ts-item__info">
+                                    <h4 th:text="${mapPoint.mpTitle}"></h4>
+                                    <aside>
+                                        <i class="fa fa-map-marker mr-2"></i>
+                                        <span th:text="${mapPoint.mpAddress}"></span>
+                                    </aside>
+                                </figure>
                             </div>
-                        </div>
 
-                        <!--Card Footer-->
-                        <a href="/v1/mapPoint/mapPointDetail" class="card-footer">
-                            <span class="ts-btn-arrow">상세보기</span>
+                            <!--Card Body-->
+                            <div class="card-body">
+                                <div class="ts-description-lists">
+                                    <dl>
+                                        <dt>생성일</dt>
+                                        <dd th:text="${#dates.format(mapPoint.mpRegDate,'yyyy-MM-dd')}"></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>어종</dt>
+                                        <dd>삼치, 고등어, 쭈꾸미</dd>
+                                    </dl>
+                                </div>
+                            </div>
+
+                            <!--Card Footer-->
+                            <div class="card-footer">
+                                <span class="ts-btn-arrow">상세보기</span>
+                            </div>
                         </a>
-
                     </div>
                     <!--end ts-item-->
                 </div>
@@ -1135,7 +1044,7 @@
                 <!--end slide-->
 
                 <!--Item-->
-                <div class="slide">
+                <div class="slide" >
                     <div class="card ts-item ts-card ts-item__lg">
 
                         <!--Card Image-->

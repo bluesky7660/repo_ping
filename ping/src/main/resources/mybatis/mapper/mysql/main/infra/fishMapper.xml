@@ -73,6 +73,18 @@
 	 	ORDER BY
      		a.fsRegDate DESC
 	</select>
+	<select id="allList" resultMap="resultMapObj">
+		SELECT
+			a.fsSeq
+			,a.fsName
+			,a.fsDelNy
+            ,b.ship_spSeq
+		FROM fishandship b
+            join fish a on b.fish_fsSeq = a.fsSeq
+        WHERE 1=1
+	 	ORDER BY
+     		a.fsRegDate DESC
+	</select>
 	<insert id="insert">
 		INSERT INTO fish(
 			fsName

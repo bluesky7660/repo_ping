@@ -16,6 +16,15 @@ public class ShipService {
 	public List<ShipDto> selectUsrList(ShipVo vo){
 		return shipDao.selectUsrList(vo);
 	}
+	public List<ShipDto> portSelectList(ShipVo vo){
+		return shipDao.portSelectList(vo);
+	}
+	public int listCount(ShipVo vo) {
+		return shipDao.listCount(vo);
+	}
+	public int portListCount(ShipVo vo) {
+		return shipDao.portListCount(vo);
+	}
 	public int insert(ShipDto shipDto) {
 		return shipDao.insert(shipDto);
 	}

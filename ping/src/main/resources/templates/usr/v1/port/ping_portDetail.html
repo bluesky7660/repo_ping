@@ -113,8 +113,7 @@
                             <!--end p-4-->
 
                             <div class="ts-bg-light p-3 ts-border-radius__md d-block d-sm-flex ts-center__vertical justify-content-between ts-xs-text-center">
-                                <a href="#" class="btn btn-outline-secondary btn-sm d-block d-sm-inline-block mb-2 mb-sm-0">9
-                                    건이 검색되었습니다</a>
+                                <p class="d-sm-inline-block mb-2 mb-sm-0" th:text="${shipCount+'건이 검색되었습니다'}"></p>
                                
                             </div>
 
@@ -148,14 +147,14 @@
                                 <!--Properties tab-->
                                 <li class="nav-item">
                                     <a class="nav-link active" id="properties-tab" data-toggle="tab" href="#properties" role="tab" aria-controls="properties" aria-selected="true">
-                                        <h3>Properties</h3>
+                                        <h3>배</h3>
                                     </a>
                                 </li>
 
                                 <!--Agents tab-->
                                 <li class="nav-item">
                                     <a class="nav-link" id="agents-tab" data-toggle="tab" href="#agents" role="tab" aria-controls="agents" aria-selected="false">
-                                        <h3>Agents</h3>
+                                        <h3>낚시포인트</h3>
                                     </a>
                                 </li>
 
@@ -204,183 +203,54 @@
                                     =================================================================================-->
                                 <section id="items-listing">
                                     <!--Item-->
-                                    <div class="card ts-item ts-item__list ts-card">
-
-                                        <!--Ribbon-->
-                                        <div class="ts-ribbon">
-                                            <i class="fa fa-thumbs-up"></i>
-                                        </div>
-
-                                        <!--Card Image-->
-                                        <a href="detail-01.html" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg"></a>
-
-                                        <!--Card Body-->
-                                        <div class="card-body">
-
-                                            <figure class="ts-item__info">
-                                                <h4>배이름</h4>
-                                                <aside>
-                                                    <i class="fa fa-ship"></i>
-                                                    배 출발날짜
-                                                </aside>
-                                            </figure>
-
-                                            <div class="ts-item__info-badge">
-                                                350,000원
+                                    <div class="card ts-item ts-item__list ts-card" th:each="shipList:${ships}">
+                                        <a th:href="@{/v1/ship/shipDetail(spSeq=${shipList.spSeq})}">
+                                            <!--Ribbon-->
+                                            <div class="ts-ribbon">
+                                                <i class="fa fa-thumbs-up"></i>
+                                            </div>
+                                            <div class="ts-ribbon-corner">
+                                                <span>Updated</span>
                                             </div>
 
-                                            <div class="ts-description-lists">
-                                                <dl>
-                                                    <dt>대상해역</dt>
-                                                    <dd>제주</dd>
-                                                </dl>
-                                                <dl>
-                                                    <dt>최대인원</dt>
-                                                    <dd>10</dd>
-                                                </dl>
-                                                <dl>
-                                                    <dt>예약가능인원</dt>
-                                                    <dd>1</dd>
-                                                </dl>
-                                            </div>
-                                        </div>
+                                            <!--Card Image-->
+                                            <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg"></div>
 
-                                        <!--Card Footer-->
-                                        <a href="detail-01.html" class="card-footer">
-                                            <span class="ts-btn-arrow">예약하기</span>
+                                            <!--Card Body-->
+                                            <div class="card-body">
+
+                                                <figure class="ts-item__info">
+                                                    <h4 th:text="${shipList.spName}"></h4>
+                                                    <aside>
+                                                        <i class="fa fa-ship"></i>
+                                                        <span th:text="${#dates.format(shipList.spStart,'yyyy-MM-dd')}"></span>
+                                                    </aside>
+                                                </figure>
+
+                                                <div class="ts-item__info-badge" th:text="${#numbers.formatInteger(shipList.spPrice,1,'COMMA') + ' 원'}">
+                                                </div>
+
+                                                <div class="ts-description-lists">
+                                                    <dl>
+                                                        <dt>대상해역</dt>
+                                                        <dd th:text="${@codeService.selectOneCachedCode(shipList.spArea)}">제주</dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt>최대인원</dt>
+                                                        <dd th:text="${shipList.spTotal}">10</dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt>예약가능인원</dt>
+                                                        <dd>1</dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+
+                                            <!--Card Footer-->
+                                            <div class="card-footer">
+                                                <span class="ts-btn-arrow">예약하기</span>
+                                            </div>
                                         </a>
-
-                                    </div>
-
-                                    <!--Item-->
-                                    <div class="card ts-item ts-item__list ts-card">
-
-                                        <!--Ribbon-->
-                                        <div class="ts-ribbon-corner">
-                                            <span>Updated</span>
-                                        </div>
-
-                                        <!--Card Image-->
-                                        <a href="detail-01.html" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-02.jpg"></a>
-
-                                        <!--Card Body-->
-                                        <div class="card-body ts-item__body">
-
-                                            <figure class="ts-item__info">
-                                                <h4>Cozy Design Studio</h4>
-                                                <aside>
-                                                    <i class="fa fa-map-marker mr-2"></i>
-                                                    4831 Worthington Drive
-                                                </aside>
-                                            </figure>
-
-                                            <div class="ts-item__info-badge">$125,000</div>
-
-                                            <div class="ts-description-lists">
-                                                <dl>
-                                                    <dt>Area</dt>
-                                                    <dd>325m<sup>2</sup></dd>
-                                                </dl>
-                                                <dl>
-                                                    <dt>Bedrooms</dt>
-                                                    <dd>2</dd>
-                                                </dl>
-                                                <dl>
-                                                    <dt>Bathrooms</dt>
-                                                    <dd>1</dd>
-                                                </dl>
-                                            </div>
-                                        </div>
-
-                                        <!--Card Footer-->
-                                        <a href="detail-01.html" class="card-footer ts-item__footer">
-                                            <span class="ts-btn-arrow">Detail</span>
-                                        </a>
-
-                                    </div>
-
-                                    <!--Item-->
-                                    <div class="card ts-item ts-item__list ts-card">
-
-                                        <!--Card Image-->
-                                        <a href="detail-01.html" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-03.jpg"></a>
-
-                                        <!--Card Body-->
-                                        <div class="card-body ts-item__body">
-
-                                            <figure class="ts-item__info">
-                                                <h4>Family Villa</h4>
-                                                <aside>
-                                                    <i class="fa fa-map-marker mr-2"></i>
-                                                    4127 Winding Way
-                                                </aside>
-                                            </figure>
-
-                                            <div class="ts-item__info-badge">$45,900</div>
-
-                                            <div class="ts-description-lists">
-                                                <dl>
-                                                    <dt>Area</dt>
-                                                    <dd>325m<sup>2</sup></dd>
-                                                </dl>
-                                                <dl>
-                                                    <dt>Bedrooms</dt>
-                                                    <dd>2</dd>
-                                                </dl>
-                                                <dl>
-                                                    <dt>Bathrooms</dt>
-                                                    <dd>1</dd>
-                                                </dl>
-                                            </div>
-                                        </div>
-
-                                        <!--Card Footer-->
-                                        <a href="detail-01.html" class="card-footer ts-item__footer">
-                                            <span class="ts-btn-arrow">Detail</span>
-                                        </a>
-
-                                    </div>
-
-                                    <!--Item-->
-                                    <div class="card ts-item ts-item__list ts-card">
-
-                                        <!--Card Image-->
-                                        <a href="detail-01.html" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-04.jpg"></a>
-
-                                        <!--Card Body-->
-                                        <div class="card-body">
-
-                                            <figure class="ts-item__info">
-                                                <h4>Traditional Restaurant</h4>
-                                                <aside>
-                                                    <i class="fa fa-map-marker mr-2"></i>
-                                                    1350 Arbutus Drive
-                                                </aside>
-                                            </figure>
-
-                                            <div class="ts-item__info-badge">$860,000</div>
-
-                                            <div class="ts-description-lists">
-                                                <dl>
-                                                    <dt>Area</dt>
-                                                    <dd>325m<sup>2</sup></dd>
-                                                </dl>
-                                                <dl>
-                                                    <dt>Bedrooms</dt>
-                                                    <dd>2</dd>
-                                                </dl>
-                                                <dl>
-                                                    <dt>Bathrooms</dt>
-                                                    <dd>1</dd>
-                                                </dl>
-                                            </div>
-                                        </div>
-
-                                        <!--Card Footer-->
-                                        <a href="detail-01.html" class="card-footer">
-                                            <span class="ts-btn-arrow">Detail</span>
-                                        </a>
-
                                     </div>
                                 </section>
 

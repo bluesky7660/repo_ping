@@ -161,7 +161,8 @@ public class MemberController {
 		return "/usr/v1/etc/ping_register";
 	}
 	@RequestMapping(value = "/v1/member/editMember")
-	public String editMember() {
+	public String editMember(Model model, MemberDto memberDto) {
+//		model.addAttribute("item", memberService.selectOne(memberDto));
 		return "/usr/v1/member/ping_editMember";
 	}
 	@RequestMapping(value = "/v1/member/ping_orderList")
