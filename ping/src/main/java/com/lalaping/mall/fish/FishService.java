@@ -1,4 +1,4 @@
-package com.lalaping.infra.fish;
+package com.lalaping.mall.fish;
 
 import java.util.List;
 
@@ -13,6 +13,9 @@ public class FishService {
 	public List<FishDto> selectList(FishVo vo){
 		return fishDao.selectList(vo);
 	}	
+	public List<FishDto> shipFishList(FishVo vo){
+		return fishDao.shipFishList(vo);
+	}
 	public int insert(FishDto fishDto) {
 		return fishDao.insert(fishDto);
 	}

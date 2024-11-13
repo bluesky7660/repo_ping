@@ -5,7 +5,9 @@
 	
 	<sql id="selectCommon">
         FROM ship a
-        
+        	left join fishandship b on b.ship_spSeq = a.spSeq
+            left join fish c on c.fsSeq = b.fish_fsSeq
+            left join port d on d.ptSeq = a.port_ptSeq
         WHERE 1=1
         <if test="port_ptSeq != null and !port_ptSeq.equals('')">
        		AND a.port_ptSeq = #{port_ptSeq}
@@ -69,7 +71,32 @@
      	a.spRegDate DESC
 		<include refid="base.selectListLowerForMysql"/>
 	</select>
-	 
+	<select id="selectUsrList">
+		<include refid="base.selectListUpperForMysql"/>
+		SELECT
+			a.spSeq
+			,a.spName
+			,a.spPrice
+			,a.spDesc
+			,a.spTotal
+			,a.spStart
+			,a.spDelNy
+			,a.spArea
+			,a.spEatNy
+			,a.spRentalNy
+			,a.spRegDate
+			,a.port_ptSeq
+			,d.ptName
+			<!-- ,c.fsSeq
+            ,c.fsName -->
+            ,GROUP_CONCAT(c.fsSeq ORDER BY c.fsSeq) AS fsSeqList
+    		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
+		<include refid="selectCommon"/>
+		GROUP BY a.spSeq
+		 ORDER BY
+	     	a.spRegDate DESC
+	     <include refid="base.selectListLowerForMysql"/>
+	</select>
 	<insert id="insert">
 		INSERT INTO ship(
 			spName
@@ -111,9 +138,15 @@
 			,a.spRentalNy
 			,a.spRegDate
 			,a.port_ptSeq
+			,d.ptName
+			,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
 		FROM ship a
+			left join fishandship b on b.ship_spSeq = a.spSeq
+            left join fish c on c.fsSeq = b.fish_fsSeq
+            left join port d on d.ptSeq = a.port_ptSeq
 		WHERE 1=1
-		AND a.spSeq = #{spSeq}
+			AND a.spSeq = #{spSeq}
+		GROUP BY a.spSeq
 	</select>
 		
 	<update id="update">

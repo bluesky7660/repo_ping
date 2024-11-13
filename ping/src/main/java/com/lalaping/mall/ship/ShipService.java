@@ -13,6 +13,9 @@ public class ShipService {
 	public List<ShipDto> selectList(ShipVo vo){
 		return shipDao.selectList(vo);
 	}
+	public List<ShipDto> selectUsrList(ShipVo vo){
+		return shipDao.selectUsrList(vo);
+	}
 	public int insert(ShipDto shipDto) {
 		return shipDao.insert(shipDto);
 	}

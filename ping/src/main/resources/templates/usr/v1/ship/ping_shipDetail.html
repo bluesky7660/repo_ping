@@ -60,27 +60,20 @@
 
                     <!--Title-->
                     <div class="ts-title mb-0">
-                        <h1>누리호</h1>
+                        <h1 th:text="${item.spName}">누리호</h1>
                         <h5 class="ts-opacity__90">
                             <i class="fa fa-map-marker text-primary"></i>
-                            인천항
+                            <span th:text="${item.ptName}">인천항</span>
                         </h5>
                     </div>
 
                     <!--Price-->
                     <div class="col-sm-2">
-                        <select class="custom-select my-2" id="type" name="type">
+                        <select class="custom-select my-2" id="type" name="type" style="max-height: 200px; overflow-y: auto;">
                             <option value="">인원</option>
-                            <option value="1">1인</option>
-                            <option value="2">2인</option>
-                            <option value="3">3인</option>
-                            <option value="4">4인</option>
-                            <option value="5">5인</option>
-                            <option value="6">6인</option>
-                            <option value="7">7인</option>
-                            <option value="8">8인</option>
-                            <option value="9">9인</option>
-                            <option value="10">10인</option>
+                            <option th:each="i : ${#numbers.sequence(1, item.spTotal)}" 
+                                th:value="${i}" th:text="${i + '인'}"></option>
+                            
                         </select>
                         <h3 class="col-1">
                             <span class="badge badge-primary p-3 font-weight-normal ts-shadow__sm">예약하기</span>
@@ -172,7 +165,7 @@
                                     <div class="col-sm-3">
                                         <div class="ts-quick-info__item" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/icon-quick-info-shower.png">
                                             <h6>최대인원</h6>
-                                            <figure>10</figure>
+                                            <figure th:text="${item.spTotal}"></figure>
                                         </div>
                                     </div>
 
@@ -188,7 +181,7 @@
                                     <div class="col-sm-3">
                                         <div class="ts-quick-info__item" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/icon-quick-info-area.png">
                                             <h6>출조비용 1인당</h6>
-                                            <figure>220,000원</figure>
+                                            <figure th:text="${#numbers.formatInteger(item.spPrice,1,'COMMA') + ' 원'}"></figure>
                                         </div>
                                     </div>
 
@@ -196,7 +189,7 @@
                                     <div class="col-sm-3">
                                         <div class="ts-quick-info__item" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/icon-quick-info-garages.png">
                                             <h6>어종</h6>
-                                            <figure>갈치</figure>
+                                            <figure th:text="${#strings.substring(item.fsNameList, 1, #strings.length(item.fsNameList) - 1)}" style="font-size: 1rem;"></figure>
                                         </div>
                                     </div>
 
@@ -232,7 +225,7 @@
                             =========================================================================================-->
                         <section id="map-location">
 
-                            <h3>Map</h3>
+                            <h3>위치</h3>
 
                             <div class="ts-map ts-map__detail ts-border-radius__sm ts-shadow__sm" id="ts-map-simple"
                                  data-ts-map-leaflet-provider="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
@@ -258,11 +251,11 @@
                             =========================================================================================-->
                         <section id="amenities">
 
-                            <h3>Amenities</h3>
+                            <h3>추가제공서비스</h3>
 
                             <ul class="ts-list-colored-bullets ts-text-color-light ts-column-count-3 ts-column-count-md-2">
-                                <li>식사제공</li>
-                                <li>낚시대 대여</li>
+                                <li th:if="${item.spEatNy == 1}">식사제공</li>
+                                <li th:if="${item.spRentalNy == 1}">낚시대 대여</li>
                                
                             </ul>
 

@@ -1,4 +1,4 @@
-package com.lalaping.infra.fish;
+package com.lalaping.mall.fish;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

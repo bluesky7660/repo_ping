@@ -1,15 +1,23 @@
 package com.lalaping.mall.ship;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.lalaping.mall.fish.FishDto;
+import com.lalaping.mall.fish.FishService;
+import com.lalaping.mall.fish.FishVo;
+
 @Controller
 public class ShipController {
 	@Autowired
 	public ShipService shipService;
+	@Autowired
+	FishService fishService;
 	
 	@RequestMapping(value = "/v1/ship/shipXdmList")
 	public String shipXdmList(Model model,@ModelAttribute("vo") ShipVo vo){
@@ -48,13 +56,35 @@ public class ShipController {
 	
 	/*usr*/
 	@RequestMapping(value = "/v1/ship/shipList")
-	public String shipList(Model model,@ModelAttribute("vo") ShipVo vo){
-		model.addAttribute("list",shipService.selectList(vo));
+	public String shipList(Model model,@ModelAttribute("vo") ShipVo vo ,@ModelAttribute("fishVo") FishVo fishVo){
+		model.addAttribute("list",shipService.selectUsrList(vo));
+		List<ShipDto> shipList = shipService.selectUsrList(vo);
+		for (ShipDto ship : shipList) {
+		    System.out.println("Ship Name: " + ship.getSpName());
+		    System.out.println("Ship Capacity: " + ship.getSpTotal());
+		    System.out.println("Fish: " + ship.getFsNameList());
+
+		    // fsSeqList와 fsNameList가 null이거나 비어있는지 체크
+		    if (ship.getFsSeqList() != null && !ship.getFsSeqList().isEmpty()) {
+		        System.out.println("Fish Sequence: " + ship.getFsSeqList());
+		    } else {
+		        System.out.println("No Fish Available");
+		    }
+
+		    // fsNameList가 null이거나 비어있는지 체크
+		    if (ship.getFsNameList() != null && !ship.getFsNameList().isEmpty()) {
+		        System.out.println("Fish Names: " + ship.getFsNameList());
+		    } else {
+		        System.out.println("No Fish Available");
+		    }
+		}
+
+		model.addAttribute("fishList",fishService.shipFishList(fishVo));
 		return "/usr/v1/ship/ping_shipList";
 	}
 	@RequestMapping(value = "/v1/ship/shipDetail")
-	public String shipDetail(Model model,@ModelAttribute("vo") ShipVo vo){
-//		model.addAttribute("list",shipService.selectList(vo));
+	public String shipDetail(Model model,ShipDto shipDto){
+		model.addAttribute("item",shipService.selectOne(shipDto));
 		return "/usr/v1/ship/ping_shipDetail";
 	}
 
