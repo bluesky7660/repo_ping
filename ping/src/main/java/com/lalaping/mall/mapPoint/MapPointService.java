@@ -14,6 +14,12 @@ public class MapPointService {
 	public List<MapPointDto> selectList(MapPointVo vo) {
 		return mapPointDao.selectList(vo);
 	}
+	public List<MapPointDto> selectUsrList(MapPointVo vo) {
+		return mapPointDao.selectUsrList(vo);
+	}
+	public List<MapPointDto> sessSelectList(MapPointVo vo) {
+		return mapPointDao.sessSelectList(vo);
+	}
 	public int insert(MapPointDto mapPointDto) {
 		return mapPointDao.insert(mapPointDto);
 	}
