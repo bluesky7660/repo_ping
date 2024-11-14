@@ -57,14 +57,16 @@ public class PortController {
 	/*usr*/
 	@RequestMapping(value = "/v1/port/portList")
 	public String portList(Model model,@ModelAttribute("vo") PortVo vo){
+		vo.setParamsPaging(portService.selectOneCount(vo));
 		model.addAttribute("list",portService.selectList(vo));
 		return "/usr/v1/port/ping_portList";
 	}
 	@RequestMapping(value = "/v1/port/portDetail")
 	public String portDetail(Model model, PortDto portDto, ShipVo shipVo){
 		PortDto item = portService.selectOne(portDto);
-		model.addAttribute("item",item);
+		shipVo.setParamsPaging(shipService.listCount(shipVo));
 		shipVo.setPort_ptSeq(item.getPtSeq());
+		model.addAttribute("item",item);
 		model.addAttribute("shipCount", shipService.portListCount(shipVo));
 		model.addAttribute("ships", shipService.portSelectList(shipVo));
 		return "/usr/v1/port/ping_portDetail";

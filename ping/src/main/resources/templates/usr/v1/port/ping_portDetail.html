@@ -257,27 +257,17 @@
                                 <!--PAGINATION
                                     =================================================================================-->
                                 <section id="pagination-items">
-                                    <div class="container">
-
-                                        <!--Pagination-->
-                                        <nav aria-label="Page navigation">
-                                            <ul class="pagination ts-center__horizontal">
-                                                <li class="page-item active">
-                                                    <a class="page-link" href="#">1</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">2</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">3</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link ts-btn-arrow" href="#">Next</a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-
-                                    </div>
+                                   <div class="container-fluid px-0 mt-2 mb-2">
+										<div class="row">
+											<div class="col">
+												<ul class="pagination justify-content-center mb-0">
+													<li th:if="${shipVo.startPage gt shipVo.pageNumToShow}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${shipVo.startPage - 1})" th:attr="onclick=|goList('${shipVo.startPage - 1}')|"><i class="bi bi-caret-left-fill"></i></a></li>
+												<li th:each="num: ${#numbers.sequence(shipVo.startPage, shipVo.endPage)}" th:classappend="${num eq shipVo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
+												<li th:if="${shipVo.endPage ne shipVo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${shipVo.endPage + 1}')|"><i class="bi bi-caret-right-fill"></i></a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
                                 </section>
 
                             </div>
@@ -558,8 +548,9 @@
 
                                 <h3>검색</h3>
 
-                                <form id="form-search" class="ts-form">
-
+                                <form id="form-search" method="post" action="/v1/port/portDetail" name="formList" class="ts-form">
+									<input type="hidden" name="thisPage" th:value="${shipVo.thisPage}" default="1"/>
+									<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${shipVo.rowNumToShow}"/>
                                     <!--Keyword-->
                                     <div class="form-group">
                                         <label for="bedrooms">배이름</label>
@@ -830,6 +821,21 @@
 
 </div>
 <!--end page-->
+<script type="text/javascript">
+	goList = function (thisPage) {
+    document.querySelector("input[name=thisPage]").value = thisPage;
+    document.querySelector("form[name=formList]").action = "/v1/port/portDetail";
+    document.querySelector("form[name=formList]").submit();
+	}
+</script>
+
+<script type="text/javascript">
+	document.getElementById("changeRowNum").onchange = function () {
+    document.getElementById("rowNumToShow").value = document.getElementById("changeRowNum").value;
+    form.action = goUrlXdmList;
+    form.submit();
+	}
+</script>
 
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>

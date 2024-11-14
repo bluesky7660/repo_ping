@@ -40,6 +40,9 @@ public class ShipService {
 	public int delete(ShipDto shipDto) {
 		return shipDao.delete(shipDto);
 	}
+	public int selectOneCount(ShipVo vo) {
+		return shipDao.selectOneCount(vo);
+	}
 
 
 }
