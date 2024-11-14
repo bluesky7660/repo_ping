@@ -1,6 +1,10 @@
 package com.lalaping.mall.fish;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import com.lalaping.infra.code.CodeDto;
 
 public class FishDto {
 	private String fsSeq;
@@ -10,6 +14,10 @@ public class FishDto {
 	private Date fsRegDate;
 	
 	private String ship_spSeq;
+	private String fsNameList;
+	
+	//for cache
+	public static List<FishDto> cachedFishArrayList = new ArrayList<FishDto>();
 	
 //	------------------------------ 
 	
@@ -48,6 +56,12 @@ public class FishDto {
 	}
 	public void setShip_spSeq(String ship_spSeq) {
 		this.ship_spSeq = ship_spSeq;
+	}
+	public String getFsNameList() {
+		return fsNameList;
+	}
+	public void setFsNameList(String fsNameList) {
+		this.fsNameList = fsNameList;
 	}
 
 }

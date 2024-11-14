@@ -272,14 +272,10 @@
 
                                 <!--Card Body-->
                                 <div class="card-body ts-item__body">
-                                    <div class="ts-description-lists">
+                                    <div class="ts-description-lists d-flex flex-wrap justify-content-between">
                                         <dl>
-                                            <dt>출발일</dt>
-                                            <dd th:text="${#dates.format(ships.spStart,'yyyy-MM-dd')}"></dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>최대인원</dt>
-                                            <dd th:text="${ships.spTotal+'명'}"></dd>
+                                            <dt>어종</dt>
+                                            <dd th:text="${#strings.substring(ships.fsNameList, 1, #strings.length(ships.fsNameList) - 1)}"></dd>
                                         </dl>
                                         <dl>
                                             <dt>추가서비스</dt>
@@ -293,9 +289,18 @@
                                             </dd>
                                         </dl>
                                         <dl>
-                                            <dt>어종</dt>
-                                            <dd>삼치, 고등어, 쭈꾸미</dd>
+                                            <dt>출발일</dt>
+                                            <dd th:text="${#dates.format(ships.spStart,'yyyy-MM-dd')}"></dd>
                                         </dl>
+                                        <dl>
+                                            <dt>최대인원</dt>
+                                            <dd th:text="${ships.spTotal+'명'}"></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>예약가능인원</dt>
+                                            <dd th:text="${ships.spRemain+'명'}"></dd>
+                                        </dl>
+                                        
                                     </div>
                                 </div>
 
@@ -345,6 +350,9 @@
                 <div class="row seasonalTabs">
                     <ul class="nav nav-tabs">
                         <li class="nav-item active">
+                            <span>연중[전체]</span>
+                        </li>
+                        <li class="nav-item">
                             <span>1월</span>
                         </li>
                         <li class="nav-item">
@@ -387,21 +395,24 @@
                 <div class="row">
 
                     <!--Item-->
-                    <div class="col-sm-6 col-lg-3">
+                    <div class="col-sm-6 col-lg-3" th:each="sessPoint:${sessPoint}">
                         <div class="card ts-item ts-card">
 
                             <!--Ribbon-->
-                            <div class="ts-ribbon">
+                            <!-- <div class="ts-ribbon">
                                 <i class="fa fa-thumbs-up"></i>
                             </div>
+                            <div class="ts-ribbon-corner">
+                                <span>Updated</span>
+                            </div> -->
 
                             <!--Card Image-->
                             <a href="/v1/mapPoint/mapPointDetail" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
                                 <figure class="ts-item__info">
-                                    <h4>Big Luxury Apartment</h4>
+                                    <h4 th:text="${sessPoint.mpTitle}"></h4>
                                     <aside>
                                         <i class="fa fa-map-marker mr-2"></i>
-                                        1350 Arbutus Drive
+                                        <span th:text="${sessPoint.mpAddress}"></span>
                                     </aside>
                                 </figure>
                             </a>
@@ -411,15 +422,11 @@
                                 <div class="ts-description-lists">
                                     <dl>
                                         <dt>생성일</dt>
-                                        <dd>2024-11-08</dd>
+                                        <dd th:text="${#dates.format(sessPoint.mpRegDate,'yyyy-MM-dd')}"></dd>
                                     </dl>
                                     <dl>
-                                        <dt>어종</dt>
-                                        <dd>삼치, 고등어, 쭈꾸미</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>낚시방법</dt>
-                                        <dd>쇼어루어, 쭈꾸미루어</dd>
+                                        <dt th:text="${@codeService.selectOneCachedCode(sessPoint.season_ssSeq) != null ? @codeService.selectOneCachedCode(sessPoint.season_ssSeq) + ' 시즌 어종' : '어종'}"></dt>
+                                        <dd th:text="${sessPoint.fsNameList}"></dd>
                                     </dl>
                                 </div>
                             </div>
@@ -431,315 +438,6 @@
 
                         </div>
                         <!--end ts-item-->
-                    </div>
-                    <!--end Item col-md-4-->
-
-                    <!--Item-->
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="card ts-item ts-card">
-
-                            <!--Ribbon-->
-                            <div class="ts-ribbon-corner">
-                                <span>Updated</span>
-                            </div>
-
-                            <!--Card Image-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-02.jpg">
-                                <figure class="ts-item__info">
-                                    <h4>Cozy Design Studio</h4>
-                                    <aside>
-                                        <i class="fa fa-map-marker mr-2"></i>
-                                        4831 Worthington Drive
-                                    </aside>
-                                </figure>
-                            </a>
-
-                            <!--Card Body-->
-                            <div class="card-body ts-item__body">
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>생성일</dt>
-                                        <dd>2024-11-08</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>어종</dt>
-                                        <dd>삼치, 고등어, 쭈꾸미</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>낚시방법</dt>
-                                        <dd>쇼어루어, 쭈꾸미루어</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <!--Card Footer-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-footer">
-                                <span class="ts-btn-arrow">상세보기</span>
-                            </a>
-
-                        </div>
-                        <!--end ts-item ts-card-->
-                    </div>
-                    <!--end Item col-md-4-->
-
-                    <!--Item-->
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="card ts-item ts-card">
-
-                            <!--Card Image-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-03.jpg">
-                                <figure class="ts-item__info">
-                                    <h4>Family Villa</h4>
-                                    <aside>
-                                        <i class="fa fa-map-marker mr-2"></i>
-                                        4127 Winding Way
-                                    </aside>
-                                </figure>
-                            </a>
-
-                            <!--Card Body-->
-                            <div class="card-body ts-item__body">
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>생성일</dt>
-                                        <dd>2024-11-08</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>어종</dt>
-                                        <dd>삼치, 고등어, 쭈꾸미</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>낚시방법</dt>
-                                        <dd>쇼어루어, 쭈꾸미루어</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <!--Card Footer-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-footer">
-                                <span class="ts-btn-arrow">상세보기</span>
-                            </a>
-
-                        </div>
-                        <!--end ts-item ts-card-->
-                    </div>
-                    <!--end Item col-md-4-->
-
-                    <!--Item-->
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="card ts-item ts-card">
-
-                            <!--Card Image-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-04.jpg">
-                                
-                                <figure class="ts-item__info">
-                                    <h4>Traditional Restaurant</h4>
-                                    <aside>
-                                        <i class="fa fa-map-marker mr-2"></i>
-                                        1350 Arbutus Drive
-                                    </aside>
-                                </figure>
-                            </a>
-
-                            <!--Card Body-->
-                            <div class="card-body">
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>생성일</dt>
-                                        <dd>2024-11-08</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>어종</dt>
-                                        <dd>삼치, 고등어, 쭈꾸미</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>낚시방법</dt>
-                                        <dd>쇼어루어, 쭈꾸미루어</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <!--Card Footer-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-footer">
-                                <span class="ts-btn-arrow">상세보기</span>
-                            </a>
-
-                        </div>
-                        <!--end ts-item-->
-                    </div>
-                    <!--end Item col-md-4-->
-
-                    <!--Item-->
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="card ts-item ts-card">
-
-                            <!--Card Image-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-05.jpg">
-                                <figure class="ts-item__info">
-                                    <h4>White Cubes Resort</h4>
-                                    <aside>
-                                        <i class="fa fa-map-marker mr-2"></i>
-                                        4831 Worthington Drive
-                                    </aside>
-                                </figure>
-                            </a>
-
-                            <!--Card Body-->
-                            <div class="card-body ts-item__body">
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>생성일</dt>
-                                        <dd>2024-11-08</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>어종</dt>
-                                        <dd>삼치, 고등어, 쭈꾸미</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>낚시방법</dt>
-                                        <dd>쇼어루어, 쭈꾸미루어</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <!--Card Footer-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-footer">
-                                <span class="ts-btn-arrow">상세보기</span>
-                            </a>
-
-                        </div>
-                        <!--end ts-item ts-card-->
-                    </div>
-                    <!--end Item col-md-4-->
-
-                    <!--Item-->
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="card ts-item ts-card">
-
-                            <!--Card Image-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-06.jpg">
-                                <figure class="ts-item__info">
-                                    <h4>Bristol Tower Complex</h4>
-                                    <aside>
-                                        <i class="fa fa-map-marker mr-2"></i>
-                                        4127 Winding Way
-                                    </aside>
-                                </figure>
-                            </a>
-
-                            <!--Card Body-->
-                            <div class="card-body ts-item__body">
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>생성일</dt>
-                                        <dd>2024-11-08</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>어종</dt>
-                                        <dd>삼치, 고등어, 쭈꾸미</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>낚시방법</dt>
-                                        <dd>쇼어루어, 쭈꾸미루어</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <!--Card Footer-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-footer">
-                                <span class="ts-btn-arrow">상세보기</span>
-                            </a>
-
-                        </div>
-                        <!--end ts-item ts-card-->
-                    </div>
-                    <!--end Item col-md-4-->
-
-                    <!--Item-->
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="card ts-item ts-card">
-
-                            <!--Card Image-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-07.jpg">
-                                <figure class="ts-item__info">
-                                    <h4>River Apartments</h4>
-                                    <aside>
-                                        <i class="fa fa-map-marker mr-2"></i>
-                                        1350 Arbutus Drive
-                                    </aside>
-                                </figure>
-                            </a>
-
-                            <!--Card Body-->
-                            <div class="card-body">
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>생성일</dt>
-                                        <dd>2024-11-08</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>어종</dt>
-                                        <dd>삼치, 고등어, 쭈꾸미</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>낚시방법</dt>
-                                        <dd>쇼어루어, 쭈꾸미루어</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <!--Card Footer-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-footer">
-                                <span class="ts-btn-arrow">상세보기</span>
-                            </a>
-
-                        </div>
-                        <!--end ts-item-->
-                    </div>
-                    <!--end Item col-md-4-->
-
-                    <!--Item-->
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="card ts-item ts-card">
-
-                            <div class="badge badge-dark">Rent</div>
-
-                            <!--Card Image-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-08.jpg">
-                                <figure class="ts-item__info">
-                                    <h4>Apartment for Rent</h4>
-                                    <aside>
-                                        <i class="fa fa-map-marker mr-2"></i>
-                                        4831 Worthington Drive
-                                    </aside>
-                                </figure>
-                            </a>
-
-                            <!--Card Body-->
-                            <div class="card-body ts-item__body">
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>생성일</dt>
-                                        <dd>2024-11-08</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>어종</dt>
-                                        <dd>삼치, 고등어, 쭈꾸미</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>낚시방법</dt>
-                                        <dd>쇼어루어, 쭈꾸미루어</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <!--Card Footer-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-footer">
-                                <span class="ts-btn-arrow">상세보기</span>
-                            </a>
-
-                        </div>
-                        <!--end ts-item ts-card-->
                     </div>
                     <!--end Item col-md-4-->
 
@@ -765,7 +463,6 @@
                 <div class="slide" th:each="mapPoint:${mapPoint}">
 
                     <div class="card ts-item ts-card ts-item__lg">
-                        <a th:href="@{/v1/mapPoint/mapPointDetail(mpSeq=${mapPoint.mpSeq})}">
                             <!--Ribbon-->
                             <div class="ts-ribbon">
                                 <i class="fa fa-thumbs-up"></i>
@@ -791,16 +488,15 @@
                                     </dl>
                                     <dl>
                                         <dt>어종</dt>
-                                        <dd>삼치, 고등어, 쭈꾸미</dd>
+                                        <dd th:text="${mapPoint.fsNameList}"></dd>
                                     </dl>
                                 </div>
                             </div>
 
                             <!--Card Footer-->
-                            <div class="card-footer">
+                            <a th:href="@{/v1/mapPoint/mapPointDetail(mpSeq=${mapPoint.mpSeq})}" class="card-footer">
                                 <span class="ts-btn-arrow">상세보기</span>
-                            </div>
-                        </a>
+                            </a>
                     </div>
                     <!--end ts-item-->
                 </div>

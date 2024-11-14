@@ -17,6 +17,7 @@ public class ShipDto {
 	private String spPrice;
 	private String spDesc;
 	private String spTotal;
+	private String spRemain;
 	@DateTimeFormat(pattern = "yyyyMMdd")
 	private Date spStart;
 	private Integer spDelNy;
@@ -147,6 +148,12 @@ public class ShipDto {
 	}
 	public void setPtName(String ptName) {
 		this.ptName = ptName;
+	}
+	public String getSpRemain() {
+		return spRemain;
+	}
+	public void setSpRemain(String spRemain) {
+		this.spRemain = spRemain;
 	}
 
 	

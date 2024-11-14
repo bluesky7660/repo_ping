@@ -13,6 +13,8 @@ public class MapPointDto {
 	private Integer mpDelNy;
 	private Date mpRegDate;
 	
+	private String fsNameList;
+	private String season_ssSeq;
 //	---------------------------------
 	
 	public String getMpSeq() {
@@ -68,6 +70,18 @@ public class MapPointDto {
 	}
 	public void setMpLongitude(Double mpLongitude) {
 		this.mpLongitude = mpLongitude;
+	}
+	public String getFsNameList() {
+		return fsNameList;
+	}
+	public void setFsNameList(String fsNameList) {
+		this.fsNameList = fsNameList;
+	}
+	public String getSeason_ssSeq() {
+		return season_ssSeq;
+	}
+	public void setSeason_ssSeq(String season_ssSeq) {
+		this.season_ssSeq = season_ssSeq;
 	}
 
 }

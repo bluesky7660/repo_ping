@@ -1,9 +1,14 @@
 package com.lalaping.mall.fish;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.lalaping.infra.code.CodeDto;
+
+import jakarta.annotation.PostConstruct;
 
 @Service
 public class FishService {
@@ -31,5 +36,30 @@ public class FishService {
 	public int delete(FishDto fishDto) {
 		return fishDao.delete(fishDto);
 	}
+	
+	
+//	@PostConstruct
+//	public void selectListCachedCodeArrayList() throws Exception {
+//		List<CodeDto> codeListFromDb = (ArrayList<CodeDto>) codeDao.selectListCachedCodeArrayList();
+//		CodeDto.cachedCodeArrayList.clear(); 
+//		CodeDto.cachedCodeArrayList.addAll(codeListFromDb);
+//		System.out.println("cachedCodeArrayList: " + CodeDto.cachedCodeArrayList.size() + " chached !");
+//	}
+//	
+//	public static void clear() throws Exception {
+//		CodeDto.cachedCodeArrayList.clear();
+//	}
+//	
+//	public static List<FishDto> shipSelectListFish(String ship_spSeq) throws Exception {
+//		List<FishDto> rt = new ArrayList<FishDto>();
+//		for(FishDto fishRow : FishDto.cachedFishArrayList) {
+//			if (fishRow.getShip_spSeq().equals(ship_spSeq)) {
+//				rt.add(fishRow);
+//			} else {
+//				// by pass
+//			}
+//		}
+//		return rt;
+//	}
 
 }
