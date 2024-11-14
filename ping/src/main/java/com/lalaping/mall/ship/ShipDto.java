@@ -18,7 +18,7 @@ public class ShipDto {
 	private String spDesc;
 	private String spTotal;
 	private String spRemain;
-	@DateTimeFormat(pattern = "yyyyMMdd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date spStart;
 	private Integer spDelNy;
 	private Integer spArea;
