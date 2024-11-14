@@ -155,18 +155,6 @@ public class ShipDto {
 	public void setSpRemain(String spRemain) {
 		this.spRemain = spRemain;
 	}
-	public String getFsNames() {
-		return fsNames;
-	}
-	public void setFsNames(String fsNames) {
-		this.fsNames = fsNames;
-	}
-	public void setFsSeqList(List<String> fsSeqList) {
-		this.fsSeqList = fsSeqList;
-	}
-	public void setFsNameList(List<String> fsNameList) {
-		this.fsNameList = fsNameList;
-	}
 	
 
 	
