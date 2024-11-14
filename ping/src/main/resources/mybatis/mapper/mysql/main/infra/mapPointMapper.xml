@@ -3,9 +3,10 @@
 <mapper namespace="com.lalaping.mall.mapPoint.MapPointDao">
 	<resultMap type="com.lalaping.mall.mapPoint.MapPointDto" id="resultMapObj"></resultMap>
 	
-	<sql id="selectCommon2">
+	<sql id="selectCommon">
         FROM mapPoint a
-        
+        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
+            left join fish c on c.fsSeq = b.fish_fsSeq
         WHERE 1=1
         <if test="shValue != null and !shValue.equals('')">
             <choose>
@@ -47,10 +48,50 @@
     		,a.mpType
     		,a.mpDelNy
     		,a.mpRegDate
-   		<include refid="selectCommon2"/>
+   		<include refid="selectCommon"/>
    		ORDER BY
      	a.mpRegDate DESC
 		<include refid="base.selectListLowerForMysql"/>
+    </select>
+    <select id="selectUsrList" resultMap="resultMapObj">
+    	SELECT
+    		a.mpSeq
+    		,a.mpTitle
+    		,a.mpText
+    		,a.mpAddress
+    		,a.mpType
+    		,a.mpDelNy
+    		,a.mpRegDate
+    		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
+   		FROM mapPoint a
+        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
+            left join fish c on c.fsSeq = b.fish_fsSeq
+   		GROUP BY a.mpSeq
+   		ORDER BY
+     	a.mpRegDate DESC
+     	limit #{rowNumToShow}
+    </select>
+    <select id="sessSelectList" resultMap="resultMapObj">
+    	SELECT
+    		a.mpSeq
+    		,a.mpTitle
+    		,a.mpText
+    		,a.mpAddress
+    		,a.mpType
+    		,a.mpDelNy
+    		,a.mpRegDate
+    		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
+            ,d.season_ssSeq
+        FROM mapPoint a
+        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
+            left join fish c on c.fsSeq = b.fish_fsSeq
+            join seasonandfish d on d.fish_fsSeq = c.fsSeq
+        WHERE 1=1
+        	and d.season_ssSeq = 6<!-- #{season_ssSeq} -->
+		GROUP BY a.mpSeq, d.season_ssSeq
+   		ORDER BY
+     	a.mpRegDate DESC
+     	limit 8
     </select>
     
     <insert id="insert">

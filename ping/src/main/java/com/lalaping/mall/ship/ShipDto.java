@@ -155,7 +155,5 @@ public class ShipDto {
 	public void setSpRemain(String spRemain) {
 		this.spRemain = spRemain;
 	}
-	
-	
-	
+
 }
