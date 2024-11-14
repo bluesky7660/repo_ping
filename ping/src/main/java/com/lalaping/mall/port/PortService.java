@@ -28,6 +28,9 @@ public class PortService {
 	public int delete(PortDto portDto) {
 		return portDao.delete(portDto);
 	}
+	public int selectOneCount(PortVo vo) {
+		return portDao.selectOneCount(vo);
+	}
 	
 
 }

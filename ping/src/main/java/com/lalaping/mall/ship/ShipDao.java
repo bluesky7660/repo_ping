@@ -17,5 +17,6 @@ public interface ShipDao {
 	public int update(ShipDto shipDto);
 	public int uelete(ShipDto shipDto);
 	public int delete(ShipDto shipDto);
+	public int selectOneCount(ShipVo vo);
 
 }

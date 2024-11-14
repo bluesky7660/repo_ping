@@ -103,5 +103,10 @@
         WHERE ptSeq = #{ptSeq}
 	</delete>
 	
+	<select id="selectOneCount">
+	select count(*)
+	<include refid="selectCommon"></include>
+	</select>
+	
     
 </mapper>

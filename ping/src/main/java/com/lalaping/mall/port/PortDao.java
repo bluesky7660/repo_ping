@@ -12,5 +12,6 @@ public interface PortDao {
 	public int update(PortDto portDto);
 	public int uelete(PortDto portDto);
 	public int delete(PortDto portDto);
+	public int selectOneCount(PortVo vo);
 
 }

@@ -156,6 +156,4 @@ public class ShipDto {
 		this.spRemain = spRemain;
 	}
 
-	
-
 }
