@@ -236,4 +236,59 @@ window.addEventListener('load', function() {
             }
         });
     }
-})
+    
+    //계절별 어종
+    $('#seasonalTab .nav-link').on('click', function(e) {
+        const season = $(this).data('season');
+        const tabContent = $('#season_pointList');
+        $.ajax({
+            url: '/v1/mapPoint/getSeasonalData', 
+            method: 'post',
+            data: { shSeason: season }, 
+            success: function(response) {
+                tabContent.empty();
+                response.data.forEach(function(point) {
+                     
+                    const htmlContent = `
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card ts-item ts-card">
+                                <a href="/v1/mapPoint/mapPointDetail?mpSeq=${point.mpSeq}">
+                                    <div class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg" 
+                                    style="background-image: url(&quot;/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg&quot;);">
+                                        <figure class="ts-item__info">
+                                            <h4>${point.mpTitle}</h4>
+                                            <aside>
+                                                <i class="fa fa-map-marker mr-2"></i>
+                                                <span>${point.mpAddress}</span>
+                                            </aside>
+                                        </figure>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="ts-description-lists">
+                                            <dl>
+                                                <dt>생성일</dt>
+                                                <dd>${point.mpRegDate}</dd>
+                                            </dl>
+                                            <dl>
+                                                <dt>${point.speciesSeason != null ? point.speciesSeason + ' 시즌 어종' : '어종'}</dt>
+                                                <dd>${point.fsNameList}</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <span class="ts-btn-arrow">상세보기</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    tabContent.append(htmlContent);
+                });
+                console.log("계절 동작성공");
+            },
+            error: function() {
+                alert('데이터를 불러오는 데 실패했습니다.');
+            }
+        });
+    });
+});

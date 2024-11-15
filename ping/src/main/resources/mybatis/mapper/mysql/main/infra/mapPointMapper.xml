@@ -87,7 +87,7 @@
             left join fish c on c.fsSeq = b.fish_fsSeq
             join seasonandfish d on d.fish_fsSeq = c.fsSeq
         WHERE 1=1
-        	and d.season_ssSeq = 6<!-- #{season_ssSeq} -->
+        	and d.season_ssSeq = #{season_ssSeq}
 		GROUP BY a.mpSeq, d.season_ssSeq
    		ORDER BY
      	a.mpRegDate DESC
