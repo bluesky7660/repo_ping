@@ -72,9 +72,11 @@ public class indexController {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		List<MapPointDto> rtPoint = new ArrayList<>();
 		mapPointVo.setRowNumToShow(8);
-		if(shSeason=="0") {
+		if(shSeason.equals("0")) {
+			System.out.println("연중");
 			rtPoint = mapPointService.selectUsrList(mapPointVo);
 		}else {
+			System.out.println("연중아님");
 			mapPointVo.setSeason_ssSeq(shSeason);
 			rtPoint = mapPointService.sessSelectList(mapPointVo);
 		}
@@ -88,15 +90,16 @@ public class indexController {
 	        String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(point.getMpRegDate());
 	        pointData.put("mpRegDate", formattedDate);
 	        pointData.put("fsNameList", point.getFsNameList());
-	        pointData.put("season_ssSeq", point.getSeason_ssSeq());
-	        int a = Integer.parseInt(point.getSeason_ssSeq());
-	        try {
-				pointData.put("speciesSeason", codeService.selectOneCachedCode(a));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}  // 계산된 값 추가
-	        
+	        if(!shSeason.equals("0")) {
+	        	pointData.put("season_ssSeq", point.getSeason_ssSeq());
+		        int a = Integer.parseInt(point.getSeason_ssSeq());
+		        try {
+					pointData.put("speciesSeason", codeService.selectOneCachedCode(a));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}  // 계산된 값 추가
+			}
 	        points.add(pointData);
 	    }
 	    System.out.println("성공");
