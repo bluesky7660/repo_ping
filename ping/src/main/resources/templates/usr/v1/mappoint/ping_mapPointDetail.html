@@ -132,7 +132,7 @@
                             <!--end p-4-->
 
                             <div class="ts-bg-light p-3 ts-border-radius__md d-block d-sm-flex ts-center__vertical justify-content-between ts-xs-text-center">
-                                <span class="d-sm-inline-block mb-2 mb-sm-0">대상어종: <span >베스</span></span>
+                                <span class="d-sm-inline-block mb-2 mb-sm-0">대상어종: <span th:text="${item.fsNameList}"></span></span>
                                 <small>등록일 <span th:text="${#dates.format(item.mpRegDate,'yyyy-MM-dd')}"></span></small>
                             </div>
 

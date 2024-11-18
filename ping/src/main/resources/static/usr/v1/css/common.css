@@ -48,10 +48,10 @@ img[alt="날씨이미지"]{
 .seasonalTabs  ul{
     width: 100%;
     /* gap: 30px; */
-    flex-wrap: nowrap;
+    /* flex-wrap: nowrap; */
 }
 .seasonalTabs li{
-    width: calc((100% / 12));
+    width: calc((100% / 7));
     padding:20px 10px;
     text-align: center;
     border: 1px solid transparent;
@@ -62,4 +62,13 @@ img[alt="날씨이미지"]{
 .seasonalTabs .nav-item.active{
     border-color:#dee2e6;background-color: rgb(164, 222, 255);
     cursor: pointer;
+}
+#more-options-collapse{
+    max-height: 200px;
+    overflow-y: auto;
+}
+.featured-properties dl:nth-child(1),.featured-properties dl:nth-child(2){
+    flex: 0 0 50%;
+    margin: 0;
+    
 }

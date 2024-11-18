@@ -73,7 +73,7 @@
 		<include refid="base.selectListLowerForMysql"/>
 	</select>
 	<select id="listCount" resultType="int">
-        SELECT COUNT(*) 
+        SELECT COUNT(DISTINCT a.spSeq) 
         <include refid="selectCommon"/>
     </select>
     <select id="portListCount" resultType="int">
@@ -183,6 +183,8 @@
 			,a.spRegDate
 			,a.port_ptSeq
 			,d.ptName
+			,d.ptLatitude
+			,d.ptLongitude
 			,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
 		FROM ship a
 			left join fishandship b on b.ship_spSeq = a.spSeq

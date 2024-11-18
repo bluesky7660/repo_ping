@@ -121,12 +121,12 @@
 
                                         <div class="">
 
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="ch_1" name="features[]" value="ch_1">
-                                                <label class="custom-control-label" for="ch_1">Air conditioning</label>
+                                            <div class="custom-control custom-checkbox" th:each="fishs:${fishList}">
+                                                <input type="checkbox" class="custom-control-input" th:id="${'ch_'+fishsStat.count}" name="features[]" th:value="${'ch_'+fishsStat.count}">
+                                                <label class="custom-control-label" th:for="${'ch_'+fishsStat.count}" th:text="${fishs.fsName}"></label>
                                             </div>
 
-                                            <div class="custom-control custom-checkbox">
+                                            <!-- <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" id="ch_2" name="features[]" value="ch_2">
                                                 <label class="custom-control-label" for="ch_2">Bedding</label>
                                             </div>
@@ -180,7 +180,7 @@
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" id="ch_12" name="features[]" value="ch_12">
                                                 <label class="custom-control-label" for="ch_12">Parking</label>
-                                            </div>
+                                            </div> -->
 
                                         </div>
                                         <!--end ts-column-count-3-->
@@ -238,7 +238,7 @@
 
         <!-- FEATURED PROPERTIES
         =============================================================================================================-->
-        <section id="featured-properties" class="ts-block pt-5">
+        <section id="featured-properties" class="featured-properties ts-block pt-5">
             <div class="container">
 
                 <!--Title-->
@@ -275,7 +275,7 @@
                                     <div class="ts-description-lists d-flex flex-wrap justify-content-between">
                                         <dl>
                                             <dt>어종</dt>
-                                            <dd th:text="${#strings.substring(ships.fsNameList, 1, #strings.length(ships.fsNameList) - 1)}"></dd>
+                                            <dd th:text="${ships.fsNameList != null and #strings.length(ships.fsNameList) > 1 ? #strings.substring(ships.fsNameList, 1, #strings.length(ships.fsNameList) - 1) : '전어종'}"></dd>
                                         </dl>
                                         <dl>
                                             <dt>추가서비스</dt>
@@ -348,94 +348,94 @@
                     <h2>제철 낚시 포인트</h2>
                 </div>
                 <div class="row seasonalTabs">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item active">
-                            <span>연중[전체]</span>
+                    <ul class="nav nav-tabs" id="seasonalTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active show" id="all-tab" data-toggle="tab" href="#seasonAll" role="tab" aria-controls="all" aria-selected="true" data-season="0">연중[전체]</a>
                         </li>
-                        <li class="nav-item">
-                            <span>1월</span>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="january-tab" data-toggle="tab" href="#january" role="tab" aria-controls="january" aria-selected="false" data-season="6">1월</a>
                         </li>
-                        <li class="nav-item">
-                            <span>2월</span>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="february-tab" data-toggle="tab" href="#february" role="tab" aria-controls="february" aria-selected="false" data-season="7">2월</a>
                         </li>
-                        <li class="nav-item">
-                            <span>3월</span>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="march-tab" data-toggle="tab" href="#march" role="tab" aria-controls="march" aria-selected="false" data-season="8">3월</a>
                         </li>
-                        <li class="nav-item">
-                            <span>4월</span>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="april-tab" data-toggle="tab" href="#april" role="tab" aria-controls="april" aria-selected="false" data-season="9">4월</a>
                         </li>
-                        <li class="nav-item">
-                            <span>5월</span>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="may-tab" data-toggle="tab" href="#may" role="tab" aria-controls="may" aria-selected="false" data-season="10">5월</a>
                         </li>
-                        <li class="nav-item">
-                            <span>6월</span>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="june-tab" data-toggle="tab" href="#june" role="tab" aria-controls="june" aria-selected="false" data-season="11">6월</a>
                         </li>
-                        <li class="nav-item">
-                            <span>7월</span>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="july-tab" data-toggle="tab" href="#july" role="tab" aria-controls="july" aria-selected="false" data-season="12">7월</a>
                         </li>
-                        <li class="nav-item">
-                            <span>8월</span>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="august-tab" data-toggle="tab" href="#august" role="tab" aria-controls="august" aria-selected="false" data-season="13">8월</a>
                         </li>
-                        <li class="nav-item">
-                            <span>9월</span>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="september-tab" data-toggle="tab" href="#september" role="tab" aria-controls="september" aria-selected="false" data-season="14">9월</a>
                         </li>
-                        <li class="nav-item">
-                            <span>10월</span>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="october-tab" data-toggle="tab" href="#october" role="tab" aria-controls="october" aria-selected="false" data-season="15">10월</a>
                         </li>
-                        <li class="nav-item">
-                            <span>11월</span>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="november-tab" data-toggle="tab" href="#november" role="tab" aria-controls="november" aria-selected="false" data-season="16">11월</a>
                         </li>
-                        <li class="nav-item">
-                            <span>12월</span>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="december-tab" data-toggle="tab" href="#december" role="tab" aria-controls="december" aria-selected="false" data-season="17">12월</a>
                         </li>
                     </ul>
                 </div>
 
                 <!--Row-->
-                <div class="row">
+                <div class="row" id="season_pointList">
 
                     <!--Item-->
                     <div class="col-sm-6 col-lg-3" th:each="sessPoint:${sessPoint}">
                         <div class="card ts-item ts-card">
-
-                            <!--Ribbon-->
-                            <!-- <div class="ts-ribbon">
-                                <i class="fa fa-thumbs-up"></i>
-                            </div>
-                            <div class="ts-ribbon-corner">
-                                <span>Updated</span>
-                            </div> -->
-
-                            <!--Card Image-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
-                                <figure class="ts-item__info">
-                                    <h4 th:text="${sessPoint.mpTitle}"></h4>
-                                    <aside>
-                                        <i class="fa fa-map-marker mr-2"></i>
-                                        <span th:text="${sessPoint.mpAddress}"></span>
-                                    </aside>
-                                </figure>
-                            </a>
-
-                            <!--Card Body-->
-                            <div class="card-body">
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>생성일</dt>
-                                        <dd th:text="${#dates.format(sessPoint.mpRegDate,'yyyy-MM-dd')}"></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt th:text="${@codeService.selectOneCachedCode(sessPoint.season_ssSeq) != null ? @codeService.selectOneCachedCode(sessPoint.season_ssSeq) + ' 시즌 어종' : '어종'}"></dt>
-                                        <dd th:text="${sessPoint.fsNameList}"></dd>
-                                    </dl>
+                            <a th:href="@{/v1/mapPoint/mapPointDetail(mpSeq=${sessPoint.mpSeq})}">
+                                <!--Ribbon-->
+                                <!-- <div class="ts-ribbon">
+                                    <i class="fa fa-thumbs-up"></i>
                                 </div>
-                            </div>
+                                <div class="ts-ribbon-corner">
+                                    <span>Updated</span>
+                                </div> -->
 
-                            <!--Card Footer-->
-                            <a href="/v1/mapPoint/mapPointDetail" class="card-footer">
-                                <span class="ts-btn-arrow">상세보기</span>
+                                <!--Card Image-->
+                                <div class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
+                                    <figure class="ts-item__info">
+                                        <h4 th:text="${sessPoint.mpTitle}"></h4>
+                                        <aside>
+                                            <i class="fa fa-map-marker mr-2"></i>
+                                            <span th:text="${sessPoint.mpAddress}"></span>
+                                        </aside>
+                                    </figure>
+                                </div>
+
+                                <!--Card Body-->
+                                <div class="card-body">
+                                    <div class="ts-description-lists">
+                                        <dl>
+                                            <dt>생성일</dt>
+                                            <dd th:text="${#dates.format(sessPoint.mpRegDate,'yyyy-MM-dd')}"></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt th:text="${sessPoint.season_ssSeq != null ? @codeService.selectOneCachedCode(sessPoint.season_ssSeq) + ' 시즌 어종' : '어종'}"></dt>
+                                            <dd th:text="${sessPoint.fsNameList}"></dd>
+                                        </dl>
+                                    </div>
+                                </div>
+
+                                <!--Card Footer-->
+                                <div href="/v1/mapPoint/mapPointDetail" class="card-footer">
+                                    <span class="ts-btn-arrow">상세보기</span>
+                                </div>
                             </a>
-
                         </div>
                         <!--end ts-item-->
                     </div>

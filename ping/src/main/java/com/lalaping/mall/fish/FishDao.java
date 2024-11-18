@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface FishDao {
 	public List<FishDto> selectList(FishVo vo);
 	public List<FishDto> shipFishList(FishVo vo);
+	public List<FishDto> allList(FishVo vo);
 	public int insert(FishDto fishDto);
 	public FishDto selectOne(FishDto fishDto);
 	public int update(FishDto fishDto);
