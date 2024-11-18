@@ -121,12 +121,12 @@
 
                                         <div class="">
 
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="ch_1" name="features[]" value="ch_1">
-                                                <label class="custom-control-label" for="ch_1">Air conditioning</label>
+                                            <div class="custom-control custom-checkbox" th:each="fishs:${fishList}">
+                                                <input type="checkbox" class="custom-control-input" th:id="${'ch_'+fishsStat.count}" name="features[]" th:value="${'ch_'+fishsStat.count}">
+                                                <label class="custom-control-label" th:for="${'ch_'+fishsStat.count}" th:text="${fishs.fsName}"></label>
                                             </div>
 
-                                            <div class="custom-control custom-checkbox">
+                                            <!-- <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" id="ch_2" name="features[]" value="ch_2">
                                                 <label class="custom-control-label" for="ch_2">Bedding</label>
                                             </div>
@@ -180,7 +180,7 @@
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" id="ch_12" name="features[]" value="ch_12">
                                                 <label class="custom-control-label" for="ch_12">Parking</label>
-                                            </div>
+                                            </div> -->
 
                                         </div>
                                         <!--end ts-column-count-3-->
@@ -238,7 +238,7 @@
 
         <!-- FEATURED PROPERTIES
         =============================================================================================================-->
-        <section id="featured-properties" class="ts-block pt-5">
+        <section id="featured-properties" class="featured-properties ts-block pt-5">
             <div class="container">
 
                 <!--Title-->
@@ -275,7 +275,7 @@
                                     <div class="ts-description-lists d-flex flex-wrap justify-content-between">
                                         <dl>
                                             <dt>어종</dt>
-                                            <dd th:text="${#strings.substring(ships.fsNameList, 1, #strings.length(ships.fsNameList) - 1)}"></dd>
+                                            <dd th:text="${ships.fsNameList != null and #strings.length(ships.fsNameList) > 1 ? #strings.substring(ships.fsNameList, 1, #strings.length(ships.fsNameList) - 1) : '전어종'}"></dd>
                                         </dl>
                                         <dl>
                                             <dt>추가서비스</dt>

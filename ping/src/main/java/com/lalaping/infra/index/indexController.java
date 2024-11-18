@@ -39,8 +39,9 @@ public class indexController {
 	@RequestMapping(value = "/v1/index")
 	public String index(Model model, FishVo vo, MapPointVo mapPointVo, ShipVo shipVo){
 		
-		model.addAttribute("fishList",fishService.selectList(vo));
+		model.addAttribute("fishList",fishService.allList(vo));
 		model.addAttribute("mapPoint",mapPointService.selectUsrList(mapPointVo));
+		model.addAttribute("ships",shipService.selectUsrList(shipVo));
 		
 		List<MapPointDto> usrList = mapPointService.sessSelectList(mapPointVo);
 		mapPointVo.setRowNumToShow(8);

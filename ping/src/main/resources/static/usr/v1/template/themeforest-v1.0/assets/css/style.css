@@ -1819,7 +1819,7 @@ form .ts-form-advanced-search, .ts-form .ts-form-advanced-search {
 
 .ts-form__map-search {
     max-height: 100%;
-    overflow-y: auto;
+    /* overflow-y: auto; */
     padding: 1rem;
     position: absolute;
     width: 100%;

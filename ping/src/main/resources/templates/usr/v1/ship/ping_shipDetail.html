@@ -189,7 +189,7 @@
                                     <div class="col-sm-3">
                                         <div class="ts-quick-info__item" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/icon-quick-info-garages.png">
                                             <h6>어종</h6>
-                                            <figure th:text="${#strings.substring(item.fsNameList, 1, #strings.length(item.fsNameList) - 1)}" style="font-size: 1rem;"></figure>
+                                            <figure th:text="${item.fsNameList != null and #strings.length(item.fsNameList) > 1 ? #strings.substring(item.fsNameList, 1, #strings.length(item.fsNameList) - 1) : '전어종'}" style="font-size: 1rem;"></figure>
                                         </div>
                                     </div>
 
@@ -207,7 +207,7 @@
 
                             <h3>출항시간</h3>
 
-                            <p>
+                            <p th:text="${item.spDesc}">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dictum ac augue et suscipit.
                                 Vivamus ac tellus ut massa bibendum aliquam vitae ac diam. Aenean in enim volutpat,
                                 accumsan erat non, porta massa. Nulla ac porta orci. Quisque condimentum fermentum
@@ -229,9 +229,9 @@
 
                             <div class="ts-map ts-map__detail ts-border-radius__sm ts-shadow__sm" id="ts-map-simple"
                                  data-ts-map-leaflet-provider="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
-                                 data-ts-map-zoom="12"
-                                 data-ts-map-center-latitude="40.702411"
-                                 data-ts-map-center-longitude="-73.556842"
+                                 data-ts-map-zoom="10"
+                                 th:data-ts-map-center-latitude="${item.ptLatitude}"
+                                 th:data-ts-map-center-longitude="${item.ptLongitude}"
                                  data-ts-map-scroll-wheel="0"
                                  data-ts-map-controls="0"></div>
 

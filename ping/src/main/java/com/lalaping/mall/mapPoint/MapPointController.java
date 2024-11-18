@@ -56,7 +56,7 @@ public class MapPointController {
 	
 	@RequestMapping(value = "/v1/mapPoint/mapPointDetail")
 	public String mapPointDetail(Model model, MapPointDto mapPointDto){
-		model.addAttribute("item",mapPointService.selectOne(mapPointDto));
+		model.addAttribute("item",mapPointService.selectUsrOne(mapPointDto));
 		return "/usr/v1/mapPoint/ping_mapPointDetail";
 	}
 	@RequestMapping(value = "/v1/mapPoint/mapPointAdd")

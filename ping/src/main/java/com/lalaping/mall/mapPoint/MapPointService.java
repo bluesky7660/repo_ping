@@ -26,6 +26,9 @@ public class MapPointService {
 	public MapPointDto selectOne(MapPointDto mapPointDto) {
 		return mapPointDao.selectOne(mapPointDto);
 	}
+	public MapPointDto selectUsrOne(MapPointDto mapPointDto) {
+		return mapPointDao.selectUsrOne(mapPointDto);
+	}
 	public int update(MapPointDto mapPointDto) {
 		return mapPointDao.update(mapPointDto);
 	}

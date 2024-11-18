@@ -292,3 +292,42 @@ window.addEventListener('load', function() {
         });
     });
 });
+function updatePagination(thisPage, totalPages) {
+    const paginationContainer = document.querySelector("#pagination-items .pagination");
+    paginationContainer.innerHTML = ""; // 기존 페이지네이션 초기화
+
+    const pageNumToShow = 5; // 보여줄 페이지 번호 수
+    const startPage = Math.max(1, thisPage - Math.floor(pageNumToShow / 2));
+    const endPage = Math.min(totalPages, startPage + pageNumToShow - 1);
+
+    // 이전 페이지로 이동 버튼
+    if (startPage > 1) {
+        const prevButton = document.createElement("li");
+        prevButton.className = "page-item";
+        prevButton.innerHTML = `
+            <a class="page-link" href="javascript:void(0)" onclick="goList(${startPage - 1})">
+                <i class="bi bi-caret-left-fill"></i>
+            </a>`;
+        paginationContainer.appendChild(prevButton);
+    }
+
+    // 페이지 번호 버튼
+    for (let page = startPage; page <= endPage; page++) {
+        const pageItem = document.createElement("li");
+        pageItem.className = `page-item ${page === thisPage ? "active" : ""}`;
+        pageItem.innerHTML = `
+            <a class="page-link" href="javascript:void(0)" onclick="goList(${page})">${page}</a>`;
+        paginationContainer.appendChild(pageItem);
+    }
+
+    // 다음 페이지로 이동 버튼
+    if (endPage < totalPages) {
+        const nextButton = document.createElement("li");
+        nextButton.className = "page-item";
+        nextButton.innerHTML = `
+            <a class="page-link" href="javascript:void(0)" onclick="goList(${endPage + 1})">
+                <i class="bi bi-caret-right-fill"></i>
+            </a>`;
+        paginationContainer.appendChild(nextButton);
+    }
+}

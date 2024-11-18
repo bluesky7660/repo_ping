@@ -201,7 +201,8 @@
 
                                 <!--ITEMS LISTING
                                     =================================================================================-->
-                                <section id="items-listing">
+                                <!-- <section id="items-listing"> -->
+                                <section id="port_shipList">
                                     <!--Item-->
                                     <div class="card ts-item ts-item__list ts-card" th:each="shipList:${ships}">
                                         <a th:href="@{/v1/ship/shipDetail(spSeq=${shipList.spSeq})}">
@@ -241,14 +242,14 @@
                                                     </dl>
                                                     <dl>
                                                         <dt>예약가능인원</dt>
-                                                        <dd>1</dd>
+                                                        <dd th:text="${shipList.spRemain}">1</dd>
                                                     </dl>
                                                 </div>
                                             </div>
 
                                             <!--Card Footer-->
                                             <div class="card-footer">
-                                                <span class="ts-btn-arrow">예약하기</span>
+                                                <span class="ts-btn-arrow">자세히보기</span>
                                             </div>
                                         </a>
                                     </div>
@@ -256,19 +257,32 @@
 
                                 <!--PAGINATION
                                     =================================================================================-->
-                                <section id="pagination-items">
+                                <!-- <section id="pagination-items">
                                    <div class="container-fluid px-0 mt-2 mb-2">
 										<div class="row">
 											<div class="col">
 												<ul class="pagination justify-content-center mb-0">
 													<li th:if="${shipVo.startPage gt shipVo.pageNumToShow}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${shipVo.startPage - 1})" th:attr="onclick=|goList('${shipVo.startPage - 1}')|"><i class="bi bi-caret-left-fill"></i></a></li>
-												<li th:each="num: ${#numbers.sequence(shipVo.startPage, shipVo.endPage)}" th:classappend="${num eq shipVo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
-												<li th:if="${shipVo.endPage ne shipVo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${shipVo.endPage + 1}')|"><i class="bi bi-caret-right-fill"></i></a></li>
+                                                    <li th:each="num: ${#numbers.sequence(shipVo.startPage, shipVo.endPage)}" th:classappend="${num eq shipVo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"></a></li>
+                                                    <li th:if="${shipVo.endPage ne shipVo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${shipVo.endPage + 1}')|"><i class="bi bi-caret-right-fill"></i></a></li>
 												</ul>
 											</div>
 										</div>
 									</div>
-                                </section>
+                                </section> -->
+                                <section id="pagination-items">
+                                    <div class="container-fluid px-0 mt-2 mb-2">
+                                         <div class="row">
+                                             <div class="col">
+                                                 <ul class="pagination justify-content-center mb-0">
+                                                     <li th:if="${shipVo.thisPage > 1}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${shipVo.thisPage - 1})" th:attr="onclick=|goList('${shipVo.thisPage - 1}')|"><i class="bi bi-caret-left-fill"></i></a></li>
+                                                     <li th:each="num: ${#numbers.sequence(1, shipVo.totalPages)}" th:classappend="${num eq shipVo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
+                                                     <li th:if="${shipVo.thisPage < shipVo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${shipVo.thisPage + 1}')|"><i class="bi bi-caret-right-fill"></i></a></li>
+                                                 </ul>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </section>
 
                             </div>
                             <!--end #properties-->
@@ -822,19 +836,112 @@
 </div>
 <!--end page-->
 <script type="text/javascript">
-	goList = function (thisPage) {
-    document.querySelector("input[name=thisPage]").value = thisPage;
-    document.querySelector("form[name=formList]").action = "/v1/port/portDetail";
-    document.querySelector("form[name=formList]").submit();
-	}
+    window.onload = function() {
+        goList = function (thisPage) {
+            const listContainer = document.getElementById('port_shipList');
+            if (listContainer) {
+                const listPosition = listContainer.getBoundingClientRect().top + window.pageYOffset; // 페이지 상단에서 요소까지의 거리
+                window.scrollTo({
+                    top: listPosition - 200, // 200px 위로 스크롤
+                    behavior: 'smooth' // 부드럽게 스크롤
+                });
+            }
+            const params = new URLSearchParams(window.location.search);
+
+            const ptSeq = params.get('ptSeq');
+            // document.querySelector("input[name=thisPage]").value = thisPage;
+            $.ajax({
+                url: '/portShipList', // 서버의 페이지네이션 엔드포인트
+                type: 'post',
+                contentType: 'application/json', // JSON 형식으로 데이터 전송
+                data: JSON.stringify({ thisPage: thisPage ,port_ptSeq:ptSeq}),
+                success: function(response) {
+
+                    $('#port_shipList').empty(); 
+                    $.each(response.shipList, function(index, ship) {
+                        console.log("ship.port_ptSeq:",ship.port_ptSeq);
+                        const areaMap = {
+                            18: '동해',
+                            19: '서해',
+                            20: '제주'
+                        };
+                        const date = new Date(ship.spStart);
+                        const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+                        const formattedPrice = new Intl.NumberFormat('ko-KR').format(ship.spPrice);
+                        
+                        var shipItem = `
+                        <div class="card ts-item ts-item__list ts-card">
+                            <a href="/v1/ship/shipDetail?spSeq=${ship.spSeq}">
+                                <!--Ribbon-->
+                                <div class="ts-ribbon">
+                                    <i class="fa fa-thumbs-up"></i>
+                                </div>
+                                <div class="ts-ribbon-corner">
+                                    <span>Updated</span>
+                                </div>
+
+                                <!--Card Image-->
+                                <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg" style="background-image: url('/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg');"></div>
+
+                                <!--Card Body-->
+                                <div class="card-body">
+
+                                    <figure class="ts-item__info">
+                                        <h4>${ship.spName}</h4>
+                                        <aside>
+                                            <i class="fa fa-ship"></i>
+                                            <span>${formattedDate}</span>
+                                        </aside>
+                                    </figure>
+
+                                    <div class="ts-item__info-badge">
+                                        ${formattedPrice} 원
+                                    </div>
+
+                                    <div class="ts-description-lists">
+                                        <dl>
+                                            <dt>대상해역</dt>
+                                            <dd>${areaMap[ship.spArea]}</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>최대인원</dt>
+                                            <dd>${ship.spTotal}</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>예약가능인원</dt>
+                                            <dd>${ship.spRemain}</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+
+                                <!--Card Footer-->
+                                <div class="card-footer">
+                                    <span class="ts-btn-arrow">자세히보기</span>
+                                </div>
+                            </a>
+                        </div>`;
+                        $('#port_shipList').append(shipItem);
+                    });
+                    // 페이징 정보 업데이트
+                    // document.querySelector("input[name=thisPage]").value = response.thisPage;
+                    updatePagination(response.thisPage, response.totalPages);
+                },
+                error: function() {
+                    alert('데이터를 불러오는 데 오류가 발생했습니다.');
+                }
+            });
+            // document.querySelector("form[name=formList]").action = "/v1/port/portDetail";
+            // document.querySelector("form[name=formList]").submit();
+        }
+    }
 </script>
 
 <script type="text/javascript">
-	document.getElementById("changeRowNum").onchange = function () {
-    document.getElementById("rowNumToShow").value = document.getElementById("changeRowNum").value;
-    form.action = goUrlXdmList;
-    form.submit();
-	}
+	// document.getElementById("changeRowNum").onchange = function () {
+    //     document.getElementById("rowNumToShow").value = document.getElementById("changeRowNum").value;
+    //     form.action = goUrlXdmList;
+    //     form.submit();
+	// }
 </script>
 
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
