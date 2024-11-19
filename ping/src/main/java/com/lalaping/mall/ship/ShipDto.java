@@ -28,6 +28,8 @@ public class ShipDto {
 	private String port_ptSeq;
 	
 	private String ptName;
+	private Double ptLongitude;
+	private Double ptLatitude;
 	
 //	private List<FishDto> fishList;
 	private List<String> fsSeqList;
@@ -155,7 +157,17 @@ public class ShipDto {
 	public void setSpRemain(String spRemain) {
 		this.spRemain = spRemain;
 	}
-	
-	
-		
+	public Double getPtLongitude() {
+		return ptLongitude;
+	}
+	public void setPtLongitude(Double ptLongitude) {
+		this.ptLongitude = ptLongitude;
+	}
+	public Double getPtLatitude() {
+		return ptLatitude;
+	}
+	public void setPtLatitude(Double ptLatitude) {
+		this.ptLatitude = ptLatitude;
+	}
+
 }
