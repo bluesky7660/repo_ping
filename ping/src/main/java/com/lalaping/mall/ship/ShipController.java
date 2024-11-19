@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.lalaping.common.util.UtilDateTime;
 import com.lalaping.mall.fish.FishDto;
 import com.lalaping.mall.fish.FishService;
 import com.lalaping.mall.fish.FishVo;
@@ -57,7 +58,15 @@ public class ShipController {
 	/*usr*/
 	@RequestMapping(value = "/v1/ship/shipList")
 	public String shipList(Model model,@ModelAttribute("vo") ShipVo vo ,@ModelAttribute("fishVo") FishVo fishVo){
-		model.addAttribute("list",shipService.selectUsrList(vo));
+		vo.setParamsPaging(shipService.listCount(vo));
+		System.out.println(vo.getStartPage());
+		System.out.println(vo.getThisPage());
+		System.out.println(vo.getPageNumToShow());
+		System.out.println(vo.getTotalRows());
+		System.out.println(vo.getTotalPages());
+		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
+		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
+		model.addAttribute("list",shipService.selectUsrList(vo));	
 		List<ShipDto> shipList = shipService.selectUsrList(vo);
 		for (ShipDto ship : shipList) {
 		    System.out.println("Ship Name: " + ship.getSpName());
