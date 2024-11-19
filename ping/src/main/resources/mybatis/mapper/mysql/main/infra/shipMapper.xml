@@ -3,6 +3,32 @@
 <mapper namespace="com.lalaping.mall.ship.ShipDao">
 	<resultMap type="com.lalaping.mall.ship.ShipDto" id="resultMapObj"></resultMap>
 	
+	<sql id="selectCommonPort">
+		FROM ship a
+        	left join fishandship b on b.ship_spSeq = a.spSeq
+            left join fish c on c.fsSeq = b.fish_fsSeq
+            left join port d on d.ptSeq = a.port_ptSeq
+        WHERE 1=1
+        <if test="shName != null and !shName.equals('')">AND spName LIKE CONCAT('%', #{shName}, '%')</if>
+        
+        <if test="(shmin_price != null and shmin_price != 0) or (shmax_price != null and shmax_price != 0)">
+    		AND a.spPrice BETWEEN #{shmin_price} AND #{shmax_price}
+		</if>
+
+        <if test="shRemain != null and !shRemain.equals('')">
+            AND a.spRemain > #{shRemain}
+        </if>
+        
+        <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
+        	<choose>
+        		<when test="shOptionDate == 1"> AND a.spRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+           	</choose>
+        </if>
+         <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
+        	AND a.spStart BETWEEN #{shDateStart} AND #{shDateEnd}
+        </if>
+	</sql>
+	
 	<sql id="selectCommon">
         FROM ship a
         	left join fishandship b on b.ship_spSeq = a.spSeq
@@ -87,7 +113,7 @@
 		<include refid="selectCommon"/>
 	 ORDER BY
      	a.spRegDate DESC
-		<include refid="base.selectListLowerForMysql"/>
+		<include refid="base.selectListLowerForMysql"/>		
 	</select>
 	<select id="listCount" resultType="int">
         SELECT COUNT(DISTINCT a.spSeq) 
@@ -95,9 +121,7 @@
     </select>
     <select id="portListCount" resultType="int">
         SELECT COUNT(*) 
-        FROM ship a
-            left join port d on d.ptSeq = a.port_ptSeq
-        WHERE 1=1
+       <include refid="selectCommonPort"/>
         	and a.port_ptSeq = #{port_ptSeq}
     </select>
 	<select id="selectUsrList">
@@ -124,7 +148,7 @@
 		<include refid="selectCommon"/>
 		GROUP BY a.spSeq
 		 ORDER BY
-	     	a.spRegDate DESC
+	     	a.${sortOrderString}
 	     <include refid="base.selectListLowerForMysql"/>
 	</select>
 	<select id="portSelectList">
@@ -146,11 +170,7 @@
 			,d.ptName
             ,GROUP_CONCAT(c.fsSeq ORDER BY c.fsSeq) AS fsSeqList
     		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
-		FROM ship a
-        	left join fishandship b on b.ship_spSeq = a.spSeq
-            left join fish c on c.fsSeq = b.fish_fsSeq
-            left join port d on d.ptSeq = a.port_ptSeq
-        WHERE 1=1
+		<include refid="selectCommonPort"/>
         	and a.port_ptSeq = #{port_ptSeq}
 		GROUP BY a.spSeq
 		ORDER BY
