@@ -32,6 +32,19 @@
                 </when>
             </choose>
         </if>
+        <if test="shName != null and !shName.equals('')">AND spName LIKE CONCAT('%', #{shName}, '%')</if>
+        <if test="shport != null and !shport.equals('')">AND ptName LIKE CONCAT('%', #{shport}, '%')</if>
+        
+        <if test="(shmin_price != null and shmin_price != 0) or (shmax_price != null and shmax_price != 0)">
+    		AND a.spPrice BETWEEN #{shmin_price} AND #{shmax_price}
+		</if>
+        
+        <if test="shfish != null and !shfish.equals('')">
+            AND c.fsName = #{shfish}
+        </if>
+        <if test="shRemain != null and !shRemain.equals('')">
+            AND a.spRemain > #{shRemain}
+        </if>
         <if test="shDelNy != null and !shDelNy.equals('')">
             AND a.spDelNy = #{shDelNy}
         </if>
@@ -48,6 +61,9 @@
         	<choose>
         		<when test="shOptionDate == 1"> AND a.spRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
            	</choose>
+        </if>
+         <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
+        	AND a.spStart BETWEEN #{shDateStart} AND #{shDateEnd}
         </if>
        
     </sql>
@@ -67,6 +83,7 @@
 			,a.spRentalNy
 			,a.spRegDate
 			,a.port_ptSeq
+			,d.ptName
 		<include refid="selectCommon"/>
 	 ORDER BY
      	a.spRegDate DESC
