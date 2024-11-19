@@ -91,33 +91,45 @@
 
                                 <h3>검색</h3>
 
-                                <form id="form-search" class="ts-form">
+                                <form method="post" action="/v1/ship/shipList" id="form-search" class="ts-form" autocomplete="off">
 
                                     <!--Keyword-->
                                     <div class="form-group">
                                         <label>배이름 검색</label>
-                                        <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Address, City or ZIP">
+                                        <input type="text" class="form-control" id="keyword" name="shName" th:value="${vo.shName}" placeholder="Address, City or ZIP">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>항구 검색</label>
+                                        <input type="text" class="form-control" id="keyword" name="shport" th:value="${vo.shport}" placeholder="">
                                     </div>
 
                                     <!--Type-->
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label>지역</label>
                                         <select class="custom-select" id="type" name="type">
                                             <option value="">지역</option>
-                                            <option value="1">서울</option>
-                                            <option value="2">제주</option>
-                                            <option value="3">강원</option>
-                                            <option value="4">울릉도</option>
+                                            <option value="1">경기</option>
+                                            <option value="23">부산</option>
+                                            <option value="21">전라남도</option>
+                                            <option value="20">인천</option>
                                         </select>
-                                    </div>
+                                    </div> -->
 
                                     <!--Status-->
                                     <div class="form-group">
                                         <label>인원</label>
-                                        <select class="custom-select" id="status" name="status">
+                                        <select class="custom-select" id="status" name="shRemain" >
                                             <option value="">인원</option>
-                                            <option value="1">Rent</option>
-                                            <option value="2">Sale</option>
+                                            <option th:selected ="${vo.shRemain == 1}" value="1">1</option>
+                                            <option th:selected ="${vo.shRemain == 2}" value="2">2</option>
+                                            <option th:selected ="${vo.shRemain == 3}" value="3">3</option>
+                                            <option th:selected ="${vo.shRemain == 4}" value="4">4</option>
+                                            <option th:selected ="${vo.shRemain == 5}" value="5">5</option>
+                                            <option th:selected ="${vo.shRemain == 6}" value="6">6</option>
+                                            <option th:selected ="${vo.shRemain == 7}" value="7">7</option>
+                                            <option th:selected ="${vo.shRemain == 8}"value="8">8</option>
+                                            <option th:selected ="${vo.shRemain == 9}" value="9">9</option>
+                                            <option th:selected ="${vo.shRemain == 10}" value="10">10</option>
                                         </select>
                                     </div>
 
@@ -129,7 +141,7 @@
                                         <!--Min Price-->
                                         <div class="col-sm-6">
                                             <div class="input-group">
-                                                <input type="text" class="form-control border-right-0" id="min-price" name="min_price" placeholder="최소가격">
+                                                <input type="text" class="form-control border-right-0" id="min-price" name="shmin_price" th:value="${vo.shmin_price}" placeholder="최소가격">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text bg-white border-left-0">$</span>
                                                 </div>
@@ -139,7 +151,7 @@
                                         <!--Max Price-->
                                         <div class="col-sm-6">
                                             <div class="input-group">
-                                                <input type="text" class="form-control border-right-0" id="max-price" name="max_price" placeholder="최대가격">
+                                                <input type="text" class="form-control border-right-0" id="max-price" name="shmax_price" th:value="${vo.shmax_price}"  placeholder="최대가격">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text bg-white border-left-0">$</span>
                                                 </div>
@@ -150,7 +162,7 @@
 
                                     <div class="form-group">
                                         <label>물고기로 검색</label>
-                                        <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Address, City or ZIP">
+                                        <input type="text" class="form-control" id="keyword"  name="shfish" th:value="${vo.shfish}" placeholder="Address, City or ZIP">
                                     </div>
 
                                     <!--Submit button-->
@@ -334,7 +346,7 @@
                                             <h4 th:text="${list.spName}">누리호</h4>
                                             <aside>
                                                 <i class="fa fa-map-marker mr-2"></i>
-                                                항구 주소
+                                                <span th:text="${list.ptName}">항구 주소</span>
                                             </aside>
                                         </figure>
 
@@ -345,11 +357,11 @@
                                         <div class="ts-description-lists">
                                             <dl>
                                                 <dt>최대인원</dt>
-                                                <dd th:text="${list.spTotal+'명'}">10명</dd>
+                                                <dd th:text="${list.spTotal}"></dd>
                                             </dl>
                                             <dl>
                                                 <dt>예약가능인원</dt>
-                                                <dd >4명</dd>
+                                                <dd th:text="${list.spRemain}"></dd>
                                             </dl>
                                             <dl>
                                                 <dt>출발날짜</dt>
