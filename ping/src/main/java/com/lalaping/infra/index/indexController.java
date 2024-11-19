@@ -40,7 +40,7 @@ public class indexController {
 	public String index(Model model, FishVo vo, MapPointVo mapPointVo, ShipVo shipVo){
 		
 		model.addAttribute("fishList",fishService.allList(vo));
-		model.addAttribute("mapPoint",mapPointService.selectUsrList(mapPointVo));
+		model.addAttribute("mapPoint",mapPointService.allList(mapPointVo));
 		model.addAttribute("ships",shipService.selectUsrList(shipVo));
 		
 		List<MapPointDto> usrList = mapPointService.sessSelectList(mapPointVo);

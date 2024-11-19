@@ -66,6 +66,11 @@ public class PortController {
 	@RequestMapping(value = "/v1/port/portList")
 	public String portList(Model model,@ModelAttribute("vo") PortVo vo){
 		vo.setParamsPaging(portService.selectOneCount(vo));
+		System.out.println("thisPage:"+vo.getThisPage());
+		System.out.println("startPage:"+vo.getStartPage());
+		System.out.println("endPage:"+vo.getEndPage());
+		System.out.println("totalPages:"+vo.getTotalPages());
+		System.out.println("totalRows:"+vo.getTotalRows());
 		model.addAttribute("list",portService.selectList(vo));
 		return "/usr/v1/port/ping_portList";
 	}

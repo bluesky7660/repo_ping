@@ -80,10 +80,10 @@
                                     <p class="m-0 text-muted">qwer1234</p>
                                 </div>
                                 <div class="p-4 osahan-sidebar-links">
-                                    <a class="dropdown-item" href="/usr/v1/infra/order/OrderList"><i class="ri-file-list-line me-2"></i> 주문목록</a>
-                                    <a class="dropdown-item" href="/usr/v1/infra/editmember/editMemberForm"></i> 환불목록</a>
-                                    <a class="dropdown-item" href="/usr/v1/infra/editmember/editMemberForm"></i> 내정보 수정 </a>
-                                    <a class="dropdown-item" id="logout" href="/usr/v1/infra/login/loginUsrForm"><i class="ri-logout-circle-line me-2"></i> 로그아웃</a>
+                                    <a class="dropdown-item" href="/v1/member/orderList"><i class="ri-file-list-line me-2"></i> 주문목록</a>
+                                    <a class="dropdown-item" href="/v1/member/orderReturn"></i> 환불목록</a>
+                                    <a class="dropdown-item" href="/v1/member/editMember"></i> 내정보 수정 </a>
+                                    <a class="dropdown-item logoutBtn" id="logout" href="javascript:void(0);"><i class="ri-logout-circle-line me-2"></i> 로그아웃</a>
                                 </div>
                             </div>
                         </div>
@@ -96,49 +96,18 @@
                         <!--Title-->
                         <h3>주문목록</h3>
                             <!--Row-->
-                            <div class="row card ts-item ts-item__list ts-card">
-                                    
-                                    <!--Card Image-->
-                                    <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
-                                        <input type="radio" name="odSeq">
-                                    </div>
-    
-                                    <!--Card Body-->
-                                  
-                                    <div class="card-body">
-    
-                                        <figure class="ts-item__info">
-                                            <a href="#"><h4>누리호</h4></a>
-                                        </figure>
-                                        <div class="ts-description-lists">
-                                            <dl>
-                                                <dt>결제가격</dt>
-                                                <dd>220,000원</dd>
-                                            </dl>
-                                            <dl>
-                                                <dt>출항날짜</dt>
-                                                <dd>2024-10-25</dd>
-                                            </dl>
-                                            <dl>
-                                                <dt>결제일</dt>
-                                                <dd>2024-10-12</dd>
-                                            </dl>
-                                        </div>
-                                           
-                                    </div>  
-                                    <a href="#" class="card-footer">
-                                        <span class="ts-btn-arrow">환불하기</span>
-                                    </a>           
-                            </div>
-                            <div class="row card ts-item ts-item__list ts-card"> 
+                            <label class="row card ts-item ts-item__list ts-card">
                                 <!--Card Image-->
                                 <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
                                     <input type="radio" name="odSeq">
                                 </div>
+
                                 <!--Card Body-->
+                                
                                 <div class="card-body">
+
                                     <figure class="ts-item__info">
-                                        <h4>누리호</h4>
+                                        <a href="#"><h4>누리호</h4></a>
                                     </figure>
                                     <div class="ts-description-lists">
                                         <dl>
@@ -146,19 +115,49 @@
                                             <dd>220,000원</dd>
                                         </dl>
                                         <dl>
-                                            <dt>결제일</dt>
-                                            <dd>2024-10-12</dd>
-                                        </dl>
-                                        <dl>
                                             <dt>출항날짜</dt>
                                             <dd>2024-10-25</dd>
                                         </dl>
-                                    </div>  
+                                        <dl>
+                                            <dt>결제일</dt>
+                                            <dd>2024-10-12</dd>
+                                        </dl>
+                                    </div>
+                                        
                                 </div>  
                                 <a href="#" class="card-footer">
                                     <span class="ts-btn-arrow">환불하기</span>
                                 </a>           
-                        </div>
+                        </label>
+                        <label class="row card ts-item ts-item__list ts-card"> 
+                            <!--Card Image-->
+                            <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
+                                <input type="radio" name="odSeq">
+                            </div>
+                            <!--Card Body-->
+                            <div class="card-body">
+                                <figure class="ts-item__info">
+                                    <h4>누리호</h4>
+                                </figure>
+                                <div class="ts-description-lists">
+                                    <dl>
+                                        <dt>결제가격</dt>
+                                        <dd>220,000원</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>결제일</dt>
+                                        <dd>2024-10-12</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>출항날짜</dt>
+                                        <dd>2024-10-25</dd>
+                                    </dl>
+                                </div>  
+                            </div>  
+                            <a href="#" class="card-footer">
+                                <span class="ts-btn-arrow">환불하기</span>
+                            </a>           
+                        </label>
                             
                         <!--end form-contact -->
                     </div>

@@ -165,9 +165,13 @@ public class MemberController {
 //		model.addAttribute("item", memberService.selectOne(memberDto));
 		return "/usr/v1/member/ping_editMember";
 	}
-	@RequestMapping(value = "/v1/member/ping_orderList")
-	public String ping_orderList() {
-		return "/usr/v1/member/ping_ping_orderList";
+	@RequestMapping(value = "/v1/member/orderList")
+	public String orderList() {
+		return "/usr/v1/member/ping_orderList";
+	}
+	@RequestMapping(value = "/v1/member/orderReturn")
+	public String orderReturn() {
+		return "/usr/v1/member/ping_orderReturn";
 	}
 	
 	@ResponseBody
@@ -182,10 +186,10 @@ public class MemberController {
 		if (rtMember != null) {
 			if(matchesBcrypt(memberDto.getMmPasswd(), rtMember.getMmPasswd(), 10)) {
 //			if(true) {
-				httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60second * 30 = 30minute
-				httpSession.setAttribute("sessSeqXdm", rtMember.getMmSeq());
-				httpSession.setAttribute("sessIdXdm", rtMember.getMmEmail());
-				httpSession.setAttribute("sessNameXdm", rtMember.getMmName());
+				httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
+				httpSession.setAttribute("sessSeqUsr", rtMember.getMmSeq());
+				httpSession.setAttribute("sessIdUsr", rtMember.getMmEmail());
+				httpSession.setAttribute("sessNameUsr", rtMember.getMmName());
 //				httpSession.setAttribute("loginType", "usr");
 				
 				String prevPage = (String) httpSession.getAttribute("prevPage");
