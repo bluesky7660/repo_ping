@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lalaping.common.util.UtilDateTime;
 import com.lalaping.mall.ship.ShipDto;
 import com.lalaping.mall.ship.ShipService;
 import com.lalaping.mall.ship.ShipVo;
@@ -70,7 +71,9 @@ public class PortController {
 		return "/usr/v1/port/ping_portList";
 	}
 	@RequestMapping(value = "/v1/port/portDetail")
-	public String portDetail(Model model, PortDto portDto, ShipVo shipVo){
+	public String portDetail(Model model, PortDto portDto, ShipVo shipVo){	
+		shipVo.setShDateStart(shipVo.getShDateStart() == null || shipVo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(shipVo.getShDateStart()));
+		shipVo.setShDateEnd(shipVo.getShDateEnd() == null || shipVo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(shipVo.getShDateEnd()));
 		PortDto item = portService.selectOne(portDto);
 		shipVo.setPort_ptSeq(item.getPtSeq());
 		shipVo.setParamsPaging(shipService.portListCount(shipVo));

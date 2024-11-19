@@ -100,7 +100,7 @@
                                     <!--Keyword-->
                                     <div class="form-group">
                                         <label>배이름 검색</label>
-                                        <input type="text" class="form-control" id="keyword" name="shName" th:value="${vo.shName}" placeholder="Address, City or ZIP">
+                                        <input type="text" class="form-control" id="keyword" name="shName" th:value="${vo.shName}" placeholder="">
                                     </div>
                                     <div class="form-group">
                                         <label>항구 검색</label>
@@ -147,7 +147,7 @@
                                             <div class="input-group">
                                                 <input type="text" class="form-control border-right-0" id="min-price" name="shmin_price" th:value="${vo.shmin_price}" placeholder="최소가격">
                                                 <div class="input-group-append">
-                                                    <span class="input-group-text bg-white border-left-0">$</span>
+                                                    <span class="input-group-text bg-white border-left-0"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -157,7 +157,7 @@
                                             <div class="input-group">
                                                 <input type="text" class="form-control border-right-0" id="max-price" name="shmax_price" th:value="${vo.shmax_price}"  placeholder="최대가격">
                                                 <div class="input-group-append">
-                                                    <span class="input-group-text bg-white border-left-0">$</span>
+                                                    <span class="input-group-text bg-white border-left-0"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -188,7 +188,7 @@
                                         <div class="py-4">
 
                                             <!--Row-->
-                                            <div class="form-row">
+                                            <div class="row">
 
                                                 <!--Bedrooms-->
                                                 <div class="col-sm-6">
@@ -216,13 +216,13 @@
                                                 <div class="ts-column-count-2">
 
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="ch_1" name="features[]" value="ch_1">
+                                                        <input type="checkbox" class="custom-control-input" id="ch_1" name="shEatNy" th:checked="${vo.shEatNy}" value="1">
                                                         <label class="custom-control-label" for="ch_1">
                                                             식사제공</label>
                                                     </div>
 
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="ch_2" name="features[]" value="ch_2">
+                                                        <input type="checkbox" class="custom-control-input" id="ch_2" name="shRentalNy" th:checked="${vo.shRentalNy}" value="1">
                                                         <label class="custom-control-label" for="ch_2">낚시대 대여</label>
                                                     </div>
 
@@ -320,11 +320,11 @@
                             <!--Display selector on the right-->
                             <div class="float-none float-sm-right pl-2 ts-center__vertical">
                                 <label for="sorting" class="mb-0 mr-2 text-nowrap">Sort by:</label>
-                                <select class="custom-select bg-transparent" id="sorting" name="sorting">
-                                    <option value="">Default</option>
-                                    <option value="1">Price lowest first</option>
-                                    <option value="2">Price highest first</option>
-                                    <option value="3">Distance</option>
+                                <select class="custom-select bg-transparent" id="sortOrder" name="sortOrder">
+                                   <!--  <option value="">검색구분</option> -->
+                                    <option value="2" th:seleted="${vo.sortOrder == 2}">출발일</option>
+                                    <option value="1" th:seleted="${vo.sortOrder == 1}">가격별</option>
+                                    <!-- <option value="3">Distance</option> -->
                                 </select>
                             </div>
 

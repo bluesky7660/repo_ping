@@ -14,6 +14,9 @@
 
     <!-- dev -->
     <link rel="stylesheet" href="/usr/v1/css/common.css">
+    
+    <!-- by developer -->
+	<link rel="stylesheet" href="/xdm/v1/css/datetimepicker/jquery.datetimepicker.min.css">
 
 	<title>MyHouse - Advanced Real Estate HTML Template by ThemeStarz</title>
 
@@ -562,23 +565,29 @@
 
                                 <h3>검색</h3>
 
-                                <form id="form-search" method="post" action="/v1/port/portDetail" name="formList" class="ts-form">
+                                <form id="form-search" method="post" action="/v1/port/portDetail" name="formList" class="ts-form" autocomplete="off">
 									<input type="hidden" name="thisPage" th:value="${shipVo.thisPage}" default="1"/>
 									<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${shipVo.rowNumToShow}"/>
                                     <!--Keyword-->
                                     <div class="form-group">
                                         <label for="bedrooms">배이름</label>
-                                        <input type="text" class="form-control" id="keyword" name="keyword" placeholder="배이름검색">
+                                        <input type="text" class="form-control" id="keyword" name="shName" th:value="${shipVo.shName}" placeholder="배이름검색">
                                     </div>
 
                                     <!--Type-->
                                     <div class="form-group">
-                                        <select class="custom-select" id="type" name="type">
+                                         <select class="custom-select" id="status" name="shRemain" >
                                             <option value="">인원</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
+                                            <option th:selected ="${shipVo.shRemain == 1}" value="1">1</option>
+                                            <option th:selected ="${shipVo.shRemain == 2}" value="2">2</option>
+                                            <option th:selected ="${shipVo.shRemain == 3}" value="3">3</option>
+                                            <option th:selected ="${shipVo.shRemain == 4}" value="4">4</option>
+                                            <option th:selected ="${shipVo.shRemain == 5}" value="5">5</option>
+                                            <option th:selected ="${shipVo.shRemain == 6}" value="6">6</option>
+                                            <option th:selected ="${shipVo.shRemain == 7}" value="7">7</option>
+                                            <option th:selected ="${shipVo.shRemain == 8}"value="8">8</option>
+                                            <option th:selected ="${shipVo.shRemain == 9}" value="9">9</option>
+                                            <option th:selected ="${shipVo.shRemain == 10}" value="10">10</option>
                                         </select>
                                     </div>
                                     
@@ -598,7 +607,7 @@
                                         <!--Min Price-->
                                         <div class="col-sm-6">
                                             <div class="input-group">
-                                                <input type="text" class="form-control border-right-0" id="min-price" name="min_price" placeholder="최소가격">
+                                                <input type="text" class="form-control border-right-0" id="min-price" name="shmin_price" th:value="${shipVo.shmin_price}" placeholder="최소가격">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text bg-white border-left-0"></span>
                                                 </div>
@@ -608,7 +617,7 @@
                                         <!--Max Price-->
                                         <div class="col-sm-6">
                                             <div class="input-group">
-                                                <input type="text" class="form-control border-right-0" id="max-price" name="max_price" placeholder="최대가격">
+                                                <input type="text" class="form-control border-right-0" id="max-price"name="shmax_price" th:value="${shipVo.shmax_price}" placeholder="최대가격">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text bg-white border-left-0"></span>
                                                 </div>
@@ -637,21 +646,26 @@
                                         <div class="py-4">
 
                                             <!--Row-->
-                                            <div class="form-row">
+                                            <div class="row">
 
                                                 <!--Bedrooms-->
-                                                <div class="col-sm-5">
+                                                <!--Bedrooms-->
+                                                <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <input type="number" class="form-control" id="bedrooms" name="bedrooms" min="0">
+                                                       <label class="visually-hidden" for="inputDateStart">시작일</label>
+														<input type="text" class="form-control" id="inputDateStart" name="shDateStart" th:value="${#strings.substring(shipVo.shDateStart, 0, 10)}" placeholder="날짜선택" value="">
                                                     </div>
                                                 </div>
-                                                ~
+
                                                 <!--Bathrooms-->
-                                                <div class="col-sm-5">
+                                                <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <input type="number" class="form-control" id="bathrooms" name="bathrooms" min="0">
+                                                        <label class="visually-hidden" for="inputDateEnd">종료일</label>
+														<input type="text" class="form-control" id="inputDateEnd" name="shDateEnd" th:value="${#strings.substring(shipVo.shDateEnd, 0, 10)}" placeholder="날짜선택" value="">
                                                     </div>
                                                 </div>
+
+                                            </div>
 
                                             </div>
                                             <!--end row-->
@@ -936,12 +950,14 @@
     }
 </script>
 
-<script type="text/javascript">
-	// document.getElementById("changeRowNum").onchange = function () {
-    //     document.getElementById("rowNumToShow").value = document.getElementById("changeRowNum").value;
-    //     form.action = goUrlXdmList;
-    //     form.submit();
-	// }
+<script type="text/javascript">				
+	window.addEventListener('load', function() {	
+		$.datetimepicker.setLocale('ko');
+		$("#inputDateStart,#inputDateEnd").datetimepicker({
+			timepicker:false,
+			format:'Y-m-d'
+		});	
+	});
 </script>
 
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
@@ -952,6 +968,9 @@
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
 <script src="/usr/v1/js/script.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
+
+<!-- by developer -->
+<script src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
 
 </body>
 </html>

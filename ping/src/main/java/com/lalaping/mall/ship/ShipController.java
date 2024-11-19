@@ -58,6 +58,18 @@ public class ShipController {
 	/*usr*/
 	@RequestMapping(value = "/v1/ship/shipList")
 	public String shipList(Model model,@ModelAttribute("vo") ShipVo vo ,@ModelAttribute("fishVo") FishVo fishVo){
+		System.out.println("테스트" + vo.getSortOrder());
+		switch (vo.getSortOrder()) {
+			case 1: {
+			
+				vo.setSortOrderString("spStart Desc");
+				break;
+			}
+			case 2:{
+				vo.setSortOrderString("spPrice Desc");
+				break;
+			}
+		}
 		vo.setParamsPaging(shipService.listCount(vo));
 		System.out.println(vo.getStartPage());
 		System.out.println(vo.getThisPage());
