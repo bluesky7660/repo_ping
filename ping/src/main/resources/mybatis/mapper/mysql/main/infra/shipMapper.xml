@@ -262,6 +262,7 @@
         DELETE FROM ship
         WHERE spSeq = #{spSeq}
     </delete>
+    
 	
 	
 	

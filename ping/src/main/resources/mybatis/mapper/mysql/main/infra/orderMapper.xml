@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lalaping.mall.order.OrderDao">
+
+    <resultMap type="com.lalaping.mall.order.OrderDto" id="resultMapObj"></resultMap>
+    
+    <select id="CheckSelectOne">
+    	SELECT
+    		,a.spName
+    		,a.spStart
+    		,a.spEatNy
+    		,a.spRentalNy
+    		,a.spPrice
+    		,a.spTotal
+    		,d.ptName
+   		FROM ship a
+   		LEFT JOIN d port d
+		ON a.port_ptSeq = d.ptSeq
+
+    </select>
+    
+</mapper>

@@ -108,5 +108,6 @@ public class ShipController {
 		model.addAttribute("item",shipService.selectOne(shipDto));
 		return "/usr/v1/ship/ping_shipDetail";
 	}
+	
 
 }
