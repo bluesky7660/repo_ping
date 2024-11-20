@@ -81,7 +81,7 @@
     		,a.mpDelNy
     		,a.mpRegDate
     		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
-   		FROM mapPoint a
+   		FROM mappoint a
         	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
             left join fish c on c.fsSeq = b.fish_fsSeq
    		GROUP BY a.mpSeq
