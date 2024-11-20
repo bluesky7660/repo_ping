@@ -4,7 +4,7 @@
 	<resultMap type="com.lalaping.mall.mapPoint.MapPointDto" id="resultMapObj"></resultMap>
 	
 	<sql id="selectCommon">
-        FROM mapPoint a
+        FROM mappoint a
         	left join fishandmappoint b on b.mappoint_mpSeq = a.mpSeq
             left join fish c on c.fsSeq = b.fish_fsSeq
         WHERE 1=1
@@ -64,7 +64,7 @@
     		,a.mpRegDate
     		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
    		FROM mappoint a
-        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
+        	left join fishandmappoint b on b.mappoint_mpSeq = a.mpSeq
             left join fish c on c.fsSeq = b.fish_fsSeq
    		GROUP BY a.mpSeq
    		ORDER BY
@@ -81,7 +81,7 @@
     		,a.mpDelNy
     		,a.mpRegDate
     		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
-   		FROM mapPoint a
+   		FROM mappoint a
         	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
             left join fish c on c.fsSeq = b.fish_fsSeq
    		GROUP BY a.mpSeq

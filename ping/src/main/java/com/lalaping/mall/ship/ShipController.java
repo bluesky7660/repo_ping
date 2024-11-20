@@ -100,7 +100,7 @@ public class ShipController {
 		    }
 		}
 
-		model.addAttribute("fishList",fishService.shipFishList(fishVo));
+		model.addAttribute("fishList",fishService.allOneList(fishVo));
 		return "/usr/v1/ship/ping_shipList";
 	}
 	@RequestMapping(value = "/v1/ship/shipDetail")

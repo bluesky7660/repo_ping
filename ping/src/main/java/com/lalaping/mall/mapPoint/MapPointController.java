@@ -62,7 +62,7 @@ public class MapPointController {
 	@RequestMapping(value = "/v1/mapPoint/mapPointAdd")
 	public String mapPointAdd(Model model,FishVo fishVo){
 //		model.addAttribute("list",mapPointService.selectList(vo));
-		model.addAttribute("fishList",fishService.selectList(fishVo));
+		model.addAttribute("fishList",fishService.allOneList(fishVo));
 		return "/usr/v1/mapPoint/ping_mapPoint_add";
 	}
 

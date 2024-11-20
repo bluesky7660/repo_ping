@@ -1,0 +1,15 @@
+<th:block th:fragment="side">
+    <div class="col-lg-4">
+        <div class="rounded-4 border osahan-sidebar bg-white mb-4">
+            <div class="text-center p-4 border-bottom">
+                <h3 class="fw-bold mb-1" th:text="${item.mmName+'님'}"></h3>
+                <p class="m-0 text-muted" th:text="${item.mmEmail}"></p>
+            </div>
+            <div class="p-4 osahan-sidebar-links">
+                <a class="dropdown-item" href="/v1/member/orderList"><i class="fa fa-file-alt me-2" style="margin-left: -10px;"></i> 주문목록 </a>
+                <a class="dropdown-item" href="/v1/member/orderReturn"><i class="fa fa-times me-2" style="margin-left: -10px;"></i> 환불목록</a>
+                <a class="dropdown-item" href="/v1/member/editMember"><i class="fa fa-edit me-2" style="margin-left: -10px;"></i> 내정보 수정 </a>
+            </div>
+        </div>
+    </div>
+</th:block>
