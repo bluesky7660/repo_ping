@@ -3,21 +3,23 @@ package com.lalaping.mall.port;
 import com.lalaping.common.base.BaseVo;
 
 public class PortVo extends BaseVo {
-	private String shPtArea;
+	private Integer shPtArea;
 	private String shPtName;
 	
 //	-----------------------------------
 
-	public String getShPtArea() {
-		return shPtArea;
-	}
-
-	public void setShPtArea(String shPtArea) {
-		this.shPtArea = shPtArea;
-	}
+	
 
 	public String getShPtName() {
 		return shPtName;
+	}
+
+	public Integer getShPtArea() {
+		return shPtArea;
+	}
+
+	public void setShPtArea(Integer shPtArea) {
+		this.shPtArea = shPtArea;
 	}
 
 	public void setShPtName(String shPtName) {

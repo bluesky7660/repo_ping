@@ -7,10 +7,10 @@
 	<meta name="author" content="ThemeStarz">
 
     <!--CSS -->
-    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/bootstrap/css/bootstrap.min.css">
+   <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/font-awesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/style.css">
-
+    
     <!-- dev -->
     <link rel="stylesheet" href="/usr/v1/css/common.css">
 
@@ -19,11 +19,9 @@
 </head>
 
 <body>
-	 <form name ="formList" method = "post" action = "/v1/port/portList" autocomplete="off">
-		<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
-		<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
+
 <!-- WRAPPER
-=====================================================================================================================-->
+    =================================================================================================================-->
 <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
 
     <!--*********************************************************************************************************-->
@@ -58,142 +56,166 @@
             <div class="container">
 
                 <div class="ts-title">
-                    <h1>항구</h1>
+                    <a href="/v1/port/portList"><h1>항구</h1></a>
                 </div>
 
             </div>
         </section>
 
-        <!--AGENCIES LIST
+        <!--SEARCH FORM
             =========================================================================================================-->
-        <section id="agencies-list">
+        <section id="search-form">
             <div class="container">
 
-                <!--DISPLAY CONTROL
-                    =================================================================================================-->
-                <section id="display-control" class="clearfix">
+               <form name ="formList" method = "post" action = "/v1/port/portList" autocomplete="off">
+					<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
+					<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
+                    <section class="ts-box p-0">
 
-                    <!--Display selector on the left-->
-                    <!-- <div class="float-left">
-                        <a href="#" class="btn btn-outline-secondary px-3 mr-2 mb-2 ts-btn-border-muted">
-                            <i class="fa fa-th-large"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-secondary active px-3 mb-2 ts-btn-border-muted">
-                            <i class="fa fa-th-list"></i>
-                        </a>
-                    </div> -->
+                        <!--PRIMARY SEARCH INPUTS
+                            =========================================================================================-->
+                        <div class="form-row px-4 py-3">
 
-                    <!--Display selector on the right-->
-                    <div class="float-none float-sm-right pl-2 ts-center__vertical">
-                        <label for="sorting" class="mb-0 mr-2 text-nowrap">Sort by:</label>
-                        <select class="custom-select bg-transparent" id="sorting" name="sorting">
-                            <option value="">Default</option>
-                            <option value="1">Price lowest first</option>
-                            <option value="2">Price highest first</option>
-                            <option value="3">Distance</option>
-                        </select>
-                    </div>
-
-                </section>
-
-                <!--AGENCIES
-                    =================================================================================================-->
-                <section id="agencies">
-
-                    <!--Agency-->
-                    <div class="card ts-item ts-item__list ts-item__company ts-card" th:each="list:${list}">
-
-                        <!--Ribbon-->
-                        <!-- <div class="ts-ribbon">
-                            <i class="fa fa-thumbs-up"></i>
-                        </div> -->
-
-                        <!--Card Image-->
-                        <!-- <a th:href="@{/v1/prot/portDetail(ptSeq=${list.ptSeq})}" class="card-img">
-                            
-                            <img src="/usr/v1/template/themeforest-v1.0/assets/img/logo-agency-01.png" alt="">
-                        </a> -->
-                        <a th:href="@{/v1/port/portDetail(ptSeq=${list.ptSeq})}">
-                            <div class="card-img">
-                                <img src="/usr/v1/template/themeforest-v1.0/assets/img/logo-agency-01.png" alt="">  
-                            </div>
-
-                            <!--Card Body-->
-                            <div class="card-body">
-
-                                <figure class="ts-item__info">
-                                    <h4 th:text="${list.ptName}"></h4>
-                                    <aside>
-                                        <i class="fa fa-map-marker mr-2"></i>
-                                        <span th:text="${list.ptAddress}"></span>
-                                    </aside>
-                                </figure>
-
-                                <div class="ts-company-info">
-
-                                    <div class="ts-company-contact mb-2 mb-sm-0">
-                                        <div>
-                                            <i class="fas fa-building"></i>
-                                            <span th:text="${@codeService.selectOneCachedCode(list.ptArea)}"></span>
-                                        </div>
-
-                                        <div>
-                                            <i class="fas fa-info-circle"></i>
-                                            <span th:text="${list.ptDesc}"></span>
-                                        </div>
-                                    </div>
-
-                                    <!-- <div class="ts-description-lists">
-                                        <dl>
-                                            <dt>Properties</dt>
-                                            <dd>64</dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>Agents</dt>
-                                            <dd>12</dd>
-                                        </dl>
-                                    </div> -->
-
+                            <!--Keyword-->
+                            <div class="col-sm-12 col-md-4">
+                                <div class="form-group my-2">
+                                    <input type="text" class="form-control" id="keyword" name="shPtName" th:value="${vo.shPtName}" placeholder="항구이름">
                                 </div>
                             </div>
 
-                            <!--Card Footer-->
-                            <div class="card-footer">
-                                <!-- <a th:href="@{/v1/prot/portDetail(ptSeq=${list.ptSeq})}" class="ts-btn-arrow">자세히</a> -->
-                                <span class="ts-btn-arrow">자세히</span>
+                            <!--Other inputs-->
+                            <div class="col-md-8">
+                                <div class="form-row">
+
+                                    <!--Type-->
+                                    <div class="col-sm-3">
+                                        <select class="custom-select my-2" id="type" name="shPtArea">
+                                            <option value="" selected>지역선택</option>
+											<option value="21" th:selected ="${vo.shPtArea == 21}">부산</option>
+											<option value="22" th:selected ="${vo.shPtArea == 22}">전남</option>
+											<option value="23" th:selected ="${vo.shPtArea == 23}">강원</option>
+											<option value="24" th:selected ="${vo.shPtArea == 24}">경북</option>
+											<!-- <option value="0" th:selected="${vo.shPtArea == 0}">광주</option>
+											<option value="0" th:selected="${vo.shPtArea == 0}">전라남도</option>
+											<option value="0" th:selected="${vo.shPtArea == 0}">경상남도</option>
+											<option value="0" th:selected="${vo.shPtArea == 0}">경상북도</option>
+											<option value="0" th:selected="${vo.shPtArea == 0}">제주도</option> -->
+                                        </select>
+                                    </div>
+
+                                   
+
+                                    <!--Submit button-->
+                                    <div class="col-sm-3">
+                                        <div class="form-group my-2">
+                                            <button type="submit" class="btn btn-primary w-100" id="search-btn">Search
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!--end row-->
                             </div>
-                        </a>
+                            <!--end col-md-8-->
 
-                    </div>
-                    <!--end agency-->
+                        </div>
+                        <!--end form-row-->
 
-                </section>
-                <!--end #agencies-->
+                        <!--MORE OPTIONS - ADVANCED SEARCH
+                            =========================================================================================-->
+                        
+                        <!--end ts-bg-light-->
+                    </section>
 
-                <!--PAGINATION
-                    =================================================================================================-->
-                <section id="pagination">
-                    <div class="container-fluid px-0 mt-2 mb-2">
-						<div class="row">
-							<div class="col">
-								<ul class="pagination justify-content-center mb-0">
-									<li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}')|"><i class="bi bi-caret-left-fill"></i></a></li>
-								<li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
-								<li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|"><i class="bi bi-caret-right-fill"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-                </section>
+                </form>
+                <!--end #form-search-->
 
             </div>
             <!--end container-->
         </section>
-        <!--end #items-list-->
+        <!--end #search-form-->
+
+        <!--DISPLAY CONTROL
+            =========================================================================================================-->
+        
+        <!--ITEMS LISTING
+            =========================================================================================================-->
+        <section id="items-grid">
+            <div class="container">
+
+                <!--Row-->
+                <div class="row">
+
+                    <!--Item-->
+                    <div class="col-sm-6 col-lg-4" th:each="list2 : ${list2}">
+
+                        <div class="card ts-item ts-card ts-item__lg">
+
+                           
+
+                            <!--Card Image-->
+                            <a href="#" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
+                               
+                                <figure class="ts-item__info">
+                                    <h4 th:text="${list2.ptName}">인천항</h4>
+                                    <!-- <aside>
+                                        <i class="fa fa-map-marker mr-2"></i>
+                                        <span th:text="${list2.ptAddress}"></span>
+                                    </aside> -->
+                                </figure>
+                            </a>
+
+                            <!--Card Body-->
+                            <div class="card-body">
+                                <div class="ts-description-lists">
+                                
+                                	<dl>
+                                        <dt>주소</dt>
+                                        <dd><span th:text="${list2.ptAddress}"></span></dd>
+                                        <dt>지역</dt>
+                                        <dd th:text="${@codeService.selectOneCachedCode(list2.ptArea)}">인천</dd>
+                                    </dl>
+                                    <!-- <dl>
+                                        <dt>Bathrooms</dt>
+                                        <dd>1</dd>
+                                    </dl> -->
+                                </div>
+                            </div>
+
+                            <!--Card Footer-->
+                            <a href="detail-01.html" class="card-footer">
+                                <span class="ts-btn-arrow">상세정보</span>
+                            </a>
+
+                        </div>
+                        <!--end ts-item-->
+                    </div>
+                    <!--end Item col-md-4-->
+                </div>
+                <!--end row-->
+            </div>
+            <!--end container-->
+        </section>
+
+        <!--PAGINATION
+            =========================================================================================================-->
+         <section id="pagination">
+           <div class="container-fluid px-0 mt-2 mb-2">
+				<div class="row">
+					<div class="col">
+						<ul class="pagination justify-content-center mb-0">
+							<li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}')|"><i class="bi bi-caret-left-fill"></i></a></li>
+						<li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
+						<li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|"><i class="bi bi-caret-right-fill"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+          </section>
 
     </main>
     <!--end #ts-main-->
-	</form>
+
     <!--*********************************************************************************************************-->
     <!--************ FOOTER *************************************************************************************-->
     <!--*********************************************************************************************************-->

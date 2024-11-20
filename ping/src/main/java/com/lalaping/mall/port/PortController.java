@@ -64,23 +64,24 @@ public class PortController {
 	}
 	
 	/*usr*/
+//	@RequestMapping(value = "/v1/port/portList3")
+//	public String portList3(Model model,@ModelAttribute("vo") PortVo vo){
+//		vo.setParamsPaging(portService.selectOneCount(vo));
+//		System.out.println("thisPage:"+vo.getThisPage());
+//		System.out.println("startPage:"+vo.getStartPage());
+//		System.out.println("endPage:"+vo.getEndPage());
+//		System.out.println("totalPages:"+vo.getTotalPages());
+//		System.out.println("totalRows:"+vo.getTotalRows());
+//		model.addAttribute("list",portService.selectList(vo));
+//		return "/usr/v1/port/ping_portList3";
+//	}
+	
 	@RequestMapping(value = "/v1/port/portList")
-	public String portList(Model model,@ModelAttribute("vo") PortVo vo){
-		vo.setParamsPaging(portService.selectOneCount(vo));
-		System.out.println("thisPage:"+vo.getThisPage());
-		System.out.println("startPage:"+vo.getStartPage());
-		System.out.println("endPage:"+vo.getEndPage());
-		System.out.println("totalPages:"+vo.getTotalPages());
-		System.out.println("totalRows:"+vo.getTotalRows());
-		model.addAttribute("list",portService.selectList(vo));
-		return "/usr/v1/port/ping_portList";
-	}
-	@RequestMapping(value = "/v1/port/portList2")
-	public String portList2(Model model,@ModelAttribute("vo") PortVo vo) {
+	public String portList(Model model,@ModelAttribute("vo") PortVo vo) {
 		vo.setRowNumToShow(6);
 		vo.setParamsPaging(portService.selectOneCount(vo));
 		model.addAttribute("list2", portService.selectList(vo));
-		return "/usr/v1/port/ping_portList2";
+		return "/usr/v1/port/ping_portList";
 	}
 	@RequestMapping(value = "/v1/port/portDetail")
 	public String portDetail(Model model, PortDto portDto, ShipVo shipVo){	
