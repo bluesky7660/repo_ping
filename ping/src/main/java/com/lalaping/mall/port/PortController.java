@@ -75,6 +75,13 @@ public class PortController {
 		model.addAttribute("list",portService.selectList(vo));
 		return "/usr/v1/port/ping_portList";
 	}
+	@RequestMapping(value = "/v1/port/portList2")
+	public String portList2(Model model,@ModelAttribute("vo") PortVo vo) {
+		vo.setRowNumToShow(6);
+		vo.setParamsPaging(portService.selectOneCount(vo));
+		model.addAttribute("list2", portService.selectList(vo));
+		return "/usr/v1/port/ping_portList2";
+	}
 	@RequestMapping(value = "/v1/port/portDetail")
 	public String portDetail(Model model, PortDto portDto, ShipVo shipVo){	
 		shipVo.setShDateStart(shipVo.getShDateStart() == null || shipVo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(shipVo.getShDateStart()));

@@ -7,7 +7,7 @@
     <resultMap type="com.lalaping.infra.member.MemberDto" id="resultMapObj"></resultMap>
     <sql id="selectCommon">
         FROM member a
-        LEFT JOIN commonCode c ON a.mmGender = c.cdSeq 
+        LEFT JOIN commoncode c ON a.mmGender = c.cdSeq 
         WHERE 1=1
         <if test="shValue != null and !shValue.equals('')">
             <choose>
