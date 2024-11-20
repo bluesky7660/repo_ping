@@ -148,7 +148,8 @@
 		<include refid="selectCommon"/>
 		GROUP BY a.spSeq
 		 ORDER BY
-	     	a.${sortOrderString}
+	     	<!-- a.${sortOrderString} -->
+	     	a.spRegDate Desc
 	     <include refid="base.selectListLowerForMysql"/>
 	</select>
 	<select id="portSelectList">
