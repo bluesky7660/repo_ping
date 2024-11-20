@@ -26,8 +26,11 @@
         <if test="shDelNy != null and !shDelNy.equals('')">
             AND a.ptDelNy = #{shDelNy}
         </if>
-        <if test="shPtArea != null and !shArea.equals('')">
+        <if test="shPtArea != null and !shPtArea.equals('')">
             AND a.ptArea = #{shPtArea}
+        </if>
+        <if test="shPtName != null and !shPtName.equals('')" >
+        	AND a.ptName LIKE CONCAT('%', #{shPtName}, '%')
         </if>
         <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
         	<choose>
