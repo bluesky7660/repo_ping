@@ -85,21 +85,21 @@
     
                                 </li>
                                 <!--end CATEGORY ICONS (1st level)-->
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
     
                                     <a href="/v1/port/portDetail?ptSeq=1" class="nav-link">항구 상세</a>
     
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
     
                                     <a href="/v1/ship/shipList" class="nav-link">배</a>
     
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
     
                                     <a href="/v1/ship/shipDetail?spSeq=1" class="nav-link">배 상세</a>
     
-                                </li>
+                                </li> -->
                                 
                                 <li class="nav-item">
                                     <a href="javascript:void(0);" class="nav-link">선상낚시 예약</a>
@@ -185,22 +185,22 @@
     
                         <!--LOGIN (Main level)
                         =============================================================================================-->
-                        <li class="nav-item" th:unless="${session != null and session.sessNameXdm != null}">
+                        <li class="nav-item" th:unless="${session != null and session.sessNameUsr != null}">
                             <a class="nav-link" href="/v1/login">로그인</a>
                         </li>
     
                         <!--REGISTER (Main level)
                         =============================================================================================-->
-                        <li class="nav-item" th:unless="${session != null and session.sessNameXdm != null}">
+                        <li class="nav-item" th:unless="${session != null and session.sessNameUsr != null}">
                             <a class="nav-link text-dark" href="/v1/register">회원가입</a>
                         </li>
 
-                        <li class="nav-item" th:if="${session != null and session.sessNameXdm != null}">
-                            <a class="nav-link" href="/v1/member/editMember" th:text="${session.sessNameXdm}"></a>
-                            <input type="hidden" th:value="${session.sessSeqXdm}" id="sessSeqXdm">
-                            <input type="hidden" th:value="${session.sessIdXdm}" id="sessIdXdm">
+                        <li class="nav-item" th:if="${session != null and session.sessNameUsr != null}">
+                            <a class="nav-link" href="/v1/member/editMember" th:text="${session.sessNameUsr}"></a>
+                            <input type="hidden" th:value="${session.sessSeqUsr}" id="sessSeqUsr">
+                            <input type="hidden" th:value="${session.sessIdUsr}" id="sessIdUsr">
                         </li>
-                        <li class="nav-item" th:if="${session != null and session.sessNameXdm != null}">
+                        <li class="nav-item" th:if="${session != null and session.sessNameUsr != null}">
                             <a class="nav-link logoutBtn" href="javascript:void(0);">로그아웃</a>
                         </li>
     

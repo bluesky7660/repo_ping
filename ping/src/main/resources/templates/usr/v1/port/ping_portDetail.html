@@ -60,7 +60,7 @@
             <div class="container">
 
                 <div class="ts-title">
-                    <h1>항구 상세</h1>
+                    <h1>항구</h1>
                 </div>
 
             </div>
@@ -87,13 +87,13 @@
                         </div>
 
                         <!--Description-->
-                        <div class="col-md-8">
+                        <div class="col-md-8 row">
 
-                            <div class="py-4">
+                            <div class="py-4 col-8">
 
                                 <!--Title-->
                                 <div class="ts-title mb-2">
-                                    <h2 class="mb-1" th:text="${item.ptName}">인천항</h2>
+                                    <h2 class="mb-1" th:text="${item.ptName}"></h2>
                                     <h5>
                                         <i class="fa fa-map-marker mr-2"></i>
                                         <span th:text="${item.ptAddress}"></span>
@@ -105,7 +105,6 @@
 
                                     <div class="col-md-7">
                                         <p th:text="${item.ptDesc}">
-                                            아름다운 인천항
                                         </p>
                                     </div>
 
@@ -114,8 +113,9 @@
                                 <!--end row-->
                             </div>
                             <!--end p-4-->
+                            <div class="col-4" style="background-color: red;">항구지도</div>
 
-                            <div class="ts-bg-light p-3 ts-border-radius__md d-block d-sm-flex ts-center__vertical justify-content-between ts-xs-text-center">
+                            <div class="col-7 ts-bg-light p-3 ts-border-radius__md d-block d-sm-flex ts-center__vertical justify-content-between ts-xs-text-center">
                                 <p class="d-sm-inline-block mb-2 mb-sm-0" th:text="${shipCount+'건이 검색되었습니다'}"></p>
                                
                             </div>

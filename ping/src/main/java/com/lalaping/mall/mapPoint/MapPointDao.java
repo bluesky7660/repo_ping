@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface MapPointDao {
 	public List<MapPointDto> selectList(MapPointVo vo);
 	public List<MapPointDto> selectUsrList(MapPointVo vo);
+	public List<MapPointDto> allList(MapPointVo vo);
 	public List<MapPointDto> sessSelectList(MapPointVo vo);
 	
 	public int insert(MapPointDto mapPointDto);
