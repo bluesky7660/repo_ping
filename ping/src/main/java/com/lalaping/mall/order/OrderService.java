@@ -7,5 +7,9 @@ import org.springframework.stereotype.Service;
 public class OrderService {
 	@Autowired
 	public OrderDao orderDao;
+	
+	public OrderDto CheckSelectOne(OrderDto orderDto) {
+		return orderDao.CheckSelectOne(orderDto);
+	}
 
 }

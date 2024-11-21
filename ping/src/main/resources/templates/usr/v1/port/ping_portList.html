@@ -154,7 +154,7 @@
                            
 
                             <!--Card Image-->
-                            <a href="#" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
+                            <a th:href="@{/v1/port/portDetail(ptSeq=${list2.ptSeq})}" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
                                
                                 <figure class="ts-item__info">
                                     <h4 th:text="${list2.ptName}">인천항</h4>
@@ -183,7 +183,7 @@
                             </div>
 
                             <!--Card Footer-->
-                            <a href="detail-01.html" class="card-footer">
+                            <a th:href="@{/v1/port/portDetail(ptSeq=${list2.ptSeq})}" class="card-footer">
                                 <span class="ts-btn-arrow">상세정보</span>
                             </a>
 
