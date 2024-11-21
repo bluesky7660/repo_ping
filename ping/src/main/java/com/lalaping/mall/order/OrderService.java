@@ -12,6 +12,7 @@ public class OrderService {
 		return orderDao.CheckSelectOne(orderDto);
 	}
 	public OrderDto memberSelectOne(OrderDto orderDto) {
+		System.out.println("sdsd");
 		return orderDao.memberSelectOne(orderDto);
 	}
 
