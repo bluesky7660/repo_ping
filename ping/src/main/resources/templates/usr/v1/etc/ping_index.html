@@ -117,7 +117,9 @@
                                 <div class="pt-4">
 
                                     <!--Checkboxes-->
-                                    <div id="features-checkboxes" class="w-100">
+                                    <!-- <div id="features-checkboxes" class="w-100"> -->
+                                   
+                                    <div id="fishList-checkboxes"  class="w-100">
                                         <h6 class="mb-3">어종</h6>
 
                                         <div class="">
@@ -193,7 +195,7 @@
                 <div class="row">
 
                     <!--Item-->
-                    <div class="col-sm-6 col-lg-4" th:each="ships:${ships}">
+                    <div th:class="${shipsStat.count == 1} ? 'col-md-6 col-lg-4' : 'col-sm-6 col-lg-4'" th:each="ships:${ships}">
 
                         <div class="card ts-item ts-card ts-item__lg">
                             <a th:href="@{/v1/ship/shipDetail(spSeq=${ships.spSeq})}">
