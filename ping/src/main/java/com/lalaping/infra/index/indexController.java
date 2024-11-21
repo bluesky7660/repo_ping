@@ -39,7 +39,7 @@ public class indexController {
 	@RequestMapping(value = "/v1/index")
 	public String index(Model model, FishVo vo, MapPointVo mapPointVo, ShipVo shipVo){
 		
-		model.addAttribute("fishList",fishService.allList(vo));
+		model.addAttribute("fishList",fishService.allOneList(vo));
 		model.addAttribute("mapPoint",mapPointService.allList(mapPointVo));
 		model.addAttribute("ships",shipService.selectUsrList(shipVo));
 		

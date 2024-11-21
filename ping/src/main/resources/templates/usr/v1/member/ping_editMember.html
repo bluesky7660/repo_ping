@@ -15,7 +15,8 @@
     <!-- dev -->
     <link rel="stylesheet" href="/usr/v1/css/common.css">
 
-    <title>MyHouse - Advanced Real Estate HTML Template by ThemeStarz</title>
+    <title>FishOn - 피쉬온</title>
+    <link rel="icon" href="/usr/v1/template/themeforest-v1.0/assets/img/favicon.ico">
 
 </head>
 
@@ -73,20 +74,7 @@
 
                     <!--CONTACTS (LEFT SIDE)
                         =============================================================================================-->
-                        <div class="col-lg-4">
-                            <div class="rounded-4 border osahan-sidebar bg-white mb-4">
-                                <div class="text-center p-4 border-bottom">
-                                    <h3 class="fw-bold mb-1" th:text="${session.sessNameUsr+'님'}"></h3>
-                                    <p class="m-0 text-muted" th:text="${session.sessIdUsr}"></p>
-                                </div>
-                                <div class="p-4 osahan-sidebar-links">
-                                    <a class="dropdown-item" href="/v1/member/orderList"><i class="ri-file-list-line me-2"></i> 주문목록 </a>
-                                    <a class="dropdown-item" href="/v1/member/orderReturn"></i> 환불목록</a>
-                                    <a class="dropdown-item" href="/v1/member/editMember"></i> 내정보 수정 </a>
-                                    <a class="dropdown-item logoutBtn" id="logout" href="javascript:void(0);"><i class="ri-logout-circle-line me-2"></i> 로그아웃</a>
-                                </div>
-                            </div>
-                        </div>
+                    <div th:replace="~{usr/v1/etc/userSide :: side}"></div>
                     <!--end col-md-4-->
 
                     <!--FORM (RIGHT SIDE)
@@ -104,14 +92,14 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label for="form-contact-name">이름</label>
-                                  <h5 th:text="${session.sessNameUsr}">김선우<h5>
+                                  <p class="ts-text-color-black" th:text="${item.mmName}">김선우<p>
                                 </div>
                             </div>
                             <!--Email-->
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label for="form-contact-email">생년월일</label>
-                                    <h5>1990년9월20일<h5>
+                                    <p class="ts-text-color-black" th:text="${#dates.format(item.mmBirthDay,'yyyy년MM월dd일')}"><p>
                                 </div>
                             </div>
                         </div>
