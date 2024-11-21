@@ -25,6 +25,7 @@ public class OrderController {
 		memberDto.setMmSeq(sessSeqUsr);
 		model.addAttribute("item", orderService.CheckSelectOne(orderDto));
 		model.addAttribute("memberitem", memberService.selectOne(memberDto));
+		System.out.println("sadasd");
 		return "/usr/v1/checkout/ping_checkout";
 	}
 
