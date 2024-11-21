@@ -109,5 +109,6 @@ public class ShipController {
 		return "/usr/v1/ship/ping_shipDetail";
 	}
 	
+	
 
 }
