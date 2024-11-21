@@ -12,10 +12,10 @@ public class OrderController {
 	@Autowired
 	public OrderService orderService;
 	
-//	@RequestMapping(value = "/v1/checkout/ping_checkout")
-//	public String ping_checkout(Model model,ShipDto shipDto) {
-//		model.addAttribute("item", shipService.selectOne(shipDto));
-//		return "/usr/v1/checkout/ping_checkout";
-//	}
+	@RequestMapping(value = "/v1/checkout/ping_checkout")
+	public String ping_checkout(Model model,OrderDto orderDto) {
+		model.addAttribute("item", orderService.CheckSelectOne(orderDto));
+		return "/usr/v1/checkout/ping_checkout";
+	}
 
 }

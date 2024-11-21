@@ -7,7 +7,7 @@
     
     <select id="CheckSelectOne">
     	SELECT
-    		,a.spName
+    		a.spName
     		,a.spStart
     		,a.spEatNy
     		,a.spRentalNy
@@ -15,9 +15,10 @@
     		,a.spTotal
     		,d.ptName
    		FROM ship a
-   		LEFT JOIN d port d
+   		LEFT JOIN port d
 		ON a.port_ptSeq = d.ptSeq
-
+		WHERE 1=1
+		AND a.spSeq = #{spSeq}
     </select>
     
 </mapper>
