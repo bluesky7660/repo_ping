@@ -24,6 +24,9 @@ public class FishService {
 	public List<FishDto> allList(FishVo vo){
 		return fishDao.allList(vo);
 	}
+	public List<FishDto> allOneList(FishVo vo){
+		return fishDao.allOneList(vo);
+	}
 	public int insert(FishDto fishDto) {
 		return fishDao.insert(fishDto);
 	}

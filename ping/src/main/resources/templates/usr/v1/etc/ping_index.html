@@ -16,7 +16,8 @@
     <!-- dev -->
     <link rel="stylesheet" href="/usr/v1/css/common.css">
 
-    <title>MyHouse - Advanced Real Estate HTML Template by ThemeStarz</title>
+    <title>FishOn - 피쉬온</title>
+    <link rel="icon" href="/usr/v1/template/themeforest-v1.0/assets/img/favicon.ico">
     <style>
         .navbar-brand{
             padding-top: 0;
@@ -120,10 +121,6 @@
                                         <h6 class="mb-3">어종</h6>
 
                                         <div class="">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="ch_0" name="features[]" value="0">
-                                                <label class="custom-control-label" for=ch_0>전체선택</label>
-                                            </div>
                                             <div class="custom-control custom-checkbox" th:each="fishs:${fishList}">
                                                 <input type="checkbox" class="custom-control-input" th:id="${'ch_'+fishsStat.count}" name="features[]" th:value="${'ch_'+fishsStat.count}">
                                                 <label class="custom-control-label" th:for="${'ch_'+fishsStat.count}" th:text="${fishs.fsName}"></label>
