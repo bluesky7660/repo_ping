@@ -11,8 +11,5 @@ public class OrderService {
 	public OrderDto CheckSelectOne(OrderDto orderDto) {
 		return orderDao.CheckSelectOne(orderDto);
 	}
-	public OrderDto memberSelectOne(OrderDto orderDto) {
-		return orderDao.memberSelectOne(orderDto);
-	}
 
 }

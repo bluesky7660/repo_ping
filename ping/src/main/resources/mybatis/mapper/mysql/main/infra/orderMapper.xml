@@ -14,19 +14,11 @@
     		,a.spPrice
     		,a.spTotal
     		,d.ptName
-    		,d.ptAddress
    		FROM ship a
    		LEFT JOIN port d
 		ON a.port_ptSeq = d.ptSeq
 		WHERE 1=1
 		AND a.spSeq = #{spSeq}
-    </select>
-    <select id="memberSelectOne">
-    	SELECT
-    		f.mmTel
-   		FROM member f
-   		Where 1=1
-   		AND f.mmSeq = #{sessSeqUsr}
     </select>
     
 </mapper>

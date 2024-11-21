@@ -2,20 +2,15 @@ package com.lalaping.mall.order;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 public class OrderDto {
 	private String spSeq;
 	private String spName;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date spStart;
 	private Integer spEatNy;
 	private Integer spRentalNy;
 	private Integer spPrice;
 	private Integer spTotal;
 	private String ptName;
-	private String ptAddress;
-	private String mmTel;
 	
 //	---------------------------------
 	
@@ -67,21 +62,6 @@ public class OrderDto {
 	public void setPtName(String ptName) {
 		this.ptName = ptName;
 	}
-	public String getPtAddress() {
-		return ptAddress;
-	}
-	public void setPtAddress(String ptAddress) {
-		this.ptAddress = ptAddress;
-	}
-	public String getMmTel() {
-		return mmTel;
-	}
-	public void setMmTel(String mmTel) {
-		this.mmTel = mmTel;
-	}
-	
-	
-	
 	
 
 	
