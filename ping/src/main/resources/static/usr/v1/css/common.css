@@ -75,6 +75,9 @@ img[alt="날씨이미지"]{
 #fishing_point .owl-item{
     /* min-width: 400px; */
 }
+#ts-hero #more-options-collapse{
+    max-height: 200px;
+}
 
 
 
@@ -87,14 +90,32 @@ img[alt="날씨이미지"]{
     #fishing_point .container {
         max-width: 720px;
     }
+    #ts-hero #more-options-collapse{
+        max-height: none;
+    }
+    #featured-properties .container>div>div:nth-child(1){
+        margin: 0 25%;
+    }
 }
 @media (min-width: 992px) {
     #fishing_point .container {
         max-width: 960px;
+    }
+    #ts-hero #more-options-collapse{
+        max-height: none;
+    }
+    #featured-properties .container>div>div:nth-child(1){
+        margin: 0;
     }
 }
 @media (min-width: 1200px) {
     #fishing_point .container {
         max-width: 1400px;
     }
+    #ts-hero #more-options-collapse{
+        max-height: none;
+    }
+}
+section#ts-hero{
+    overflow: visible;
 }
