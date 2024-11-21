@@ -91,12 +91,12 @@
                                         <div class="form-group">
                                             <label for="title">예약 고객님</label>
                                             <div class="input-group-append">
-                                                <span class="border-left-0" th:text="${item.}">김선우</span>
+                                                <span class="border-left-0" th:text="${session.sessNameUsr}"></span>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="title">이메일</label>
-                                            <div class="input-group-append">
+                                            <div class="input-group-append" th:text="${session.sessIdUsr}">
                                                 <span class="border-left-0">qwer1234@gmail.com</span>
                                             </div>
                                         </div>
@@ -116,7 +116,7 @@
                                             <div class="col">
                                                 <div class="input-group">
                                                     <label for="price">전화번호</label>
-                                                    <span class="border-left-0">010-0000-1111</span>
+                                                    <span class="border-left-0" th:text="${memberitem.mmTel}">010-0000-1111</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -136,39 +136,46 @@
                                 <div class="row">
 
                                     <!--Title-->
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-2">
                                         <div class="form-group">
                                             <label for="title">배이름</label>
                                             <div class="input-group-append">
-                                                <span class="border-left-0">누리호</span>
+                                                <span class="border-left-0" th:text="${item.spName}">누리호</span>
                                             </div>
                                         </div>
+                                        
                                     </div>
+                                    
 
                                     <!--Price-->
                                     
 
-                                    <div class="col-sm-12 col-md-4">
+                                    <div class="col-sm-12 col-md-10">
 
                                         <div class="row">
 
                                             <!--Area-->
                                             <div class="col">
                                                 <div class="input-group">
+                                                    <label for="area">주소</label>
+                                                    <span class="border-left-0" th:text="${item.ptAddress}">부산항</span>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="input-group">
                                                     <label for="area">항구명</label>
-                                                    <span class="border-left-0">부산항</span>
+                                                    <span class="border-left-0" th:text="${item.ptName}">부산항</span>
                                                 </div>
                                             </div>
 
                                             <!--Rooms-->
                                             <div class="col">
-                                                <div class="input-group">
-                                                    <label for="price">탑승인원</label>
-                                                    <span class="border-left-0">1</span>
-                                                    <div class="input-group-append">
-                                                        <span class="border-left-0">명</span>
-                                                    </div>
-                                                </div>
+                                                <select class="custom-select my-2" id="type" name="type" style="max-height: 200px; overflow-y: auto;">
+						                            <option value="">인원</option>
+						                            <option th:each="i : ${#numbers.sequence(1, item.spTotal)}" 
+						                                th:value="${i}" th:text="${i + '인'}"></option>
+						                            
+						                        </select>
                                             </div>
                                         </div>
                                         <!--end row-->
@@ -177,30 +184,33 @@
                                     <!--end col-md-4-->
 
                                     <!--Type Select-->
-                                    <div class="col">
+                                    
+                                    <div class="col-sm-2">
                                         <div class="input-group">
                                             <label for="area">출발일</label>
-                                            <span class="border-left-0">2024-12-31</span>
+                                            <span th:text="${#dates.format(item.spStart, 'yyyy-MM-dd HH:mm')}">2024-12-31</span>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="input-group">
                                             <label for="area">식사제공</label>
-                                            <span class="border-left-0">Y</span>
+                                            <span th:if="${item.spEatNy eq 0}">N</span>
+                                            <span th:unless="${item.spEatNy eq 0}">Y</span>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="input-group">
                                             <label for="area">낚시대대여</label>
-                                            <span class="border-left-0">Y</span>
+                                            <span th:if="${item.spRentalNy eq 0}">N</span>
+                                            <span th:unless="${item.spRentalNy eq 0}">Y</span>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="input-group">
                                             <label for="price">총가격</label>
-                                            <span class="border-left-0">220,000</span>
+                                            <span>220,000</span>
                                             <div class="input-group-append">
-                                                <span class="border-left-0">원</span>
+                                                <span>원</span>
                                             </div>
                                         </div>
                                     </div>
