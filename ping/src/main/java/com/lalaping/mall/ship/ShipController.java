@@ -105,7 +105,7 @@ public class ShipController {
 	}
 	@RequestMapping(value = "/v1/ship/shipDetail")
 	public String shipDetail(Model model,ShipDto shipDto){
-		System.out.println("sad");
+		System.out.println("sadfgfgdfgfd");
 		model.addAttribute("item",shipService.selectOne(shipDto));
 		return "/usr/v1/ship/ping_shipDetail";
 	}
