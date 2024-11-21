@@ -291,6 +291,21 @@ window.addEventListener('load', function() {
             }
         });
     });
+    const checkboxes = document.querySelectorAll('input[name="shFishList"]');
+    const maxSelection = 3;
+    if(checkboxes){
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener("change", () => {
+                const selectedCount = Array.from(checkboxes).filter((cb) => cb.checked).length;
+    
+                if (selectedCount > maxSelection) {
+                    alert(`You can only select up to ${maxSelection} options.`);
+                    checkbox.checked = false; // 선택을 취소
+                }
+            });
+        });
+    }
+    
 });
 function updatePagination(thisPage, totalPages) {
     const paginationContainer = document.querySelector("#pagination-items .pagination");

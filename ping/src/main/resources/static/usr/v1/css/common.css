@@ -72,3 +72,29 @@ img[alt="날씨이미지"]{
     margin: 0;
     
 }
+#fishing_point .owl-item{
+    /* min-width: 400px; */
+}
+
+
+
+@media (min-width: 576px) {
+    #fishing_point .container {
+        max-width: 540px;
+    }
+}
+@media (min-width: 768px) {
+    #fishing_point .container {
+        max-width: 720px;
+    }
+}
+@media (min-width: 992px) {
+    #fishing_point .container {
+        max-width: 960px;
+    }
+}
+@media (min-width: 1200px) {
+    #fishing_point .container {
+        max-width: 1400px;
+    }
+}
