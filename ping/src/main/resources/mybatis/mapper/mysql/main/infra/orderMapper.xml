@@ -21,12 +21,5 @@
 		WHERE 1=1
 		AND a.spSeq = #{spSeq}
     </select>
-    <select id="memberSelectOne">
-    	SELECT
-    		f.mmTel
-   		FROM member f
-   		Where 1=1
-   		AND f.mmSeq = #{sessSeqUsr}
-    </select>
     
 </mapper>
