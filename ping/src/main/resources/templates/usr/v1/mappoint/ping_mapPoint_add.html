@@ -17,7 +17,17 @@
 
 	<title>FishOn - 피쉬온</title>
     <link rel="icon" href="/usr/v1/template/themeforest-v1.0/assets/img/favicon.ico">
-
+    
+	<!-- kakao 우편번호 -->
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<!-- map 마커 css -->
+	<style>
+	    .map_wrap {position:relative;width:100%;height:350px;}
+	    .title {font-weight:bold;display:block;}
+	    .hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
+	    #centerAddr {display:block;margin-top:2px;font-weight: normal;}
+	    .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+	</style>
 </head>
 
 <body>
@@ -115,9 +125,12 @@
                                         <!--Address-->
                                         <div class="input-group">
                                             <label for="address">주소</label>
-                                            <input type="text" class="form-control border-right-0" id="address">
+                                            <input type="text" class="form-control border-right-0" id="sample5_address" placeholder="주소">
+                                            <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+<!-- 											<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div> -->
+                                            
                                             <div class="input-group-append" data-toggle="tooltip" data-placement="top" title="Find My Location">
-                                                <a href="#" class="input-group-text bg-white border-left-0 ">
+                                                <a href="" class="input-group-text bg-white border-left-0 ">
                                                     <i class="fa fa-map-marker ts-text-color-primary"></i>
                                                 </a>
                                             </div>
@@ -128,15 +141,17 @@
 
                                     <!--Map-->
                                     <div class="col-sm-6">
-                                        <div id="ts-map-simple" class="ts-map ts-shadow__sm h-100"
-                                             data-ts-map-leaflet-provider="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
-                                             data-ts-map-zoom="13"
-                                             data-ts-map-center-latitude="40.702411"
-                                             data-ts-map-center-longitude="-73.556842"
-                                             data-ts-map-scroll-wheel="1"
-                                             data-ts-map-controls="0"
-                                             data-ts-map-marker-drag="1">
-                                        </div>
+                                    <!-- 지도를 표시할 div 입니다, 지도 크기 설정 -->
+										<div id="map" style="width:100%;height:500px;"></div>
+<!--                                         <div id="ts-map-simple" class="ts-map ts-shadow__sm h-100" -->
+<!--                                              data-ts-map-leaflet-provider="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png" -->
+<!--                                              data-ts-map-zoom="13" -->
+<!--                                              data-ts-map-center-latitude="40.702411" -->
+<!--                                              data-ts-map-center-longitude="-73.556842" -->
+<!--                                              data-ts-map-scroll-wheel="1" -->
+<!--                                              data-ts-map-controls="0" -->
+<!--                                              data-ts-map-marker-drag="1"> -->
+<!--                                         </div> -->
                                     </div>
                                     <!--end col-md-6-->
 
@@ -234,6 +249,235 @@
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
 <script src="/usr/v1/js/script.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
+<!-- kakao 우편번호Api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- Map 영역 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ccc202e0ea64c7691f1f29219a351c5a&libraries=services,clusterer"></script>
+<script>
+// ***** Map 클릭시 마커로 주소표시 *****
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = {
+    center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+    level: 1 // 지도의 확대 레벨
+};  
+
+//지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
+infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+
+//현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
+searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+
+//지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
+kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+    if (status === kakao.maps.services.Status.OK) {
+        var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
+        detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+        
+        var content = '<div class="bAddr">' +
+                        '<span class="title">법정동 주소정보</span>' + 
+                        detailAddr + 
+                    '</div>';
+
+        // 마커를 클릭한 위치에 표시합니다 
+        marker.setPosition(mouseEvent.latLng);
+        marker.setMap(map);
+
+        // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+        infowindow.setContent(content);
+        infowindow.open(map, marker);
+    }   
+});
+});
+
+//중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
+kakao.maps.event.addListener(map, 'idle', function() {
+searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+});
+
+function searchAddrFromCoords(coords, callback) {
+// 좌표로 행정동 주소 정보를 요청합니다
+geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+}
+
+function searchDetailAddrFromCoords(coords, callback) {
+// 좌표로 법정동 상세 주소 정보를 요청합니다
+geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+}
+
+//지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+function displayCenterInfo(result, status) {
+if (status === kakao.maps.services.Status.OK) {
+    var infoDiv = document.getElementById('centerAddr');
+	
+    for(var i = 0; i < result.length; i++) {
+        // 행정동의 region_type 값은 'H' 이므로
+        if (result[i].region_type === 'H') {
+            infoDiv.innerHTML = result[i].address_name;
+            break;
+        }
+    }
+}    
+}
+// *************************** 우편번호 Api ******************************
+function sample5_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            var addr = data.address; // 최종 주소 변수
+
+            // 주소 정보를 해당 필드에 넣는다.
+            document.getElementById("sample5_address").value = addr;
+            // 주소로 상세 정보를 검색
+            geocoder.addressSearch(data.address, function(results, status) {
+                // 정상적으로 검색이 완료됐으면
+                if (status === daum.maps.services.Status.OK) {
+
+                    var result = results[0]; //첫번째 결과의 값을 활용
+
+                    // 해당 주소에 대한 좌표를 받아서
+                    var coords = new daum.maps.LatLng(result.y, result.x);
+                    // 지도를 보여준다.
+                    mapContainer.style.display = "block";
+                    map.relayout();
+                    // 지도 중심을 변경한다.
+                    map.setCenter(coords);
+                    // 마커를 결과값으로 받은 위치로 옮긴다.
+                    marker.setPosition(coords)
+                }
+            });
+        }
+    }).open();
+}
+// ************************* Map 검색 영역 ***************************
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch('sample5_address', function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">검색주소 위치</div>'
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});    
+// **************************** Map 마커 클러스터 영역 **************************
+// lat=위도, lng=경도
+var positions = [
+        {
+            title: '안양역', 
+            "lat": 37.402707,
+            "lng": 126.922044
+        },
+        {
+            title: '안양역 주위 1', 
+            "lat": 37.400707,
+            "lng": 126.920044
+        },
+        {
+            title: '안양역 주위 2', 
+            "lat": 37.403007,
+            "lng": 126.925044
+        },
+        {
+            title: '안양역 주위 3',
+            "lat": 37.405707,
+            "lng": 126.925044
+        },
+        {
+            title: '노원역', 
+            "lat": 37.654213,
+            "lng": 127.060894
+        },
+        {
+            title: '노원구', 
+            "lat": 37.651642,
+            "lng": 127.066584
+        }
+    ];
+		
+   var markers = positions.map(function(position) {  // 마커를 배열 단위로 묶음
+        return new kakao.maps.Marker({
+            position : new kakao.maps.LatLng(position.lat, position.lng)
+        });
+    });
+		
+    var clusterer = new kakao.maps.MarkerClusterer({
+            map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+            averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+            minLevel: 5, // 클러스터 할 최소 지도 레벨 
+            markers: markers // 클러스터에 마커 추가
+    });
+	// ************************ 접속위치로 표시된 위치 ******************************
+	// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+	if (navigator.geolocation) {
+	    
+	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+	    navigator.geolocation.getCurrentPosition(function(position) {
+	        
+	        var lat = position.coords.latitude, // 위도
+	            lon = position.coords.longitude; // 경도
+	        
+	        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+	            message = '<div style="padding:5px;">접속 위치</div>'; // 인포윈도우에 표시될 내용입니다
+	        
+	        // 마커와 인포윈도우를 표시합니다
+	        displayMarker(locPosition, message);
+	            
+	      });
+	    
+	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+	    
+	    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+	        message = 'geolocation을 사용할수 없습니다'
+	        
+	    displayMarker(locPosition, message);
+	}
+
+	// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+	function displayMarker(locPosition, message) {
+
+	    // 마커를 생성합니다
+	    var marker = new kakao.maps.Marker({  
+	        map: map, 
+	        position: locPosition
+	    }); 
+	    
+	 	// 인포윈도우에 표시할 내용
+	    var iwContent = message, 
+	        iwRemoveable = true;
+
+	    // 인포윈도우를 생성합니다
+	    var infowindow = new kakao.maps.InfoWindow({
+	        content : iwContent,
+	        removable : iwRemoveable
+	    });
+	    
+	    // 인포윈도우를 마커위에 표시합니다 
+	    infowindow.open(map, marker);
+	    
+	    // 지도 중심좌표를 접속위치로 변경합니다
+	    map.setCenter(locPosition);      
+	}       
+</script>
 
 </body>
 </html>
