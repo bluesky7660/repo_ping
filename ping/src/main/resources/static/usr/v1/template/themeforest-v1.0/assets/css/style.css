@@ -2769,6 +2769,7 @@ ul.ts-list-icons i {
 
 .leaflet-popup {
     margin-bottom: 0;
+    /* transform: translateY(-100% + 43px); */
 }
 
 .leaflet-popup .leaflet-popup-content-wrapper {
