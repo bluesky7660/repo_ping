@@ -1,10 +1,15 @@
 package com.lalaping.mall.mapPoint;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lalaping.mall.fish.FishService;
 import com.lalaping.mall.fish.FishVo;
@@ -64,6 +69,16 @@ public class MapPointController {
 //		model.addAttribute("list",mapPointService.selectList(vo));
 		model.addAttribute("fishList",fishService.allOneList(fishVo));
 		return "/usr/v1/mapPoint/ping_mapPoint_add";
+	}
+	
+	@RequestMapping(value = "/v1/mapPoint/mapPointSearchList")
+	@ResponseBody
+	public Map<String, Object> mapPointList(MapPointDto mapPointDto,MapPointVo mapPointVo){
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		List<MapPointDto> rtPoint = mapPointService.selectSearchList(mapPointVo);
+		System.out.println("성공");
+	    returnMap.put("data", rtPoint);
+		return returnMap;
 	}
 
 }

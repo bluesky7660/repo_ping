@@ -46,6 +46,8 @@
     		,a.mpText
     		,a.mpAddress
     		,a.mpType
+    		,a.mpLatitude
+    		,a.mpLongitude
     		,a.mpDelNy
     		,a.mpRegDate
    		<include refid="selectCommon"/>
@@ -60,6 +62,8 @@
     		,a.mpText
     		,a.mpAddress
     		,a.mpType
+    		,a.mpLatitude
+    		,a.mpLongitude
     		,a.mpDelNy
     		,a.mpRegDate
     		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
@@ -70,6 +74,25 @@
    		ORDER BY
      	a.mpRegDate DESC
      	limit #{rowNumToShow}
+    </select>
+    <select id="selectSearchList" resultMap="resultMapObj">
+    	SELECT
+    		a.mpSeq
+    		,a.mpTitle
+    		,a.mpText
+    		,a.mpAddress
+    		,a.mpType
+    		,a.mpLatitude
+    		,a.mpLongitude
+    		,a.mpDelNy
+    		,a.mpRegDate
+    		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
+   		FROM mappoint a
+        	left join fishandmappoint b on b.mappoint_mpSeq = a.mpSeq
+            left join fish c on c.fsSeq = b.fish_fsSeq
+   		GROUP BY a.mpSeq
+   		ORDER BY
+     	a.mpRegDate DESC
     </select>
     <select id="allList" resultMap="resultMapObj">
     	SELECT
