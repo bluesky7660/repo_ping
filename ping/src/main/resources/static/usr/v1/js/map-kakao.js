@@ -36,35 +36,7 @@ $(document).ready(function($) {
     kakao.maps.event.addListener(map, 'zoom_changed', constrainBounds);
 
     // **************************** Map 마커 클러스터 영역 **************************
-    // 마커 데이터 예시
-    var loadedMarkersData = [
-        {
-            id: 1,
-            lat: 37.402707,
-            lng: 126.922044,
-            title: "화이트 큐브 리조트",  // 한국어 제목
-            price: 435000,
-            address: "경기도 안양시 동안구, 대한민국",  // 한국어 주소
-            url: "https://example.com",
-            marker_image: "https://via.placeholder.com/150",
-            ribbon: "특별 할인",  // 한국어 리본
-            ribbon_corner: "최고 판매",  // 한국어 코너 리본
-            badge: "추천 상품"  // 한국어 배지
-        },
-        {
-            id: 2,
-            lat: 37.654213,
-            lng: 127.060894,
-            title: "블루 레이크 빌라",  // 한국어 제목
-            price: 300000,
-            address: "서울특별시 강남구, 대한민국",  // 한국어 주소
-            url: "https://example.com",
-            marker_image: "https://via.placeholder.com/150",
-            ribbon: "새로운 상품",  // 한국어 리본
-            ribbon_corner: "독점",  // 한국어 코너 리본
-            badge: "핫딜"  // 한국어 배지
-        }
-    ];
+    
     
     // var mapContainer = document.getElementById('map');
     // var mapOption = {
@@ -104,21 +76,33 @@ $(document).ready(function($) {
       }
     ];
 
+    // 마커 클러스터러 생성
+    var clusterer = new kakao.maps.MarkerClusterer({
+      map: map,               // 클러스터러가 표시될 지도
+      averageCenter: true,    // 마커들의 평균 위치에 클러스터 표시
+      minLevel: 5            // 최소 zoom 레벨
+    });
+
     // 마커와 인포윈도우를 한 번에 처리하는 함수
     function createMarker(markerData) {
       var markerPosition = new kakao.maps.LatLng(markerData.lat, markerData.lng);
-
+      // var marker = new kakao.maps.Marker({
+      //     position: new kakao.maps.LatLng(markerData.lat, markerData.lng),
+      //     title: markerData.title
+      // });
+      // marker.setMap(map);
       // 마커 HTML 생성
       var markerHTML = document.createElement("div");
-      markerHTML.className ="leaflet-marker-icon leaflet-div-icon leaflet-zoom-animated leaflet-interactive";
-      markerHTML.innerHTML = '<div class="ts-marker-wrapper">' +
+      // markerHTML.className ="leaflet-marker-icon leaflet-div-icon leaflet-zoom-animated leaflet-interactive";
+      markerHTML.className ="ts-marker-wrapper";
+      markerHTML.innerHTML = 
         '<div class="ts-marker" data-ts-id="' + markerData.id + '">' +
         (markerData.ribbon ? '<div class="ts-marker__feature">' + markerData.ribbon + '</div>' : "") +
         (markerData.title ? '<div class="ts-marker__title">' + markerData.title + '</div>' : "") +
         (markerData.price ? '<div class="ts-marker__info">₩' + markerData.price.toLocaleString() + '</div>' : "") +
         (markerData.marker_image ? '<div class="ts-marker__image ts-black-gradient" style="background-image: url(' + markerData.marker_image + ')"></div>' :
           '<div class="ts-marker__image ts-black-gradient" style="background-image: url(/usr/v1/template/themeforest-v1.0/assets/img/marker-default-img.png)"></div>') +
-        '</div>' +
+      
         '</div>';
 
       // 커스텀 마커 생성
@@ -126,16 +110,18 @@ $(document).ready(function($) {
         position: markerPosition,
         content: markerHTML,
         clickable: true,
-        yAnchor: 1,
+        yAnchor: 0.8,
+        xAnchor: 0,
         zIndex:1
       });
 
-      customMarker.setMap(map);
+      // customMarker.setMap(map);
+      clusterer.addMarker(customMarker);
 
       // 인포윈도우 HTML 생성
       var infowindowHTML = document.createElement("div");
-      infowindowHTML.className ="leaflet-popup  leaflet-zoom-animated";
-      infowindowHTML.innerHTML = '<div class="infobox-wrapper">' +
+      infowindowHTML.className ="infobox-wrapper";
+      infowindowHTML.innerHTML =
         '<div class="ts-infobox" data-ts-id="' + markerData.id + '">' +
         '<img src="/usr/v1/template/themeforest-v1.0/assets/img/infobox-close.svg" class="ts-close">' +
         (markerData.ribbon ? '<div class="ts-ribbon">' + markerData.ribbon + '</div>' : '') +
@@ -153,7 +139,6 @@ $(document).ready(function($) {
                     (markerData.marker_image || "/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg") + 
                 ')"></div>' + 
         '</a>' +
-        '</div>' +
         '</div>';
 
       // 인포윈도우 생성
@@ -161,24 +146,28 @@ $(document).ready(function($) {
         position: markerPosition,
         content: infowindowHTML,
         clickable: true,
-        yAnchor: 0,
+        yAnchor: 1,
         xAnchor: 0,
         zIndex: 0
       });
-      
+
       infowindow.setMap(map);
+      infowindowHTML.parentElement.classList.add("leaflet-popup", "leaflet-zoom-animated");
       // 마커 클릭 시 인포윈도우 표시
       markerHTML.addEventListener('click', function () {
-        infowindowHTML.querySelector(".infobox-wrapper").classList.add("ts-show");
-        infowindow.zIndex=2;
+        markerHTML.classList.add("ts-hide-marker");
+        infowindowHTML.classList.add("ts-show");
+        infowindow.setZIndex(2);
       });
 
       // 인포윈도우 닫기 버튼 클릭 시 인포윈도우 숨기기
       infowindowHTML.querySelector('.ts-close').addEventListener('click', function () {
+        markerHTML.classList.remove("ts-hide-marker");
         // infowindow.setMap(null);
-        infowindowHTML.querySelector(".infobox-wrapper").classList.remove("ts-show");
-        infowindow.zIndex=0;
+        infowindowHTML.classList.remove("ts-show");
+        infowindow.setZIndex(0);
       });
+      
     }
 
     // 데이터에 있는 마커를 순차적으로 생성
