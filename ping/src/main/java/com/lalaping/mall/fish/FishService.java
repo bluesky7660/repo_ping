@@ -43,7 +43,6 @@ public class FishService {
 		return fishDao.delete(fishDto);
 	}
 	
-	
 //	@PostConstruct
 //	public void selectListCachedCodeArrayList() throws Exception {
 //		List<CodeDto> codeListFromDb = (ArrayList<CodeDto>) codeDao.selectListCachedCodeArrayList();
