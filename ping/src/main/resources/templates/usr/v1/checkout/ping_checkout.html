@@ -173,7 +173,7 @@
 
                                             <!--Rooms-->
                                             <div class="col">
-                                                <select class="custom-select my-2" id="type" name="odCount" style="max-height: 200px; overflow-y: auto; name=""">
+                                                <select class="custom-select my-2" id="type" name="odCount" style="max-height: 200px; overflow-y: auto;">
 						                            <option value="">인원</option>
 						                            <option th:each="i : ${#numbers.sequence(1, item.spTotal)}" 
 						                                th:value="${i}" th:text="${i + '인'}"></option>
