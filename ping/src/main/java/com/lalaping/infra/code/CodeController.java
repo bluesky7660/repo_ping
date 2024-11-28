@@ -25,7 +25,6 @@ public class CodeController {
 		codeVo.setParamsPaging(codeService.listCount(codeVo));
 		model.addAttribute("list", codeService.selectList(codeVo));
 		model.addAttribute("formLink", "codeXdmForm");
-		System.out.println("sdsad");
 		return "xdm/v1/infra/code/codeXdmList";
 	}
 	@RequestMapping(value = "/v1/infra/code/codeXdmForm")
