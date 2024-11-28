@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/font-awesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/leaflet.css">
     <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/style.css">
-    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<!-- iamport.payment.js 1.1.7로 변경 -->
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.7.js"></script>
+   
      <!-- dev -->
     <link rel="stylesheet" href="/usr/v1/css/common.css">
 
@@ -76,7 +79,7 @@
 
                     <div class="offset-lg-1 col-lg-10">
 
-                        <form id="form-edit" class="ts-form">
+                        <form method="post" action="/v1/checkout/checkoutInst" id="checkoutForm" class="ts-form">
 
                             <section id="basic-information" class="mb-5">
 
@@ -140,7 +143,7 @@
                                         <div class="form-group">
                                             <label for="title">배이름</label>
                                             <div class="input-group-append">
-                                                <span class="border-left-0" th:text="${item.spName}">누리호</span>
+                                                <span class="border-left-0" name="spName" th:text="${item.spName}">누리호</span>
                                             </div>
                                         </div>
                                         
@@ -170,13 +173,16 @@
 
                                             <!--Rooms-->
                                             <div class="col">
-                                                <select class="custom-select my-2" id="type" name="type" style="max-height: 200px; overflow-y: auto;">
+                                                <select class="custom-select my-2" id="type" name="odCount" style="max-height: 200px; overflow-y: auto; name=""">
 						                            <option value="">인원</option>
 						                            <option th:each="i : ${#numbers.sequence(1, item.spTotal)}" 
 						                                th:value="${i}" th:text="${i + '인'}"></option>
-						                            
 						                        </select>
                                             </div>
+                                            <input type="hidden" name="spName" th:value="${item.spName}">
+                                            <input type="hidden" name="spSeq" th:value="${item.spSeq}">
+                                            <input type="hidden" name="spPrice" th:value="${item.spPrice}">
+                                            <input type="hidden" id="mmSeq" name="mmSeq" th:value="${session.sessSeqUsr}">
                                         </div>
                                         <!--end row-->
 
@@ -208,7 +214,7 @@
                                     <div class="col-sm-4">
                                         <div class="input-group">
                                             <label for="price">총가격</label>
-                                            <span>220,000</span>
+                                            <span name="odTotalPrice">220,000</span>
                                             <div class="input-group-append">
                                                 <span>원</span>
                                             </div>
@@ -238,7 +244,7 @@
                                     <i class="fa fa-times mr-2"></i>
                                     돌아가기
                                 </button>
-                                <button class="btn btn-primary btn-lg float-right">
+                                <button type="button" onclick="requestPay()" class="btn btn-primary btn-lg float-right">
                                     카카오페이 결제
                                 </button>
                             </section>
@@ -274,6 +280,70 @@
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
 <script src="/usr/v1/js/script.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
+<script>
+	    // IAMPORT 초기화
+	    var IMP = window.IMP;
+	    IMP.init("imp75302860");  // 이 값은 IAMPORT 대시보드에서 받은 본인의 상점 아이디로 바꿔야 합니다.
+	
+	    // 랜덤 merchant_uid 생성 함수
+	    function generateMerchantUid() {
+	        var date = new Date().getTime();  // 현재 시간 (밀리초)
+	        var randomNum = Math.floor(Math.random() * 1000000);  // 0부터 999999까지의 랜덤 숫자
+	        return 'merchant_' + date + '-' + randomNum;  // 예: merchant_1637796621278-56123
+	    }
+	
+	    // 결제 요청 함수
+	    function requestPay() {
+	        var merchantUid = generateMerchantUid(); // 랜덤 merchant_uid 생성
+	        var spName = $("input[name='spName']").val(); // 상품명
+	        var odTotalPrice = $("input[name='odTotalPrice']").val(); // 결제 금액
+// 	        var spSeq = $("input[name='spSeq']").val();
+// 	        var mmSeq = $("input[name='mmSeq']").val();
+	
+	        IMP.request_pay({
+	            pg: "kakaopay.TC0ONETIME", // Test용 카카오페이 PG 코드
+	            pay_method: "card",  // 카드 결제 방법
+	            merchant_uid: merchantUid, // 생성된 랜덤 merchant_uid
+	            name: spName,  // 결제 상품명
+	            amount: 2000,  // 결제 금액
+	            buyer_email: 'test@naver.com',
+	            buyer_name: '홍길동',
+	            buyer_tel: '010-1234-5678',
+	            buyer_addr: '서울특별시',
+	            buyer_postcode: '123-456'
+	        }, function (rsp) {
+	            if (rsp.success) {
+	                // 결제 성공 시 서버로 결제 정보 전송
+	                $.ajax({
+	                    type: 'POST',
+	                    url: '/v1/checkout/checkoutInst',
+	                    data: {
+	                        mmSeq: $("#mmSeq").val(),  // mmSeq 값 가져오기
+	                        spSeq: $("input[name='spSeq']").val()  // pdSeq 값 가져오기
+	                    },
+	                    success: function (data) {
+	                        if (rsp.success) {
+	                            alert("결제 성공");
+	                            window.location.href = "/v1/member/orderList";
+	                        } else {
+	                            alert("결제 실패");
+	                        }
+	                    },
+	                    error: function () {
+	                        alert("서버 요청 실패");
+	                    }
+	                });
+	            } else {
+	                alert("결제 실패: " + rsp.error_msg);  // 결제 실패 시 에러 메시지
+	            }
+	        });
+	    }
+	
+	    // 카카오페이 결제 버튼 클릭 시 결제 요청
+	    $('#kakaoPayBtn').click(function () {
+	        requestPay();  // 결제 요청 함수 호출
+	    });
+	</script>
 
 </body>
 </html>

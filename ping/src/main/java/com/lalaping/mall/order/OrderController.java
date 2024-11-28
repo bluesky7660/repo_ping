@@ -27,5 +27,10 @@ public class OrderController {
 		model.addAttribute("memberitem", memberService.selectOne(memberDto));
 		return "usr/v1/checkout/ping_checkout";
 	}
+	@RequestMapping(value = "/v1/checkout/checkoutInst")
+	public String checkoutInst(OrderDto orderDto) {
+		orderService.insertOrder(orderDto);
+		return "redirect:/v1/member/orderList";
+	}
 
 }
