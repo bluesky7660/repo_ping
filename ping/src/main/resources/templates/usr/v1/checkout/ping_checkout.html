@@ -173,7 +173,7 @@
 
                                             <!--Rooms-->
                                             <div class="col">
-                                                <select class="custom-select my-2" id="type" name="odCount" style="max-height: 200px; overflow-y: auto; name=""">
+                                                <select class="custom-select my-2" id="type" name="odCount" style="max-height: 200px; overflow-y: auto;">
 						                            <option value="">인원</option>
 						                            <option th:each="i : ${#numbers.sequence(1, item.spTotal)}" 
 						                                th:value="${i}" th:text="${i + '인'}"></option>
@@ -214,7 +214,8 @@
                                     <div class="col-sm-4">
                                         <div class="input-group">
                                             <label for="price">총가격</label>
-                                            <span name="odTotalPrice">220,000</span>
+                                            
+                                            <span id="odTotalPrice" th:text="${#numbers.formatInteger(item.spPrice,1,'COMMA')}"></span>
                                             <div class="input-group-append">
                                                 <span>원</span>
                                             </div>
@@ -291,12 +292,20 @@
 	        var randomNum = Math.floor(Math.random() * 1000000);  // 0부터 999999까지의 랜덤 숫자
 	        return 'merchant_' + date + '-' + randomNum;  // 예: merchant_1637796621278-56123
 	    }
-	
+        function totalPrice(count) {
+            const spPrice = $("input[name='spPrice']").val();
+            console.log("count:",count);
+            if(count==0||count=="0"||count==''||isNaN(count)){
+                count=1;
+            }
+            const totalPrice= spPrice* count;
+            return totalPrice;
+        }
 	    // 결제 요청 함수
 	    function requestPay() {
 	        var merchantUid = generateMerchantUid(); // 랜덤 merchant_uid 생성
 	        var spName = $("input[name='spName']").val(); // 상품명
-	        var odTotalPrice = $("input[name='odTotalPrice']").val(); // 결제 금액
+	        var odTotalPrice = $("#odTotalPrice").text(); // 결제 금액
 // 	        var spSeq = $("input[name='spSeq']").val();
 // 	        var mmSeq = $("input[name='mmSeq']").val();
 	
@@ -338,6 +347,11 @@
 	            }
 	        });
 	    }
+        $("select[name='odCount']").change(function (){
+            const count = parseInt($(this).val(), 10);
+            const pay = totalPrice(count);
+            $("#odTotalPrice").text(pay.toLocaleString('ko-KR'));
+        });
 	
 	    // 카카오페이 결제 버튼 클릭 시 결제 요청
 	    $('#kakaoPayBtn').click(function () {
