@@ -27,13 +27,13 @@ public class CodeGroupController {
 //			System.out.println("리스트seq: " + item.get );
 //		}
 		model.addAttribute("formLink", "codeGroupXdmForm");
-		return "/xdm/v1/infra/codegroup/codeGroupXdmList";
+		return "xdm/v1/infra/codegroup/codeGroupXdmList";
 	}
 	
 	@RequestMapping(value = "/v1/infra/codegroup/codeGroupXdmForm")
 	public String codeGroupXdmForm(Model model) {
 		model.addAttribute("listLink", "codeGroupXdmList");
-		return "/xdm/v1/infra/codegroup/codeGroupXdmForm";
+		return "xdm/v1/infra/codegroup/codeGroupXdmForm";
 	}
 	 
 	@RequestMapping(value = "/v1/infra/codegroup/codeGroupXdmInst")

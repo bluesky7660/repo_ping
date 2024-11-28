@@ -20,7 +20,7 @@ public class WeatherController {
 	@RequestMapping(value = "/v1/weather/weatherPoint")
 	public String weatherPoint(Model model, MapPointDto mapPointDto){
 		model.addAttribute("item",mapPointService.selectOne(mapPointDto));
-		return "/usr/v1/weather/ping_weatherPoint";
+		return "usr/v1/weather/ping_weatherPoint";
 	}
 	
 	/*물떄*/
@@ -30,6 +30,6 @@ public class WeatherController {
 		String DATE = "";
 		String apiUrl = "http://www.khoa.go.kr/api/oceangrid/DataType/search.do?ServiceKey=" + API_KEY +
                 "&ObsCode=" + OBS_CODE + "&Date=" + DATE + "&ResultType=json";
-		return "/usr/v1/weather/ping_weatherPoint";
+		return "usr/v1/weather/ping_weatherPoint";
 	}
 }
