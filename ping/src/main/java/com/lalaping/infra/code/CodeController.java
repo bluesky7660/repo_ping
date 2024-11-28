@@ -32,7 +32,7 @@ public class CodeController {
 	public String CodeXdmForm(Model model , CodeGroupVo codeGroupVo) {
 		model.addAttribute("codeGroups", codeGroupService.selectList(codeGroupVo));
 		model.addAttribute("listLink", "codeXdmList");
-		return "/xdm/v1/infra/code/codeXdmForm";
+		return "xdm/v1/infra/code/codeXdmForm";
 	}
 	@RequestMapping(value = "/v1/infra/code/codeXdmInst")
 	public String CodeXdmInst(CodeDto codeDto) {
