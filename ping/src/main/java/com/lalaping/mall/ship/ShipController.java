@@ -23,11 +23,11 @@ public class ShipController {
 	@RequestMapping(value = "/v1/ship/shipXdmList")
 	public String shipXdmList(Model model,@ModelAttribute("vo") ShipVo vo){
 		model.addAttribute("list",shipService.selectList(vo));
-		return "/xdm/v1/ship/shipXdmList";
+		return "xdm/v1/ship/shipXdmList";
 	}
 	@RequestMapping(value = "/v1/ship/shipXdmForm")
 	public String shipXdmForm() {
-		return "/xdm/v1/ship/shipXdmForm";
+		return "xdm/v1/ship/shipXdmForm";
 	}
 	@RequestMapping(value = "/v1/ship/shipXdmInst")
 	public String shipXdmInst(ShipDto shipDto) {
@@ -37,7 +37,7 @@ public class ShipController {
 	@RequestMapping(value = "/v1/ship/shipXdmMFom")
 	public String shipXdmMFom(Model model,ShipDto shipDto) {
 		model.addAttribute("item",shipService.selectOne(shipDto));
-		return "/xdm/v1/ship/shipXdmMFom";
+		return "xdm/v1/ship/shipXdmMFom";
 	}
 	@RequestMapping(value="/v1/ship/shipXdmUpdt")
 	public String shipXdmUpdt(ShipDto shipDto) {
@@ -101,13 +101,13 @@ public class ShipController {
 		}
 
 		model.addAttribute("fishList",fishService.allOneList(fishVo));
-		return "/usr/v1/ship/ping_shipList";
+		return "usr/v1/ship/ping_shipList";
 	}
 	@RequestMapping(value = "/v1/ship/shipDetail")
 	public String shipDetail(Model model,ShipDto shipDto){
 		System.out.println("sadfgfgdfgfdssss");
 		model.addAttribute("item",shipService.selectOne(shipDto));
-		return "/usr/v1/ship/ping_shipDetail";
+		return "usr/v1/ship/ping_shipDetail";
 	}
 	
 	

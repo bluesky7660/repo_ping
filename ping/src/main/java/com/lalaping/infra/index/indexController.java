@@ -59,7 +59,7 @@ public class indexController {
 		
 		shipVo.setRowNumToShow(3);
 		model.addAttribute("ships",shipService.selectUsrList(shipVo));
-		return "/usr/v1/etc/ping_index";
+		return "usr/v1/etc/ping_index";
 	}
 	
 	@RequestMapping(value = "/v1/mapPoint/getSeasonalData")

@@ -15,12 +15,12 @@ public class FishController {
 	public String fishXdmList(Model model,@ModelAttribute("vo") FishVo vo){
 		model.addAttribute("list",fishService.selectList(vo));
 		model.addAttribute("formLink", "fishXdmForm");
-		return "/xdm/v1/fish/fishXdmList";
+		return "xdm/v1/fish/fishXdmList";
 	}
 	@RequestMapping(value = "/v1/fish/fishXdmForm")
 	public String fishXdmForm(Model model) {
 		model.addAttribute("listLink", "fishXdmList");
-		return "/xdm/v1/fish/fishXdmForm";
+		return "xdm/v1/fish/fishXdmForm";
 	}
 	@RequestMapping(value = "/v1/fish/fishXdmInst")
 	public String fishXdmInst(FishDto fishDto) {
@@ -30,7 +30,7 @@ public class FishController {
 	@RequestMapping(value = "/v1/fish/fishXdmMFom")
 	public String fishXdmMFom(Model model,FishDto fishDto) {
 		model.addAttribute("item",fishService.selectOne(fishDto));
-		return "/xdm/v1/fish/fishXdmMFom";
+		return "xdm/v1/fish/fishXdmMFom";
 	}
 	@RequestMapping(value="/v1/fish/fishXdmUpdt")
 	public String fishXdmUpdt(FishDto fishDto) {
