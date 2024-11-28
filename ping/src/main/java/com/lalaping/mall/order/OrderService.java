@@ -14,5 +14,8 @@ public class OrderService {
 	public OrderDto memberSelectOne(OrderDto orderDto) {
 		return orderDao.memberSelectOne(orderDto);
 	}
+	public int insertOrder(OrderDto orderDto) {
+		return orderDao.insertOrder(orderDto);
+	}
 
 }
