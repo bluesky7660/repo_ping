@@ -62,8 +62,9 @@
     </select>
     <update id="ueleteOrder">
   		UPDATE orders
-  		SET
-  			odReturnNy = 1
+  		SET	
+  			odModDate = now()
+  			,odReturnNy = 1
 		WHERE 1=1
 		AND odSeq = #{odSeq}
     </update>
@@ -75,6 +76,7 @@
     		,g.odTotalPrice
     		,g.odReturnNy
     		,g.odRegDate
+    		,g.odModDate
     		,g.ship_spSeq
     		,g.member_mmSeq
     		,a.spName
