@@ -167,20 +167,7 @@ public class MemberController {
 		model.addAttribute("item", memberService.selectOne(memberDto));
 		return "usr/v1/member/ping_editMember";
 	}
-	@RequestMapping(value = "/v1/member/orderList")
-	public String orderList(Model model, MemberDto memberDto, HttpSession session) {
-		String sessSeqUsr = String.valueOf(session.getAttribute("sessSeqUsr"));
-		memberDto.setMmSeq(sessSeqUsr);
-		model.addAttribute("item", memberService.selectOne(memberDto));
-		return "usr/v1/member/ping_orderList";
-	}
-	@RequestMapping(value = "/v1/member/orderReturn")
-	public String orderReturn(Model model, MemberDto memberDto, HttpSession session) {
-		String sessSeqUsr = String.valueOf(session.getAttribute("sessSeqUsr"));
-		memberDto.setMmSeq(sessSeqUsr);
-		model.addAttribute("item", memberService.selectOne(memberDto));
-		return "usr/v1/member/ping_orderReturn";
-	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "loginUsrProc")

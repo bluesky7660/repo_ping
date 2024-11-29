@@ -1,5 +1,7 @@
 package com.lalaping.mall.order;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,9 @@ public class OrderService {
 	}
 	public int insertOrder(OrderDto orderDto) {
 		return orderDao.insertOrder(orderDto);
+	}
+	public List<OrderDto> selectListOrder(OrderDto orderDto){
+		return orderDao.selectListOrder(orderDto);
 	}
 
 }

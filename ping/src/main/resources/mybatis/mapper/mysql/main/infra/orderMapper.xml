@@ -5,7 +5,7 @@
 
     <resultMap type="com.lalaping.mall.order.OrderDto" id="resultMapObj"></resultMap>
     
-    <select id="CheckSelectOne">
+    <select id="CheckSelectOne" resultMap="resultMapObj">
     	SELECT
     		a.spSeq
     		,a.spName
@@ -31,7 +31,7 @@
     		,ship_spSeq
     		,member_mmSeq
     	)VALUES(
-    		240000
+    		#{odTotalPrice}
     		,#{odCount}
     		,now()
     		,now()
@@ -39,5 +39,21 @@
     		,#{mmSeq}
     	)
     </insert>
+    
+    <select id="selectListOrder" resultMap="resultMapObj">
+    	SELECT
+    		g.odSeq
+    		,g.odTotalPrice
+    		,g.odRegDate
+    		,g.ship_spSeq
+    		,g.member_mmSeq
+    		,a.spName
+    		,a.spStart
+   		FROM orders g
+   		LEFT JOIN ship a
+		ON g.ship_spSeq = a.spSeq
+		WHERE 1=1
+		AND g.member_mmSeq = #{member_mmSeq}
+    </select>
     
 </mapper>
