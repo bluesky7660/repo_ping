@@ -10,5 +10,7 @@ public interface OrderDao {
 	public OrderDto memberSelectOne(OrderDto orderDto);
 	public int insertOrder(OrderDto orderDto);
 	public List<OrderDto> selectListOrder(OrderDto orderDto);
+	public int ueleteOrder(OrderDto orderDto);
+	public List<OrderDto> selectListReturn(OrderDto orderDto);
 
 }

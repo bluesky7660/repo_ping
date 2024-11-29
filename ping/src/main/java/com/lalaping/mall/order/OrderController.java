@@ -40,10 +40,17 @@ public class OrderController {
 		model.addAttribute("list", orderService.selectListOrder(orderDto));
 		return "usr/v1/member/ping_orderList";
 	}
+	@RequestMapping(value = "/v1/member/orderUelete")
+	public String orderUelete(OrderDto orderDto) {
+		orderService.ueleteOrder(orderDto);
+		return "redirect:/v1/member/orderReturn";
+	}
 	@RequestMapping(value = "/v1/member/orderReturn")
-	public String orderReturn(Model model, MemberDto memberDto, HttpSession session) {
+	public String orderReturn(Model model, MemberDto memberDto, HttpSession session,OrderDto orderDto) {
 		String sessSeqUsr = String.valueOf(session.getAttribute("sessSeqUsr"));
+		orderDto.setMember_mmSeq(sessSeqUsr);
 		memberDto.setMmSeq(sessSeqUsr);
+		model.addAttribute("list", orderService.selectListReturn(orderDto));
 		model.addAttribute("item", memberService.selectOne(memberDto));
 		return "usr/v1/member/ping_orderReturn";
 	}
