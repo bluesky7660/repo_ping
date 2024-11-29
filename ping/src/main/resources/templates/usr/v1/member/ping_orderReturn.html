@@ -88,7 +88,6 @@
                             <label class="row card ts-item ts-item__list ts-card"  th:each="list:${list}">
                                 <!--Card Image-->
                                 <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
-<!--                                     <input type="radio" name="odSeq"> -->
                                 </div>
 
                                 <!--Card Body-->
@@ -112,8 +111,12 @@
                                             <dd th:text="${#dates.format(list.spStart,'yyyy-MM-dd / HH:mm')}"></dd>
                                         </dl>
                                         <dl>
-                                            <dt>결제일</dt>
-                                            <dd  th:text="${#dates.format(list.odRegDate,'yyyy-MM-dd / HH:mm')}"></dd>
+                                            <dt>결제일자</dt>
+                                            <dd th:text="${#dates.format(list.odRegDate,'yyyy-MM-dd / HH:mm')}"></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>환불일자</dt>
+                                            <dd th:text="${#dates.format(list.odModDate,'yyyy-MM-dd / HH:mm')}"></dd>
                                         </dl>
                                     </div>
                                       <input type="hidden" th:value="${list.odReturnNy}">
