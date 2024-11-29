@@ -114,7 +114,13 @@
                                 <!--end row-->
                             </div>
                             <!--end p-4-->
-                            <div class="col-4" style="background-color: red;">항구지도</div>
+                            <div class="col-4 ts-map ts-map__detail ts-border-radius__sm ts-shadow__sm" id="ts-map-simple"
+                                 data-ts-map-zoom="7"
+                                 th:data-ts-map-portName="${item.ptName}"
+                                 th:data-ts-map-center-latitude="${item.ptLatitude}"
+                                 th:data-ts-map-center-longitude="${item.ptLongitude}"
+                                 data-ts-map-scroll-wheel="0"
+                                 data-ts-map-controls="0"></div>
 
                             <div class="col-7 ts-bg-light p-3 ts-border-radius__md d-block d-sm-flex ts-center__vertical justify-content-between ts-xs-text-center">
                                 <p class="d-sm-inline-block mb-2 mb-sm-0" th:text="${shipCount+'건이 검색되었습니다'}"></p>
@@ -965,10 +971,12 @@
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/owl.carousel.min.js"></script>
-<script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script>
+<!-- <script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script> -->
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&libraries=services,clusterer"></script>
 <script src="/usr/v1/js/script.js"></script>
-<script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
+<script src="/usr/v1/js/map-kakao.js"></script>
+<!-- <script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script> -->
 
 <!-- by developer -->
 <script src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>

@@ -12,8 +12,8 @@
     		,a.spStart
     		,a.spEatNy
     		,a.spRentalNy
+    		,a.spRemain
     		,a.spPrice
-    		,a.spTotal
     		,d.ptName
     		,d.ptAddress
    		FROM ship a

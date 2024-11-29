@@ -47,6 +47,8 @@
 			,a.ptName
 			,a.ptDesc
 			,a.ptAddress
+			,a.ptLatitude
+			,a.ptLongitude
 			,a.ptDelNy
 			,a.ptRegDate
 		<include refid="selectCommon"/>
@@ -60,6 +62,8 @@
 			,ptName
 			,ptDesc
 			,ptAddress
+			,ptLatitude
+			,ptLongitude
 			,ptDelNy
 			,ptRegDate
 		)values(
@@ -67,6 +71,8 @@
 			,#{ptName}
 			,#{ptDesc}
 			,#{ptAddress}
+			,#{ptLatitude}
+			,#{ptLongitude}
 			,0
 			,now()	
 		)	
@@ -78,6 +84,8 @@
 			,a.ptName
 			,a.ptDesc
 			,a.ptAddress
+			,a.ptLatitude
+			,a.ptLongitude
 			,a.ptDelNy
 			,a.ptRegDate
 		FROM port a

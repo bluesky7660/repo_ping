@@ -7,6 +7,8 @@ public class PortDto {
 	private Integer ptArea;
 	private String ptName;
 	private String ptDesc;
+	private String ptLongitude;
+	private String ptLatitude;
 	private String ptAddress;
 	private Integer ptDelNy;
 	private Date ptRegDate;
@@ -55,11 +57,18 @@ public class PortDto {
 	public void setPtRegDate(Date ptRegDate) {
 		this.ptRegDate = ptRegDate;
 	}
-	
+	public String getPtLongitude() {
+		return ptLongitude;
+	}
+	public void setPtLongitude(String ptLongitude) {
+		this.ptLongitude = ptLongitude;
+	}
+	public String getPtLatitude() {
+		return ptLatitude;
+	}
+	public void setPtLatitude(String ptLatitude) {
+		this.ptLatitude = ptLatitude;
+	}
 
-	
-	
-	
-	
 
 }

@@ -13,6 +13,7 @@ public class OrderDto {
 	private Integer spRentalNy;
 	private Integer spPrice;
 	private Integer spTotal;
+	private Integer spRemain;
 	private String ptName;
 	private String ptAddress;
 	private String mmTel;
@@ -138,19 +139,10 @@ public class OrderDto {
 	public void setMmSeq(String mmSeq) {
 		this.mmSeq = mmSeq;
 	}
-	
-	
-	
-	
-	
-	
-
-	
-	
-
-	
-	
-	
-	
-
+	public Integer getSpRemain() {
+		return spRemain;
+	}
+	public void setSpRemain(Integer spRemain) {
+		this.spRemain = spRemain;
+	}
 }
