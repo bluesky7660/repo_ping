@@ -162,7 +162,7 @@
                                             </td>
                                             <td>
                                                 <div>
-                                                    <select class="custom-select" id="type" name="odCount" style="max-height: 200px; overflow-y: auto;">
+                                                    <select class="custom-select" id="odCount" name="odCount" style="max-height: 200px; overflow-y: auto;">
                                                         <option value="">인원</option>
                                                         <option th:each="i : ${#numbers.sequence(1, item.spRemain)}" 
                                                             th:value="${i}" th:text="${i + '인'}"></option>
@@ -193,7 +193,7 @@
                                                 <span th:text="${#dates.format(item.spStart, 'yyyy-MM-dd / HH:mm')}"></span>
                                             </td>
                                             <td>
-                                                <span id="odTotalPrice" th:text="${#numbers.formatInteger(item.spPrice,1,'COMMA')}"></span><span>원</span>
+                                                <span id="odTotalPrice" name="odTotalPrice" th:text="${#numbers.formatInteger(item.spPrice,1,'COMMA')}"></span><span>원</span>
                                                 
                                             </td>
                                         </tr>
@@ -343,7 +343,7 @@
 	    function requestPay() {
 	        var merchantUid = generateMerchantUid(); // 랜덤 merchant_uid 생성
 	        var spName = $("input[name='spName']").val(); // 상품명
-	        var odTotalPrice = $("#odTotalPrice").text(); // 결제 금액
+	        var odTotalPrice = $("#odTotalPrice").text().replace(/,/g, ''); // 결제 금액
 // 	        var spSeq = $("input[name='spSeq']").val();
 // 	        var mmSeq = $("input[name='mmSeq']").val();
 	
@@ -364,7 +364,9 @@
 	                    url: '/v1/checkout/checkoutInst',
 	                    data: {
 	                        mmSeq: $("#mmSeq").val(),  // mmSeq 값 가져오기
-	                        spSeq: $("input[name='spSeq']").val()  // pdSeq 값 가져오기
+	                        spSeq: $("input[name='spSeq']").val(),  // pdSeq 값 가져오기
+	                        odTotalPrice: $("#odTotalPrice").text().replace(/,/g, ''),
+	                        odCount: $("#odCount").val()
 	                    },
 	                    success: function (data) {
 	                        if (rsp.success) {

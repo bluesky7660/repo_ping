@@ -22,5 +22,11 @@ public class OrderService {
 	public List<OrderDto> selectListOrder(OrderDto orderDto){
 		return orderDao.selectListOrder(orderDto);
 	}
+	public int ueleteOrder(OrderDto orderDto) {
+		return orderDao.ueleteOrder(orderDto);
+	}
+	public List<OrderDto> selectListReturn(OrderDto orderDto){
+		 return orderDao.selectListReturn(orderDto);
+	}
 
 }

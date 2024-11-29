@@ -26,6 +26,7 @@
     	INSERT INTO orders(
     		odTotalPrice
     		,odCount
+    		,odReturnNy
     		,odRegDate
     		,odModDate
     		,ship_spSeq
@@ -33,6 +34,7 @@
     	)VALUES(
     		#{odTotalPrice}
     		,#{odCount}
+    		,0
     		,now()
     		,now()
     		,#{spSeq}
@@ -43,7 +45,9 @@
     <select id="selectListOrder" resultMap="resultMapObj">
     	SELECT
     		g.odSeq
+    		,g.odCount
     		,g.odTotalPrice
+    		,g.odReturnNy
     		,g.odRegDate
     		,g.ship_spSeq
     		,g.member_mmSeq
@@ -54,6 +58,33 @@
 		ON g.ship_spSeq = a.spSeq
 		WHERE 1=1
 		AND g.member_mmSeq = #{member_mmSeq}
+		AND g.odReturnNy = 0
+    </select>
+    <update id="ueleteOrder">
+  		UPDATE orders
+  		SET
+  			odReturnNy = 1
+		WHERE 1=1
+		AND odSeq = #{odSeq}
+    </update>
+    
+    <select id="selectListReturn" resultMap="resultMapObj">
+    	SELECT
+    		g.odSeq
+    		,g.odCount
+    		,g.odTotalPrice
+    		,g.odReturnNy
+    		,g.odRegDate
+    		,g.ship_spSeq
+    		,g.member_mmSeq
+    		,a.spName
+    		,a.spStart
+   		FROM orders g
+   		LEFT JOIN ship a
+		ON g.ship_spSeq = a.spSeq
+		WHERE 1=1
+		AND g.member_mmSeq = #{member_mmSeq}
+		AND g.odReturnNy = 1
     </select>
     
 </mapper>

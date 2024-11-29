@@ -80,88 +80,52 @@
                     <!--FORM (RIGHT SIDE)
                         =============================================================================================-->
                     <div class="col-md-8">
+                    <form method="post" action="/v1/member/orderUelete">
 
                         <!--Title-->
-                        <h3>환불목록</h3>
+                        <h3>예약목록</h3>
                             <!--Row-->
-                            <div class="row">
-                                <a href="detail-01.html" class="card ts-item ts-item__list ts-card">
-                                    
-                                    <!--Card Image-->
-                                    <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
+                            <label class="row card ts-item ts-item__list ts-card"  th:each="list:${list}">
+                                <!--Card Image-->
+                                <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
+<!--                                     <input type="radio" name="odSeq"> -->
+                                </div>
+
+                                <!--Card Body-->
+                                
+                                <div class="card-body">
+
+                                    <figure class="ts-item__info">
+                                        <a href="#"><h4 th:text="${list.spName}"></h4></a>
+                                    </figure>
+                                    <div class="ts-description-lists">
+                                        <dl>
+                                            <dt>결제가격</dt>
+                                            <dd th:text="${#numbers.formatInteger(list.odTotalPrice,1,'COMMA') + ' 원'}"></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>예약인원</dt>
+                                            <dd th:text="${list.odCount} + '명'"></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>출항날짜</dt>
+                                            <dd th:text="${#dates.format(list.spStart,'yyyy-MM-dd / HH:mm')}"></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>결제일</dt>
+                                            <dd  th:text="${#dates.format(list.odRegDate,'yyyy-MM-dd / HH:mm')}"></dd>
+                                        </dl>
                                     </div>
-    
-                                    <!--Card Body-->
-                                  
-                                    <div class="card-body">
-    
-                                        <figure class="ts-item__info">
-                                            <small>환불중</small>
-                                            <h4>누리호</h4>
-                                            <!-- <aside>
-                                                <i class="fa fa-map-marker mr-2"></i>
-                                                1350 Arbutus Drive
-                                            </aside> -->
-                                        </figure>
-                                        <div class="ts-description-lists">
-                                            <dl>
-                                                <dt>결제가격</dt>
-                                                <dd>220,000원</dd>
-                                            </dl>
-                                            <dl>
-                                                <dt>출항날짜</dt>
-                                                <dd>2024-10-25</dd>
-                                            </dl>
-                                            <dl>
-                                                <dt>결제일</dt>
-                                                <dd>2024-10-12</dd>
-                                            </dl>
-                                            
-                                            <dl>
-                                                <dt>환불날짜</dt>
-                                                <dd>2024-10-23</dd>
-                                            </dl>
-                                        </div>
-                                    </div>            
-                                </a>  
-                            </div>
-                            <div class="row">
-                                <a href="detail-01.html" class="card ts-item ts-item__list ts-card">
-                                    
-                                    <!--Card Image-->
-                                    <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
-                                    </div>
-    
-                                    <!--Card Body-->
-                                  
-                                    <div class="card-body">
-    
-                                        <figure class="ts-item__info">
-                                            <small>환불완료</small>
-                                            <h4>누리호</h4>
-                                            <!-- <aside>
-                                                <i class="fa fa-map-marker mr-2"></i>
-                                                1350 Arbutus Drive
-                                            </aside> -->
-                                        </figure>
-                                        <div class="ts-description-lists">
-                                            <dl>
-                                                <dt>결제가격</dt>
-                                                <dd>220,000원</dd>
-                                            </dl>
-                                            <dl>
-                                                <dt>결제일</dt>
-                                                <dd>2024-10-12</dd>
-                                            </dl>
-                                            <dl>
-                                                <dt>출항날짜</dt>
-                                                <dd>2024-10-25</dd>
-                                            </dl>
-                                        </div>
-                                    </div>            
-                                </a>  
-                            </div>
-                        <!--end form-contact -->
+                                      <input type="hidden" th:value="${list.odReturnNy}">
+                                        
+                                </div>  
+<!--                                <button type="submit" class="card-footer"> -->
+<!--                                     <span class="ts-btn-arrow">환불하기</span> -->
+<!--                                </button> -->
+                             
+                        </label>
+                        
+                    </form>    <!--end form-contact -->
                     </div>
                     <!--end col-md-8-->
 

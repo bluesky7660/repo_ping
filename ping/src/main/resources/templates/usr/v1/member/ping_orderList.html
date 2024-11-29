@@ -80,6 +80,7 @@
                     <!--FORM (RIGHT SIDE)
                         =============================================================================================-->
                     <div class="col-md-8">
+                    <form method="post" action="/v1/member/orderUelete">
 
                         <!--Title-->
                         <h3>예약목록</h3>
@@ -87,7 +88,8 @@
                             <label class="row card ts-item ts-item__list ts-card"  th:each="list:${list}">
                                 <!--Card Image-->
                                 <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
-                                    <input type="radio" name="odSeq">
+                                    <input type="radio" name="odSeq" th:value="${list.odSeq}"
+                                     th:if="${list.spStart != null and list.spStart.after(new java.util.Date())}" />
                                 </div>
 
                                 <!--Card Body-->
@@ -103,6 +105,10 @@
                                             <dd th:text="${#numbers.formatInteger(list.odTotalPrice,1,'COMMA') + ' 원'}"></dd>
                                         </dl>
                                         <dl>
+                                            <dt>예약인원</dt>
+                                            <dd th:text="${list.odCount} + '명'"></dd>
+                                        </dl>
+                                        <dl>
                                             <dt>출항날짜</dt>
                                             <dd th:text="${#dates.format(list.spStart,'yyyy-MM-dd / HH:mm')}"></dd>
                                         </dl>
@@ -111,13 +117,16 @@
                                             <dd  th:text="${#dates.format(list.odRegDate,'yyyy-MM-dd / HH:mm')}"></dd>
                                         </dl>
                                     </div>
+                                      <input type="hidden" th:value="${list.odReturnNy}">
                                         
                                 </div>  
-                                <a href="#" class="card-footer">
+                               <button type="submit" class="card-footer">
                                     <span class="ts-btn-arrow">환불하기</span>
-                                </a>           
+                               </button>
+                             
                         </label>
-                        <!--end form-contact -->
+                        
+                    </form>    <!--end form-contact -->
                     </div>
                     <!--end col-md-8-->
 

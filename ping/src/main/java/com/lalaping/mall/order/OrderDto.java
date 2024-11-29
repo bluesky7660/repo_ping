@@ -27,6 +27,7 @@ public class OrderDto {
 	private String ship_spSeq;
 	private String member_mmSeq;
 	private String mmSeq;
+	private Integer odReturnNy;
 	
 	
 //	---------------------------------
@@ -145,4 +146,12 @@ public class OrderDto {
 	public void setSpRemain(Integer spRemain) {
 		this.spRemain = spRemain;
 	}
+	public Integer getOdReturnNy() {
+		return odReturnNy;
+	}
+	public void setOdReturnNy(Integer odReturnNy) {
+		this.odReturnNy = odReturnNy;
+	}
+	
+	
 }
