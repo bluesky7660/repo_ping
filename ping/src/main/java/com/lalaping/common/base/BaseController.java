@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BaseController {
 	@RequestMapping(value = "/v1/dashBoardXdm")
 	public String dashBoardXdm() {
-		return "/xdm/v1/infra/base/index";
+		return "xdm/v1/infra/base/index";
 	}
 
 }

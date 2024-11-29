@@ -119,13 +119,13 @@
                                 <h3 class="text-muted border-bottom">포인트 위치</h3>
 
                                 <div class="row">
-
+                                    <!-- 포인트 주소 -->
                                     <div class="col-sm-6">
 
-                                        <!--Address-->
+                                        <!--주소 검색-->
                                         <div class="input-group">
-                                            <label for="address">주소</label>
-                                            <input type="text" class="form-control border-right-0" id="sample5_address" placeholder="주소">
+                                            <label for="sample5_address">주소</label>
+                                            <input type="text" class="form-control border-right-0" id="sample5_address" placeholder="주소" readonly>
                                             <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 <!-- 											<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div> -->
                                             
@@ -135,7 +135,10 @@
                                                 </a>
                                             </div>
                                         </div>
-
+                                        <div class="input-group">
+                                            <label for="address_view">포인트 상세주소</label>
+                                            <input type="text" id="address_view" class="form-control"/>
+                                        </div>
                                     </div>
                                     <!--end col-md-6-->
 
@@ -189,7 +192,8 @@
                                 </div>
                                 <!--end row-->
 
-                                <div id="features-checkboxes">
+                                <!-- <div id="features-checkboxes"> -->
+                                <div id="fishList-checkboxes">
                                     <h6 class="mb-3">잡히는 어종</h6>
 
                                     <!--Checkboxes-->
@@ -252,180 +256,139 @@
 <!-- kakao 우편번호Api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- Map 영역 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ccc202e0ea64c7691f1f29219a351c5a&libraries=services,clusterer"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&libraries=services,clusterer"></script>
 <script>
-// ***** Map 클릭시 마커로 주소표시 *****
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-mapOption = {
-    center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-    level: 1 // 지도의 확대 레벨
-};  
+    // ***** Map 클릭시 마커로 주소표시 *****
+    var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
+    var address_view = document.getElementById("sample5_address");
+    var mapOption = {
+        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        level: 1 // 지도의 확대 레벨
+    };  
 
-//지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
+    //지도를 생성합니다    
+    var map = new kakao.maps.Map(mapContainer, mapOption); 
 
-//주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
+    //주소-좌표 변환 객체를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder();
 
-var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
-infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+    var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
+    infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
 
-//현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
-searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+    //현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
+    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 
-//지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
-kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
-    if (status === kakao.maps.services.Status.OK) {
-        var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
-        detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
-        
-        var content = '<div class="bAddr">' +
-                        '<span class="title">법정동 주소정보</span>' + 
-                        detailAddr + 
-                    '</div>';
+    //지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
+    kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+    searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
+            detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+            
+            var content = '<div class="bAddr">' +
+                            '<span class="title">포인트 주소정보</span>' + 
+                            detailAddr + 
+                        '</div>';
 
-        // 마커를 클릭한 위치에 표시합니다 
-        marker.setPosition(mouseEvent.latLng);
-        marker.setMap(map);
+            // 마커를 클릭한 위치에 표시합니다 
+            marker.setPosition(mouseEvent.latLng);
+            marker.setMap(map);
+            address_view.value = !!result[0].road_address ? result[0].road_address.address_name:result[0].address.address_name;
+            // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+        }   
+    });
+    });
 
-        // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-        infowindow.setContent(content);
-        infowindow.open(map, marker);
-    }   
-});
-});
+    
+    //
+    
+    //중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
+    kakao.maps.event.addListener(map, 'idle', function() {
+    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+    });
 
-//중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
-kakao.maps.event.addListener(map, 'idle', function() {
-searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-});
-
-function searchAddrFromCoords(coords, callback) {
-// 좌표로 행정동 주소 정보를 요청합니다
-geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
-}
-
-function searchDetailAddrFromCoords(coords, callback) {
-// 좌표로 법정동 상세 주소 정보를 요청합니다
-geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-}
-
-//지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
-function displayCenterInfo(result, status) {
-if (status === kakao.maps.services.Status.OK) {
-    var infoDiv = document.getElementById('centerAddr');
-	
-    for(var i = 0; i < result.length; i++) {
-        // 행정동의 region_type 값은 'H' 이므로
-        if (result[i].region_type === 'H') {
-            infoDiv.innerHTML = result[i].address_name;
-            break;
-        }
+    function searchAddrFromCoords(coords, callback) {
+    // 좌표로 행정동 주소 정보를 요청합니다
+    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
     }
-}    
-}
-// *************************** 우편번호 Api ******************************
-function sample5_execDaumPostcode() {
-    new daum.Postcode({
-        oncomplete: function(data) {
-            var addr = data.address; // 최종 주소 변수
 
-            // 주소 정보를 해당 필드에 넣는다.
-            document.getElementById("sample5_address").value = addr;
-            // 주소로 상세 정보를 검색
-            geocoder.addressSearch(data.address, function(results, status) {
-                // 정상적으로 검색이 완료됐으면
-                if (status === daum.maps.services.Status.OK) {
+    function searchDetailAddrFromCoords(coords, callback) {
+    // 좌표로 법정동 상세 주소 정보를 요청합니다
+    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+    }
 
-                    var result = results[0]; //첫번째 결과의 값을 활용
+    //지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+    function displayCenterInfo(result, status) {
+    if (status === kakao.maps.services.Status.OK) {
+        var infoDiv = document.getElementById('centerAddr');
+        
+        for(var i = 0; i < result.length; i++) {
+            // 행정동의 region_type 값은 'H' 이므로
+            if (result[i].region_type === 'H') {
+                infoDiv.innerHTML = result[i].address_name;
+                break;
+            }
+        }
+    }    
+    }
+    // *************************** 우편번호 Api ******************************
+    function sample5_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = data.address; // 최종 주소 변수
 
-                    // 해당 주소에 대한 좌표를 받아서
-                    var coords = new daum.maps.LatLng(result.y, result.x);
-                    // 지도를 보여준다.
-                    mapContainer.style.display = "block";
-                    map.relayout();
-                    // 지도 중심을 변경한다.
-                    map.setCenter(coords);
-                    // 마커를 결과값으로 받은 위치로 옮긴다.
-                    marker.setPosition(coords)
-                }
+                // 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("sample5_address").value = addr;
+                // 주소로 상세 정보를 검색
+                geocoder.addressSearch(data.address, function(results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+
+                        var result = results[0]; //첫번째 결과의 값을 활용
+
+                        // 해당 주소에 대한 좌표를 받아서
+                        var coords = new daum.maps.LatLng(result.y, result.x);
+                        // 지도를 보여준다.
+                        mapContainer.style.display = "block";
+                        map.relayout();
+                        // 지도 중심을 변경한다.
+                        map.setCenter(coords);
+                        // 마커를 결과값으로 받은 위치로 옮긴다.
+                        marker.setPosition(coords)
+                        marker.setMap(map);
+                    }
+                });
+            }
+        }).open();
+    }
+    // ************************* Map 검색 영역 ***************************
+    // 주소로 좌표를 검색합니다
+    geocoder.addressSearch('sample5_address', function(result, status) {
+
+        // 정상적으로 검색이 완료됐으면 
+        if (status === kakao.maps.services.Status.OK) {
+
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var addressMarker = new kakao.maps.Marker({
+                map: map,
+                position: coords
             });
-        }
-    }).open();
-}
-// ************************* Map 검색 영역 ***************************
-// 주소로 좌표를 검색합니다
-geocoder.addressSearch('sample5_address', function(result, status) {
 
-    // 정상적으로 검색이 완료됐으면 
-     if (status === kakao.maps.services.Status.OK) {
+            // 인포윈도우로 장소에 대한 설명을 표시합니다
+            var infowindow = new kakao.maps.InfoWindow({
+                content: '<div style="width:150px;text-align:center;padding:6px 0;">검색주소 위치</div>'
+            });
+            infowindow.open(map, addressMarker);
 
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
-        });
-
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">검색주소 위치</div>'
-        });
-        infowindow.open(map, marker);
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-    } 
-});    
-// **************************** Map 마커 클러스터 영역 **************************
-// lat=위도, lng=경도
-var positions = [
-        {
-            title: '안양역', 
-            "lat": 37.402707,
-            "lng": 126.922044
-        },
-        {
-            title: '안양역 주위 1', 
-            "lat": 37.400707,
-            "lng": 126.920044
-        },
-        {
-            title: '안양역 주위 2', 
-            "lat": 37.403007,
-            "lng": 126.925044
-        },
-        {
-            title: '안양역 주위 3',
-            "lat": 37.405707,
-            "lng": 126.925044
-        },
-        {
-            title: '노원역', 
-            "lat": 37.654213,
-            "lng": 127.060894
-        },
-        {
-            title: '노원구', 
-            "lat": 37.651642,
-            "lng": 127.066584
-        }
-    ];
-		
-   var markers = positions.map(function(position) {  // 마커를 배열 단위로 묶음
-        return new kakao.maps.Marker({
-            position : new kakao.maps.LatLng(position.lat, position.lng)
-        });
-    });
-		
-    var clusterer = new kakao.maps.MarkerClusterer({
-            map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-            averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-            minLevel: 5, // 클러스터 할 최소 지도 레벨 
-            markers: markers // 클러스터에 마커 추가
-    });
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
+        } 
+    });    
+    
 	// ************************ 접속위치로 표시된 위치 ******************************
 	// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 	if (navigator.geolocation) {

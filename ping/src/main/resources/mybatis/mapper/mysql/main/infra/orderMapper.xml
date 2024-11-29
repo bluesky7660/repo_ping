@@ -7,6 +7,7 @@
     
     <select id="CheckSelectOne">
     	SELECT
+    		a.spSeq
     		,a.spName
     		,a.spStart
     		,a.spEatNy
@@ -14,10 +15,29 @@
     		,a.spPrice
     		,a.spTotal
     		,d.ptName
+    		,d.ptAddress
    		FROM ship a
-   		LEFT JOIN d port d
+   		LEFT JOIN port d
 		ON a.port_ptSeq = d.ptSeq
-
+		WHERE 1=1
+		AND a.spSeq = #{spSeq}
     </select>
+    <insert id="insertOrder">
+    	INSERT INTO orders(
+    		odTotalPrice
+    		,odCount
+    		,odRegDate
+    		,odModDate
+    		,ship_spSeq
+    		,member_mmSeq
+    	)VALUES(
+    		240000
+    		,#{odCount}
+    		,now()
+    		,now()
+    		,#{spSeq}
+    		,#{mmSeq}
+    	)
+    </insert>
     
 </mapper>

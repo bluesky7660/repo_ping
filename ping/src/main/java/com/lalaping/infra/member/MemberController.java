@@ -48,19 +48,19 @@ public class MemberController {
 		memberVo.setParamsPaging(memberService.listCount(memberVo));
 		model.addAttribute("list", memberService.selectList(memberVo));
 		model.addAttribute("formLink", "memberXdmForm");
-		return "/xdm/v1/infra/member/memberXdmList";
+		return "xdm/v1/infra/member/memberXdmList";
 	}
 
 	@RequestMapping(value = "/v1/member/memberXdmForm")
 	public String memberXdmForm(Model model) {
 		model.addAttribute("listLink", "memberXdmList");
-		return "/xdm/v1/infra/member/memberXdmForm";
+		return "xdm/v1/infra/member/memberXdmForm";
 	}
 	@RequestMapping(value = "/v1/member/memberXdmMfom")
 	public String memberXdmMfom(Model model,MemberDto memberDto) {
 		model.addAttribute("item", memberService.selectOne(memberDto));
 		model.addAttribute("listLink", "memberXdmList");
-		return "/xdm/v1/infra/member/memberXdmMfom";
+		return "xdm/v1/infra/member/memberXdmMfom";
 	}
 
 	// CRUD
@@ -96,11 +96,11 @@ public class MemberController {
 	//로그인
 	@RequestMapping(value = "/v1/loginXdm")
 	public String loginXdm() {
-		return "/xdm/v1/infra/base/loginXdm";
+		return "xdm/v1/infra/base/loginXdm";
 	}
 	@RequestMapping(value = "/v1/signupXdm")
 	public String signupXdm() {
-		return "/xdm/v1/infra/base/signupXdm";
+		return "xdm/v1/infra/base/signupXdm";
 	}
 
 	@ResponseBody
@@ -154,32 +154,32 @@ public class MemberController {
 	//usr
 	@RequestMapping(value = "/v1/login")
 	public String login() {
-		return "/usr/v1/etc/ping_login";
+		return "usr/v1/etc/ping_login";
 	}
 	@RequestMapping(value = "/v1/register")
 	public String register() {
-		return "/usr/v1/etc/ping_register";
+		return "usr/v1/etc/ping_register";
 	}
 	@RequestMapping(value = "/v1/member/editMember")
 	public String editMember(Model model, MemberDto memberDto, HttpSession session) {
 		String sessSeqUsr = String.valueOf(session.getAttribute("sessSeqUsr"));
 		memberDto.setMmSeq(sessSeqUsr);
 		model.addAttribute("item", memberService.selectOne(memberDto));
-		return "/usr/v1/member/ping_editMember";
+		return "usr/v1/member/ping_editMember";
 	}
 	@RequestMapping(value = "/v1/member/orderList")
 	public String orderList(Model model, MemberDto memberDto, HttpSession session) {
 		String sessSeqUsr = String.valueOf(session.getAttribute("sessSeqUsr"));
 		memberDto.setMmSeq(sessSeqUsr);
 		model.addAttribute("item", memberService.selectOne(memberDto));
-		return "/usr/v1/member/ping_orderList";
+		return "usr/v1/member/ping_orderList";
 	}
 	@RequestMapping(value = "/v1/member/orderReturn")
 	public String orderReturn(Model model, MemberDto memberDto, HttpSession session) {
 		String sessSeqUsr = String.valueOf(session.getAttribute("sessSeqUsr"));
 		memberDto.setMmSeq(sessSeqUsr);
 		model.addAttribute("item", memberService.selectOne(memberDto));
-		return "/usr/v1/member/ping_orderReturn";
+		return "usr/v1/member/ping_orderReturn";
 	}
 	
 	@ResponseBody

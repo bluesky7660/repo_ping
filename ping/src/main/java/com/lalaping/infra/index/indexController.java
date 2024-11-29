@@ -59,13 +59,9 @@ public class indexController {
 		
 		shipVo.setRowNumToShow(3);
 		model.addAttribute("ships",shipService.selectUsrList(shipVo));
-		return "/usr/v1/etc/ping_index";
+		return "usr/v1/etc/ping_index";
 	}
-	@RequestMapping(value = "/v1/weather/weatherPoint")
-	public String weatherPoint(Model model, MapPointDto mapPointDto){
-		model.addAttribute("item",mapPointService.selectOne(mapPointDto));
-		return "/usr/v1/weather/ping_weatherPoint";
-	}
+	
 	@RequestMapping(value = "/v1/mapPoint/getSeasonalData")
 	@ResponseBody
 	public Map<String, Object> getSeasonalData(MapPointDto mapPointDto,MapPointVo mapPointVo,

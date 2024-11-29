@@ -30,12 +30,12 @@ public class PortController {
 	public String portXdmList(Model model,@ModelAttribute("vo") PortVo vo){
 		model.addAttribute("list",portService.selectList(vo));
 		model.addAttribute("formLink", "portXdmForm");
-		return "/xdm/v1/port/portXdmList";
+		return "xdm/v1/port/portXdmList";
 	}
 	@RequestMapping(value = "/v1/port/portXdmForm")
 	public String portXdmForm(Model model) {
 		model.addAttribute("listLink", "portXdmList");
-		return "/xdm/v1/port/portXdmForm";
+		return "xdm/v1/port/portXdmForm";
 	}
 	@RequestMapping(value = "/v1/port/portXdmInst")
 	public String portXdmInst(PortDto portDto) {
@@ -45,7 +45,7 @@ public class PortController {
 	@RequestMapping(value = "/v1/port/portXdmMFom")
 	public String portXdmMFom(Model model,PortDto portDto) {
 		model.addAttribute("item",portService.selectOne(portDto));
-		return "/xdm/v1/port/portXdmMFom";
+		return "xdm/v1/port/portXdmMFom";
 	}
 	@RequestMapping(value="/v1/port/portXdmUpdt")
 	public String portXdmUpdt(PortDto portDto) {
@@ -73,7 +73,7 @@ public class PortController {
 //		System.out.println("totalPages:"+vo.getTotalPages());
 //		System.out.println("totalRows:"+vo.getTotalRows());
 //		model.addAttribute("list",portService.selectList(vo));
-//		return "/usr/v1/port/ping_portList3";
+//		return "usr/v1/port/ping_portList3";
 //	}
 	
 	@RequestMapping(value = "/v1/port/portList")
@@ -81,7 +81,7 @@ public class PortController {
 		vo.setRowNumToShow(6);
 		vo.setParamsPaging(portService.selectOneCount(vo));
 		model.addAttribute("list2", portService.selectList(vo));
-		return "/usr/v1/port/ping_portList";
+		return "usr/v1/port/ping_portList";
 	}
 	@RequestMapping(value = "/v1/port/portDetail")
 	public String portDetail(Model model, PortDto portDto, ShipVo shipVo){	
@@ -98,7 +98,7 @@ public class PortController {
 		model.addAttribute("item",item);
 		model.addAttribute("shipCount", shipService.portListCount(shipVo));
 		model.addAttribute("ships", shipService.portSelectList(shipVo));
-		return "/usr/v1/port/ping_portDetail";
+		return "usr/v1/port/ping_portDetail";
 	}
 	
 	@ResponseBody

@@ -196,7 +196,7 @@ $(document).ready(function($) {
                         992: {
                             items: 3
                         },
-                        450: {
+                        768: {
                             items: 2
                         },
                         0: {
