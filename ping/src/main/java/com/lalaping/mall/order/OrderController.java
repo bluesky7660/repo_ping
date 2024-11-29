@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lalaping.infra.member.MemberDto;
 import com.lalaping.infra.member.MemberService;
-import com.lalaping.mall.ship.ShipDto;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -31,6 +29,23 @@ public class OrderController {
 	public String checkoutInst(OrderDto orderDto) {
 		orderService.insertOrder(orderDto);
 		return "redirect:/v1/member/orderList";
+	}
+	
+	@RequestMapping(value = "/v1/member/orderList")
+	public String orderList(Model model, MemberDto memberDto, HttpSession session,OrderDto orderDto) {
+		String sessSeqUsr = String.valueOf(session.getAttribute("sessSeqUsr"));
+		memberDto.setMmSeq(sessSeqUsr);
+		orderDto.setMember_mmSeq(sessSeqUsr);
+		model.addAttribute("item", memberService.selectOne(memberDto));
+		model.addAttribute("list", orderService.selectListOrder(orderDto));
+		return "usr/v1/member/ping_orderList";
+	}
+	@RequestMapping(value = "/v1/member/orderReturn")
+	public String orderReturn(Model model, MemberDto memberDto, HttpSession session) {
+		String sessSeqUsr = String.valueOf(session.getAttribute("sessSeqUsr"));
+		memberDto.setMmSeq(sessSeqUsr);
+		model.addAttribute("item", memberService.selectOne(memberDto));
+		return "usr/v1/member/ping_orderReturn";
 	}
 
 }
