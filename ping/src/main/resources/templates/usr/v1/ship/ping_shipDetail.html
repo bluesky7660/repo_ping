@@ -69,17 +69,11 @@
                     </div>
 
                     <!--Price-->
-                    <div class="col-sm-2">
-                        <select class="custom-select my-2" id="type" name="type" style="max-height: 200px; overflow-y: auto;">
-                            <option value="">인원</option>
-                            <option th:each="i : ${#numbers.sequence(1, item.spTotal)}" 
-                                th:value="${i}" th:text="${i + '인'}"></option>
-                            
-                        </select>
+                     <div class="col-sm-2">
                         <h3 class="col-1">
                             <a th:href="@{/v1/checkout/ping_checkout(spSeq=${item.spSeq})}"><span class="badge badge-primary p-3 font-weight-normal ts-shadow__sm">예약하기</span></a>
                         </h3>
-                    </div>
+                    </div> 
                     
 
                 </div>
@@ -228,9 +222,16 @@
 
                             <h3>위치</h3>
 
-                            <div class="ts-map ts-map__detail ts-border-radius__sm ts-shadow__sm" id="ts-map-simple"
+                            <!-- <div class="ts-map ts-map__detail ts-border-radius__sm ts-shadow__sm" id="ts-map-simple"
                                  data-ts-map-leaflet-provider="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
                                  data-ts-map-zoom="10"
+                                 th:data-ts-map-center-latitude="${item.ptLatitude}"
+                                 th:data-ts-map-center-longitude="${item.ptLongitude}"
+                                 data-ts-map-scroll-wheel="0"
+                                 data-ts-map-controls="0"></div> -->
+                            <div class="ts-map ts-map__detail ts-border-radius__sm ts-shadow__sm" id="ts-map-simple"
+                                 data-ts-map-zoom="5"
+                                 th:data-ts-map-portName="${item.ptName}"
                                  th:data-ts-map-center-latitude="${item.ptLatitude}"
                                  th:data-ts-map-center-longitude="${item.ptLongitude}"
                                  data-ts-map-scroll-wheel="0"
@@ -444,10 +445,12 @@
 <script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/owl.carousel.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery.magnific-popup.min.js"></script>
-<script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script>
+<!-- <script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script> -->
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&libraries=services,clusterer"></script>
 <script src="/usr/v1/js/script.js"></script>
-<script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
+<script src="/usr/v1/js/map-kakao.js"></script>
+<!-- <script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script> -->
 
 </body>
 </html>

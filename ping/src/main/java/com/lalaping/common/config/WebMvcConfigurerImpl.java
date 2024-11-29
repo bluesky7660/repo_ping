@@ -33,7 +33,8 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer{
 				"/v1/mapPoint/mapPointAdd",
 				"/v1/member/editMember", 
 				"/v1/member/orderList",
-				"/v1/member/orderReturn"
+				"/v1/member/orderReturn",
+				"/v1/checkout/ping_checkout"
 				
 				) 
 		

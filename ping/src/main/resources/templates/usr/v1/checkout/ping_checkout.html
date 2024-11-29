@@ -119,7 +119,7 @@
                                             <div class="col">
                                                 <div class="input-group">
                                                     <label for="price">전화번호</label>
-                                                    <span class="border-left-0" th:text="${memberitem.mmTel}">010-0000-1111</span>
+                                                    <span class="border-left-0" th:text="${memberitem.mmTel.substring(0, 3) + '-' + memberitem.mmTel.substring(3, 7) + '-' + memberitem.mmTel.substring(7)}"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -137,9 +137,68 @@
 
                                 <!--Row-->
                                 <div class="row">
-
-                                    <!--Title-->
-                                    <div class="col-sm-2">
+                                    <table class="w-100">
+                                        <colgroup>
+                                            <col class="w-25">
+                                            <col class="w-25">
+                                            <col class="w-25">
+                                            <col class="w-25">
+                                        </colgroup>
+                                        <tr style="height: 44px;">
+                                            <th>배이름</th>
+                                            <th>항구명</th>
+                                            <th>항구 주소</th>
+                                            <th>예약인원</th>
+                                        </tr>
+                                        <tr style="height: 44px;">
+                                            <td>
+                                                <span class="border-left-0" th:text="${item.spName}"></span>
+                                            </td>
+                                            <td>
+                                                <span class="border-left-0" th:text="${item.ptName}"></span>
+                                            </td>
+                                            <td>
+                                                <span class="border-left-0" th:text="${item.ptAddress}"></span>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <select class="custom-select" id="type" name="odCount" style="max-height: 200px; overflow-y: auto;">
+                                                        <option value="">인원</option>
+                                                        <option th:each="i : ${#numbers.sequence(1, item.spRemain)}" 
+                                                            th:value="${i}" th:text="${i + '인'}"></option>
+                                                    </select>
+                                                </div>
+                                                <input type="hidden" name="spName" th:value="${item.spName}">
+                                                <input type="hidden" name="spSeq" th:value="${item.spSeq}">
+                                                <input type="hidden" name="spPrice" th:value="${item.spPrice}">
+                                                <input type="hidden" id="mmSeq" name="mmSeq" th:value="${session.sessSeqUsr}">
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 44px;">
+                                            <th>식사제공</th>
+                                            <th>낚시대대여</th>
+                                            <th>출발일</th>
+                                            <th>총가격</th>
+                                        </tr>
+                                        <tr style="height: 44px;">
+                                            <td>
+                                                <span th:if="${item.spEatNy eq 0}">N</span>
+                                                <span th:unless="${item.spEatNy eq 0}">Y</span>
+                                            </td>
+                                            <td>
+                                                <span th:if="${item.spRentalNy eq 0}">N</span>
+                                                <span th:unless="${item.spRentalNy eq 0}">Y</span>
+                                            </td>
+                                            <td>
+                                                <span th:text="${#dates.format(item.spStart, 'yyyy-MM-dd / HH:mm')}"></span>
+                                            </td>
+                                            <td>
+                                                <span id="odTotalPrice" th:text="${#numbers.formatInteger(item.spPrice,1,'COMMA')}"></span><span>원</span>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!-- <div class="col-sm-2">
                                         <div class="form-group">
                                             <label for="title">배이름</label>
                                             <div class="input-group-append">
@@ -148,16 +207,9 @@
                                         </div>
                                         
                                     </div>
-                                    
-
-                                    <!--Price-->
-                                    
-
                                     <div class="col-sm-12 col-md-10">
 
                                         <div class="row">
-
-                                            <!--Area-->
                                             <div class="col">
                                                 <div class="input-group">
                                                     <label for="area">주소</label>
@@ -171,11 +223,10 @@
                                                 </div>
                                             </div>
 
-                                            <!--Rooms-->
                                             <div class="col">
                                                 <select class="custom-select my-2" id="type" name="odCount" style="max-height: 200px; overflow-y: auto;">
 						                            <option value="">인원</option>
-						                            <option th:each="i : ${#numbers.sequence(1, item.spTotal)}" 
+						                            <option th:each="i : ${#numbers.sequence(1, item.spRemain)}" 
 						                                th:value="${i}" th:text="${i + '인'}"></option>
 						                        </select>
                                             </div>
@@ -184,12 +235,8 @@
                                             <input type="hidden" name="spPrice" th:value="${item.spPrice}">
                                             <input type="hidden" id="mmSeq" name="mmSeq" th:value="${session.sessSeqUsr}">
                                         </div>
-                                        <!--end row-->
 
                                     </div>
-                                    <!--end col-md-4-->
-
-                                    <!--Type Select-->
                                     
                                     <div class="col-sm-2">
                                         <div class="input-group">
@@ -214,37 +261,29 @@
                                     <div class="col-sm-4">
                                         <div class="input-group">
                                             <label for="price">총가격</label>
-                                            <span name="odTotalPrice">220,000</span>
+                                            
+                                            <span id="odTotalPrice" th:text="${#numbers.formatInteger(item.spPrice,1,'COMMA')}"></span>
                                             <div class="input-group-append">
                                                 <span>원</span>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    
-
+                                    </div> -->
                                 </div>
                                 <!--end row-->
                             </section>
 
                             <!--LOCATION
                                 =====================================================================================-->
-                            
-
-                           
 
                             <!--ADDITIONAL INFORMATION
-                                =====================================================================================-->
-                           
-
+                                =====================================================================================-->  
                             <hr>
-
                             <section class="py-3">
-                                <button class="btn btn-outline-secondary btn-lg float-left">
+                                <button type="button" class="btn btn-outline-secondary btn-lg float-left" onclick="history.back()">
                                     <i class="fa fa-times mr-2"></i>
                                     돌아가기
                                 </button>
-                                <button type="button" onclick="requestPay()" class="btn btn-primary btn-lg float-right">
+                                <button type="button" onclick="requestPay()" id="kakaoPayBtn" class="btn btn-primary btn-lg float-right">
                                     카카오페이 결제
                                 </button>
                             </section>
@@ -291,12 +330,20 @@
 	        var randomNum = Math.floor(Math.random() * 1000000);  // 0부터 999999까지의 랜덤 숫자
 	        return 'merchant_' + date + '-' + randomNum;  // 예: merchant_1637796621278-56123
 	    }
-	
+        function totalPrice(count) {
+            const spPrice = $("input[name='spPrice']").val();
+            console.log("count:",count);
+            if(count==0||count=="0"||count==''||isNaN(count)){
+                count=1;
+            }
+            const totalPrice= spPrice* count;
+            return totalPrice;
+        }
 	    // 결제 요청 함수
 	    function requestPay() {
 	        var merchantUid = generateMerchantUid(); // 랜덤 merchant_uid 생성
 	        var spName = $("input[name='spName']").val(); // 상품명
-	        var odTotalPrice = $("input[name='odTotalPrice']").val(); // 결제 금액
+	        var odTotalPrice = $("#odTotalPrice").text(); // 결제 금액
 // 	        var spSeq = $("input[name='spSeq']").val();
 // 	        var mmSeq = $("input[name='mmSeq']").val();
 	
@@ -305,12 +352,10 @@
 	            pay_method: "card",  // 카드 결제 방법
 	            merchant_uid: merchantUid, // 생성된 랜덤 merchant_uid
 	            name: spName,  // 결제 상품명
-	            amount: 2000,  // 결제 금액
+	            amount: odTotalPrice,  // 결제 금액
 	            buyer_email: 'test@naver.com',
 	            buyer_name: '홍길동',
 	            buyer_tel: '010-1234-5678',
-	            buyer_addr: '서울특별시',
-	            buyer_postcode: '123-456'
 	        }, function (rsp) {
 	            if (rsp.success) {
 	                // 결제 성공 시 서버로 결제 정보 전송
@@ -338,6 +383,11 @@
 	            }
 	        });
 	    }
+        $("select[name='odCount']").change(function (){
+            const count = parseInt($(this).val(), 10);
+            const pay = totalPrice(count);
+            $("#odTotalPrice").text(pay.toLocaleString('ko-KR'));
+        });
 	
 	    // 카카오페이 결제 버튼 클릭 시 결제 요청
 	    $('#kakaoPayBtn').click(function () {
