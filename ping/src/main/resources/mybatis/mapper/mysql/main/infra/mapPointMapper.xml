@@ -76,7 +76,7 @@
      	limit #{rowNumToShow}
     </select>
     <select id="selectSearchList" resultMap="resultMapObj">
-    	SELECT
+    	<!-- SELECT
     		a.mpSeq
     		,a.mpTitle
     		,a.mpText
@@ -86,13 +86,51 @@
     		,a.mpLongitude
     		,a.mpDelNy
     		,a.mpRegDate
-    		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
+    		,(SELECT GROUP_CONCAT(c.fsName ORDER BY c.fsSeq)
+			 FROM fishandmappoint b
+			 LEFT JOIN fish c ON c.fsSeq = b.fish_fsSeq
+			 WHERE b.mapPoint_mpSeq = a.mpSeq
+			) AS fsNameList
    		FROM mappoint a
         	left join fishandmappoint b on b.mappoint_mpSeq = a.mpSeq
             left join fish c on c.fsSeq = b.fish_fsSeq
+        WHERE 1=1
+        	<if test="fsSeqList != null and !fsSeqList.isEmpty()">
+        		and
+	    		<foreach item="item" collection="fsSeqList" open="(" separator=" AND " close=")">
+		            c.fsSeq = #{item}
+		        </foreach>
+	        </if>
    		GROUP BY a.mpSeq
    		ORDER BY
-     	a.mpRegDate DESC
+     	a.mpRegDate DESC -->
+     	SELECT
+		    a.mpSeq,
+		    a.mpTitle,
+		    a.mpText,
+		    a.mpAddress,
+		    a.mpType,
+		    a.mpLatitude,
+		    a.mpLongitude,
+		    a.mpDelNy,
+		    a.mpRegDate,
+		    (SELECT GROUP_CONCAT(c.fsName ORDER BY c.fsSeq)
+		     FROM fish c 
+		     LEFT JOIN fishandmappoint b ON c.fsSeq = b.fish_fsSeq
+		     WHERE b.mapPoint_mpSeq = a.mpSeq
+		    ) AS fsNameList
+		FROM mappoint a
+			LEFT JOIN fishandmappoint b ON b.mappoint_mpSeq = a.mpSeq
+			LEFT JOIN fish c ON c.fsSeq = b.fish_fsSeq
+		GROUP BY a.mpSeq
+		<if test="fsSeqList != null and !fsSeqList.isEmpty()">
+			HAVING 
+			
+			    <foreach item="item" collection="fsSeqList" separator=" AND ">
+			        SUM(CASE WHEN c.fsSeq = #{item} THEN 1 ELSE 0 END) > 0
+			    </foreach>
+	    </if>
+		ORDER BY a.mpRegDate DESC
     </select>
     <select id="allList" resultMap="resultMapObj">
     	SELECT

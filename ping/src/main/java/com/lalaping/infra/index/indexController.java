@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,10 +38,16 @@ public class indexController {
 	CodeService codeService;
 	
 	@RequestMapping(value = "/v1/index")
-	public String index(Model model, FishVo vo, MapPointVo mapPointVo, ShipVo shipVo){
-		
+//	@ResponseBody
+	public String index(Model model, FishVo vo, @ModelAttribute("mapPointVo") MapPointVo mapPointVo, ShipVo shipVo){
+		if (mapPointVo.getFsSeqList() != null) {
+		    System.out.println("fsSeqList: " + mapPointVo.getFsSeqList().toString());
+		} else {
+		    System.out.println("fsSeqList is null");
+		}
 		model.addAttribute("fishList",fishService.allOneList(vo));
-		model.addAttribute("mapPoint",mapPointService.allList(mapPointVo));
+//		model.addAttribute("mapPoint",mapPointService.allList(mapPointVo));
+		model.addAttribute("mapPoint",mapPointService.selectSearchList(mapPointVo));
 		model.addAttribute("ships",shipService.selectUsrList(shipVo));
 		
 		List<MapPointDto> usrList = mapPointService.sessSelectList(mapPointVo);
@@ -66,6 +73,7 @@ public class indexController {
 	@ResponseBody
 	public Map<String, Object> getSeasonalData(MapPointDto mapPointDto,MapPointVo mapPointVo,
 			@RequestParam(name = "shSeason", defaultValue = "0") String shSeason){
+		
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		List<MapPointDto> rtPoint = new ArrayList<>();
 		mapPointVo.setRowNumToShow(8);

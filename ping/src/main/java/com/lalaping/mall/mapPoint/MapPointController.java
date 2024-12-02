@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lalaping.mall.fish.FishService;
@@ -73,7 +74,12 @@ public class MapPointController {
 	
 	@RequestMapping(value = "/v1/mapPoint/mapPointSearchList")
 	@ResponseBody
-	public Map<String, Object> mapPointList(MapPointDto mapPointDto,MapPointVo mapPointVo){
+	public Map<String, Object> mapPointSearchList(MapPointDto mapPointDto,MapPointVo mapPointVo){
+		if (mapPointVo.getFsSeqList() != null) {
+		    System.out.println("fsSeqList2: " + mapPointVo.getFsSeqList().toString());
+		} else {
+		    System.out.println("fsSeqList2 is null");
+		}
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		List<MapPointDto> rtPoint = mapPointService.selectSearchList(mapPointVo);
 		System.out.println("성공");

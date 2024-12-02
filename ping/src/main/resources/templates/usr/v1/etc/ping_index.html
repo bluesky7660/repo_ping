@@ -57,7 +57,7 @@
                 =====================================================================================================-->
                 <div class="ts-form__map-search ts-z-index__2">
                     <!--Form-->
-                    <form class="ts-form">
+                    <form class="ts-form" method="post" action="/v1/index" autocomplete="off">
 
                         <!--Collapse button-->
                         <a href=".ts-form-collapse" data-toggle="collapse" class="ts-center__vertical justify-content-between">
@@ -121,10 +121,10 @@
                                    
                                     <div id="fishList-checkboxes"  class="w-100">
                                         <h6 class="mb-3">어종</h6>
-
+                                        <!-- <input type="hidden" th:id="'fsSeqListDebug'" th:value="${fsSeqList.stream().map(#strings.toString).collect(#strings.join(','))}"> -->
                                         <div class="">
                                             <div class="custom-control custom-checkbox" th:each="fishs:${fishList}">
-                                                <input type="checkbox" class="custom-control-input" th:id="${'ch_'+fishsStat.count}" name="shFishList" th:value="${'ch_'+fishsStat.count}">
+                                                <input type="checkbox" class="custom-control-input" th:id="${'ch_'+fishsStat.count}" name="fsSeqList" th:value="${fishs.fsSeq}" th:checked="${mapPointVo.fsSeqList != null and #lists.contains(mapPointVo.fsSeqList, fishs.fsSeq)}">
                                                 <label class="custom-control-label" th:for="${'ch_'+fishsStat.count}" th:text="${fishs.fsName}"></label>
                                             </div>
 
@@ -475,10 +475,32 @@
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.markercluster.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&libraries=services,clusterer"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&autoload=false&libraries=services,clusterer"></script>
+<script th:inline="javascript" type="text/javascript">
+    var fsSeqList = /*[[${mapPointVo.fsSeqList}]]*/[];
+</script>
 <script src="/usr/v1/js/script.js"></script>
-<script src="/usr/v1/js/map-kakao.js"></script>
+<script src="/usr/v1/js/map-kakao.js" ></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
+<script>
+    // window.onload = function() {
+        // $.ajax({
+        //     type: 'POST',
+        //     url: '/v1/mapPoint/searchMapPoint',
+        //     data: {
+        //         mmSeq: $("#mmSeq").val(),  // mmSeq 값 가져오기
+        //         mpTitle: $("input[name='spSeq']").val(),  // pdSeq 값 가져오기
+        //         odTotalPrice: $("#odTotalPrice").text().replace(/,/g, ''),
+        //         odCount: $("#odCount").val()
+        //     },
+        //     success: function (data) {
 
+        //     },
+        //     error: function () {
+        //         alert("서버 요청 실패");
+        //     }
+        // })
+    // }
+</script>
 </body>
 </html>
