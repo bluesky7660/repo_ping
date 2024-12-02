@@ -123,10 +123,13 @@
 			LEFT JOIN fishandmappoint b ON b.mappoint_mpSeq = a.mpSeq
 			LEFT JOIN fish c ON c.fsSeq = b.fish_fsSeq
 		GROUP BY a.mpSeq
-		HAVING 
-		    <foreach item="item" collection="fsSeqList" separator=" AND ">
-		        SUM(CASE WHEN c.fsSeq = #{item} THEN 1 ELSE 0 END) > 0
-		    </foreach>
+		<if test="fsSeqList != null and !fsSeqList.isEmpty()">
+			HAVING 
+			
+			    <foreach item="item" collection="fsSeqList" separator=" AND ">
+			        SUM(CASE WHEN c.fsSeq = #{item} THEN 1 ELSE 0 END) > 0
+			    </foreach>
+	    </if>
 		ORDER BY a.mpRegDate DESC
     </select>
     <select id="allList" resultMap="resultMapObj">
