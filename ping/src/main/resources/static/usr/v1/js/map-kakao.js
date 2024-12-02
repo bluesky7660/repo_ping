@@ -104,11 +104,15 @@ function createSideBarResult(map, loadedMarkersData, newMarkers) {
   // 사이드바에 HTML 추가
   document.querySelector('.ts-results-wrapper').innerHTML = resultsHtml.join('');
 }
-
+function loadPointData() {
+  
+}
 
 
 $(document).ready(function($) {
+  console.log("fsSeqList2:",fsSeqList);
   kakao.maps.load(function() {
+    
     initializeMap('ts-map-simple');
     var newMarkers = [];
     var mapContainer = document.getElementById('map');
@@ -306,9 +310,13 @@ $(document).ready(function($) {
         });
         
       }
+      console.log("fsSeqList",fsSeqList);
       $.ajax({
         url: '/v1/mapPoint/mapPointSearchList', 
         method: 'POST', 
+        data: {
+          fsSeqList:fsSeqList
+        },
         success: function(response) {
             // 응답 받은 데이터를 바탕으로 마커 생성
             console.log("response:",response);
