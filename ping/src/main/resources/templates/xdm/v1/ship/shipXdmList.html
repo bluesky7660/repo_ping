@@ -223,8 +223,8 @@
 													<td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}" class="align-middle"></td>
 													<td th:text="${list.spSeq}"></td>
 													<td class="td_spotlight">
-														<a th:href="@{/v1/infra/ship/shipXdmMFom(spSeq=${list.spSeq})}" th:text="${list.spName}"></a>
-													</td>
+														<a th:href="@{/v1/ship/shipXdmMFom(spSeq=${list.spSeq})}" th:text="${list.spName}"></a>
+													</td> 
 													<td th:text="${list.spPrice}"></td>
 													<td th:text = "${list.spTotal}"></td>
 													<td th:text="${list.spStart}"></td>

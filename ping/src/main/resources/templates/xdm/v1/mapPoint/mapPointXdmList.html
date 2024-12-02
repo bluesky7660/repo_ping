@@ -368,7 +368,7 @@
 														<td th:text="${vo.totalRows - (((vo.thisPage -1) * vo.rowNumToShow) +listStat.index)}"></td>
 														<td th:text="${list.mpSeq}"></td>
 														<td class="td_spotlight">
-															<a th:href="@{/v1/infra/mapPoint/mapPointXdmMFom(mpSeq=${list.mpSeq})}" th:text="${list.mpTitle}"></a>
+															<a th:href="@{/v1/mapPoint/mapPointXdmMFom(mpSeq=${list.mpSeq})}" th:text="${list.mpTitle}"></a>
 														</td>
 														<td th:text="${list.mpType}"></td>
 														<td th:text="${list.mpAddress}"></td>
