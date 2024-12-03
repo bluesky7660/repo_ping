@@ -204,7 +204,7 @@
 		ORDER BY
 	     	a.spRegDate DESC
 	     <include refid="base.selectListLowerForMysql"/>
-	</select>
+	</select> 
 	<insert id="insert">
 		INSERT INTO ship(
 			spName
