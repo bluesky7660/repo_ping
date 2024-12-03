@@ -18,7 +18,7 @@
 		<link rel="shortcut icon" href="/xdm/v1/template/arise-v1.0/assets/images/favicon.svg">
 
 		<!-- Title -->
-		<title>Bootstrap Admin Dashboards</title>
+		<title>코드</title>
 
 
 		<!-- *************
@@ -131,9 +131,9 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputIndustryType1" class="form-label">코드그룹</label>
-														<select class="form-select validate-this" id="inputIndustryType1" name="codeGroup_cgSeq" required>
+														<select class="form-select validate-this" id="inputIndustryType1" name="codegroup_cgSeq" required>
 															<option value="" disabled>선택하세요</option>
-															<option th:each="group : ${codeGroups}" th:value="${group.cgSeq}" th:text="${group.cgName}" th:selected="${group.cgSeq == item.codeGroup_cgSeq}"></option>
+															<option th:each="group : ${codeGroups}" th:value="${group.cgSeq}" th:text="${group.cgName}" th:selected="${group.cgSeq == item.codegroup_cgSeq}"></option>
 														</select>
 														<div class="invalid-feedback">
 															코드그룹을 선택해주세요.

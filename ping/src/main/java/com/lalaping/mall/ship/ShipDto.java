@@ -7,8 +7,6 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.lalaping.mall.fish.FishDto;
-
 public class ShipDto {
 	private String fsSeq;
 	private String fsName;
@@ -35,12 +33,23 @@ public class ShipDto {
 	private List<String> fsSeqList;
 	private List<String> fsNameList;
 	private String fsNames;
-
 	
 //	-------------------------------
 	
 	public String getFsSeq() {
 		return fsSeq;
+	}
+	public String getFsNames() {
+		return fsNames;
+	}
+	public void setFsNames(String fsNames) {
+		this.fsNames = fsNames;
+	}
+	public void setFsSeqList(List<String> fsSeqList) {
+		this.fsSeqList = fsSeqList;
+	}
+	public void setFsNameList(List<String> fsNameList) {
+		this.fsNameList = fsNameList;
 	}
 	public void setFsSeq(String fsSeq) {
 		this.fsSeq = fsSeq;

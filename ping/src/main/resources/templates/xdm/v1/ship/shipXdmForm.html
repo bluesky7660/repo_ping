@@ -18,7 +18,7 @@
 		<link rel="shortcut icon" href="/xdm/v1/template/arise-v1.0/assets/images/favicon.svg">
 
 		<!-- Title -->
-		<title>Bootstrap Admin Dashboards</title>
+		<title>낚시포인트</title>
 
 
 		<!-- *************
@@ -44,6 +44,7 @@
 		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/vendor/overlay-scroll/OverlayScrollbars.min.css">
 		
 		<!-- by developer -->
+		<link rel="stylesheet" href="/xdm/v1/css/datetimepicker/jquery.datetimepicker.min.css">
 		<link rel="stylesheet" href="/xdm/v1/css/commonXdm.css">
 		<style>
 			.form-label{
@@ -184,7 +185,7 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputCodeOrder" class="form-label">총인원</label>
-														<input type="text" class="form-control" id="inputspTotal" name="spTotal" placeholder="주소입력" required>
+														<input type="text" class="form-control" id="inputspTotal" name="spTotal" placeholder="총인원" required>
 														<div class="invalid-feedback">
 															순서를 적어주세요.
 														</div>
@@ -193,7 +194,7 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputCodeOrder" class="form-label">출발일</label>
-														<input type="text" class="form-control" id="inputspStart" name="spStart" placeholder="주소입력" required>
+														<input type="" class="form-control" id="inputspStart" name="spStart" placeholder="출발일" required>
 														<div class="invalid-feedback">
 															순서를 적어주세요.
 														</div>
@@ -204,7 +205,7 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputCodeOrder" class="form-label">지역</label>
-														<input type="text" class="form-control" id="inputspArea" name="spArea" placeholder="spArea" required>
+														<input type="text" class="form-control" id="inputspArea" name="spArea" placeholder="지역" required>
 														<div class="invalid-feedback">
 															순서를 적어주세요.
 														</div>
@@ -213,7 +214,7 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputCodeOrder" class="form-label">항구명</label>
-														<input type="text" class="form-control" id="inputport_ptSeq" name="port_ptSeq" placeholder="port_ptSeq" required>
+														<input type="text" class="form-control" id="inputport_ptSeq" name="port_ptSeq" placeholder="항구명" required>
 														<div class="invalid-feedback">
 															순서를 적어주세요.
 														</div>
@@ -290,6 +291,16 @@
 		</script>
 		<!-- by developer -->
 		<script src="/xdm/v1/js/commonXdm.js"></script>
+		<script src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
+		<script>
+			window.addEventListener('load',function() {
+				$.datetimepicker.setLocale('ko');
+				$("#inputspStart").datetimepicker({
+					timepicker:false,
+					format:'Y-m-d'
+				});
+			})
+		</script>
 	</body>
 
 </html>

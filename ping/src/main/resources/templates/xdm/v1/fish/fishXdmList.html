@@ -18,7 +18,7 @@
 		<link rel="shortcut icon" href="/xdm/v1/template/arise-v1.0/assets/images/favicon.svg">
 
 		<!-- Title -->
-		<title>Bootstrap Admin Dashboards</title>
+		<title>물고기 도감</title>
 
 
 		<!-- *************
@@ -369,7 +369,7 @@
 														<td th:text="${vo.totalRows - (((vo.thisPage -1) * vo.rowNumToShow) +listStat.index)}"></td>
 														<td th:text="${list.fsSeq}"></td>
 														<td class="td_spotlight">
-															<a th:href="@{/v1/infra/fish/fishXdmMFom(fsSeq=${list.fsSeq})}" th:text="${list.fsName}"></a>
+															<a th:href="@{/v1/fish/fishXdmMFom(fsSeq=${list.fsSeq})}" th:text="${list.fsName}"></a>
 														</td>
 														<td th:text="${list.fsSeason}"></td>
 														<td th:if="${list.fsDelNy eq 0}">N</td>

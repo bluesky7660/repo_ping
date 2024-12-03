@@ -26,6 +26,7 @@ public class MapPointController {
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmList")
 	public String mapPointXdmList(Model model,@ModelAttribute("vo") MapPointVo vo){
 		model.addAttribute("list",mapPointService.selectList(vo));
+		model.addAttribute("formLink", "mapPointXdmForm");
 		return "xdm/v1/mapPoint/mapPointXdmList";
 	}
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmForm")
