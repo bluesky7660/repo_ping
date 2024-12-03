@@ -62,8 +62,11 @@ public class MapPointController {
 	/*usr*/
 	
 	@RequestMapping(value = "/v1/mapPoint/mapPointDetail")
-	public String mapPointDetail(Model model, MapPointDto mapPointDto){
+	public String mapPointDetail(Model model, MapPointDto mapPointDto,MapPointVo mapPointVo){
 		model.addAttribute("item",mapPointService.selectUsrOne(mapPointDto));
+		mapPointVo.setBaseMpLatitude(mapPointService.selectUsrOne(mapPointDto).getMpLatitude());
+		mapPointVo.setBaseMpLongitude(mapPointService.selectUsrOne(mapPointDto).getMpLongitude());
+		model.addAttribute("nearList", mapPointService.nearList(mapPointVo));
 		return "usr/v1/mapPoint/ping_mapPointDetail";
 	}
 	@RequestMapping(value = "/v1/mapPoint/mapPointAdd")

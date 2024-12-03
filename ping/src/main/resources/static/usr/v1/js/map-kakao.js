@@ -10,7 +10,7 @@ function initializeMap(mapElementId) {
   const zoomLevel = parseInt(mapElement.getAttribute('data-ts-map-zoom'), 10);
   const latitude = parseFloat(mapElement.getAttribute('data-ts-map-center-latitude'));
   const longitude = parseFloat(mapElement.getAttribute('data-ts-map-center-longitude'));
-  const ptName = mapElement.getAttribute('data-ts-map-portName');
+  const ptName = mapElement.getAttribute('data-ts-map-Name');
 
   // 카카오맵 생성
   const container = document.getElementById(mapElementId);
@@ -110,7 +110,6 @@ function loadPointData() {
 
 
 $(document).ready(function($) {
-  console.log("fsSeqList2:",fsSeqList);
   kakao.maps.load(function() {
     
     initializeMap('ts-map-simple');

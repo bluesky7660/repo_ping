@@ -10,6 +10,7 @@ public interface MapPointDao {
 	public List<MapPointDto> selectUsrList(MapPointVo vo);
 	public List<MapPointDto> selectSearchList(MapPointVo vo);
 	public List<MapPointDto> allList(MapPointVo vo);
+	public List<MapPointDto> nearList(MapPointVo vo);
 	public List<MapPointDto> sessSelectList(MapPointVo vo);
 	
 	public int insert(MapPointDto mapPointDto);

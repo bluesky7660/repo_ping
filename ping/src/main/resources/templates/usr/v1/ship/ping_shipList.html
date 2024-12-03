@@ -299,9 +299,7 @@
                                             </aside>
                                         </figure>
 
-                                        <div class="ts-item__info-badge" th:text="${#numbers.formatInteger(list.spPrice,1,'COMMA') + ' 원'}">
-                                            220,000원
-                                        </div>
+                                        <div class="ts-item__info-badge" th:text="${#numbers.formatInteger(list.spPrice,1,'COMMA') + ' 원'}"></div>
 
                                         <div class="ts-description-lists">
                                             <dl>
@@ -314,23 +312,19 @@
                                             </dl>
                                             <dl>
                                                 <dt>출발날짜</dt>
-                                                <dd th:text="${#dates.format(list.spStart,'yyyy-MM-dd')}">2024-10-10</dd>
+                                                <dd th:text="${#dates.format(list.spStart,'yyyy-MM-dd')}"></dd>
+                                            </dl>
+                                            <dl>
+                                                <dt>대상어종</dt>
+                                                <dd th:text="${list.fsNameList != null and #strings.length(list.fsNameList) > 1 ? #strings.substring(list.fsNameList, 1, #strings.length(list.fsNameList) - 1) : '전어종'}"></dd>
                                             </dl>
                                         </div>
                                     </div>
 
                                     <!--Card Footer-->
                                     <div  class="card-footer">
-                                        <!-- <span>
-                                            대상어종: 
-                                            <span th:each="fish, iterStat : ${list.fsNameList}" 
-                                                    th:text="${iterStat.index == 0 ? fish : ', ' + fish}"> 
-                                            </span>
-                                        </span> -->
-                                        <span>대상어종: <span th:text="${list.fsNameList != null and #strings.length(list.fsNameList) > 1 ? #strings.substring(list.fsNameList, 1, #strings.length(list.fsNameList) - 1) : '전어종'}"></span></span>
-                                        <!-- <span th:text="${#lists.join(list.fsNameList, ', ')}"></span>
-                                        <span th:text="${#strings.join(list.fsNameList, ', ')}"></span> -->
-                                        <!-- <span>대상어종: <span th:each="fish : ${#lists.size(list.fsSeqList)}"th:text="${list.fsNameList[fishStat.index]}">갈치</span></span> -->
+                                        <!-- <span>대상어종: <span th:text="${list.fsNameList != null and #strings.length(list.fsNameList) > 1 ? #strings.substring(list.fsNameList, 1, #strings.length(list.fsNameList) - 1) : '전어종'}"></span></span> -->
+                                        <span class="ts-btn-arrow">자세히보기</span>
                                     </div>
                                 </a>
                             </div>

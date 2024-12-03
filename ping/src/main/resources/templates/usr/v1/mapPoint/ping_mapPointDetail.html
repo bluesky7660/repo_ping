@@ -166,13 +166,13 @@
 
                             <div class="position-relative ts-border-radius__sm ts-shadow__sm">
                                 <div id="collapse-map" class="collapse show">
-                                    <div id="ts-map-simple" class="ts-map ts-min-h__30vh"
-                                         data-ts-map-leaflet-provider="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
-                                         data-ts-map-zoom="14"
-                                         th:data-ts-map-center-latitude="${item.mpLatitude}"
-                                         th:data-ts-map-center-longitude="${item.mpLongitude}"
-                                         data-ts-map-scroll-wheel="1"
-                                         data-ts-map-controls="0"></div>
+                                    <div class="ts-map ts-map__detail ts-border-radius__sm ts-shadow__sm" id="ts-map-simple"
+                                        data-ts-map-zoom="6"
+                                        th:data-ts-map-center-latitude="${item.mpLatitude}"
+                                        th:data-ts-map-center-longitude="${item.mpLongitude}"
+                                        data-ts-map-scroll-wheel="1"
+                                        data-ts-map-controls="0"
+                                        th:data-ts-map-Name="${item.mpTitle}"></div>
                                 </div>
                                 <a href="#collapse-map" class="d-block bg-white p-2 text-center text-dark" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapse-map">
                                     <i class="fa fa-map ts-opacity__20 mr-2"></i>
@@ -217,70 +217,59 @@
                         <section id="items-listing">
                             <h3 class="mb-4 pb-4"> 낚시포인트</h3>
                             <div class="row">
-                                
-
                                 <!--Item-->
-                                <div class="col-sm-6">
-                                    
-
-                                    <div class="card ts-item ts-card ts-item__lg">
-
+                                <div class="col-sm-6" th:each="near : ${nearList}">
+                                    <a th:href="@{/v1/mapPoint/mapPointDetail(mpSeq=${near.mpSeq})}" class="card ts-item ts-card ts-item__lg">
                                         <!--Ribbon-->
-                                        <div class="ts-ribbon">
+                                        <!-- <div class="ts-ribbon-corner">
+                                            <span>Updated</span>
+                                        </div> -->
+                                        <!--Ribbon-->
+                                        <!-- <div class="ts-ribbon">
                                             <i class="fa fa-thumbs-up"></i>
-                                        </div>
-
+                                        </div> -->
                                         <!--Card Image-->
-                                        <a href="#" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
-                                            
+                                        <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
                                             <figure class="ts-item__info">
-                                                <h4>이름</h4>
+                                                <h4 th:text="${near.mpTitle}"></h4>
                                                 <aside>
                                                     <i class="fa fa-map-marker mr-2"></i>
-                                                   주소
+                                                   <span th:text="${near.mpAddress}"></span>
                                                 </aside>
                                             </figure>
-                                        </a>
-
+                                        </div>
                                         <!--Card Body-->
                                         <div class="card-body">
                                             <div class="ts-description-lists">
                                                 <dl>
                                                     <dt>지역</dt>
-                                                    <dd>경기도</dd>
+                                                    <dd th:text="${#strings.substring(near.mpAddress, 0, near.mpAddress.indexOf(' '))}"></dd>
                                                 </dl>
                                                 <dl>
                                                     <dt>대상어종</dt>
-                                                    <dd>베스</dd>
+                                                    <dd th:text="${near.fsNameList}"></dd>
                                                 </dl>
                                                 <dl>
-                                                    <dt>등록일or대상과의 거리</dt>
-                                                    <dd>1</dd>
+                                                    <dt>대상과의 거리</dt>
+                                                    <dd th:text="${#numbers.formatDecimal(near.distanceIn/1000, 2,2) +'km'}"></dd>
                                                 </dl>
                                             </div>
                                         </div>
 
                                         <!--Card Footer-->
-                                        <a href="detail-01.html" class="card-footer">
+                                        <div class="card-footer">
                                             <span class="ts-btn-arrow">상세정보</span>
-                                        </a>
+                                        </div>
 
-                                    </div>
+                                    </a>
                                     <!--end ts-item-->
                                 </div>
                                 <!--end Item col-md-4-->
 
                                 <!--Item-->
-                                <div class="col-sm-6">
+                                <!-- <div class="col-sm-6">
 
                                     <div class="card ts-item ts-card ts-item__lg">
-
-                                        <!--Ribbon-->
-                                        <div class="ts-ribbon-corner">
-                                            <span>Updated</span>
-                                        </div>
-
-                                        <!--Card Image-->
                                         <a href="#" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-02.jpg">
                                             <figure class="ts-item__info">
                                                 <h4>Cozy Design Studio</h4>
@@ -291,8 +280,6 @@
                                             </figure>
                                             <div class="ts-item__info-badge">$125,000</div>
                                         </a>
-
-                                        <!--Card Body-->
                                         <div class="card-body ts-item__body">
                                             <div class="ts-description-lists">
                                                 <dl>
@@ -309,106 +296,12 @@
                                                 </dl>
                                             </div>
                                         </div>
-
-                                        <!--Card Footer-->
                                         <a href="detail-01.html" class="card-footer">
                                             <span class="ts-btn-arrow">Detail</span>
                                         </a>
 
                                     </div>
-                                    <!--end ts-item ts-card-->
-                                </div>
-                                <!--end Item col-md-4-->
-
-                                <!--Item-->
-                                <div class="col-sm-6">
-
-                                    <div class="card ts-item ts-card ts-item__lg">
-
-                                        <!--Card Image-->
-                                        <a href="#" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-03.jpg">
-                                            <figure class="ts-item__info">
-                                                <h4>Family Villa</h4>
-                                                <aside>
-                                                    <i class="fa fa-map-marker mr-2"></i>
-                                                    4127 Winding Way
-                                                </aside>
-                                            </figure>
-                                            <div class="ts-item__info-badge">$45,900</div>
-                                        </a>
-
-                                        <!--Card Body-->
-                                        <div class="card-body ts-item__body">
-                                            <div class="ts-description-lists">
-                                                <dl>
-                                                    <dt>Area</dt>
-                                                    <dd>325m<sup>2</sup></dd>
-                                                </dl>
-                                                <dl>
-                                                    <dt>Bedrooms</dt>
-                                                    <dd>2</dd>
-                                                </dl>
-                                                <dl>
-                                                    <dt>Bathrooms</dt>
-                                                    <dd>1</dd>
-                                                </dl>
-                                            </div>
-                                        </div>
-
-                                        <!--Card Footer-->
-                                        <a href="detail-01.html" class="card-footer">
-                                            <span class="ts-btn-arrow">Detail</span>
-                                        </a>
-
-                                    </div>
-                                    <!--end ts-item ts-card-->
-                                </div>
-                                <!--end Item col-md-4-->
-
-                                <!--Item-->
-                                <div class="col-sm-6">
-                                    <div class="card ts-item ts-card ts-item__lg">
-
-                                        <!--Card Image-->
-                                        <a href="#" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-04.jpg">
-                                            <div class="ts-item__info-badge">
-                                                $860,000
-                                            </div>
-                                            <figure class="ts-item__info">
-                                                <h4>Traditional Restaurant</h4>
-                                                <aside>
-                                                    <i class="fa fa-map-marker mr-2"></i>
-                                                    1350 Arbutus Drive
-                                                </aside>
-                                            </figure>
-                                        </a>
-
-                                        <!--Card Body-->
-                                        <div class="card-body">
-                                            <div class="ts-description-lists">
-                                                <dl>
-                                                    <dt>Area</dt>
-                                                    <dd>325m<sup>2</sup></dd>
-                                                </dl>
-                                                <dl>
-                                                    <dt>Bedrooms</dt>
-                                                    <dd>2</dd>
-                                                </dl>
-                                                <dl>
-                                                    <dt>Bathrooms</dt>
-                                                    <dd>1</dd>
-                                                </dl>
-                                            </div>
-                                        </div>
-
-                                        <!--Card Footer-->
-                                        <a href="detail-01.html" class="card-footer">
-                                            <span class="ts-btn-arrow">Detail</span>
-                                        </a>
-
-                                    </div>
-                                    <!--end ts-item-->
-                                </div>
+                                </div> -->
                                 <!--end Item col-md-4-->
 
                             </div>
@@ -596,8 +489,10 @@
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/owl.carousel.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&libraries=services,clusterer"></script>
 <script src="/usr/v1/js/script.js"></script>
-<script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
+<script src="/usr/v1/js/map-kakao.js"></script>
+<!-- <script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script> -->
 
 </body>
 </html>
