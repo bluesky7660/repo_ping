@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lalaping.common.util.UtilDateTime;
-import com.lalaping.mall.fish.FishDto;
 import com.lalaping.mall.fish.FishService;
 import com.lalaping.mall.fish.FishVo;
 
@@ -23,6 +22,7 @@ public class ShipController {
 	@RequestMapping(value = "/v1/ship/shipXdmList")
 	public String shipXdmList(Model model,@ModelAttribute("vo") ShipVo vo){
 		model.addAttribute("list",shipService.selectList(vo));
+		model.addAttribute("formLink", "shipXdmForm");
 		return "xdm/v1/ship/shipXdmList";
 	}
 	@RequestMapping(value = "/v1/ship/shipXdmForm")

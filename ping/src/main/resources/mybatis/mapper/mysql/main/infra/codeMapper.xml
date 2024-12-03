@@ -9,7 +9,7 @@
 	<sql id="selectCommon">
 		FROM
 			commoncode a
-			left join codegroup b on a.codeGroup_cgSeq = b.cgSeq
+			left join codegroup b on a.codegroup_cgSeq = b.cgSeq
 		where 1=1
 			<if test="shDelNy != null and !shDelNy.equals('')">AND a.delNy = #{sDelNy}</if>
 			<if test="shUseNy != null and !shUseNy.equals('')">AND a.useNy = #{sUseNy}</if>
@@ -45,7 +45,7 @@
 		    ,a.cdDelNy
 		    ,a.cdRegDate
 		    ,a.cdModDate
-		    ,a.codeGroup_cgSeq
+		    ,a.codegroup_cgSeq
 		    ,b.cgSeq
 		    ,b.cgName
 	    <include refid="selectCommon"/>
@@ -58,7 +58,7 @@
         <include refid="selectCommon"/>
     </select>
 	<insert id="insert">
-		INSERT INTO commonCode(
+		INSERT INTO commoncode(
 			cdName
 			,cdOrder
 			,cdDesc
@@ -66,7 +66,7 @@
 		    ,cdDelNy
 		    ,cdRegDate
 		    ,cdModDate
-		    ,codeGroup_cgSeq
+		    ,codegroup_cgSeq
 		)VALUES(
 			#{cdName}
 		    ,#{cdOrder}
@@ -75,7 +75,7 @@
 		    ,0
 		    ,now()
 		    ,now()
-		    ,#{codeGroup_cgSeq}
+		    ,#{codegroup_cgSeq}
 		    )
 	</insert>
 	<select id="selectOne" resultMap="resultMapObj">
@@ -88,29 +88,29 @@
 		    ,b.cdDelNy
 		    ,b.cdRegDate
 		    ,b.cdModDate
-		    ,b.codeGroup_cgSeq
+		    ,b.codegroup_cgSeq
 		    ,a.cgSeq
 		    ,a.cgName
-	    FROM commonCode b
-	    LEFT JOIN codeGroup a
-	    ON b.codeGroup_cgSeq = a.cgSeq
+	    FROM commoncode b
+	    LEFT JOIN codegroup a
+	    ON b.codegroup_cgSeq = a.cgSeq
 	    WHERE 1=1
 	    AND b.cdSeq = #{cdSeq}
 	</select>
 	<update id="update">
-		UPDATE commonCode 
+		UPDATE commoncode 
 		set
 			cdName = #{cdName}
 			,cdUseNy = #{cdUseNy}
 			,cdOrder = #{cdOrder}
 			,cdDesc = #{cdDesc}
 			,cdModDate = now()
-			,codeGroup_cgSeq = #{codeGroup_cgSeq}
+			,codegroup_cgSeq = #{codegroup_cgSeq}
 		WHERE 1=1
 			AND cdSeq = #{cdSeq}
 	</update>
 	<update id="uelete">
-		update commonCode
+		update commoncode
 		set
 			cdDelNy = 1
 		where 1=1
@@ -118,7 +118,7 @@
 	</update>
 	
 	<delete id="delete">
-		DELETE FROM commonCode
+		DELETE FROM commoncode
 		where 1=1
 			and cdSeq = #{cdSeq}
 	</delete>
@@ -126,7 +126,7 @@
 		SELECT 
 			cdSeq
 			, cdName
-			, codeGroup_cgSeq
+			, codegroup_cgSeq
 		FROM
 			commoncode
 		WHERE 1=1

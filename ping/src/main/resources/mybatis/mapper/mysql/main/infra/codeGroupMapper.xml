@@ -9,7 +9,7 @@
 	<sql id="selectCommon">
 		FROM
 			codegroup a
-			<!-- left JOIN commoncode b ON b.codeGroup_seq = a.seq -->
+			<!-- left JOIN commoncode b ON b.codegroup_seq = a.seq -->
 		WHERE 1=1
 			<if test="shValue != null and !shValue.equals('')">
 				<choose>
@@ -48,7 +48,7 @@
 			,a.cgName
 			,a.cgDesc
 			,a.cgOrder
-			,(select count(aa.codeGroup_cgSeq) from commoncode aa  where 1=1 and aa.codeGroup_cgSeq = a.cgSeq) as cgCodeCount
+			,(select count(aa.codegroup_cgSeq) from commoncode aa  where 1=1 and aa.codegroup_cgSeq = a.cgSeq) as cgCodeCount
 			,a.cgUseNy
 		    ,a.cgDelNy
 			,a.cgRegDate
@@ -92,12 +92,12 @@
 		    ,a.cgDelNy
 			,a.cgRegDate
 			,a.cgModDate
-		FROM codeGroup a 
+		FROM codegroup a 
 		WHERE 1=1
 		AND a.cgSeq = #{cgSeq}
     </select>
     <update id="update">
-    	UPDATE codeGroup 
+    	UPDATE codegroup 
 		set
 			cgName = #{cgName}
 			,cgUseNy = #{cgUseNy}
@@ -108,14 +108,14 @@
 			AND cgSeq = #{cgSeq}
     </update>
     <update id="uelete">
-		update codeGroup
+		update codegroup
 		set
 			cgDelNy = 1
 		where 1=1
 			and cgSeq = #{cgSeq}
 	</update>
 	<delete id="delete">
-		DELETE FROM codeGroup
+		DELETE FROM codegroup
 		where 1=1
 			and cgSeq = #{cgSeq}
 	</delete>

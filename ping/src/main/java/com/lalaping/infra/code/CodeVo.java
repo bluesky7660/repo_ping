@@ -17,12 +17,18 @@ public class CodeVo extends BaseVo {
 	private Date cdRegDate;
 	@DateTimeFormat
 	private Date cdModDate;
-	private String codeGroup_cgSeq;
+	private String codegroup_cgSeq;
 	private String cgSeq;
 	private String cgName;
 //-----------------------------
 	public String getCdSeq() {
 		return cdSeq;
+	}
+	public String getCodegroup_cgSeq() {
+		return codegroup_cgSeq;
+	}
+	public void setCodegroup_cgSeq(String codegroup_cgSeq) {
+		this.codegroup_cgSeq = codegroup_cgSeq;
 	}
 	public void setCdSeq(String cdSeq) {
 		this.cdSeq = cdSeq;
@@ -68,12 +74,6 @@ public class CodeVo extends BaseVo {
 	}
 	public void setCdModDate(Date cdModDate) {
 		this.cdModDate = cdModDate;
-	}
-	public String getCodeGroup_cgSeq() {
-		return codeGroup_cgSeq;
-	}
-	public void setCodeGroup_cgSeq(String codeGroup_cgSeq) {
-		this.codeGroup_cgSeq = codeGroup_cgSeq;
 	}
 	public String getCgSeq() {
 		return cgSeq;

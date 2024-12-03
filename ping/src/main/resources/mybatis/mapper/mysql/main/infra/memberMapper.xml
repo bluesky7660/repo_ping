@@ -128,7 +128,7 @@
 	        <!-- mmPasswd = #{mmPasswd}, -->
 	        mmTel = #{mmTel},
 	        mmBirthDay = #{mmBirthDay},
-	        mmDept = #{mmDept},
+<!-- 	        mmDept = #{mmDept}, -->
 	        mmEmail = #{mmEmail},
 	        mmGender = #{mmGender}
         WHERE mmSeq = #{mmSeq}

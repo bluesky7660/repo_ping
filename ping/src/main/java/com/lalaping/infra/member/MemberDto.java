@@ -84,5 +84,4 @@ public class MemberDto {
 	public void setMmModDate(Date mmModDate) {
 		this.mmModDate = mmModDate;
 	}
-	
 }
