@@ -178,6 +178,33 @@
 	     	a.spRegDate DESC
 	     <include refid="base.selectListLowerForMysql"/>
 	</select>
+	<select id="otherPortSelectList">
+		<include refid="base.selectListUpperForMysql"/>
+		SELECT
+			a.spSeq
+			,a.spName
+			,a.spPrice
+			,a.spDesc
+			,a.spTotal
+			,a.spRemain
+			,a.spStart
+			,a.spDelNy
+			,a.spArea
+			,a.spEatNy
+			,a.spRentalNy
+			,a.spRegDate
+			,a.port_ptSeq
+			,d.ptName
+            ,GROUP_CONCAT(c.fsSeq ORDER BY c.fsSeq) AS fsSeqList
+    		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
+		<include refid="selectCommonPort"/>
+        	and a.port_ptSeq = #{port_ptSeq}
+        	and !(a.spSeq = #{baseSpSeq})
+		GROUP BY a.spSeq
+		ORDER BY
+	     	a.spRegDate DESC
+	     <include refid="base.selectListLowerForMysql"/>
+	</select>
 	<insert id="insert">
 		INSERT INTO ship(
 			spName

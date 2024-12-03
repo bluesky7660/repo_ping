@@ -13,7 +13,7 @@ public class ShipVo extends BaseVo {
 	private String shfish;
 	private Integer shmin_price;
 	private Integer shmax_price;
-	
+	private String baseSpSeq;
 //	-----------------------------
 	
 	public Integer getShEatNy() {
@@ -76,16 +76,12 @@ public class ShipVo extends BaseVo {
 	public void setShmax_price(Integer shmax_price) {
 		this.shmax_price = shmax_price;
 	}
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
+	public String getBaseSpSeq() {
+		return baseSpSeq;
+	}
+	public void setBaseSpSeq(String baseSpSeq) {
+		this.baseSpSeq = baseSpSeq;
+	}
 	
 
 }

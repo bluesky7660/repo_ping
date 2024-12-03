@@ -231,7 +231,7 @@
                                  data-ts-map-controls="0"></div> -->
                             <div class="ts-map ts-map__detail ts-border-radius__sm ts-shadow__sm" id="ts-map-simple"
                                  data-ts-map-zoom="5"
-                                 th:data-ts-map-portName="${item.ptName}"
+                                 th:data-ts-map-Name="${item.ptName}"
                                  th:data-ts-map-center-latitude="${item.ptLatitude}"
                                  th:data-ts-map-center-longitude="${item.ptLongitude}"
                                  data-ts-map-scroll-wheel="0"
@@ -281,145 +281,61 @@
                     <div class="col-sm-12 col-lg-8">
         
                         <hr class="mb-5">
-                        <h3>Similar Properties</h3>
+                        <h3 th:text="${item.ptName+'의 다른 배'}"></h3>
         
                         <!-- 첫 번째 아이템 -->
-                        <div class="card ts-item ts-item__list ts-card">
+                        <a th:href="@{/v1/ship/shipDetail(spSeq=${other.spSeq})}" class="card ts-item ts-item__list ts-card" th:each="other:${other}">
 
                             <!--Ribbon-->
-                            <div class="ts-ribbon">
+                            <!-- <div class="ts-ribbon">
                                 <i class="fa fa-thumbs-up"></i>
-                            </div>
+                            </div> -->
+                             <!--Ribbon-->
+                             <!-- <div class="ts-ribbon-corner">
+                                <span>Updated</span>
+                            </div> -->
 
                             <!--Card Image-->
-                            <a href="detail-01.html" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg"></a>
+                            <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg"></div>
 
                             <!--Card Body-->
                             <div class="card-body">
 
                                 <figure class="ts-item__info">
-                                    <h4>Big Luxury Apartment</h4>
+                                    <h4 th:text="${other.spName}"></h4>
                                     <aside>
                                         <i class="fa fa-map-marker mr-2"></i>
-                                        1350 Arbutus Drive
+                                        <span th:text="${other.ptName}"></span>
                                     </aside>
                                 </figure>
-
-                                <div class="ts-item__info-badge">
-                                    $350,000
-                                </div>
+                                <div class="ts-item__info-badge" th:text="${#numbers.formatInteger(other.spPrice,1,'COMMA') + '원'}"></div>
 
                                 <div class="ts-description-lists">
                                     <dl>
-                                        <dt>Area</dt>
-                                        <dd>325m<sup>2</sup></dd>
+                                        <dt>최대인원</dt>
+                                        <dd th:text="${other.spTotal+'명'}"></dd>
                                     </dl>
                                     <dl>
-                                        <dt>Bedrooms</dt>
-                                        <dd>2</dd>
+                                        <dt>예약가능인원</dt>
+                                        <dd th:text="${other.spRemain+'명'}"></dd>
                                     </dl>
                                     <dl>
-                                        <dt>Bathrooms</dt>
-                                        <dd>1</dd>
+                                        <dt>출발날짜</dt>
+                                        <dd th:text="${#dates.format(other.spStart,'yyyy-MM-dd')}"></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>어종</dt>
+                                        <dd th:text="${item.fsNameList != null and #strings.length(item.fsNameList) > 1 ? #strings.substring(item.fsNameList, 1, #strings.length(item.fsNameList) - 1) : '전어종'}"></dd>
                                     </dl>
                                 </div>
                             </div>
 
                             <!--Card Footer-->
-                            <a href="detail-01.html" class="card-footer">
-                                <span class="ts-btn-arrow">Detail</span>
-                            </a>
-
-                        </div>
-
-                        <!--Item-->
-                        <div class="card ts-item ts-item__list ts-card">
-
-                            <!--Ribbon-->
-                            <div class="ts-ribbon-corner">
-                                <span>Updated</span>
+                            <div class="card-footer">
+                                <span class="ts-btn-arrow">자세히보기</span>
                             </div>
 
-                            <!--Card Image-->
-                            <a href="detail-01.html" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-02.jpg"></a>
-
-                            <!--Card Body-->
-                            <div class="card-body ts-item__body">
-
-                                <figure class="ts-item__info">
-                                    <h4>Cozy Design Studio</h4>
-                                    <aside>
-                                        <i class="fa fa-map-marker mr-2"></i>
-                                        4831 Worthington Drive
-                                    </aside>
-                                </figure>
-
-                                <div class="ts-item__info-badge">$125,000</div>
-
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>Area</dt>
-                                        <dd>325m<sup>2</sup></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>Bedrooms</dt>
-                                        <dd>2</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>Bathrooms</dt>
-                                        <dd>1</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <!--Card Footer-->
-                            <a href="detail-01.html" class="card-footer ts-item__footer">
-                                <span class="ts-btn-arrow">Detail</span>
-                            </a>
-
-                        </div>
-
-                        <!--Item-->
-                        <div class="card ts-item ts-item__list ts-card">
-
-                            <!--Card Image-->
-                            <a href="detail-01.html" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-03.jpg"></a>
-
-                            <!--Card Body-->
-                            <div class="card-body ts-item__body">
-
-                                <figure class="ts-item__info">
-                                    <h4>Family Villa</h4>
-                                    <aside>
-                                        <i class="fa fa-map-marker mr-2"></i>
-                                        4127 Winding Way
-                                    </aside>
-                                </figure>
-
-                                <div class="ts-item__info-badge">$45,900</div>
-
-                                <div class="ts-description-lists">
-                                    <dl>
-                                        <dt>Area</dt>
-                                        <dd>325m<sup>2</sup></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>Bedrooms</dt>
-                                        <dd>2</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>Bathrooms</dt>
-                                        <dd>1</dd>
-                                    </dl>
-                                </div>
-                            </div>
-
-                            <!--Card Footer-->
-                            <a href="detail-01.html" class="card-footer ts-item__footer">
-                                <span class="ts-btn-arrow">Detail</span>
-                            </a>
-
-                        </div>
+                        </a>
 
                     </div>
 

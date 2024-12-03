@@ -8,6 +8,8 @@ public class MapPointVo extends BaseVo {
 	private Integer shType;
 	private String season_ssSeq;
 	private List<String> fsSeqList;
+	private Double baseMpLongitude;
+	private Double baseMpLatitude;
 //	------------------------------------
 
 	public Integer getShType() {
@@ -34,14 +36,21 @@ public class MapPointVo extends BaseVo {
 		this.fsSeqList = fsSeqList;
 	}
 
-//	public List<Integer> getFsSeqList() {
-//		return fsSeqList;
-//	}
-//
-//	public void setFsSeqList(List<Integer> fsSeqList) {
-//		this.fsSeqList = fsSeqList;
-//	}
-	
-	
+	public Double getBaseMpLongitude() {
+		return baseMpLongitude;
+	}
+
+	public void setBaseMpLongitude(Double baseMpLongitude) {
+		this.baseMpLongitude = baseMpLongitude;
+	}
+
+	public Double getBaseMpLatitude() {
+		return baseMpLatitude;
+	}
+
+	public void setBaseMpLatitude(Double baseMpLatitude) {
+		this.baseMpLatitude = baseMpLatitude;
+	}
+
 
 }

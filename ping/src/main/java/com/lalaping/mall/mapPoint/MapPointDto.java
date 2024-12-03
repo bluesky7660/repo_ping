@@ -15,6 +15,7 @@ public class MapPointDto {
 	
 	private String fsNameList;
 	private String season_ssSeq;
+	private Double distanceIn;
 //	---------------------------------
 	
 	public String getMpSeq() {
@@ -83,5 +84,18 @@ public class MapPointDto {
 	public void setSeason_ssSeq(String season_ssSeq) {
 		this.season_ssSeq = season_ssSeq;
 	}
+//	public Integer getDistanceIn() {
+//		return distanceIn;
+//	}
+//	public void setDistanceIn(Integer distanceIn) {
+//		this.distanceIn = distanceIn;
+//	}
+	public Double getDistanceIn() {
+		return distanceIn;
+	}
+	public void setDistanceIn(Double distanceIn) {
+		this.distanceIn = distanceIn;
+	}
+	
 
 }
