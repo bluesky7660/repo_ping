@@ -19,6 +19,9 @@ public class ShipService {
 	public List<ShipDto> portSelectList(ShipVo vo){
 		return shipDao.portSelectList(vo);
 	}
+	public List<ShipDto> otherPortSelectList(ShipVo vo){
+		return shipDao.otherPortSelectList(vo);
+	}
 	public int listCount(ShipVo vo) {
 		return shipDao.listCount(vo);
 	}

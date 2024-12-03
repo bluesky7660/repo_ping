@@ -104,9 +104,12 @@ public class ShipController {
 		return "usr/v1/ship/ping_shipList";
 	}
 	@RequestMapping(value = "/v1/ship/shipDetail")
-	public String shipDetail(Model model,ShipDto shipDto){
+	public String shipDetail(Model model,ShipDto shipDto,ShipVo shipVo){
 		System.out.println("sadfgfgdfgfdssss");
 		model.addAttribute("item",shipService.selectOne(shipDto));
+		shipVo.setBaseSpSeq(shipService.selectOne(shipDto).getSpSeq());
+		shipVo.setPort_ptSeq(shipService.selectOne(shipDto).getPort_ptSeq());
+		model.addAttribute("other", shipService.otherPortSelectList(shipVo));
 		return "usr/v1/ship/ping_shipDetail";
 	}
 	
