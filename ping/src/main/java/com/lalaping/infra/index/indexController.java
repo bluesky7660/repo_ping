@@ -66,6 +66,7 @@ public class indexController {
 		
 		shipVo.setRowNumToShow(3);
 		model.addAttribute("ships",shipService.selectUsrList(shipVo));
+		System.out.println("index - shMpValue:"+mapPointVo.getShMpValue());
 		return "usr/v1/etc/ping_index";
 	}
 	

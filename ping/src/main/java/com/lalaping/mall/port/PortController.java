@@ -10,9 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lalaping.common.util.UtilDateTime;
+import com.lalaping.mall.mapPoint.MapPointDto;
+import com.lalaping.mall.mapPoint.MapPointService;
+import com.lalaping.mall.mapPoint.MapPointVo;
 import com.lalaping.mall.ship.ShipDto;
 import com.lalaping.mall.ship.ShipService;
 import com.lalaping.mall.ship.ShipVo;
@@ -24,6 +28,9 @@ public class PortController {
 	
 	@Autowired
 	ShipService shipService;
+	
+	@Autowired
+	MapPointService mapPointService;
 	
 	@RequestMapping(value = "/v1/port/portXdmList")
 	public String portXdmList(Model model,@ModelAttribute("vo") PortVo vo){
@@ -83,7 +90,7 @@ public class PortController {
 		return "usr/v1/port/ping_portList";
 	}
 	@RequestMapping(value = "/v1/port/portDetail")
-	public String portDetail(Model model, PortDto portDto, ShipVo shipVo){	
+	public String portDetail(Model model, PortDto portDto, ShipVo shipVo,MapPointVo mapPointVo ){	
 		shipVo.setShDateStart(shipVo.getShDateStart() == null || shipVo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(shipVo.getShDateStart()));
 		shipVo.setShDateEnd(shipVo.getShDateEnd() == null || shipVo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(shipVo.getShDateEnd()));
 		PortDto item = portService.selectOne(portDto);
@@ -97,6 +104,11 @@ public class PortController {
 		model.addAttribute("item",item);
 		model.addAttribute("shipCount", shipService.portListCount(shipVo));
 		model.addAttribute("ships", shipService.portSelectList(shipVo));
+		mapPointVo.setRowNumToShow(2);
+		mapPointVo.setParamsPaging(shipService.portListCount(shipVo));
+		mapPointVo.setBaseMpLatitude(item.getPtLatitude());
+		mapPointVo.setBaseMpLongitude(item.getPtLongitude());
+		model.addAttribute("mapPoint",mapPointService.portNearList(mapPointVo));
 		return "usr/v1/port/ping_portDetail";
 	}
 	
@@ -115,10 +127,32 @@ public class PortController {
 		List<ShipDto> ships = shipService.portSelectList(shipVo);
 
 	    Map<String, Object> responseMap = new HashMap<>();
-	    responseMap.put("shipList", ships); // 리뷰 목록 추가
-	    responseMap.put("thisPage", shipVo.getThisPage()); // 현재 페이지
-	    responseMap.put("totalPages", shipVo.getTotalPages()); // 총 페이지 수
-        return responseMap; // 제품에 대한 리뷰 목록 반환
+	    responseMap.put("shipList", ships);
+	    responseMap.put("thisPage", shipVo.getThisPage()); 
+	    responseMap.put("totalPages", shipVo.getTotalPages());
+        return responseMap;
     }
+	@ResponseBody
+	@RequestMapping(value = "portMapPointList")
+    public Map<String, Object> portMapPointList(@RequestBody MapPointVo mapPointVo,PortDto portDto) {
+		portDto.setPtSeq(mapPointVo.getPtSeq());
+		PortDto item = portService.selectOne(portDto);
+		mapPointVo.setRowNumToShow(2);
+		mapPointVo.setBaseMpLatitude(item.getPtLatitude());
+		mapPointVo.setBaseMpLongitude(item.getPtLongitude());
+		mapPointVo.setParamsPaging(mapPointService.portNearCount(mapPointVo));
+		System.out.println("mapPointVo.getRowNumToShow():"+mapPointVo.getRowNumToShow());
+		List<MapPointDto> mapPoint = mapPointService.portNearList(mapPointVo);
+
+	    Map<String, Object> responseMap = new HashMap<>();
+	    responseMap.put("mpPointList", mapPoint);
+	    responseMap.put("thisPage", mapPointVo.getThisPage()); 
+	    responseMap.put("totalPages", mapPointVo.getTotalPages()); 
+	    System.out.println("mapPointVo.getThisPage:"+mapPointVo.getThisPage());
+	    System.out.println("mapPointVo.getTotalPages:"+mapPointVo.getTotalPages());
+//	    System.out.println("thisPage:"+mapPointVo.getThisPage());
+        return responseMap; 
+    }
+
 
 }

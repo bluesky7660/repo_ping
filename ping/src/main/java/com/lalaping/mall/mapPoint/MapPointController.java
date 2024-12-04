@@ -79,6 +79,7 @@ public class MapPointController {
 	@RequestMapping(value = "/v1/mapPoint/mapPointSearchList")
 	@ResponseBody
 	public Map<String, Object> mapPointSearchList(MapPointDto mapPointDto,MapPointVo mapPointVo){
+		System.out.println("shMpValue:"+mapPointVo.getShMpValue());
 		if (mapPointVo.getFsSeqList() != null) {
 		    System.out.println("fsSeqList2: " + mapPointVo.getFsSeqList().toString());
 		} else {
@@ -87,6 +88,7 @@ public class MapPointController {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		List<MapPointDto> rtPoint = mapPointService.selectSearchList(mapPointVo);
 		System.out.println("성공");
+		
 	    returnMap.put("data", rtPoint);
 		return returnMap;
 	}

@@ -151,20 +151,20 @@
 
                         <!--PROPERTIES & AGENTS TABS
                             =========================================================================================-->
-                        <section id="properties-agents-tab" class="pb-2 mb-3">
+                        <section id="ships-mapPoint-tab" class="pb-2 mb-3">
                             <ul class="nav nav-tabs mb-1" id="login-register-tabs" role="tablist">
 
                                 <!--Properties tab-->
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="properties-tab" data-toggle="tab" href="#properties" role="tab" aria-controls="properties" aria-selected="true">
+                                    <a class="nav-link active" id="ships-tab" data-toggle="tab" href="#ships" role="tab" aria-controls="ships" aria-selected="true">
                                         <h3>배</h3>
                                     </a>
                                 </li>
 
                                 <!--Agents tab-->
                                 <li class="nav-item">
-                                    <a class="nav-link" id="agents-tab" data-toggle="tab" href="#agents" role="tab" aria-controls="agents" aria-selected="false">
-                                        <h3>낚시포인트</h3>
+                                    <a class="nav-link" id="mapPoint-tab" data-toggle="tab" href="#mapPoint" role="tab" aria-controls="mapPoint" aria-selected="false">
+                                        <h3>주변 낚시포인트</h3>
                                     </a>
                                 </li>
 
@@ -177,7 +177,7 @@
 
                             <!--PROPERTIES TAB
                                 =====================================================================================-->
-                            <div class="tab-pane active" id="properties" role="tabpanel" aria-labelledby="properties-tab">
+                            <div class="tab-pane active" id="ships" role="tabpanel" aria-labelledby="ships-tab">
 
                                 <!--DISPLAY CONTROL
                                     =================================================================================-->
@@ -299,7 +299,7 @@
 
                             <!--AGENTS TAB
                                 =====================================================================================-->
-                            <div class="tab-pane" id="agents" role="tabpanel" aria-labelledby="agents-tab">
+                            <div class="tab-pane" id="mapPoint" role="tabpanel" aria-labelledby="mapPoint-tab">
 
                                 <!--DISPLAY CONTROL
                                     =================================================================================-->
@@ -314,6 +314,8 @@
                                             <a href="#" class="btn btn-outline-secondary px-3 mb-2 ts-btn-border-muted">
                                                 <i class="fa fa-th-list"></i>
                                             </a>
+                                            
+                                            <p class="d-inline-block ml-3">100km 범위내</p>
                                         </div>
 
                                         <!--Display selector on the right-->
@@ -333,176 +335,51 @@
 
                                 <!--AGENTS LISTING
                                     =================================================================================-->
-                                <section id="agents-listing">
+                                <section id="mapPointList">
                                     <div class="row">
 
                                         <!--Person-->
-                                        <div class="col-md-6">
-                                            <div class="card ts-person ts-card">
-
-                                                <!--Ribbon-->
-                                                <div class="ts-ribbon">
-                                                    <i class="fa fa-thumbs-up"></i>
-                                                </div>
+                                        <div class="col-md-6" th:each="mapPoint:${mapPoint}">
+                                            <a th:href="@{/v1/mapPoint/mapPointDetail(mpSeq=${mapPoint.mpSeq})}" class="card ts-item ts-card">
 
                                                 <!--Image-->
-                                                <a href="agent-detail-01.html" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-person-01.jpg">
-                                                    <div class="ts-item__info-badge">
-                                                        <span>23 Properties</span>
-                                                    </div>
-                                                </a>
-
-                                                <!--Body-->
-                                                <div class="card-body">
-
-                                                    <figure class="ts-item__info">
-                                                        <h4>Jane Harwood</h4>
-                                                        <aside>
-                                                            <i class="fa fa-map-marker mr-2"></i>
-                                                            London
-                                                        </aside>
-                                                    </figure>
-
-                                                    <dl>
-                                                        <dt>Phone</dt>
-                                                        <dd>+1 602-862-1673</dd>
-                                                        <dt>Email</dt>
-                                                        <dd><a href="#">jane.harwood@example.com</a></dd>
-                                                    </dl>
-
-                                                </div>
-
-                                                <!--Footer-->
-                                                <a href="agent-detail-01.html" class="card-footer">
-                                                    <span class="ts-btn-arrow">Detail</span>
-                                                </a>
-
-                                            </div>
-                                        </div>
-                                        <!--end col-md-3-->
-
-                                        <!--Person-->
-                                        <div class="col-md-6">
-                                            <div class="card ts-person ts-card">
-
-                                                <!--Ribbon-->
-                                                <div class="ts-ribbon">
-                                                    <i class="fa fa-thumbs-up"></i>
-                                                </div>
-
-                                                <!--Image-->
-                                                <a href="agent-detail-01.html" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-person-02.jpg">
-                                                    <div class="ts-item__info-badge">
-                                                        <span>41 Properties</span>
-                                                    </div>
-                                                </a>
-
-                                                <!--Body-->
-                                                <div class="card-body">
-
-                                                    <figure class="ts-item__info">
-                                                        <h4>Jackie Kinsey</h4>
-                                                        <aside>
-                                                            <i class="fa fa-map-marker mr-2"></i>
-                                                            New York
-                                                        </aside>
-                                                    </figure>
-
-                                                    <dl>
-                                                        <dt>Phone</dt>
-                                                        <dd>+1 602-862-1673</dd>
-                                                        <dt>Email</dt>
-                                                        <dd><a href="#">jane.harwood@example.com</a></dd>
-                                                    </dl>
-
-                                                </div>
-
-                                                <!--Footer-->
-                                                <a href="agent-detail-01.html" class="card-footer">
-                                                    <span class="ts-btn-arrow">Detail</span>
-                                                </a>
-
-                                            </div>
-                                        </div>
-                                        <!--end col-md-3-->
-
-                                        <!--Person-->
-                                        <div class="col-md-6">
-                                            <div class="card ts-person ts-card">
-
-                                                <!--Image-->
-                                                <a href="agent-detail-01.html" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-person-03.jpg">
-                                                    <div class="ts-item__info-badge">
-                                                        <span>16 Properties</span>
-                                                    </div>
-                                                </a>
-
-                                                <!--Body-->
-                                                <div class="card-body">
-
-                                                    <figure class="ts-item__info">
-                                                        <h4>Adam Price</h4>
-                                                        <aside>
-                                                            <i class="fa fa-map-marker mr-2"></i>
-                                                            Paris
-                                                        </aside>
-                                                    </figure>
-
-                                                    <dl>
-                                                        <dt>Phone</dt>
-                                                        <dd>+1 602-862-1673</dd>
-                                                        <dt>Email</dt>
-                                                        <dd><a href="#">jane.harwood@example.com</a></dd>
-                                                    </dl>
-
-                                                </div>
-
-                                                <!--Footer-->
-                                                <a href="agent-detail-01.html" class="card-footer">
-                                                    <span class="ts-btn-arrow">Detail</span>
-                                                </a>
-
-                                            </div>
-                                        </div>
-                                        <!--end col-md-3-->
-
-                                        <!--Person-->
-                                        <div class="col-md-6">
-                                            <div class="card ts-person ts-card">
-
-                                                <!--Image-->
-                                                <a href="agent-detail-01.html" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-person-04.jpg">
-                                                    <div class="ts-item__info-badge">
+                                                <div class="ts-item__image ts-item card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-person-04.jpg">
+                                                    <!-- <div class="ts-item__info-badge">
                                                         <span>28 Properties</span>
-                                                    </div>
-                                                </a>
+                                                    </div> -->
+                                                    <figure class="ts-item__info mb-2 pt-2 pb-2">
+                                                        <h4 th:text="${mapPoint.mpTitle}"></h4>
+                                                        <aside>
+                                                            <i class="fa fa-map-marker mr-2"></i>
+                                                            <span th:text="${mapPoint.mpAddress}"></span>
+                                                        </aside>
+                                                    </figure>
+                                                </div>
 
                                                 <!--Body-->
                                                 <div class="card-body">
-
-                                                    <figure class="ts-item__info">
-                                                        <h4>Edward Palmer</h4>
-                                                        <aside>
-                                                            <i class="fa fa-map-marker mr-2"></i>
-                                                            Berlin
-                                                        </aside>
-                                                    </figure>
-
-                                                    <dl>
-                                                        <dt>Phone</dt>
-                                                        <dd>+1 602-862-1673</dd>
+                                                    <!-- <dl>
+                                                        <dt>지역</dt>
+                                                        <dd th:text="${#strings.substring(near.mpAddress, 0, near.mpAddress.indexOf(' '))}"></dd>
                                                         <dt>Email</dt>
                                                         <dd><a href="#">jane.harwood@example.com</a></dd>
+                                                    </dl> -->
+                                                    <dl class="mb-0">
+                                                        <dt>지역</dt>
+                                                        <dd th:text="${#strings.substring(mapPoint.mpAddress, 0, mapPoint.mpAddress.indexOf(' '))}"></dd>
+                                                        <dt>대상어종</dt>
+                                                        <dd th:text="${mapPoint.fsNameList}"></dd>
+                                                        <dt>대상과의 거리</dt>
+                                                        <dd th:text="${mapPoint.distanceIn >= 1000 ? #numbers.formatDecimal(mapPoint.distanceIn / 1000, 2, 2) + 'km' : #numbers.formatDecimal(mapPoint.distanceIn,2,0) + 'm'}"></dd>
                                                     </dl>
-
                                                 </div>
 
                                                 <!--Footer-->
-                                                <a href="agent-detail-01.html" class="card-footer">
+                                                <div  class="card-footer">
                                                     <span class="ts-btn-arrow">Detail</span>
-                                                </a>
+                                                </div>
 
-                                            </div>
+                                            </a>
                                         </div>
                                         <!--end col-md-3-->
 
@@ -512,27 +389,17 @@
 
                                 <!--PAGINATION
                                     =================================================================================-->
-                                <section id="pagination">
-                                    <div class="container">
-
-                                        <!--Pagination-->
-                                        <nav aria-label="Page navigation">
-                                            <ul class="pagination ts-center__horizontal">
-                                                <li class="page-item active">
-                                                    <a class="page-link" href="#">1</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">2</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">3</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a class="page-link ts-btn-arrow" href="#">Next</a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-
+                                <section id="pagination-items">
+                                    <div class="container-fluid px-0 mt-2 mb-2">
+                                        <div class="row">
+                                            <div class="col">
+                                                <ul class="pagination justify-content-center mb-0">
+                                                    <li th:if="${mapPointVo.thisPage > 1}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList2(${mapPointVo.thisPage - 1})" th:attr="onclick=|goList2('${mapPointVo.thisPage - 1}')|"><i class="bi bi-caret-left-fill"></i></a></li>
+                                                    <li th:each="num: ${#numbers.sequence(1, mapPointVo.totalPages)}" th:classappend="${num eq mapPointVo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList2('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
+                                                    <li th:if="${mapPointVo.thisPage < mapPointVo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList2('${mapPointVo.thisPage + 1}')|"><i class="bi bi-caret-right-fill"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </section>
 
@@ -585,16 +452,16 @@
                                     <div class="form-group">
                                          <select class="custom-select" id="status" name="shRemain" >
                                             <option value="">인원</option>
-                                            <option th:selected ="${shipVo.shRemain == 1}" value="1">1</option>
-                                            <option th:selected ="${shipVo.shRemain == 2}" value="2">2</option>
-                                            <option th:selected ="${shipVo.shRemain == 3}" value="3">3</option>
-                                            <option th:selected ="${shipVo.shRemain == 4}" value="4">4</option>
-                                            <option th:selected ="${shipVo.shRemain == 5}" value="5">5</option>
-                                            <option th:selected ="${shipVo.shRemain == 6}" value="6">6</option>
-                                            <option th:selected ="${shipVo.shRemain == 7}" value="7">7</option>
-                                            <option th:selected ="${shipVo.shRemain == 8}"value="8">8</option>
-                                            <option th:selected ="${shipVo.shRemain == 9}" value="9">9</option>
-                                            <option th:selected ="${shipVo.shRemain == 10}" value="10">10</option>
+                                            <option th:selected ="${shipVo.shRemain == 1}" value="1">1명</option>
+                                            <option th:selected ="${shipVo.shRemain == 2}" value="2">2명</option>
+                                            <option th:selected ="${shipVo.shRemain == 3}" value="3">3명</option>
+                                            <option th:selected ="${shipVo.shRemain == 4}" value="4">4명</option>
+                                            <option th:selected ="${shipVo.shRemain == 5}" value="5">5명</option>
+                                            <option th:selected ="${shipVo.shRemain == 6}" value="6">6명</option>
+                                            <option th:selected ="${shipVo.shRemain == 7}" value="7">7명</option>
+                                            <option th:selected ="${shipVo.shRemain == 8}" value="8">8명</option>
+                                            <option th:selected ="${shipVo.shRemain == 9}" value="9">9명</option>
+                                            <option th:selected ="${shipVo.shRemain == 10}" value="10">10명 이상</option>
                                         </select>
                                     </div>
                                     
@@ -778,12 +645,12 @@
 
                             <!--FEATURED PROPERTIES
                                 =====================================================================================-->
-                            <section id="featured-properties">
+                            <!-- <section id="featured-properties">
                                 <h3>Featured Properties</h3>
 
                                 <div class="owl-carousel" data-owl-dots="1">
 
-                                    <!--Slide-->
+                                    
                                     <div class="slide">
                                         <div class="card ts-item ts-card ts-item__lg ts-shadow__none">
                                             <a href="#" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
@@ -798,8 +665,6 @@
                                             </a>
                                         </div>
                                     </div>
-
-                                    <!--Slide-->
                                     <div class="slide">
                                         <div class="card ts-item ts-card ts-item__lg ts-shadow__none">
                                             <a href="#" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-02.jpg">
@@ -814,8 +679,6 @@
                                             </a>
                                         </div>
                                     </div>
-
-                                    <!--Slide-->
                                     <div class="slide">
                                         <div class="card ts-item ts-card ts-item__lg ts-shadow__none">
                                             <a href="#" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-03.jpg">
@@ -832,7 +695,7 @@
                                     </div>
 
                                 </div>
-                            </section>
+                            </section> -->
 
 
                         </aside>
@@ -944,15 +807,81 @@
                         $('#port_shipList').append(shipItem);
                     });
                     // 페이징 정보 업데이트
-                    // document.querySelector("input[name=thisPage]").value = response.thisPage;
-                    updatePagination(response.thisPage, response.totalPages);
+                    const paginationContainer = document.querySelector('#ships #pagination-items .pagination');
+                    const index = '';
+                    updatePagination(response.thisPage, response.totalPages,paginationContainer ,index);
                 },
                 error: function() {
                     alert('데이터를 불러오는 데 오류가 발생했습니다.');
                 }
             });
-            // document.querySelector("form[name=formList]").action = "/v1/port/portDetail";
-            // document.querySelector("form[name=formList]").submit();
+        }
+        goList2 = function (thisPage) {
+            const listContainer = document.getElementById('mapPointList');
+            if (listContainer) {
+                const listPosition = listContainer.getBoundingClientRect().top + window.pageYOffset; // 페이지 상단에서 요소까지의 거리
+                window.scrollTo({
+                    top: listPosition - 200, // 200px 위로 스크롤
+                    behavior: 'smooth' // 부드럽게 스크롤
+                });
+            }
+            const params = new URLSearchParams(window.location.search);
+
+            const ptSeq = params.get('ptSeq');
+            console.log("ptSeq2:"+ptSeq);
+            // document.querySelector("input[name=thisPage]").value = thisPage;
+            $.ajax({
+                url: '/portMapPointList', // 서버의 페이지네이션 엔드포인트
+                type: 'post',
+                contentType: 'application/json', // JSON 형식으로 데이터 전송
+                data: JSON.stringify({ thisPage: thisPage ,ptSeq:ptSeq}),
+                success: function(response) {
+
+                    $('#mapPointList .row').empty(); 
+                    $.each(response.mpPointList, function(index, mapPoint) {
+                        var distance = mapPoint.distanceIn >= 1000 ? (mapPoint.distanceIn / 1000).toFixed(2) + 'km'  
+                        : Math.floor(mapPoint.distanceIn) + 'm'; 
+                        var shipItem = `
+                        <div class="col-md-6">
+                            <a href="/v1/mapPoint/mapPointDetail?mpSeq=${mapPoint.mpSeq}" class="card ts-person ts-card">
+                               
+                                <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-person-04.jpg" style="background-image: url(/usr/v1/template/themeforest-v1.0/assets/img/img-person-04.jpg;)">
+                                </div>
+
+                                <div class="card-body">
+                                    <figure class="ts-item__info">
+                                        <h4>${mapPoint.mpTitle}</h4>
+                                        <aside>
+                                            <i class="fa fa-map-marker mr-2"></i>
+                                            <span>${mapPoint.mpAddress}</span>
+                                        </aside>
+                                    </figure>
+                                    <dl>
+                                        <dt>지역</dt>
+                                        <dd>${mapPoint.mpAddress.split(' ')[0]}</dd>
+                                        <dt>대상어종</dt>
+                                        <dd>${mapPoint.fsNameList}</dd>
+                                        <dt>대상과의 거리</dt>
+                                        <dd>${distance}</dd>
+                                    </dl>
+                                </div>
+
+                                <div class="card-footer">
+                                    <span class="ts-btn-arrow">Detail</span>
+                                </div>
+                            </a>
+                        </div>`;
+                        $('#mapPointList .row').append(shipItem);
+                    });
+                    // 페이징 정보 업데이트
+                    const paginationContainer =  document.querySelector('#mapPoint #pagination-items .pagination');
+                    const index = '2';
+                    updatePagination(response.thisPage, response.totalPages,paginationContainer,index);
+                },
+                error: function() {
+                    alert('데이터를 불러오는 데 오류가 발생했습니다.');
+                }
+            });
         }
     }
 </script>
