@@ -7,7 +7,9 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class ShipDto {
+import com.lalaping.common.base.FileDto;
+
+public class ShipDto extends FileDto {
 	private String fsSeq;
 	private String fsName;
 	private String spSeq;

@@ -30,7 +30,8 @@ public class MapPointController {
 		return "xdm/v1/mapPoint/mapPointXdmList";
 	}
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmForm")
-	public String mapPointXdmForm() {
+	public String mapPointXdmForm(Model model) {
+		model.addAttribute("listLink", "mapPointXdmList");
 		return "xdm/v1/mapPoint/mapPointXdmForm";
 	}
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmInst")
@@ -41,6 +42,7 @@ public class MapPointController {
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmMFom")
 	public String mapPointXdmMFom(Model model,MapPointDto mapPointDto) {
 		model.addAttribute("item",mapPointService.selectOne(mapPointDto));
+		model.addAttribute("listLink", "mapPointXdmList");
 		return "xdm/v1/mapPoint/mapPointXdmMFom";
 	}
 	@RequestMapping(value="/v1/mapPoint/mapPointXdmUpdt")

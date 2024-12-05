@@ -26,7 +26,8 @@ public class ShipController {
 		return "xdm/v1/ship/shipXdmList";
 	}
 	@RequestMapping(value = "/v1/ship/shipXdmForm")
-	public String shipXdmForm() {
+	public String shipXdmForm(Model model) {
+		model.addAttribute("listLink", "shipXdmList");
 		return "xdm/v1/ship/shipXdmForm";
 	}
 	@RequestMapping(value = "/v1/ship/shipXdmInst")
@@ -37,10 +38,11 @@ public class ShipController {
 	@RequestMapping(value = "/v1/ship/shipXdmMFom")
 	public String shipXdmMFom(Model model,ShipDto shipDto) {
 		model.addAttribute("item",shipService.selectOne(shipDto));
+		model.addAttribute("listLink", "shipXdmList");
 		return "xdm/v1/ship/shipXdmMFom";
 	}
 	@RequestMapping(value="/v1/ship/shipXdmUpdt")
-	public String shipXdmUpdt(ShipDto shipDto) {
+	public String shipXdmUpdt(ShipDto shipDto)throws Exception {
 		shipService.update(shipDto);
 		return "redirect:/v1/ship/shipXdmList";
 	}

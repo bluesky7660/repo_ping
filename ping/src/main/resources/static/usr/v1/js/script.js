@@ -276,7 +276,7 @@ window.addEventListener('load', function() {
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <span class="ts-btn-arrow">상세보기</span>
+                                        <span class="ts-btn-arrow">자세히 보기</span>
                                     </div>
                                 </a>
                             </div>

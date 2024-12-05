@@ -30,6 +30,7 @@ public class FishController {
 	@RequestMapping(value = "/v1/fish/fishXdmMFom")
 	public String fishXdmMFom(Model model,FishDto fishDto) {
 		model.addAttribute("item",fishService.selectOne(fishDto));
+		model.addAttribute("listLink", "fishXdmList");
 		return "xdm/v1/fish/fishXdmMFom";
 	}
 	@RequestMapping(value="/v1/fish/fishXdmUpdt")

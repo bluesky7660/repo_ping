@@ -51,6 +51,7 @@ public class PortController {
 	@RequestMapping(value = "/v1/port/portXdmMFom")
 	public String portXdmMFom(Model model,PortDto portDto) {
 		model.addAttribute("item",portService.selectOne(portDto));
+		model.addAttribute("listLink", "portXdmList");
 		return "xdm/v1/port/portXdmMFom";
 	}
 	@RequestMapping(value="/v1/port/portXdmUpdt")
@@ -101,13 +102,19 @@ public class PortController {
 		System.out.println("endPage:"+shipVo.getEndPage());
 		System.out.println("totalPages:"+shipVo.getTotalPages());
 		System.out.println("totalRows:"+shipVo.getTotalRows());
+		
 		model.addAttribute("item",item);
 		model.addAttribute("shipCount", shipService.portListCount(shipVo));
 		model.addAttribute("ships", shipService.portSelectList(shipVo));
 		mapPointVo.setRowNumToShow(2);
-		mapPointVo.setParamsPaging(shipService.portListCount(shipVo));
 		mapPointVo.setBaseMpLatitude(item.getPtLatitude());
 		mapPointVo.setBaseMpLongitude(item.getPtLongitude());
+		mapPointVo.setParamsPaging(mapPointService.portNearCount(mapPointVo));
+		System.out.println("mapPointVo thisPage:"+mapPointVo.getThisPage());
+		System.out.println("mapPointVo startPage:"+mapPointVo.getStartPage());
+		System.out.println("mapPointVo endPage:"+mapPointVo.getEndPage());
+		System.out.println("mapPointVo totalPages:"+mapPointVo.getTotalPages());
+		System.out.println("mapPointVo totalRows:"+mapPointVo.getTotalRows());
 		model.addAttribute("mapPoint",mapPointService.portNearList(mapPointVo));
 		return "usr/v1/port/ping_portDetail";
 	}

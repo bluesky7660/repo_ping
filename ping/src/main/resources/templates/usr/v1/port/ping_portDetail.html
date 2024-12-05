@@ -376,7 +376,7 @@
 
                                                 <!--Footer-->
                                                 <div  class="card-footer">
-                                                    <span class="ts-btn-arrow">Detail</span>
+                                                    <span class="ts-btn-arrow">자세히 보기</span>
                                                 </div>
 
                                             </a>
@@ -843,20 +843,20 @@
                         : Math.floor(mapPoint.distanceIn) + 'm'; 
                         var shipItem = `
                         <div class="col-md-6">
-                            <a href="/v1/mapPoint/mapPointDetail?mpSeq=${mapPoint.mpSeq}" class="card ts-person ts-card">
+                            <a href="/v1/mapPoint/mapPointDetail?mpSeq=${mapPoint.mpSeq}" class="card ts-item ts-card">
                                
-                                <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-person-04.jpg" style="background-image: url(/usr/v1/template/themeforest-v1.0/assets/img/img-person-04.jpg;)">
-                                </div>
-
-                                <div class="card-body">
-                                    <figure class="ts-item__info">
+                                <div class="ts-item__image ts-item card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-person-04.jpg" style="background-image: url(/usr/v1/template/themeforest-v1.0/assets/img/img-person-04.jpg;)">
+                                    <figure class="ts-item__info pt-2 pb-2">
                                         <h4>${mapPoint.mpTitle}</h4>
                                         <aside>
                                             <i class="fa fa-map-marker mr-2"></i>
                                             <span>${mapPoint.mpAddress}</span>
                                         </aside>
                                     </figure>
-                                    <dl>
+                                </div>
+
+                                <div class="card-body">
+                                    <dl class="mb-0">
                                         <dt>지역</dt>
                                         <dd>${mapPoint.mpAddress.split(' ')[0]}</dd>
                                         <dt>대상어종</dt>
@@ -867,7 +867,7 @@
                                 </div>
 
                                 <div class="card-footer">
-                                    <span class="ts-btn-arrow">Detail</span>
+                                    <span class="ts-btn-arrow">자세히 보기</span>
                                 </div>
                             </a>
                         </div>`;

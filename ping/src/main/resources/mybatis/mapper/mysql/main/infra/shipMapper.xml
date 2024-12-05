@@ -289,7 +289,38 @@
         DELETE FROM ship
         WHERE spSeq = #{spSeq}
     </delete>
-    
+    <insert id="insertUploaded">
+			insert into imginsert_ship(
+			    type
+			    ,defaultNy
+			    ,sort
+			    ,path
+			    ,originalName
+			    ,uuid
+			    ,ext
+			    ,size
+				,regDate
+				,modDate
+			    ,delNy
+			    ,pseq
+			) value(
+				#{type}
+			    ,#{defaultNy}
+			    ,#{sort}
+			    ,#{path}
+			    ,#{originalName}
+			    ,#{uuid}
+			    ,#{ext}
+			    ,#{size}
+			    ,now()
+			    ,now()
+			    ,0
+			    ,#{pseq}
+			)
+			<selectKey resultType="String" keyProperty="seq" order="AFTER">
+				SELECT last_insert_id()
+		 	</selectKey>
+	  </insert>
 	
 	
 	
