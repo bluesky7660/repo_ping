@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="ThemeStarz">
+
+    <!--CSS -->
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/leaflet.css">
+    <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/style.css">
+
+    <!-- dev --> 
+    <link rel="stylesheet" href="/usr/v1/css/common.css">
+
+	<title>FishOn - 피쉬온</title>
+    <link rel="icon" href="/usr/v1/template/themeforest-v1.0/assets/img/favicon.ico">
+    
+	<!-- kakao 우편번호 -->
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<!-- map 마커 css -->
+	<style>
+	    .map_wrap {position:relative;width:100%;height:350px;}
+	    .title {font-weight:bold;display:block;}
+	    .hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
+	    #centerAddr {display:block;margin-top:2px;font-weight: normal;}
+	    .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+	</style>
+</head>
+
+<body>
+
+<!-- WRAPPER
+    =================================================================================================================-->
+<div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
+
+    <!--*********************************************************************************************************-->
+    <!--HEADER **************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+    <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
+    <!--end Header-->
+
+    <!--*********************************************************************************************************-->
+    <!-- MAIN ***************************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <main id="ts-main">
+
+        <!--BREADCRUMB
+            =========================================================================================================-->
+        <section id="breadcrumb">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Library</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!--PAGE TITLE
+            =========================================================================================================-->
+        <section id="page-title">
+            <div class="container">
+                <div class="row">
+                    <div class="offset-lg-1 col-lg-10">
+                        <div class="ts-title">
+                            <h1>낚시 포인트 추가</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--SUBMIT FORM
+            =========================================================================================================-->
+        <section id="submit-form">
+            <div class="container">
+                <div class="row">
+
+                    <div class="offset-lg-1 col-lg-10">
+
+                        <form id="form-submit" class="ts-form">
+
+                            <!--BASIC INFORMATION
+                                =====================================================================================-->
+                            <section id="basic-information" class="mb-5">
+
+                                <!--Title-->
+                                <h3 class="text-muted border-bottom">기본정보</h3>
+
+                                <!--Row-->
+                                <div class="row">
+                                    <!--Title-->
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="title">포인트 제목</label>
+                                            <input type="text" class="form-control" id="title" name="title" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end row-->
+                                <!--Description-->
+                                <div class="col">
+                                    <label for="description">포인트 설명</label>
+                                    <textarea class="form-control" id="description" rows="4" name="description"></textarea>
+                                </div>
+                            </section>
+
+                            <!--LOCATION
+                                =====================================================================================-->
+                            <section id="location" class="mb-5">
+
+                                <!--Title-->
+                                <h3 class="text-muted border-bottom">포인트 위치</h3>
+
+                                <div class="row">
+                                    <!-- 포인트 주소 -->
+                                    <div class="col-sm-6">
+
+                                        <!--주소 검색-->
+                                        <div class="input-group">
+                                            <label for="sample5_address">주소</label>
+                                            <input type="text" class="form-control border-right-0" id="sample5_address" placeholder="주소" readonly>
+                                            <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+<!-- 											<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div> -->
+                                            
+                                            <div class="input-group-append" data-toggle="tooltip" data-placement="top" title="Find My Location">
+                                                <a href="" class="input-group-text bg-white border-left-0 ">
+                                                    <i class="fa fa-map-marker ts-text-color-primary"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="address_view">포인트 상세주소</label>
+                                            <input type="text" id="address_view" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <!--end col-md-6-->
+                                    <!--Map-->
+                                    <div class="col-sm-6">
+                                    <!-- 지도를 표시할 div 입니다, 지도 크기 설정 -->
+										<div id="map" style="width:100%;height:500px;"></div>
+<!--                                         <div id="ts-map-simple" class="ts-map ts-shadow__sm h-100" -->
+<!--                                              data-ts-map-leaflet-provider="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png" -->
+<!--                                              data-ts-map-zoom="13" -->
+<!--                                              data-ts-map-center-latitude="40.702411" -->
+<!--                                              data-ts-map-center-longitude="-73.556842" -->
+<!--                                              data-ts-map-scroll-wheel="1" -->
+<!--                                              data-ts-map-controls="0" -->
+<!--                                              data-ts-map-marker-drag="1"> -->
+<!--                                         </div> -->
+                                    </div>
+                                    <!--end col-md-6-->
+                                </div>
+                                <!--end row-->
+                            </section>
+                            <!--end #location-->
+
+                            <!--GALLERY
+                                =====================================================================================-->
+                            <section id="gallery" class="mb-5">
+
+                                <!--Title-->
+                                <h3 class="text-muted border-bottom">갤러리</h3>
+
+                                <!--File upload-->
+                                <div class="file-upload-previews"></div>
+                                <div class="file-upload">
+                                    <input type="file" name="files[]" class="file-upload-input with-preview" multiple title="Click to add files" maxlength="10" accept="gif|jpg|png">
+                                    <span><i class="fa fa-plus-circle"></i>Click or drag images here</span>
+                                </div>
+
+                            </section>
+
+                            <!--ADDITIONAL INFORMATION
+                                =====================================================================================-->
+                            <section id="additional-information" class="mb-5">
+
+                                <!--Title-->
+                                <h3 class="text-muted border-bottom">추가 정보</h3>
+
+                                <!--Row-->
+                                <div class="row">
+
+                                </div>
+                                <!--end row-->
+
+                                <!-- <div id="features-checkboxes"> -->
+                                <div id="fishList-checkboxes">
+                                    <h6 class="mb-3">잡히는 어종</h6>
+
+                                    <!--Checkboxes-->
+                                    <div class="ts-column-count-3">
+
+                                        <div class="custom-control custom-checkbox" th:each="fishList:${fishList}">
+                                            <input type="checkbox" class="custom-control-input" th:id="${'ch_'+fishListStat.count}" name="features[]" th:value="${'ch_'+fishListStat.count}">
+                                            <label class="custom-control-label" th:for="${'ch_'+fishListStat.count}" th:text="${fishList.fsName}"></label>
+                                        </div>
+
+                                    </div>
+                                    <!--end ts-column-count-3-->
+
+                                </div>
+                                <!--end #features-checkboxes-->
+
+                            </section>
+                            <!--end #additional-information-->
+
+                            <hr>
+
+                            <section class="py-3">
+                                <button type="submit" onclick="window.location='/v1/mapPoint/mapPointDetail?mpSeq=1'" class="btn btn-primary ts-btn-arrow btn-lg float-right">
+                                    <i class="fa fa-save mr-2"></i>포인트 생성
+                                </button>
+                            </section>
+
+                        </form>
+                        <!--end #form-submit-->
+
+                    </div>
+                    <!--end offset-lg-1 col-lg-10-->
+                </div>
+                <!--end row-->
+            </div>
+            <!--end container-->
+        </section>
+
+    </main>
+    <!--end #ts-main-->
+
+    <!--*********************************************************************************************************-->
+    <!--************ FOOTER *************************************************************************************-->
+    <!--*********************************************************************************************************-->
+
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
+    <!--end #ts-footer-->
+
+</div>
+<!--end page-->
+
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/jQuery.MultiFile.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script src="/usr/v1/js/script.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
+<!-- kakao 우편번호Api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- Map 영역 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&libraries=services,clusterer"></script>
+<script>
+    // ***** Map 클릭시 마커로 주소표시 *****
+    var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
+    var address_view = document.getElementById("sample5_address");
+    var mapOption = {
+        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        level: 1 // 지도의 확대 레벨
+    };  
+
+    //지도를 생성합니다    
+    var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+    //주소-좌표 변환 객체를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder();
+
+    var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
+    infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+
+    //현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
+    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+
+    //지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
+    kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+    searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
+            detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+            
+            var content = '<div class="bAddr">' +
+                            '<span class="title">포인트 주소정보</span>' + 
+                            detailAddr + 
+                        '</div>';
+
+            // 마커를 클릭한 위치에 표시합니다 
+            marker.setPosition(mouseEvent.latLng);
+            marker.setMap(map);
+            address_view.value = !!result[0].road_address ? result[0].road_address.address_name:result[0].address.address_name;
+            // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+        }   
+    });
+    });
+
+    
+    //
+    
+    //중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
+    kakao.maps.event.addListener(map, 'idle', function() {
+    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+    });
+
+    function searchAddrFromCoords(coords, callback) {
+    // 좌표로 행정동 주소 정보를 요청합니다
+    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+    }
+
+    function searchDetailAddrFromCoords(coords, callback) {
+    // 좌표로 법정동 상세 주소 정보를 요청합니다
+    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+    }
+
+    //지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+    function displayCenterInfo(result, status) {
+    if (status === kakao.maps.services.Status.OK) {
+        var infoDiv = document.getElementById('centerAddr');
+        
+        for(var i = 0; i < result.length; i++) {
+            // 행정동의 region_type 값은 'H' 이므로
+            if (result[i].region_type === 'H') {
+                infoDiv.innerHTML = result[i].address_name;
+                break;
+            }
+        }
+    }    
+    }
+    // *************************** 우편번호 Api ******************************
+    function sample5_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = data.address; // 최종 주소 변수
+
+                // 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("sample5_address").value = addr;
+                // 주소로 상세 정보를 검색
+                geocoder.addressSearch(data.address, function(results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+
+                        var result = results[0]; //첫번째 결과의 값을 활용
+
+                        // 해당 주소에 대한 좌표를 받아서
+                        var coords = new daum.maps.LatLng(result.y, result.x);
+                        // 지도를 보여준다.
+                        mapContainer.style.display = "block";
+                        map.relayout();
+                        // 지도 중심을 변경한다.
+                        map.setCenter(coords);
+                        // 마커를 결과값으로 받은 위치로 옮긴다.
+                        marker.setPosition(coords)
+                        marker.setMap(map);
+                    }
+                });
+            }
+        }).open();
+    }
+    // ************************* Map 검색 영역 ***************************
+    // 주소로 좌표를 검색합니다
+    geocoder.addressSearch('sample5_address', function(result, status) {
+
+        // 정상적으로 검색이 완료됐으면 
+        if (status === kakao.maps.services.Status.OK) {
+
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var addressMarker = new kakao.maps.Marker({
+                map: map,
+                position: coords
+            });
+
+            // 인포윈도우로 장소에 대한 설명을 표시합니다
+            var infowindow = new kakao.maps.InfoWindow({
+                content: '<div style="width:150px;text-align:center;padding:6px 0;">검색주소 위치</div>'
+            });
+            infowindow.open(map, addressMarker);
+
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
+        } 
+    });    
+    
+	// ************************ 접속위치로 표시된 위치 ******************************
+	// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+	if (navigator.geolocation) {
+	    
+	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+	    navigator.geolocation.getCurrentPosition(function(position) {
+	        
+	        var lat = position.coords.latitude, // 위도
+	            lon = position.coords.longitude; // 경도
+	        
+	        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+	            message = '<div style="padding:5px;">접속 위치</div>'; // 인포윈도우에 표시될 내용입니다
+	        
+	        // 마커와 인포윈도우를 표시합니다
+	        displayMarker(locPosition, message);
+	            
+	      });
+	    
+	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+	    
+	    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+	        message = 'geolocation을 사용할수 없습니다'
+	        
+	    displayMarker(locPosition, message);
+	}
+
+	// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+	function displayMarker(locPosition, message) {
+
+	    // 마커를 생성합니다
+	    var marker = new kakao.maps.Marker({  
+	        map: map, 
+	        position: locPosition
+	    }); 
+	    
+	 	// 인포윈도우에 표시할 내용
+	    var iwContent = message, 
+	        iwRemoveable = true;
+
+	    // 인포윈도우를 생성합니다
+	    var infowindow = new kakao.maps.InfoWindow({
+	        content : iwContent,
+	        removable : iwRemoveable
+	    });
+	    
+	    // 인포윈도우를 마커위에 표시합니다 
+	    infowindow.open(map, marker);
+	    
+	    // 지도 중심좌표를 접속위치로 변경합니다
+	    map.setCenter(locPosition);      
+	}       
+</script>
+
+</body>
+</html>
