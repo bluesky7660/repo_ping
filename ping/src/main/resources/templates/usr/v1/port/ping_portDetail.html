@@ -570,7 +570,7 @@
                                 =====================================================================================-->
                             <section id="sidebar-search-form">
 
-                                <h3>검색</h3>
+                                <h3 th:text="${shipVo.totalRows}+' 건의 검색'"></h3>
 
                                 <form id="form-search" method="post" action="/v1/port/portDetail" name="formList" class="ts-form" autocomplete="off">
 									<input type="hidden" name="thisPage" th:value="${shipVo.thisPage}" default="1"/>

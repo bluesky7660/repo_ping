@@ -93,7 +93,7 @@
                                 =========================================================================================-->
                             <section id="sidebar-search-form">
 
-                                <h3>검색</h3>
+                                <h3 th:text="${vo.totalRows}+' 건의 검색'"></h3>
 
                                 <form method="post" action="/v1/ship/shipList" id="form-search" class="ts-form" autocomplete="off">
                                     <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
@@ -281,9 +281,9 @@
                             <div class="card ts-item ts-item__list ts-card" th:each="list:${list}">
                                 <a th:href="@{/v1/ship/shipDetail(spSeq=${list.spSeq})}">
                                     <!--Ribbon-->
-                                    <div class="ts-ribbon-corner">
-                                        <span>Updated</span>
-                                    </div>
+<!--                                     <div class="ts-ribbon-corner"> -->
+<!--                                         <span>Updated</span> -->
+<!--                                     </div> -->
 
                                     <!--Card Image-->
                                     <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg"></div>
