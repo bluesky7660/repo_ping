@@ -140,7 +140,7 @@
 														<label for="inputCodeName" class="form-label">포인트제목</label>
 														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputMpTitle" name="mpTitle" th:value="${item.mpTitle}" placeholder="한글, 영대소문자, 숫자" required>
 														<div class="invalid-feedback">
-															코드이름을 적어주세요.
+															포인트제목을 적어주세요.
 														</div>
 													</div>
 												</div>
@@ -172,9 +172,11 @@
 														<!--주소 검색-->
 					                                       <div class="input-group">
 															<!-- <label for="sample5_address">주소</label> -->
-					                                           <input type="text" class="form-control border-right-0" id="sample5_address" placeholder="주소" readonly>
+					                                           <input type="text" class="form-control border-right-0" id="sample5_address" name="mpAddress" placeholder="주소" readonly>
 					                                           <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 															<!-- <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div> -->
+																<input type="hidden" id="lat" name="mpLatitude">
+																<input type="hidden" id="lng" name="mpLongitude">
 					                                       </div>
 
 														<!-- <input type="text" class="form-control" id="inputPtAddress" name="ptAddress" th:value="${item.ptAddress}" placeholder="주소입력" required> -->
@@ -306,7 +308,6 @@
     });
     });
 
-    
     //
     
     //중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
@@ -403,13 +404,16 @@
 	        
 	        var lat = position.coords.latitude, // 위도
 	            lon = position.coords.longitude; // 경도
-	        
+
+	            console.log(lat);
+	            console.log(lon);
+	            
 	        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 	            message = '<div style="padding:5px;">접속 위치</div>'; // 인포윈도우에 표시될 내용입니다
 	        
 	        // 마커와 인포윈도우를 표시합니다
 	        displayMarker(locPosition, message);
-	            
+	        
 	      });
 	    
 	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
