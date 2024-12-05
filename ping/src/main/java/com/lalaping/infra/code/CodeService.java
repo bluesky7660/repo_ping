@@ -53,7 +53,7 @@ public class CodeService {
 	public static List<CodeDto> selectListCachedCode(String ifcgSeq) throws Exception {
 		List<CodeDto> rt = new ArrayList<CodeDto>();
 		for(CodeDto codeRow : CodeDto.cachedCodeArrayList) {
-			if (codeRow.getCodeGroup_cgSeq().equals(ifcgSeq)) {
+			if (codeRow.getCodegroup_cgSeq().equals(ifcgSeq)) {
 				rt.add(codeRow);
 			} else {
 				// by pass
