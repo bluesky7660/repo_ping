@@ -966,6 +966,35 @@
 		});	
 	});
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const minPriceInput = document.getElementById('min-price');
+        const maxPriceInput = document.getElementById('max-price');
+
+        // Function to check if fields are filled and alert if needed
+        function checkPrices() {
+            if (minPriceInput.value === '') {
+                alert('최소가격을 입력해주세요.');
+                return false;
+            } else if (maxPriceInput.value === '') {
+                alert('최대가격을 입력해주세요.');
+                return false;
+            }
+            return true;
+        }
+
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(event) {
+                if (minPriceInput.value === '' && maxPriceInput.value === '') {
+                    return true;
+                } else if (!checkPrices()) {
+                    event.preventDefault();
+                }
+            });
+        }
+    });
+</script>
 
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>

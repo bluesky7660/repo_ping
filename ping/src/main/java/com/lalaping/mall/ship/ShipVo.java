@@ -68,13 +68,21 @@ public class ShipVo extends BaseVo {
 		return shmin_price;
 	}
 	public void setShmin_price(Integer shmin_price) {
-		this.shmin_price = shmin_price;
+		if(shmin_price == null) {
+			this.shmin_price = 1;
+		}else {
+			this.shmin_price = shmin_price;
+		}
 	}
 	public Integer getShmax_price() {
 		return shmax_price;
 	}
 	public void setShmax_price(Integer shmax_price) {
-		this.shmax_price = shmax_price;
+		if(shmax_price == null) {
+			this.shmax_price = 500000;
+		}else {
+			this.shmax_price = shmax_price;
+		}
 	}
 	public String getBaseSpSeq() {
 		return baseSpSeq;
