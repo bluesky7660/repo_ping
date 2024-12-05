@@ -122,6 +122,14 @@
 		FROM mappoint a
 			LEFT JOIN fishandmappoint b ON b.mappoint_mpSeq = a.mpSeq
 			LEFT JOIN fish c ON c.fsSeq = b.fish_fsSeq
+		Where 1=1
+	    <if test="shMpValue != null and !shMpValue.equals('')">
+	    	AND(
+                 a.mpTitle LIKE CONCAT('%', #{shMpValue}, '%')
+                 OR a.mpAddress LIKE CONCAT('%', #{shMpValue}, '%')
+                 <!-- OR a.mpText LIKE CONCAT('%', #{shMpValue}, '%') -->
+            )
+	    </if>
 		GROUP BY a.mpSeq
 		<if test="fsSeqList != null and !fsSeqList.isEmpty()">
 			HAVING 
@@ -130,6 +138,7 @@
 			        SUM(CASE WHEN c.fsSeq = #{item} THEN 1 ELSE 0 END) > 0
 			    </foreach>
 	    </if>
+	    
 		ORDER BY a.mpRegDate DESC
     </select>
     <select id="allList" resultMap="resultMapObj">
@@ -169,6 +178,39 @@
    		GROUP BY a.mpSeq
    		ORDER BY
      	a.mpRegDate DESC
+    </select>
+    <select id="portNearCount" resultType="int">
+    	 SELECT COUNT(DISTINCT a.mpSeq) 
+    	 FROM mappoint a
+        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
+            left join fish c on c.fsSeq = b.fish_fsSeq
+        WHERE 1=1
+        	and ST_Distance_Sphere(POINT(#{baseMpLongitude},#{baseMpLatitude}), POINT(a.mpLongitude, a.mpLatitude)) &lt; 100000
+   		<!-- GROUP BY a.mpSeq -->
+   		ORDER BY
+     	a.mpRegDate DESC
+    </select>
+    <select id="portNearList" resultMap="resultMapObj">
+    	<include refid="base.selectListUpperForMysql"/>
+    	SELECT
+    		a.mpSeq
+    		,a.mpTitle
+    		,a.mpText
+    		,a.mpAddress
+    		,a.mpType
+    		,a.mpDelNy
+    		,a.mpRegDate
+    		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
+    		,ST_Distance_Sphere(POINT(#{baseMpLongitude}, #{baseMpLatitude}), POINT(a.mpLongitude, a.mpLatitude)) AS distanceIn
+   		FROM mappoint a
+        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
+            left join fish c on c.fsSeq = b.fish_fsSeq
+        WHERE 1=1
+        	and ST_Distance_Sphere(POINT(#{baseMpLongitude},#{baseMpLatitude}), POINT(a.mpLongitude, a.mpLatitude)) &lt; 100000
+   		GROUP BY a.mpSeq
+   		ORDER BY
+     	a.mpRegDate DESC
+     	<include refid="base.selectListLowerForMysql"/>
     </select>
     <select id="sessSelectList" resultMap="resultMapObj">
     	SELECT

@@ -10,6 +10,9 @@ public class MapPointVo extends BaseVo {
 	private List<String> fsSeqList;
 	private Double baseMpLongitude;
 	private Double baseMpLatitude;
+	private String shMpValue;
+	
+	private String ptSeq;
 //	------------------------------------
 
 	public Integer getShType() {
@@ -52,6 +55,22 @@ public class MapPointVo extends BaseVo {
 		this.baseMpLatitude = baseMpLatitude;
 	}
 	
+
+	public String getShMpValue() {
+		return shMpValue;
+	}
+
+	public void setShMpValue(String shMpValue) {
+		this.shMpValue = shMpValue;
+	}
+
+	public String getPtSeq() {
+		return ptSeq;
+	}
+
+	public void setPtSeq(String ptSeq) {
+		this.ptSeq = ptSeq;
+	}
 
 
 }

@@ -30,7 +30,8 @@ public class MapPointController {
 		return "xdm/v1/mapPoint/mapPointXdmList";
 	}
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmForm")
-	public String mapPointXdmForm() {
+	public String mapPointXdmForm(Model model) {
+		model.addAttribute("listLink", "mapPointXdmList");
 		return "xdm/v1/mapPoint/mapPointXdmForm";
 	}
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmInst")
@@ -41,6 +42,7 @@ public class MapPointController {
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmMFom")
 	public String mapPointXdmMFom(Model model,MapPointDto mapPointDto) {
 		model.addAttribute("item",mapPointService.selectOne(mapPointDto));
+		model.addAttribute("listLink", "mapPointXdmList");
 		return "xdm/v1/mapPoint/mapPointXdmMFom";
 	}
 	@RequestMapping(value="/v1/mapPoint/mapPointXdmUpdt")
@@ -79,6 +81,7 @@ public class MapPointController {
 	@RequestMapping(value = "/v1/mapPoint/mapPointSearchList")
 	@ResponseBody
 	public Map<String, Object> mapPointSearchList(MapPointDto mapPointDto,MapPointVo mapPointVo){
+		System.out.println("shMpValue:"+mapPointVo.getShMpValue());
 		if (mapPointVo.getFsSeqList() != null) {
 		    System.out.println("fsSeqList2: " + mapPointVo.getFsSeqList().toString());
 		} else {
@@ -87,6 +90,7 @@ public class MapPointController {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		List<MapPointDto> rtPoint = mapPointService.selectSearchList(mapPointVo);
 		System.out.println("성공");
+		
 	    returnMap.put("data", rtPoint);
 		return returnMap;
 	}

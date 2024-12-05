@@ -26,8 +26,14 @@ public class MapPointService {
 	public List<MapPointDto> nearList(MapPointVo vo) {
 		return mapPointDao.nearList(vo);
 	}
+	public List<MapPointDto> portNearList(MapPointVo vo) {
+		return mapPointDao.portNearList(vo);
+	}
 	public List<MapPointDto> sessSelectList(MapPointVo vo) {
 		return mapPointDao.sessSelectList(vo);
+	}
+	public int portNearCount(MapPointVo mapPointVo) {
+		return mapPointDao.portNearCount(mapPointVo);
 	}
 	public int insert(MapPointDto mapPointDto) {
 		return mapPointDao.insert(mapPointDto);

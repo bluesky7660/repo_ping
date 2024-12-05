@@ -310,11 +310,14 @@ $(document).ready(function($) {
         
       }
       console.log("fsSeqList",fsSeqList);
+      const shMpValue = document.querySelector("input[name=shMpValue]");
+      console.log("shMpValue.value: " + shMpValue.value);
       $.ajax({
         url: '/v1/mapPoint/mapPointSearchList', 
         method: 'POST', 
         data: {
-          fsSeqList:fsSeqList
+          fsSeqList:fsSeqList,
+          shMpValue:shMpValue.value
         },
         success: function(response) {
             // 응답 받은 데이터를 바탕으로 마커 생성
@@ -338,6 +341,7 @@ $(document).ready(function($) {
                 url: "/v1/mapPoint/mapPointDetail?mpSeq=" + data.mpSeq // URL 예시: 상세 페이지 링크
               };
             });
+            
             loadedMarkersData.forEach(function (markerData) {
                 createMarker(markerData);
             });

@@ -276,7 +276,7 @@ window.addEventListener('load', function() {
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <span class="ts-btn-arrow">상세보기</span>
+                                        <span class="ts-btn-arrow">자세히 보기</span>
                                     </div>
                                 </a>
                             </div>
@@ -307,8 +307,9 @@ window.addEventListener('load', function() {
     }
     
 });
-function updatePagination(thisPage, totalPages) {
-    const paginationContainer = document.querySelector("#pagination-items .pagination");
+function updatePagination(thisPage, totalPages, paginationContainer,index) {
+    // const paginationContainer = document.querySelector("#pagination-items .pagination");
+    console.log()
     paginationContainer.innerHTML = ""; // 기존 페이지네이션 초기화
 
     const pageNumToShow = 5; // 보여줄 페이지 번호 수
@@ -320,7 +321,7 @@ function updatePagination(thisPage, totalPages) {
         const prevButton = document.createElement("li");
         prevButton.className = "page-item";
         prevButton.innerHTML = `
-            <a class="page-link" href="javascript:void(0)" onclick="goList(${startPage - 1})">
+            <a class="page-link" href="javascript:void(0)" onclick="goList${index}(${startPage - 1})">
                 <i class="bi bi-caret-left-fill"></i>
             </a>`;
         paginationContainer.appendChild(prevButton);
@@ -331,7 +332,7 @@ function updatePagination(thisPage, totalPages) {
         const pageItem = document.createElement("li");
         pageItem.className = `page-item ${page === thisPage ? "active" : ""}`;
         pageItem.innerHTML = `
-            <a class="page-link" href="javascript:void(0)" onclick="goList(${page})">${page}</a>`;
+            <a class="page-link" href="javascript:void(0)" onclick="goList${index}(${page})">${page}</a>`;
         paginationContainer.appendChild(pageItem);
     }
 
@@ -340,7 +341,7 @@ function updatePagination(thisPage, totalPages) {
         const nextButton = document.createElement("li");
         nextButton.className = "page-item";
         nextButton.innerHTML = `
-            <a class="page-link" href="javascript:void(0)" onclick="goList(${endPage + 1})">
+            <a class="page-link" href="javascript:void(0)" onclick="goList${index}(${endPage + 1})">
                 <i class="bi bi-caret-right-fill"></i>
             </a>`;
         paginationContainer.appendChild(nextButton);
