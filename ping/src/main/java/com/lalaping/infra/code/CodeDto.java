@@ -18,24 +18,23 @@ public class CodeDto {
 	private Date cdRegDate;
 	@DateTimeFormat
 	private Date cdModDate;
-	private String codeGroup_cgSeq;
+	private String codegroup_cgSeq;
 	private String cgSeq;
 	private String cgName;
 	
 	//for cache
 	public static List<CodeDto> cachedCodeArrayList = new ArrayList<CodeDto>();
 //	---------------------
-	
 	public String getCdSeq() {
 		return cdSeq;
 	}
 
-	public String getCodeGroup_cgSeq() {
-		return codeGroup_cgSeq;
+	public String getCodegroup_cgSeq() {
+		return codegroup_cgSeq;
 	}
 
-	public void setCodeGroup_cgSeq(String codeGroup_cgSeq) {
-		this.codeGroup_cgSeq = codeGroup_cgSeq;
+	public void setCodegroup_cgSeq(String codegroup_cgSeq) {
+		this.codegroup_cgSeq = codegroup_cgSeq;
 	}
 
 	public void setCdSeq(String cdSeq) {

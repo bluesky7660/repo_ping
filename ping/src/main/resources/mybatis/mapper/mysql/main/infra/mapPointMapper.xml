@@ -251,6 +251,8 @@
     		mpTitle = #{mpTitle}
     		,mpText = #{mpText}
     		,mpAddress = #{mpAddress}
+    		,mpLatitude = #{mpLatitude}
+    		,mpLongitude = #{mpLongitude}
     		,mpType = #{mpType}
 		WHERE 1=1
 		AND mpSeq = #{mpSeq}
