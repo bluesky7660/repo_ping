@@ -51,6 +51,7 @@ public class MapPointVo extends BaseVo {
 	public void setBaseMpLatitude(Double baseMpLatitude) {
 		this.baseMpLatitude = baseMpLatitude;
 	}
+	
 
 
 }
