@@ -53,6 +53,7 @@
     		,g.member_mmSeq
     		,a.spName
     		,a.spStart
+    		,a.spSeq
    		FROM orders g
    		LEFT JOIN ship a
 		ON g.ship_spSeq = a.spSeq
@@ -81,6 +82,7 @@
     		,g.member_mmSeq
     		,a.spName
     		,a.spStart
+    		,a.spSeq
    		FROM orders g
    		LEFT JOIN ship a
 		ON g.ship_spSeq = a.spSeq

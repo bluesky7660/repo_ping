@@ -97,7 +97,7 @@
                                 <div class="card-body">
 
                                     <figure class="ts-item__info">
-                                        <a href="#"><h4 th:text="${list.spName}"></h4></a>
+                                        <a th:href="@{/v1/ship/shipDetail(spSeq=${list.spSeq})}"><h4 th:text="${list.spName}"></h4></a>
                                     </figure>
                                     <div class="ts-description-lists">
                                         <dl>
