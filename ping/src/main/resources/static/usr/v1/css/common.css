@@ -79,6 +79,21 @@ img[alt="날씨이미지"]{
     max-height: 200px;
 }
 
+/*icon*/
+.icon_box i{
+    font-size: 60px;
+}
+.waveDirectionIcon{
+    color: #006DF0;
+}
+.windDirectionIcon{
+    color: #FB8C00;
+}
+.weatherIcon{
+    font-size: 40px;
+    color: #EFCC00;
+}
+
 
 
 @media (min-width: 576px) {

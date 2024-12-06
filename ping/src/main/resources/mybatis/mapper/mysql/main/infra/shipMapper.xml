@@ -317,7 +317,7 @@
 			    ,0
 			    ,#{pseq}
 			)
-			<selectKey resultType="String" keyProperty="seq" order="AFTER">
+			<selectKey resultType="String" keyProperty="spSeq" order="AFTER">
 				SELECT last_insert_id()
 		 	</selectKey>
 	  </insert>
