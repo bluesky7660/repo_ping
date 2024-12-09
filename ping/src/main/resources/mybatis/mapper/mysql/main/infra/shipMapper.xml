@@ -1,8 +1,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.lalaping.mall.ship.ShipDao">
-	<resultMap type="com.lalaping.mall.ship.ShipDto" id="resultMapObj"></resultMap>
-	
+	<resultMap type="com.lalaping.mall.ship.ShipDto"
+		id="resultMapObj"></resultMap>
+
 	<sql id="selectCommonPort">
 		FROM ship a
         	left join fishandship b on b.ship_spSeq = a.spSeq
@@ -30,7 +31,7 @@
         	AND a.spStart BETWEEN #{shDateStart} AND #{shDateEnd}
         </if>
 	</sql>
-	
+
 	<sql id="selectCommon">
         FROM ship a
         	left join fishandship b on b.ship_spSeq = a.spSeq
@@ -68,68 +69,52 @@
         <if test="(shmin_price != null and shmin_price != 0) or (shmax_price != null and shmax_price != 0)">
     		AND a.spPrice BETWEEN #{shmin_price} AND #{shmax_price}
 		</if>
-        
-        <if test="shfish != null and !shfish.equals('')">
-            AND c.fsName = #{shfish}
-        </if>
-        <if test="shRemain != null and !shRemain.equals('')">
-            AND a.spRemain > #{shRemain}
-        </if>
-        <if test="shDelNy != null and !shDelNy.equals('')">
-            AND a.spDelNy = #{shDelNy}
-        </if>
-        <if test="shEatNy != null and !shEatNy.equals('')">
-            AND a.spEatNy = #{shEatNy}
-        </if>
-        <if test="shRentalNy != null and !shRentalNy.equals('')">
-            AND a.spRentalNy = #{shRentalNy}
-        </if>
-        <if test="shArea != null and !shArea.equals('')">
-            AND a.spArea = #{shArea}
-        </if>
-        <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
-        	<choose>
-        		<when test="shOptionDate == 1"> AND a.spRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-           	</choose>
-        </if>
-         <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
-        	AND a.spStart BETWEEN #{shDateStart} AND #{shDateEnd}
-        </if>
-       
-    </sql>
+		<if
+			test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
+			<choose>
+				<when test="shOptionDate == 1"> AND a.spRegDate BETWEEN #{shDateStart} AND
+					#{shDateEnd}</when>
+			</choose>
+		</if>
+		<if
+			test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
+			AND a.spStart BETWEEN #{shDateStart} AND #{shDateEnd}
+		</if>
+
+	</sql>
 	<select id="selectList">
-		<include refid="base.selectListUpperForMysql"/>
+		<include refid="base.selectListUpperForMysql" />
 		SELECT
-			a.spSeq
-			,a.spName
-			,a.spPrice
-			,a.spDesc
-			,a.spTotal
-			,a.spRemain
-			,a.spStart
-			,a.spDelNy
-			,a.spArea
-			,a.spEatNy
-			,a.spRentalNy
-			,a.spRegDate
-			,a.port_ptSeq
-			,d.ptName
-		<include refid="selectCommon"/>
-	 ORDER BY
-     	a.spRegDate DESC
-		<include refid="base.selectListLowerForMysql"/>		
+		a.spSeq
+		,a.spName
+		,a.spPrice
+		,a.spDesc
+		,a.spTotal
+		,a.spRemain
+		,a.spStart
+		,a.spDelNy
+		,a.spArea
+		,a.spEatNy
+		,a.spRentalNy
+		,a.spRegDate
+		,a.port_ptSeq
+		,d.ptName
+		<include refid="selectCommon" />
+		ORDER BY
+		a.spRegDate DESC
+		<include refid="base.selectListLowerForMysql" />
 	</select>
 	<select id="listCount" resultType="int">
-        SELECT COUNT(DISTINCT a.spSeq) 
-        <include refid="selectCommon"/>
-    </select>
-    <select id="portListCount" resultType="int">
-        SELECT COUNT(*) 
-       <include refid="selectCommonPort"/>
-        	and a.port_ptSeq = #{port_ptSeq}
-    </select>
+		SELECT COUNT(DISTINCT a.spSeq)
+		<include refid="selectCommon" />
+	</select>
+	<select id="portListCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="selectCommonPort" />
+		and a.port_ptSeq = #{port_ptSeq}
+	</select>
 	<select id="selectUsrList">
-		<include refid="base.selectListUpperForMysql"/>
+		<include refid="base.selectListUpperForMysql" />
 		SELECT
 			a.spSeq
 			,a.spName
@@ -152,39 +137,39 @@
     		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
 		<include refid="selectCommon"/>
 		GROUP BY a.spSeq
-		 ORDER BY
-	     	<!-- a.${sortOrderString} -->
-	     	a.spRegDate Desc
-	     <include refid="base.selectListLowerForMysql"/>
+		ORDER BY
+		<!-- a.${sortOrderString} -->
+		a.spRegDate Desc
+		<include refid="base.selectListLowerForMysql" />
 	</select>
 	<select id="portSelectList">
-		<include refid="base.selectListUpperForMysql"/>
+		<include refid="base.selectListUpperForMysql" />
 		SELECT
-			a.spSeq
-			,a.spName
-			,a.spPrice
-			,a.spDesc
-			,a.spTotal
-			,a.spRemain
-			,a.spStart
-			,a.spDelNy
-			,a.spArea
-			,a.spEatNy
-			,a.spRentalNy
-			,a.spRegDate
-			,a.port_ptSeq
-			,d.ptName
-            ,GROUP_CONCAT(c.fsSeq ORDER BY c.fsSeq) AS fsSeqList
-    		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
-		<include refid="selectCommonPort"/>
-        	and a.port_ptSeq = #{port_ptSeq}
+		a.spSeq
+		,a.spName
+		,a.spPrice
+		,a.spDesc
+		,a.spTotal
+		,a.spRemain
+		,a.spStart
+		,a.spDelNy
+		,a.spArea
+		,a.spEatNy
+		,a.spRentalNy
+		,a.spRegDate
+		,a.port_ptSeq
+		,d.ptName
+		,GROUP_CONCAT(c.fsSeq ORDER BY c.fsSeq) AS fsSeqList
+		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
+		<include refid="selectCommonPort" />
+		and a.port_ptSeq = #{port_ptSeq}
 		GROUP BY a.spSeq
 		ORDER BY
-	     	a.spRegDate DESC
-	     <include refid="base.selectListLowerForMysql"/>
+		a.spRegDate DESC
+		<include refid="base.selectListLowerForMysql" />
 	</select>
 	<select id="otherPortSelectList">
-		<include refid="base.selectListUpperForMysql"/>
+		<include refid="base.selectListUpperForMysql" />
 		SELECT
 			a.spSeq
 			,a.spName
@@ -208,89 +193,89 @@
         	and !(a.spSeq = #{baseSpSeq})
 		GROUP BY a.spSeq
 		ORDER BY
-	     	a.spRegDate DESC
-	     <include refid="base.selectListLowerForMysql"/>
-	</select> 
+		a.spRegDate DESC
+		<include refid="base.selectListLowerForMysql" />
+	</select>
 	<insert id="insert">
 		INSERT INTO ship(
-			spName
-			,spPrice
-			,spDesc
-			,spTotal
-			,spStart
-			,spDelNy
-			,spArea
-			,spEatNy
-			,spRentalNy
-			,spRegDate
-			,port_ptSeq
+		spName
+		,spPrice
+		,spDesc
+		,spTotal
+		,spStart
+		,spDelNy
+		,spArea
+		,spEatNy
+		,spRentalNy
+		,spRegDate
+		,port_ptSeq
 		)VALUES(
-			#{spName}
-			,#{spPrice}
-			,#{spDesc}
-			,#{spTotal}
-			,#{spStart}
-			,0
-			,#{spArea}
-			,#{spEatNy}
-			,#{spRentalNy}
-			,now()
-			,#{port_ptSeq}
+		#{spName}
+		,#{spPrice}
+		,#{spDesc}
+		,#{spTotal}
+		,#{spStart}
+		,0
+		,#{spArea}
+		,#{spEatNy}
+		,#{spRentalNy}
+		,now()
+		,#{port_ptSeq}
 		)
 	</insert>
 	<select id="selectOne" resultMap="resultMapObj">
 		SELECT
-			a.spSeq
-			,a.spName
-			,a.spPrice
-			,a.spDesc
-			,a.spTotal
-			,a.spRemain
-			,a.spStart
-			,a.spDelNy
-			,a.spArea
-			,a.spEatNy
-			,a.spRentalNy
-			,a.spRegDate
-			,a.port_ptSeq
-			,d.ptName
-			,d.ptLatitude
-			,d.ptLongitude
-			,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
+		a.spSeq
+		,a.spName
+		,a.spPrice
+		,a.spDesc
+		,a.spTotal
+		,a.spRemain
+		,a.spStart
+		,a.spDelNy
+		,a.spArea
+		,a.spEatNy
+		,a.spRentalNy
+		,a.spRegDate
+		,a.port_ptSeq
+		,d.ptName
+		,d.ptLatitude
+		,d.ptLongitude
+		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
 		FROM ship a
-			left join fishandship b on b.ship_spSeq = a.spSeq
-            left join fish c on c.fsSeq = b.fish_fsSeq
-            left join port d on d.ptSeq = a.port_ptSeq
+		left join fishandship b on b.ship_spSeq = a.spSeq
+		left join fish c on c.fsSeq = b.fish_fsSeq
+		left join port d on d.ptSeq = a.port_ptSeq
 		WHERE 1=1
-			AND a.spSeq = #{spSeq}
+		AND a.spSeq = #{spSeq}
 		GROUP BY a.spSeq
 	</select>
-		
+
 	<update id="update">
 		UPDATE ship
 		SET
-			spName = #{spName}
-			,spPrice = #{spPrice}
-			,spDEsc = #{spDesc}
-			,spTotal = #{spTotal}
-			,spStart = #{spStart}
-			,spArea = #{spArea}
-			,spEatNy = #{spEatNy}
-			,spRentalNy = #{spRentalNy}
-			,spRegDate = #{spRegDate}
-			,port_ptSeq = #{port_ptSeq}
+		spName = #{spName}
+		,spPrice = #{spPrice}
+		,spDEsc = #{spDesc}
+		,spTotal = #{spTotal}
+		,spStart = #{spStart}
+		,spArea = #{spArea}
+		,spEatNy = #{spEatNy}
+		,spRentalNy = #{spRentalNy}
+		,spRegDate = #{spRegDate}
+		,port_ptSeq = #{port_ptSeq}
 		WHERE 1=1
 		AND spSeq = #{spSeq}
 	</update>
-	
+
 	<update id="uelete">
 		UPDATE ship
-		SET 
-			spDelNy = 1
+		SET
+		spDelNy = 1
 		WHERE 1=1
 		AND spSeq = #{spSeq}
 	</update>
-	
+
 	<delete id="delete">
         DELETE FROM ship
         WHERE spSeq = #{spSeq}
@@ -339,8 +324,6 @@
 		 ORDER BY
 	     	s.sort
 	</select>
-	
-	
 	
 	
 </mapper>

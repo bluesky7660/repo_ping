@@ -71,7 +71,7 @@ function createSideBarResult(map, loadedMarkersData, newMarkers) {
 
       resultsHtml.push(
           '<div class="ts-result-link" data-ts-id="' + loadedMarkersData[id]["id"] + '" data-ts-ln="' + newMarkers[id].loopNumber + '">' +
-                    '<span class="ts-center-marker"><img src="/usr/v1/template/themeforest-v1.0/assets/img/result-center.svg"></span>' +
+                    '<span class="ts-center-marker"><img src=""></span>' +
                     '<a href="' + loadedMarkersData[id]["url"] + '" class="card ts-item ts-card ts-result">' +
                         ( ( loadedMarkersData[i]["ribbon"] !== undefined ) ? '<div class="ts-ribbon">' + loadedMarkersData[i]["ribbon"] + '</div>' : "" ) +
                         ( ( loadedMarkersData[i]["ribbon_corner"] !== undefined ) ? '<div class="ts-ribbon-corner"><span>' + loadedMarkersData[i]["ribbon_corner"] + '</span></div>' : "" ) +
@@ -337,7 +337,7 @@ $(document).ready(function($) {
                 fsNameList: data.fsNameList, // fsNameList는 서버에서 CONCAT된 값일 가능성이므로 필요에 따라 처리
                 lat: data.mpLatitude,  // 데이터에 위도 값이 포함되어 있다고 가정
                 lng: data.mpLongitude,  // 데이터에 경도 값이 포함되어 있다고 가정
-                marker_image: data.marker_image || "/usr/v1/template/themeforest-v1.0/assets/img/marker-default-img.png",  // 기본 이미지 설정
+                marker_image: data.marker_image || "/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png",  // 기본 이미지 설정
                 url: "/v1/mapPoint/mapPointDetail?mpSeq=" + data.mpSeq // URL 예시: 상세 페이지 링크
               };
             });

@@ -227,7 +227,7 @@
 													</td> 
 													<td th:text="${list.spPrice}"></td>
 													<td th:text = "${list.spTotal}"></td>
-													<td th:text="${list.spStart}"></td>
+													<td th:text="${#dates.format(list.spStart, 'yyyy-MM-dd HH:mm')}"></td>
 													<td th:text ="${list.spArea}"></td>
 													<td th:text ="${list.port_ptSeq}"></td>
 													<td th:if="${list.spEatNy eq false }">N</td>
