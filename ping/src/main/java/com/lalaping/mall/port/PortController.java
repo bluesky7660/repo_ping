@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lalaping.common.util.UtilDateTime;
@@ -34,6 +33,9 @@ public class PortController {
 	
 	@RequestMapping(value = "/v1/port/portXdmList")
 	public String portXdmList(Model model,@ModelAttribute("vo") PortVo vo){
+		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
+		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
+		vo.setParamsPaging(portService.listCount(vo));
 		model.addAttribute("list",portService.selectList(vo));
 		model.addAttribute("formLink", "portXdmForm");
 		return "xdm/v1/port/portXdmList";
@@ -52,6 +54,7 @@ public class PortController {
 	public String portXdmMFom(Model model,PortDto portDto) {
 		model.addAttribute("item",portService.selectOne(portDto));
 		model.addAttribute("listLink", "portXdmList");
+		System.out.println("위도 경도 확인 : " );
 		return "xdm/v1/port/portXdmMFom";
 	}
 	@RequestMapping(value="/v1/port/portXdmUpdt")

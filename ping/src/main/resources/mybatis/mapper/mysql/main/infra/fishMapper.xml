@@ -29,9 +29,14 @@
         		<when test="shOptionDate == 1"> AND a.fsRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
            	</choose>
         </if>
+        
        
     </sql>
     
+    <select id="listCount" resultType="int">
+        SELECT COUNT(*) 
+        <include refid="selectCommon"/>
+    </select>
     <select id="selectList" resultMap="resultMapObj">
 		<include refid="base.selectListUpperForMysql"/>
 		SELECT
