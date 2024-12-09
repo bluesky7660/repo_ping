@@ -13,5 +13,5 @@ public interface PortDao {
 	public int uelete(PortDto portDto);
 	public int delete(PortDto portDto);
 	public int selectOneCount(PortVo vo);
-
+	public int listCount(PortVo vo);
 }

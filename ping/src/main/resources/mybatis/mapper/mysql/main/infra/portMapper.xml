@@ -56,6 +56,10 @@
      	a.ptRegDate DESC
 		<include refid="base.selectListLowerForMysql"/>
 	</select>
+	<select id="listCount" resultType="int">
+        SELECT COUNT(*) 
+        <include refid="selectCommon"/>
+    </select>
 	<insert id="insert">
 		INSERT INTO port(
 			ptArea
@@ -84,8 +88,8 @@
 			,a.ptName
 			,a.ptDesc
 			,a.ptAddress
-			,a.ptLatitude
-			,a.ptLongitude
+			,a.ptLatitude 
+			,a.ptLongitude 
 			,a.ptDelNy
 			,a.ptRegDate
 		FROM port a
@@ -99,6 +103,8 @@
 			,ptName = #{ptName}
 			,ptDesc = #{ptDesc}
 			,ptAddress = #{ptAddress}
+			,ptLongitude = #{ptLongitude}
+			,ptLatitude = #{ptLatitude}
 		WHERE 1=1
 		AND ptSeq = #{ptSeq}
 	</update>

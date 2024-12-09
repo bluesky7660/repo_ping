@@ -176,7 +176,7 @@
 					                                           <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 															<!-- <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div> -->
 																<input type="hidden" id="lat" name="mpLatitude">
-																<input type="hidden" id="lng" name="mpLongitude">
+																<input type="hidden" id="lon" name="mpLongitude">
 					                                       </div>
 
 														<!-- <input type="text" class="form-control" id="inputPtAddress" name="ptAddress" th:value="${item.ptAddress}" placeholder="주소입력" required> -->
@@ -261,10 +261,10 @@
 		<!-- by developer -->
 		<script src="/xdm/v1/js/commonXdm.js"></script>
 		<!-- kakao 우편번호Api -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!-- Map 영역 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&libraries=services,clusterer"></script>
-<script>
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<!-- Map 영역 -->
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&libraries=services,clusterer"></script>
+		<script>
     // ***** Map 클릭시 마커로 주소표시 *****
     var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
     var address_view = document.getElementById("sample5_address");
@@ -402,11 +402,11 @@
 	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
 	    navigator.geolocation.getCurrentPosition(function(position) {
 	        
-	        var lat = position.coords.latitude, // 위도
-	            lon = position.coords.longitude; // 경도
-
-	            console.log(lat);
-	            console.log(lon);
+	        var lat = position.coords.latitude = document.getElementById("lat"), // 위도
+	            lon = position.coords.longitude = document.getElementById("lon"); // 경도
+	
+	            console.log("위도 : " + lat);
+	            console.log(" 경도 : " + lon);
 	            
 	        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 	            message = '<div style="padding:5px;">접속 위치</div>'; // 인포윈도우에 표시될 내용입니다

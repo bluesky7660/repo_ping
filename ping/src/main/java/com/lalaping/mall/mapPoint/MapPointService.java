@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class MapPointService {
 	@Autowired
@@ -52,6 +51,9 @@ public class MapPointService {
 	}
 	public int delete(MapPointDto mapPointDto) {
 		return mapPointDao.delete(mapPointDto);
+	}
+	public int listCount(MapPointVo vo) {
+		return mapPointDao.listCount(vo);
 	}
 
 }

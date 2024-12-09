@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.lalaping.common.util.UtilDateTime;
+
 @Controller
 public class FishController {
 	@Autowired
@@ -13,6 +15,9 @@ public class FishController {
 	
 	@RequestMapping(value = "/v1/fish/fishXdmList")
 	public String fishXdmList(Model model,@ModelAttribute("vo") FishVo vo){
+		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
+		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
+		vo.setParamsPaging(fishService.listCount(vo));
 		model.addAttribute("list",fishService.selectList(vo));
 		model.addAttribute("formLink", "fishXdmForm");
 		return "xdm/v1/fish/fishXdmList";
