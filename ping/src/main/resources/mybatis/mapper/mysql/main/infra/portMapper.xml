@@ -5,7 +5,9 @@
 	
 	<sql id="selectCommon">
         FROM port a
+
         LEFT JOIN imginsert_port p on p.pSeq = a.ptSeq        
+
         WHERE 1=1
         <if test="shValue != null and !shValue.equals('')">
             <choose>
@@ -57,6 +59,10 @@
      	a.ptRegDate DESC
 		<include refid="base.selectListLowerForMysql"/>
 	</select>
+	<select id="listCount" resultType="int">
+        SELECT COUNT(*) 
+        <include refid="selectCommon"/>
+    </select>
 	<insert id="insert">
 		INSERT INTO port(
 			ptArea
@@ -85,11 +91,13 @@
 			,a.ptName
 			,a.ptDesc
 			,a.ptAddress
-			,a.ptLatitude
-			,a.ptLongitude
+			,a.ptLatitude 
+			,a.ptLongitude 
 			,a.ptDelNy
 			,a.ptRegDate
+			,p.path
 		FROM port a
+			left join imginsert_port p on b.pseq = a.ptSeq and b.defaultNy = 1
 		WHERE 1=1
 		AND a.ptSeq = #{ptSeq}
 	</select>
@@ -100,6 +108,8 @@
 			,ptName = #{ptName}
 			,ptDesc = #{ptDesc}
 			,ptAddress = #{ptAddress}
+			,ptLongitude = #{ptLongitude}
+			,ptLatitude = #{ptLatitude}
 		WHERE 1=1
 		AND ptSeq = #{ptSeq}
 	</update>
@@ -119,7 +129,39 @@
 	select count(*)
 	<include refid="selectCommon"></include>
 	</select>
-	
-	
+
+	<insert id="insertUploaded">
+		insert into imginsert_port(
+		type
+		,defaultNy
+		,sort
+		,path
+		,originalName
+		,uuid
+		,ext
+		,size
+		,regDate
+		,modDate
+		,delNy
+		,pseq
+		) value(
+		#{type}
+		,#{defaultNy}
+		,#{sort}
+		,#{path}
+		,#{originalName}
+		,#{uuid}
+		,#{ext}
+		,#{size}
+		,now()
+		,now()
+		,0
+		,#{pseq}
+		)
+		<selectKey resultType="String" keyProperty="ptSeq"
+			order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
+	</insert>
     
 </mapper>

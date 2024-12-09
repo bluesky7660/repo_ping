@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/font-awesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/leaflet.css">
     <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons-wind.min.css" integrity="sha512-Ydyj0LLrJGMf7yUSU+QxZE4Pu/jVIutpdTOAozUrzZMslo+vLMX64rghLxEs+AKpN+GmnVNgXoeLlMwSqtyjPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- dev -->
     <link rel="stylesheet" href="/usr/v1/css/common.css">
@@ -429,7 +431,7 @@
                                 <h4>지역 날씨</h4>
                                 <table class="table">
                                     <tr>
-                                        <th>11.08</th>
+                                        <th th:text="${#dates.format(new java.util.Date(), 'MM.dd')}"></th>
                                         <th>날씨</th>
                                         <th>기온</th>
                                         <th>풍향</th>
@@ -441,72 +443,75 @@
                                         <th>강수량</th>
                                         <th>습도</th>
                                     </tr>
-                                    <tr>
+                                    <tr th:each="weather:${weatherData}">
                                         <td>
                                             <div>
-                                                <p>03시</p>
+                                                <p th:text="${#strings.substring(weather.time, 11,13)+'시'}"></p>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
+                                                <div class="icon_box weatherIcon">
+                                                    <!-- <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/> -->
+                                                    <i th:class="${weather.weatherIcon}"></i>
                                                 </div>
-                                                <p>맑음</p>
+                                                <p th:text="${weather.weatherName}"></p>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p><span>2</span>* C</p>
+                                                <p><span th:text="${weather.temperature}"></span>* C</p>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/NE1.png" alt="풍향이미지">
+                                                <div class="icon_box windDirectionIcon">
+                                                    <!-- <img src="/usr/v1/template/themeforest-v1.0/assets/img/NE1.png" alt="풍향이미지"> -->
+                                                    <i th:class="${weather.windDirectionIcon}"></i>
                                                 </div>
-                                                <p>북동</p>
+                                                <p th:text="${weather.windDirection}"></p>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p><span>1.8</span> m/s</p>
+                                                <p><span th:text="${weather.windSpeed}"></span> m/s</p>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p><span>0.27</span> m</p>
+                                                <p><span th:text="${weather.waveHeight}"></span> m</p>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/NNE.png" alt="파향이미지">
+                                                <div class="icon_box waveDirectionIcon">
+                                                    <!-- <img src="/usr/v1/template/themeforest-v1.0/assets/img/NNE.png" alt="파향이미지"> -->
+                                                    <i th:class="${weather.waveDirectionIcon}"></i>
                                                 </div>
-                                                <p>북북동</p>
+                                                <p th:text="${weather.waveDirection}"></p>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p><span>2.36</span> /s</p>
+                                                <p><span th:text="${weather.wavePeriod}"></span> /s</p>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p><span>0</span> %</p>
+                                                <p><span th:text="${weather.precipitationProbability}"></span> %</p>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p><span>-</span></p>
+                                                <p><span th:text="${weather.precipitation!=null? weather.precipitation+'mm':'-'}"></span></p>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p><span>80</span> %</p>
+                                                <p><span th:text="${weather.relativeHumidity}"></span> %</p>
                                             </div>
                                         </td>
-                                    </tr>
+                                    <!-- </tr>
                                     <tr>
                                         <td>
                                             <div>
@@ -902,7 +907,7 @@
                                                 <p><span>80</span> %</p>
                                             </div>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                 </table>
                                 
                             </div>

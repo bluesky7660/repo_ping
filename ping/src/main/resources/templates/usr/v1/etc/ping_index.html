@@ -353,7 +353,7 @@
                                 </div> -->
 
                                 <!--Card Image-->
-                                <div class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
+                                <div class="card-img ts-item__image" th:data-bg-image="${sessPoint.path != null ? sessPoint.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}">
                                     <figure class="ts-item__info">
                                         <h4 th:text="${sessPoint.mpTitle}"></h4>
                                         <aside>
@@ -415,7 +415,7 @@
                                 </div>
 
                                 <!--Card Image-->
-                                <div class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
+                                <div class="card-img ts-item__image" th:data-bg-image="${mapPoint.path != null ? mapPoint.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}">
                                     <figure class="ts-item__info">
                                         <h4 th:text="${mapPoint.mpTitle}"></h4>
                                         <aside>

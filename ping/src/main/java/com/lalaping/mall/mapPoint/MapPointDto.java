@@ -2,7 +2,9 @@ package com.lalaping.mall.mapPoint;
 
 import java.util.Date;
 
-public class MapPointDto {
+import com.lalaping.common.base.FileDto;
+
+public class MapPointDto extends FileDto {
 	private String mpSeq;
 	private String mpTitle;
 	private String mpText;

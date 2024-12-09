@@ -124,7 +124,7 @@
 										<div class="card-title">기본정보</div>
 									</div>
 									<div class="card-body">
-										<form class="needs-validation" method="post" autocomplete="off" action="/v1/mapPoint/mapPointXdmUpdt" novalidate>
+										<form class="needs-validation" method="post" autocomplete="off" enctype="multipart/form-data" action="/v1/mapPoint/mapPointXdmUpdt" novalidate>
 											<!-- Row start -->
 											<div class="row">
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
@@ -175,8 +175,8 @@
 					                                           <input type="text" class="form-control border-right-0" id="sample5_address" name="mpAddress" placeholder="주소" readonly>
 					                                           <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 															<!-- <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div> -->
-																<input type="hidden" id="lat" name="mpLatitude">
-																<input type="hidden" id="lng" name="mpLongitude">
+																<input type="hidden" id="mpLatitude" name="mpLatitude">
+					                                          	<input type="hidden" id="mpLongitude" name="mpLongitude">
 					                                       </div>
 
 														<!-- <input type="text" class="form-control" id="inputPtAddress" name="ptAddress" th:value="${item.ptAddress}" placeholder="주소입력" required> -->
@@ -196,6 +196,13 @@
 												<div class="col-xl-6 col-md-8 col-12">
 													<!-- 지도를 표시 DIV, 지도 크기 설정 -->
 													<div id="map" style="width:300px;height:300px;"></div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-xl-6 col-md-8 col-12">
+													<label for="uploadFiles" class="form-label fs--1">file</label>
+													<input type="file" id="uploadFiles" name="uploadFiles" multiple class="form-control"/>
+													<div class="invalid-feedback" id="uploadFilesFeedback"></div>
 												</div>
 											</div>
 											
@@ -261,10 +268,10 @@
 		<!-- by developer -->
 		<script src="/xdm/v1/js/commonXdm.js"></script>
 		<!-- kakao 우편번호Api -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!-- Map 영역 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&libraries=services,clusterer"></script>
-<script>
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<!-- Map 영역 -->
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&libraries=services,clusterer"></script>
+		<script>
     // ***** Map 클릭시 마커로 주소표시 *****
     var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
     var address_view = document.getElementById("sample5_address");
@@ -328,19 +335,19 @@
     //지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
     function displayCenterInfo(result, status) {
     if (status === kakao.maps.services.Status.OK) {
-        var infoDiv = document.getElementById('centerAddr');
+        // var infoDiv = document.getElementById('centerAddr');
         
         for(var i = 0; i < result.length; i++) {
             // 행정동의 region_type 값은 'H' 이므로
             if (result[i].region_type === 'H') {
-                infoDiv.innerHTML = result[i].address_name;
+                // infoDiv.innerHTML = result[i].address_name;
                 break;
             }
         }
     }    
     }
     // *************************** 우편번호 Api ******************************
-    function sample5_execDaumPostcode() {
+     function sample5_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
                 var addr = data.address; // 최종 주소 변수
@@ -356,11 +363,30 @@
 
                         // 해당 주소에 대한 좌표를 받아서
                         var coords = new daum.maps.LatLng(result.y, result.x);
+                        
+                        var mpLatitude = document.getElementById("mpLatitude");
+                        var mpLongitude = document.getElementById("mpLongitude");
+                       
+                        // 바닐라js
+                        mpLatitude.value = coords.getLat();
+                        mpLongitude.value = coords.getLng();
+                        
+                        // jquery 방식
+//                         $("#ptLatitude").val(coords.getLat);
+//                         $("#ptLongitude").val(coords.getLng);
+                        
+                        // *** 위도, 경도 값 ***
+                        console.log("위도,경도 확인 : " + coords);
+                        console.log("위도 : " + coords.getLat());
+                        console.log("경도 : " + coords.getLng());
+                        
                         // 지도를 보여준다.
                         mapContainer.style.display = "block";
                         map.relayout();
+                        
                         // 지도 중심을 변경한다.
                         map.setCenter(coords);
+                        
                         // 마커를 결과값으로 받은 위치로 옮긴다.
                         marker.setPosition(coords)
                         marker.setMap(map);
@@ -369,6 +395,7 @@
             }
         }).open();
     }
+    
     // ************************* Map 검색 영역 ***************************
     // 주소로 좌표를 검색합니다
     geocoder.addressSearch('sample5_address', function(result, status) {
@@ -402,11 +429,11 @@
 	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
 	    navigator.geolocation.getCurrentPosition(function(position) {
 	        
-	        var lat = position.coords.latitude, // 위도
-	            lon = position.coords.longitude; // 경도
-
-	            console.log(lat);
-	            console.log(lon);
+	        var lat = position.coords.latitude = document.getElementById("lat"), // 위도
+	            lon = position.coords.longitude = document.getElementById("lon"); // 경도
+	
+	            console.log("위도 : " + lat);
+	            console.log(" 경도 : " + lon);
 	            
 	        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 	            message = '<div style="padding:5px;">접속 위치</div>'; // 인포윈도우에 표시될 내용입니다

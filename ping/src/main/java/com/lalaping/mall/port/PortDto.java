@@ -2,7 +2,9 @@ package com.lalaping.mall.port;
 
 import java.util.Date;
 
-public class PortDto {
+import com.lalaping.common.base.FileDto;
+
+public class PortDto extends FileDto{
 	private String ptSeq;
 	private Integer ptArea;
 	private String ptName;

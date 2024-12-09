@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.lalaping.mall.port.PortDto;
+
 @Repository
 public interface MapPointDao {
 	public List<MapPointDto> selectList(MapPointVo vo);
@@ -21,6 +23,9 @@ public interface MapPointDao {
 	public int update(MapPointDto mapPointDto);
 	public int uelete(MapPointDto mapPointDto);
 	public int delete(MapPointDto mapPointDto);
+	public int listCount(MapPointVo vo);
+
+	public int insertUploaded(MapPointDto mapPointDto);
 
 
 }

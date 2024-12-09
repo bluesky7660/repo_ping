@@ -38,6 +38,10 @@
        
     </sql>
     
+    <select id="listCount" resultType="int">
+        SELECT COUNT(*) 
+        <include refid="selectCommon"/>
+    </select>
     <select id="selectList" resultMap="resultMapObj">
     	<include refid="base.selectListUpperForMysql"/>
     	SELECT
@@ -312,5 +316,39 @@
     	 DELETE FROM mappoint
         WHERE mpSeq = #{mpSeq}
     </delete>
+    
+    <insert id="insertUploaded">
+		insert into imginsert_mappoint(
+		type
+		,defaultNy
+		,sort
+		,path
+		,originalName
+		,uuid
+		,ext
+		,size
+		,regDate
+		,modDate
+		,delNy
+		,pseq
+		) value(
+		#{type}
+		,#{defaultNy}
+		,#{sort}
+		,#{path}
+		,#{originalName}
+		,#{uuid}
+		,#{ext}
+		,#{size}
+		,now()
+		,now()
+		,0
+		,#{pseq}
+		)
+		<selectKey resultType="String" keyProperty="mpSeq"
+			order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
+	</insert>
 	
 </mapper>

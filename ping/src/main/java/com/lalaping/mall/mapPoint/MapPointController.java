@@ -9,12 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lalaping.common.util.UtilDateTime;
 import com.lalaping.mall.fish.FishService;
 import com.lalaping.mall.fish.FishVo;
-
 
 @Controller
 public class MapPointController {
@@ -25,6 +24,9 @@ public class MapPointController {
 	
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmList")
 	public String mapPointXdmList(Model model,@ModelAttribute("vo") MapPointVo vo){
+		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
+		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
+		vo.setParamsPaging(mapPointService.listCount(vo));
 		model.addAttribute("list",mapPointService.selectList(vo));
 		model.addAttribute("formLink", "mapPointXdmForm");
 		return "xdm/v1/mapPoint/mapPointXdmList";
@@ -43,10 +45,12 @@ public class MapPointController {
 	public String mapPointXdmMFom(Model model,MapPointDto mapPointDto) {
 		model.addAttribute("item",mapPointService.selectOne(mapPointDto));
 		model.addAttribute("listLink", "mapPointXdmList");
+		
+		System.out.println("위도 값 확인 : " + mapPointDto.getMpLatitude());
 		return "xdm/v1/mapPoint/mapPointXdmMFom";
 	}
 	@RequestMapping(value="/v1/mapPoint/mapPointXdmUpdt")
-	public String mapPointXdmUpdt(MapPointDto mapPointDto) {
+	public String mapPointXdmUpdt(MapPointDto mapPointDto) throws Exception{
 		mapPointService.update(mapPointDto);
 		return "redirect:/v1/mapPoint/mapPointXdmList";
 	}
