@@ -5,7 +5,7 @@
 	
 	<sql id="selectCommon">
         FROM port a
-        
+        LEFT JOIN imginsert_port p on p.pSeq = a.ptSeq        
         WHERE 1=1
         <if test="shValue != null and !shValue.equals('')">
             <choose>
@@ -51,6 +51,7 @@
 			,a.ptLongitude
 			,a.ptDelNy
 			,a.ptRegDate
+			,p.path
 		<include refid="selectCommon"/>
 	 ORDER BY
      	a.ptRegDate DESC
@@ -124,6 +125,7 @@
 	select count(*)
 	<include refid="selectCommon"></include>
 	</select>
+	
 	
     
 </mapper>
