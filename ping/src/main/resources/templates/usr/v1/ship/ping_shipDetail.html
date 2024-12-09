@@ -88,36 +88,39 @@
             <div class="owl-carousel ts-gallery-carousel ts-gallery-carousel__multi" data-owl-dots="1" data-owl-items="3" data-owl-center="1" data-owl-loop="1">
 
                 <!--Slide-->
-                <div class="slide">
-                    <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-01.jpg">
-                        <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-01.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a>
+                <div class="slide" th:each="list : ${list}">
+                    <div class="ts-image" th:data-bg-image="${list.path}">
+                        <a th:href="${list.path}" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a>
                     </div>
                 </div>
 
                 <!--Slide-->
-                <div class="slide">
-                    <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-02.jpg">
-                        <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-02.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a>
-                    </div>
-                </div>
+<!--                 <div class="slide"> -->
+<!--                     <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-02.jpg"> -->
+<!--                         <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-02.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a> -->
+<!--                     </div> -->
+<!--                 </div> -->
 
                 <!--Slide-->
-                <div class="slide">
-                    <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-05.jpg">
-                        <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-03.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a>
-                    </div>
-                </div>
+<!--                 <div class="slide"> -->
+<!--                     <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-05.jpg"> -->
+<!--                         <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-03.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a> -->
+<!--                     </div> -->
+<!--                 </div> -->
 
-                <!-- <div class="slide">
-                    <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-04.jpg">
-                        <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-04.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a>
-                    </div>
-                </div>
-                <div class="slide">
-                    <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-03.jpg">
-                        <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-05.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a>
-                    </div>
-                </div> -->
+                <!--Slide-->
+<!--                 <div class="slide"> -->
+<!--                     <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-04.jpg"> -->
+<!--                         <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-04.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a> -->
+<!--                     </div> -->
+<!--                 </div> -->
+
+                <!--Slide-->
+<!--                 <div class="slide"> -->
+<!--                     <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-03.jpg"> -->
+<!--                         <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-05.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a> -->
+<!--                     </div> -->
+<!--                 </div> -->
 
             </div>
 
@@ -293,7 +296,7 @@
                             </div> -->
 
                             <!--Card Image-->
-                            <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg"></div>
+                            <div class="card-img" th:data-bg-image="${other.path}"></div>
 
                             <!--Card Body-->
                             <div class="card-body">

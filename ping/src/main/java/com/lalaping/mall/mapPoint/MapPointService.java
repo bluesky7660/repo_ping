@@ -13,7 +13,6 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.lalaping.common.config.S3Config;
 import com.lalaping.common.util.UtilDateTime;
 
-
 @Service
 public class MapPointService {
 	@Autowired
@@ -133,6 +132,9 @@ public class MapPointService {
 	}
 	public int delete(MapPointDto mapPointDto) {
 		return mapPointDao.delete(mapPointDto);
+	}
+	public int listCount(MapPointVo vo) {
+		return mapPointDao.listCount(vo);
 	}
 
 }

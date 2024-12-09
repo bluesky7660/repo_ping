@@ -112,6 +112,8 @@ public class PortService {
 	public int selectOneCount(PortVo vo) {
 		return portDao.selectOneCount(vo);
 	}
-	
+	public int listCount(PortVo vo) {
+		return portDao.listCount(vo);
+	}
 
 }

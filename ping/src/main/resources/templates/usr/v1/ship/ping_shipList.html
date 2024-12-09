@@ -20,6 +20,8 @@
 
 	<title>FishOn - 피쉬온</title>
     <link rel="icon" href="/usr/v1/template/themeforest-v1.0/assets/img/favicon.ico">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 </head>
 
@@ -286,8 +288,8 @@
 <!--                                     </div> -->
 
                                     <!--Card Image-->
-                                    <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg"></div>
-
+                                    <div class="card-img" th:data-bg-image="${list.path}"></div>
+<!-- 														디폴트이미지 주소 -> /usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg -->
                                     <!--Card Body-->
                                     <div class="card-body">
 
@@ -340,8 +342,8 @@
 									<div class="col">
 										<ul class="pagination justify-content-center mb-0">
 											<li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}')|"><i class="bi bi-caret-left-fill"></i></a></li>
-										<li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
-										<li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|"><i class="bi bi-caret-right-fill"></i></a></li>
+											<li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
+											<li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|"><i class="bi bi-caret-right-fill"></i></a></li>
 										</ul>
 									</div>
 								</div>

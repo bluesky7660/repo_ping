@@ -26,6 +26,9 @@ public class ShipDto extends FileDto {
 	private Integer spEatNy;
 	private Date spRegDate;
 	private String port_ptSeq;
+	private String seq;
+	private String pSeq;
+	private String path;
 	
 	private String ptName;
 	private Double ptLongitude;
@@ -180,5 +183,26 @@ public class ShipDto extends FileDto {
 	public void setPtLatitude(Double ptLatitude) {
 		this.ptLatitude = ptLatitude;
 	}
+	public String getpSeq() {
+		return pSeq;
+	}
+	public void setpSeq(String pSeq) {
+		this.pSeq = pSeq;
+	}
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
+	public String getSeq() {
+		return seq;
+	}
+	public void setSeq(String seq) {
+		this.seq = seq;
+	}
+	
+	
+	
 
 }

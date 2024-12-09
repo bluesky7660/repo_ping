@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.lalaping.infra.code.CodeVo;
+
 
 @Repository
 public interface FishDao {
@@ -16,6 +18,6 @@ public interface FishDao {
 	public int update(FishDto fishDto);
 	public int uelete(FishDto fishDto);
 	public int delete(FishDto fishDto);
-	
+	public int listCount(FishVo vo);
 
 }

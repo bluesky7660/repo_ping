@@ -1,14 +1,9 @@
 package com.lalaping.mall.fish;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.lalaping.infra.code.CodeDto;
-
-import jakarta.annotation.PostConstruct;
 
 @Service
 public class FishService {
@@ -41,6 +36,9 @@ public class FishService {
 	}
 	public int delete(FishDto fishDto) {
 		return fishDao.delete(fishDto);
+	}
+	public int listCount(FishVo vo) {
+		return fishDao.listCount(vo);
 	}
 	
 //	@PostConstruct

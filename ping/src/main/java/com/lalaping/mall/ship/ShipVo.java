@@ -14,6 +14,7 @@ public class ShipVo extends BaseVo {
 	private Integer shmin_price;
 	private Integer shmax_price;
 	private String baseSpSeq;
+	private String spSeq;
 //	-----------------------------
 	
 	public Integer getShEatNy() {
@@ -90,6 +91,13 @@ public class ShipVo extends BaseVo {
 	public void setBaseSpSeq(String baseSpSeq) {
 		this.baseSpSeq = baseSpSeq;
 	}
+	public String getSpSeq() {
+		return spSeq;
+	}
+	public void setSpSeq(String spSeq) {
+		this.spSeq = spSeq;
+	}
+	
 	
 
 }

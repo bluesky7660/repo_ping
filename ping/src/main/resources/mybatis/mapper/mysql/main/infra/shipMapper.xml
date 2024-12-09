@@ -6,91 +6,68 @@
 
 	<sql id="selectCommonPort">
 		FROM ship a
-		left join fishandship b on b.ship_spSeq = a.spSeq
-		left join fish c on c.fsSeq = b.fish_fsSeq
-		left join port d on d.ptSeq = a.port_ptSeq
-		WHERE 1=1
-		<if test="shName != null and !shName.equals('')">AND spName LIKE CONCAT('%', #{shName}, '%')</if>
-
-		<if
-			test="(shmin_price != null and shmin_price != 0) or (shmax_price != null and shmax_price != 0)">
-			AND a.spPrice BETWEEN #{shmin_price} AND #{shmax_price}
+        	left join fishandship b on b.ship_spSeq = a.spSeq
+            left join fish c on c.fsSeq = b.fish_fsSeq
+            left join port d on d.ptSeq = a.port_ptSeq
+            left join imginsert_ship s on s.pSeq = a.spSeq
+        WHERE 1=1
+        AND s.sort = 1
+        <if test="shName != null and !shName.equals('')">AND spName LIKE CONCAT('%', #{shName}, '%')</if>
+        
+        <if test="(shmin_price != null and shmin_price != 0) or (shmax_price != null and shmax_price != 0)">
+    		AND a.spPrice BETWEEN #{shmin_price} AND #{shmax_price}
 		</if>
 
-		<if test="shRemain != null and !shRemain.equals('')">
-			AND a.spRemain > #{shRemain}
-		</if>
-
-		<if
-			test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
-			<choose>
-				<when test="shOptionDate == 1"> AND a.spRegDate BETWEEN #{shDateStart} AND
-					#{shDateEnd}</when>
-			</choose>
-		</if>
-		<if
-			test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
-			AND a.spStart BETWEEN #{shDateStart} AND #{shDateEnd}
-		</if>
+        <if test="shRemain != null and !shRemain.equals('')">
+            AND a.spRemain > #{shRemain}
+        </if>
+        
+        <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
+        	<choose>
+        		<when test="shOptionDate == 1"> AND a.spRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+           	</choose>
+        </if>
+         <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
+        	AND a.spStart BETWEEN #{shDateStart} AND #{shDateEnd}
+        </if>
 	</sql>
 
 	<sql id="selectCommon">
-		FROM ship a
-		left join fishandship b on b.ship_spSeq = a.spSeq
-		left join fish c on c.fsSeq = b.fish_fsSeq
-		left join port d on d.ptSeq = a.port_ptSeq
-		WHERE 1=1
-		<if test="port_ptSeq != null and !port_ptSeq.equals('')">
-			AND a.port_ptSeq = #{port_ptSeq}
-		</if>
-		<if test="shValue != null and !shValue.equals('')">
-			<choose>
-				<when test="shOption == null">
-					AND(
-					a.spName LIKE CONCAT('%', #{shValue}, '%')
-					OR a.spPrice LIKE CONCAT('%', #{shValue}, '%')
-					OR a.spTotal LIKE CONCAT('%', #{shValue}, '%')
-					)
-				</when>
-				<when
-					test="shOption == 1 and shOption != null and shOption != ''">
-					AND a.spName = #{shValue}
-				</when>
-				<when
-					test="shOption == 2 and shOption != null and shOption != ''">
-					AND a.spPrice LIKE CONCAT('%', #{shValue}, '%')
-				</when>
-				<when
-					test="shOption == 3 and shOption != null and shOption != ''">
-					AND a.spTotal LIKE CONCAT('%', #{shValue}, '%')
-				</when>
-			</choose>
-		</if>
-		<if test="shName != null and !shName.equals('')">AND spName LIKE CONCAT('%', #{shName}, '%')</if>
-		<if test="shport != null and !shport.equals('')">AND ptName LIKE CONCAT('%', #{shport}, '%')</if>
-
-		<if
-			test="(shmin_price != null and shmin_price != 0) or (shmax_price != null and shmax_price != 0)">
-			AND a.spPrice BETWEEN #{shmin_price} AND #{shmax_price}
-		</if>
-
-		<if test="shfish != null and !shfish.equals('')">
-			AND c.fsName = #{shfish}
-		</if>
-		<if test="shRemain != null and !shRemain.equals('')">
-			AND a.spRemain > #{shRemain}
-		</if>
-		<if test="shDelNy != null and !shDelNy.equals('')">
-			AND a.spDelNy = #{shDelNy}
-		</if>
-		<if test="shEatNy != null and !shEatNy.equals('')">
-			AND a.spEatNy = #{shEatNy}
-		</if>
-		<if test="shRentalNy != null and !shRentalNy.equals('')">
-			AND a.spRentalNy = #{shRentalNy}
-		</if>
-		<if test="shArea != null and !shArea.equals('')">
-			AND a.spArea = #{shArea}
+        FROM ship a
+        	left join fishandship b on b.ship_spSeq = a.spSeq
+            left join fish c on c.fsSeq = b.fish_fsSeq
+            left join port d on d.ptSeq = a.port_ptSeq
+            left join imginsert_ship s on s.pSeq = a.spSeq
+        WHERE 1=1
+        	AND s.defaultNy = 1
+        <if test="port_ptSeq != null and !port_ptSeq.equals('')">
+       		AND a.port_ptSeq = #{port_ptSeq}
+        </if>
+        <if test="shValue != null and !shValue.equals('')">
+            <choose>
+                <when test="shOption == null">
+                    AND(
+                        a.spName LIKE CONCAT('%', #{shValue}, '%')
+                        OR a.spPrice LIKE CONCAT('%', #{shValue}, '%')
+                        OR a.spTotal LIKE CONCAT('%', #{shValue}, '%')
+                    )
+                </when>
+                <when test="shOption == 1 and shOption != null and shOption != ''">
+                    AND a.spName = #{shValue}
+                </when>
+                <when test="shOption == 2 and shOption != null and shOption != ''">
+                    AND a.spPrice LIKE CONCAT('%', #{shValue}, '%')
+                </when>
+                <when test="shOption == 3 and shOption != null and shOption != ''">
+                    AND a.spTotal LIKE CONCAT('%', #{shValue}, '%')
+                </when>
+            </choose>
+        </if>
+        <if test="shName != null and !shName.equals('')">AND spName LIKE CONCAT('%', #{shName}, '%')</if>
+        <if test="shport != null and !shport.equals('')">AND ptName LIKE CONCAT('%', #{shport}, '%')</if>
+        
+        <if test="(shmin_price != null and shmin_price != 0) or (shmax_price != null and shmax_price != 0)">
+    		AND a.spPrice BETWEEN #{shmin_price} AND #{shmax_price}
 		</if>
 		<if
 			test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
@@ -139,24 +116,26 @@
 	<select id="selectUsrList">
 		<include refid="base.selectListUpperForMysql" />
 		SELECT
-		a.spSeq
-		,a.spName
-		,a.spPrice
-		,a.spDesc
-		,a.spTotal
-		,a.spRemain
-		,a.spStart
-		,a.spDelNy
-		,a.spArea
-		,a.spEatNy
-		,a.spRentalNy
-		,a.spRegDate
-		,a.port_ptSeq
-		,d.ptName
-		<!-- ,c.fsSeq ,c.fsName -->
-		,GROUP_CONCAT(c.fsSeq ORDER BY c.fsSeq) AS fsSeqList
-		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
-		<include refid="selectCommon" />
+			a.spSeq
+			,a.spName
+			,a.spPrice
+			,a.spDesc
+			,a.spTotal
+			,a.spRemain
+			,a.spStart
+			,a.spDelNy
+			,a.spArea
+			,a.spEatNy
+			,a.spRentalNy
+			,a.spRegDate
+			,a.port_ptSeq
+			,d.ptName
+			,s.path
+			<!-- ,c.fsSeq
+            ,c.fsName -->
+            ,GROUP_CONCAT(c.fsSeq ORDER BY c.fsSeq) AS fsSeqList
+    		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
+		<include refid="selectCommon"/>
 		GROUP BY a.spSeq
 		ORDER BY
 		<!-- a.${sortOrderString} -->
@@ -192,25 +171,26 @@
 	<select id="otherPortSelectList">
 		<include refid="base.selectListUpperForMysql" />
 		SELECT
-		a.spSeq
-		,a.spName
-		,a.spPrice
-		,a.spDesc
-		,a.spTotal
-		,a.spRemain
-		,a.spStart
-		,a.spDelNy
-		,a.spArea
-		,a.spEatNy
-		,a.spRentalNy
-		,a.spRegDate
-		,a.port_ptSeq
-		,d.ptName
-		,GROUP_CONCAT(c.fsSeq ORDER BY c.fsSeq) AS fsSeqList
-		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
-		<include refid="selectCommonPort" />
-		and a.port_ptSeq = #{port_ptSeq}
-		and !(a.spSeq = #{baseSpSeq})
+			a.spSeq
+			,a.spName
+			,a.spPrice
+			,a.spDesc
+			,a.spTotal
+			,a.spRemain
+			,a.spStart
+			,a.spDelNy
+			,a.spArea
+			,a.spEatNy
+			,a.spRentalNy
+			,a.spRegDate
+			,a.port_ptSeq
+			,d.ptName
+			,s.path
+            ,GROUP_CONCAT(c.fsSeq ORDER BY c.fsSeq) AS fsSeqList
+    		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
+		<include refid="selectCommonPort"/>
+        	and a.port_ptSeq = #{port_ptSeq}
+        	and !(a.spSeq = #{baseSpSeq})
 		GROUP BY a.spSeq
 		ORDER BY
 		a.spRegDate DESC
@@ -297,44 +277,53 @@
 	</update>
 
 	<delete id="delete">
-		DELETE FROM ship
-		WHERE spSeq = #{spSeq}
-	</delete>
-	<insert id="insertUploaded">
-		insert into imginsert_ship(
-		type
-		,defaultNy
-		,sort
-		,path
-		,originalName
-		,uuid
-		,ext
-		,size
-		,regDate
-		,modDate
-		,delNy
-		,pseq
-		) value(
-		#{type}
-		,#{defaultNy}
-		,#{sort}
-		,#{path}
-		,#{originalName}
-		,#{uuid}
-		,#{ext}
-		,#{size}
-		,now()
-		,now()
-		,0
-		,#{pseq}
-		)
-		<selectKey resultType="String" keyProperty="spSeq"
-			order="AFTER">
-			SELECT last_insert_id()
-		</selectKey>
-	</insert>
-
-
-
-
+        DELETE FROM ship
+        WHERE spSeq = #{spSeq}
+    </delete>
+    <insert id="insertUploaded">
+			insert into imginsert_ship(
+			    type
+			    ,defaultNy
+			    ,sort
+			    ,path
+			    ,originalName
+			    ,uuid
+			    ,ext
+			    ,size
+				,regDate
+				,modDate
+			    ,delNy
+			    ,pseq
+			) value(
+				#{type}
+			    ,#{defaultNy}
+			    ,#{sort}
+			    ,#{path}
+			    ,#{originalName}
+			    ,#{uuid}
+			    ,#{ext}
+			    ,#{size}
+			    ,now()
+			    ,now()
+			    ,0
+			    ,#{pseq}
+			)
+			<selectKey resultType="String" keyProperty="seq" order="AFTER">
+				SELECT last_insert_id()
+		 	</selectKey>
+	  </insert>
+	  
+	  <select id="selectUsrList2" resultMap="resultMapObj">
+		SELECT
+			a.spSeq
+			,s.path
+		FROM ship a
+            left join imginsert_ship s on s.pSeq = a.spSeq
+        WHERE 1=1
+        AND s.pSeq = #{spSeq}
+		 ORDER BY
+	     	s.sort
+	</select>
+	
+	
 </mapper>

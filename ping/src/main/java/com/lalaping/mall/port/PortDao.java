@@ -16,7 +16,7 @@ public interface PortDao {
 	public int delete(PortDto portDto);
 	public int selectOneCount(PortVo vo);
 	public int listCount(PortVo vo);
-	
+
 	public int insertUploaded(PortDto portDto);
 
 }

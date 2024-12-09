@@ -13,8 +13,6 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.lalaping.common.config.S3Config;
 import com.lalaping.common.util.UtilDateTime;
 
-
-
 @Service
 public class ShipService {
 	@Autowired
@@ -126,6 +124,8 @@ public class ShipService {
 	public int delete(ShipDto shipDto) {
 		return shipDao.delete(shipDto);
 	}
-
+	public List<ShipDto> selectUsrList2(ShipVo vo){
+		return shipDao.selectUsrList2(vo);
+	}
 
 }

@@ -20,5 +20,6 @@ public interface ShipDao {
 	public int delete(ShipDto shipDto);
 	
 	public int insertUploaded(ShipDto shipDto);
+	public List<ShipDto> selectUsrList2(ShipVo vo);
 
 }

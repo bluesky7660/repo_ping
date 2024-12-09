@@ -21,6 +21,9 @@ public class ShipController {
 	
 	@RequestMapping(value = "/v1/ship/shipXdmList")
 	public String shipXdmList(Model model,@ModelAttribute("vo") ShipVo vo){
+		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
+		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
+		vo.setParamsPaging(shipService.listCount(vo));
 		model.addAttribute("list",shipService.selectList(vo));
 		model.addAttribute("formLink", "shipXdmForm");
 		return "xdm/v1/ship/shipXdmList";
@@ -108,6 +111,7 @@ public class ShipController {
 	@RequestMapping(value = "/v1/ship/shipDetail")
 	public String shipDetail(Model model,ShipDto shipDto,ShipVo shipVo){
 		System.out.println("sadfgfgdfgfdssss");
+		model.addAttribute("list", shipService.selectUsrList2(shipVo));	
 		model.addAttribute("item",shipService.selectOne(shipDto));
 		shipVo.setBaseSpSeq(shipService.selectOne(shipDto).getSpSeq());
 		shipVo.setPort_ptSeq(shipService.selectOne(shipDto).getPort_ptSeq());
