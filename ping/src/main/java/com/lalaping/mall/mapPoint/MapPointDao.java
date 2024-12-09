@@ -23,6 +23,7 @@ public interface MapPointDao {
 	public int update(MapPointDto mapPointDto);
 	public int uelete(MapPointDto mapPointDto);
 	public int delete(MapPointDto mapPointDto);
+	public int listCount(MapPointVo vo);
 	
 	public int insertUploaded(MapPointDto mapPointDto);
 

@@ -160,7 +160,7 @@ public class PortController {
 	    responseMap.put("mpPointList", mapPoint);
 	    responseMap.put("thisPage", mapPointVo.getThisPage()); 
 	    responseMap.put("totalPages", mapPointVo.getTotalPages()); 
-	    System.out.println("responseMap:"+responseMap);
+	    System.out.println(responseMap);
 	    System.out.println("mapPointVo.getThisPage:"+mapPointVo.getThisPage());
 	    System.out.println("mapPointVo.getTotalPages:"+mapPointVo.getTotalPages());
 //	    System.out.println("thisPage:"+mapPointVo.getThisPage());
