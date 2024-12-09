@@ -55,8 +55,13 @@ public class PortController {
 		return "xdm/v1/port/portXdmMFom";
 	}
 	@RequestMapping(value="/v1/port/portXdmUpdt")
-	public String portXdmUpdt(PortDto portDto) {
-		portService.update(portDto);
+	public String portXdmUpdt(PortDto portDto){
+		try {
+			portService.update(portDto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "redirect:/v1/port/portXdmList";
 	}
 	@RequestMapping(value="/v1/port/portXdmUelt")

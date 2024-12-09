@@ -5,7 +5,7 @@
 	
 	<sql id="selectCommon">
         FROM port a
-        
+        	left join imginsert_port b on b.pseq = a.ptSeq and b.defaultNy = 1
         WHERE 1=1
         <if test="shValue != null and !shValue.equals('')">
             <choose>
@@ -51,6 +51,7 @@
 			,a.ptLongitude
 			,a.ptDelNy
 			,a.ptRegDate
+			,b.path
 		<include refid="selectCommon"/>
 	 ORDER BY
      	a.ptRegDate DESC
@@ -88,7 +89,9 @@
 			,a.ptLongitude
 			,a.ptDelNy
 			,a.ptRegDate
+			,b.path
 		FROM port a
+			left join imginsert_port b on b.pseq = a.ptSeq and b.defaultNy = 1
 		WHERE 1=1
 		AND a.ptSeq = #{ptSeq}
 	</select>
@@ -118,6 +121,38 @@
 	select count(*)
 	<include refid="selectCommon"></include>
 	</select>
-	
+	<insert id="insertUploaded">
+		insert into imginsert_port(
+		type
+		,defaultNy
+		,sort
+		,path
+		,originalName
+		,uuid
+		,ext
+		,size
+		,regDate
+		,modDate
+		,delNy
+		,pseq
+		) value(
+		#{type}
+		,#{defaultNy}
+		,#{sort}
+		,#{path}
+		,#{originalName}
+		,#{uuid}
+		,#{ext}
+		,#{size}
+		,now()
+		,now()
+		,0
+		,#{pseq}
+		)
+		<selectKey resultType="String" keyProperty="ptSeq"
+			order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
+	</insert>
     
 </mapper>
