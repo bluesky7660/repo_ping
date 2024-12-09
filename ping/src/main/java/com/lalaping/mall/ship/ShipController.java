@@ -108,6 +108,7 @@ public class ShipController {
 	@RequestMapping(value = "/v1/ship/shipDetail")
 	public String shipDetail(Model model,ShipDto shipDto,ShipVo shipVo){
 		System.out.println("sadfgfgdfgfdssss");
+		model.addAttribute("list", shipService.selectUsrList2(shipVo));	
 		model.addAttribute("item",shipService.selectOne(shipDto));
 		shipVo.setBaseSpSeq(shipService.selectOne(shipDto).getSpSeq());
 		shipVo.setPort_ptSeq(shipService.selectOne(shipDto).getPort_ptSeq());

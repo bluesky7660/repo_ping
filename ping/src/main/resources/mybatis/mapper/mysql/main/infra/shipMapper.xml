@@ -8,7 +8,9 @@
         	left join fishandship b on b.ship_spSeq = a.spSeq
             left join fish c on c.fsSeq = b.fish_fsSeq
             left join port d on d.ptSeq = a.port_ptSeq
+            left join imginsert_ship s on s.pSeq = a.spSeq
         WHERE 1=1
+        AND s.sort = 1
         <if test="shName != null and !shName.equals('')">AND spName LIKE CONCAT('%', #{shName}, '%')</if>
         
         <if test="(shmin_price != null and shmin_price != 0) or (shmax_price != null and shmax_price != 0)">
@@ -34,7 +36,9 @@
         	left join fishandship b on b.ship_spSeq = a.spSeq
             left join fish c on c.fsSeq = b.fish_fsSeq
             left join port d on d.ptSeq = a.port_ptSeq
+            left join imginsert_ship s on s.pSeq = a.spSeq
         WHERE 1=1
+        	AND s.defaultNy = 1
         <if test="port_ptSeq != null and !port_ptSeq.equals('')">
        		AND a.port_ptSeq = #{port_ptSeq}
         </if>
@@ -141,6 +145,7 @@
 			,a.spRegDate
 			,a.port_ptSeq
 			,d.ptName
+			,s.path
 			<!-- ,c.fsSeq
             ,c.fsName -->
             ,GROUP_CONCAT(c.fsSeq ORDER BY c.fsSeq) AS fsSeqList
@@ -195,6 +200,7 @@
 			,a.spRegDate
 			,a.port_ptSeq
 			,d.ptName
+			,s.path
             ,GROUP_CONCAT(c.fsSeq ORDER BY c.fsSeq) AS fsSeqList
     		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
 		<include refid="selectCommonPort"/>
@@ -321,6 +327,18 @@
 				SELECT last_insert_id()
 		 	</selectKey>
 	  </insert>
+	  
+	  <select id="selectUsrList2" resultMap="resultMapObj">
+		SELECT
+			a.spSeq
+			,s.path
+		FROM ship a
+            left join imginsert_ship s on s.pSeq = a.spSeq
+        WHERE 1=1
+        AND s.pSeq = #{spSeq}
+		 ORDER BY
+	     	s.sort
+	</select>
 	
 	
 	

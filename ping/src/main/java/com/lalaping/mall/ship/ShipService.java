@@ -126,6 +126,9 @@ public class ShipService {
 	public int delete(ShipDto shipDto) {
 		return shipDao.delete(shipDto);
 	}
+	public List<ShipDto> selectUsrList2(ShipVo vo){
+		return shipDao.selectUsrList2(vo);
+	}
 
 
 }
