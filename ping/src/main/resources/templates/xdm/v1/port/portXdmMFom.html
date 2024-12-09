@@ -184,8 +184,8 @@
 															<!-- <label for="sample5_address">주소</label> -->
 					                                           <input type="text" class="form-control border-right-0" id="sample5_address" name="ptAddress" placeholder="주소" readonly>
 					                                           <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
-					                                           <input type="hidden" id="ptLatitude" name="ptLatitude" th:value="${item.ptLatitude}">
-					                                           <input type="hidden" id="ptLongitude" name="ptLongitude" th:value="${item.ptLongitude}">
+					                                           <input type="hidden" id="ptLatitude" name="ptLatitude">
+					                                           <input type="hidden" id="ptLongitude" name="ptLongitude">
 															<!-- <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div> -->
 					                                       </div>
 
@@ -368,25 +368,29 @@
                         // 해당 주소에 대한 좌표를 받아서
                         var coords = new daum.maps.LatLng(result.y, result.x);
                         
-                        // *** 위도, 경도 추가 ***
+                        var ptLatitude = document.getElementById("ptLatitude");
+                        var ptLongitude = document.getElementById("ptLongitude");
+                       
+                        // 바닐라js
+                        ptLatitude.value = coords.getLat();
+                        ptLongitude.value = coords.getLng();
                         
-                        // 	var callback = function(result, status) {
-// 		if (status === kakao.maps.services.Status.OK) {
-// 			$("input[name=ptLongitude]").val(result[0].x);
-// 			$("input[name=ptLatitude]").val(result[0].y);
-// 		}
-// 	};
+                        // jquery 방식
+//                         $("#ptLatitude").val(coords.getLat);
+//                         $("#ptLongitude").val(coords.getLng);
                         
-//                         $("input[name=ptLongitude]").val(result[0].x);
-//             			$("input[name=ptLatitude]").val(result[0].y);
                         // *** 위도, 경도 값 ***
                         console.log("위도,경도 확인 : " + coords);
+                        console.log("위도 : " + coords.getLat());
+                        console.log("경도 : " + coords.getLng());
                         
                         // 지도를 보여준다.
                         mapContainer.style.display = "block";
                         map.relayout();
+                        
                         // 지도 중심을 변경한다.
                         map.setCenter(coords);
+                        
                         // 마커를 결과값으로 받은 위치로 옮긴다.
                         marker.setPosition(coords)
                         marker.setMap(map);

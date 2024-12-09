@@ -54,7 +54,6 @@ public class PortController {
 	public String portXdmMFom(Model model,PortDto portDto) {
 		model.addAttribute("item",portService.selectOne(portDto));
 		model.addAttribute("listLink", "portXdmList");
-		System.out.println("위도 경도 확인 : " );
 		return "xdm/v1/port/portXdmMFom";
 	}
 	@RequestMapping(value="/v1/port/portXdmUpdt")
