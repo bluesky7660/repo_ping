@@ -267,8 +267,9 @@
                                 <label for="sorting" class="mb-0 mr-2 text-nowrap">Sort by:</label>
                                 <select class="custom-select bg-transparent" id="sortOrder" name="sortOrder">
                                    <!--  <option value="">검색구분</option> -->
-                                    <option value="2" th:seleted="${vo.sortOrder == 2}">출발일</option>
-                                    <option value="1" th:seleted="${vo.sortOrder == 1}">가격별</option>
+                                    <option value="4" th:seleted="${vo.sortOrder == 4}">낮은가격</option>
+                                    <option value="5" th:seleted="${vo.sortOrder == 5}">높은가격</option>
+                                    <option value="6" th:seleted="${vo.sortOrder == 6}">가까운날짜</option>
                                     <!-- <option value="3">Distance</option> -->
                                 </select>
                             </div>
