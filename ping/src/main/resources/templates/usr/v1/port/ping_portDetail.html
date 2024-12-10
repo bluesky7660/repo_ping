@@ -83,7 +83,7 @@
                         <!--Brand-->
                         <div class="col-md-4 ts-center__both">
                             <div class="ts-circle__xxl ts-shadow__md">
-                                <img src="/usr/v1/template/themeforest-v1.0/assets/img/logo-agency-01.png" alt="">
+                                <img th:src="${item.path != null ? item.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}" alt="${item.ptName+' 이미지'}">
                             </div>
                         </div>
 

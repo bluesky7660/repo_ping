@@ -60,7 +60,7 @@
 		<include refid="base.selectListLowerForMysql"/>
 	</select>
 	<select id="listCount" resultType="int">
-        SELECT COUNT(*) 
+        SELECT COUNT(DISTINCT a.ptSeq) 
         <include refid="selectCommon"/>
     </select>
 	<insert id="insert">

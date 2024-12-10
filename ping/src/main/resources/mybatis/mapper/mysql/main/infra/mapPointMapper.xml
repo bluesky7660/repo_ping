@@ -39,7 +39,7 @@
     </sql>
     
     <select id="listCount" resultType="int">
-        SELECT COUNT(*) 
+        SELECT COUNT(DISTINCT a.mpSeq) 
         <include refid="selectCommon"/>
     </select>
     <select id="selectList" resultMap="resultMapObj">
@@ -55,6 +55,7 @@
     		,a.mpDelNy
     		,a.mpRegDate
    		<include refid="selectCommon"/>
+   		GROUP BY a.mpSeq
    		ORDER BY
      	a.mpRegDate DESC
 		<include refid="base.selectListLowerForMysql"/>
