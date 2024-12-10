@@ -50,13 +50,13 @@ function createSideBarResult(map, loadedMarkersData, newMarkers) {
   for (let i = 0; i < newMarkers.length; i++) {
       const markerPosition = newMarkers[i].getPosition(); // 마커 위치 가져오기
       if (restrictBounds.contain(markerPosition)) { // LatLngBounds.contains() 사용
-          visibleMarkersOnMap.push(newMarkers[i]);
+          visibleMarkersOnMap.push(i);
       }
   }
 
   // 마커 정보로 사이드바 생성
   for (let i = 0; i < visibleMarkersOnMap.length; i++) {
-      const id = i;
+      const id = visibleMarkersOnMap[i]; 
       let additionalInfoHtml = '';
 
       if (loadedMarkersData[id]["additional_info"]) {
@@ -75,7 +75,7 @@ function createSideBarResult(map, loadedMarkersData, newMarkers) {
                     '<a href="' + loadedMarkersData[id]["url"] + '" class="card ts-item ts-card ts-result">' +
                         ( ( loadedMarkersData[i]["ribbon"] !== undefined ) ? '<div class="ts-ribbon">' + loadedMarkersData[i]["ribbon"] + '</div>' : "" ) +
                         ( ( loadedMarkersData[i]["ribbon_corner"] !== undefined ) ? '<div class="ts-ribbon-corner"><span>' + loadedMarkersData[i]["ribbon_corner"] + '</span></div>' : "" ) +
-                        '<div href="detail-01.html" class="card-img ts-item__image" style="background-image: url(' + loadedMarkersData[id]["marker_image"] + ')"></div>' +
+                        '<div class="card-img ts-item__image" style="background-image: url(' + loadedMarkersData[id]["marker_image"] + ')"></div>' +
                         '<div class="card-body">' +
                             '<figure class="ts-item__info">' +
                                 '<h4>' + loadedMarkersData[id]["title"] + '</h4>' +
@@ -126,51 +126,106 @@ $(document).ready(function($) {
 
       // 대한민국 경계 설정 (kakao.maps.LatLngBounds 사용)
       // 제한할 영역의 좌표 (예시: 대한민국의 대략적인 좌표)
-      var pos1 = new kakao.maps.LatLng(34.0, 126.0); // 남서쪽 좌표
-      var pos2 = new kakao.maps.LatLng(38.5, 127.5); // 북동쪽 좌표
+      // var pos1 = new kakao.maps.LatLng(34.0, 126.0); // 남서쪽 좌표
+      // var pos2 = new kakao.maps.LatLng(38.5, 127.5); // 북동쪽 좌표
 
-      // LatLngBounds 객체 생성
-      var restrictBounds = new kakao.maps.LatLngBounds(pos1, pos2);
+      // // LatLngBounds 객체 생성
+      // var restrictBounds = new kakao.maps.LatLngBounds(pos1, pos2);
+
+      // // 지도 중심을 제한할 영역으로 설정하는 함수
+      // var constrainBounds = function() {
+      //     var center = map.getCenter(); // 현재 지도 중심 좌표 가져오기
+      //     var zoomLevel = map.getLevel(); // 현재 지도 레벨 가져오기
+      //     var clipLat, clipLng, sw, ne;
+
+      //     // 지도 줌 레벨에 따라 경계 범위를 동적으로 설정
+      //     if (zoomLevel <= 11) {
+      //         // 기본 대한민국 범위
+      //         pos1 = new kakao.maps.LatLng(33.0, 124.0);
+      //         pos2 = new kakao.maps.LatLng(38.5, 127.5);
+      //     } else {
+      //         // 제주도를 포함할 수 있도록 경계를 확장 (줌 11 이상일 때)
+      //         pos1 = new kakao.maps.LatLng(34.0, 126.0); // 남서쪽 좌표 확장
+      //         pos2 = new kakao.maps.LatLng(38.5, 127.5); // 북동쪽 좌표 확장
+      //     }
+
+      //     // LatLngBounds 객체 재설정
+      //     restrictBounds = new kakao.maps.LatLngBounds(pos1, pos2);
+
+      //     // 지도 중심이 설정된 경계 밖으로 나갈 경우
+      //     if (!restrictBounds .contain(center)) {
+      //         sw = restrictBounds.getSouthWest(); // 경계의 남서쪽 좌표
+      //         ne = restrictBounds.getNorthEast(); // 경계의 북동쪽 좌표
+
+      //         // 제한된 경계 안에서 중심 좌표를 계산
+      //         clipLat = Math.min(Math.max(sw.getLat(), center.getLat()), ne.getLat());
+      //         clipLng = Math.min(Math.max(sw.getLng(), center.getLng()), ne.getLng());
+
+      //         // 제한된 좌표로 지도 중심을 설정
+      //         map.setCenter(new kakao.maps.LatLng(clipLat, clipLng));
+      //     }
+      // };
+
+      // // 지도 이동 시 경계 제한 적용
+      // kakao.maps.event.addListener(map, 'drag', constrainBounds);
+
+      // // 지도 줌 변경 시 경계 제한 적용
+      // kakao.maps.event.addListener(map, 'zoom_changed', constrainBounds);
+      
+      // 대한민국 기본 경계 설정 (대한민국의 대략적인 좌표)
+      let defaultPos1 = new kakao.maps.LatLng(33.0, 124.0); // 남서쪽 좌표
+      let defaultPos2 = new kakao.maps.LatLng(38.5, 132.0); // 북동쪽 좌표 (독도를 포함하도록 확장)
+      let restrictBounds = new kakao.maps.LatLngBounds(defaultPos1, defaultPos2);
 
       // 지도 중심을 제한할 영역으로 설정하는 함수
-      var constrainBounds = function() {
-          var center = map.getCenter(); // 현재 지도 중심 좌표 가져오기
-          var zoomLevel = map.getLevel(); // 현재 지도 레벨 가져오기
-          var clipLat, clipLng, sw, ne;
+      function constrainBounds() {
+          const center = map.getCenter(); // 현재 지도 중심 좌표 가져오기
+          const sw = restrictBounds.getSouthWest(); // 경계의 남서쪽 좌표
+          const ne = restrictBounds.getNorthEast(); // 경계의 북동쪽 좌표
 
-          // 지도 줌 레벨에 따라 경계 범위를 동적으로 설정
-          if (zoomLevel <= 11) {
-              // 기본 대한민국 범위
-              pos1 = new kakao.maps.LatLng(33.0, 124.0);
-              pos2 = new kakao.maps.LatLng(38.5, 127.5);
+          // 중심 좌표가 제한된 경계 내에 있는지 확인
+          if (!restrictBounds.contain(center)) {
+              // 제한된 경계 안에서 새로운 중심 좌표 계산
+              const clipLat = Math.min(Math.max(center.getLat(), sw.getLat()), ne.getLat());
+              const clipLng = Math.min(Math.max(center.getLng(), sw.getLng()), ne.getLng());
+
+              // 제한된 좌표로 지도 중심 설정
+              if (clipLat !== center.getLat() || clipLng !== center.getLng()) {
+                  map.setCenter(new kakao.maps.LatLng(clipLat, clipLng));
+              }
+          }
+      }
+
+      // 지도 줌 레벨에 따라 경계를 동적으로 변경
+      function updateRestrictBounds() {
+          const zoomLevel = map.getLevel(); // 현재 줌 레벨 가져오기
+
+          // 줌 레벨에 따라 제한 경계를 설정
+          if (zoomLevel > 11) {
+              // 줌 레벨 11 이상일 때 (대한민국 기준 확장)
+              restrictBounds = new kakao.maps.LatLngBounds(
+                  new kakao.maps.LatLng(33.8, 128.0), // 남서쪽 좌표 확장
+                  new kakao.maps.LatLng(38.5, 128.0)  // 북동쪽 좌표 확장 (독도 포함)
+              );
           } else {
-              // 제주도를 포함할 수 있도록 경계를 확장 (줌 11 이상일 때)
-              pos1 = new kakao.maps.LatLng(34.0, 126.0); // 남서쪽 좌표 확장
-              pos2 = new kakao.maps.LatLng(38.5, 127.5); // 북동쪽 좌표 확장
+              // 기본 대한민국 경계
+              restrictBounds = new kakao.maps.LatLngBounds(defaultPos1, defaultPos2);
           }
-
-          // LatLngBounds 객체 재설정
-          restrictBounds = new kakao.maps.LatLngBounds(pos1, pos2);
-
-          // 지도 중심이 설정된 경계 밖으로 나갈 경우
-          if (!restrictBounds .contain(center)) {
-              sw = restrictBounds.getSouthWest(); // 경계의 남서쪽 좌표
-              ne = restrictBounds.getNorthEast(); // 경계의 북동쪽 좌표
-
-              // 제한된 경계 안에서 중심 좌표를 계산
-              clipLat = Math.min(Math.max(sw.getLat(), center.getLat()), ne.getLat());
-              clipLng = Math.min(Math.max(sw.getLng(), center.getLng()), ne.getLng());
-
-              // 제한된 좌표로 지도 중심을 설정
-              map.setCenter(new kakao.maps.LatLng(clipLat, clipLng));
-          }
-      };
+      }
 
       // 지도 이동 시 경계 제한 적용
-      kakao.maps.event.addListener(map, 'drag', constrainBounds);
+      kakao.maps.event.addListener(map, 'dragend',() => {
+        updateRestrictBounds();
+        constrainBounds();
+      });
 
-      // 지도 줌 변경 시 경계 제한 적용
-      kakao.maps.event.addListener(map, 'zoom_changed', constrainBounds);
+      // 지도 줌 변경 시 경계 제한 갱신 및 적용
+      kakao.maps.event.addListener(map, 'zoom_changed', () => {
+          updateRestrictBounds();
+          constrainBounds();
+      });
+
+
 
 
       // **************************** Map 마커 클러스터 영역 **************************
@@ -272,7 +327,7 @@ $(document).ready(function($) {
                 '</div>' +
               '</div>' +
               '<div class="ts-infobox_image" style="background-image: url(' + 
-                          (markerData.marker_image || "/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg") + 
+                          (markerData.path || "/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png") + 
                       ')"></div>' + 
             '</a>' +
           '</div>';
@@ -337,7 +392,7 @@ $(document).ready(function($) {
                 fsNameList: data.fsNameList, // fsNameList는 서버에서 CONCAT된 값일 가능성이므로 필요에 따라 처리
                 lat: data.mpLatitude,  // 데이터에 위도 값이 포함되어 있다고 가정
                 lng: data.mpLongitude,  // 데이터에 경도 값이 포함되어 있다고 가정
-                marker_image: data.marker_image || "/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png",  // 기본 이미지 설정
+                marker_image: data.path || "/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png",  // 기본 이미지 설정
                 url: "/v1/mapPoint/mapPointDetail?mpSeq=" + data.mpSeq // URL 예시: 상세 페이지 링크
               };
             });
@@ -346,7 +401,7 @@ $(document).ready(function($) {
                 createMarker(markerData);
             });
             // console.log("ajax 끝");
-            console.log("restrictBounds:",restrictBounds.contain(newMarkers[0].getPosition()));
+            // console.log("restrictBounds:",restrictBounds.contain(newMarkers[0].getPosition()));
             createSideBarResult(map,loadedMarkersData,newMarkers);
             kakao.maps.event.addListener(map, 'idle', () => {
               createSideBarResult(map, loadedMarkersData, newMarkers);

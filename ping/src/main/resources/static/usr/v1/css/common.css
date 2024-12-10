@@ -77,6 +77,10 @@ img[alt="날씨이미지"]{
     transform: translateX(-50%);
     height: 100%;
 }
+.fishList-checkboxes aside{
+    opacity: .5;
+    font-size: .75rem;
+}
 
 /*기타*/
 #more-options-collapse{

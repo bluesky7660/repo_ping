@@ -3759,7 +3759,7 @@ body.ts-full-screen-page {
     flex-direction: row;
     white-space: normal;
     margin: .25rem;
-    width: 19rem;
+    width: 24rem;
     height: 6rem;
 }
 
@@ -3793,7 +3793,7 @@ body.ts-full-screen-page {
     height: 100%;
     float: left;
     position: relative;
-    width: 4rem;
+    width: 10rem;
     z-index: 1;
 }
 

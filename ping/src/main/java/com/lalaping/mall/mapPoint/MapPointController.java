@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -67,10 +68,11 @@ public class MapPointController {
 	/*usr*/
 	
 	@RequestMapping(value = "/v1/mapPoint/mapPointDetail")
-	public String mapPointDetail(Model model, MapPointDto mapPointDto,MapPointVo mapPointVo){
+	public String mapPointDetail(Model model, MapPointDto mapPointDto,@ModelAttribute("mapPointVo") MapPointVo mapPointVo){
 		model.addAttribute("item",mapPointService.selectUsrOne(mapPointDto));
 		mapPointVo.setBaseMpLatitude(mapPointService.selectUsrOne(mapPointDto).getMpLatitude());
 		mapPointVo.setBaseMpLongitude(mapPointService.selectUsrOne(mapPointDto).getMpLongitude());
+		System.out.println("mapPointVo.thispage:"+mapPointVo.getThisPage());
 		model.addAttribute("nearList", mapPointService.nearList(mapPointVo));
 		return "usr/v1/mapPoint/ping_mapPointDetail";
 	}
@@ -95,6 +97,26 @@ public class MapPointController {
 		System.out.println("성공");
 		
 	    returnMap.put("data", rtPoint);
+		return returnMap;
+	}
+	
+	@RequestMapping(value = "/nearMapPointList")
+	@ResponseBody
+	public Map<String, Object> nearMapPointList(@RequestBody MapPointDto mapPointDto,MapPointVo mapPointVo){
+		System.out.println("mpseq:"+mapPointDto.getMpSeq());
+		
+		mapPointVo.setBaseMpLatitude(mapPointService.selectUsrOne(mapPointDto).getMpLatitude());
+		mapPointVo.setBaseMpLongitude(mapPointService.selectUsrOne(mapPointDto).getMpLongitude());
+		
+		
+		mapPointVo.setParamsPaging(mapPointService.nearCount(mapPointVo));
+		List<MapPointDto> rtPoint = mapPointService.nearList(mapPointVo);
+		
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+	    returnMap.put("data", rtPoint);
+	    returnMap.put("thisPage", mapPointVo.getThisPage()); 
+	    returnMap.put("totalPages", mapPointVo.getTotalPages());
 		return returnMap;
 	}
 

@@ -48,6 +48,9 @@ public class MapPointService {
 	public int portNearCount(MapPointVo mapPointVo) {
 		return mapPointDao.portNearCount(mapPointVo);
 	}
+	public int nearCount(MapPointVo mapPointVo) {
+		return mapPointDao.nearCount(mapPointVo);
+	}
 	public int insert(MapPointDto mapPointDto) {
 		return mapPointDao.insert(mapPointDto);
 	}
