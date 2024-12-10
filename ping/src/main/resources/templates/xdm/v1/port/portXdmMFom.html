@@ -20,7 +20,6 @@
 		<!-- Title -->
 		<title>항구수정</title>
 
-
 		<!-- *************
 			************ Common Css Files *************
 		************ -->
@@ -184,10 +183,10 @@
 														<!--주소 검색-->
 					                                       <div class="input-group">
 															<!-- <label for="sample5_address">주소</label> -->
-					                                           <input type="text" class="form-control border-right-0" id="sample5_address" name="ptAddress" placeholder="주소" readonly>
+					                                           <input type="text" class="form-control border-right-0" id="sample5_address" name="ptAddress" placeholder="주소" th:value="${item.ptAddress}" readonly>
 					                                           <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
-					                                           <input type="hidden" id="ptLatitude" name="ptLatitude">
-					                                           <input type="hidden" id="ptLongitude" name="ptLongitude">
+					                                           <input type="hidden" id="ptLatitude" name="ptLatitude" th:value="${item.ptLatitude}">
+					                                           <input type="hidden" id="ptLongitude" name="ptLongitude" th:value="${item.ptLongitude}">
 															<!-- <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div> -->
 					                                       </div>
 
