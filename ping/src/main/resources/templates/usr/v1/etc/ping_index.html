@@ -119,8 +119,9 @@
                                     <!--Checkboxes-->
                                     <!-- <div id="features-checkboxes" class="w-100"> -->
                                    
-                                    <div id="fishList-checkboxes"  class="w-100">
+                                    <div id="fishList-checkboxes"  class="w-100 fishList-checkboxes">
                                         <h6 class="mb-3">어종</h6>
+                                        <aside class="mb-3">최대 선택 3개 제한</aside>
                                         <!-- <input type="hidden" th:id="'fsSeqListDebug'" th:value="${fsSeqList.stream().map(#strings.toString).collect(#strings.join(','))}"> -->
                                         <div class="">
                                             <div class="custom-control custom-checkbox" th:each="fishs:${fishList}">

@@ -191,14 +191,15 @@
                                 <!--end row-->
 
                                 <!-- <div id="features-checkboxes"> -->
-                                <div id="fishList-checkboxes">
+                                <div id="fishList-checkboxes" class="fishList-checkboxes">
                                     <h6 class="mb-3">잡히는 어종</h6>
+                                    <aside class="mb-3">최대 선택 3개 제한</aside>
 
                                     <!--Checkboxes-->
                                     <div class="ts-column-count-3">
 
                                         <div class="custom-control custom-checkbox" th:each="fishList:${fishList}">
-                                            <input type="checkbox" class="custom-control-input" th:id="${'ch_'+fishListStat.count}" name="features[]" th:value="${'ch_'+fishListStat.count}">
+                                            <input type="checkbox" class="custom-control-input" th:id="${'ch_'+fishListStat.count}" name="fsSeqList" th:value="${fishList.fsSeq}">
                                             <label class="custom-control-label" th:for="${'ch_'+fishListStat.count}" th:text="${fishList.fsName}"></label>
                                         </div>
 

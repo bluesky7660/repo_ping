@@ -248,7 +248,7 @@ window.addEventListener('load', function() {
             success: function(response) {
                 tabContent.empty();
                 response.data.forEach(function(point) {
-                     
+                    console.log("point: ",point);
                     const htmlContent = `
                         <div class="col-sm-6 col-lg-3">
                             <div class="card ts-item ts-card">
@@ -291,7 +291,9 @@ window.addEventListener('load', function() {
             }
         });
     });
-    const checkboxes = document.querySelectorAll('input[name="shFishList"]');
+
+    /*체크 박스[어종 선택제한 최대 3개] */
+    const checkboxes = document.querySelectorAll('input[name="fsSeqList"]');
     const maxSelection = 3;
     if(checkboxes){
         checkboxes.forEach((checkbox) => {
@@ -307,6 +309,8 @@ window.addEventListener('load', function() {
     }
     
 });
+
+/*페이지 네이션*/
 function updatePagination(thisPage, totalPages, paginationContainer,index) {
     // const paginationContainer = document.querySelector("#pagination-items .pagination");
     console.log()

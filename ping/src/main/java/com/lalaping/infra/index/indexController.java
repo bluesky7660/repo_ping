@@ -97,6 +97,7 @@ public class indexController {
 	        String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(point.getMpRegDate());
 	        pointData.put("mpRegDate", formattedDate);
 	        pointData.put("fsNameList", point.getFsNameList());
+	        pointData.put("path", point.getPath());
 	        if(!shSeason.equals("0")) {
 	        	pointData.put("season_ssSeq", point.getSeason_ssSeq());
 		        int a = Integer.parseInt(point.getSeason_ssSeq());
