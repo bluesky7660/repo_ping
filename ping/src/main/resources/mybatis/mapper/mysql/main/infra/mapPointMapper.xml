@@ -70,10 +70,12 @@
     		,a.mpLongitude
     		,a.mpDelNy
     		,a.mpRegDate
+    		,p.path
     		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
    		FROM mappoint a
         	left join fishandmappoint b on b.mappoint_mpSeq = a.mpSeq
             left join fish c on c.fsSeq = b.fish_fsSeq
+            left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
    		GROUP BY a.mpSeq
    		ORDER BY
      	a.mpRegDate DESC
@@ -123,9 +125,11 @@
 		     LEFT JOIN fishandmappoint b ON c.fsSeq = b.fish_fsSeq
 		     WHERE b.mapPoint_mpSeq = a.mpSeq
 		    ) AS fsNameList
+		    ,p.path
 		FROM mappoint a
 			LEFT JOIN fishandmappoint b ON b.mappoint_mpSeq = a.mpSeq
 			LEFT JOIN fish c ON c.fsSeq = b.fish_fsSeq
+			left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
 		Where 1=1
 	    <if test="shMpValue != null and !shMpValue.equals('')">
 	    	AND(
@@ -155,9 +159,11 @@
     		,a.mpDelNy
     		,a.mpRegDate
     		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
+    		,p.path
    		FROM mappoint a
         	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
             left join fish c on c.fsSeq = b.fish_fsSeq
+            left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
    		GROUP BY a.mpSeq
    		ORDER BY
      	a.mpRegDate DESC
@@ -173,9 +179,11 @@
     		,a.mpRegDate
     		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
     		,ST_Distance_Sphere(POINT(#{baseMpLongitude}, #{baseMpLatitude}), POINT(a.mpLongitude, a.mpLatitude)) AS distanceIn
+   			,p.path
    		FROM mappoint a
         	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
             left join fish c on c.fsSeq = b.fish_fsSeq
+            left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
         WHERE 1=1
         	and ST_Distance_Sphere(POINT(#{baseMpLongitude},#{baseMpLatitude}), POINT(a.mpLongitude, a.mpLatitude)) &lt; 100000
         	AND ST_Distance_Sphere(POINT(#{baseMpLongitude}, #{baseMpLatitude}), POINT(a.mpLongitude, a.mpLatitude)) != 0
@@ -206,9 +214,11 @@
     		,a.mpRegDate
     		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
     		,ST_Distance_Sphere(POINT(#{baseMpLongitude}, #{baseMpLatitude}), POINT(a.mpLongitude, a.mpLatitude)) AS distanceIn
+   			,p.path
    		FROM mappoint a
         	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
             left join fish c on c.fsSeq = b.fish_fsSeq
+            left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
         WHERE 1=1
         	and ST_Distance_Sphere(POINT(#{baseMpLongitude},#{baseMpLatitude}), POINT(a.mpLongitude, a.mpLatitude)) &lt; 100000
    		GROUP BY a.mpSeq
@@ -227,10 +237,12 @@
     		,a.mpRegDate
     		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
             ,d.season_ssSeq
+            ,p.path
         FROM mappoint a
         	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
             left join fish c on c.fsSeq = b.fish_fsSeq
             join seasonandfish d on d.fish_fsSeq = c.fsSeq
+            left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
         WHERE 1=1
         	and d.season_ssSeq = #{season_ssSeq}
 		GROUP BY a.mpSeq, d.season_ssSeq
@@ -284,9 +296,11 @@
     		,a.mpLatitude
     		,a.mpLongitude
     		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
+    		,p.path
    		FROM mappoint a
         	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
             left join fish c on c.fsSeq = b.fish_fsSeq
+            left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
    		WHERE 1=1
    			AND mpSeq = #{mpSeq}
    		GROUP BY a.mpSeq
