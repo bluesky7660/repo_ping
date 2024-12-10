@@ -253,8 +253,8 @@ window.addEventListener('load', function() {
                         <div class="col-sm-6 col-lg-3">
                             <div class="card ts-item ts-card">
                                 <a href="/v1/mapPoint/mapPointDetail?mpSeq=${point.mpSeq}">
-                                    <div class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg" 
-                                    style="background-image: url(&quot;/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg&quot;);">
+                                    <div class="card-img ts-item__image" data-bg-image="${point.path != null ? point.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}" 
+                                    style="background-image: url(&quot;${point.path != null ? point.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}&quot;);">
                                         <figure class="ts-item__info">
                                             <h4>${point.mpTitle}</h4>
                                             <aside>
