@@ -370,7 +370,7 @@
 														<td class="td_spotlight">
 															<a th:href="@{/v1/port/portXdmMFom(ptSeq=${list.ptSeq})}" th:text="${list.ptName}"></a>
 														</td>
-														<td th:text="${list.ptArea}"></td>
+														<td th:text="${@codeService.selectOneCachedCode(list.ptArea)}"></td>
 														<td th:text="${list.ptAddress}"></td>
 														<td th:if="${list.ptDelNy eq 0}">N</td>
 														<td th:unless="${list.ptDelNy eq 0}">Y</td>

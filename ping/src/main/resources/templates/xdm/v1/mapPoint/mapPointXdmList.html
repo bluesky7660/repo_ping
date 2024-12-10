@@ -370,7 +370,7 @@
 														<td class="td_spotlight">
 															<a th:href="@{/v1/mapPoint/mapPointXdmMFom(mpSeq=${list.mpSeq})}" th:text="${list.mpTitle}"></a>
 														</td>
-														<td th:text="${list.mpType}"></td>
+														<td th:text="${@codeService.selectOneCachedCode(list.mpType)}"></td>
 														<td th:text="${list.mpAddress}"></td>
 														<td th:if="${list.mpDelNy eq 0}">N</td>
 														<td th:unless="${list.mpDelNy eq 0}">Y</td>
