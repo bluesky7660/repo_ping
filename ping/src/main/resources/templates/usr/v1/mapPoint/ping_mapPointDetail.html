@@ -228,7 +228,7 @@
                                             <i class="fa fa-thumbs-up"></i>
                                         </div> -->
                                         <!--Card Image-->
-                                        <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
+                                        <div class="card-img" th:data-bg-image="${near.path != null ? near.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}">
                                             <figure class="ts-item__info">
                                                 <h4 th:text="${near.mpTitle}"></h4>
                                                 <aside>

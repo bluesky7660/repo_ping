@@ -343,7 +343,7 @@
                                             <a th:href="@{/v1/mapPoint/mapPointDetail(mpSeq=${mapPoint.mpSeq})}" class="card ts-item ts-card">
 
                                                 <!--Image-->
-                                                <div class="ts-item__image ts-item card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-person-04.jpg">
+                                                <div class="ts-item__image ts-item card-img" th:data-bg-image="${mapPoint.path != null ? mapPoint.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}">
                                                     <!-- <div class="ts-item__info-badge">
                                                         <span>28 Properties</span>
                                                     </div> -->
@@ -845,7 +845,7 @@
                         <div class="col-md-6">
                             <a href="/v1/mapPoint/mapPointDetail?mpSeq=${mapPoint.mpSeq}" class="card ts-item ts-card">
                                
-                                <div class="ts-item__image ts-item card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-person-04.jpg" style="background-image: url(/usr/v1/template/themeforest-v1.0/assets/img/img-person-04.jpg;)">
+                                <div class="ts-item__image ts-item card-img" data-bg-image="${mapPoint.path != null ? mapPoint.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}" style="background-image: url(${mapPoint.path != null ? mapPoint.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'};)">
                                     <figure class="ts-item__info pt-2 pb-2">
                                         <h4>${mapPoint.mpTitle}</h4>
                                         <aside>

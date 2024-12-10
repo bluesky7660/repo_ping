@@ -205,7 +205,7 @@
                                 </div>
 
                                 <!--Card Image-->
-                                <div class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
+                                <div class="card-img ts-item__image" th:data-bg-image="${ships.path != null ? ships.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}">
                                     <div class="ts-item__info-badge" th:text="${#numbers.formatInteger(ships.spPrice,1,'COMMA') + ' 원'}"></div>
                                     <figure class="ts-item__info">
                                         <h4 th:text="${ships.spName}"></h4>
@@ -286,7 +286,7 @@
 
         <!--LATEST LISTINGS
         =============================================================================================================-->
-        <section id="latest-listings" class="ts-block">
+        <section id="season_point" class="ts-block season_point">
             <div class="container">
 
                 <!--Title-->
@@ -406,7 +406,7 @@
                 <div class="owl-carousel ts-items-carousel" data-owl-items="4" data-owl-dots="1">
 
                     <!--Item-->
-                    <div class="slide" th:each="mapPoint:${mapPoint}">
+                    <div class="slide" th:each="mapPoint:${allmapPoint}">
 
                         <div class="card ts-item ts-card ts-item__lg">
                                 <!--Ribbon-->

@@ -99,7 +99,10 @@
 		,a.spRegDate
 		,a.port_ptSeq
 		,d.ptName
+		,GROUP_CONCAT(c.fsSeq ORDER BY c.fsSeq) AS fsSeqList
+   		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
 		<include refid="selectCommon" />
+		GROUP BY a.spSeq
 		ORDER BY
 		a.spRegDate DESC
 		<include refid="base.selectListLowerForMysql" />

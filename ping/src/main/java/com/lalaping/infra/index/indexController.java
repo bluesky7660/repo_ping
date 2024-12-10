@@ -48,6 +48,7 @@ public class indexController {
 		model.addAttribute("fishList",fishService.allOneList(vo));
 //		model.addAttribute("mapPoint",mapPointService.allList(mapPointVo));
 		model.addAttribute("mapPoint",mapPointService.selectSearchList(mapPointVo));
+		model.addAttribute("allmapPoint",mapPointService.allList(mapPointVo));
 		model.addAttribute("ships",shipService.selectUsrList(shipVo));
 		
 		List<MapPointDto> usrList = mapPointService.sessSelectList(mapPointVo);
