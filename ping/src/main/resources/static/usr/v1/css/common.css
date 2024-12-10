@@ -70,6 +70,14 @@ img[alt="날씨이미지"]{
     font-size: 1rem;
 }
 
+/*항구 상세*/
+.ts-circle__xxl img {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+}
+
 /*기타*/
 #more-options-collapse{
     max-height: 200px;
