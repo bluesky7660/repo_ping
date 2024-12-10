@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.lalaping.infra.code.CodeDto;
-
 public class FishDto {
 	private String fsSeq;
 	private String fsName;
@@ -16,6 +14,9 @@ public class FishDto {
 	private String ship_spSeq;
 	private String fsNameList;
 	
+	private String season_ssSeq;
+	private String fish_fsSeq;
+	
 	//for cache
 	public static List<FishDto> cachedFishArrayList = new ArrayList<FishDto>();
 	
@@ -23,6 +24,24 @@ public class FishDto {
 	
 	public String getFsSeq() {
 		return fsSeq;
+	}
+	public String getFish_fsSeq() {
+		return fish_fsSeq;
+	}
+	public void setFish_fsSeq(String fish_fsSeq) {
+		this.fish_fsSeq = fish_fsSeq;
+	}
+	public String getSeason_ssSeq() {
+		return season_ssSeq;
+	}
+	public void setSeason_ssSeq(String season_ssSeq) {
+		this.season_ssSeq = season_ssSeq;
+	}
+	public static List<FishDto> getCachedFishArrayList() {
+		return cachedFishArrayList;
+	}
+	public static void setCachedFishArrayList(List<FishDto> cachedFishArrayList) {
+		FishDto.cachedFishArrayList = cachedFishArrayList;
 	}
 	public void setFsSeq(String fsSeq) {
 		this.fsSeq = fsSeq;
