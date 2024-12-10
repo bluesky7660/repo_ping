@@ -162,6 +162,7 @@
 		,a.spRegDate
 		,a.port_ptSeq
 		,d.ptName
+		,s.path
 		,GROUP_CONCAT(c.fsSeq ORDER BY c.fsSeq) AS fsSeqList
 		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
 		<include refid="selectCommonPort" />

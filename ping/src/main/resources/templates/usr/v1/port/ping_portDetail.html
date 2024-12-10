@@ -216,16 +216,9 @@
                                     <!--Item-->
                                     <div class="card ts-item ts-item__list ts-card" th:each="shipList:${ships}">
                                         <a th:href="@{/v1/ship/shipDetail(spSeq=${shipList.spSeq})}">
-                                            <!--Ribbon-->
-                                            <div class="ts-ribbon">
-                                                <i class="fa fa-thumbs-up"></i>
-                                            </div>
-                                            <div class="ts-ribbon-corner">
-                                                <span>Updated</span>
-                                            </div>
-
+                                            
                                             <!--Card Image-->
-                                            <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg"></div>
+                                            <div class="card-img" th:data-bg-image="${shipList.path}"></div>
 
                                             <!--Card Body-->
                                             <div class="card-body">
