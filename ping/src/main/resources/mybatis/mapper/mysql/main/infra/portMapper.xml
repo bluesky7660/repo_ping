@@ -97,7 +97,7 @@
 			,a.ptRegDate
 			,p.path
 		FROM port a
-			left join imginsert_port p on b.pseq = a.ptSeq and b.defaultNy = 1
+			left join imginsert_port p on p.pseq = a.ptSeq and p.defaultNy = 1
 		WHERE 1=1
 		AND a.ptSeq = #{ptSeq}
 	</select>

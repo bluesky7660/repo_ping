@@ -45,7 +45,6 @@ public class MapPointController {
 	public String mapPointXdmMFom(Model model,MapPointDto mapPointDto) {
 		model.addAttribute("item",mapPointService.selectOne(mapPointDto));
 		model.addAttribute("listLink", "mapPointXdmList");
-		
 		System.out.println("위도 값 확인 : " + mapPointDto.getMpLatitude());
 		return "xdm/v1/mapPoint/mapPointXdmMFom";
 	}

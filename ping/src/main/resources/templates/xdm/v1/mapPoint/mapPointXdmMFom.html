@@ -172,11 +172,11 @@
 														<!--주소 검색-->
 					                                       <div class="input-group">
 															<!-- <label for="sample5_address">주소</label> -->
-					                                           <input type="text" class="form-control border-right-0" id="sample5_address" name="mpAddress" placeholder="주소" readonly>
+					                                           <input type="text" class="form-control border-right-0" id="sample5_address" name="mpAddress" placeholder="주소" th:value="${item.mpAddress}" readonly>
 					                                           <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 															<!-- <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div> -->
-																<input type="hidden" id="mpLatitude" name="mpLatitude">
-					                                          	<input type="hidden" id="mpLongitude" name="mpLongitude">
+																<input type="hidden" id="mpLatitude" name="mpLatitude" th:value="${item.mpLatitude}">
+					                                          	<input type="hidden" id="mpLongitude" name="mpLongitude" th:value="${item.mpLongitude}">
 					                                       </div>
 
 														<!-- <input type="text" class="form-control" id="inputPtAddress" name="ptAddress" th:value="${item.ptAddress}" placeholder="주소입력" required> -->
