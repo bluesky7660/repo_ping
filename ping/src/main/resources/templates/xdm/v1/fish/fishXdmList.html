@@ -371,14 +371,13 @@
 														<td class="td_spotlight">
 															<a th:href="@{/v1/fish/fishXdmMFom(fsSeq=${list.fsSeq})}" th:text="${list.fsName}"></a>
 														</td>
-<!-- 														<td th:text="${@codeService.selectOneCachedCode(list.season_ssSeq)}"></td> -->
 														<td th:text="${@codeService.selectOneCachedCode(list.season_ssSeq)}"></td>
 														<td th:if="${list.fsDelNy eq 0}">N</td>
 														<td th:unless="${list.fsDelNy eq 0}">Y</td>
 														<td th:text="${#dates.format(list.fsRegDate,'yyyy-MM-dd HH:mm:ss')}"></td>
 													</tr>
 												</tbody>
-											</table>	
+											</table>
 										</div>
 										
 										<div class="dataTable-bottom">
