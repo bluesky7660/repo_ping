@@ -14,16 +14,25 @@ public class FishDto {
 	private String ship_spSeq;
 	private String fsNameList;
 	
+	
 	private String season_ssSeq;
 	private String fish_fsSeq;
+	private List<> seasons;
 	
 	//for cache
 	public static List<FishDto> cachedFishArrayList = new ArrayList<FishDto>();
 	
 //	------------------------------ 
 	
+	
 	public String getFsSeq() {
 		return fsSeq;
+	}
+	public String getSeasons() {
+		return seasons;
+	}
+	public void setSeasons(String seasons) {
+		this.seasons = seasons;
 	}
 	public String getFish_fsSeq() {
 		return fish_fsSeq;

@@ -55,7 +55,7 @@
 			,a.cgModDate
 		<include refid="selectCommon"/>
 		ORDER BY
-			a.cgOrder desc
+			a.cgRegDate desc
 		<include refid="base.selectListLowerForMysql"/>
 	</select>
 	<select id="listCount" resultType="int">
