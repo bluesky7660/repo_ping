@@ -63,9 +63,10 @@
 	        a.mmRegDate,
 	        a.mmModDate,
 	        a.mmEmail,
-	        a.mmGender
+	        a.mmGender,
+	        a.mmAdminNy
         <include refid="selectCommon" />
-        ORDER BY a.mmSeq DESC
+        ORDER BY a.mmRegDate DESC
         <include refid="base.selectListLowerForMysql"/>
     </select>
     <select id="selectOne" resultMap="resultMapObj">
