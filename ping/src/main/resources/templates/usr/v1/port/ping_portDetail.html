@@ -296,19 +296,20 @@
                                 <!--DISPLAY CONTROL
                                     =================================================================================-->
                                 <section id="display-control-agents">
-                                    <div class="clearfix">
+                                    <div class="d-flex justify-content-between">
 
                                         <!--Display selector on the left-->
-                                        <div class="float-left">
-                                            <a href="#" class="btn btn-outline-secondary active px-3 mr-2 mb-2 ts-btn-border-muted">
+                                        <!-- <div class="float-left">
+                                             <a href="#" class="btn btn-outline-secondary active px-3 mr-2 mb-2 ts-btn-border-muted">
                                                 <i class="fa fa-th-large"></i>
                                             </a>
                                             <a href="#" class="btn btn-outline-secondary px-3 mb-2 ts-btn-border-muted">
                                                 <i class="fa fa-th-list"></i>
-                                            </a>
+                                            </a> 
                                             
-                                            <p class="d-inline-block ml-3">50km 범위내</p>
-                                        </div>
+                                            
+                                        </div> -->
+                                        <p class="">주변 낚시포인트는 50km 범위내에 있는 데이터 입니다.</p>
 
                                         <!--Display selector on the right-->
                                         <div class="float-none float-sm-right pl-2 ts-center__vertical">
@@ -330,7 +331,9 @@
                                 <section id="mapPointList">
                                     <div class="row">
 
-                                        <!--Person-->
+                                        <div class="col-sm-6" th:if="${#lists.isEmpty(mapPoint)}">
+                                            <p>범위내의 낚시포인트의 데이터가 없습니다.</p>
+                                        </div>
                                         <div class="col-md-6" th:each="mapPoint:${mapPoint}">
                                             <a th:href="@{/v1/mapPoint/mapPointDetail(mpSeq=${mapPoint.mpSeq})}" class="card ts-item ts-card">
 

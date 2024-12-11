@@ -258,3 +258,12 @@ table .td_spotlight a:hover{
     margin-left: 5px;
     vertical-align: text-bottom;
 }
+
+
+.img-box{
+    width: 100%;
+    height: auto;
+}
+.img-box img{
+    width: 100%;
+}
