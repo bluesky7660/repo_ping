@@ -40,15 +40,15 @@ public class BaseVo {
 		} else {
 			setTotalPages(getTotalRows() / getRowNumToShow());
 		}
-
+		System.out.println("TotalPages1:"+getTotalPages());
 		if (getTotalRows() % getRowNumToShow() > 0) {
 			setTotalPages(getTotalPages() + 1);
 		}
-
+		System.out.println("TotalPages2:"+getTotalPages());
 		if (getTotalPages() < getThisPage()) {
 			setThisPage(getTotalPages());
 		}
-		
+		System.out.println("TotalPages3:"+getTotalPages());
 		setStartPage(((getThisPage() - 1) / getPageNumToShow()) * getPageNumToShow() + 1);
 
 		setEndPage(getStartPage() + getPageNumToShow() - 1);

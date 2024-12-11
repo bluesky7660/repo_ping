@@ -3,8 +3,16 @@ var options = {
 		height: 317,
 		type: 'area',
 		toolbar: {
-      show: false,
-    },
+			show: true,
+			tools: {
+			  zoom: true, 
+			  zoomin: true, 
+			  zoomout: true, 
+			  reset: true, 
+			  download: false,
+			  pan: false,
+			},
+		},
 	},
 	dataLabels: {
 		enabled: false
@@ -14,11 +22,11 @@ var options = {
 		width: 3
 	},
 	series: [{
-		name: 'Sales',
-		data: [10, 40, 15, 40, 20, 35, 20, 10, 31, 43, 56, 29]
+		name: '맵 포인트 생성',
+		data: [1, 4, 5, 10, 2, 3, 2, 10, 3, 4, 6, 9]
 	}, {
-		name: 'Revenue',
-		data: [2, 8, 25, 7, 20, 20, 51, 35, 42, 20, 33, 67]
+		name: '선상낚시 예약',
+		data: [2, 8, 5, 7, 12, 2, 5, 5, 4, 10, 3, 6]
 	}],
 	grid: {
     borderColor: '#e0e6ed',

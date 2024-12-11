@@ -213,10 +213,15 @@
                             <!--ITEMS LISTING
                                 =================================================================================-->
                             <section id="near_mappoint">
-                                <h3 class="mb-2">주변 낚시포인트</h3>
-                                <p>50km 범위내</p>
+                                <div class="d-flex justify-content-between">
+                                    <h3 class="mb-2">주변 낚시포인트</h3>
+                                    <p>주변 낚시포인트는 50km 범위내에 있는 데이터 입니다.</p>
+                                </div>
                                 <div class="row">
                                     <!--Item-->
+                                    <div class="col-sm-6" th:if="${#lists.isEmpty(nearList)}">
+                                        <p>범위내의 낚시포인트의 데이터가 없습니다.</p>
+                                    </div>
                                     <div class="col-sm-6" th:each="near : ${nearList}">
                                         <a th:href="@{/v1/mapPoint/mapPointDetail(mpSeq=${near.mpSeq})}" class="card ts-item ts-card ts-item__lg">
                                             <!--Ribbon-->
@@ -309,7 +314,6 @@
 
                             <!--PAGINATION
                                 =================================================================================-->
-                                <p th:text="${'지금페이지: '+mapPointVo.thisPage}"></p>
                                 <section id="pagination-items">
                                     <div class="container-fluid px-0 mt-2 mb-2">
                                         <div class="row">

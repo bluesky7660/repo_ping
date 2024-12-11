@@ -73,6 +73,7 @@ public class MapPointController {
 		mapPointVo.setBaseMpLatitude(mapPointService.selectUsrOne(mapPointDto).getMpLatitude());
 		mapPointVo.setBaseMpLongitude(mapPointService.selectUsrOne(mapPointDto).getMpLongitude());
 		System.out.println("mapPointVo.thispage:"+mapPointVo.getThisPage());
+		mapPointVo.setParamsPaging(mapPointService.nearCount(mapPointVo));
 		model.addAttribute("nearList", mapPointService.nearList(mapPointVo));
 		return "usr/v1/mapPoint/ping_mapPointDetail";
 	}
@@ -108,7 +109,7 @@ public class MapPointController {
 		mapPointVo.setBaseMpLatitude(mapPointService.selectUsrOne(mapPointDto).getMpLatitude());
 		mapPointVo.setBaseMpLongitude(mapPointService.selectUsrOne(mapPointDto).getMpLongitude());
 		
-		
+		System.out.println("near:"+mapPointService.nearCount(mapPointVo));
 		mapPointVo.setParamsPaging(mapPointService.nearCount(mapPointVo));
 		List<MapPointDto> rtPoint = mapPointService.nearList(mapPointVo);
 		
