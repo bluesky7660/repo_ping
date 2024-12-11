@@ -27,7 +27,10 @@ public class OrderDto {
 	private String ship_spSeq;
 	private String member_mmSeq;
 	private String mmSeq;
+	private String mmName;
 	private Integer odReturnNy;
+	private String mmEmail;
+	private String path;
 	
 	
 //	---------------------------------
@@ -151,6 +154,24 @@ public class OrderDto {
 	}
 	public void setOdReturnNy(Integer odReturnNy) {
 		this.odReturnNy = odReturnNy;
+	}
+	public String getMmName() {
+		return mmName;
+	}
+	public void setMmName(String mmName) {
+		this.mmName = mmName;
+	}
+	public String getMmEmail() {
+		return mmEmail;
+	}
+	public void setMmEmail(String mmEmail) {
+		this.mmEmail = mmEmail;
+	}
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
 	}
 	
 	

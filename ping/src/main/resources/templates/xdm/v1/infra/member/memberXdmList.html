@@ -137,8 +137,8 @@
 														<label class="visually-hidden" for="selectKeywordType">검색어 종류</label>
 														<select class="form-select" id="selectKeywordType" name="shOption">
 															<option value="" selected>상세 검색구분</option>
-															<option value="1" th:selected="${vo.shOption == 1}">직원코드</option>
-															<option value="2" th:selected="${vo.shOption == 2}">직원이름</option>
+															<option value="1" th:selected="${vo.shOption == 1}">코드</option>
+															<option value="2" th:selected="${vo.shOption == 2}">이름</option>
 															<option value="3" th:selected="${vo.shOption == 3}">아이디</option>
 															<option value="4" th:selected="${vo.shOption == 4}">성별</option>
 															<option value="5" th:selected="${vo.shOption == 5}">이메일</option>
@@ -188,8 +188,8 @@
 														</th>
 														<th><span>#</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">코드</span></th>
-														<th class="sorting sorting_asc"><span class="dataTable-sorter">관리자</span></th>
-														<th class="sorting sorting_asc"><span class="dataTable-sorter">유저 이름</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">관리자여부</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">이름</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">아이디[이메일]</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">성별</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">전화번호</span></th>
@@ -225,7 +225,7 @@
 													<td th:if="${list.mmDelNy eq false }">N</td>
 													<td th:unless ="${list.mmDelNy eq false }">Y</td>
 													<td th:text="${#dates.format(list.mmRegDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-													<td th:text="${#dates.format(list.mmModDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+													<td th:text="${#dates.format(list.mmModDate, 'yyyy-MM-dd HH:mm')}"></td>
 												</tr>
 											</tbody>
 											</table>

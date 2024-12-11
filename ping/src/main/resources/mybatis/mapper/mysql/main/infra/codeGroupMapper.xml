@@ -41,6 +41,22 @@
 			</if>
 			
 	</sql>
+	<select id="allList" resultMap="resultMapObj">
+		SELECT
+			a.cgSeq
+			,a.cgName
+			,a.cgDesc
+			,a.cgOrder
+			,(select count(aa.codegroup_cgSeq) from commoncode aa  where 1=1 and aa.codegroup_cgSeq = a.cgSeq) as cgCodeCount
+			,a.cgUseNy
+		    ,a.cgDelNy
+			,a.cgRegDate
+			,a.cgModDate
+		FROM
+			codegroup a
+		ORDER BY
+			a.cgOrder desc
+	</select>
 	<select id="selectList" resultMap="resultMapObj">
 		<include refid="base.selectListUpperForMysql"/>
 		SELECT

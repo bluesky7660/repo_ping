@@ -1,4 +1,11 @@
-/*xdm용*/
+/*reset*/
+h3{
+    font-size: 1.2rem;
+}
+h4{
+    font-size: 1.1rem;
+}
+/*xdm*/
 #logoutBtn{
     width: 100%;
     font-weight: bold;
@@ -259,6 +266,13 @@ table .td_spotlight a:hover{
     vertical-align: text-bottom;
 }
 
+.orderAllList td,.pointReview td{
+    white-space: nowrap;
+}
+
+.latest_mapPoint .card{
+    height:447px;
+}
 
 .img-box{
     width: 100%;
@@ -267,3 +281,12 @@ table .td_spotlight a:hover{
 .img-box img{
     width: 100%;
 }
+.sale-details p{
+    font-size: 2rem;
+    font-weight: bold;
+}
+.num-stats{
+    gap:20px;
+    padding:20px 0;
+}
+
