@@ -20,7 +20,6 @@
 		<!-- Title -->
 		<title>낚시포인트</title>
 
-
 		<!-- *************
 			************ Common Css Files *************
 		************ -->
@@ -271,12 +270,20 @@
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<!-- Map 영역 -->
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&libraries=services,clusterer"></script>
-		<script>
+		<script th:inline="javascript" type="text/javascript"> 
     // ***** Map 클릭시 마커로 주소표시 *****
+    
+    // 처음 지도에 띄울 위도, 경도
+     /*<![CDATA[*/
+   	var mpLatitude1 = /*[[${item.mpLatitude}]]*/ 'mpLatitude1';
+    console.log("지도에 표시할 위도 : " + mpLatitude1);
+    var mpLongitude1 = /*[[${item.mpLongitude}]]*/ 'mpLongitude1';
+    console.log("지도에 표시할 경도 : " + mpLongitude1);
+    
     var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
-    var address_view = document.getElementById("sample5_address");
+    var address_view = document.getElementById("sample5_address"); 
     var mapOption = {
-        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(mpLatitude1, mpLongitude1), // 지도의 중심좌표
         level: 1 // 지도의 확대 레벨
     };  
 
