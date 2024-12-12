@@ -79,7 +79,7 @@
 		ON g.ship_spSeq = a.spSeq
 		WHERE 1=1
 		AND g.member_mmSeq = #{member_mmSeq}
-		AND g.odReturnNy = 0
+		AND !(g.odReturnNy = 28)
     </select>
     <update id="ueleteOrder">
   		UPDATE orders
@@ -108,7 +108,7 @@
 		ON g.ship_spSeq = a.spSeq
 		WHERE 1=1
 		AND g.member_mmSeq = #{member_mmSeq}
-		AND g.odReturnNy = 1
+		AND g.odReturnNy = 28
     </select>
     
 </mapper>

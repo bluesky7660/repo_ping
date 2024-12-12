@@ -184,7 +184,7 @@
                                     <div class="col-sm-3">
                                         <div class="ts-quick-info__item" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/icon-quick-info-garages.png">
                                             <h6>어종</h6>
-                                            <figure th:text="${item.fsNameList != null and #strings.length(item.fsNameList) > 1 ? #strings.substring(item.fsNameList, 1, #strings.length(item.fsNameList) - 1) : '전어종'}" style="font-size: 1rem;"></figure>
+                                            <figure th:text="${item.fsNameList}" style="font-size: 1rem;"></figure>
                                         </div>
                                     </div>
 
