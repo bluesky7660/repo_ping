@@ -225,7 +225,7 @@
 													<td class="td_spotlight">
 														<a th:href="@{/v1/ship/shipXdmMFom(spSeq=${list.spSeq})}" th:text="${list.spName}"></a>
 													</td> 
-													<td th:text="${list.spPrice}"></td>
+													<td th:text="${#numbers.formatInteger(list.spPrice, 3, 'COMMA') + '원'}">
 													<td th:text = "${list.spTotal}"></td>
 													<td th:text="${#dates.format(list.spStart, 'yyyy-MM-dd HH:mm')}"></td>
 													<td th:text="${@codeService.selectOneCachedCode(list.spArea)}"></td>

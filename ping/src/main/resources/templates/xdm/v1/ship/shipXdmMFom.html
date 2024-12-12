@@ -176,7 +176,7 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputCodeName" class="form-label">가격</label>
-														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputspPrice" name="spPrice" th:value="${item.spPrice}" placeholder="숫자임의입력" required>
+														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputspPrice" name="spPrice" th:value="${#numbers.formatInteger(item.spPrice, 3, 'COMMA')}" placeholder="숫자임의입력" required>
 														<div class="invalid-feedback">
 															코드이름을 적어주세요.
 														</div>
