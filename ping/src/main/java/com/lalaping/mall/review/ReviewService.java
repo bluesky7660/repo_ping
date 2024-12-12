@@ -1,0 +1,24 @@
+package com.lalaping.mall.review;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ReviewService {
+	@Autowired
+	ReviewDao reviewDao;
+	
+	public List<ReviewDto> rvSelectList(ReviewVo reviewVo){
+		return reviewDao.rvSelectList(reviewVo);
+	}
+	public int rvinsert(ReviewDto reviewDto) {
+		return reviewDao.rvinsert(reviewDto);
+	}
+	public ReviewDto rvSelectOne(ReviewDto reviewDto) {
+		return reviewDao.rvSelectOne(reviewDto);
+	}
+	
+
+}
