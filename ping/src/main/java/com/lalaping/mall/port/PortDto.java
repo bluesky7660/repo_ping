@@ -12,7 +12,7 @@ public class PortDto extends FileDto{
 	private Double ptLongitude;
 	private Double ptLatitude;
 	private String ptAddress;
-	private Integer ptDelNy;
+	private Boolean ptDelNy;
 	private Date ptRegDate;
 	
 //	-------------------------
@@ -47,10 +47,10 @@ public class PortDto extends FileDto{
 	public void setPtAddress(String ptAddress) {
 		this.ptAddress = ptAddress;
 	}
-	public Integer getPtDelNy() {
+	public Boolean getPtDelNy() {
 		return ptDelNy;
 	}
-	public void setPtDelNy(Integer ptDelNy) {
+	public void setPtDelNy(Boolean ptDelNy) {
 		this.ptDelNy = ptDelNy;
 	}
 	public Date getPtRegDate() {

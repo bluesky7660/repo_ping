@@ -169,14 +169,23 @@
 													</div>
 												</div> -->
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+<!-- 													<div class="mb-3"> -->
+<!-- 														<label for="inputCodeName" class="form-label">항구지역</label> -->
+<!-- 														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputPtArea" name="ptArea" th:value="${item.ptArea}" placeholder="숫자임의입력" required> -->
+<!-- 														<div class="invalid-feedback"> -->
+<!-- 															항구지역을 선택해주세요 -->
+<!-- 														</div> -->
+<!-- 													</div> -->
 													<div class="mb-3">
-														<label for="inputCodeName" class="form-label">항구지역</label>
-														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputPtArea" name="ptArea" th:value="${item.ptArea}" placeholder="숫자임의입력" required>
-														<div class="invalid-feedback">
-															코드이름을 적어주세요.
-														</div>
+														<label for="selectptArea" class="form-label">항구지역</label>
+														<select class="form-select" id="selectptArea" name="ptArea" required>
+															<option value="" selected>항구지역을 선택하세요</option>
+															<option th:each="list : ${@codeService.selectListCachedCode(5)}" th:value="${list.cdSeq}" th:text="${list.cdName}" th:selected="${list.cdSeq} == ${item.ptArea}"></option>
+														</select>
 													</div>
 												</div>
+												
+												
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputCodeOrder" class="form-label">주소</label>

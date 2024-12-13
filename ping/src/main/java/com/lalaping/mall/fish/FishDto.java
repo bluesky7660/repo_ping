@@ -8,31 +8,22 @@ public class FishDto {
 	private String fsSeq;
 	private String fsName;
 	private Integer fsSeason;
-	private Integer fsDelNy;
+	private Boolean fsDelNy;
 	private Date fsRegDate;
 	
 	private String ship_spSeq;
 	private String fsNameList;
 	
-	
 	private String season_ssSeq;
 	private String fish_fsSeq;
-	private List<> seasons;
+//	private List<> seasons;
 	
 	//for cache
 	public static List<FishDto> cachedFishArrayList = new ArrayList<FishDto>();
 	
 //	------------------------------ 
-	
-	
 	public String getFsSeq() {
 		return fsSeq;
-	}
-	public String getSeasons() {
-		return seasons;
-	}
-	public void setSeasons(String seasons) {
-		this.seasons = seasons;
 	}
 	public String getFish_fsSeq() {
 		return fish_fsSeq;
@@ -67,10 +58,10 @@ public class FishDto {
 	public void setFsSeason(Integer fsSeason) {
 		this.fsSeason = fsSeason;
 	}
-	public Integer getFsDelNy() {
+	public Boolean getFsDelNy() {
 		return fsDelNy;
 	}
-	public void setFsDelNy(Integer fsDelNy) {
+	public void setFsDelNy(Boolean fsDelNy) {
 		this.fsDelNy = fsDelNy;
 	}
 	public Date getFsRegDate() {

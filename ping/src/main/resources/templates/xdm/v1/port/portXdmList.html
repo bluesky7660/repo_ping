@@ -372,8 +372,8 @@
 														</td>
 														<td th:text="${@codeService.selectOneCachedCode(list.ptArea)}"></td>
 														<td th:text="${list.ptAddress}"></td>
-														<td th:if="${list.ptDelNy eq 0}">N</td>
-														<td th:unless="${list.ptDelNy eq 0}">Y</td>
+														<td th:if="${list.ptDelNy eq false}">N</td>
+														<td th:unless="${list.ptDelNy eq false}">Y</td>
 														<td th:text="${#dates.format(list.ptRegDate,'yyyy-MM-dd HH:mm:ss')}"></td>
 													</tr>
 												</tbody>
