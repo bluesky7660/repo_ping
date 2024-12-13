@@ -20,16 +20,17 @@ public class ShipDto extends FileDto {
 	private String spRemain;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date spStart;
-	private Integer spDelNy;
+	private Boolean spDelNy;
 	private Integer spArea;
-	private Integer spRentalNy;
-	private Integer spEatNy;
+	private Boolean spRentalNy;
+	private Boolean spEatNy;
 	private Date spRegDate;
 	private String port_ptSeq;
 	private String seq;
 	private String pSeq;
 	private String path;
-	
+
+	private String ptSeq;
 	private String ptName;
 	private Double ptLongitude;
 	private Double ptLatitude;
@@ -45,6 +46,12 @@ public class ShipDto extends FileDto {
 	
 	public String getFsSeq() {
 		return fsSeq;
+	}
+	public String getPtSeq() {
+		return ptSeq;
+	}
+	public void setPtSeq(String ptSeq) {
+		this.ptSeq = ptSeq;
 	}
 	public String getFsNames() {
 		return fsNames;
@@ -98,29 +105,28 @@ public class ShipDto extends FileDto {
 	public void setSpStart(Date spStart) {
 		this.spStart = spStart;
 	}
-	public Integer getSpDelNy() {
+	public Boolean getSpDelNy() {
 		return spDelNy;
 	}
-	public void setSpDelNy(Integer spDelNy) {
+	public void setSpDelNy(Boolean spDelNy) {
 		this.spDelNy = spDelNy;
 	}
-	
 	public Integer getSpArea() {
 		return spArea;
 	}
 	public void setSpArea(Integer spArea) {
 		this.spArea = spArea;
 	}
-	public Integer getSpRentalNy() {
+	public Boolean getSpRentalNy() {
 		return spRentalNy;
 	}
-	public void setSpRentalNy(Integer spRentalNy) {
+	public void setSpRentalNy(Boolean spRentalNy) {
 		this.spRentalNy = spRentalNy;
 	}
-	public Integer getSpEatNy() {
+	public Boolean getSpEatNy() {
 		return spEatNy;
 	}
-	public void setSpEatNy(Integer spEatNy) {
+	public void setSpEatNy(Boolean spEatNy) {
 		this.spEatNy = spEatNy;
 	}
 	public Date getSpRegDate() {

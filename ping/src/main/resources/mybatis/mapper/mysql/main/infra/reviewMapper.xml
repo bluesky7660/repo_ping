@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lalaping.mall.review.ReviewDao">
+<!-- namespace:mapper와 연결될 dao파일  -->
+<!-- xml에서 주석 단축키 : ctrl + shift + c -->
+
+	<resultMap type="com.lalaping.mall.review.ReviewDto" id="resultMapObj"></resultMap>
+	
+	<sql id="selectCommon">
+        FROM mpreview a
+
+        LEFT JOIN mappoint b on a.mapPoint_mpSeq = b.mpSeq       
+		LEFT JOIN member c on a.member_mmSeq = c.mmSeq
+        WHERE 1=1
+        <if test="shValue != null and !shValue.equals('')">
+            <choose>
+                <when test="shOption == null">
+                    AND(
+                        b.mpTitle LIKE CONCAT('%', #{shValue}, '%')
+                        OR c.mmName LIKE CONCAT('%', #{shValue}, '%')
+                    )
+                </when>
+                <when test="shOption == 1 and shOption != null and shOption != ''">
+                    AND b.mpTitle = #{shValue}
+                </when>
+                <when test="shOption == 2 and shOption != null and shOption != ''">
+                    AND c.mmName LIKE CONCAT('%', #{shValue}, '%')
+                </when>
+            </choose>
+        </if>
+        <if test="shDelNy != null and !shDelNy.equals('')">
+            AND a.mrDelNy = #{shDelNy}
+        </if>
+        <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
+        	<choose>
+        		<when test="shOptionDate == 1"> AND a.mrRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+           	</choose>
+        </if>
+       
+    </sql>
+	
+	<select id="rvSelectList" resultMap="resultMapObj">
+		<include refid="base.selectListUpperForMysql"/>
+			SELECT
+				a.mrSeq
+				,a.mrComment
+				,a.mrDelNy
+				,a.mrRegDate
+				,a.mapPoint_mpSeq
+				,a.member_mmSeq
+				,b.mpTitle
+				,c.mmName
+		<include refid="selectCommon"/>
+		GROUP BY a.mrSeq	
+   		ORDER BY
+     	a.mrRegDate DESC
+     	<include refid="base.selectListLowerForMysql"/>
+	</select>
+	<insert id="rvinsert">
+		INSERT INTO mpreview(
+			mrComment
+			,mrDelNy
+			,mrRegDate
+			,mapPoint_mpSeq
+			,member_mmSeq
+		)VALUES(
+			#{mrComment}
+			,0
+			,now()
+			,#{mapPoint_mpSeq}
+			,#{member_mmSeq}
+		)
+	</insert>
+	<select id="rvSelectOne" resultMap="resultMapObj">
+		SELECT
+			a.mrSeq
+			,a.mrComment
+			,a.mrDelNy
+			,a.mrRegDate
+			,a.mapPoint_mpSeq
+			,a.member_mmSeq
+			,b.mpTitle
+			,c.mmName
+		FROM mpreview a
+		LEFT JOIN mappoint b on a.mapPoint_mpSeq = b.mpSeq       
+		LEFT JOIN member c on a.member_mmSeq = c.mmSeq
+        WHERE 1=1
+		AND a.mrSeq = #{mrSeq}
+	</select>
+	<update id="rvUpdate">
+		UPDATE mpreview
+		SET 
+		mrComment = #{mrComment}
+		,mapPoint_mpSeq = #{mapPoint_mpSeq}
+		,member_mmSeq = #{member_mmSeq}
+		WHERE 1=1
+		AND mrSeq = #{mrSeq}
+	</update>
+	<update id="rvUelete">
+		UPDATE mpreview
+		SET
+		mrDelNy = 1
+		WHERE 1=1
+		AND mrSeq = #{mrSeq}
+	</update>
+	
+	<delete id="rvDelete">
+		DELETE FROM mpreview
+        WHERE 1=1
+        AND mrSeq = #{mrSeq}
+	</delete>
+	
+	<select id="selectOneCountRv" resultType="Integer">
+    select count(*)
+    	<include refid="selectCommon"></include>
+   	AND mpSeq = #{mpSeq}
+	</select>
+	
+	<select id="rvSelectListUsr" resultMap="resultMapObj">
+		SELECT
+			a.mrSeq
+			,a.mrComment
+			,a.mrDelNy
+			,a.mrRegDate
+			,a.mapPoint_mpSeq
+			,a.member_mmSeq
+			,b.mpTitle
+			,c.mmName
+		FROM mpreview a
+        LEFT JOIN mappoint b on a.mapPoint_mpSeq = b.mpSeq       
+		LEFT JOIN member c on a.member_mmSeq = c.mmSeq
+        WHERE 1=1
+		AND a.mapPoint_mpSeq = #{mpSeq}
+		GROUP BY a.mrSeq	
+		ORDER BY
+   			a.mrRegDate DESC
+	</select>
+	
+	
+</mapper>

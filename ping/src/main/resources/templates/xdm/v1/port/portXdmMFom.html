@@ -169,14 +169,23 @@
 													</div>
 												</div> -->
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+<!-- 													<div class="mb-3"> -->
+<!-- 														<label for="inputCodeName" class="form-label">항구지역</label> -->
+<!-- 														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputPtArea" name="ptArea" th:value="${item.ptArea}" placeholder="숫자임의입력" required> -->
+<!-- 														<div class="invalid-feedback"> -->
+<!-- 															항구지역을 선택해주세요 -->
+<!-- 														</div> -->
+<!-- 													</div> -->
 													<div class="mb-3">
-														<label for="inputCodeName" class="form-label">항구지역</label>
-														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputPtArea" name="ptArea" th:value="${item.ptArea}" placeholder="숫자임의입력" required>
-														<div class="invalid-feedback">
-															코드이름을 적어주세요.
-														</div>
+														<label for="selectptArea" class="form-label">항구지역</label>
+														<select class="form-select" id="selectptArea" name="ptArea" required>
+															<option value="" selected>항구지역을 선택하세요</option>
+															<option th:each="list : ${@codeService.selectListCachedCode(5)}" th:value="${list.cdSeq}" th:text="${list.cdName}" th:selected="${list.cdSeq} == ${item.ptArea}"></option>
+														</select>
 													</div>
 												</div>
+												
+												
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputCodeOrder" class="form-label">주소</label>
@@ -254,26 +263,26 @@
 		</div>
 		<!-- Page wrapper end -->
 
-		<!-- *************
-			************ Required JavaScript Files *************
-		************* -->
-		<!-- Required jQuery first, then Bootstrap Bundle JS -->
-		<script src="/xdm/v1/template/arise-v1.0/assets/js/jquery.min.js"></script>
-		<script src="/xdm/v1/template/arise-v1.0/assets/js/bootstrap.bundle.min.js"></script>
-		<script src="/xdm/v1/template/arise-v1.0/assets/js/modernizr.js"></script>
-		<script src="/xdm/v1/template/arise-v1.0/assets/js/moment.js"></script>
+	<!-- *************
+		************ Required JavaScript Files *************
+	************* -->
+	<!-- Required jQuery first, then Bootstrap Bundle JS -->
+	<script src="/xdm/v1/template/arise-v1.0/assets/js/jquery.min.js"></script>
+	<script src="/xdm/v1/template/arise-v1.0/assets/js/bootstrap.bundle.min.js"></script>
+	<script src="/xdm/v1/template/arise-v1.0/assets/js/modernizr.js"></script>
+	<script src="/xdm/v1/template/arise-v1.0/assets/js/moment.js"></script>
 
-		<!-- *************
-			************ Vendor Js Files *************
-		************* -->
+	<!-- *************
+		************ Vendor Js Files *************
+	************* -->
 
-		<!-- Overlay Scroll JS -->
-		<script src="/xdm/v1/template/arise-v1.0/assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
-		<script src="/xdm/v1/template/arise-v1.0/assets/vendor/overlay-scroll/custom-scrollbar.js"></script>
+	<!-- Overlay Scroll JS -->
+	<script src="/xdm/v1/template/arise-v1.0/assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
+	<script src="/xdm/v1/template/arise-v1.0/assets/vendor/overlay-scroll/custom-scrollbar.js"></script>
 
-		<!-- Main Js Required -->
-		<script src="/xdm/v1/template/arise-v1.0/assets/js/main.js"></script>
-		<script src="/xdm/v1/template/arise-v1.0/assets/js/validations.js"></script>
+	<!-- Main Js Required -->
+	<script src="/xdm/v1/template/arise-v1.0/assets/js/main.js"></script>
+	<script src="/xdm/v1/template/arise-v1.0/assets/js/validations.js"></script>
 	<!-- by developer -->
 	<script src="/xdm/v1/js/commonXdm.js"></script>
 	<!-- kakao 우편번호Api -->
@@ -281,21 +290,30 @@
 	<!-- Map 영역 -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&libraries=services,clusterer"></script>
 	<script src="/xdm/v1/js/commonXdm.js"></script>
-  <script>
+  <script th:inline="javascript" type="text/javascript">
     // ***** Map 클릭시 마커로 주소표시 *****
+    
+    // 처음 지도에 띄울 위도, 경도
+    /*<![CDATA[*/
+   	var ptLatitude1 = /*[[${item.ptLatitude}]]*/ 'ptLatitude1';
+    console.log("지도에 표시할 위도 : " + ptLatitude1);
+    var ptLongitude1 = /*[[${item.ptLongitude}]]*/ 'ptLongitude1';
+    console.log("지도에 표시할 경도 : " + ptLongitude1);
+    
     var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
     var address_view = document.getElementById("sample5_address");
     var mapOption = {
-        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(ptLatitude1, ptLongitude1), // 지도의 중심좌표
         level: 1, // 지도의 확대 레벨
         draggable: false
     };  
-
-    //지도를 생성합니다    
+    /*]]>*/
+    
+    //지도를 생성합니다
     var map = new kakao.maps.Map(mapContainer, mapOption); 
 
-    //주소-좌표 변환 객체를 생성합니다
-    var geocoder = new kakao.maps.services.Geocoder();
+    //주소-좌표 변환 객체를 생성합니다 
+    var geocoder = new kakao.maps.services.Geocoder(); 
 
     var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
     infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
@@ -456,7 +474,7 @@
     });    
     
 	// ************************ 접속위치로 표시된 위치 ******************************
-// 	// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+	// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 	
 // 	if (navigator.geolocation) {
 	    
 // 	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다

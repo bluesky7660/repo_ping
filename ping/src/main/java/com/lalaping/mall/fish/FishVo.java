@@ -76,6 +76,5 @@ public class FishVo extends BaseVo {
 	public void setSpSeq(String spSeq) {
 		this.spSeq = spSeq;
 	}
-	
 
 }

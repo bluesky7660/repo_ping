@@ -50,18 +50,6 @@ public class MapPointDto extends FileDto {
 	public void setMpType(Integer mpType) {
 		this.mpType = mpType;
 	}
-	public Integer getMpDelNy() {
-		return mpDelNy;
-	}
-	public void setMpDelNy(Integer mpDelNy) {
-		this.mpDelNy = mpDelNy;
-	}
-	public Date getMpRegDate() {
-		return mpRegDate;
-	}
-	public void setMpRegDate(Date mpRegDate) {
-		this.mpRegDate = mpRegDate;
-	}
 	public Double getMpLatitude() {
 		return mpLatitude;
 	}
@@ -73,6 +61,18 @@ public class MapPointDto extends FileDto {
 	}
 	public void setMpLongitude(Double mpLongitude) {
 		this.mpLongitude = mpLongitude;
+	}
+	public Integer getMpDelNy() {
+		return mpDelNy;
+	}
+	public void setMpDelNy(Integer mpDelNy) {
+		this.mpDelNy = mpDelNy;
+	}
+	public Date getMpRegDate() {
+		return mpRegDate;
+	}
+	public void setMpRegDate(Date mpRegDate) {
+		this.mpRegDate = mpRegDate;
 	}
 	public String getFsNameList() {
 		return fsNameList;
@@ -86,18 +86,11 @@ public class MapPointDto extends FileDto {
 	public void setSeason_ssSeq(String season_ssSeq) {
 		this.season_ssSeq = season_ssSeq;
 	}
-//	public Integer getDistanceIn() {
-//		return distanceIn;
-//	}
-//	public void setDistanceIn(Integer distanceIn) {
-//		this.distanceIn = distanceIn;
-//	}
 	public Double getDistanceIn() {
 		return distanceIn;
 	}
 	public void setDistanceIn(Double distanceIn) {
 		this.distanceIn = distanceIn;
 	}
-	
 
 }

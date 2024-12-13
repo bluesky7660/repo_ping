@@ -45,7 +45,6 @@
 			,a.fsDelNy
 			,a.fsRegDate
 			,b.fish_fsSeq
-            ,b.season_ssSeq
             ,GROUP_CONCAT(b.season_ssSeq ORDER BY a.fsSeq) AS seasons
         FROM fish a
 		LEFT JOIN seasonandfish b 

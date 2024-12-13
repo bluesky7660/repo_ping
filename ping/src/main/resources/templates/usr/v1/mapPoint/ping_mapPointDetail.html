@@ -92,6 +92,7 @@
                                         <h5>
                                             <i class="fa fa-sun-o mr-2"></i>
                                             <span th:text="${item.mpAddress}"></span>
+                                            <input type="hidden" id="mapPoint_mpSeq" th:value="${item.mpSeq}">
                                         </h5>
                                     <a th:href="@{/v1/weather/weatherPoint(mpSeq=${item.mpSeq})}">
                                             <figure class="mb-1">
@@ -350,100 +351,23 @@
 
                             <!--SIDEBAR COLLAPSABLE CONTENT
                                 =========================================================================================-->
+                          
                             <aside id="sidebar" class="ts-sidebar collapse navbar-collapse">
-
-                                <!--REVIEWS
-                                    =====================================================================================-->
-                                <section id="reviews">
-                                    <h3></h3>
-
-                                    <!--Reviews carousel-->
-                                    <div class="owl-carousel" data-owl-dots="1">
-
-                                        <!--Slide-->
-                                        <div class="slide">
-
-                                            <!--Review-->
-                                            <div class="ts-box mb-4 ts-has-talk-arrow">
-                                                <p class="mb-0">좋아요</p>
-                                            </div>
-
-                                            <!--Author-->
-                                            <div class="mx-2 ts-center__vertical">
-                                                <div class="ts-circle p-4 mr-3" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-person-02.jpg"></div>
-                                                <div>
-                                                    <h6 class="mb-0"><strong>맴버이름</strong></h6>
-                                                    <small class="ts-opacity__30">
-                                                        <i class="fa fa-map-marker"></i>
-                                                        등록일
-                                                    </small>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <!--end slide-->
-
-                                        <!--Slide-->
-                                        <div class="slide">
-
-                                            <!--Review-->
-                                            <div class="ts-box mb-4 ts-has-talk-arrow">
-                                                <h6>
-                                                    <strong>Satisfied</strong>
-                                                </h6>
-                                                <p class="mb-0">
-                                                    Pellentesque lectus sapien, porta quis lacus at, pretium tincidunt
-                                                    purus.
-                                                    Sed eget velit ligula. Cras enim enim, blandit quis
-                                                </p>
-                                            </div>
-
-                                            <!--Author-->
-                                            <div class="mx-2 ts-center__vertical">
-                                                <div class="ts-circle p-4 mr-3" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-person-03.jpg"></div>
-                                                <div>
-                                                    <h6 class="mb-0"><strong>John Peters</strong></h6>
-                                                    <small class="ts-opacity__30">
-                                                        <i class="fa fa-map-marker"></i>
-                                                        Paris
-                                                    </small>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <!--end slide-->
-
-                                    </div>
-                                    <!--end owl-carousel-->
-
-                                </section>
-
-                                <!--REVIEW FORM
+                            <!--REVIEW FORM
                                     =====================================================================================-->
                                 <section id="review-form">
                                     <h2>댓글 작성</h2>
 
                                     <!--Form-->
-                                    <form id="form-contact" method="post" class="clearfix ts-form ts-form-email" data-php-path="/usr/v1/template/themeforest-v1.0/assets/php/email.php">
-
-                                        <!--Name-->
-                                        <!-- <div class="form-group">
-                                            <input type="text" class="form-control" id="form-contact-name" name="name" placeholder="Your Name" required>
-                                        </div> -->
-
-                                        <!--Email-->
-                                        <!-- <div class="form-group">
-                                            <input type="email" class="form-control" id="form-contact-email" name="email" placeholder="Your Email" required>
-                                        </div> -->
-
+                                    <form id="form-contact" method="post" class="clearfix ts-form ts-form-email" action="/v1/review/reviewXdmInst">
                                         <!--Message-->
                                         <div class="form-group">
-                                            <textarea class="form-control" id="form-contact-message" rows="4" name="message" placeholder="댓글을 작성해주세요." required></textarea>
+                                            <textarea  class="form-control" id="mrComment" rows="4" name="mrComment" placeholder="댓글을 작성해주세요." required></textarea>
                                         </div>
 
                                         <!--Submit button-->
                                         <div class="form-group clearfix">
-                                            <button type="submit" class="btn btn-primary float-right" id="form-contact-submit">댓글 등록
+                                            <button type="button" onclick="insertComment(event)" class="btn btn-primary float-right" id="form-contact-submit">댓글 등록
                                             </button>
                                         </div>
 
@@ -454,6 +378,45 @@
 
                                 </section>
 
+                                <!--REVIEWS
+                                    =====================================================================================-->
+                              
+                                <section id="reviews">
+                                	<div id="reviewsContainer">
+
+                                    <!--Reviews carousel-->
+<!--                                     <div class="owl-carousel" data-owl-dots="1" > -->
+
+                                        <!--Slide-->
+                                        <div class="slide" th:each="rvList :${rvList}">
+                                            <!--Review-->
+                                            <div class="ts-box mb-4 ts-has-talk-arrow">
+                                                <p class="mb-0" th:text="${rvList.mrComment}"</p>
+                                                
+                                            </div>
+                                             <button type="button" onclick="deleteComment(event)" th:if="${session.sessSeqUsr == rvList.member_mmSeq}"><i class="fa fa-trash"></i></button>
+
+                                            <!--Author-->
+                                            <div class="mx-2 ts-center__vertical">
+                                                <div class="ts-circle p-4 mr-3"></div>
+                                                <div>
+                                                    <h6 class="mb-0"><strong th:text="${rvList.mmName}">맴버이름</strong></h6>
+                                                    <input type="hidden" id="mrSeq" th:value="${rvList.mrSeq}">
+                                                    
+                                                    <small class="ts-opacity__30">
+                                                        <i class="fa fa-map-marker" th:text="${rvList.mrRegDate}"></i>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <!--end slide-->
+<!--                                     </div> -->
+                                    <!--end owl-carousel-->
+									</div>
+									
+                                </section>
+                                
 
                             </aside>
                             <!--end #sidebar-->
@@ -578,6 +541,131 @@
                 });
             }
         }
+        
+     // 댓글 삭제
+	     function deleteComment(event) {
+		  
+	         var dDto = {
+	             mrSeq: $("#mrSeq").val(),
+	             mapPoint_mpSeq: $("#mapPoint_mpSeq").val()
+	         };
+	
+	         $.ajax({
+	             url: "/v1/review/reviewXdmDelt",  // 삭제 요청 URL
+	             type: 'POST',
+	             data: dDto,
+	             success: function(result) {
+	                 // 삭제 성공 후 댓글 목록 갱신
+	                 getCommentList();
+	             },
+	             error: function() {
+	                 alert('댓글 삭제 실패');
+	             }
+	         });
+	     }
+	
+	     // 댓글 추가 함수
+	     function insertComment(event) {
+	         // 로그인 여부 확인
+	         if (!$("#sessSeqUsr").val()) {
+	             alert("로그인 후 이용하세요.");
+	             return; // 함수 종료
+	         }
+	
+	         // 댓글 내용 입력 확인
+	         if (!$("#mrComment").val()) {
+	             alert("내용을 입력하세요.");
+	         } else {
+	             var bDto = {
+	                 mapPoint_mpSeq: $("#mapPoint_mpSeq").val(),
+	                 member_mmSeq: $("#sessSeqUsr").val(),
+	                 mrComment: $("#mrComment").val()
+	             };
+	
+	             $.ajax({
+	                 url: "/v1/review/reviewXdmInst",  // 댓글 추가 요청 URL
+	                 type: 'POST',
+	                 data: bDto,
+	                 success: function(result) {
+	                     // 댓글 목록 새로 고침
+	                     getCommentList();
+	                     // 댓글 입력란 초기화
+	                     $("#mrComment").val("");
+	                 },
+	                 error: function() {
+	                     console.log("리뷰 등록 실패.");
+	                 }
+	             });
+	         }
+	     }
+	
+	     // 댓글 목록을 가져오는 함수
+	     function getCommentList() {
+	    	 $.ajax({
+	    		    url: "/reviewList",  // 서버에서 리뷰 목록을 가져오는 URL
+	    		    type: 'get',
+	    		    dataType: 'json',
+	    		    data: { 
+	    		        "member_mmSeq": $("#sessSeqUsr").val(), 
+	    		        "mapPoint_mpSeq": $("#mapPoint_mpSeq").val(),
+	    		        "mpSeq" : $("#mapPoint_mpSeq").val()
+	    		    },
+	    		    success: function(response) {
+	    		        var reviewsHtml = "";  // 댓글 HTML을 저장할 변수
+
+	    		        // 서버에서 받은 댓글 데이터를 반복하여 HTML 생성
+	    		        $.each(response.rvList, function(index, rvList) {
+	    		            var date = new Date(rvList.mrRegDate);
+	    		            var formattedDate = date.toLocaleString("ko-KR", {
+	    		                year: 'numeric',
+	    		                month: '2-digit',
+	    		                day: '2-digit',
+	    		                hour: '2-digit',
+	    		                minute: '2-digit',
+	    		                second: '2-digit',
+	    		                hour12: false
+	    		            });
+
+	    		            reviewsHtml += `
+	    		                <div class="slide">
+	    		                    <div class="ts-box mb-4 ts-has-talk-arrow">
+	    		                        <p class="mb-0">${rvList.mrComment}</p>
+	    		                    </div>
+	    		                    <button type="button" onclick="deleteComment(event)"><i class="fa fa-trash"></i></button>
+
+	    		                    <div class="mx-2 ts-center__vertical">
+	    		                        <div class="ts-circle p-4 mr-3"></div>
+	    		                        <div>
+	    		                            <h6 class="mb-0"><strong>${rvList.mmName}</strong></h6>
+	    		                            <input type="hidden" id="mrSeq" value="${rvList.mrSeq}">
+	    		                            <small class="ts-opacity__30">
+	    		                                <i class="fa fa-map-marker">${formattedDate}</i>
+	    		                            </small>
+	    		                        </div>
+	    		                    </div>
+	    		                </div>
+	    		            `;
+	    		        });
+
+// 	    		        #reviewsContainer의 .owl-carousel에 새로운 HTML 삽입
+	    		        $("#reviewsContainer").html(reviewsHtml);
+
+// 	    		        Owl Carousel 초기화
+	    		        $("#reviewsContainer .owl-carousel").owlCarousel({
+	    		            items: 1,
+	    		            dots: true,
+	    		            loop: true,
+	    		            autoplay: true,
+	    		            autoplayTimeout: 5000,
+	    		            autoplayHoverPause: true
+	    		        });
+	    		    },
+	    		    error: function() {
+	    		        console.log("리뷰 목록 가져오기 실패.");
+	    		    }
+	    		});
+	        
+	     };
     </script>
 </body>
 </html>
