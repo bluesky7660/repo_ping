@@ -88,5 +88,27 @@
         WHERE 1=1
 		AND a.mrSeq = #{mrSeq}
 	</select>
+	<update id="rvUpdate">
+		UPDATE mpreview
+		SET 
+		mrComment = #{mrComment}
+		,mapPoint_mpSeq = #{mapPoint_mpSeq}
+		,member_mmSeq = #{member_mmSeq}
+		WHERE 1=1
+		AND mrSeq = #{mrSeq}
+	</update>
+	<update id="rvUelete">
+		UPDATE mpreview
+		SET
+		mrDelNy = 1
+		WHERE 1=1
+		AND mrSeq = #{mrSeq}
+	</update>
+	
+	<delete id="rvDelete">
+		DELETE FROM mpreview
+        WHERE 1=1
+        AND mrSeq = #{mrSeq}
+	</delete>
 	
 </mapper>
