@@ -111,4 +111,31 @@
         AND mrSeq = #{mrSeq}
 	</delete>
 	
+	<select id="selectOneCountRv" resultType="Integer">
+    select count(*)
+    	<include refid="selectCommon"></include>
+   	AND mpSeq = #{mpSeq}
+	</select>
+	
+	<select id="rvSelectListUsr" resultMap="resultMapObj">
+		SELECT
+			a.mrSeq
+			,a.mrComment
+			,a.mrDelNy
+			,a.mrRegDate
+			,a.mapPoint_mpSeq
+			,a.member_mmSeq
+			,b.mpTitle
+			,c.mmName
+		FROM mpreview a
+        LEFT JOIN mappoint b on a.mapPoint_mpSeq = b.mpSeq       
+		LEFT JOIN member c on a.member_mmSeq = c.mmSeq
+        WHERE 1=1
+		AND a.mapPoint_mpSeq = #{mpSeq}
+		GROUP BY a.mrSeq	
+		ORDER BY
+   			a.mrRegDate DESC
+	</select>
+	
+	
 </mapper>

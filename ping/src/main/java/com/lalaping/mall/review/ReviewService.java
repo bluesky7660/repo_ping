@@ -28,6 +28,12 @@ public class ReviewService {
 	public int rvDelete(ReviewDto reviewDto) {
 		return reviewDao.rvDelete(reviewDto);
 	}
+	public int selectOneCountRv(ReviewVo vo) {
+		return reviewDao.selectOneCountRv(vo);
+	}
+	public List<ReviewDto> rvSelectListUsr(ReviewDto reviewDto){
+		return reviewDao.rvSelectListUsr(reviewDto);
+	}
 	
 
 }

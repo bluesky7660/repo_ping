@@ -12,5 +12,7 @@ public interface ReviewDao {
 	public int rvUpdate(ReviewDto reviewDto);
 	public int rvUelete(ReviewDto reviewDto);
 	public int rvDelete(ReviewDto reviewDto);
+	public int selectOneCountRv(ReviewVo vo);
+	public List<ReviewDto> rvSelectListUsr(ReviewDto reviewDto);
 
 }

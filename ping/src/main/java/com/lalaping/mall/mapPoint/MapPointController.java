@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.lalaping.common.util.UtilDateTime;
 import com.lalaping.mall.fish.FishService;
 import com.lalaping.mall.fish.FishVo;
+import com.lalaping.mall.review.ReviewDto;
+import com.lalaping.mall.review.ReviewService;
+import com.lalaping.mall.review.ReviewVo;
+import com.lalaping.mall.ship.ShipDto;
 
 @Controller
 public class MapPointController {
@@ -22,6 +26,8 @@ public class MapPointController {
 	public MapPointService mapPointService;
 	@Autowired
 	FishService fishService;
+	@Autowired
+	ReviewService reviewService;
 	
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmList")
 	public String mapPointXdmList(Model model,@ModelAttribute("vo") MapPointVo vo){
@@ -40,6 +46,7 @@ public class MapPointController {
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmInst")
 	public String mapPointXdmInst(MapPointDto mapPointDto) {
 		mapPointService.insert(mapPointDto);
+		
 		return "redirect:/v1/mapPoint/mapPointXdmList";
 	}
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmMFom")
@@ -68,8 +75,9 @@ public class MapPointController {
 	/*usr*/
 	
 	@RequestMapping(value = "/v1/mapPoint/mapPointDetail")
-	public String mapPointDetail(Model model, MapPointDto mapPointDto,@ModelAttribute("mapPointVo") MapPointVo mapPointVo){
+	public String mapPointDetail(Model model,ReviewDto reviewDto,MapPointDto mapPointDto,@ModelAttribute("mapPointVo") MapPointVo mapPointVo){
 		model.addAttribute("item",mapPointService.selectUsrOne(mapPointDto));
+		model.addAttribute("rvList", reviewService.rvSelectListUsr(reviewDto));
 		mapPointVo.setBaseMpLatitude(mapPointService.selectUsrOne(mapPointDto).getMpLatitude());
 		mapPointVo.setBaseMpLongitude(mapPointService.selectUsrOne(mapPointDto).getMpLongitude());
 		System.out.println("mapPointVo.thispage:"+mapPointVo.getThisPage());
@@ -120,5 +128,14 @@ public class MapPointController {
 	    returnMap.put("totalPages", mapPointVo.getTotalPages());
 		return returnMap;
 	}
+	@RequestMapping(value = "reviewList")
+	@ResponseBody
+	 public Map<String, Object> reviewList(Model model,MapPointDto mapPointDto,ReviewDto reviewDto){
+		List<ReviewDto> rvList = reviewService.rvSelectListUsr(reviewDto);
+		Map<String, Object> response = new HashMap<>();
+		response.put("rvList", rvList);
+		System.out.println(response);
+		return response;
+		}
 
 }

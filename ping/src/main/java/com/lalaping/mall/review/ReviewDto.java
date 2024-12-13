@@ -16,7 +16,7 @@ public class ReviewDto extends BaseVo {
 	private String member_mmSeq;
 	private String mpTitle;
 	private String mmName;
-	
+	private String mpSeq;
 //	------------------------------------
 	
 	public String getMrSeq() {
@@ -68,6 +68,13 @@ public class ReviewDto extends BaseVo {
 	public void setMapPoint_mpSeq(String mapPoint_mpSeq) {
 		this.mapPoint_mpSeq = mapPoint_mpSeq;
 	}
+	public String getMpSeq() {
+		return mpSeq;
+	}
+	public void setMpSeq(String mpSeq) {
+		this.mpSeq = mpSeq;
+	}
+	
 	
 	
 	
