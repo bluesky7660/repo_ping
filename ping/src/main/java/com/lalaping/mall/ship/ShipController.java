@@ -118,8 +118,5 @@ public class ShipController {
 		model.addAttribute("other", shipService.otherPortSelectList(shipVo));
 		return "usr/v1/ship/ping_shipDetail";
 	}
-	
-	
-	
 
 }

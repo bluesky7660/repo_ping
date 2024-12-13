@@ -366,14 +366,14 @@
 													</tr>
 													<tr th:each="list : ${list}" th:if="${!#lists.isEmpty(list)}">
 														<td><input type="checkbox"></td>
-														<td th:text="${vo.totalRows - (((vo.thisPage -1) * vo.rowNumToShow) +listStat.index)}"></td>
+														<td th:text="${vo.totalRows - (((vo.thisPage -1) * vo.rowNumToShow) +listStat.index)}" class="align-middle"></td>
 														<td th:text="${list.fsSeq}"></td>
 														<td class="td_spotlight">
 															<a th:href="@{/v1/fish/fishXdmMFom(fsSeq=${list.fsSeq})}" th:text="${list.fsName}"></a>
 														</td>
-														<td th:text="${@codeService.selectOneCachedCode(list.seasons)}"></td>
-														<td th:if="${list.fsDelNy eq 0}">N</td>
-														<td th:unless="${list.fsDelNy eq 0}">Y</td>
+														<td th:text="${@codeService.selectOneCachedCode(list.fsSeason)}"></td>
+														<td th:if="${list.fsDelNy eq false}">N</td>
+														<td th:unless="${list.fsDelNy eq false}">Y</td>
 														<td th:text="${#dates.format(list.fsRegDate,'yyyy-MM-dd HH:mm:ss')}"></td>
 													</tr>
 												</tbody>

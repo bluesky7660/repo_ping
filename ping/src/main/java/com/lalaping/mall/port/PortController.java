@@ -51,8 +51,9 @@ public class PortController {
 		return "redirect:/v1/port/portXdmList";
 	}
 	@RequestMapping(value = "/v1/port/portXdmMFom")
-	public String portXdmMFom(Model model,PortDto portDto) {
+	public String portXdmMFom(Model model,PortDto portDto,@ModelAttribute("Portvo") PortVo vo) {
 		model.addAttribute("item",portService.selectOne(portDto));
+		model.addAttribute("list",portService.selectList(vo));
 		model.addAttribute("listLink", "portXdmList");
 		return "xdm/v1/port/portXdmMFom";
 	}
