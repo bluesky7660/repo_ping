@@ -19,6 +19,15 @@ public class ReviewService {
 	public ReviewDto rvSelectOne(ReviewDto reviewDto) {
 		return reviewDao.rvSelectOne(reviewDto);
 	}
+	public int rvUpdate(ReviewDto reviewDto) {
+		return reviewDao.rvUpdate(reviewDto);
+	}
+	public int rvUelete(ReviewDto reviewDto) {
+		return reviewDao.rvUelete(reviewDto);
+	}
+	public int rvDelete(ReviewDto reviewDto) {
+		return reviewDao.rvDelete(reviewDto);
+	}
 	
 
 }
