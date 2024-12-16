@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.lalaping.common.util.UtilDateTime;
 import com.lalaping.mall.mapPoint.MapPointController;
 import com.lalaping.mall.mapPoint.MapPointService;
 
@@ -18,6 +19,9 @@ public class ReviewController {
 	@RequestMapping(value = "v1/review/reviewXdmList")
 	public String reviewXdmList(Model model,@ModelAttribute("vo") ReviewVo reviewVo) {
 		model.addAttribute("formLink", "reviewXdmForm");
+		reviewVo.setShDateStart(reviewVo.getShDateStart() == null || reviewVo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(reviewVo.getShDateStart()));
+		reviewVo.setShDateEnd(reviewVo.getShDateEnd() == null || reviewVo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(reviewVo.getShDateEnd()));
+		reviewVo.setParamsPaging(reviewService.rvSelectListCount(reviewVo));
 		model.addAttribute("list", reviewService.rvSelectList(reviewVo));
 		return "xdm/v1/review/reviewXdmList";
 	}

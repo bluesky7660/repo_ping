@@ -261,7 +261,7 @@
 											댓글관리
 										</h2>
 										<div>
-											<form name class="row gx-3 align-items-center" method="post" autocomplete="off" action="/v1/port/portXdmList">
+											<form name class="row gx-3 align-items-center" method="post" autocomplete="off" action="/v1/review/reviewXdmList">
 												<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
 												<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
 												<div class="row gy-3">
@@ -288,6 +288,8 @@
 													<div class="col-12 col-md-6 col-lg-4 col-xl">
 														<label class="visually-hidden" for="inputDateEnd">종료일</label>
 														<input type="text" class="form-control" id="inputDateEnd" name="shDateEnd" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="종료일을 선택해주세요" value="">
+													</div>
+													<div class="col">      
 													</div>
 												</div>
 												<div class="row gy-3 mt-0">
@@ -337,9 +339,10 @@
 															<input type="checkbox">
 														</th>
 														<th><span>#</span></th>
-														<th class="sorting sorting_asc"><span class="dataTable-sorter">리뷰번호</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">댓글번호</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">포인트제목</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">유저이름</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">유저ID</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">댓글내용</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">삭제</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">등록일</span></th>
@@ -357,7 +360,8 @@
 															<a th:href="@{/v1/review/reviewXdmMFom2(mrSeq=${list.mrSeq})}" th:text="${list.mpTitle}"></a>
 														</td>
 														<td th:text="${list.mmName}"></td>
-														<td th:text="${list.mrComment}"></td>
+														<td th:text="${list.mmEmail}"></td>
+														<td class="mrComment_td" th:text="${list.mrComment}"></td>
 														<td th:if="${list.mrDelNy eq 0}">N</td>
 														<td th:unless="${list.mrDelNy eq 0}">Y</td>
 														<td th:text="${#dates.format(list.mrRegDate,'yyyy-MM-dd HH:mm:ss')}"></td>

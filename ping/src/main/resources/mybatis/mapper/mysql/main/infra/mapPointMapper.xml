@@ -266,7 +266,27 @@
      	a.mpRegDate DESC
      	limit 8
     </select>
-    
+    <select id="lastPoint" resultMap="resultMapObj">
+	    SELECT
+	        a.mpSeq,
+	        a.mpTitle,
+	        a.mpText,
+	        a.mpAddress,
+	        a.mpType,
+	        a.mpLatitude,
+	        a.mpLongitude,
+	        a.mpDelNy,
+	        a.mpRegDate
+	        ,p.path
+	    FROM mappoint a
+		    LEFT JOIN fishandmappoint b ON b.mappoint_mpSeq = a.mpSeq
+		    LEFT JOIN fish c ON c.fsSeq = b.fish_fsSeq
+			left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
+	    WHERE 1=1
+	    GROUP BY a.mpSeq
+	    ORDER BY a.mpRegDate DESC
+		LIMIT 1;
+    </select>
     <insert id="insert">
     	INSERT INTO mappoint(
     		mpTitle

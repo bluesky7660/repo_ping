@@ -269,11 +269,45 @@ table .td_spotlight a:hover{
 .orderAllList td,.pointReview td{
     white-space: nowrap;
 }
-
-.latest_mapPoint .card{
+.orderAllList td{
+    height: 93px;
+}
+.orderAllList tbody, .pointReview tbody{
+    /* overflow-x: auto; */
+}
+/* .table-responsive{
+    overflow: ;
+} */
+.pointReview tr td:nth-child(3),.mrComment_td{
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/* .latest_mapPoint .card{
     height:447px;
+} */
+.latest_mapPoint .card{
+    /* width:600px; */
+    height: calc(100% - 24px);
+
 }
 
+.latest_mapPoint .card-body{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.img_area{
+    display: flex;
+    gap: 20px;
+}
+
+.img_area>div{
+    border: 1px solid #aaa;
+    border-radius: 10px;
+    overflow: hidden;
+}
 .img-box{
     width: 100%;
     height: auto;
@@ -285,8 +319,19 @@ table .td_spotlight a:hover{
     font-size: 2rem;
     font-weight: bold;
 }
-.num-stats{
-    gap:20px;
+.ts-map{
+    width: 100%;
+
+}
+.mapPoint_cotent{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
     padding:20px 0;
+}
+.mapPoint_info{
+    height: 100%;
+}
+.mapPoint_address{
 }
 

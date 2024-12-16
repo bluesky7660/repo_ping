@@ -34,6 +34,8 @@ public class ReviewService {
 	public List<ReviewDto> rvSelectListUsr(ReviewDto reviewDto){
 		return reviewDao.rvSelectListUsr(reviewDto);
 	}
-	
+	public int rvSelectListCount(ReviewVo vo) {
+		return reviewDao.rvSelectListCount(vo);
+	}
 
 }

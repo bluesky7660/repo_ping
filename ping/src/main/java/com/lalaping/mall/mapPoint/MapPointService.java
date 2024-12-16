@@ -145,6 +145,9 @@ public class MapPointService {
 	public MapPointDto selectOne(MapPointDto mapPointDto) {
 		return mapPointDao.selectOne(mapPointDto);
 	}
+	public MapPointDto lastPoint() {
+		return mapPointDao.lastPoint();
+	}
 	public MapPointDto selectUsrOne(MapPointDto mapPointDto) {
 		return mapPointDao.selectUsrOne(mapPointDto);
 	}

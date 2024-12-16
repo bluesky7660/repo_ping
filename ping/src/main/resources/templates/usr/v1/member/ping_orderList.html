@@ -120,7 +120,7 @@
                                       <input type="hidden" th:value="${list.odReturnNy}">
                                         
                                 </div>  
-                               <button type="submit" class="card-footer" th:if="${list.spStart != null and list.spStart.after(new java.util.Date())}" >
+                               <button type="submit" class="card-footer" th:if="${list.odReturnNy == 26}" >
                                     <span class="ts-btn-arrow"
                                     >환불하기</span>
                                </button>

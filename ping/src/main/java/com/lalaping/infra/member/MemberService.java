@@ -30,6 +30,9 @@ public class MemberService {
 	public int selectOneCount(MemberVo memberVo) {
 		return memberDao.selectOneCount(memberVo); 
 	}
+	public int listAllCount() {
+		return memberDao.listAllCount(); 
+	}
     
     // Member CRUD
     public int insertMember(MemberDto memberDto) {
