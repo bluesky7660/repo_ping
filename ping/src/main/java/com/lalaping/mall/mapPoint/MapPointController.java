@@ -48,12 +48,12 @@ public class MapPointController {
 		model.addAttribute("listLink", "mapPointXdmList");
 		return "xdm/v1/mapPoint/mapPointXdmForm";
 	}
-	@RequestMapping(value = "/v1/mapPoint/mapPointXdmInst")
-	public String mapPointXdmInst(MapPointDto mapPointDto) {
-		mapPointService.insert(mapPointDto);
-		
-		return "redirect:/v1/mapPoint/mapPointXdmList";
-	}
+//	@RequestMapping(value = "/v1/mapPoint/mapPointXdmInst")
+//	public String mapPointXdmInst(MapPointDto mapPointDto) {
+//		mapPointService.insert(mapPointDto);
+//		
+//		return "redirect:/v1/mapPoint/mapPointXdmList";
+//	}
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmMFom")
 	public String mapPointXdmMFom(Model model,MapPointDto mapPointDto) {
 		model.addAttribute("item",mapPointService.selectOne(mapPointDto));
@@ -135,11 +135,17 @@ public class MapPointController {
 	}
 	
 	@RequestMapping(value = "/mapPointInst")
-	public String mapPointInst(MapPointDto mapPointDto,FishMappointDto fishMappointDto) {
-		mapPointService.insert(mapPointDto);
-		fishMappointService.mappointFishInsert(fishMappointDto);
-		System.out.println("인서트 mpSeq:"+mapPointDto.getMpSeq());
-		return "redirect:/v1/mapPoint/mapPointDetail?seq"+mapPointDto.getMpSeq();
+	public String mapPointInst(MapPointDto mapPointDto,FishMappointDto fishMappointDto){
+		System.out.println("mapPointInst");
+		System.out.println("multipartFiles:"+mapPointDto.getUploadFiles());
+		try {
+			mapPointService.insert(mapPointDto,fishMappointDto);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+//		fishMappointService.mappointFishInsert(fishMappointDto);
+//		System.out.println("인서트 mpSeq:"+mapPointDto.getMpSeq());
+		return "redirect:/v1/mapPoint/mapPointDetail?mpSeq="+mapPointDto.getMpSeq();
 	}
 	@RequestMapping(value = "reviewList")
 	@ResponseBody

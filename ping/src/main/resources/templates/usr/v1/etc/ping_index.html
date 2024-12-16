@@ -222,17 +222,17 @@
                                     <div class="ts-description-lists d-flex flex-wrap justify-content-between">
                                         <dl>
                                             <dt>어종</dt>
-                                            <dd th:text="${ships.fsNameList != null and #strings.length(ships.fsNameList) > 1 ? #strings.substring(ships.fsNameList, 1, #strings.length(ships.fsNameList) - 1) : '전어종'}"></dd>
+                                            <dd th:text="${ships.fsNameList}"></dd>
                                         </dl>
                                         <dl>
                                             <dt>추가서비스</dt>
                                             <dd>
-                                                <i th:classappend="${ships.spRentalNy == 1} ? 'fas fa-check-square' : 'fas fa-times-square'"
-                                                   th:style="${ships.spRentalNy == 1} ? 'color: green;' : 'color: red;'"></i> 낚시대 대여
+                                                <i th:classappend="${ships.spRentalNy == true} ? 'fas fa-check-circle' : 'fas fa-times-circle'"
+                                                   th:style="${ships.spRentalNy == true} ? 'color: green;' : 'color: red;'"></i> 낚시대 대여
                                             </dd>                                            
                                             <dd>
-                                                <i th:classappend="${ships.spEatNy == 1} ? 'fas fa-check-circle' : 'fas fa-times-circle'"
-                                                th:style="${ships.spEatNy == 1} ? 'color: green;' : 'color: red;'"></i> 식사제공
+                                                <i th:classappend="${ships.spEatNy == true} ? 'fas fa-check-circle' : 'fas fa-times-circle'"
+                                                th:style="${ships.spEatNy == true} ? 'color: green;' : 'color: red;'"></i> 식사제공
                                             </dd>
                                         </dl>
                                         <dl>

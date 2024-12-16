@@ -19,7 +19,7 @@
     <link rel="icon" href="/usr/v1/template/themeforest-v1.0/assets/img/favicon.ico">
     
 	<!-- kakao 우편번호 -->
-	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
 	<!-- map 마커 css -->
 	<style>
 	    .map_wrap {position:relative;width:100%;height:350px;}
@@ -84,7 +84,7 @@
 
                     <div class="offset-lg-1 col-lg-10">
 
-                        <form id="form-submit" class="ts-form" action="/mapPointInst" enctype="multipart/form-data">
+                        <form id="form-submit" method="POST" class="ts-form" action="/mapPointInst" enctype="multipart/form-data">
 
                             <!--BASIC INFORMATION
                                 =====================================================================================-->
@@ -127,16 +127,18 @@
                                             <label for="sample5_address">주소</label>
                                             <input type="text" class="form-control validate-this border-right-0" id="sample5_address" name="mpAddress" placeholder="주소" readonly required>
                                             <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+                                            <input type="hidden" id="mpLatitude" name="mpLatitude">
+                                            <input type="hidden" id="mpLongitude" name="mpLongitude">
                                             <!-- <div class="input-group-append" data-toggle="tooltip" data-placement="top" title="Find My Location">
                                                 <a href="" class="input-group-text bg-white border-left-0 ">
                                                     <i class="fa fa-map-marker ts-text-color-primary"></i>
                                                 </a>
                                             </div> -->
                                         </div>
-                                        <div class="input-group">
+                                        <!-- <div class="input-group">
                                             <label for="address_view">포인트 상세주소</label>
                                             <input type="text" id="address_view" class="form-control"/>
-                                        </div>
+                                        </div> -->
                                         <div class="input-group">
                                             <label for="">포인트 종류</label>
                                             <select name="mpType" class="custom-select validate-this valid-gender" id="selectMpType" required>
@@ -176,7 +178,7 @@
                                 <!--File upload-->
                                 <div class="file-upload-previews"></div>
                                 <div class="file-upload">
-                                    <input type="file" name="files[]" class="file-upload-input with-preview" multiple title="Click to add files" maxlength="10" accept="gif|jpg|png">
+                                    <input type="file" name="uploadFiles" class="file-upload-input with-preview" multiple title="Click to add files" maxlength="10" accept="gif|jpg|png">
                                     <span><i class="fa fa-plus-circle"></i>Click or drag images here</span>
                                 </div>
 
@@ -291,6 +293,13 @@
             // 마커를 클릭한 위치에 표시합니다 
             marker.setPosition(mouseEvent.latLng);
             marker.setMap(map);
+            
+            var mpLatitude = document.getElementById("mpLatitude");
+            var mpLongitude = document.getElementById("mpLongitude");
+            
+            // 바닐라js
+            mpLatitude.value = mouseEvent.latLng.getLat();
+            mpLongitude.value = mouseEvent.latLng.getLng();
             address_view.value = !!result[0].road_address ? result[0].road_address.address_name:result[0].address.address_name;
             // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
             infowindow.setContent(content);
@@ -356,6 +365,12 @@
                         // 마커를 결과값으로 받은 위치로 옮긴다.
                         marker.setPosition(coords)
                         marker.setMap(map);
+                        var mpLatitude = document.getElementById("mpLatitude");
+                        var mpLongitude = document.getElementById("mpLongitude");
+                        
+                        // 바닐라js
+                        mpLatitude.value = coords.getLat();
+                        mpLongitude.value = coords.getLng();
                     }
                 });
             }
@@ -440,6 +455,29 @@
 	}
 
     window.addEventListener("load",function() {
+        // $("input.file-upload-input.with-preview").on('change', function() {
+        //     // 모든 동적 input 필드를 disabled로 설정
+        //     $(".file-upload-input").prop('disabled', true);
+        // });
+
+        var fileInput = document.querySelector("input#MultiFile1");
+
+        if (fileInput) {
+            fileInput.addEventListener('change', function() {
+                // 파일 선택 후, 새로 생성된 input[type="file"]을 찾아 disabled 처리
+                setTimeout(function() {
+                    var allFileInputs = document.querySelectorAll("input[type='file']");
+                    
+                    allFileInputs.forEach(function(input) {
+                        // id가 'MultiFile1'인 input은 제외하고, 새로 생성된 input만 disabled 처리
+                        if (input.id !== 'MultiFile1') {
+                            input.disabled = true;
+                        }
+                    });
+                }, 0); // DOM 업데이트 후 처리되도록 setTimeout 사용
+            });
+        }
+
         btnSubmit.onclick = function (){
             
             var objs = document.querySelectorAll(".validate-this");
@@ -493,6 +531,7 @@
                 return false;
             }
             // alert("통과!");
+            form.action = formUrl;
             form.action = formUrl;
             form.submit();
 
