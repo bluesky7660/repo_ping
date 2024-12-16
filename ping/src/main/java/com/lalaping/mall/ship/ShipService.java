@@ -127,5 +127,8 @@ public class ShipService {
 	public List<ShipDto> selectUsrList2(ShipVo vo){
 		return shipDao.selectUsrList2(vo);
 	}
+	public List<ShipDto> selectUsrList3(ShipVo vo){
+		return shipDao.selectUsrList3(vo);
+	}
 
 }

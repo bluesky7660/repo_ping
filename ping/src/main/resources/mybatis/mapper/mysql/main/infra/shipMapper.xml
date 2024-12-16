@@ -61,6 +61,16 @@
                 <when test="shOption == 3 and shOption != null and shOption != ''">
                     AND a.spTotal LIKE CONCAT('%', #{shValue}, '%')
                 </when>
+                <when test="sortOrder == 4 and sortOrder != null and sortOrder != ''">
+				    ORDER BY a.spPrice Desc  <!-- 낮은 가격 순으로 정렬 -->
+				</when>
+				<when test="sortOrder == 5 and sortOrder != null and sortOrder != ''">
+				    ORDER BY a.spPrice Desc  <!-- 높은 가격 순으로 정렬 -->
+				</when>
+				<when test="sortOrder == 6 and sortOrder != null and sortOrder != ''">
+				    ORDER BY a.spStart Desc  <!-- 가까운 날짜 순으로 정렬 -->
+				</when>
+                
             </choose>
         </if>
         <if test="shName != null and !shName.equals('')">AND spName LIKE CONCAT('%', #{shName}, '%')</if>
@@ -146,6 +156,37 @@
 		a.spRegDate Desc
 		<include refid="base.selectListLowerForMysql" />
 	</select>
+	<!-- 낮은가격,높은가격,출발일 배리스트 -->
+	<select id="selectUsrList3">
+		<include refid="base.selectListUpperForMysql" />
+		SELECT
+			a.spSeq
+			,a.spName
+			,a.spPrice
+			,a.spDesc
+			,a.spTotal
+			,a.spRemain
+			,a.spStart
+			,a.spDelNy
+			,a.spArea
+			,a.spEatNy
+			,a.spRentalNy
+			,a.spRegDate
+			,a.port_ptSeq
+			,d.ptName
+			,s.path
+			<!-- ,c.fsSeq
+            ,c.fsName -->
+            ,GROUP_CONCAT(DISTINCT c.fsSeq ORDER BY c.fsSeq) AS fsSeqList
+    		,GROUP_CONCAT(DISTINCT c.fsName ORDER BY c.fsSeq) AS fsNameList
+		<include refid="selectCommon"/>
+		GROUP BY a.spSeq
+		ORDER BY
+		<!-- a.${sortOrderString} -->
+		${sortOrderString}
+		<include refid="base.selectListLowerForMysql" />
+	</select>
+	
 	<select id="portSelectList">
 		<include refid="base.selectListUpperForMysql" />
 		SELECT
@@ -318,7 +359,7 @@
 				SELECT last_insert_id()
 		 	</selectKey>
 	  </insert>
-	  
+	  <!-- 배이미지 -->
 	  <select id="selectUsrList2" resultMap="resultMapObj">
 		SELECT
 			a.spSeq

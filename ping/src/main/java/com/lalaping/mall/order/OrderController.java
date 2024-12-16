@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lalaping.infra.member.MemberDto;
 import com.lalaping.infra.member.MemberService;
+import com.lalaping.mall.ship.ShipService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -16,6 +17,8 @@ public class OrderController {
 	public OrderService orderService;
 	@Autowired
 	public MemberService memberService;
+	@Autowired
+	public ShipService shipService;
 	
 	@RequestMapping(value = "/v1/checkout/ping_checkout")
 	public String ping_checkout(Model model,OrderDto orderDto, HttpSession session, MemberDto memberDto) {
