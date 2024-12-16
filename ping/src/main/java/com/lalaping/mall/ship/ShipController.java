@@ -63,18 +63,25 @@ public class ShipController {
 	/*usr*/
 	@RequestMapping(value = "/v1/ship/shipList")
 	public String shipList(Model model,@ModelAttribute("vo") ShipVo vo ,@ModelAttribute("fishVo") FishVo fishVo){
-		System.out.println("테스트" + vo.getSortOrder());
+		System.out.println("테스트: " + vo.getSortOrder());
 		switch (vo.getSortOrder()) {
-			case 1: {
-			
-				vo.setSortOrderString("spStart Desc");
-				break;
-			}
-			case 2:{
-				vo.setSortOrderString("spPrice Desc");
-				break;
-			}
-		}
+	        case 4: {
+	            vo.setSortOrderString("spPrice ASC");
+	            break;
+	        }
+	        case 5: {
+	            vo.setSortOrderString("spPrice DESC");
+	            break;
+	        }
+	        case 6: {
+	            vo.setSortOrderString("spStart ASC");
+	            break;
+	        }
+	        default: {
+	            vo.setSortOrderString("spPrice ASC"); // 기본적으로 낮은 가격 순 정렬
+	            break;
+	        }
+	    }
 		vo.setParamsPaging(shipService.listCount(vo));
 		System.out.println(vo.getStartPage());
 		System.out.println(vo.getThisPage());
@@ -83,8 +90,8 @@ public class ShipController {
 		System.out.println(vo.getTotalPages());
 		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
 		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
-		model.addAttribute("list",shipService.selectUsrList(vo));	
-		List<ShipDto> shipList = shipService.selectUsrList(vo);
+		model.addAttribute("list",shipService.selectUsrList3(vo));	
+		List<ShipDto> shipList = shipService.selectUsrList3(vo);
 		for (ShipDto ship : shipList) {
 		    System.out.println("Ship Name: " + ship.getSpName());
 		    System.out.println("Ship Capacity: " + ship.getSpTotal());

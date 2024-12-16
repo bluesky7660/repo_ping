@@ -82,12 +82,16 @@
     		,a.spName
     		,a.spStart
     		,a.spSeq
+    		,s.path
    		FROM orders g
    		LEFT JOIN ship a
 		ON g.ship_spSeq = a.spSeq
+		left join imginsert_ship s
+	 	 on s.pSeq = a.spSeq
 		WHERE 1=1
 		AND g.member_mmSeq = #{member_mmSeq}
 		AND !(g.odReturnNy = 28)
+		AND s.sort = 1
     </select>
     <update id="ueleteOrder">
   		UPDATE orders
@@ -111,12 +115,16 @@
     		,a.spName
     		,a.spStart
     		,a.spSeq
+    		,s.path
    		FROM orders g
    		LEFT JOIN ship a
 		ON g.ship_spSeq = a.spSeq
+		left join imginsert_ship s
+	 	on s.pSeq = a.spSeq
 		WHERE 1=1
 		AND g.member_mmSeq = #{member_mmSeq}
 		AND g.odReturnNy = 28
+		AND s.sort = 1
     </select>
     
     <select id="orderList" resultMap="resultMapObj">
