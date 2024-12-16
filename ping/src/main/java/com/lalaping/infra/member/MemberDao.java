@@ -13,6 +13,7 @@ public interface MemberDao {
 	public MemberDto selectOne(MemberDto memberDto);
 	public MemberDto selectUsrOne(MemberDto memberDto);
 	public int listCount(MemberVo memberVo);
+	public int listAllCount();
 
 	public int insertMember(MemberDto memberDto);
 	public int updateMember(MemberDto memberDto);

@@ -28,9 +28,19 @@ public class OrderService {
 	public List<OrderDto> selectListReturn(OrderDto orderDto){
 		 return orderDao.selectListReturn(orderDto);
 	}
+	public List<OrderDto> orderList(OrderDto orderDto){
+		 return orderDao.orderList(orderDto);
+	}
 	
 	public List<OrderDto> allListOrder(){
 		return orderDao.allListOrder();
+	}
+	
+	public int allListOrderCount() {
+		return orderDao.allListOrderCount();
+	}
+	public int orderListCount(OrderDto orderDto) {
+		return orderDao.orderListCount(orderDto);
 	}
 
 }

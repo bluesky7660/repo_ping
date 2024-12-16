@@ -51,11 +51,20 @@
 				,a.member_mmSeq
 				,b.mpTitle
 				,c.mmName
+				,c.mmEmail
 		<include refid="selectCommon"/>
 		GROUP BY a.mrSeq	
    		ORDER BY
      	a.mrRegDate DESC
      	<include refid="base.selectListLowerForMysql"/>
+	</select>
+	<select id="rvSelectListCount" resultType="int">
+			SELECT
+				count(DISTINCT a.mrSeq)
+		<include refid="selectCommon"/>
+		<!-- GROUP BY a.mrSeq	 -->
+   		ORDER BY
+     	a.mrRegDate DESC
 	</select>
 	<insert id="rvinsert">
 		INSERT INTO mpreview(
@@ -82,6 +91,7 @@
 			,a.member_mmSeq
 			,b.mpTitle
 			,c.mmName
+			,c.mmEmail
 		FROM mpreview a
 		LEFT JOIN mappoint b on a.mapPoint_mpSeq = b.mpSeq       
 		LEFT JOIN member c on a.member_mmSeq = c.mmSeq
@@ -127,6 +137,7 @@
 			,a.member_mmSeq
 			,b.mpTitle
 			,c.mmName
+			,c.mmEmail
 		FROM mpreview a
         LEFT JOIN mappoint b on a.mapPoint_mpSeq = b.mpSeq       
 		LEFT JOIN member c on a.member_mmSeq = c.mmSeq

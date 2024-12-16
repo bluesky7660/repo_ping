@@ -96,6 +96,11 @@
         SELECT COUNT(*)
         <include refid="selectCommon" />
     </select>
+    <select id="listAllCount" resultType="int">
+        SELECT COUNT(*)
+        FROM member a
+        LEFT JOIN commoncode c ON a.mmGender = c.cdSeq 
+    </select>
     <insert id="insertMember">
         INSERT INTO member (
 	        mmPasswd,

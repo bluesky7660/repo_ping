@@ -21,6 +21,7 @@ public interface MapPointDao {
 	public int insert(MapPointDto mapPointDto);
 	public MapPointDto selectOne(MapPointDto mapPointDto);
 	public MapPointDto selectUsrOne(MapPointDto mapPointDto);
+	public MapPointDto lastPoint();
 	public int update(MapPointDto mapPointDto);
 	public int uelete(MapPointDto mapPointDto);
 	public int delete(MapPointDto mapPointDto);

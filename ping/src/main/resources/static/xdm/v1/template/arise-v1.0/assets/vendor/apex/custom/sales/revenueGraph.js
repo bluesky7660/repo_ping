@@ -1,6 +1,6 @@
 var options = {
 	chart: {
-		height: 400,
+		height: 300,
 		type: 'area',
 		toolbar: {
 			show: true,
@@ -23,10 +23,10 @@ var options = {
 	},
 	series: [{
 		name: '맵 포인트 생성',
-		data: [1, 4, 5, 10, 2, 3, 2, 10, 3, 4, 6, 9]
+		data: [0, 1, 2, 4, 1, 1, 1, 4, 1, 1, 2, 4]
 	}, {
 		name: '선상낚시 예약',
-		data: [2, 8, 5, 7, 12, 2, 5, 5, 4, 10, 3, 6]
+		data: [2, 3, 5, 3, 2, 2, 5, 1, 4, 3 , 3, 2]
 	}],
 	grid: {
     borderColor: '#e0e6ed',

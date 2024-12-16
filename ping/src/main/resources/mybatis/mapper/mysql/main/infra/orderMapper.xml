@@ -25,6 +25,14 @@
    			left join imginsert_ship s on s.pSeq = a.spSeq and s.sort = 1
 		WHERE 1=1
     </select>
+    <select id="allListOrderCount"  resultType="int">
+    	SELECT COUNT(DISTINCT g.odSeq)
+   		FROM orders g
+   			LEFT JOIN ship a ON g.ship_spSeq = a.spSeq
+   			left join member m on m.mmSeq = g.member_mmSeq
+   			left join imginsert_ship s on s.pSeq = a.spSeq and s.sort = 1
+		WHERE 1=1
+    </select>
     <select id="CheckSelectOne" resultMap="resultMapObj">
     	SELECT
     		a.spSeq
@@ -54,7 +62,7 @@
     	)VALUES(
     		#{odTotalPrice}
     		,#{odCount}
-    		,0
+    		,26
     		,now()
     		,now()
     		,#{spSeq}
@@ -89,7 +97,7 @@
   		UPDATE orders
   		SET	
   			odModDate = now()
-  			,odReturnNy = 1
+  			,odReturnNy = 27
 		WHERE 1=1
 		AND odSeq = #{odSeq}
     </update>
@@ -117,6 +125,35 @@
 		AND g.member_mmSeq = #{member_mmSeq}
 		AND g.odReturnNy = 28
 		AND s.sort = 1
+    </select>
+    
+    <select id="orderList" resultMap="resultMapObj">
+    	SELECT
+    		g.odSeq
+    		,g.odCount
+    		,g.odTotalPrice
+    		,g.odReturnNy
+    		,g.odRegDate
+    		,g.odModDate
+    		,g.ship_spSeq
+    		,g.member_mmSeq
+    		,a.spName
+    		,a.spStart
+    		,a.spSeq
+   		FROM orders g
+   		LEFT JOIN ship a
+		ON g.ship_spSeq = a.spSeq
+		WHERE 1=1
+		AND g.odReturnNy = #{odReturnNy}
+    </select>
+    <select id="orderListCount" resultType="int">
+    	SELECT 
+    		COUNT(DISTINCT g.odSeq)
+   		FROM orders g
+   		LEFT JOIN ship a
+		ON g.ship_spSeq = a.spSeq
+		WHERE 1=1
+		AND g.odReturnNy = #{odReturnNy}
     </select>
     
 </mapper>
