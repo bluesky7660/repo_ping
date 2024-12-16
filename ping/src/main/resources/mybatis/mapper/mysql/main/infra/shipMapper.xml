@@ -39,7 +39,7 @@
             left join port d on d.ptSeq = a.port_ptSeq
             left join imginsert_ship s on s.pSeq = a.spSeq
         WHERE 1=1
-        	AND s.defaultNy = 1
+        	AND s.sort = 1
         <if test="port_ptSeq != null and !port_ptSeq.equals('')">
        		AND a.port_ptSeq = #{port_ptSeq}
         </if>
