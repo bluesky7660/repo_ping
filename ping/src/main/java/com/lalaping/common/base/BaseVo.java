@@ -26,7 +26,7 @@ public class BaseVo {
     private int endPage;					//마지막 페이지 번호
     
     private int startRnumForMysql = 0; 	// 쿼리 시작하는 row[index번호]
-    private int sortOrder = 1;
+    private int sortOrder = 5;
     private String sortOrderString;
     private String shStaff;
     //-------------

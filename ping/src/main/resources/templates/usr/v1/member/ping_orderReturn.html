@@ -87,7 +87,7 @@
                             <!--Row-->
                             <label class="row card ts-item ts-item__list ts-card"  th:each="list:${list}">
                                 <!--Card Image-->
-                                <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
+                                <div class="card-img" th:data-bg-image="${list.path}">
                                 </div>
 
                                 <!--Card Body-->
