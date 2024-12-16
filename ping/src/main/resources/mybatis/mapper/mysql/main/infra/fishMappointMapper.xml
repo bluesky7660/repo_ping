@@ -1,0 +1,22 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lalaping.mall.fishMappoint.FishMappointDao">
+<!-- namespace:mapper와 연결될 dao파일  -->
+<!-- xml에서 주석 단축키 : ctrl + shift + c -->
+
+	<resultMap type="com.lalaping.mall.fishMappoint.FishMappointDto" id="resultMapObj"></resultMap>
+	<insert id="mappointFishInsert">
+		INSERT INTO fishandmappoint(
+			fsOrder
+			,mapPoint_mpSeq
+			,delNy
+			,fish_fsSeq
+		)values(
+			#{fsOrder}
+			,#{mapPoint_mpSeq}
+			,0
+			,#{fish_fsSeq}
+		)
+	</insert>
+</mapper>
+	
