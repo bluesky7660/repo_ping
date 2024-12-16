@@ -391,7 +391,7 @@
                                         <div class="slide" th:each="rvList :${rvList}">
                                             <!--Review-->
                                             <div class="ts-box mb-4 ts-has-talk-arrow">
-                                                <p class="mb-0" th:text="${rvList.mrComment}"</p>
+                                                <p class="mb-0" th:text="${rvList.mrComment}"></p>
                                                 
                                             </div>
                                              <button type="button" onclick="deleteComment(event)" th:if="${session.sessSeqUsr == rvList.member_mmSeq}"><i class="fa fa-trash"></i></button>

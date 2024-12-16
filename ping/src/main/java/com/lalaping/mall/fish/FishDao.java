@@ -20,4 +20,5 @@ public interface FishDao {
 	public int delete(FishDto fishDto);
 	public int listCount(FishVo vo);
 
+
 }
