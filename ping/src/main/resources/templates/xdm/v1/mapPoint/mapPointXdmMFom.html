@@ -320,6 +320,17 @@
 
             // 마커를 클릭한 위치에 표시합니다 
             marker.setPosition(mouseEvent.latLng);
+			var mpLatitude = document.getElementById("mpLatitude");
+			var mpLongitude = document.getElementById("mpLongitude");
+			
+			// 바닐라js
+			mpLatitude.value = mouseEvent.latLng.getLat();
+			mpLongitude.value = mouseEvent.latLng.getLng();
+
+			console.log("latLng :",mouseEvent.latLng);
+			console.log("latLng.qa :",mouseEvent.latLng.qa);
+			console.log("위도(Lat) :",mouseEvent.latLng.getLat());
+			console.log("경도(Lng) :",mouseEvent.latLng.getLng());
             marker.setMap(map);
             address_view.value = !!result[0].road_address ? result[0].road_address.address_name:result[0].address.address_name;
             // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다

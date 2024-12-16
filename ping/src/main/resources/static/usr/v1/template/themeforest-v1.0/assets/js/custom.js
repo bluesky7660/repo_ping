@@ -290,7 +290,7 @@ $(document).ready(function($) {
         });
     });
 
-    if( $("input[type=file].with-preview").length ){
+    if( $("input[name=uploadFiles].with-preview").length ){
         $("input.file-upload-input").MultiFile({
             list: ".file-upload-previews"
         });
