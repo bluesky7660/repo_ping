@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.lalaping.common.util.UtilDateTime;
 import com.lalaping.mall.fish.FishService;
 import com.lalaping.mall.fish.FishVo;
+import com.lalaping.mall.fishMappoint.FishMappointDao;
+import com.lalaping.mall.fishMappoint.FishMappointDto;
+import com.lalaping.mall.fishMappoint.FishMappointService;
 import com.lalaping.mall.review.ReviewDto;
 import com.lalaping.mall.review.ReviewService;
 import com.lalaping.mall.review.ReviewVo;
@@ -28,6 +31,8 @@ public class MapPointController {
 	FishService fishService;
 	@Autowired
 	ReviewService reviewService;
+	@Autowired
+	FishMappointService fishMappointService;
 	
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmList")
 	public String mapPointXdmList(Model model,@ModelAttribute("vo") MapPointVo vo){
@@ -127,6 +132,14 @@ public class MapPointController {
 	    returnMap.put("thisPage", mapPointVo.getThisPage()); 
 	    returnMap.put("totalPages", mapPointVo.getTotalPages());
 		return returnMap;
+	}
+	
+	@RequestMapping(value = "/mapPointInst")
+	public String mapPointInst(MapPointDto mapPointDto,FishMappointDto fishMappointDto) {
+		mapPointService.insert(mapPointDto);
+		fishMappointService.mappointFishInsert(fishMappointDto);
+		System.out.println("인서트 mpSeq:"+mapPointDto.getMpSeq());
+		return "redirect:/v1/mapPoint/mapPointDetail?seq"+mapPointDto.getMpSeq();
 	}
 	@RequestMapping(value = "reviewList")
 	@ResponseBody

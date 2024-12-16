@@ -319,7 +319,8 @@
                                             </dl>
                                             <dl>
                                                 <dt>대상어종</dt>
-                                                <dd th:text="${list.fsNameList != null and #strings.length(list.fsNameList) > 1 ? #strings.substring(list.fsNameList, 1, #strings.length(list.fsNameList) - 1) : '전어종'}"></dd>
+                                                <!-- <dd th:text="${list.fsNameList != null and #strings.length(list.fsNameList) > 1 ? #strings.substring(list.fsNameList, 1, #strings.length(list.fsNameList) - 1) : '전어종'}"></dd> -->
+                                                <dd th:text="${list.fsNameList}"></dd>
                                             </dl>
                                         </div>
                                     </div>

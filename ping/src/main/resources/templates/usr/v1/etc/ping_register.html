@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/font-awesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="/usr/v1/template/themeforest-v1.0/assets/css/style.css">
+    <link rel="stylesheet" href="/xdm/v1/css/datetimepicker/jquery.datetimepicker.min.css">
 
     <!-- dev -->
     <link rel="stylesheet" href="/usr/v1/css/common.css">
@@ -44,8 +45,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Library</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Data</li>
+                        <li class="breadcrumb-item"><a href="#">register</a></li>
                     </ol>
                 </nav>
             </div>
@@ -71,23 +71,20 @@
 
                         <!--LOGIN / REGISTER TABS
                             =========================================================================================-->
-                        <ul class="nav nav-tabs" id="login-register-tabs" role="tablist">
+                        <!-- <ul class="nav nav-tabs" id="login-register_tabs" role="tablist">
 
-                            <!--Login tab-->
                             <li class="nav-item">
                                 <a class="nav-link" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">
                                     <h3>Login</h3>
                                 </a>
                             </li>
-
-                            <!--Register tab-->
                             <li class="nav-item">
-                                <a class="nav-link active" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">
+                                <a class="nav-link active" id="register_tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">
                                     <h3>회원가입</h3>
                                 </a>
                             </li>
 
-                        </ul>
+                        </ul> -->
 
                         <!--TAB CONTENT
                             =========================================================================================-->
@@ -97,70 +94,90 @@
 
                             <!--REGISTER TAB
                                 =====================================================================================-->
-                            <div class="tab-pane active" id="register" role="tabpanel" aria-labelledby="register-tab">
+                            <div class="tab-pane active" id="register" role="tabpanel" aria-labelledby="register_tab">
 
                                 <!--Register tab-->
                                 <form class="ts-form" id="form-register">
 
                                     <!--Name-->
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="register-name" placeholder="한글 이름" required>
+                                    <div class="form-group register_item">
+                                        <label for="register_name">이름</label>
+                                        <div>a
+                                            <input type="text" class="form-control validate-this valid-user-name" id="register_name" name="mmName" placeholder="한글로만 이름을 입력해주세요." required>
+                                        </div>
                                     </div>
 
                                     <!--Email-->
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" id="register-email" placeholder="ex) example@gmail.com" required>
+                                    <div class="form-group register_item">
+                                        <label for="register_email">이메일[아이디]</label>
+                                        <div>
+                                            <input type="email" class="form-control validate-this valid-email" id="register_email" name="mmEmail" placeholder="ex) example@gmail.com" required>
+                                        </div>
                                     </div>
 
                                     <!--Password-->
-                                    <div class="input-group ts-has-password-toggle">
-                                        <input type="password" class="form-control border-right-0" placeholder="ex) 123456abc@!" required>
-                                        <div class="input-group-append">
-                                            <a href="javascript:void(0);" class="input-group-text bg-white border-left-0 ts-password-toggle">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
+                                    <div class="ts-has-password-toggle register_item">
+                                        <label for="register_passwd">비밀번호</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control signup_password validate-this valid-password" id="register_passwd" name="mmPasswd" placeholder="ex) 123456abc@!" required>
+                                            <div class="input-group-append">
+                                                <a href="javascript:void(0);" class="input-group-text ts-password-toggle">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            </div>
                                         </div>
+                                        
                                     </div>
                                     <p class="ts-text-small">※ 8~15자 사이여야 하며, 최소 1개의 숫자, 영문자, 특수문자를 포함해야 합니다.</p>
 
                                     <!--Repeat Password-->
-                                    <div class="input-group ts-has-password-toggle">
-                                        <input type="password" class="form-control border-right-0" placeholder="Repeat Password" required>
-                                        <div class="input-group-append">
-                                            <a href="javascript:void(0);" class="input-group-text bg-white border-left-0 ts-password-toggle">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
+                                    <div class="ts-has-password-toggle register_item">
+                                        <label for="register_passwdChk">비밀번호 확인</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control signup_password validate-this valid-passwordCk" id="register_passwdChk" placeholder="Repeat Password" required>
+                                            <div class="input-group-append">
+                                                <a href="javascript:void(0);" class="input-group-text ts-password-toggle">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <!--Gender-->
-                                    <div class="form-group">
-                                        <select class="custom-select border-left" id="register-gender" name="gender" required>
-                                            <option value="">성별을 선택하세요.</option>
-                                            <option value="1">남성</option>
-                                            <option value="2">여성</option>
-                                            <option value="3">기타</option>
-                                        </select>
+                                    <div class="form-group register_item">
+                                        <label for="register_gender">성별</label>
+                                        <div>
+                                            <select class="custom-select validate-this valid-gender" id="register_gender" name="gender" required>
+                                                <option value="">성별을 선택하세요.</option>
+                                                <option th:each="gender: ${@codeService.selectListCachedCode(1)}" th:value="${gender.cdSeq}" th:text="${gender.cdName}"></option>
+                                            </select>
+                                        </div>
                                     </div>
 
                                     <!--Tel-->
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="register-tel" placeholder="ex) 01012345678" required>
+                                    <div class="form-group register_item">
+                                        <label for="register_tel">핸드폰 번호</label>
+                                        <div>
+                                            <input type="text" class="form-control validate-this valid-phone-num" id="register_tel" name="mmTel" placeholder="ex) 01012345678" required>
+                                        </div>
                                     </div>
 
                                     <!--BirthDay-->
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="register-birthDay" placeholder="ex) 1999-11-11" required>
+                                    <div class="form-group register_item">
+                                        <label for="register_birthDay">생년월일</label>
+                                        <div>
+                                            <input type="text" class="form-control signup_dateOfBirth valid-birth-num form-control validate-this" id="register_birthDay" name="mmBirthDay" placeholder="ex) 1999-11-11" required>
+                                        </div>
                                     </div>
 
                                     <!--Checkbox-->
                                     <!-- <div class="custom-control custom-checkbox mb-4">
-                                        <input type="checkbox" class="custom-control-input" id="register-check" required>
-                                        <label class="custom-control-label" for="register-check">I Agree With <a href="ja" class="btn-link">Terms and Conditions</a></label>
+                                        <input type="checkbox" class="custom-control-input" id="register_check" required>
+                                        <label class="custom-control-label" for="register_check">I Agree With <a href="ja" class="btn-link">Terms and Conditions</a></label>
                                     </div> -->
 
                                     <!--Submit button-->
-                                    <button type="button" class="btn btn-primary">회원가입</button>
+                                    <button id="signupBtn" type="button" class="btn btn-primary">회원가입</button>
 
                                 </form>
 
@@ -195,7 +212,16 @@
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
 <script src="/usr/v1/js/script.js"></script>
-
+<script>
+    window.addEventListener('load',function() {
+        $.datetimepicker.setLocale('ko');
+        $("#register_birthDay").datetimepicker({
+            timepicker:false,
+            format:'Y-m-d'
+        });
+    })
+</script>
 </body>
 </html>

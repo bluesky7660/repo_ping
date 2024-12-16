@@ -28,5 +28,9 @@ public class OrderService {
 	public List<OrderDto> selectListReturn(OrderDto orderDto){
 		 return orderDao.selectListReturn(orderDto);
 	}
+	
+	public List<OrderDto> allListOrder(){
+		return orderDao.allListOrder();
+	}
 
 }

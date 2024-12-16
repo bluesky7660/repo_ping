@@ -46,6 +46,31 @@ img[alt="날씨이미지"]{
     text-align: center;
 }
 
+.is-invalid + .invalid-feedback{
+    display: block;
+}
+.ts-password-toggle{
+    background-color: transparent;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 3;
+    border: none;
+}
+.register_item .input-group .signup_password{
+    border-radius: .1875rem;
+    border-top-right-radius:.1875rem;
+    border-bottom-right-radius:.1875rem;
+}
+.ts-has-password-toggle{
+    margin-bottom: 1.5rem;
+}
+.ts-has-password-toggle .input-group{
+    margin-bottom: 0;
+}
+
+
 /*index 제철 낚시 포인트*/
 .seasonalTabs  ul{
     width: 100%;

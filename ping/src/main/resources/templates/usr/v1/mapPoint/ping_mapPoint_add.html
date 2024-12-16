@@ -84,7 +84,7 @@
 
                     <div class="offset-lg-1 col-lg-10">
 
-                        <form id="form-submit" class="ts-form">
+                        <form id="form-submit" class="ts-form" action="/mapPointInst" enctype="multipart/form-data">
 
                             <!--BASIC INFORMATION
                                 =====================================================================================-->
@@ -99,7 +99,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="title">포인트 제목</label>
-                                            <input type="text" class="form-control" id="title" name="title" required>
+                                            <input type="text" class="form-control" id="title" name="mpTitle" required>
                                         </div>
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@
                                 <!--Description-->
                                 <div class="col">
                                     <label for="description">포인트 설명</label>
-                                    <textarea class="form-control" id="description" rows="4" name="description"></textarea>
+                                    <textarea class="form-control" id="description" rows="4" name="mpText" required></textarea>
                                 </div>
                             </section>
 
@@ -125,19 +125,24 @@
                                         <!--주소 검색-->
                                         <div class="input-group">
                                             <label for="sample5_address">주소</label>
-                                            <input type="text" class="form-control border-right-0" id="sample5_address" placeholder="주소" readonly>
+                                            <input type="text" class="form-control validate-this border-right-0" id="sample5_address" name="mpAddress" placeholder="주소" readonly required>
                                             <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
-<!-- 											<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div> -->
-                                            
-                                            <div class="input-group-append" data-toggle="tooltip" data-placement="top" title="Find My Location">
+                                            <!-- <div class="input-group-append" data-toggle="tooltip" data-placement="top" title="Find My Location">
                                                 <a href="" class="input-group-text bg-white border-left-0 ">
                                                     <i class="fa fa-map-marker ts-text-color-primary"></i>
                                                 </a>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="input-group">
                                             <label for="address_view">포인트 상세주소</label>
                                             <input type="text" id="address_view" class="form-control"/>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="">포인트 종류</label>
+                                            <select name="mpType" class="custom-select validate-this valid-gender" id="selectMpType" required>
+                                                <option value="">종류를 선택하세요</option>
+                                                <option th:each="option:${@codeService.selectListCachedCode(2)}" th:value="${option.cdSeq}" th:text="${option.cdName}"></option>
+                                            </select>
                                         </div>
                                     </div>
                                     <!--end col-md-6-->
@@ -184,12 +189,6 @@
                                 <!--Title-->
                                 <h3 class="text-muted border-bottom">추가 정보</h3>
 
-                                <!--Row-->
-                                <div class="row">
-
-                                </div>
-                                <!--end row-->
-
                                 <!-- <div id="features-checkboxes"> -->
                                 <div id="fishList-checkboxes" class="fishList-checkboxes">
                                     <h6 class="mb-3">잡히는 어종</h6>
@@ -215,7 +214,7 @@
                             <hr>
 
                             <section class="py-3">
-                                <button type="submit" onclick="window.location='/v1/mapPoint/mapPointDetail?mpSeq=1'" class="btn btn-primary ts-btn-arrow btn-lg float-right">
+                                <button type="type" id="btnSubmit" class="btn btn-primary ts-btn-arrow btn-lg float-right">
                                     <i class="fa fa-save mr-2"></i>포인트 생성
                                 </button>
                             </section>
@@ -326,7 +325,7 @@
         for(var i = 0; i < result.length; i++) {
             // 행정동의 region_type 값은 'H' 이므로
             if (result[i].region_type === 'H') {
-                infoDiv.innerHTML = result[i].address_name;
+                // infoDiv.innerHTML = result[i].address_name;
                 break;
             }
         }
@@ -438,8 +437,67 @@
 	    
 	    // 지도 중심좌표를 접속위치로 변경합니다
 	    map.setCenter(locPosition);      
-	}       
-</script>
+	}
 
+    window.addEventListener("load",function() {
+        btnSubmit.onclick = function (){
+            
+            var objs = document.querySelectorAll(".validate-this");
+            var i= 0;
+            var validateChk = false;
+            for(let element of objs){
+                console.log("element:",element);
+                var objValue = element.value.trim();
+                const feedback = element.parentElement.querySelector(".invalid-feedback");
+                if (objValue == "" || objValue == null) {
+                    // var waring = feedback.textContent.trim();
+                    if(element.tagName ==='INPUT'){
+                        console.log("테스트:",inputNullText);
+                        console.log("feedback:"+feedback);
+                        feedback.textContent = inputNullText;
+                        // alert(inputNullText);
+                    }else if(element.tagName ==='SELECT'){
+                        feedback.textContent = selectNullText;
+                        // alert(selectNullText);
+                    }
+                    
+                    
+                    if(i==0){
+                        element.focus();
+                    }
+                    i++;
+                    validateChk = false;
+                    element.classList.add('is-invalid');
+                } else {
+                    //by pass
+                    var val  = RegExps(element,objValue,feedback);
+                    console.log("체크");
+                    if(val == true){
+                        validateChk = true;
+                        element.classList.remove('is-invalid');
+                        element.classList.add('is-valid');
+                    }else{
+                        // feedback.textContent = codeRegExpText;
+                        if(i==0){
+                            element.focus();
+                        }
+                        i++;
+                        validateChk = false;
+                        element.classList.add('is-invalid');
+                    }
+                    
+                }
+            };
+            if(validateChk == false){
+                alert("검사실패");
+                return false;
+            }
+            // alert("통과!");
+            form.action = formUrl;
+            form.submit();
+
+        }
+    })
+</script>
 </body>
 </html>

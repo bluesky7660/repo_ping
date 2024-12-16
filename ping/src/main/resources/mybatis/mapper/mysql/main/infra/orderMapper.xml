@@ -4,7 +4,27 @@
 <mapper namespace="com.lalaping.mall.order.OrderDao">
 
     <resultMap type="com.lalaping.mall.order.OrderDto" id="resultMapObj"></resultMap>
-    
+    <select id="allListOrder" resultMap="resultMapObj">
+    	SELECT
+    		g.odSeq
+    		,g.odCount
+    		,g.odTotalPrice
+    		,g.odReturnNy
+    		,g.odRegDate
+    		,g.ship_spSeq
+    		,g.member_mmSeq
+    		,a.spName
+    		,a.spStart
+    		,a.spSeq
+    		,m.mmName
+    		,m.mmEmail
+    		,s.path
+   		FROM orders g
+   			LEFT JOIN ship a ON g.ship_spSeq = a.spSeq
+   			left join member m on m.mmSeq = g.member_mmSeq
+   			left join imginsert_ship s on s.pSeq = a.spSeq and s.sort = 1
+		WHERE 1=1
+    </select>
     <select id="CheckSelectOne" resultMap="resultMapObj">
     	SELECT
     		a.spSeq
@@ -59,7 +79,7 @@
 		ON g.ship_spSeq = a.spSeq
 		WHERE 1=1
 		AND g.member_mmSeq = #{member_mmSeq}
-		AND g.odReturnNy = 0
+		AND !(g.odReturnNy = 28)
     </select>
     <update id="ueleteOrder">
   		UPDATE orders
@@ -88,7 +108,7 @@
 		ON g.ship_spSeq = a.spSeq
 		WHERE 1=1
 		AND g.member_mmSeq = #{member_mmSeq}
-		AND g.odReturnNy = 1
+		AND g.odReturnNy = 28
     </select>
     
 </mapper>

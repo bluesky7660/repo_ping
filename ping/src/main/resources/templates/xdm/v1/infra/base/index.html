@@ -94,8 +94,8 @@
 									<i class="bi bi-pie-chart"></i>
 								</div>
 								<div class="sale-details">
-									<h3 class="text-red">250k</h3>
-									<p>선상낚시 예약</p>
+									<p class="text-red">250k</p>
+									<h3>선상낚시 예약</h3>
 								</div>
 							</div>
 						</div>
@@ -105,8 +105,8 @@
 									<i class="bi bi-emoji-smile"></i>
 								</div>
 								<div class="sale-details">
-									<h3 class="text-blue">24m</h3>
-									<p>회원</p>
+									<p class="text-blue">24m</p>
+									<h3>총 회원</h3>
 								</div>
 							</div>
 						</div>
@@ -116,8 +116,8 @@
 									<i class="bi bi-box-seam"></i>
 								</div>
 								<div class="sale-details">
-									<h3 class="text-yellow">15k</h3>
-									<p>맵 포인트</p>
+									<p class="text-yellow">15k</p>
+									<h3>총 맵 포인트</h3>
 								</div>
 							</div>
 						</div>
@@ -127,8 +127,8 @@
 									<i class="bi bi-handbag"></i>
 								</div>
 								<div class="sale-details">
-									<h3 class="text-green">180m</h3>
-									<p>배</p>
+									<p class="text-green">180m</p>
+									<h3>배</h3>
 								</div>
 							</div>
 						</div>
@@ -198,12 +198,13 @@
 								</div>
 
 							</div>
-							<div class="col-xxl-3  col-sm-12 col-12" id="latest_mapPoint">
+							<div class="col-xxl-3  col-sm-12 col-12 latest_mapPoint" id="latest_mapPoint">
 
 								<div class="card">
 									<div class="card-header">
-										<div class="card-title">
-											<h3>최신 낚시 포인트</h3>
+										<div class="card-title d-flex justify-content-between align-items-center">
+											<h3 class="m-0">최신 낚시 포인트</h3>
+											<button type="button" class="btn btn-info" onclick="window.location='/v1/mapPoint/mapPointXdmList'">맵 포인트 목록</button>
 										</div>
 									</div>
 									<div class="card-body">
@@ -224,146 +225,114 @@
 					<!-- Row end -->
 
 					<!-- Row start -->
-					<!-- <div class="row">
-							<div class="col-12">
-								<div class="card">
-									<div class="card-header">
-										<div class="card-title">Orders</div>
-									</div>
-									<div class="card-body">
+					<div class="row" >
+						<div class="col-xxl-7  col-sm-12 col-12 orderAllList">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">선상낚시 예약목록</div>
+								</div>
+								<div class="card-body">
 
-										<div class="table-responsive">
-											<table class="table v-middle">
-												<thead>
-													<tr>
-														<th>Customer</th>
-														<th>Product</th>
-														<th>User ID</th>
-														<th>Ordered Placed</th>
-														<th>Amount</th>
-														<th>Payment Status</th>
-														<th>Order Status</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>
-															<div class="media-box">
-																<img src="/xdm/v1/template/arise-v1.0/assets/images/user3.png" class="media-avatar" alt="Bootstrap Gallery">
-																<div class="media-box-body">
-																	<div class="text-truncate">Ellie Collins</div>
-																</div>
+									<div class="table-responsive">
+										<table class="table v-middle">
+											<thead>
+												<tr>
+													<th>회원 이름</th>
+													<th>회원 ID</th>
+													<th>배 이름</th>
+													<th>예약 날짜</th>
+													<th>가격</th>
+													<th>예약상태</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="order : ${orderList}">
+													<td>
+														<div class="media-box">
+															<!-- <img src="/xdm/v1/template/arise-v1.0/assets/images/user3.png" class="media-avatar" alt="Bootstrap Gallery"> -->
+															<div class="media-box-body">
+																<div class="text-truncate" th:text="${order.mmName}"></div>
 															</div>
-														</td>
-														<td>
-															<div class="media-box">
-																<img src="/xdm/v1/template/arise-v1.0/assets/images/food/img3.jpg" class="media-avatar" alt="Admin Themes">
-																<div class="media-box-body">
-																	<div class="text-truncate">Ginger Snacks</div>
-																</div>
+														</div>
+													</td>
+													<td th:text="${order.mmEmail}"></td>
+													<td>
+														<div class="media-box">
+															<img th:src="${order.path}" class="media-avatar" th:alt="${order.spName+' 이미지'}">
+															<div class="media-box-body">
+																<div class="text-truncate" th:text="${order.spName}"></div>
 															</div>
-														</td>
-														<td>Arise827</td>
-														<td>12/12/2021</td>
-														<td>$18.00</td>
-														<td>
-															<span class="text-green td-status"><i class="bi bi-check-circle"></i> Paid</span>
-														</td>
-														<td>
-															<span class="badge shade-green min-90">Delivered</span>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<div class="media-box">
-																<img src="/xdm/v1/template/arise-v1.0/assets/images/user.png" class="media-avatar" alt="Bootstrap Gallery">
-																<div class="media-box-body">
-																	<div class="text-truncate">Sophie Nguyen</div>
-																</div>
-															</div>
-														</td>
-														<td>
-															<div class="media-box">
-																<img src="/xdm/v1/template/arise-v1.0/assets/images/food/img6.jpg" class="media-avatar" alt="Admin Themes">
-																<div class="media-box-body">
-																	<div class="text-truncate">Guava Sorbet</div>
-																</div>
-															</div>
-														</td>
-														<td>Arise253</td>
-														<td>18/12/2021</td>
-														<td>$32.00</td>
-														<td>
-															<span class="text-red td-status"><i class="bi bi-x-circle"></i> Failed</span>
-														</td>
-														<td>
-															<span class="badge shade-red min-90">Cancelled</span>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<div class="media-box">
-																<img src="/xdm/v1/template/arise-v1.0/assets/images/user4.png" class="media-avatar" alt="Bootstrap Gallery">
-																<div class="media-box-body">
-																	<div class="text-truncate">Darcy Ryan</div>
-																</div>
-															</div>
-														</td>
-														<td>
-															<div class="media-box">
-																<img src="/xdm/v1/template/arise-v1.0/assets/images/food/img5.jpg" class="media-avatar" alt="Admin Themes">
-																<div class="media-box-body">
-																	<div class="text-truncate">Gooseberry Surprise</div>
-																</div>
-															</div>
-														</td>
-														<td>Arise878</td>
-														<td>22/12/2021</td>
-														<td>$19.00</td>
-														<td>
-															<span class="text-blue td-status"><i class="bi bi-clock-history"></i> Awaiting</span>
-														</td>
-														<td>
-															<span class="badge shade-blue min-90">Processing</span>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<div class="media-box">
-																<img src="/xdm/v1/template/arise-v1.0/assets/images/user3.png" class="media-avatar" alt="Bootstrap Gallery">
-																<div class="media-box-body">
-																	<div class="text-truncate">Ellie Collins</div>
-																</div>
-															</div>
-														</td>
-														<td>
-															<div class="media-box">
-																<img src="/xdm/v1/template/arise-v1.0/assets/images/food/img3.jpg" class="media-avatar" alt="Admin Themes">
-																<div class="media-box-body">
-																	<div class="text-truncate">Ginger Snacks</div>
-																</div>
-															</div>
-														</td>
-														<td>Arise827</td>
-														<td>12/12/2021</td>
-														<td>$18.00</td>
-														<td>
-															<span class="text-green td-status"><i class="bi bi-check-circle"></i> Paid</span>
-														</td>
-														<td>
-															<span class="badge shade-green min-90">Delivered</span>
-														</td>
-													</tr>
-													
-												</tbody>
-												
-											</table>
-										</div>
-
+														</div>
+													</td>
+													<td th:text="${#dates.format(order.odRegDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+													<td th:text="${#numbers.formatInteger(order.odTotalPrice,3,'COMMA')+'원'}"></td>
+													<!-- <td>
+														<span class="text-green td-status"><i class="bi bi-check-circle"></i> Paid</span>
+													</td> -->
+													<td>
+														<span th:class="${order.odReturnNy == 26 ? 'badge shade-blue min-90' : 
+																		order.odReturnNy == 27 ? 'badge shade-green min-90' :
+																		order.odReturnNy == 28 ? 'badge shade-red min-90' :'' }" 
+																th:text="${@codeService.selectOneCachedCode(order.odReturnNy)}"
+																			>
+														</span>
+													</td>
+												</tr>
+											</tbody>
+											
+										</table>
 									</div>
+
 								</div>
 							</div>
-						</div> -->
+						</div>
+						<div class="col-xxl-5  col-sm-12 col-12 pointReview">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">맵 포인트 리뷰</div>
+								</div>
+								<div class="card-body">
+
+									<div class="table-responsive">
+										<table class="table v-middle">
+											<thead>
+												<tr>
+													<th>회원 이름</th>
+													<th>회원 ID</th>
+													<th>포인트 이름</th>
+													<th>작성일</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="order : ${orderList}">
+													<td>
+														<div class="media-box">
+															<!-- <img src="/xdm/v1/template/arise-v1.0/assets/images/user3.png" class="media-avatar" alt="Bootstrap Gallery"> -->
+															<div class="media-box-body">
+																<div class="text-truncate" th:text="${order.mmName}"></div>
+															</div>
+														</div>
+													</td>
+													<td th:text="${order.mmEmail}"></td>
+													<td>
+														<div class="media-box">
+															<img th:src="${order.path}" class="media-avatar" th:alt="${order.spName+' 이미지'}">
+															<div class="media-box-body">
+																<div class="text-truncate" th:text="${order.spName}"></div>
+															</div>
+														</div>
+													</td>
+													<td th:text="${#dates.format(order.odRegDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+												</tr>
+											</tbody>
+											
+										</table>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
 					<!-- Row end -->
 
 					<!-- Row start -->

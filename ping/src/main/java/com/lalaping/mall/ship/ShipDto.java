@@ -36,8 +36,10 @@ public class ShipDto extends FileDto {
 	private Double ptLatitude;
 	
 //	private List<FishDto> fishList;
-	private List<String> fsSeqList;
-	private List<String> fsNameList;
+//	private List<String> fsSeqList;
+//	private List<String> fsNameList;
+	private String fsSeqList;
+	private String fsNameList;
 	private String fsNames;
 	
 //	-------------------------------
@@ -57,12 +59,7 @@ public class ShipDto extends FileDto {
 	public void setFsNames(String fsNames) {
 		this.fsNames = fsNames;
 	}
-	public void setFsSeqList(List<String> fsSeqList) {
-		this.fsSeqList = fsSeqList;
-	}
-	public void setFsNameList(List<String> fsNameList) {
-		this.fsNameList = fsNameList;
-	}
+	
 	public void setFsSeq(String fsSeq) {
 		this.fsSeq = fsSeq;
 	}
@@ -144,27 +141,39 @@ public class ShipDto extends FileDto {
 	public void setPort_ptSeq(String port_ptSeq) {
 		this.port_ptSeq = port_ptSeq;
 	}
-
-	public List<String> getFsSeqList() {
+//	public List<String> getFsSeqList() {
+//		return fsSeqList;
+//	}
+//	public void setFsSeqList(String fsSeqList) {
+//        if (fsSeqList != null && !fsSeqList.isEmpty()) {
+//            this.fsSeqList = Arrays.asList(fsSeqList.split(","));
+//        } else {
+//            this.fsSeqList = new ArrayList<>();
+//        }
+//    }
+//	public List<String> getFsNameList() {
+//		return fsNameList;
+//	}
+//	public void setFsNameList(String fsNameList) {
+//        if (fsNameList != null && !fsNameList.isEmpty()) {
+//            this.fsNameList = Arrays.asList(fsNameList.split(","));
+//        } else {
+//            this.fsNameList = new ArrayList<>();
+//        }
+//    }
+	
+	public String getFsSeqList() {
 		return fsSeqList;
 	}
 	public void setFsSeqList(String fsSeqList) {
-        if (fsSeqList != null && !fsSeqList.isEmpty()) {
-            this.fsSeqList = Arrays.asList(fsSeqList.split(","));
-        } else {
-            this.fsSeqList = new ArrayList<>();
-        }
-    }
-	public List<String> getFsNameList() {
+		this.fsSeqList = fsSeqList;
+	}
+	public String getFsNameList() {
 		return fsNameList;
 	}
 	public void setFsNameList(String fsNameList) {
-        if (fsNameList != null && !fsNameList.isEmpty()) {
-            this.fsNameList = Arrays.asList(fsNameList.split(","));
-        } else {
-            this.fsNameList = new ArrayList<>();
-        }
-    }
+		this.fsNameList = fsNameList;
+	}
 	public String getPtName() {
 		return ptName;
 	}

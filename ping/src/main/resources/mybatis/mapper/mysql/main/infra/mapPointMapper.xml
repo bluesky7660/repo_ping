@@ -273,6 +273,8 @@
     		,mpText
     		,mpAddress
     		,mpType
+    		,mpLatitude
+    		,mpLongitude
     		,mpDelNy
     		,mpRegDate
     	)VALUES(
@@ -280,9 +282,15 @@
     		,#{mpText}
     		,#{mpAddress}
     		,#{mpType}
+    		,#{mpLatitude}
+    		,#{mpLongitude}
     		,0
     		,now()
     	)
+    	<selectKey resultType="String" keyProperty="mpSeq"
+			order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
     </insert>
     
     <select id="selectOne">

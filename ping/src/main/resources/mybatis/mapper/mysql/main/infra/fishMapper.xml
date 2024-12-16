@@ -158,4 +158,18 @@
         AND fsSeq = #{fsSeq}
 	</delete>
 	
+	<insert id="mappointFishInsert">
+		INSERT INTO fishandmappoint(
+			fsOrder
+			,mapPoint_mpSeq
+			,delNy
+			,fish_fsSeq
+		)values(
+			#{fsOrder}
+			,#{mapPoint_mpSeq}
+			,0
+			,#{fish_fsSeq}
+		)	
+	</insert>
+	
 </mapper>

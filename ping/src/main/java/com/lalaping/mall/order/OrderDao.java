@@ -12,5 +12,7 @@ public interface OrderDao {
 	public List<OrderDto> selectListOrder(OrderDto orderDto);
 	public int ueleteOrder(OrderDto orderDto);
 	public List<OrderDto> selectListReturn(OrderDto orderDto);
+	
+	public List<OrderDto> allListOrder();
 
 }

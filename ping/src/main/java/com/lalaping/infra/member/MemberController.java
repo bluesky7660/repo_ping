@@ -131,7 +131,6 @@ public class MemberController {
 //			httpSession.setAttribute("sessIdXdm", rtLogin.getMmEmail()); 
 //			httpSession.setAttribute("sessSeqXdm", rtLogin.getMmSeq()); 
 //			httpSession.setAttribute("sessNameXdm", rtLogin.getMmName());
-//
 //			returnMap.put("rt", "success"); 
 		} else { 
 			System.out.println("로그인 실패: " + memberDto.getMmEmail()); 
@@ -159,6 +158,16 @@ public class MemberController {
 	@RequestMapping(value = "/v1/register")
 	public String register() {
 		return "usr/v1/etc/ping_register";
+	}
+	@RequestMapping(value = "registerInst")
+	@ResponseBody
+	public Map<String, Object> registerInst(MemberDto memberDto) {
+		
+		Map<String, Object> returnMap = new HashMap<>();
+		memberDto.setMmPasswd(encodeBcrypt(memberDto.getMmPasswd(), 10));
+		memberService.insertMember(memberDto);
+		returnMap.put("rt", "success");
+		return returnMap;
 	}
 	@RequestMapping(value = "/v1/member/editMember")
 	public String editMember(Model model, MemberDto memberDto, HttpSession session) {
