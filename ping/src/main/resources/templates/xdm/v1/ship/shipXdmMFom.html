@@ -153,23 +153,29 @@
 													</div> -->
 													<div class="mb-3">
 														<label for="selectspArea" class="form-label">지역</label>
-														<select class="form-select" id="selectspArea" name="spArea">
+														<select class="form-select" id="inputspArea" name="spArea" required>
 															<option value="" selected>지역을 선택하세요</option>
-															<option th:each="list : ${@codeService.selectListCachedCode(5)}" th:value="${list.cdSeq}" th:text="${list.cdName}" th:selected="${list.cdSeq} == ${item.spArea}"></option>
+															<option th:each="list : ${@codeService.selectListCachedCode(4)}" th:value="${list.cdSeq}" th:text="${list.cdName}" th:selected="${list.cdSeq} == ${item.spArea}"></option>
 														</select>
 													</div>
 												</div>
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+<!-- 													<div class="mb-3"> -->
+<!-- 														<label for="inputCodeOrder" class="form-label">항구명</label>   -->
+<!-- 														<input type="text" class="form-control" id="inputport_ptSeq" name="port_ptSeq" th:value="${item.port_ptSeq}" placeholder="주소입력" required> -->
+														
 													<div class="mb-3">
-														<label for="inputCodeOrder" class="form-label">항구명</label>
-														<input type="text" class="form-control" id="inputport_ptSeq" name="port_ptSeq" th:value="${item.port_ptSeq}" placeholder="주소입력" required>
+														<label for="selectptArea" class="form-label">항구명</label>
+														<select class="form-select" id="port_ptSeq" name="port_ptSeq" required>
+															<option value="" selected>항구명을 선택하세요</option>
+															<option th:each="list : ${item.ptName}" th:value="${item.port_ptSeq}" th:text="${item.ptName}" th:selected="${item.port_ptSeq} == ${item.ptSeq}"></option>
+														</select>
+													</div>
 														<div class="invalid-feedback">
-															항구명를 적어주세요.
+															항구명을 적어주세요
 														</div>
 													</div>
 												</div>
-												
-											</div>
 											
 											<div class="row">
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
