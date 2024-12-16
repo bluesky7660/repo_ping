@@ -427,492 +427,492 @@
                             </div>
                             <!--end row -->
                             <!--Row-->
-                            <div class="row" id="local_weather">
-                                <h4>지역 날씨</h4>
-                                <table class="table">
-                                    <tr>
-                                        <th th:text="${#dates.format(new java.util.Date(), 'MM.dd')}"></th>
-                                        <th>날씨</th>
-                                        <th>기온</th>
-                                        <th>풍향</th>
-                                        <th>풍속</th>
-                                        <th>파고</th>
-                                        <th>파향</th>
-                                        <th>파주기(초)</th>
-                                        <th>강수확률</th>
-                                        <th>강수량</th>
-                                        <th>습도</th>
-                                    </tr>
-                                    <tr th:each="weather:${weatherData}">
-                                        <td>
-                                            <div>
-                                                <p th:text="${#strings.substring(weather.time, 11,13)+'시'}"></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div class="icon_box weatherIcon">
-                                                    <!-- <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/> -->
-                                                    <i th:class="${weather.weatherIcon}"></i>
-                                                </div>
-                                                <p th:text="${weather.weatherName}"></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span th:text="${weather.temperature}"></span>* C</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div class="icon_box windDirectionIcon">
-                                                    <!-- <img src="/usr/v1/template/themeforest-v1.0/assets/img/NE1.png" alt="풍향이미지"> -->
-                                                    <i th:class="${weather.windDirectionIcon}"></i>
-                                                </div>
-                                                <p th:text="${weather.windDirection}"></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span th:text="${weather.windSpeed}"></span> m/s</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span th:text="${weather.waveHeight}"></span> m</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div class="icon_box waveDirectionIcon">
-                                                    <!-- <img src="/usr/v1/template/themeforest-v1.0/assets/img/NNE.png" alt="파향이미지"> -->
-                                                    <i th:class="${weather.waveDirectionIcon}"></i>
-                                                </div>
-                                                <p th:text="${weather.waveDirection}"></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span th:text="${weather.wavePeriod}"></span> /s</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span th:text="${weather.precipitationProbability}"></span> %</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span th:text="${weather.precipitation!=null? weather.precipitation+'mm':'-'}"></span></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span th:text="${weather.relativeHumidity}"></span> %</p>
-                                            </div>
-                                        </td>
-                                    <!-- </tr>
-                                    <tr>
-                                        <td>
-                                            <div>
-                                                <p>06시</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
-                                                </div>
-                                                <p>맑음</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>2</span>* C</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/NE1.png" alt="풍향이미지">
-                                                </div>
-                                                <p>북동</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>1.8</span> m/s</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>0.27</span> m</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/NNE.png" alt="파향이미지">
-                                                </div>
-                                                <p>북북동</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>2.36</span> /s</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>0</span> %</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>-</span></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>80</span> %</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div>
-                                                <p>09시</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
-                                                </div>
-                                                <p>맑음</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>2</span>* C</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/NE1.png" alt="풍향이미지">
-                                                </div>
-                                                <p>북동</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>1.8</span> m/s</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>0.27</span> m</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/NNE.png" alt="파향이미지">
-                                                </div>
-                                                <p>북북동</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>2.36</span> /s</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>0</span> %</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>-</span></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>80</span> %</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div>
-                                                <p>12시</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
-                                                </div>
-                                                <p>맑음</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>2</span>* C</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/NE1.png" alt="풍향이미지">
-                                                </div>
-                                                <p>북동</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>1.8</span> m/s</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>0.27</span> m</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/NNE.png" alt="파향이미지">
-                                                </div>
-                                                <p>북북동</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>2.36</span> /s</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>0</span> %</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>-</span></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>80</span> %</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div>
-                                                <p>15시</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
-                                                </div>
-                                                <p>맑음</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>2</span>* C</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/NE1.png" alt="풍향이미지">
-                                                </div>
-                                                <p>북동</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>1.8</span> m/s</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>0.27</span> m</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/NNE.png" alt="파향이미지">
-                                                </div>
-                                                <p>북북동</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>2.36</span> /s</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>0</span> %</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>-</span></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>80</span> %</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div>
-                                                <p>18시</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
-                                                </div>
-                                                <p>맑음</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>2</span>* C</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/NE1.png" alt="풍향이미지">
-                                                </div>
-                                                <p>북동</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>1.8</span> m/s</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>0.27</span> m</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/NNE.png" alt="파향이미지">
-                                                </div>
-                                                <p>북북동</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>2.36</span> /s</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>0</span> %</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>-</span></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>80</span> %</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div>
-                                                <p>21시</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
-                                                </div>
-                                                <p>맑음</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>2</span>* C</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/NE1.png" alt="풍향이미지">
-                                                </div>
-                                                <p>북동</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>1.8</span> m/s</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>0.27</span> m</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/NNE.png" alt="파향이미지">
-                                                </div>
-                                                <p>북북동</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>2.36</span> /s</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>0</span> %</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>-</span></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>80</span> %</p>
-                                            </div>
-                                        </td>
-                                    </tr> -->
-                                </table>
+<!--                             <div class="row" id="local_weather"> -->
+<!--                                 <h4>지역 날씨</h4> -->
+<!--                                 <table class="table"> -->
+<!--                                     <tr> -->
+<!--                                         <th th:text="${#dates.format(new java.util.Date(), 'MM.dd')}"></th> -->
+<!--                                         <th>날씨</th> -->
+<!--                                         <th>기온</th> -->
+<!--                                         <th>풍향</th> -->
+<!--                                         <th>풍속</th> -->
+<!--                                         <th>파고</th> -->
+<!--                                         <th>파향</th> -->
+<!--                                         <th>파주기(초)</th> -->
+<!--                                         <th>강수확률</th> -->
+<!--                                         <th>강수량</th> -->
+<!--                                         <th>습도</th> -->
+<!--                                     </tr> -->
+<!--                                     <tr th:each="weather:${weatherData}"> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p th:text="${#strings.substring(weather.time, 11,13)+'시'}"></p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div class="icon_box weatherIcon"> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/> -->
+<!--                                                     <i th:class="${weather.weatherIcon}"></i> -->
+<!--                                                 </div> -->
+<!--                                                 <p th:text="${weather.weatherName}"></p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span th:text="${weather.temperature}"></span>* C</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div class="icon_box windDirectionIcon"> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/NE1.png" alt="풍향이미지"> -->
+<!--                                                     <i th:class="${weather.windDirectionIcon}"></i> -->
+<!--                                                 </div> -->
+<!--                                                 <p th:text="${weather.windDirection}"></p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span th:text="${weather.windSpeed}"></span> m/s</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span th:text="${weather.waveHeight}"></span> m</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div class="icon_box waveDirectionIcon"> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/NNE.png" alt="파향이미지"> -->
+<!--                                                     <i th:class="${weather.waveDirectionIcon}"></i> -->
+<!--                                                 </div> -->
+<!--                                                 <p th:text="${weather.waveDirection}"></p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span th:text="${weather.wavePeriod}"></span> /s</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span th:text="${weather.precipitationProbability}"></span> %</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span th:text="${weather.precipitation!=null? weather.precipitation+'mm':'-'}"></span></p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span th:text="${weather.relativeHumidity}"></span> %</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                     </tr>
+<!--                                     <tr> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p>06시</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/> -->
+<!--                                                 </div> -->
+<!--                                                 <p>맑음</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>2</span>* C</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/NE1.png" alt="풍향이미지"> -->
+<!--                                                 </div> -->
+<!--                                                 <p>북동</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>1.8</span> m/s</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>0.27</span> m</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/NNE.png" alt="파향이미지"> -->
+<!--                                                 </div> -->
+<!--                                                 <p>북북동</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>2.36</span> /s</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>0</span> %</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>-</span></p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>80</span> %</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                     </tr> -->
+<!--                                     <tr> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p>09시</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/> -->
+<!--                                                 </div> -->
+<!--                                                 <p>맑음</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>2</span>* C</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/NE1.png" alt="풍향이미지"> -->
+<!--                                                 </div> -->
+<!--                                                 <p>북동</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>1.8</span> m/s</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>0.27</span> m</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/NNE.png" alt="파향이미지"> -->
+<!--                                                 </div> -->
+<!--                                                 <p>북북동</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>2.36</span> /s</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>0</span> %</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>-</span></p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>80</span> %</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                     </tr> -->
+<!--                                     <tr> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p>12시</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/> -->
+<!--                                                 </div> -->
+<!--                                                 <p>맑음</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>2</span>* C</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/NE1.png" alt="풍향이미지"> -->
+<!--                                                 </div> -->
+<!--                                                 <p>북동</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>1.8</span> m/s</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>0.27</span> m</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/NNE.png" alt="파향이미지"> -->
+<!--                                                 </div> -->
+<!--                                                 <p>북북동</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>2.36</span> /s</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>0</span> %</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>-</span></p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>80</span> %</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                     </tr> -->
+<!--                                     <tr> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p>15시</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/> -->
+<!--                                                 </div> -->
+<!--                                                 <p>맑음</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>2</span>* C</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/NE1.png" alt="풍향이미지"> -->
+<!--                                                 </div> -->
+<!--                                                 <p>북동</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>1.8</span> m/s</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>0.27</span> m</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/NNE.png" alt="파향이미지"> -->
+<!--                                                 </div> -->
+<!--                                                 <p>북북동</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>2.36</span> /s</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>0</span> %</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>-</span></p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>80</span> %</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                     </tr> -->
+<!--                                     <tr> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p>18시</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/> -->
+<!--                                                 </div> -->
+<!--                                                 <p>맑음</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>2</span>* C</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/NE1.png" alt="풍향이미지"> -->
+<!--                                                 </div> -->
+<!--                                                 <p>북동</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>1.8</span> m/s</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>0.27</span> m</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/NNE.png" alt="파향이미지"> -->
+<!--                                                 </div> -->
+<!--                                                 <p>북북동</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>2.36</span> /s</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>0</span> %</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>-</span></p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>80</span> %</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                     </tr> -->
+<!--                                     <tr> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p>21시</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/> -->
+<!--                                                 </div> -->
+<!--                                                 <p>맑음</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>2</span>* C</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/NE1.png" alt="풍향이미지"> -->
+<!--                                                 </div> -->
+<!--                                                 <p>북동</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>1.8</span> m/s</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>0.27</span> m</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <div> -->
+<!--                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/NNE.png" alt="파향이미지"> -->
+<!--                                                 </div> -->
+<!--                                                 <p>북북동</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>2.36</span> /s</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>0</span> %</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>-</span></p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                         <td> -->
+<!--                                             <div> -->
+<!--                                                 <p><span>80</span> %</p> -->
+<!--                                             </div> -->
+<!--                                         </td> -->
+<!--                                     </tr> --> 
+<!--                                 </table> -->
                                 
-                            </div>
-                            <!--end row -->
-                            <!--Row-->
+<!--                             </div> -->
+<!--                             end row -->
+<!--                             Row -->
                             <div class="row" id="sea_temperature" th:if="${item.mpType == 5}">
                                 <div class="w-100">
                                     <h4>바다 수온</h4>

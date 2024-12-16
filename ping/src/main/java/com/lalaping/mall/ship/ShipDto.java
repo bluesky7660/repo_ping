@@ -21,7 +21,7 @@ public class ShipDto extends FileDto {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date spStart;
 	private Boolean spDelNy;
-	private Integer spArea;
+	private String spArea;
 	private Boolean spRentalNy;
 	private Boolean spEatNy;
 	private Date spRegDate;
@@ -114,10 +114,10 @@ public class ShipDto extends FileDto {
 	public void setSpDelNy(Boolean spDelNy) {
 		this.spDelNy = spDelNy;
 	}
-	public Integer getSpArea() {
+	public String getSpArea() {
 		return spArea;
 	}
-	public void setSpArea(Integer spArea) {
+	public void setSpArea(String spArea) {
 		this.spArea = spArea;
 	}
 	public Boolean getSpRentalNy() {
