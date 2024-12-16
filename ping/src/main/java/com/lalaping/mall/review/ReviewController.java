@@ -27,7 +27,8 @@ public class ReviewController {
 		return "redirect:/v1/review/reviewXdmList";
 	}
 	@RequestMapping(value = "v1/review/reviewXdmForm")
-	public String reviewXdmForm() {
+	public String reviewXdmForm(Model model,ReviewVo reviewVo) {
+		model.addAttribute("list", reviewService.rvSelectList(reviewVo));
 		return "xdm/v1/review/reviewXdmForm";
 	}
 	@RequestMapping(value = "v1/review/reviewXdmMFom2")
