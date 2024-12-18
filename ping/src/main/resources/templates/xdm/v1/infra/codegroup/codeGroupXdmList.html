@@ -364,7 +364,7 @@
 														<td th:text="${vo.totalRows - (((vo.thisPage -1) * vo.rowNumToShow) +listStat.index)}"></td>
 														<td th:text="${list.cgSeq}"></td>
 														<td class="td_spotlight">
-															<a th:href="@{/v1/infra/codegroup/codeGroupXdmMfom(cgSeq=${list.cgSeq})}" th:text="${list.cgName}"></a>
+															<a th:href="@{/v1/infra/codegroup/codeGroupXdmMFom(cgSeq=${list.cgSeq})}" th:text="${list.cgName}"></a>
 														</td>
 														<td th:if="${list.cgUseNy eq 0}">N</td>
 														<td th:unless="${list.cgUseNy eq 0}">Y</td>

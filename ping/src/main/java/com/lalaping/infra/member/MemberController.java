@@ -56,11 +56,11 @@ public class MemberController {
 		model.addAttribute("listLink", "memberXdmList");
 		return "xdm/v1/infra/member/memberXdmForm";
 	}
-	@RequestMapping(value = "/v1/member/memberXdmMfom")
+	@RequestMapping(value = "/v1/member/memberXdmMFom")
 	public String memberXdmMfom(Model model,MemberDto memberDto) {
 		model.addAttribute("item", memberService.selectOne(memberDto));
 		model.addAttribute("listLink", "memberXdmList");
-		return "xdm/v1/infra/member/memberXdmMfom";
+		return "xdm/v1/infra/member/memberXdmMFom";
 	}
 
 	// CRUD

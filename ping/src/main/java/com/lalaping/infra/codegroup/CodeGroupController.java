@@ -42,11 +42,11 @@ public class CodeGroupController {
 		return "redirect:/v1/infra/codegroup/codeGroupXdmList";
 	}
 	
-	@RequestMapping(value = "/v1/infra/codegroup/codeGroupXdmMfom")
+	@RequestMapping(value = "/v1/infra/codegroup/codeGroupXdmMFom")
 	public String codeGroupXdmMfom(Model model,CodeGroupDto codeGroupDto) {
 		model.addAttribute("item", codeGroupService.selectOne(codeGroupDto));
 		model.addAttribute("listLink", "codeGroupXdmList");
-		return "xdm/v1/infra/codegroup/codeGroupXdmMfom";
+		return "xdm/v1/infra/codegroup/codeGroupXdmMFom";
 	}
 	@RequestMapping(value = "/v1/infra/codegroup/codeGroupXdmUpdt")
 	public String codeGroupXdmUpdt(CodeGroupDto codeGroupDto) {
