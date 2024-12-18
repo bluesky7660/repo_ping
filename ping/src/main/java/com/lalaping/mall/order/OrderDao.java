@@ -10,6 +10,7 @@ public interface OrderDao {
 	public OrderDto memberSelectOne(OrderDto orderDto);
 	public int insertOrder(OrderDto orderDto);
 	public List<OrderDto> selectListOrder(OrderDto orderDto);
+	public List<OrderDto> selectXdmListOrder(OrderVo vo);
 	public int ueleteOrder(OrderDto orderDto);
 	public List<OrderDto> selectListReturn(OrderDto orderDto);
 	public List<OrderDto> orderList(OrderDto orderDto);
@@ -18,5 +19,7 @@ public interface OrderDao {
 	
 	public int allListOrderCount();
 	public int orderListCount(OrderDto orderDto);
+	public int listCount(OrderVo vo);
+	public OrderDto selectOne(OrderDto orderDto);
 
 }

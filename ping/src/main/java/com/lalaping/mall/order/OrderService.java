@@ -22,6 +22,9 @@ public class OrderService {
 	public List<OrderDto> selectListOrder(OrderDto orderDto){
 		return orderDao.selectListOrder(orderDto);
 	}
+	public List<OrderDto> selectXdmListOrder(OrderVo vo){
+		return orderDao.selectXdmListOrder(vo);
+	}
 	public int ueleteOrder(OrderDto orderDto) {
 		return orderDao.ueleteOrder(orderDto);
 	}
@@ -30,6 +33,9 @@ public class OrderService {
 	}
 	public List<OrderDto> orderList(OrderDto orderDto){
 		 return orderDao.orderList(orderDto);
+	}
+	public int listCount(OrderVo vo) {
+		return orderDao.listCount(vo);
 	}
 	
 	public List<OrderDto> allListOrder(){
@@ -42,5 +48,8 @@ public class OrderService {
 	public int orderListCount(OrderDto orderDto) {
 		return orderDao.orderListCount(orderDto);
 	}
+	public OrderDto selectOne(OrderDto orderDto) {
+		return orderDao.selectOne(orderDto);
 
+	}
 }
