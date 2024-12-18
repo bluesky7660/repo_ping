@@ -1,9 +1,6 @@
 package com.lalaping.mall.ship;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,7 +15,7 @@ public class ShipDto extends FileDto {
 	private String spDesc;
 	private String spTotal;
 	private String spRemain;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date spStart;
 	private Boolean spDelNy;
 	private String spArea;
@@ -43,23 +40,10 @@ public class ShipDto extends FileDto {
 	private String fsNames;
 	
 //	-------------------------------
-	
+
 	public String getFsSeq() {
 		return fsSeq;
 	}
-	public String getPtSeq() {
-		return ptSeq;
-	}
-	public void setPtSeq(String ptSeq) {
-		this.ptSeq = ptSeq;
-	}
-	public String getFsNames() {
-		return fsNames;
-	}
-	public void setFsNames(String fsNames) {
-		this.fsNames = fsNames;
-	}
-	
 	public void setFsSeq(String fsSeq) {
 		this.fsSeq = fsSeq;
 	}
@@ -98,6 +82,12 @@ public class ShipDto extends FileDto {
 	}
 	public void setSpTotal(String spTotal) {
 		this.spTotal = spTotal;
+	}
+	public String getSpRemain() {
+		return spRemain;
+	}
+	public void setSpRemain(String spRemain) {
+		this.spRemain = spRemain;
 	}
 	public Date getSpStart() {
 		return spStart;
@@ -141,62 +131,11 @@ public class ShipDto extends FileDto {
 	public void setPort_ptSeq(String port_ptSeq) {
 		this.port_ptSeq = port_ptSeq;
 	}
-//	public List<String> getFsSeqList() {
-//		return fsSeqList;
-//	}
-//	public void setFsSeqList(String fsSeqList) {
-//        if (fsSeqList != null && !fsSeqList.isEmpty()) {
-//            this.fsSeqList = Arrays.asList(fsSeqList.split(","));
-//        } else {
-//            this.fsSeqList = new ArrayList<>();
-//        }
-//    }
-//	public List<String> getFsNameList() {
-//		return fsNameList;
-//	}
-//	public void setFsNameList(String fsNameList) {
-//        if (fsNameList != null && !fsNameList.isEmpty()) {
-//            this.fsNameList = Arrays.asList(fsNameList.split(","));
-//        } else {
-//            this.fsNameList = new ArrayList<>();
-//        }
-//    }
-	
-	public String getFsSeqList() {
-		return fsSeqList;
+	public String getSeq() {
+		return seq;
 	}
-	public void setFsSeqList(String fsSeqList) {
-		this.fsSeqList = fsSeqList;
-	}
-	public String getFsNameList() {
-		return fsNameList;
-	}
-	public void setFsNameList(String fsNameList) {
-		this.fsNameList = fsNameList;
-	}
-	public String getPtName() {
-		return ptName;
-	}
-	public void setPtName(String ptName) {
-		this.ptName = ptName;
-	}
-	public String getSpRemain() {
-		return spRemain;
-	}
-	public void setSpRemain(String spRemain) {
-		this.spRemain = spRemain;
-	}
-	public Double getPtLongitude() {
-		return ptLongitude;
-	}
-	public void setPtLongitude(Double ptLongitude) {
-		this.ptLongitude = ptLongitude;
-	}
-	public Double getPtLatitude() {
-		return ptLatitude;
-	}
-	public void setPtLatitude(Double ptLatitude) {
-		this.ptLatitude = ptLatitude;
+	public void setSeq(String seq) {
+		this.seq = seq;
 	}
 	public String getpSeq() {
 		return pSeq;
@@ -210,14 +149,47 @@ public class ShipDto extends FileDto {
 	public void setPath(String path) {
 		this.path = path;
 	}
-	public String getSeq() {
-		return seq;
+	public String getPtSeq() {
+		return ptSeq;
 	}
-	public void setSeq(String seq) {
-		this.seq = seq;
+	public void setPtSeq(String ptSeq) {
+		this.ptSeq = ptSeq;
+	}
+	public String getPtName() {
+		return ptName;
+	}
+	public void setPtName(String ptName) {
+		this.ptName = ptName;
+	}
+	public Double getPtLongitude() {
+		return ptLongitude;
+	}
+	public void setPtLongitude(Double ptLongitude) {
+		this.ptLongitude = ptLongitude;
+	}
+	public Double getPtLatitude() {
+		return ptLatitude;
+	}
+	public void setPtLatitude(Double ptLatitude) {
+		this.ptLatitude = ptLatitude;
+	}
+	public String getFsSeqList() {
+		return fsSeqList;
+	}
+	public void setFsSeqList(String fsSeqList) {
+		this.fsSeqList = fsSeqList;
+	}
+	public String getFsNameList() {
+		return fsNameList;
+	}
+	public void setFsNameList(String fsNameList) {
+		this.fsNameList = fsNameList;
+	}
+	public String getFsNames() {
+		return fsNames;
+	}
+	public void setFsNames(String fsNames) {
+		this.fsNames = fsNames;
 	}
 	
-	
-	
-
 }

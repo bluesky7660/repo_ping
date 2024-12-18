@@ -110,6 +110,7 @@
 		,a.port_ptSeq
 		,d.ptSeq
 		,d.ptName
+		,d.ptArea
 		,GROUP_CONCAT(c.fsSeq ORDER BY c.fsSeq) AS fsSeqList
    		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
 		<include refid="selectCommon" />

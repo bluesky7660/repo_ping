@@ -29,7 +29,8 @@ public class ShipController {
 		return "xdm/v1/ship/shipXdmList";
 	}
 	@RequestMapping(value = "/v1/ship/shipXdmForm")
-	public String shipXdmForm(Model model) {
+	public String shipXdmForm(Model model,ShipVo shipVo) {
+		model.addAttribute("list", shipService.selectList(shipVo));
 		model.addAttribute("listLink", "shipXdmList");
 		return "xdm/v1/ship/shipXdmForm";
 	}

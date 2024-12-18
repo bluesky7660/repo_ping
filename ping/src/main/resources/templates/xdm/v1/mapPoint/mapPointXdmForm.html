@@ -18,7 +18,7 @@
 		<link rel="shortcut icon" href="/xdm/v1/template/arise-v1.0/assets/images/favicon.svg">
 
 		<!-- Title -->
-		<title>낚시포인트</title>
+		<title>낚시포인트 추가</title>
 
 
 		<!-- *************
@@ -110,7 +110,7 @@
 									<!-- Breadcrumb end -->
 								</div>
 								<div class="pb-4">
-									<h2>낚시포인트</h2>
+									<h2>낚시포인트 추가</h2>
 								</div>
 							</div>
 						</div>
@@ -160,7 +160,11 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputCodeName" class="form-label">포인트지역</label>
-														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputMpType" name="mpType" placeholder="숫자임의입력" required>
+<!-- 														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputMpType" name="mpType" placeholder="숫자임의입력" required> -->
+														<select class="form-select validate-this valid-gender" id="inputMpType" name="mpType" required>
+															<option value="" selected disabled>선택하세요</option>
+															<option th:each="list : ${@codeService.selectListCachedCode(4)}" th:value="${list.cdSeq}" th:text="${list.cdName}"></option>
+														</select>
 														<div class="invalid-feedback">
 															코드이름을 적어주세요.
 														</div>

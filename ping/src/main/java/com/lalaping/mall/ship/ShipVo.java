@@ -6,7 +6,6 @@ public class ShipVo extends BaseVo {
 	private Integer shEatNy;
 	private Integer shRentalNy;
 	private Integer shArea;
-	private String port_ptSeq;
 	private String shName;
 	private String shport;
 	private Integer shRemain;
@@ -15,10 +14,34 @@ public class ShipVo extends BaseVo {
 	private Integer shmax_price;
 	private String baseSpSeq;
 	private String spSeq;
-//	-----------------------------
+	private String port_ptSeq;
+	
+	private String ptSeq;
+	private String ptName;
+	private String ptArea;
+	
+	//	-----------------------------
 	
 	public Integer getShEatNy() {
 		return shEatNy;
+	}
+	public String getPtArea() {
+		return ptArea;
+	}
+	public void setPtArea(String ptArea) {
+		this.ptArea = ptArea;
+	}
+	public String getPtSeq() {
+		return ptSeq;
+	}
+	public void setPtSeq(String ptSeq) {
+		this.ptSeq = ptSeq;
+	}
+	public String getPtName() {
+		return ptName;
+	}
+	public void setPtName(String ptName) {
+		this.ptName = ptName;
 	}
 	public void setShEatNy(Integer shEatNy) {
 		this.shEatNy = shEatNy;
