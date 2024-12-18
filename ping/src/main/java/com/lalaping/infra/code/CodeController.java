@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lalaping.common.util.UtilDateTime;
 import com.lalaping.infra.codegroup.CodeGroupService;
-import com.lalaping.infra.codegroup.CodeGroupVo;
 
 @Controller
 public class CodeController {
@@ -27,7 +26,7 @@ public class CodeController {
 		return "xdm/v1/infra/code/codeXdmList";
 	}
 	@RequestMapping(value = "/v1/infra/code/codeXdmForm")
-	public String CodeXdmForm(Model model ) {
+	public String CodeXdmForm(Model model) {
 		model.addAttribute("codeGroups", codeGroupService.allList());
 		model.addAttribute("listLink", "codeXdmList");
 		return "xdm/v1/infra/code/codeXdmForm";
