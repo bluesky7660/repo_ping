@@ -27,7 +27,7 @@ ADMIN URL - http://3.35.53.81:8082/v1/loginXdm
 ![image](https://github.com/user-attachments/assets/13e53af4-786e-4244-90c0-956ac1c11031)
 ![image](https://github.com/user-attachments/assets/ea396cb8-9088-4759-9f5e-92a449f2f275)
 
-결제- 카카오페이
+결제- 포트원을 이용해 스크립트로 카카오api 구현
 ![KakaoTalk_20241218_121555363_01](https://github.com/user-attachments/assets/ae988f1e-4919-4138-931d-f86a8f61bfca)
 ![KakaoTalk_20241218_121555363](https://github.com/user-attachments/assets/e31a3df4-db00-4f0f-9172-e716377c2f6d)
 
