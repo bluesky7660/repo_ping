@@ -4,6 +4,34 @@
 <mapper namespace="com.lalaping.mall.order.OrderDao">
 
     <resultMap type="com.lalaping.mall.order.OrderDto" id="resultMapObj"></resultMap>
+    <sql id="selectCommon">
+        FROM orders g
+   		LEFT JOIN ship a
+		ON g.ship_spSeq = a.spSeq
+		WHERE 1=1
+        <if test="shValue != null and !shValue.equals('')">
+            <choose>
+                <when test="shOption == null">
+                    AND(
+                        a.spName LIKE CONCAT('%', #{shValue}, '%')
+                        OR g.odTotalPrice LIKE CONCAT('%', #{shValue}, '%')
+                    )
+                </when>
+                <when test="shOption == 1 and shOption != null and shOption != ''">
+                    AND a.spName = #{shValue}
+                </when>
+                <when test="shOption == 2 and shOption != null and shOption != ''">
+                    AND g.odTotalPrice LIKE CONCAT('%', #{shValue}, '%')
+                </when>
+            </choose>
+        </if>
+        <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
+        	<choose>
+        		<when test="shOptionDate == 1"> AND g.odRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+           	</choose>
+        </if>
+       
+    </sql>
     <select id="allListOrder" resultMap="resultMapObj">
     	SELECT
     		g.odSeq
@@ -93,6 +121,29 @@
 		AND !(g.odReturnNy = 28)
 		AND s.sort = 1
     </select>
+    <select id="selectXdmListOrder" resultMap="resultMapObj">
+    	<include refid="base.selectListUpperForMysql" />
+    	SELECT
+    		g.odSeq
+    		,g.odCount
+    		,g.odTotalPrice
+    		,g.odReturnNy
+    		,g.odRegDate
+    		,g.ship_spSeq
+    		,g.member_mmSeq
+    		,a.spName
+    		,a.spStart
+    		,a.spSeq
+   		<include refid="selectCommon"/>
+   		ORDER BY
+		g.odSeq Desc
+		<include refid="base.selectListLowerForMysql" />
+    </select>
+    <select id="listCount" resultType="int">
+		SELECT COUNT(DISTINCT g.odSeq)
+		<include refid="selectCommon" />
+	</select>
+    
     <update id="ueleteOrder">
   		UPDATE orders
   		SET	
@@ -154,6 +205,25 @@
 		ON g.ship_spSeq = a.spSeq
 		WHERE 1=1
 		AND g.odReturnNy = #{odReturnNy}
+    </select>
+    <select id="selectOne">
+    	SELECT
+    		g.odSeq
+    		,g.odCount
+    		,g.odTotalPrice
+    		,g.odReturnNy
+    		,g.odRegDate
+    		,g.odModDate
+    		,g.ship_spSeq
+    		,g.member_mmSeq
+    		,a.spName
+    		,a.spStart
+    		,a.spSeq
+    	FROM orders g
+    	LEFT JOIN ship a
+		ON g.ship_spSeq = a.spSeq
+		WHERE 1=1
+		AND g.odSeq = #{odSeq}
     </select>
     
 </mapper>
