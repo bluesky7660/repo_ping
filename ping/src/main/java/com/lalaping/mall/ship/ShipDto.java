@@ -18,7 +18,7 @@ public class ShipDto extends FileDto {
 	private String spDesc;
 	private String spTotal;
 	private String spRemain;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date spStart;
 	private Boolean spDelNy;
 	private String spArea;

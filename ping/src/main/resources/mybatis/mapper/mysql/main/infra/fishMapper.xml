@@ -19,9 +19,7 @@
         <if test="shDelNy != null and !shDelNy.equals('')">
             AND a.fsDelNy = #{shDelNy}
         </if>
-        <if test="shSeason != null and !shSeason.equals('')">
-            AND a.fsSeason = #{shSeason}
-        </if>
+        
         <if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
         	<choose>
         		<when test="shOptionDate == 1"> AND a.fsRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
@@ -33,8 +31,15 @@
     <select id="listCount" resultType="int">
         SELECT COUNT(DISTINCT a.fsSeq) 
         FROM fish a
+	        LEFT JOIN seasonandfish b ON a.fsSeq = b.fish_fsSeq
+			left join commoncode c on c.cdSeq = b.season_ssSeq
          WHERE 1=1
         <include refid="selectCommon"/>
+        <if test="shSeason != null and !shSeason.equals('')"> 
+			WHERE FIND_IN_SET('11', (SELECT GROUP_CONCAT(b.season_ssSeq ORDER BY a.fsSeq) 
+                          FROM seasonandfish b 
+                          WHERE a.fsSeq = b.fish_fsSeq)) > 0;
+        </if>
     </select>
     <select id="selectList" resultMap="resultMapObj">
 		<include refid="base.selectListUpperForMysql"/>
@@ -45,13 +50,18 @@
 			,a.fsDelNy
 			,a.fsRegDate
 			,b.fish_fsSeq
-            ,GROUP_CONCAT(b.season_ssSeq ORDER BY a.fsSeq) AS seasons
+            ,GROUP_CONCAT(b.season_ssSeq ORDER BY a.fsSeq) AS seasonsSeq
+            ,GROUP_CONCAT(c.cdName ORDER BY a.fsSeq) AS seasonsName
         FROM fish a
 		LEFT JOIN seasonandfish b 
 		ON a.fsSeq = b.fish_fsSeq
+		left join commoncode c on c.cdSeq = b.season_ssSeq
 		<include refid="selectCommon"/>
 		group by
 			a.fsSeq
+		<if test="shSeason != null and !shSeason.equals('')"> 
+			HAVING FIND_IN_SET(#{shSeason} , seasonsSeq) > 0
+        </if>
 		ORDER BY
 	     	a.fsRegDate DESC
 		<include refid="base.selectListLowerForMysql"/>

@@ -302,6 +302,8 @@ $(document).ready(function($) {
 
         // 인포윈도우 HTML 생성
         var infowindowHTML = document.createElement("div");
+        console.log("markerData:",markerData);
+        console.log("markerData이미지:",markerData.marker_image);
         infowindowHTML.className ="infobox-wrapper";
         infowindowHTML.innerHTML = '<div class="ts-infobox" data-ts-id="' + markerData.id + '">' +
             '<img src="/usr/v1/template/themeforest-v1.0/assets/img/infobox-close.svg" class="ts-close">' +
@@ -327,7 +329,7 @@ $(document).ready(function($) {
                 '</div>' +
               '</div>' +
               '<div class="ts-infobox_image" style="background-image: url(' + 
-                          (markerData.path || "/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png") + 
+                          (markerData.marker_image !=null ? markerData.marker_image: "/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png") + 
                       ')"></div>' + 
             '</a>' +
           '</div>';

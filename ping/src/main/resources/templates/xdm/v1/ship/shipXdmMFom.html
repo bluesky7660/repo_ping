@@ -209,7 +209,7 @@
 													<div class="mb-3">
 														<label for="inputCodeOrder" class="form-label">출발일</label>
 <!-- 														<input type="text" class="form-control" id="inputspStart" name="spStart" th:value="${item.spStart}" placeholder="출발일" required> -->
-														<input type="text" class="valid-birth-num form-control validate-this" id="inputspStart" name="spStart" th:value="${#dates.format(item.spStart,'yyyy-MM-dd')}"placeholder="출발일" required>
+														<input type="text" class="valid-dateTime form-control validate-this" id="inputspStart" name="spStart" th:value="${#dates.format(item.spStart,'yyyy-MM-dd HH:mm')}"placeholder="출발일" required>
 														<div class="invalid-feedback">
 															출발일를 적어주세요.
 														</div>
@@ -318,8 +318,9 @@
 			window.addEventListener('load',function() {
 				$.datetimepicker.setLocale('ko');
 				$("#inputspStart").datetimepicker({
-					timepicker:false,
-					format:'Y-m-d'
+					timepicker:true,
+					format:'Y-m-d H:i',
+					step:30,
 				});
 			})
 		</script>

@@ -32,6 +32,7 @@ window.addEventListener('load', function() {
     var numericRegExp = /^[0-9]+$/;
     var emailRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     var birthRegExp =  /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+    var dateTimeRegExp =  /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (\d{2}):([0-5][0-9])$/;
     var phoneRegExp = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
     
     const loginBtn = document.querySelector("#loginBtn");
@@ -465,6 +466,19 @@ window.addEventListener('load', function() {
             
             if(!phoneRegExp.test(objValue)){
                 var text = "정확한 핸드폰번호를 입력해주세요: - 제외";
+                //alert(text);
+                feedback.textContent = text;
+                element.focus();
+                return false;
+            } else {
+    // 	    	by pass
+                return true;
+            }
+        }else if (element.classList.contains('valid-dateTime')) {
+            console.log("년-월-일 시:분만 입력");
+            
+            if(!dateTimeRegExp.test(objValue)){
+                var text = "정확한 년-월-일 시:분 형식 입력해주세요";
                 //alert(text);
                 feedback.textContent = text;
                 element.focus();
