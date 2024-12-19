@@ -18,7 +18,7 @@
 		<link rel="shortcut icon" href="/xdm/v1/template/arise-v1.0/assets/images/favicon.svg">
 
 		<!-- Title -->
-		<title>어종도감</title>
+		<title>선상예약목록</title>
 
 
 		<!-- *************
@@ -258,26 +258,34 @@
 								<div class="card border">
 									<div class="card-header bg-light">
 										<h2 class="card-title">
-											어종도감
+											선상예약목록
 										</h2>
 										<div>
-											<form name class="row gx-3 align-items-center" method="post" autocomplete="off" action="/v1/fish/fishXdmList">
-												<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
+											<form name class="row gx-3 align-items-center" method="post" autocomplete="off" action="/v1/order/orderXdmList">
+												<input type="hidden" name="thisPage" th:value="${vo.thisPage}"/>
 												<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
 												<div class="row gy-3">
-													<div class="col-12 col-md-6 col-lg-4 col-xl ">
-														<label class="visually-hidden" for="selectDelNy">삭제검색</label>
-														<select class="form-select" id="selectDelNy" name="shDelNy">
-															<option value="" selected>삭제여부를 선택하세요</option>
-															<option value="1" th:selected="${vo.shDelNy == 1}">Y</option>
-															<option value="0" th:selected="${vo.shDelNy == 0}">N</option>
-														</select>
-													</div>
+<!-- 													<div class="col-12 col-md-6 col-lg-4 col-xl "> -->
+<!-- 														<label class="visually-hidden" for="selectDelNy">삭제검색</label> -->
+<!-- 														<select class="form-select" id="selectDelNy" name="shDelNy"> -->
+<!-- 															<option value="" selected>삭제여부를 선택하세요</option> -->
+<!-- 															<option value="1" th:selected="${vo.shDelNy == 1}">Y</option> -->
+<!-- 															<option value="0" th:selected="${vo.shDelNy == 0}">N</option> -->
+<!-- 														</select> -->
+<!-- 													</div> -->
 													<div class="col-12 col-md-6 col-lg-4 col-xl">
-														<label class="visually-hidden" for="selectfsSeason">사용검색</label>
-														<select class="form-select" id="selectfsSeason" name="shSeason">
-															<option value="" selected>시즌을 선택해주세요</option>
-															<option th:each="season:${@codeService.selectListCachedCode(3)}" th:value="${season.cdSeq}" th:selected="${vo.shSeason == season.cdSeq}" th:text="${season.cdName}">1월</option>
+														<label class="visually-hidden" for="selectPtArea">사용검색</label>
+														<select class="form-select" id="selectptArea" name="shPtArea">
+<!-- 															<option value="" selected>지역을 선택해주세요</option> -->
+<!-- 															<option value="1" th:selected="${vo.shPtArea == 1}">경기도</option> -->
+<!-- 															<option value="0" th:selected="${vo.shPtArea == 0}">대구</option> -->
+<!-- 															<option value="0" th:selected="${vo.shPtArea == 0}">인천</option> -->
+<!-- 															<option value="0" th:selected="${vo.shPtArea == 0}">울산</option> -->
+<!-- 															<option value="0" th:selected="${vo.shPtArea == 0}">광주</option> -->
+<!-- 															<option value="0" th:selected="${vo.shPtArea == 0}">전라남도</option> -->
+<!-- 															<option value="0" th:selected="${vo.shPtArea == 0}">경상남도</option> -->
+<!-- 															<option value="0" th:selected="${vo.shPtArea == 0}">경상북도</option> -->
+<!-- 															<option value="0" th:selected="${vo.shPtArea == 0}">제주도</option> -->
 														</select>
 													</div>
 													<div class="col-12 col-md-6 col-lg-4 col-xl">
@@ -289,11 +297,11 @@
 													</div>
 													<div class="col-12 col-md-6 col-lg-4 col-xl">
 														<label class="visually-hidden" for="inputDateStart">시작일</label>
-														<input type="text" class="form-control" id="inputDateStart" name="shDateStart" th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="시작일을 선택해주세요" value="">
+<!-- 														<input type="text" class="form-control" id="inputDateStart" name="shDateStart" th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="시작일을 선택해주세요" value=""> -->
 													</div>
 													<div class="col-12 col-md-6 col-lg-4 col-xl">
 														<label class="visually-hidden" for="inputDateEnd">종료일</label>
-														<input type="text" class="form-control" id="inputDateEnd" name="shDateEnd" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="종료일을 선택해주세요" value="">
+<!-- 														<input type="text" class="form-control" id="inputDateEnd" name="shDateEnd" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="종료일을 선택해주세요" value=""> -->
 													</div>
 												</div>
 												<div class="row gy-3 mt-0">
@@ -301,7 +309,8 @@
 														<label class="visually-hidden" for="selectKeywordType">검색어 종류</label>
 														<select class="form-select" id="selectKeywordType" name="shOption">
 															<option value="" selected>검색구분</option>
-															<option value="1" th:selected="${vo.shOption == 1}">물고기 이름</option>
+															<option value="1" th:selected="${vo.shOption == 1}">항구이름</option>
+															<option value="2" th:selected="${vo.shOption == 2}">항구주소</option>
 														</select>
 													</div>
 													<div class="col-12 col-md-6 col-lg-4 col-xl">
@@ -342,10 +351,13 @@
 															<input type="checkbox">
 														</th>
 														<th><span>#</span></th>
-														<th class="sorting sorting_asc"><span class="dataTable-sorter">물고기번호</span></th>
-														<th class="sorting sorting_asc"><span class="dataTable-sorter">물고기이름</span></th>
-														<th class="sorting sorting_asc"><span class="dataTable-sorter">시즌</span></th>
-														<th class="sorting sorting_asc"><span class="dataTable-sorter">삭제</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">예약번호</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">선상이름</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">총가격</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">예약인원</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">예약현황</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">출항날짜</span></th>
+<!-- 														<th class="sorting sorting_asc"><span class="dataTable-sorter">삭제</span></th> -->
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">등록일</span></th>
 													</tr>
 												</thead>
@@ -355,18 +367,21 @@
 													</tr>
 													<tr th:each="list : ${list}" th:if="${!#lists.isEmpty(list)}">
 														<td><input type="checkbox"></td>
-														<td th:text="${vo.totalRows - (((vo.thisPage -1) * vo.rowNumToShow) +listStat.index)}" class="align-middle"></td>
-														<td th:text="${list.fsSeq}"></td>
+														<td th:text="${vo.totalRows - (((vo.thisPage -1) * vo.rowNumToShow) +listStat.index)}"></td>
+														<td th:text="${list.odSeq}"></td>
 														<td class="td_spotlight">
-															<a th:href="@{/v1/fish/fishXdmMFom(fsSeq=${list.fsSeq})}" th:text="${list.fsName}"></a>
+															<a th:href="@{/v1/order/orderXdmMFom(odSeq=${list.odSeq})}" th:text="${list.spName}"></a>
 														</td>
-														<td th:text="${list.seasonsName}"></td>
-														<td th:if="${list.fsDelNy eq false}">N</td>
-														<td th:unless="${list.fsDelNy eq false}">Y</td>
-														<td th:text="${#dates.format(list.fsRegDate,'yyyy-MM-dd HH:mm:ss')}"></td>
+														<td th:text="${list.odTotalPrice}"></td>
+														<td th:text="${list.odCount}"></td>
+														<td th:if="${list.odReturnNy == 28}">환불중</td>
+														<td th:if="${list.odReturnNy == 27}">예약이용</td>
+														<td th:if="${list.odReturnNy == 26}">예약완료</td>
+														<td th:text="${#dates.format(list.spStart,'yyyy-MM-dd HH:mm')}"></td>
+														<td th:text="${#dates.format(list.odRegDate,'yyyy-MM-dd HH:mm:ss')}"></td>
 													</tr>
 												</tbody>
-											</table>
+											</table>	
 										</div>
 										
 										<div class="dataTable-bottom">
