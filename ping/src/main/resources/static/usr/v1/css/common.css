@@ -9,7 +9,10 @@
     padding-bottom: 0;
 }
 .navbar-brand img,.brand img{
-    width: 80px;
+    width: 65px;
+}
+ul.navbar-nav > .nav-item > .nav-link{
+    white-space: nowrap;
 }
 .row {
     margin-right: 0;

@@ -47,27 +47,19 @@ function createSideBarResult(map, loadedMarkersData, newMarkers) {
   const bounds = map.getBounds();
   const restrictBounds = new kakao.maps.LatLngBounds(bounds.getSouthWest(), bounds.getNorthEast());
   // 맵 범위 내의 마커 필터링
+  console.log("범위:",restrictBounds);
+  console.log("newMarkers:",newMarkers);
   for (let i = 0; i < newMarkers.length; i++) {
       const markerPosition = newMarkers[i].getPosition(); // 마커 위치 가져오기
       if (restrictBounds.contain(markerPosition)) { // LatLngBounds.contains() 사용
           visibleMarkersOnMap.push(i);
       }
   }
-
+  console.log("loadedMarkersData:",loadedMarkersData);
+  console.log("visibleMarkersOnMap:",visibleMarkersOnMap);
   // 마커 정보로 사이드바 생성
   for (let i = 0; i < visibleMarkersOnMap.length; i++) {
       const id = visibleMarkersOnMap[i]; 
-      let additionalInfoHtml = '';
-
-      if (loadedMarkersData[id]["additional_info"]) {
-          for (let a = 0; a < loadedMarkersData[id]["additional_info"].length; a++) {
-              additionalInfoHtml +=
-                  '<dl>' +
-                  '<dt>' + loadedMarkersData[id]["additional_info"][a]["title"] + '</dt>' +
-                  '<dd>' + loadedMarkersData[id]["additional_info"][a]["value"] + '</dd>' +
-                  '</dl>';
-          }
-      }
 
       resultsHtml.push(
           '<div class="ts-result-link" data-ts-id="' + loadedMarkersData[id]["id"] + '" data-ts-ln="' + newMarkers[id].loopNumber + '">' +
@@ -100,14 +92,116 @@ function createSideBarResult(map, loadedMarkersData, newMarkers) {
                 '</div>'
       );
   }
-
+  console.log("resultsHtml:",resultsHtml);
+  document.querySelector('.ts-results-wrapper').innerHTML = ''; 
   // 사이드바에 HTML 추가
   document.querySelector('.ts-results-wrapper').innerHTML = resultsHtml.join('');
 }
 function loadPointData() {
   
 }
+function createMarker(markerData,clusterer,newMarkers,map) {
+  var markerPosition = new kakao.maps.LatLng(markerData.lat, markerData.lng);
+  var restPosition = new kakao.maps.LatLng(0, 0);
+  // var marker = new kakao.maps.Marker({
+  //     position: new kakao.maps.LatLng(markerData.lat, markerData.lng),
+  //     title: markerData.title
+  // });
+  // marker.setMap(map);
+  // 마커 HTML 생성
+  var markerHTML = document.createElement("div");
+  // markerHTML.className ="leaflet-marker-icon leaflet-div-icon leaflet-zoom-animated leaflet-interactive";
+  markerHTML.className ="ts-marker-wrapper";
+  markerHTML.innerHTML = 
+    '<div class="ts-marker" data-ts-id="' + markerData.id + '">' +
+    (markerData.ribbon ? '<div class="ts-marker__feature">' + markerData.ribbon + '</div>' : "") +
+    (markerData.title ? '<div class="ts-marker__title">' + markerData.title + '</div>' : "") +
+    // (markerData.price ? '<div class="ts-marker__info">₩' + markerData.price.toLocaleString() + '</div>' : "") +
+    (markerData.marker_image ? '<div class="ts-marker__image ts-black-gradient" style="background-image: url(' + markerData.marker_image + ')"></div>' :
+      '<div class="ts-marker__image ts-black-gradient" style="background-image: url(/usr/v1/template/themeforest-v1.0/assets/img/marker-default-img.png)"></div>') +
+  
+    '</div>';
 
+  // 커스텀 마커 생성
+  var customMarker = new kakao.maps.CustomOverlay({
+    position: markerPosition,
+    content: markerHTML,
+    clickable: true,
+    yAnchor: 0.8,
+    xAnchor: 0,
+    zIndex:1
+  });
+
+  // customMarker.setMap(map);
+  clusterer.addMarker(customMarker);
+  newMarkers.push(customMarker);
+  console.log("newMarkers");
+
+  // 인포윈도우 HTML 생성
+  var infowindowHTML = document.createElement("div");
+  // console.log("markerData:",markerData);
+  infowindowHTML.className ="infobox-wrapper";
+  infowindowHTML.innerHTML = '<div class="ts-infobox" data-ts-id="' + markerData.id + '">' +
+      '<img src="/usr/v1/template/themeforest-v1.0/assets/img/infobox-close.svg" class="ts-close">' +
+      (markerData.ribbon ? '<div class="ts-ribbon">' + markerData.ribbon + '</div>' : '') +
+      (markerData.ribbon_corner ? '<div class="ts-ribbon-corner"><span>' + markerData.ribbon_corner + '</span></div>' : '') +
+      '<a href="' + markerData.url + '" class="ts-infobox__wrapper ts-black-gradient">' +
+        (markerData.badge ? '<div class="badge badge-dark">' + markerData.badge + '</div>' : '') +
+        '<div class="ts-infobox__content">' +
+          '<figure class="ts-item__info">' +
+          // (markerData.price ? '<div class="ts-item__info-badge">₩' + markerData.price.toLocaleString() + '</div>' : '') +
+          (markerData.title ? '<h4>' + markerData.title + '</h4>' : '') +
+          (markerData.address ? '<aside><i class="fa fa-map-marker mr-2"></i>' + markerData.address + '</aside>' : '') +
+          '</figure>' +
+          '<div class="ts-description-lists">'+
+            '<dl>' +
+              '<dt>생성일</dt>' +
+              '<dd>' + markerData.regDate + '</dd>' +
+            '</dl>'+
+            '<dl>' +
+              '<dt>어종</dt>' +
+              '<dd>' + markerData.fsNameList + '</dd>' +
+            '</dl>'+
+          '</div>' +
+        '</div>' +
+        '<div class="ts-infobox_image" style="background-image: url(' + 
+                    (markerData.marker_image !=null ? markerData.marker_image: "/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png") + 
+                ')"></div>' + 
+      '</a>' +
+    '</div>';
+
+  // 인포윈도우 생성
+  var infowindow = new kakao.maps.CustomOverlay({
+    position:restPosition,
+    content: infowindowHTML,
+    clickable: true,
+    yAnchor: 1,
+    xAnchor: 0,
+    zIndex: 0
+  });
+
+  infowindow.setMap(map);
+  infowindowHTML.parentElement.classList.add("leaflet-popup", "leaflet-zoom-animated");
+  // 마커 클릭 시 인포윈도우 표시
+  markerHTML.addEventListener('click', function () {
+    markerHTML.classList.add("ts-hide-marker");
+    infowindowHTML.classList.add("ts-show");
+    infowindow.setZIndex(2);
+    infowindow.setPosition(markerPosition);
+    // onMarkerClick(markerPosition);
+  });
+
+  // 인포윈도우 닫기 버튼 클릭 시 인포윈도우 숨기기
+  infowindowHTML.querySelector('.ts-close').addEventListener('click', function () {
+    markerHTML.classList.remove("ts-hide-marker");
+    // infowindow.setMap(null);
+    infowindowHTML.classList.remove("ts-show");
+    infowindow.setZIndex(0);
+    infowindow.setPosition(restPosition);
+    // restLevel();
+  });
+  
+}
 
 $(document).ready(function($) {
   kakao.maps.load(function() {
@@ -122,7 +216,17 @@ $(document).ready(function($) {
       };
     
       var map = new kakao.maps.Map(mapContainer, mapOption); 
+      console.log("map:",map.getBounds());
       map.setMaxLevel(13);
+      kakao.maps.event.addListener(map, 'click', function(event) {
+        var latLngc = event.latLng; // 클릭한 위치의 LatLng 객체
+    
+        // 클릭한 위치의 위도, 경도 값 가져오기
+        var latitudec = latLngc.getLat();  // 위도
+        var longitudec = latLngc.getLng(); // 경도
+    
+        console.log('클릭한 위치의 좌표:', latitudec, longitudec);
+      });
 
       // 대한민국 경계 설정 (kakao.maps.LatLngBounds 사용)
       // 제한할 영역의 좌표 (예시: 대한민국의 대략적인 좌표)
@@ -242,133 +346,89 @@ $(document).ready(function($) {
       //   map.jump(Position,5);
       //   // map.setLevel(5);
       // } 
-      function onMarkerClick(position) {
-        console.log("Clicked position:", position); // 디버깅용 로그
+      // function onMarkerClick(position) {
+      //   console.log("Clicked position:", position); // 디버깅용 로그
         
-        // 지도 중심을 마커 위치로 이동
-        map.setCenter(position);
+      //   // 지도 중심을 마커 위치로 이동
+      //   map.setCenter(position);
         
-        // 약간의 지연 후 줌 레벨 변경
-        setTimeout(function() {
-            map.setLevel(5); // 레벨을 3으로 설정
-        }, 3000); // 300ms 딜레이
-      }  
-      function restLevel() {
-        var center = new kakao.maps.LatLng(36.219334746848095, 127.86117181879779);
-        // map.pajumpnTo(center,13);
-        map.setLevel(13);
-        setTimeout(function() {
-          map.setCenter(center);
-        }, 3000);
-      }
+      //   // 약간의 지연 후 줌 레벨 변경
+      //   setTimeout(function() {
+      //       map.setLevel(5); // 레벨을 3으로 설정
+      //   }, 3000); // 300ms 딜레이
+      // }  
+      // function restLevel() {
+      //   var center = new kakao.maps.LatLng(36.219334746848095, 127.86117181879779);
+      //   // map.pajumpnTo(center,13);
+      //   map.setLevel(13);
+      //   setTimeout(function() {
+      //     map.setCenter(center);
+      //   }, 3000);
+      // }
 
       // 마커와 인포윈도우를 한 번에 처리하는 함수
-      function createMarker(markerData) {
-        var markerPosition = new kakao.maps.LatLng(markerData.lat, markerData.lng);
-        var restPosition = new kakao.maps.LatLng(0, 0);
-        // var marker = new kakao.maps.Marker({
-        //     position: new kakao.maps.LatLng(markerData.lat, markerData.lng),
-        //     title: markerData.title
-        // });
-        // marker.setMap(map);
-        // 마커 HTML 생성
-        var markerHTML = document.createElement("div");
-        // markerHTML.className ="leaflet-marker-icon leaflet-div-icon leaflet-zoom-animated leaflet-interactive";
-        markerHTML.className ="ts-marker-wrapper";
-        markerHTML.innerHTML = 
-          '<div class="ts-marker" data-ts-id="' + markerData.id + '">' +
-          (markerData.ribbon ? '<div class="ts-marker__feature">' + markerData.ribbon + '</div>' : "") +
-          (markerData.title ? '<div class="ts-marker__title">' + markerData.title + '</div>' : "") +
-          // (markerData.price ? '<div class="ts-marker__info">₩' + markerData.price.toLocaleString() + '</div>' : "") +
-          (markerData.marker_image ? '<div class="ts-marker__image ts-black-gradient" style="background-image: url(' + markerData.marker_image + ')"></div>' :
-            '<div class="ts-marker__image ts-black-gradient" style="background-image: url(/usr/v1/template/themeforest-v1.0/assets/img/marker-default-img.png)"></div>') +
-        
-          '</div>';
-
-        // 커스텀 마커 생성
-        var customMarker = new kakao.maps.CustomOverlay({
-          position: markerPosition,
-          content: markerHTML,
-          clickable: true,
-          yAnchor: 0.8,
-          xAnchor: 0,
-          zIndex:1
-        });
-
-        // customMarker.setMap(map);
-        clusterer.addMarker(customMarker);
-        newMarkers.push(customMarker);
-        
-
-        // 인포윈도우 HTML 생성
-        var infowindowHTML = document.createElement("div");
-        console.log("markerData:",markerData);
-        console.log("markerData이미지:",markerData.marker_image);
-        infowindowHTML.className ="infobox-wrapper";
-        infowindowHTML.innerHTML = '<div class="ts-infobox" data-ts-id="' + markerData.id + '">' +
-            '<img src="/usr/v1/template/themeforest-v1.0/assets/img/infobox-close.svg" class="ts-close">' +
-            (markerData.ribbon ? '<div class="ts-ribbon">' + markerData.ribbon + '</div>' : '') +
-            (markerData.ribbon_corner ? '<div class="ts-ribbon-corner"><span>' + markerData.ribbon_corner + '</span></div>' : '') +
-            '<a href="' + markerData.url + '" class="ts-infobox__wrapper ts-black-gradient">' +
-              (markerData.badge ? '<div class="badge badge-dark">' + markerData.badge + '</div>' : '') +
-              '<div class="ts-infobox__content">' +
-                '<figure class="ts-item__info">' +
-                // (markerData.price ? '<div class="ts-item__info-badge">₩' + markerData.price.toLocaleString() + '</div>' : '') +
-                (markerData.title ? '<h4>' + markerData.title + '</h4>' : '') +
-                (markerData.address ? '<aside><i class="fa fa-map-marker mr-2"></i>' + markerData.address + '</aside>' : '') +
-                '</figure>' +
-                '<div class="ts-description-lists">'+
-                  '<dl>' +
-                    '<dt>생성일</dt>' +
-                    '<dd>' + markerData.regDate + '</dd>' +
-                  '</dl>'+
-                  '<dl>' +
-                    '<dt>어종</dt>' +
-                    '<dd>' + markerData.fsNameList + '</dd>' +
-                  '</dl>'+
-                '</div>' +
-              '</div>' +
-              '<div class="ts-infobox_image" style="background-image: url(' + 
-                          (markerData.marker_image !=null ? markerData.marker_image: "/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png") + 
-                      ')"></div>' + 
-            '</a>' +
-          '</div>';
-
-        // 인포윈도우 생성
-        var infowindow = new kakao.maps.CustomOverlay({
-          position:restPosition,
-          content: infowindowHTML,
-          clickable: true,
-          yAnchor: 1,
-          xAnchor: 0,
-          zIndex: 0
-        });
-
-        infowindow.setMap(map);
-        infowindowHTML.parentElement.classList.add("leaflet-popup", "leaflet-zoom-animated");
-        // 마커 클릭 시 인포윈도우 표시
-        markerHTML.addEventListener('click', function () {
-          markerHTML.classList.add("ts-hide-marker");
-          infowindowHTML.classList.add("ts-show");
-          infowindow.setZIndex(2);
-          infowindow.setPosition(markerPosition);
-          // onMarkerClick(markerPosition);
-        });
-
-        // 인포윈도우 닫기 버튼 클릭 시 인포윈도우 숨기기
-        infowindowHTML.querySelector('.ts-close').addEventListener('click', function () {
-          markerHTML.classList.remove("ts-hide-marker");
-          // infowindow.setMap(null);
-          infowindowHTML.classList.remove("ts-show");
-          infowindow.setZIndex(0);
-          infowindow.setPosition(restPosition);
-          // restLevel();
-        });
-        
-      }
+      
       console.log("fsSeqList",fsSeqList);
       const shMpValue = document.querySelector("input[name=shMpValue]");
       console.log("shMpValue.value: " + shMpValue.value);
+
+      document.getElementById("mapPoint_search_form").addEventListener("submit", function (event) {
+        event.preventDefault();
+      })
+      document.getElementById("mapPoint_search_btn").addEventListener("click", function() {
+        console.log("클릭성공");
+        // $.ajax({
+        //   url: '/v1/mapPoint/mapPointSearchList', 
+        //   method: 'POST', 
+        //   data: {
+        //     fsSeqList:fsSeqList,
+        //     shMpValue:shMpValue.value
+        //   },
+        //   success: function(response) {
+        //       // 응답 받은 데이터를 바탕으로 마커 생성
+        //       // console.log("response:",response);
+        //       // console.log("data:",response.data);
+        //       var loadedMarkersData = response.data.map(function (data) {
+        //         const date = new Date(data.mpRegDate);
+        //         const dateOnly = date.toISOString().split('T')[0]; 
+        //         return {
+        //           id: data.mpSeq,
+        //           title: data.mpTitle,
+        //           text: data.mpText,
+        //           address: data.mpAddress,
+        //           type: data.mpType,
+        //           delNy: data.mpDelNy,
+        //           regDate: dateOnly,
+        //           fsNameList: data.fsNameList, // fsNameList는 서버에서 CONCAT된 값일 가능성이므로 필요에 따라 처리
+        //           lat: data.mpLatitude,  // 데이터에 위도 값이 포함되어 있다고 가정
+        //           lng: data.mpLongitude,  // 데이터에 경도 값이 포함되어 있다고 가정
+        //           marker_image: data.path || "/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png",  // 기본 이미지 설정
+        //           url: "/v1/mapPoint/mapPointDetail?mpSeq=" + data.mpSeq // URL 예시: 상세 페이지 링크
+        //         };
+        //       });
+              
+        //       loadedMarkersData.forEach(function (markerData) {
+        //           createMarker(markerData,clusterer,newMarkers,map);
+        //       });
+        //       // console.log("ajax 끝");
+        //       // console.log("restrictBounds:",restrictBounds.contain(newMarkers[0].getPosition()));  
+        //       createSideBarResult(map,loadedMarkersData,newMarkers);
+        //       kakao.maps.event.addListener(map, 'idle', () => {
+        //         createSideBarResult(map, loadedMarkersData, newMarkers);
+        //       });
+        //   },
+        //   error: function(xhr, status, error) {
+        //       console.error("포인트 데이터를 가져오지 못했습니다:", error);
+        //   }
+        // });
+      });
+      document.getElementById("keyword").addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          // Enter 키가 눌렸을 때 실행
+          document.getElementById("mapPoint_search_btn").click(); // 버튼 클릭 이벤트를 트리거
+        }
+      })
+      console.log("넘어감");
       $.ajax({
         url: '/v1/mapPoint/mapPointSearchList', 
         method: 'POST', 
@@ -400,12 +460,14 @@ $(document).ready(function($) {
             });
             
             loadedMarkersData.forEach(function (markerData) {
-                createMarker(markerData);
+              createMarker(markerData,clusterer,newMarkers,map);
             });
             // console.log("ajax 끝");
             // console.log("restrictBounds:",restrictBounds.contain(newMarkers[0].getPosition()));
+            console.log("restrictBounds:",restrictBounds)
             createSideBarResult(map,loadedMarkersData,newMarkers);
             kakao.maps.event.addListener(map, 'idle', () => {
+              console.log("restrictBounds:",restrictBounds)
               createSideBarResult(map, loadedMarkersData, newMarkers);
             });
         },
