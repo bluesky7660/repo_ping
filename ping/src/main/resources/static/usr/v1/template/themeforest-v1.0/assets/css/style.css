@@ -5272,7 +5272,7 @@ img.mfp-img {
     }
 
     .ts-full-screen.ts-has-horizontal-results .ts-map {
-        height: calc(100% - 13em);
+        height: calc(100% - 12em);
     }
 
     .ts-map .ts-results__horizontal {

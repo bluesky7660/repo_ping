@@ -285,7 +285,7 @@
 								<div class="card-body">
 									<div class="img_area">
 										<div class="img-box">
-											<img th:src="${lastPoint.path}" th:alt="${lastPoint.mpTitle}">
+											<img th:src="${lastPoint.path!=null?lastPoint.path:'/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}" th:alt="${lastPoint.mpTitle}">
 										</div>
 										<div class="ts-map ts-map__detail ts-border-radius__sm ts-shadow__sm" id="ts-map-simple"
 											data-ts-map-zoom="6"

@@ -216,7 +216,7 @@
 													<td th:if="${list.mmAdminNy eq false}">N</td>
 													<td th:unless ="${list.mmAdminNy eq false}">Y</td>
 													<td class="td_spotlight">
-														<a th:href="@{/v1/member/memberXdmMfom(mmSeq=${list.mmSeq})}" th:text="${list.mmName}"></a>
+														<a th:href="@{/v1/member/memberXdmMFom(mmSeq=${list.mmSeq})}" th:text="${list.mmName}"></a>
 													</td>
 													<td th:text="${list.mmEmail}"></td>
 													<td th:text = "${@codeService.selectOneCachedCode(list.mmGender)}"></td>

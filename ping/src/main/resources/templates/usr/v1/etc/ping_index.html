@@ -23,9 +23,9 @@
             padding-top: 0;
             padding-bottom: 0;
         }
-        .navbar-brand img{
+        /* .navbar-brand img{
             width: 80px;
-        }
+        } */
     </style>
 </head>
 
@@ -57,7 +57,7 @@
                 =====================================================================================================-->
                 <div class="ts-form__map-search ts-z-index__2">
                     <!--Form-->
-                    <form class="ts-form" method="post" action="/v1/index" autocomplete="off">
+                    <form class="ts-form" id="mapPoint_search_form" method="post" action="" autocomplete="off">
 
                         <!--Collapse button-->
                         <a href=".ts-form-collapse" data-toggle="collapse" class="ts-center__vertical justify-content-between">
@@ -100,7 +100,7 @@
 
                             <!--Submit button-->
                             <div class="form-group mt-2 mb-3">
-                                <button type="submit" class="btn btn-primary w-100" id="search-btn">검색</button>
+                                <button type="button" class="btn btn-primary w-100" id="mapPoint_search_btn">검색</button>
                             </div>
 
                             <!--More Options Button-->
@@ -473,16 +473,17 @@
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/sly.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/dragscroll.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery.scrollbar.min.js"></script>
-<script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script>
-<script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.markercluster.js"></script>
+<!-- <script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.markercluster.js"></script> -->
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&autoload=false&libraries=services,clusterer"></script>
 <script th:inline="javascript" type="text/javascript">
     var fsSeqList = /*[[${mapPointVo.fsSeqList}]]*/[];
+    var mapPointSearch = /*[[${mapPointSearch}]]*/[];
 </script>
 <script src="/usr/v1/js/script.js"></script>
 <script src="/usr/v1/js/map-kakao.js" ></script>
-<script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
+<!-- <script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script> -->
 <script>
     // window.onload = function() {
         // $.ajax({

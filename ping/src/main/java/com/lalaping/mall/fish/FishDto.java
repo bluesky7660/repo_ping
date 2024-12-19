@@ -17,6 +17,8 @@ public class FishDto {
 	private String season_ssSeq;
 	private String fish_fsSeq;
 //	private List<> seasons;
+	private List<String> seasonsSeq;
+	private String seasonsName;
 	
 	//for cache
 	public static List<FishDto> cachedFishArrayList = new ArrayList<FishDto>();
@@ -81,6 +83,18 @@ public class FishDto {
 	}
 	public void setFsNameList(String fsNameList) {
 		this.fsNameList = fsNameList;
+	}
+	public String getSeasonsName() {
+		return seasonsName;
+	}
+	public void setSeasonsName(String seasonsName) {
+		this.seasonsName = seasonsName;
+	}
+	public List<String> getSeasonsSeq() {
+		return seasonsSeq;
+	}
+	public void setSeasonsSeq(List<String> seasonsSeq) {
+		this.seasonsSeq = seasonsSeq;
 	}
 
 }

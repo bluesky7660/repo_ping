@@ -46,7 +46,7 @@ public class indexController {
 		    System.out.println("fsSeqList is null");
 		}
 		model.addAttribute("fishList",fishService.allOneList(vo));
-//		model.addAttribute("mapPoint",mapPointService.allList(mapPointVo));
+		model.addAttribute("mapPointSearch",mapPointService.selectSearchList(mapPointVo));
 		model.addAttribute("mapPoint",mapPointService.selectSearchList(mapPointVo));
 		model.addAttribute("allmapPoint",mapPointService.allList(mapPointVo));
 		model.addAttribute("ships",shipService.selectUsrList(shipVo));
