@@ -129,7 +129,7 @@
 											<div class="row">
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
-														<label for="inputName" class="form-label">물고기번호</label>
+														<label for="inputName" class="form-label">어종번호</label>
 														<input type="text" class="form-control" id="inputFsSeq" name="fsSeq" th:value="${item.fsSeq}" placeholder="자동생성" readonly="readonly">
 													</div>
 												</div>
@@ -137,60 +137,29 @@
 											<div class="row">
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
-														<label for="inputCodeName" class="form-label">물고기이름</label>
+														<label for="inputCodeName" class="form-label">어종이름</label>
 														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputFsName" name="fsName" th:value="${item.fsName}" placeholder="한글, 영대소문자, 숫자" required>
 														<div class="invalid-feedback">
-															코드이름을 적어주세요.
+															어종이름을 적어주세요.
 														</div>
 													</div>
 												</div>
-												<!-- <div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-													<div class="mb-3">	
-														<label for="inputUseNy" class="form-label">사용여부</label>
-														<select class="form-select validate-this" id="inputUseNy" name="cgUseNy" required>
-															<option value="" selected disabled>선택하세요</option>
-															<option value="1">사용</option>
-															<option value="0">사용안함</option>
-														</select>
-														<div class="invalid-feedback">
-															사용여부을 선택해주세요.
-														</div>
-													</div>
-												</div> -->
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-<!-- 													<div class="mb-3"> -->
-<!-- 														<label for="inputCodeName" class="form-label">시즌</label> -->
-<!-- 														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputFsSeason" name="fsSeason" th:value="${item.fsSeason}" placeholder="숫자임의입력" required> -->
-<!-- 														<div class="invalid-feedback"> -->
-<!-- 															코드이름을 적어주세요. -->
-<!-- 														</div> -->
-<!-- 													</div> -->
 													<div class="mb-3">
-														<label for="selectfsSeason" class="form-label">시즌</label>
-														<select class="form-select" id="inputFsSeason" name="fsSeason" required>
-															<option value="" selected>시즌을 선택하세요</option>
-															<option th:each="list : ${@codeService.selectListCachedCode(3)}" th:value="${list.cdSeq}" th:text="${list.cdName}" th:selected="${list.cdSeq} == ${item.fsSeason}"></option>
-														</select>
-													</div>
-												</div>
-												<!-- <div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-													<div class="mb-3">
-														<label for="inputCodeOrder" class="form-label">주소</label>
-														<input type="text" class="form-control" id="inputMpAddress" name="mpAddress" placeholder="주소입력" required>
+														<label for="FsSeasonList" class="form-label">시즌</label>
+														<div class="FsSeasonList d-flex flex-wrap justify-content-between row-gap-3 ">
+															<div class="FsSeasonItem d-flex gap-1 flex-grow-1 w-25" th:each="season : ${@codeService.selectListCachedCode(3)}">
+																<input type="checkbox" name="season_ssSeq" class="form-check-input" th:id="${'FsSeason'+seasonStat.count}">
+																<label th:for="${'FsSeason'+seasonStat.count}" th:text="${season.cdName}" style="white-space: nowrap;"></label>
+															</div>
+														</div>
+														<input id="FsSeasonCount" type="hidden" value="0" required>
 														<div class="invalid-feedback">
-															순서를 적어주세요.
+															시즌를 선택하세요.
 														</div>
 													</div>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-xl-6 col-md-8 col-12">
-													<div class="mb-3">
-														<label for="inputCodeDesc" class="form-label">포인트글</label>
-														<textarea class="form-control exclude-validation" id="inputMpText" name="mpText" placeholder="" rows="3"></textarea>
-													</div>
-												</div>
-											</div> -->
 											
 											<!-- Row end -->
 											<!-- Form actions footer start -->

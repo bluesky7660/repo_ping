@@ -352,12 +352,12 @@
 														</th>
 														<th><span>#</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">예약번호</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">유저ID</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">선상이름</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">총가격</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">예약인원</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">예약현황</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">출항날짜</span></th>
-<!-- 														<th class="sorting sorting_asc"><span class="dataTable-sorter">삭제</span></th> -->
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">등록일</span></th>
 													</tr>
 												</thead>
@@ -369,11 +369,12 @@
 														<td><input type="checkbox"></td>
 														<td th:text="${vo.totalRows - (((vo.thisPage -1) * vo.rowNumToShow) +listStat.index)}"></td>
 														<td th:text="${list.odSeq}"></td>
+														<td th:text="${list.mmEmail}"></td>
 														<td class="td_spotlight">
 															<a th:href="@{/v1/order/orderXdmMFom(odSeq=${list.odSeq})}" th:text="${list.spName}"></a>
 														</td>
-														<td th:text="${list.odTotalPrice}"></td>
-														<td th:text="${list.odCount}"></td>
+														<td th:text="${#numbers.formatInteger(list.odTotalPrice, 3, 'COMMA') + '원'}"></td>
+														<td th:text="${list.odCount} + '명'"></td>
 														<td th:if="${list.odReturnNy == 28}">환불중</td>
 														<td th:if="${list.odReturnNy == 27}">예약이용</td>
 														<td th:if="${list.odReturnNy == 26}">예약완료</td>

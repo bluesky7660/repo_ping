@@ -216,7 +216,7 @@ $(document).ready(function($) {
     var mapContainer = document.getElementById('map');
     if(mapContainer){
       var mapOption = {
-        center: new kakao.maps.LatLng(36.219334746848095, 127.86117181879779), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(36.319334746848095, 127.86117181879779), // 지도의 중심좌표
         level: 13 // 지도의 확대 레벨
       };
     
