@@ -518,6 +518,7 @@ window.addEventListener('load', function() {
                     "mmTel" : $("#register_tel").val().trim(),
                     "mmGender" : $("#register_gender").val().trim(),
                     "mmBirthDay" : $("#register_birthDay").val().trim(),
+                    "mmAdminNy": 0,
                 }//, "autoLogin" : $("#autoLogin").is(":checked")}
                 ,success: function(response) {
                     if(response.rt == "success") {

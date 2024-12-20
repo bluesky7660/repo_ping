@@ -6,8 +6,8 @@
     <resultMap type="com.lalaping.mall.order.OrderDto" id="resultMapObj"></resultMap>
     <sql id="selectCommon">
         FROM orders g
-   		LEFT JOIN ship a
-		ON g.ship_spSeq = a.spSeq
+   		LEFT JOIN ship a ON g.ship_spSeq = a.spSeq
+		left join member m on m.mmSeq = g.member_mmSeq
 		WHERE 1=1
         <if test="shValue != null and !shValue.equals('')">
             <choose>
@@ -134,6 +134,7 @@
     		,a.spName
     		,a.spStart
     		,a.spSeq
+    		,m.mmEmail
    		<include refid="selectCommon"/>
    		ORDER BY
 		g.odSeq Desc

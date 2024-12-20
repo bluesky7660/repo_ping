@@ -51,7 +51,7 @@
 			,a.fsRegDate
 			,b.fish_fsSeq
             ,GROUP_CONCAT(b.season_ssSeq ORDER BY a.fsSeq) AS seasonsSeq
-            ,GROUP_CONCAT(c.cdName ORDER BY a.fsSeq) AS seasonsName
+            ,GROUP_CONCAT(c.cdName ORDER BY b.season_ssSeq) AS seasonsName
         FROM fish a
 		LEFT JOIN seasonandfish b 
 		ON a.fsSeq = b.fish_fsSeq

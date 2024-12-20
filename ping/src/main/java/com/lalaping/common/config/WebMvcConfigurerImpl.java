@@ -14,7 +14,7 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer{
 
 		registry.addInterceptor(new CheckLoginSessionInterceptor())
 				
-				.addPathPatterns("/*/*/*/*Xdm*","/xdm/infra/*Xdm*") 
+				.addPathPatterns("/*/*/*/*Xdm*","/*/*/*Xdm*","/*/*Xdm*","/xdm/infra/*Xdm*") 
 				
 				.excludePathPatterns(
 						"/resources/**",
@@ -24,7 +24,7 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer{
 						"/xdm/v1/template/**",
 						"/v1/loginXdm",
 						"/v1/signupXdm",
-						"/v1/infra/loginProc",
+						"/v1/infra/loginXdmProc",
 						"/loginUsrProc"
 						);
 		registry.addInterceptor(new UsrCheckLoginSessionInterceptor())

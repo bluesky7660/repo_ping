@@ -114,7 +114,7 @@ function createMarker(markerData,clusterer,newMarkers,map) {
   markerHTML.className ="ts-marker-wrapper";
   markerHTML.innerHTML = 
     '<div class="ts-marker" data-ts-id="' + markerData.id + '">' +
-    (markerData.ribbon ? '<div class="ts-marker__feature">' + markerData.ribbon + '</div>' : "") +
+    // (markerData.ribbon ? '<div class="ts-marker__feature">' + markerData.ribbon + '</div>' : "") +
     (markerData.title ? '<div class="ts-marker__title">' + markerData.title + '</div>' : "") +
     // (markerData.price ? '<div class="ts-marker__info">₩' + markerData.price.toLocaleString() + '</div>' : "") +
     (markerData.marker_image ? '<div class="ts-marker__image ts-black-gradient" style="background-image: url(' + markerData.marker_image + ')"></div>' :
@@ -141,10 +141,10 @@ function createMarker(markerData,clusterer,newMarkers,map) {
   var infowindowHTML = document.createElement("div");
   // console.log("markerData:",markerData);
   infowindowHTML.className ="infobox-wrapper";
-  infowindowHTML.innerHTML = '<div class="ts-infobox" data-ts-id="' + markerData.id + '">' +
+  infowindowHTML.innerHTML = '<div class="ts-infobox " data-ts-id="' + markerData.id + '">' +
       '<img src="/usr/v1/template/themeforest-v1.0/assets/img/infobox-close.svg" class="ts-close">' +
-      (markerData.ribbon ? '<div class="ts-ribbon">' + markerData.ribbon + '</div>' : '') +
-      (markerData.ribbon_corner ? '<div class="ts-ribbon-corner"><span>' + markerData.ribbon_corner + '</span></div>' : '') +
+      // (markerData.ribbon ? '<div class="ts-ribbon">' + markerData.ribbon + '</div>' : '') +
+      // (markerData.ribbon_corner ? '<div class="ts-ribbon-corner"><span>' + markerData.ribbon_corner + '</span></div>' : '') +
       '<a href="' + markerData.url + '" class="ts-infobox__wrapper ts-black-gradient">' +
         (markerData.badge ? '<div class="badge badge-dark">' + markerData.badge + '</div>' : '') +
         '<div class="ts-infobox__content">' +
@@ -188,16 +188,21 @@ function createMarker(markerData,clusterer,newMarkers,map) {
     infowindowHTML.classList.add("ts-show");
     infowindow.setZIndex(2);
     infowindow.setPosition(markerPosition);
+    infowindowHTML.parentElement.style.opacity=1;
+    infowindowHTML.parentElement.style.transform="scale(1)";
     // onMarkerClick(markerPosition);
   });
-
   // 인포윈도우 닫기 버튼 클릭 시 인포윈도우 숨기기
   infowindowHTML.querySelector('.ts-close').addEventListener('click', function () {
     markerHTML.classList.remove("ts-hide-marker");
+    infowindowHTML.parentElement.style.opacity=0;
+    infowindowHTML.parentElement.style.transform="scale(0)";
     // infowindow.setMap(null);
-    infowindowHTML.classList.remove("ts-show");
-    infowindow.setZIndex(0);
-    infowindow.setPosition(restPosition);
+    setTimeout(function () {
+      infowindowHTML.classList.remove("ts-show");
+      // infowindow.setZIndex(0);
+      infowindow.setPosition(restPosition);
+    }, 500);
     // restLevel();
   });
   
@@ -211,7 +216,7 @@ $(document).ready(function($) {
     var mapContainer = document.getElementById('map');
     if(mapContainer){
       var mapOption = {
-        center: new kakao.maps.LatLng(36.219334746848095, 127.86117181879779), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(36.319334746848095, 127.86117181879779), // 지도의 중심좌표
         level: 13 // 지도의 확대 레벨
       };
     
@@ -340,31 +345,8 @@ $(document).ready(function($) {
         map: map,               // 클러스터러가 표시될 지도
         averageCenter: true,    // 마커들의 평균 위치에 클러스터 표시
         minLevel: 5,            // 최소 zoom 레벨
-        gridSize: 200,
+        gridSize: 50,
       });
-      // function onMarkerClick(Position) {
-      //   map.jump(Position,5);
-      //   // map.setLevel(5);
-      // } 
-      // function onMarkerClick(position) {
-      //   console.log("Clicked position:", position); // 디버깅용 로그
-        
-      //   // 지도 중심을 마커 위치로 이동
-      //   map.setCenter(position);
-        
-      //   // 약간의 지연 후 줌 레벨 변경
-      //   setTimeout(function() {
-      //       map.setLevel(5); // 레벨을 3으로 설정
-      //   }, 3000); // 300ms 딜레이
-      // }  
-      // function restLevel() {
-      //   var center = new kakao.maps.LatLng(36.219334746848095, 127.86117181879779);
-      //   // map.pajumpnTo(center,13);
-      //   map.setLevel(13);
-      //   setTimeout(function() {
-      //     map.setCenter(center);
-      //   }, 3000);
-      // }
 
       // 마커와 인포윈도우를 한 번에 처리하는 함수
       
