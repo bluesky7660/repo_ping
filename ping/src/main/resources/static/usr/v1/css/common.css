@@ -142,7 +142,17 @@ img[alt="날씨이미지"]{
     color: #EFCC00;
 }
 
+.ts-marker .ts-marker__image:before{
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+}
 
+.leaflet-popup.leaflet-zoom-animated{
+    transform: scale(0);
+    transform-origin: bottom left;
+    opacity: 0;
+    transition: all .1s linear;
+}
 
 @media (min-width: 576px) {
     #fishing_point .container {
