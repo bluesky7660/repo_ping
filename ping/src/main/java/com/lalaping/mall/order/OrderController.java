@@ -3,8 +3,10 @@ package com.lalaping.mall.order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fasterxml.jackson.annotation.JacksonInject.Value;
 import com.lalaping.infra.member.MemberDto;
 import com.lalaping.infra.member.MemberService;
 import com.lalaping.mall.ship.ShipService;
@@ -20,6 +22,23 @@ public class OrderController {
 	@Autowired
 	public ShipService shipService;
 	
+//	xdm
+	@RequestMapping(value = "/v1/order/orderXdmList")
+	public String orderXdmList(Model model,@ModelAttribute("vo") OrderVo vo) {
+		vo.setParamsPaging(orderService.listCount(vo));
+		model.addAttribute("list", orderService.selectXdmListOrder(vo));
+		
+		return "xdm/v1/order/orderXdmList";
+	}
+	@RequestMapping(value = "/v1/order/orderXdmMFom")
+	public String orderXdmMFom(Model model,OrderDto orderDto) {
+		model.addAttribute("item", orderService.selectOne(orderDto));
+		return "xdm/v1/order/orderXdmMFom";
+	}
+	
+	
+	
+//	usr
 	@RequestMapping(value = "/v1/checkout/ping_checkout")
 	public String ping_checkout(Model model,OrderDto orderDto, HttpSession session, MemberDto memberDto) {
 		String sessSeqUsr = (String) session.getAttribute("sessSeqUsr");

@@ -201,15 +201,8 @@
                         <section id="description">
 
                             <h3>출항시간</h3>
-
-                            <p th:text="${item.spDesc}">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dictum ac augue et suscipit.
-                                Vivamus ac tellus ut massa bibendum aliquam vitae ac diam. Aenean in enim volutpat,
-                                accumsan erat non, porta massa. Nulla ac porta orci. Quisque condimentum fermentum
-                                isl, lacinia tempor erat venenatis non. Integer ut malesuada est, nec pulvinar magna.
-                                Vestibulum tincidunt malesuada mi eget mattis. Phasellus quis purus porta, auctor dolor
-                                sed, eleifend tortor. Vestibulum placerat tristique turpis, eu suscipit nulla elementum
-                                porttitor. Duis eu varius libero.
+	
+                            <p th:text="${#dates.format(item.spStart,'yyyy-MM-dd / HH:mm')}">
                             </p>
 
                         </section>
@@ -257,7 +250,9 @@
 
                             <ul class="ts-list-colored-bullets ts-text-color-light ts-column-count-3 ts-column-count-md-2">
                                 <li th:if="${item.spEatNy == 1}">식사제공</li>
+                                <li th:unless="${item.spEatNy == 1}">식사제공</li>
                                 <li th:if="${item.spRentalNy == 1}">낚시대 대여</li>
+                                <li th:unless="${item.spRentalNy == 1}">낚시대 대여</li>
                                
                             </ul>
 
