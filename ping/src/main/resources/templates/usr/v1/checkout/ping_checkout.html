@@ -23,25 +23,10 @@
 </head>
 
 <body>
-
-<!-- WRAPPER
-    =================================================================================================================-->
 <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
-
-    <!--*********************************************************************************************************-->
-    <!--HEADER **************************************************************************************************-->
-    <!--*********************************************************************************************************-->
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
-    <!--end Header-->
-
-    <!--*********************************************************************************************************-->
-    <!-- MAIN ***************************************************************************************************-->
-    <!--*********************************************************************************************************-->
 
     <main id="ts-main">
-
-        <!--BREADCRUMB
-            =========================================================================================================-->
         <section id="breadcrumb">
             <div class="container">
                 <nav aria-label="breadcrumb">
@@ -53,9 +38,6 @@
                 </nav>
             </div>
         </section>
-
-        <!--PAGE TITLE
-            =========================================================================================================-->
         <section id="page-title">
             <div class="container">
                 <div class="row">
@@ -70,9 +52,6 @@
                 </div>
             </div>
         </section>
-
-        <!--EDIT FORM
-            =========================================================================================================-->
         <section id="edit-form">
             <div class="container">
                 <div class="row">
@@ -128,8 +107,6 @@
                                 <!--end row-->
                             </section>
 
-                            <!--BASIC INFORMATION
-                                =====================================================================================-->
                             <section id="basic-information" class="mb-5">
 
                                 <!--Title-->
@@ -198,85 +175,9 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <!-- <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label for="title">배이름</label>
-                                            <div class="input-group-append">
-                                                <span class="border-left-0" name="spName" th:text="${item.spName}">누리호</span>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="col-sm-12 col-md-10">
-
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="input-group">
-                                                    <label for="area">주소</label>
-                                                    <span class="border-left-0" th:text="${item.ptAddress}">부산항</span>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="input-group">
-                                                    <label for="area">항구명</label>
-                                                    <span class="border-left-0" th:text="${item.ptName}">부산항</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="col">
-                                                <select class="custom-select my-2" id="type" name="odCount" style="max-height: 200px; overflow-y: auto;">
-						                            <option value="">인원</option>
-						                            <option th:each="i : ${#numbers.sequence(1, item.spRemain)}" 
-						                                th:value="${i}" th:text="${i + '인'}"></option>
-						                        </select>
-                                            </div>
-                                            <input type="hidden" name="spName" th:value="${item.spName}">
-                                            <input type="hidden" name="spSeq" th:value="${item.spSeq}">
-                                            <input type="hidden" name="spPrice" th:value="${item.spPrice}">
-                                            <input type="hidden" id="mmSeq" name="mmSeq" th:value="${session.sessSeqUsr}">
-                                        </div>
-
-                                    </div>
-                                    
-                                    <div class="col-sm-2">
-                                        <div class="input-group">
-                                            <label for="area">출발일</label>
-                                            <span th:text="${#dates.format(item.spStart, 'yyyy-MM-dd HH:mm')}">2024-12-31</span>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="input-group">
-                                            <label for="area">식사제공</label>
-                                            <span th:if="${item.spEatNy eq 0}">N</span>
-                                            <span th:unless="${item.spEatNy eq 0}">Y</span>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="input-group">
-                                            <label for="area">낚시대대여</label>
-                                            <span th:if="${item.spRentalNy eq 0}">N</span>
-                                            <span th:unless="${item.spRentalNy eq 0}">Y</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="input-group">
-                                            <label for="price">총가격</label>
-                                            
-                                            <span id="odTotalPrice" th:text="${#numbers.formatInteger(item.spPrice,1,'COMMA')}"></span>
-                                            <div class="input-group-append">
-                                                <span>원</span>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </div>
                                 <!--end row-->
                             </section>
-
-                            <!--LOCATION
-                                =====================================================================================-->
-
-                            <!--ADDITIONAL INFORMATION
-                                =====================================================================================-->  
                             <hr>
                             <section class="py-3">
                                 <button type="button" class="btn btn-outline-secondary btn-lg float-left" onclick="history.back()">
@@ -300,11 +201,6 @@
         </section>
 
     </main>
-    <!--end #ts-main-->
-
-    <!--*********************************************************************************************************-->
-    <!--************ FOOTER *************************************************************************************-->
-    <!--*********************************************************************************************************-->
  	<div th:replace="~{usr/v1/etc/footer :: page-footer}"></div>
     <!--end #ts-footer-->
 
