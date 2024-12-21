@@ -30,31 +30,13 @@
 </head>
 
 <body>
-
-<!-- WRAPPER
-=====================================================================================================================-->
 <div class="ts-page-wrapper ts-homepage" id="page-top">
-
-    <!--*********************************************************************************************************-->
-    <!--HEADER **************************************************************************************************-->
-    <!--*********************************************************************************************************-->
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
-    
-    <!--end Header-->
-
-    <!-- HERO MAP
-    =================================================================================================================-->
     <section id="ts-hero" class=" mb-0">
 
         <!--Fullscreen mode-->
         <div class="ts-full-screen ts-has-horizontal-results w-1001 d-flex1 flex-column1">
-
-            <!-- MAP
-            =========================================================================================================-->
             <div class="ts-map ts-shadow__sm">
-
-                <!-- FORM
-                =====================================================================================================-->
                 <div class="ts-form__map-search ts-z-index__2">
                     <!--Form-->
                     <form class="ts-form" id="mapPoint_search_form" method="post" action="" autocomplete="off">
@@ -148,25 +130,8 @@
                 </div>
                 <!--end ts-form__map-search-->
                 <div id="map" class="h-100 ts-z-index__1"></div>
-                <!-- <div id="ts-map-hero" class="h-100 ts-z-index__1"
-                     data-ts-map-leaflet-provider="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
-                     data-ts-map-leaflet-attribution="&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> &copy; <a href='http://cartodb.com/attributions'>CartoDB</a>"
-                     data-ts-map-zoom-position="bottomright"
-                     data-ts-map-scroll-wheel="1"
-                     data-ts-map-zoom="6"
-                     data-ts-map-center-latitude="37.407709840151576"
-                     data-ts-map-center-longitude="127.35696894774053"
-                     data-ts-locale="ko-KR"
-                     data-ts-currency="KRW"
-                     data-ts-unit="m<sup>2</sup>"
-                     data-ts-display-additional-info="area_Area;bedrooms_Bedrooms;bathrooms_Bathrooms"
-                >
-                </div> -->
 
             </div>
-
-            <!-- RESULTS
-            =========================================================================================================-->
             <div id="ts-results" class="ts-results__horizontal scrollbar-inner dragscroll">
                 <div class="ts-results-wrapper"></div>
             </div>
@@ -177,14 +142,7 @@
     </section>
     <!--end ts-hero-->
 
-    <!--*********************************************************************************************************-->
-    <!-- MAIN ***************************************************************************************************-->
-    <!--*********************************************************************************************************-->
-
     <main id="ts-main">
-
-        <!-- FEATURED PROPERTIES
-        =============================================================================================================-->
         <section id="featured-properties" class="featured-properties ts-block pt-5">
             <div class="container">
 
@@ -270,23 +228,6 @@
             </div>
             <!--end container-->
         </section>
-
-        <!--SUBMIT BANNER
-        =============================================================================================================-->
-        <!-- <section id="weather" class="ts-block">
-            <div class="container">
-
-                <div class="ts-block-inside text-center ts-separate-bg-element" data-bg-image-opacity=".2" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/weather.png" data-bg-color="#fff" style="background-image: url(&quot;/usr/v1/template/themeforest-v1.0/assets/img/weather.png&quot;);">
-                    <figure class="h1 font-weight-light mb-2">지역날씨정보</figure>
-                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                    <a href="submit.html" class="btn btn-dark">날씨정보보기</a>
-                </div>
-
-            </div>
-        </section> -->
-
-        <!--LATEST LISTINGS
-        =============================================================================================================-->
         <section id="season_point" class="ts-block season_point">
             <div class="container">
 
@@ -455,9 +396,7 @@
         <!--end ts-block-->
     </main>
 
-    <!--*********************************************************************************************************-->
-    <!--************ FOOTER *************************************************************************************-->
-    <!--*********************************************************************************************************-->
+    
 
     <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
     <!--end #ts-footer-->
@@ -483,7 +422,6 @@
 </script>
 <script src="/usr/v1/js/script.js"></script>
 <script src="/usr/v1/js/map-kakao.js" ></script>
-<!-- <script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script> -->
 <script>
     // window.onload = function() {
         // $.ajax({

@@ -22,20 +22,9 @@
 
 <body>
 
-<!-- WRAPPER
-    =================================================================================================================-->
+
     <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
-
-        <!--*********************************************************************************************************-->
-        <!--HEADER **************************************************************************************************-->
-        <!--*********************************************************************************************************-->
         <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
-
-        <!--end Header-->
-
-        <!--*********************************************************************************************************-->
-        <!-- MAIN ***************************************************************************************************-->
-        <!--*********************************************************************************************************-->
 
         <main id="ts-main">
 
@@ -186,26 +175,7 @@
                             <section id="display-control-agents">
                                 <div class="clearfix">
 
-                                    <!--Display selector on the left-->
-                                    <!-- <div class="float-left">
-                                        <a href="#" class="btn btn-outline-secondary active px-3 mr-2 mb-2 ts-btn-border-muted">
-                                            <i class="fa fa-th-large"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-outline-secondary px-3 mb-2 ts-btn-border-muted">
-                                            <i class="fa fa-th-list"></i>
-                                        </a>
-                                    </div> -->
-
-                                    <!--Display selector on the right-->
-                                    <!-- <div class="float-none float-sm-right pl-2 ts-center__vertical">
-                                        <label for="sorting" class="mb-0 mr-2 text-nowrap">Sort by:</label>
-                                        <select class="custom-select bg-transparent" id="sorting" name="sorting">
-                                            <option value="">Default</option>
-                                            <option value="1">Price lowest first</option>
-                                            <option value="2">Price highest first</option>
-                                            <option value="3">Distance</option>
-                                        </select>
-                                    </div> -->
+                                    
 
                                 </div>
                                 <!--end container-->
@@ -270,51 +240,9 @@
                                         <!--end ts-item-->
                                     </div>
                                     <!--end Item col-md-4-->
-
-                                    <!--Item-->
-                                    <!-- <div class="col-sm-6">
-
-                                        <div class="card ts-item ts-card ts-item__lg">
-                                            <a href="#" class="card-img ts-item__image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-02.jpg">
-                                                <figure class="ts-item__info">
-                                                    <h4>Cozy Design Studio</h4>
-                                                    <aside>
-                                                        <i class="fa fa-map-marker mr-2"></i>
-                                                        4831 Worthington Drive
-                                                    </aside>
-                                                </figure>
-                                                <div class="ts-item__info-badge">$125,000</div>
-                                            </a>
-                                            <div class="card-body ts-item__body">
-                                                <div class="ts-description-lists">
-                                                    <dl>
-                                                        <dt>Area</dt>
-                                                        <dd>325m<sup>2</sup></dd>
-                                                    </dl>
-                                                    <dl>
-                                                        <dt>Bedrooms</dt>
-                                                        <dd>2</dd>
-                                                    </dl>
-                                                    <dl>
-                                                        <dt>Bathrooms</dt>
-                                                        <dd>1</dd>
-                                                    </dl>
-                                                </div>
-                                            </div>
-                                            <a href="detail-01.html" class="card-footer">
-                                                <span class="ts-btn-arrow">Detail</span>
-                                            </a>
-
-                                        </div>
-                                    </div> -->
-                                    <!--end Item col-md-4-->
-
                                 </div>
                                 <!--end row-->
                             </section>
-
-                            <!--PAGINATION
-                                =================================================================================-->
                                 <section id="pagination-items">
                                     <div class="container-fluid px-0 mt-2 mb-2">
                                         <div class="row">
@@ -331,13 +259,7 @@
 
                         </div>
                         <!--end col-md-8 / left side -->
-
-                        <!--RIGHT SIDE (SIDEBAR)
-                            =============================================================================================-->
                         <div class="col-md-4 navbar-expand-md">
-
-                            <!--COLLAPSE BUTTON on small screens
-                                =========================================================================================-->
                             <button class="btn bg-white mb-4 w-100 d-block d-md-none" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false"
                                     aria-label="Toggle navigation">
                                     <span class="float-left">
@@ -348,13 +270,8 @@
                                         <i class="fa fa-plus small ts-opacity__30"></i>
                                     </span>
                             </button>
-
-                            <!--SIDEBAR COLLAPSABLE CONTENT
-                                =========================================================================================-->
                           
                             <aside id="sidebar" class="ts-sidebar collapse navbar-collapse">
-                            <!--REVIEW FORM
-                                    =====================================================================================-->
                                 <section id="review-form">
                                     <h2>댓글 작성</h2>
 
@@ -377,15 +294,8 @@
                                     <!--end form-contact -->
 
                                 </section>
-
-                                <!--REVIEWS
-                                    =====================================================================================-->
-                              
                                 <section id="reviews">
                                 	<div id="reviewsContainer">
-
-                                    <!--Reviews carousel-->
-<!--                                     <div class="owl-carousel" data-owl-dots="1" > -->
 
                                         <!--Slide-->
                                         <div class="slide" th:each="rvList :${rvList}">
@@ -400,7 +310,7 @@
                                             <div class="mx-2 ts-center__vertical">
                                                 <div class="ts-circle p-4 mr-3"></div>
                                                 <div>
-                                                    <h6 class="mb-0"><strong th:text="${rvList.mmName}">맴버이름</strong></h6>
+                                                    <h6 class="mb-0"><strong th:text="${rvList.mmName}"></strong></h6>
                                                     <input type="hidden" id="mrSeq" th:value="${rvList.mrSeq}">
                                                     
                                                     <small class="ts-opacity__30">
@@ -411,7 +321,6 @@
                                             
                                         </div>
                                         <!--end slide-->
-<!--                                     </div> -->
                                     <!--end owl-carousel-->
 									</div>
 									
@@ -429,10 +338,6 @@
 
         </main>
         <!--end #ts-main-->
-
-        <!--*********************************************************************************************************-->
-        <!--************ FOOTER *************************************************************************************-->
-        <!--*********************************************************************************************************-->
 
         <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
         <!--end #ts-footer-->
