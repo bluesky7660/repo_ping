@@ -17,9 +17,7 @@
 
 	<title>FishOn - 피쉬온</title>
     <link rel="icon" href="/usr/v1/template/themeforest-v1.0/assets/img/favicon.ico">
-    
-	<!-- kakao 우편번호 -->
-	<!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+
 	<!-- map 마커 css -->
 	<style>
 	    .map_wrap {position:relative;width:100%;height:350px;}
@@ -49,9 +47,6 @@
                 </nav>
             </div>
         </section>
-
-        <!--PAGE TITLE
-            =========================================================================================================-->
         <section id="page-title">
             <div class="container">
                 <div class="row">
@@ -63,9 +58,6 @@
                 </div>
             </div>
         </section>
-
-        <!--SUBMIT FORM
-            =========================================================================================================-->
         <section id="submit-form">
             <div class="container">
                 <div class="row">
@@ -73,9 +65,6 @@
                     <div class="offset-lg-1 col-lg-10">
 
                         <form id="form-submit" method="POST" class="ts-form" action="/mapPointInst" enctype="multipart/form-data">
-
-                            <!--BASIC INFORMATION
-                                =====================================================================================-->
                             <section id="basic-information" class="mb-5">
 
                                 <!--Title-->
@@ -140,24 +129,12 @@
                                     <div class="col-sm-6">
                                     <!-- 지도를 표시할 div 입니다, 지도 크기 설정 -->
 										<div id="map" style="width:100%;height:500px;"></div>
-<!--                                         <div id="ts-map-simple" class="ts-map ts-shadow__sm h-100" -->
-<!--                                              data-ts-map-leaflet-provider="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png" -->
-<!--                                              data-ts-map-zoom="13" -->
-<!--                                              data-ts-map-center-latitude="40.702411" -->
-<!--                                              data-ts-map-center-longitude="-73.556842" -->
-<!--                                              data-ts-map-scroll-wheel="1" -->
-<!--                                              data-ts-map-controls="0" -->
-<!--                                              data-ts-map-marker-drag="1"> -->
-<!--                                         </div> -->
                                     </div>
                                     <!--end col-md-6-->
                                 </div>
                                 <!--end row-->
                             </section>
                             <!--end #location-->
-
-                            <!--GALLERY
-                                =====================================================================================-->
                             <section id="gallery" class="mb-5">
 
                                 <!--Title-->
@@ -171,9 +148,6 @@
                                 </div>
 
                             </section>
-
-                            <!--ADDITIONAL INFORMATION
-                                =====================================================================================-->
                             <section id="additional-information" class="mb-5">
 
                                 <!--Title-->
@@ -441,10 +415,6 @@
 	}
 
     window.addEventListener("load",function() {
-        // $("input.file-upload-input.with-preview").on('change', function() {
-        //     // 모든 동적 input 필드를 disabled로 설정
-        //     $(".file-upload-input").prop('disabled', true);
-        // });
 
         var fileInput = document.querySelector("input#MultiFile1");
 
