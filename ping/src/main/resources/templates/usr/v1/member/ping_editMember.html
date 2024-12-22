@@ -27,17 +27,6 @@
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
 
     <main id="ts-main">
-        <section id="breadcrumb">
-            <div class="container">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Library</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Data</li>
-                    </ol>
-                </nav>
-            </div>
-        </section>
         <section id="page-title">
             <div class="container">
                 <div class="ts-title">
@@ -45,24 +34,11 @@
                 </div>
             </div>
         </section>
-
-        <!--MAP
-            =========================================================================================================-->
-    
-
-        <!--CONTACT INFO & FORM
-            =========================================================================================================-->
         <section id="contact-form">
             <div class="container">
                 <div class="row">
-
-                    <!--CONTACTS (LEFT SIDE)
-                        =============================================================================================-->
                     <div th:replace="~{usr/v1/etc/userSide :: side}"></div>
                     <!--end col-md-4-->
-
-                    <!--FORM (RIGHT SIDE)
-                        =============================================================================================-->
                     <div class="col-md-8">
 
                         <!--Title-->
@@ -133,7 +109,6 @@
                                     </div>
                                     <!-- input -->
                                     <div class="col-12">
-                                        <!-- <p class="mb-4">Can’t remember your current password?<a href="#"> Reset your password.</a></p> -->
                                         <button type="submit" class="btn btn-primary" id="form-contact-submit">
                                             비밀번호 변경
                                         </button>

@@ -54,32 +54,6 @@
                                 <input type="text" class="form-control" id="keyword" name="shMpValue" th:value="${mapPointVo.shMpValue}" placeholder="포인트 이름, 주소">
                             </div>
 
-                            <!--Category-->
-                            <!-- <select class="custom-select my-2" id="type" name="category">
-                                <option value="">Type</option>
-                                <option value="1">Apartment</option>
-                                <option value="2">Villa</option>
-                                <option value="3">Land</option>
-                                <option value="4">Garage</option>
-                            </select> -->
-
-                            <!--Status-->
-                            <!-- <select class="custom-select my-2" id="status" name="status">
-                                <option value="">Status</option>
-                                <option value="1">Sale</option>
-                                <option value="2">Rent</option>
-                            </select> -->
-
-                            <!--Max Price-->
-                            <!-- <select class="custom-select my-2" id="price" name="price">
-                                <option value="">Max Price</option>
-                                <option value="5000">$5,000</option>
-                                <option value="10000">$10,000</option>
-                                <option value="50000">$50,000</option>
-                                <option value="100000">$100,000</option>
-                                <option value="100000>">> $100,000</option>
-                            </select> -->
-
                             <!--Submit button-->
                             <div class="form-group mt-2 mb-3">
                                 <button type="button" class="btn btn-primary w-100" id="mapPoint_search_btn">검색</button>
@@ -99,7 +73,6 @@
                                 <div class="pt-4">
 
                                     <!--Checkboxes-->
-                                    <!-- <div id="features-checkboxes" class="w-100"> -->
                                    
                                     <div id="fishList-checkboxes"  class="w-100 fishList-checkboxes">
                                         <h6 class="mb-3">어종</h6>
@@ -221,7 +194,6 @@
                 </div>    
                 <!--All properties button-->
                 <div class="text-center mt-3">
-                    <!-- <a href="listing-category-icons.html" class="btn btn-outline-dark ts-btn-border-muted">모든 낚시 포인트 보러가기</a> -->
                     <a href="/v1/ship/shipList" class="btn btn-outline-dark">모든 선상낚시 보러가기</a>
                 </div>
 
@@ -286,13 +258,6 @@
                     <div class="col-sm-6 col-lg-3" th:each="sessPoint:${sessPoint}">
                         <div class="card ts-item ts-card">
                             <a th:href="@{/v1/mapPoint/mapPointDetail(mpSeq=${sessPoint.mpSeq})}">
-                                <!--Ribbon-->
-                                <!-- <div class="ts-ribbon">
-                                    <i class="fa fa-thumbs-up"></i>
-                                </div>
-                                <div class="ts-ribbon-corner">
-                                    <span>Updated</span>
-                                </div> -->
 
                                 <!--Card Image-->
                                 <div class="card-img ts-item__image" th:data-bg-image="${sessPoint.path != null ? sessPoint.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}">
@@ -334,9 +299,6 @@
             </div>
             <!--end container-->
         </section>
-
-        <!--ITEM CAROUSEL
-        =============================================================================================================-->
         <section id="fishing_point" class="ts-block" data-bg-pattern="/usr/v1/template/themeforest-v1.0/assets/img/bg-pattern-dot.png">
             <div class="container">
                 <!--Title-->
@@ -408,8 +370,6 @@
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/sly.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/dragscroll.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery.scrollbar.min.js"></script>
-<!-- <script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script>
-<script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.markercluster.js"></script> -->
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&autoload=false&libraries=services,clusterer"></script>
 <script th:inline="javascript" type="text/javascript">
