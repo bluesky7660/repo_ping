@@ -27,17 +27,6 @@
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
 
     <main id="ts-main">
-        <section id="breadcrumb">
-            <div class="container">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Library</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Data</li>
-                    </ol>
-                </nav>
-            </div>
-        </section>
         <section id="page-title">
             <div class="container">
 
@@ -64,73 +53,21 @@
 
             </div>
         </section>
-
-        <!--GALLERY CAROUSEL
-            =========================================================================================================-->
         <section id="gallery-carousel">
 
             <div class="owl-carousel ts-gallery-carousel ts-gallery-carousel__multi" data-owl-dots="1" data-owl-items="3" data-owl-center="1" data-owl-loop="1">
-
-                <!--Slide-->
                 <div class="slide" th:each="list : ${list}">
                     <div class="ts-image" th:data-bg-image="${list.path}">
                         <a th:href="${list.path}" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a>
                     </div>
                 </div>
-
-                <!--Slide-->
-<!--                 <div class="slide"> -->
-<!--                     <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-02.jpg"> -->
-<!--                         <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-02.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a> -->
-<!--                     </div> -->
-<!--                 </div> -->
-
-                <!--Slide-->
-<!--                 <div class="slide"> -->
-<!--                     <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-05.jpg"> -->
-<!--                         <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-03.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a> -->
-<!--                     </div> -->
-<!--                 </div> -->
-
-                <!--Slide-->
-<!--                 <div class="slide"> -->
-<!--                     <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-04.jpg"> -->
-<!--                         <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-04.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a> -->
-<!--                     </div> -->
-<!--                 </div> -->
-
-                <!--Slide-->
-<!--                 <div class="slide"> -->
-<!--                     <div class="ts-image" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-03.jpg"> -->
-<!--                         <a href="/usr/v1/template/themeforest-v1.0/assets/img/img-detail-05.jpg" class="ts-zoom popup-image"><i class="fa fa-search-plus"></i>Zoom</a> -->
-<!--                     </div> -->
-<!--                 </div> -->
-
             </div>
 
         </section>
-
-        <!--CONTENT
-            =========================================================================================================-->
         <section id="content">
             <div class="container">
                 <div class="row flex-wrap-reverse d-flex justify-content-center align-items-center">
-
-                    <!--LEFT SIDE 왼쪽바
-                        =============================================================================================-->
-                    <!-- <div class="col-md-5 col-lg-4">
-                        
-                        
-
-                    </div> -->
-                    <!--end col-md-4-->
-
-                    <!--RIGHT SIDE
-                        =============================================================================================-->
                     <div class="col-md-7 col-lg-8">
-
-                        <!--QUICK INFO
-                            =========================================================================================-->
                         <section id="quick-info">
                             <h3>Quick Info</h3>
 
@@ -179,9 +116,6 @@
                             <!--end ts-quick-info-->
 
                         </section>
-
-                        <!--DESCRIPTION
-                            =========================================================================================-->
                         <section id="description">
 
                             <h3>출항시간</h3>
@@ -190,22 +124,9 @@
                             </p>
 
                         </section>
-
-                        
-
-                        <!--MAP
-                            =========================================================================================-->
                         <section id="map-location">
 
                             <h3>위치</h3>
-
-                            <!-- <div class="ts-map ts-map__detail ts-border-radius__sm ts-shadow__sm" id="ts-map-simple"
-                                 data-ts-map-leaflet-provider="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
-                                 data-ts-map-zoom="10"
-                                 th:data-ts-map-center-latitude="${item.ptLatitude}"
-                                 th:data-ts-map-center-longitude="${item.ptLongitude}"
-                                 data-ts-map-scroll-wheel="0"
-                                 data-ts-map-controls="0"></div> -->
                             <div class="ts-map ts-map__detail ts-border-radius__sm ts-shadow__sm" id="ts-map-simple"
                                  data-ts-map-zoom="5"
                                  th:data-ts-map-Name="${item.ptName}"
@@ -215,19 +136,6 @@
                                  data-ts-map-controls="0"></div>
 
                         </section>
-
-
-                        <!--FLOOR PLANS
-                            =========================================================================================-->
-                        
-
-                        <!--VIDEO
-                        =============================================================================================-->
-
-                    
-
-                        <!--AMENITIES
-                            =========================================================================================-->
                         <section id="amenities">
 
                             <h3>추가제공서비스</h3>
@@ -250,9 +158,6 @@
             </div>
             <!--end container-->
         </section>
-
-        <!--SIMILAR PROPERTIES
-        =============================================================================================================-->
         <section id="similar-properties">
             <div class="container">
                 <div class="row justify-content-center">
@@ -264,15 +169,6 @@
         
                         <!-- 첫 번째 아이템 -->
                         <a th:href="@{/v1/ship/shipDetail(spSeq=${other.spSeq})}" class="card ts-item ts-item__list ts-card" th:each="other:${other}">
-
-                            <!--Ribbon-->
-                            <!-- <div class="ts-ribbon">
-                                <i class="fa fa-thumbs-up"></i>
-                            </div> -->
-                             <!--Ribbon-->
-                             <!-- <div class="ts-ribbon-corner">
-                                <span>Updated</span>
-                            </div> -->
 
                             <!--Card Image-->
                             <div class="card-img" th:data-bg-image="${other.path}"></div>
@@ -323,10 +219,7 @@
         </section>
 
     </main>
-    <!--end #ts-main-->
-
-    
-
+    <!--end #ts-main-->    
     <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
     <!--end #ts-footer-->
 
@@ -338,12 +231,10 @@
 <script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/owl.carousel.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery.magnific-popup.min.js"></script>
-<!-- <script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script> -->
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&libraries=services,clusterer"></script>
 <script src="/usr/v1/js/script.js"></script>
 <script src="/usr/v1/js/map-kakao.js"></script>
-<!-- <script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script> -->
 
 </body>
 </html>

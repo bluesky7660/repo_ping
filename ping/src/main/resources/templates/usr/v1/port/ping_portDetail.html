@@ -49,9 +49,6 @@
 
             </div>
         </section>
-
-        <!--AGENCY INFO
-            =========================================================================================================-->
         <section id="agency-info">
             <div class="container">
 
@@ -121,19 +118,10 @@
             <!--end container-->
         </section>
         <!--end #agency-info-->
-
-        <!--ITEMS LISTING & SEARCH
-            =========================================================================================================-->
         <section id="items-listing-and-search">
             <div class="container">
                 <div class="row flex-wrap-reverse">
-
-                    <!--LEFT SIDE
-                        =============================================================================================-->
                     <div class="col-md-8">
-
-                        <!--PROPERTIES & AGENTS TABS
-                            =========================================================================================-->
                         <section id="ships-mapPoint-tab" class="pb-2 mb-3">
                             <ul class="nav nav-tabs mb-1" id="login-register-tabs" role="tablist">
 
@@ -153,17 +141,8 @@
 
                             </ul>
                         </section>
-
-                        <!--TAB CONTENT
-                            =========================================================================================-->
                         <div class="tab-content">
-
-                            <!--PROPERTIES TAB
-                                =====================================================================================-->
                             <div class="tab-pane active" id="ships" role="tabpanel" aria-labelledby="ships-tab">
-
-                                <!--DISPLAY CONTROL
-                                    =================================================================================-->
                                 <section id="display-control-items">
                                     <div class="clearfix">
 
@@ -191,10 +170,6 @@
                                     </div>
                                     <!--end container-->
                                 </section>
-
-                                <!--ITEMS LISTING
-                                    =================================================================================-->
-                                <!-- <section id="items-listing"> -->
                                 <section id="port_shipList">
                                     <!--Item-->
                                     <div class="card ts-item ts-item__list ts-card" th:each="shipList:${ships}">
@@ -240,22 +215,6 @@
                                         </a>
                                     </div>
                                 </section>
-
-                                <!--PAGINATION
-                                    =================================================================================-->
-                                <!-- <section id="pagination-items">
-                                   <div class="container-fluid px-0 mt-2 mb-2">
-										<div class="row">
-											<div class="col">
-												<ul class="pagination justify-content-center mb-0">
-													<li th:if="${shipVo.startPage gt shipVo.pageNumToShow}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${shipVo.startPage - 1})" th:attr="onclick=|goList('${shipVo.startPage - 1}')|"><i class="bi bi-caret-left-fill"></i></a></li>
-                                                    <li th:each="num: ${#numbers.sequence(shipVo.startPage, shipVo.endPage)}" th:classappend="${num eq shipVo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"></a></li>
-                                                    <li th:if="${shipVo.endPage ne shipVo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${shipVo.endPage + 1}')|"><i class="bi bi-caret-right-fill"></i></a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-                                </section> -->
                                 <section id="pagination-items">
                                     <div class="container-fluid px-0 mt-2 mb-2">
                                          <div class="row">
@@ -443,16 +402,6 @@
                                             <option th:selected ="${shipVo.shRemain == 10}" value="10">10명 이상</option>
                                         </select>
                                     </div>
-                                    
-
-                                    <!--Status-->
-                                    <!-- <div class="form-group">
-                                        <select class="custom-select" id="status" name="status">
-                                            <option value="">Status</option>
-                                            <option value="1">Rent</option>
-                                            <option value="2">Sale</option>
-                                        </select>
-                                    </div> -->
 
                                     <!--Row - Min price & Max price-->
                                     <div class="row">
@@ -500,8 +449,6 @@
 
                                             <!--Row-->
                                             <div class="row">
-
-                                                <!--Bedrooms-->
                                                 <!--Bedrooms-->
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
@@ -519,83 +466,7 @@
                                                 </div>
 
                                             </div>
-
-                                            </div>
                                             <!--end row-->
-
-                                            <!--Checkboxes-->
-                                            <!-- <div id="features-checkboxes" class="w-100">
-                                                <h6 class="mb-3">Features</h6>
-
-                                                <div class="ts-column-count-2">
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="ch_1" name="features[]" value="ch_1">
-                                                        <label class="custom-control-label" for="ch_1">Air
-                                                            conditioning</label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="ch_2" name="features[]" value="ch_2">
-                                                        <label class="custom-control-label" for="ch_2">Bedding</label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="ch_3" name="features[]" value="ch_3">
-                                                        <label class="custom-control-label" for="ch_3">Heating</label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="ch_4" name="features[]" value="ch_4">
-                                                        <label class="custom-control-label" for="ch_4">Internet</label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="ch_5" name="features[]" value="ch_5">
-                                                        <label class="custom-control-label" for="ch_5">Microwave</label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="ch_6" name="features[]" value="ch_6">
-                                                        <label class="custom-control-label" for="ch_6">Smoking
-                                                            allowed</label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="ch_7" name="features[]" value="ch_7">
-                                                        <label class="custom-control-label" for="ch_7">Terrace</label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="ch_8" name="features[]" value="ch_8">
-                                                        <label class="custom-control-label" for="ch_8">Balcony</label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="ch_9" name="features[]" value="ch_9">
-                                                        <label class="custom-control-label" for="ch_9">Iron</label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="ch_10" name="features[]" value="ch_10">
-                                                        <label class="custom-control-label" for="ch_10">Hi-Fi</label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="ch_11" name="features[]" value="ch_11">
-                                                        <label class="custom-control-label" for="ch_11">Beach</label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="ch_12" name="features[]" value="ch_12">
-                                                        <label class="custom-control-label" for="ch_12">Parking</label>
-                                                    </div>
-
-                                                </div>
-                                                end ts-column-count-3
-
-                                            </div> -->
-                                            <!--end #features-checkboxes-->
 
                                         </div>
                                         <!--end Padding-->
@@ -606,77 +477,6 @@
                                 <!--end #form-search-->
                             </section>
                             <!--end #sidebar-search-form-->
-
-                            <!--MAP RESULTS
-                                =====================================================================================-->
-                            <!-- <section id="map-results">
-                                <h3>Map Results</h3>
-
-                                <div id="ts-map-simple" class="ts-sidebar-map"
-                                     data-ts-map-leaflet-provider="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
-                                     data-ts-map-zoom="12"
-                                     data-ts-map-center-latitude="40.702411"
-                                     data-ts-map-center-longitude="-73.556842"
-                                     data-ts-map-scroll-wheel="1"
-                                     data-ts-map-controls="0"></div>
-
-                            </section> -->
-
-                            <!--FEATURED PROPERTIES
-                                =====================================================================================-->
-                            <!-- <section id="featured-properties">
-                                <h3>Featured Properties</h3>
-
-                                <div class="owl-carousel" data-owl-dots="1">
-
-                                    
-                                    <div class="slide">
-                                        <div class="card ts-item ts-card ts-item__lg ts-shadow__none">
-                                            <a href="#" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg">
-                                                <figure class="ts-item__info">
-                                                    <h4>Big Luxury Apartment</h4>
-                                                    <aside>
-                                                        <i class="fa fa-map-marker mr-2"></i>
-                                                        1350 Arbutus Drive
-                                                    </aside>
-                                                </figure>
-                                                <div class="ts-item__info-badge">$350,000</div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="slide">
-                                        <div class="card ts-item ts-card ts-item__lg ts-shadow__none">
-                                            <a href="#" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-02.jpg">
-                                                <figure class="ts-item__info">
-                                                    <h4>Cozy Design Studio</h4>
-                                                    <aside>
-                                                        <i class="fa fa-map-marker mr-2"></i>
-                                                        4831 Worthington Drive
-                                                    </aside>
-                                                </figure>
-                                                <div class="ts-item__info-badge">$125,000</div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="slide">
-                                        <div class="card ts-item ts-card ts-item__lg ts-shadow__none">
-                                            <a href="#" class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-03.jpg">
-                                                <figure class="ts-item__info">
-                                                    <h4>Family Villa</h4>
-                                                    <aside>
-                                                        <i class="fa fa-map-marker mr-2"></i>
-                                                        4831 Worthington Drive
-                                                    </aside>
-                                                </figure>
-                                                <div class="ts-item__info-badge">$45,900</div>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </section> -->
-
-
                         </aside>
                         <!--end #sidebar-->
                     </div>
@@ -687,10 +487,7 @@
         </section>
 
     </main>
-    <!--end #ts-main-->
-
-    
-
+    <!--end #ts-main-->    
     <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
     <!--end #ts-footer-->
 
@@ -710,7 +507,6 @@
             const params = new URLSearchParams(window.location.search);
 
             const ptSeq = params.get('ptSeq');
-            // document.querySelector("input[name=thisPage]").value = thisPage;
             $.ajax({
                 url: '/portShipList', // 서버의 페이지네이션 엔드포인트
                 type: 'post',
@@ -806,7 +602,6 @@
 
             const ptSeq = params.get('ptSeq');
             console.log("ptSeq2:"+ptSeq);
-            // document.querySelector("input[name=thisPage]").value = thisPage;
             $.ajax({
                 url: '/portMapPointList', // 서버의 페이지네이션 엔드포인트
                 type: 'post',
@@ -906,12 +701,10 @@
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/owl.carousel.min.js"></script>
-<!-- <script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script> -->
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&libraries=services,clusterer"></script>
 <script src="/usr/v1/js/script.js"></script>
 <script src="/usr/v1/js/map-kakao.js"></script>
-<!-- <script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script> -->
 
 <!-- by developer -->
 <script src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>

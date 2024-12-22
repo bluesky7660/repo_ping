@@ -36,17 +36,6 @@
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
 
     <main id="ts-main">
-        <section id="breadcrumb">
-            <div class="container">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Library</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Data</li>
-                    </ol>
-                </nav>
-            </div>
-        </section>
         <section id="page-title">
             <div class="container">
                 <div class="row">
@@ -112,10 +101,6 @@
                                                 </a>
                                             </div> -->
                                         </div>
-                                        <!-- <div class="input-group">
-                                            <label for="address_view">포인트 상세주소</label>
-                                            <input type="text" id="address_view" class="form-control"/>
-                                        </div> -->
                                         <div class="input-group">
                                             <label for="">포인트 종류</label>
                                             <select name="mpType" class="custom-select validate-this valid-gender" id="selectMpType" required>
@@ -152,8 +137,6 @@
 
                                 <!--Title-->
                                 <h3 class="text-muted border-bottom">추가 정보</h3>
-
-                                <!-- <div id="features-checkboxes"> -->
                                 <div id="fishList-checkboxes" class="fishList-checkboxes">
                                     <h6 class="mb-3">잡히는 어종</h6>
                                     <aside class="mb-3">최대 선택 3개 제한</aside>
@@ -195,10 +178,7 @@
         </section>
 
     </main>
-    <!--end #ts-main-->
-
-    
-
+    <!--end #ts-main-->    
     <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
     <!--end #ts-footer-->
 
