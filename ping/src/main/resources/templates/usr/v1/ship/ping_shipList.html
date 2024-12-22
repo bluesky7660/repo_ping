@@ -81,8 +81,9 @@
 
                                 <h3 th:text="${vo.totalRows}+' 건의 검색'"></h3>
 
-                                <form method="post" action="/v1/ship/shipList" id="form-search" class="ts-form" autocomplete="off">
+                                <form method="post" action="/v1/ship/shipList" id="form_search" class="ts-form" autocomplete="off">
                                     <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
+                                    <input type="hidden" id="sortOrderH" name="sortOrder" th:value="${vo.sortOrder}" default="1"/>
                                     <input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
                                     <!--Keyword-->
                                     <div class="form-group">
@@ -217,7 +218,7 @@
                                     </div>
                                     <!--end more-options-collapse-->
 
-                               
+                                </form>
                                 <!--end #form-search-->
                             </section>
                             <!--end #sidebar-search-form-->
@@ -235,17 +236,6 @@
                         <!--DISPLAY CONTROL
                             =========================================================================================-->
                         <section id="display-control" class="clearfix">
-
-                            <!--Display selector on the left-->
-<!--                             <div class="float-left"> -->
-<!--                                 <a href="#" class="btn btn-outline-secondary px-3 mr-2 mb-2 ts-btn-border-muted"> -->
-<!--                                     <i class="fa fa-th-large"></i> -->
-<!--                                 </a> -->
-<!--                                 <a href="#" class="btn btn-outline-secondary active px-3 mb-2 ts-btn-border-muted"> -->
-<!--                                     <i class="fa fa-th-list"></i> -->
-<!--                                 </a> -->
-<!--                             </div> -->
-
                             <!--Display selector on the right-->
                             <div class="float-none float-sm-right pl-2 ts-center__vertical">
 							    <label for="sorting" class="mb-0 mr-2 text-nowrap">Sort by:</label>
@@ -257,22 +247,14 @@
 							</div>
 
                         </section>
-				 					</form>
-                        <!--ITEMS LIST
-                            =========================================================================================-->
+				 					
                         <section id="ts-items-list">
 
                             <!--Item-->
                             <div class="card ts-item ts-item__list ts-card" th:each="list:${list}">
                                 <a th:href="@{/v1/ship/shipDetail(spSeq=${list.spSeq})}">
-                                    <!--Ribbon-->
-<!--                                     <div class="ts-ribbon-corner"> -->
-<!--                                         <span>Updated</span> -->
-<!--                                     </div> -->
-
                                     <!--Card Image-->
-                                    <div class="card-img" th:data-bg-image="${list.path}"></div>
-<!-- 														디폴트이미지 주소 -> /usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg -->
+                                    <div class="card-img" th:data-bg-image="${list.path != null? list.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}"></div>
                                     <!--Card Body-->
                                     <div class="card-body">
 
@@ -301,7 +283,6 @@
                                             </dl>
                                             <dl>
                                                 <dt>대상어종</dt>
-                                                <!-- <dd th:text="${list.fsNameList != null and #strings.length(list.fsNameList) > 1 ? #strings.substring(list.fsNameList, 1, #strings.length(list.fsNameList) - 1) : '전어종'}"></dd> -->
                                                 <dd th:text="${list.fsNameList}"></dd>
                                             </dl>
                                         </div>
@@ -317,9 +298,6 @@
 
                         </section>
                         <!--end row-->
-
-                        <!--PAGINATION
-                    =================================================================================================-->
 		                <section id="pagination">
 		                    <div class="container-fluid px-0 mt-2 mb-2">
 								<div class="row">
@@ -346,10 +324,7 @@
         <!--end #items-list-->
 
     </main>
-    <!--end #ts-main-->
-
-    
-
+    <!--end #ts-main-->    
     <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
     <!--end #ts-footer-->
 
@@ -393,37 +368,15 @@
 			form.action = url;
 			form.submit();
 		}
+        document.getElementById("sortOrder").addEventListener('change', function() {
+            console.log("this.value:",this.value);
+            document.getElementById("sortOrderH").value = this.value;
+            document.getElementById("form_search").submit();
+        });
 	});
 	
 </script>
 <script>
-//     document.addEventListener('DOMContentLoaded', function() {
-//         const minPriceInput = document.getElementById('min-price');
-//         const maxPriceInput = document.getElementById('max-price');
-
-//         // Function to check if fields are filled and alert if needed
-//         function checkPrices() {
-//             if (minPriceInput.value === '') {
-//                 alert('최소가격을 입력해주세요.');
-//                 return false;
-//             } else if (maxPriceInput.value === '') {
-//                 alert('최대가격을 입력해주세요.');
-//                 return false;
-//             }
-//             return true;
-//         }
-
-//         const form = document.querySelector('form');
-//         if (form) {
-//             form.addEventListener('submit', function(event) {
-//                 if (minPriceInput.value === '' && maxPriceInput.value === '') {
-//                     return true;
-//                 } else if (!checkPrices()) {
-//                     event.preventDefault();
-//                 }
-//             });
-//         }
-//     });
 </script>
 
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>

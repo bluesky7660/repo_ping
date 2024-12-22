@@ -45,9 +45,6 @@
 
             </div>
         </section>
-
-        <!--SEARCH FORM
-            =========================================================================================================-->
         <section id="search-form">
             <div class="container">
 
@@ -55,9 +52,6 @@
 					<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
 					<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
                     <section class="ts-box p-0">
-
-                        <!--PRIMARY SEARCH INPUTS
-                            =========================================================================================-->
                         <div class="form-row px-4 py-3">
 
                             <!--Keyword-->
@@ -79,16 +73,8 @@
 											<option value="22" th:selected ="${vo.shPtArea == 22}">전남</option>
 											<option value="23" th:selected ="${vo.shPtArea == 23}">강원</option>
 											<option value="24" th:selected ="${vo.shPtArea == 24}">경북</option>
-											<!-- <option value="0" th:selected="${vo.shPtArea == 0}">광주</option>
-											<option value="0" th:selected="${vo.shPtArea == 0}">전라남도</option>
-											<option value="0" th:selected="${vo.shPtArea == 0}">경상남도</option>
-											<option value="0" th:selected="${vo.shPtArea == 0}">경상북도</option>
-											<option value="0" th:selected="${vo.shPtArea == 0}">제주도</option> -->
                                         </select>
                                     </div>
-
-                                   
-
                                     <!--Submit button-->
                                     <div class="col-sm-3">
                                         <div class="form-group my-2">
@@ -104,9 +90,6 @@
 
                         </div>
                         <!--end form-row-->
-
-                        <!--MORE OPTIONS - ADVANCED SEARCH
-                            =========================================================================================-->
                         
                         <!--end ts-bg-light-->
                     </section>
@@ -118,12 +101,6 @@
             <!--end container-->
         </section>
         <!--end #search-form-->
-
-        <!--DISPLAY CONTROL
-            =========================================================================================================-->
-        
-        <!--ITEMS LISTING
-            =========================================================================================================-->
         <section id="items-grid">
             <div class="container">
 
@@ -180,9 +157,6 @@
             </div>
             <!--end container-->
         </section>
-
-        <!--PAGINATION
-            =========================================================================================================-->
          <section id="pagination">
            <div class="container-fluid px-0 mt-2 mb-2">
 				<div class="row">
@@ -196,12 +170,8 @@
 				</div>
 			</div>
           </section>
-
     </main>
     <!--end #ts-main-->
-
-    
-
     <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
     <!--end #ts-footer-->
 
