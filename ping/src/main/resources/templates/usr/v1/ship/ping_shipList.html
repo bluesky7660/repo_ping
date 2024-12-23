@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 	<meta charset="UTF-8">
@@ -75,18 +75,6 @@
                                         <input type="text" class="form-control" id="keyword" name="shport" th:value="${vo.shport}" placeholder="">
                                     </div>
 
-                                    <!--Type-->
-                                    <!-- <div class="form-group">
-                                        <label>지역</label>
-                                        <select class="custom-select" id="type" name="type">
-                                            <option value="">지역</option>
-                                            <option value="1">경기</option>
-                                            <option value="23">부산</option>
-                                            <option value="21">전라남도</option>
-                                            <option value="20">인천</option>
-                                        </select>
-                                    </div> -->
-
                                     <!--Status-->
                                     <div class="form-group">
                                         <label>인원</label>
@@ -152,7 +140,7 @@
                                     <!--More Options Button-->
                                     <a href="#more-options-collapse" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="more-options-collapse">
                                         <i class="fa fa-plus-circle ts-text-color-primary mr-2"></i>
-                                        검색 더하기
+                                        조건 더하기
                                     </a>
 
                                     <!--Hidden Form-->
@@ -207,13 +195,7 @@
                         <!--end #sidebar-->
                     </div>
                     <!--end Right Side / col-md-4-->
-
-                    <!--RIGHT SIDE (ITEMS)
-                        =============================================================================================-->
                     <div class="col-md-8">
-
-                        <!--DISPLAY CONTROL
-                            =========================================================================================-->
                         <section id="display-control" class="clearfix">
                             <!--Display selector on the right-->
                             <div class="float-none float-sm-right pl-2 ts-center__vertical">
@@ -269,7 +251,6 @@
 
                                     <!--Card Footer-->
                                     <div  class="card-footer">
-                                        <!-- <span>대상어종: <span th:text="${list.fsNameList != null and #strings.length(list.fsNameList) > 1 ? #strings.substring(list.fsNameList, 1, #strings.length(list.fsNameList) - 1) : '전어종'}"></span></span> -->
                                         <span class="ts-btn-arrow">자세히보기</span>
                                     </div>
                                 </a>
