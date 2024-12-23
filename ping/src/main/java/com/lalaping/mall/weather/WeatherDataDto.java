@@ -37,6 +37,23 @@ public class WeatherDataDto {
 		this.windDirectionIcon = windDirectionIcon;
         this.weatherIcon = weatherIcon;
 	}
+    public WeatherDataDto(String time, Double temperature, Double relativeHumidity,
+    		Double windSpeed, String windDirection , Double precipitation, 
+            Double precipitationProbability, String weatherName, String windDirectionIcon,
+            String weatherIcon) {
+		this.time = time;
+		
+		this.temperature = temperature;
+		this.relativeHumidity = relativeHumidity;
+		this.windSpeed = windSpeed;
+		this.precipitation = precipitation;
+		this.weatherName = weatherName;
+		this.precipitationProbability = precipitationProbability;
+        this.windDirection = windDirection;
+        
+		this.windDirectionIcon = windDirectionIcon;
+        this.weatherIcon = weatherIcon;
+	}
 	public String getTime() {
 		return time;
 	}
