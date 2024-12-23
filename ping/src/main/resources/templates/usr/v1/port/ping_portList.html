@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 	<meta charset="UTF-8">
@@ -119,10 +119,6 @@
                                
                                 <figure class="ts-item__info">
                                     <h4 th:text="${list2.ptName}">인천항</h4>
-                                    <!-- <aside>
-                                        <i class="fa fa-map-marker mr-2"></i>
-                                        <span th:text="${list2.ptAddress}"></span>
-                                    </aside> -->
                                 </figure>
                             </a>
 
@@ -136,10 +132,6 @@
                                         <dt>지역</dt>
                                         <dd th:text="${@codeService.selectOneCachedCode(list2.ptArea)}">인천</dd>
                                     </dl>
-                                    <!-- <dl>
-                                        <dt>Bathrooms</dt>
-                                        <dd>1</dd>
-                                    </dl> -->
                                 </div>
                             </div>
 
