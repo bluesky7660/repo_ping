@@ -13,6 +13,7 @@ public class MapPointVo extends BaseVo {
 	private String shMpValue;
 	
 	private String ptSeq;
+	private String shSeason;
 //	------------------------------------
 
 	public Integer getShType() {
@@ -70,6 +71,14 @@ public class MapPointVo extends BaseVo {
 
 	public void setPtSeq(String ptSeq) {
 		this.ptSeq = ptSeq;
+	}
+
+	public String getShSeason() {
+		return shSeason;
+	}
+
+	public void setShSeason(String shSeason) {
+		this.shSeason = shSeason;
 	}
 
 

@@ -56,6 +56,12 @@ public class MapPointService {
 	public int nearCount(MapPointVo mapPointVo) {
 		return mapPointDao.nearCount(mapPointVo);
 	}
+	public int sessSelectCount(MapPointVo mapPointVo) {
+		return mapPointDao.sessSelectCount(mapPointVo);
+	}
+	public int selectUsrCount(MapPointVo mapPointVo) {
+		return mapPointDao.selectUsrCount(mapPointVo);
+	}
 	public int insert(MapPointDto mapPointDto, FishMappointDto fishMappointDto) throws Exception{
 		int a = mapPointDao.insert(mapPointDto);
 		System.out.println("multipartFiles:"+mapPointDto.getUploadFiles());

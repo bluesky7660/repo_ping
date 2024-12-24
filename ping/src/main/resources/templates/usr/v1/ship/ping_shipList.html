@@ -24,10 +24,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 </head>
-
 <body>
-
-
 <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
 
@@ -263,9 +260,9 @@
 								<div class="row">
 									<div class="col">
 										<ul class="pagination justify-content-center mb-0">
-											<li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}')|"><i class="bi bi-caret-left-fill"></i></a></li>
+											<li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}')|"><i class="fa fa-caret-left"></i></a></li>
 											<li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
-											<li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|"><i class="bi bi-caret-right-fill"></i></a></li>
+											<li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|"><i class="fa fa-caret-right"></i></a></li>
 										</ul>
 									</div>
 								</div>

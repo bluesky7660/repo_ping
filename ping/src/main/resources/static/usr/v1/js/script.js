@@ -539,13 +539,19 @@ window.addEventListener('load', function() {
     //계절별 어종
     $('#seasonalTab .nav-link').on('click', function(e) {
         const season = $(this).data('season');
-        const tabContent = $('#season_pointList');
+        const tabContent = document.getElementById('season_pointList');
+        const thisPage = 1;
+        console.log("season:",season);
         $.ajax({
             url: '/v1/mapPoint/getSeasonalData', 
             method: 'post',
-            data: { shSeason: season }, 
+            contentType: 'application/json', 
+            data: JSON.stringify({ shSeason: season, thisPage: thisPage }),
             success: function(response) {
-                tabContent.empty();
+                console.log("tabContent:",tabContent);
+                tabContent.innerHTML="";
+                console.log("tabContent 2:",tabContent);
+                console.log("tabContent.innerHTML:",tabContent.innerHTML);
                 response.data.forEach(function(point) {
                     console.log("point: ",point);
                     const htmlContent = `
@@ -581,9 +587,14 @@ window.addEventListener('load', function() {
                             </div>
                         </div>
                     `;
-                    tabContent.append(htmlContent);
+                    tabContent.innerHTML += htmlContent;
                 });
-                console.log("계절 동작성공");
+                console.log("계절 탭 동작성공");
+                console.log("response.thisPage:",response.thisPage);
+                console.log("response.totalPages:",response.totalPages);
+                const paginationContainer = document.querySelector('#season_point #pagination-items .pagination');
+                const index = '';
+                updatePagination(response.thisPage, response.totalPages,paginationContainer ,index);
             },
             error: function() {
                 alert('데이터를 불러오는 데 실패했습니다.');
@@ -620,12 +631,12 @@ function updatePagination(thisPage, totalPages, paginationContainer,index) {
     const endPage = Math.min(totalPages, startPage + pageNumToShow - 1);
 
     // 이전 페이지로 이동 버튼
-    if (startPage > 1) {
+    if (thisPage > 1) {
         const prevButton = document.createElement("li");
         prevButton.className = "page-item";
         prevButton.innerHTML = `
-            <a class="page-link" href="javascript:void(0)" onclick="goList${index}(${startPage - 1})">
-                <i class="bi bi-caret-left-fill"></i>
+            <a class="page-link" href="javascript:void(0)" onclick="goList${index}(${thisPage - 1})">
+                <i class="fa fa-caret-left"></i>
             </a>`;
         paginationContainer.appendChild(prevButton);
     }
@@ -640,12 +651,12 @@ function updatePagination(thisPage, totalPages, paginationContainer,index) {
     }
 
     // 다음 페이지로 이동 버튼
-    if (endPage < totalPages) {
+    if (thisPage < totalPages) {
         const nextButton = document.createElement("li");
         nextButton.className = "page-item";
         nextButton.innerHTML = `
-            <a class="page-link" href="javascript:void(0)" onclick="goList${index}(${endPage + 1})">
-                <i class="bi bi-caret-right-fill"></i>
+            <a class="page-link" href="javascript:void(0)" onclick="goList${index}(${thisPage + 1})">
+                <i class="fa fa-caret-right"></i>
             </a>`;
         paginationContainer.appendChild(nextButton);
     }

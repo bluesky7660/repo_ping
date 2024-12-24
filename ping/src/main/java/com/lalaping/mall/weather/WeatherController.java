@@ -142,12 +142,6 @@ public class WeatherController {
 		        System.out.println("Weather data is null or does not contain hourly data.");
 		    }
 	    }
-	    
-//	    System.out.println("weatherData: " + weatherData);
-//
-//	    // JSON 객체를 다룰 필요 없이 WeatherResponse 객체에서 데이터 추출
-	    
-
 	    return "usr/v1/weather/ping_weatherPoint";
 	}
 
