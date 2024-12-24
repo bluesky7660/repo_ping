@@ -27,9 +27,6 @@
         <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
 
         <main id="ts-main">
-
-            <!--BREADCRUMB
-                =========================================================================================================-->
             <section id="breadcrumb">
                 <div class="container">
                     <nav aria-label="breadcrumb">
@@ -41,9 +38,6 @@
                     </nav>
                 </div>
             </section>
-
-            <!--PAGE TITLE
-                =========================================================================================================-->
             <section id="page-title">
                 <div class="container">
 
@@ -53,9 +47,6 @@
 
                 </div>
             </section>
-
-            <!--AGENT INFO
-                =========================================================================================================-->
             <section id="agent-info">
                 <div class="container">
 
@@ -136,20 +127,11 @@
                 <!--end container-->
             </section>
             <!--end #agent-info-->
-
-            <!--ITEMS LISTING & SEARCH
-                =========================================================================================================-->
             <section id="items-listing-and-search">
                 <div class="container">
                     <div class="row flex-wrap-reverse">
-
-                        <!--LEFT SIDE
-                            =============================================================================================-->
                         <div class="col-md-8">
                             <h3 class="mb-4 pb-4">포인트 디테일 주소</h3>
-
-                            <!--MAP RESULTS
-                                =========================================================================================-->
                             <section id="map-results">
 
                                 <div class="position-relative ts-border-radius__sm ts-shadow__sm">
@@ -169,9 +151,6 @@
                                 </div>
 
                             </section>
-
-                            <!--DISPLAY CONTROL
-                                =========================================================================================-->
                             <section id="display-control-agents">
                                 <div class="clearfix">
 
@@ -180,9 +159,6 @@
                                 </div>
                                 <!--end container-->
                             </section>
-
-                            <!--ITEMS LISTING
-                                =================================================================================-->
                             <section id="near_mappoint">
                                 <div class="d-flex justify-content-between">
                                     <h3 class="mb-2">주변 낚시포인트</h3>
@@ -195,14 +171,6 @@
                                     </div>
                                     <div class="col-sm-6" th:each="near : ${nearList}">
                                         <a th:href="@{/v1/mapPoint/mapPointDetail(mpSeq=${near.mpSeq})}" class="card ts-item ts-card ts-item__lg">
-                                            <!--Ribbon-->
-                                            <!-- <div class="ts-ribbon-corner">
-                                                <span>Updated</span>
-                                            </div> -->
-                                            <!--Ribbon-->
-                                            <!-- <div class="ts-ribbon">
-                                                <i class="fa fa-thumbs-up"></i>
-                                            </div> -->
                                             <!--Card Image-->
                                             <div class="card-img" th:data-bg-image="${near.path != null ? near.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}">
                                                 <figure class="ts-item__info">
