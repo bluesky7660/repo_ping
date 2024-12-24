@@ -231,13 +231,7 @@
 
                             </div>
                             <!--end #properties-->
-
-                            <!--AGENTS TAB
-                                =====================================================================================-->
                             <div class="tab-pane" id="mapPoint" role="tabpanel" aria-labelledby="mapPoint-tab">
-
-                                <!--DISPLAY CONTROL
-                                    =================================================================================-->
                                 <section id="display-control-agents">
                                     <div class="d-flex justify-content-between">
 
@@ -268,9 +262,6 @@
                                     </div>
                                     <!--end container-->
                                 </section>
-
-                                <!--AGENTS LISTING
-                                    =================================================================================-->
                                 <section id="mapPointList">
                                     <div class="row">
 
@@ -282,9 +273,6 @@
 
                                                 <!--Image-->
                                                 <div class="ts-item__image ts-item card-img" th:data-bg-image="${mapPoint.path != null ? mapPoint.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}">
-                                                    <!-- <div class="ts-item__info-badge">
-                                                        <span>28 Properties</span>
-                                                    </div> -->
                                                     <figure class="ts-item__info mb-2 pt-2 pb-2">
                                                         <h4 th:text="${mapPoint.mpTitle}"></h4>
                                                         <aside>
@@ -296,12 +284,6 @@
 
                                                 <!--Body-->
                                                 <div class="card-body">
-                                                    <!-- <dl>
-                                                        <dt>지역</dt>
-                                                        <dd th:text="${#strings.substring(near.mpAddress, 0, near.mpAddress.indexOf(' '))}"></dd>
-                                                        <dt>Email</dt>
-                                                        <dd><a href="#">jane.harwood@example.com</a></dd>
-                                                    </dl> -->
                                                     <dl class="mb-0">
                                                         <dt>지역</dt>
                                                         <dd th:text="${#strings.substring(mapPoint.mpAddress, 0, mapPoint.mpAddress.indexOf(' '))}"></dd>
@@ -324,9 +306,6 @@
                                     </div>
                                     <!--end row-->
                                 </section>
-
-                                <!--PAGINATION
-                                    =================================================================================-->
                                 <section id="pagination-items">
                                     <div class="container-fluid px-0 mt-2 mb-2">
                                         <div class="row">
@@ -354,9 +333,6 @@
 
                     </div>
                     <!--end col-md-8 / left side -->
-
-                    <!--RIGHT SIDE (SIDEBAR)
-                        =============================================================================================-->
                     <div class="col-md-4 navbar-expand-md">
 
                         <button class="btn bg-white mb-4 w-100 d-block d-md-none" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
@@ -370,9 +346,6 @@
                         </button>
 
                         <aside id="sidebar" class="ts-sidebar collapse navbar-collapse">
-
-                            <!--SEARCH FORM
-                                =====================================================================================-->
                             <section id="sidebar-search-form">
 
                                 <h3 th:text="${shipVo.totalRows}+' 건의 검색'"></h3>
