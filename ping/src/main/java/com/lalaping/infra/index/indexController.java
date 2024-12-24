@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,6 +54,7 @@ public class indexController {
 		
 		List<MapPointDto> usrList = mapPointService.sessSelectList(mapPointVo);
 		mapPointVo.setRowNumToShow(8);
+		mapPointVo.setParamsPaging(mapPointService.selectUsrCount(mapPointVo));
 		model.addAttribute("sessPoint",mapPointService.selectUsrList(mapPointVo));
 		if (usrList != null && !usrList.isEmpty()) {
 		    // 리스트의 각 항목을 순회하며 season_ssSeq 값을 출력
@@ -73,18 +75,22 @@ public class indexController {
 	
 	@RequestMapping(value = "/v1/mapPoint/getSeasonalData")
 	@ResponseBody
-	public Map<String, Object> getSeasonalData(MapPointDto mapPointDto,MapPointVo mapPointVo,
-			@RequestParam(name = "shSeason", defaultValue = "0") String shSeason){
-		
+	public Map<String, Object> getSeasonalData(MapPointDto mapPointDto,@RequestBody MapPointVo mapPointVo
+//			,@RequestParam(name = "shSeason", defaultValue = "0")String shSeason
+			){
+		System.out.println("mapPointVo.getThisPage():"+mapPointVo.getThisPage());
+		System.out.println("shSeason:"+mapPointVo.getShSeason());
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		List<MapPointDto> rtPoint = new ArrayList<>();
 		mapPointVo.setRowNumToShow(8);
-		if(shSeason.equals("0")) {
+		if(mapPointVo.getShSeason().equals("0")) {
 			System.out.println("연중");
+			mapPointVo.setParamsPaging(mapPointService.selectUsrCount(mapPointVo));
 			rtPoint = mapPointService.selectUsrList(mapPointVo);
 		}else {
 			System.out.println("연중아님");
-			mapPointVo.setSeason_ssSeq(shSeason);
+			mapPointVo.setSeason_ssSeq(mapPointVo.getShSeason());
+			mapPointVo.setParamsPaging(mapPointService.sessSelectCount(mapPointVo));
 			rtPoint = mapPointService.sessSelectList(mapPointVo);
 		}
 		
@@ -98,7 +104,7 @@ public class indexController {
 	        pointData.put("mpRegDate", formattedDate);
 	        pointData.put("fsNameList", point.getFsNameList());
 	        pointData.put("path", point.getPath());
-	        if(!shSeason.equals("0")) {
+	        if(!mapPointVo.getShSeason().equals("0")) {
 	        	pointData.put("season_ssSeq", point.getSeason_ssSeq());
 		        int a = Integer.parseInt(point.getSeason_ssSeq());
 		        try {
@@ -111,7 +117,11 @@ public class indexController {
 	        points.add(pointData);
 	    }
 	    System.out.println("성공");
+	    System.out.println("mapPointVo.getThisPage():"+mapPointVo.getThisPage());
+	    System.out.println("mapPointVo.getTotalPages():"+mapPointVo.getTotalPages());
 	    returnMap.put("data", points);
+	    returnMap.put("thisPage", mapPointVo.getThisPage()); 
+	    returnMap.put("totalPages", mapPointVo.getTotalPages()); 
 		return returnMap;
 	}
 	

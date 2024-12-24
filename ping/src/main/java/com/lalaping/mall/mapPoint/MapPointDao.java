@@ -18,6 +18,8 @@ public interface MapPointDao {
 	
 	public int portNearCount(MapPointVo mapPointVo);
 	public int nearCount(MapPointVo mapPointVo);
+	public int sessSelectCount(MapPointVo mapPointVo);
+	public int selectUsrCount(MapPointVo mapPointVo);
 	public int insert(MapPointDto mapPointDto);
 	public MapPointDto selectOne(MapPointDto mapPointDto);
 	public MapPointDto selectUsrOne(MapPointDto mapPointDto);

@@ -22,10 +22,7 @@
     <link rel="icon" href="/usr/v1/template/themeforest-v1.0/assets/img/favicon.ico">
 
 </head>
-
 <body>
-
-
 <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
 
@@ -220,9 +217,9 @@
                                          <div class="row">
                                              <div class="col">
                                                  <ul class="pagination justify-content-center mb-0">
-                                                     <li th:if="${shipVo.thisPage > 1}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${shipVo.thisPage - 1})" th:attr="onclick=|goList('${shipVo.thisPage - 1}')|"><i class="bi bi-caret-left-fill"></i></a></li>
+                                                     <li th:if="${shipVo.thisPage > 1}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${shipVo.thisPage - 1})" th:attr="onclick=|goList('${shipVo.thisPage - 1}')|"><i class="fa fa-caret-left"></i></a></li>
                                                      <li th:each="num: ${#numbers.sequence(1, shipVo.totalPages)}" th:classappend="${num eq shipVo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
-                                                     <li th:if="${shipVo.thisPage < shipVo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${shipVo.thisPage + 1}')|"><i class="bi bi-caret-right-fill"></i></a></li>
+                                                     <li th:if="${shipVo.thisPage < shipVo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${shipVo.thisPage + 1}')|"><i class="fa fa-caret-right"></i></a></li>
                                                  </ul>
                                              </div>
                                          </div>
@@ -311,9 +308,9 @@
                                         <div class="row">
                                             <div class="col">
                                                 <ul class="pagination justify-content-center mb-0">
-                                                    <li th:if="${mapPointVo.thisPage > 1}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList2(${mapPointVo.thisPage - 1})" th:attr="onclick=|goList2('${mapPointVo.thisPage - 1}')|"><i class="bi bi-caret-left-fill"></i></a></li>
+                                                    <li th:if="${mapPointVo.thisPage > 1}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList2(${mapPointVo.thisPage - 1})" th:attr="onclick=|goList2('${mapPointVo.thisPage - 1}')|"><i class="fa fa-caret-left"></i></a></li>
                                                     <li th:each="num: ${#numbers.sequence(1, mapPointVo.totalPages)}" th:classappend="${num eq mapPointVo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList2('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
-                                                    <li th:if="${mapPointVo.thisPage < mapPointVo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList2('${mapPointVo.thisPage + 1}')|"><i class="bi bi-caret-right-fill"></i></a></li>
+                                                    <li th:if="${mapPointVo.thisPage < mapPointVo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList2('${mapPointVo.thisPage + 1}')|"><i class="fa fa-caret-right"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>

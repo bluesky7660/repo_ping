@@ -61,6 +61,7 @@
 		<include refid="base.selectListLowerForMysql"/>
     </select>
     <select id="selectUsrList" resultMap="resultMapObj">
+    	<include refid="base.selectListUpperForMysql"/>
     	SELECT
     		a.mpSeq
     		,a.mpTitle
@@ -80,7 +81,16 @@
    		GROUP BY a.mpSeq
    		ORDER BY
      	a.mpRegDate DESC
-     	limit #{rowNumToShow}
+     	<!-- limit #{rowNumToShow} -->
+     	<include refid="base.selectListLowerForMysql"/>
+    </select>
+    <select id="selectUsrCount" resultType="int">
+    	SELECT
+    		Count(DISTINCT a.mpSeq)
+   		FROM mappoint a
+        	left join fishandmappoint b on b.mappoint_mpSeq = a.mpSeq
+            left join fish c on c.fsSeq = b.fish_fsSeq
+            left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
     </select>
     <select id="selectSearchList" resultMap="resultMapObj">
     	<!-- SELECT
@@ -243,6 +253,7 @@
      	<include refid="base.selectListLowerForMysql"/>
     </select>
     <select id="sessSelectList" resultMap="resultMapObj">
+    	<include refid="base.selectListUpperForMysql"/>
     	SELECT
     		a.mpSeq
     		,a.mpTitle
@@ -264,7 +275,19 @@
 		GROUP BY a.mpSeq, d.season_ssSeq
    		ORDER BY
      	a.mpRegDate DESC
-     	limit 8
+     	<!-- limit 8 -->
+     	<include refid="base.selectListLowerForMysql"/>
+    </select>
+    <select id="sessSelectCount" resultType="int">
+    	SELECT
+    		Count(DISTINCT a.mpSeq)
+        FROM mappoint a
+        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
+            left join fish c on c.fsSeq = b.fish_fsSeq
+            join seasonandfish d on d.fish_fsSeq = c.fsSeq
+            left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
+        WHERE 1=1
+        	and d.season_ssSeq = #{season_ssSeq}
     </select>
     <select id="lastPoint" resultMap="resultMapObj">
 	    SELECT
