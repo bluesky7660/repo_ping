@@ -50,8 +50,6 @@
 					<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
                     <section class="ts-box p-0">
                         <div class="form-row px-4 py-3">
-
-                            <!--Keyword-->
                             <div class="col-sm-12 col-md-4">
                                 <div class="form-group my-2">
                                     <input type="text" class="form-control" id="keyword" name="shPtName" th:value="${vo.shPtName}" placeholder="항구이름">
@@ -81,9 +79,7 @@
                                     </div>
 
                                 </div>
-                                <!--end row-->
                             </div>
-                            <!--end col-md-8-->
 
                         </div>
                         <!--end form-row-->
@@ -95,16 +91,11 @@
                 <!--end #form-search-->
 
             </div>
-            <!--end container-->
         </section>
         <!--end #search-form-->
         <section id="items-grid">
             <div class="container">
-
-                <!--Row-->
                 <div class="row">
-
-                    <!--Item-->
                     <div class="col-sm-6 col-lg-4" th:each="list2 : ${list2}">
 
                         <div class="card ts-item ts-card ts-item__lg">
@@ -138,13 +129,9 @@
                             </a>
 
                         </div>
-                        <!--end ts-item-->
                     </div>
-                    <!--end Item col-md-4-->
                 </div>
-                <!--end row-->
             </div>
-            <!--end container-->
         </section>
          <section id="pagination">
            <div class="container-fluid px-0 mt-2 mb-2">
@@ -161,12 +148,7 @@
           </section>
     </main>
     <!--end #ts-main-->
-    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
-    <!--end #ts-footer-->
-
-</div>
-<!--end page-->
-<script type="text/javascript">
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> </div><script type="text/javascript">
 	goList = function (thisPage) {
     document.querySelector("input[name=thisPage]").value = thisPage;
     document.querySelector("form[name=formList]").action = "/v1/port/portList";

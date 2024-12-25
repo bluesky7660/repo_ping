@@ -25,7 +25,6 @@
 <body>
 <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
-
     <main id="ts-main">
         <section id="page-title">
             <div class="container">
@@ -44,20 +43,11 @@
         <section id="edit-form">
             <div class="container">
                 <div class="row">
-
                     <div class="offset-lg-1 col-lg-10">
-
                         <form method="post" action="/v1/checkout/checkoutInst" id="checkoutForm" class="ts-form">
-
                             <section id="basic-information" class="mb-5">
-
-                                <!--Title-->
                                 <h3 class="text-muted border-bottom">예약 고객</h3>
-
-                                <!--Row-->
                                 <div class="row">
-
-                                    <!--Title-->
                                     <div class="col-sm-8">
                                         <div class="form-group">
                                             <label for="title">예약 고객님</label>
@@ -72,18 +62,8 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!--Price-->
-                                    
-
                                     <div class="col-sm-12 col-md-4">
-
                                         <div class="row">
-
-                                            <!--Area-->
-                                            
-
-                                            <!--Rooms-->
                                             <div class="col">
                                                 <div class="input-group">
                                                     <label for="price">전화번호</label>
@@ -93,15 +73,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--end row-->
                             </section>
-
                             <section id="basic-information" class="mb-5">
-
-                                <!--Title-->
                                 <h3 class="text-muted border-bottom">예약 상품</h3>
-
-                                <!--Row-->
                                 <div class="row">
                                     <table class="w-100">
                                         <colgroup>
@@ -160,12 +134,10 @@
                                             </td>
                                             <td>
                                                 <span id="odTotalPrice" name="odTotalPrice" th:text="${#numbers.formatInteger(item.spPrice,1,'COMMA')}"></span><span>원</span>
-                                                
                                             </td>
                                         </tr>
                                     </table>
                                 </div>
-                                <!--end row-->
                             </section>
                             <hr>
                             <section class="py-3">
@@ -177,25 +149,14 @@
                                     카카오페이 결제
                                 </button>
                             </section>
-
                         </form>
-                        <!--end #form-submit-->
-
                     </div>
-                    <!--end offset-lg-1 col-lg-10-->
                 </div>
-                <!--end row-->
             </div>
-            <!--end container-->
         </section>
-
     </main>
  	<div th:replace="~{usr/v1/etc/footer :: page-footer}"></div>
-    <!--end #ts-footer-->
-
 </div>
-<!--end page-->
-
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>

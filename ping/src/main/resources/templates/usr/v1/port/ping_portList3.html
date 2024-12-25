@@ -161,7 +161,6 @@
                 </section>
 
             </div>
-            <!--end container-->
         </section>
         <!--end #items-list-->
 
@@ -170,12 +169,7 @@
 	</form>
     
 
-    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
-    <!--end #ts-footer-->
-
-</div>
-<!--end page-->
-<script type="text/javascript">
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> </div><script type="text/javascript">
 	goList = function (thisPage) {
     document.querySelector("input[name=thisPage]").value = thisPage;
     document.querySelector("form[name=formList]").action = "/v1/port/portList";

@@ -21,11 +21,8 @@
 </head>
 
 <body>
-
-
     <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
         <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
-
         <main id="ts-main">
             <section id="breadcrumb">
                 <div class="container">
@@ -40,33 +37,20 @@
             </section>
             <section id="page-title">
                 <div class="container">
-
                     <div class="ts-title">
                         <h1>낚시포인트 상세</h1>
                     </div>
-
                 </div>
             </section>
             <section id="agent-info">
                 <div class="container">
-
-                    <!--Box-->
                     <div class="ts-box ts-has-talk-arrow">
-
-                        <!--Row-->
                         <div class="row">
-
-                            <!--Brand-->
                             <div class="col-md-4 ts-center__both">
                                 <div class="ts-circle__xxl ts-shadow__md" th:data-bg-image="${item.path != null ? item.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}"></div>
                             </div>
-
-                            <!--Description-->
                             <div class="col-md-8">
-
                                 <div class="py-4">
-
-                                    <!--Title-->
                                     <div class="ts-title mb-3">
                                         <h2 class="mb-1" th:text="${item.mpTitle}"></h2> 
                                         <h5>
@@ -74,66 +58,37 @@
                                             <span th:text="${item.mpAddress}"></span>
                                             <input type="hidden" id="mapPoint_mpSeq" th:value="${item.mpSeq}">
                                         </h5>
-                                    <a th:href="@{/v1/weather/weatherPoint(mpSeq=${item.mpSeq})}">
+                                        <a th:href="@{/v1/weather/weatherPoint(mpSeq=${item.mpSeq})}">
                                             <figure class="mb-1">
                                                 <i class="fa fa-certificate"></i>
                                                 <span th:text="${item.mpTitle}"></span>상세날씨
                                             </figure>
                                         </a>
                                     </div>
-
-                                    <!--Row-->
                                     <div class="row">
-
                                         <div class="col-md-7">
                                             <p th:text="${item.mpText}">
                                             </p>
                                         </div>
-
-                                        <div class="col-md-5 ts-opacity__50">
-
-                                            <!--Phone-->
-                                            <!-- <figure class="mb-1">
-                                                <i class="fa fa-phone-square mr-2"></i>
-                                                031-403-8217
-                                            </figure> -->
-
-                                            <!--Mail-->
-                                            <!-- <figure class="mb-1">
-                                                <i class="fa fa-envelope mr-2"></i>
-                                                <a href="#">없음</a>
-                                            </figure> -->
-
-                                        </div>
-
+                                        <!-- <div class="col-md-5 ts-opacity__50">
+                                        </div> -->
                                     </div>
-                                    <!--end row-->
                                 </div>
-                                <!--end p-4-->
-
                                 <div class="ts-bg-light p-3 ts-border-radius__md d-block d-sm-flex ts-center__vertical justify-content-between ts-xs-text-center">
                                     <span class="d-sm-inline-block mb-2 mb-sm-0">대상어종: <span th:text="${item.fsNameList}"></span></span>
                                     <small>등록일 <span th:text="${#dates.format(item.mpRegDate,'yyyy-MM-dd')}"></span></small>
                                 </div>
-
                             </div>
-                            <!--end col-md-8-->
                         </div>
-                        <!--end row-->
                     </div>
-                    <!--end ts-box-->
-
                 </div>
-                <!--end container-->
             </section>
-            <!--end #agent-info-->
             <section id="items-listing-and-search">
                 <div class="container">
                     <div class="row flex-wrap-reverse">
                         <div class="col-md-8">
                             <h3 class="mb-4 pb-4">포인트 디테일 주소</h3>
                             <section id="map-results">
-
                                 <div class="position-relative ts-border-radius__sm ts-shadow__sm">
                                     <div id="collapse-map" class="collapse show">
                                         <div class="ts-map ts-map__detail ts-border-radius__sm ts-shadow__sm" id="ts-map-simple"
@@ -149,29 +104,22 @@
                                         지도 가리기
                                     </a>
                                 </div>
-
                             </section>
-                            <section id="display-control-agents">
+                            <!-- <section id="display-control-agents">
                                 <div class="clearfix">
-
-                                    
-
                                 </div>
-                                <!--end container-->
-                            </section>
+                            </section> -->
                             <section id="near_mappoint">
                                 <div class="d-flex justify-content-between">
                                     <h3 class="mb-2">주변 낚시포인트</h3>
                                     <p>주변 낚시포인트는 50km 범위내에 있는 데이터 입니다.</p>
                                 </div>
                                 <div class="row">
-                                    <!--Item-->
                                     <div class="col-sm-6" th:if="${#lists.isEmpty(nearList)}">
                                         <p>범위내의 낚시포인트의 데이터가 없습니다.</p>
                                     </div>
                                     <div class="col-sm-6" th:each="near : ${nearList}">
                                         <a th:href="@{/v1/mapPoint/mapPointDetail(mpSeq=${near.mpSeq})}" class="card ts-item ts-card ts-item__lg">
-                                            <!--Card Image-->
                                             <div class="card-img" th:data-bg-image="${near.path != null ? near.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}">
                                                 <figure class="ts-item__info">
                                                     <h4 th:text="${near.mpTitle}"></h4>
@@ -181,7 +129,6 @@
                                                     </aside>
                                                 </figure>
                                             </div>
-                                            <!--Card Body-->
                                             <div class="card-body">
                                                 <div class="ts-description-lists">
                                                     <dl>
@@ -198,35 +145,27 @@
                                                     </dl>
                                                 </div>
                                             </div>
-
-                                            <!--Card Footer-->
                                             <div class="card-footer">
                                                 <span class="ts-btn-arrow">상세정보</span>
                                             </div>
-
                                         </a>
-                                        <!--end ts-item-->
                                     </div>
-                                    <!--end Item col-md-4-->
                                 </div>
-                                <!--end row-->
                             </section>
-                                <section id="pagination-items">
-                                    <div class="container-fluid px-0 mt-2 mb-2">
-                                        <div class="row">
-                                            <div class="col">
-                                                <ul class="pagination justify-content-center mb-0">
-                                                    <li th:if="${mapPointVo.thisPage > 1}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${mapPointVo.thisPage - 1})" th:attr="onclick=|goList('${mapPointVo.thisPage - 1}')|"><i class="fa fa-caret-left"></i></a></li>
-                                                    <li th:each="num: ${#numbers.sequence(1, mapPointVo.totalPages)}" th:classappend="${num eq mapPointVo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
-                                                    <li th:if="${mapPointVo.thisPage < mapPointVo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${mapPointVo.thisPage + 1}')|"><i class="fa fa-caret-right"></i></a></li>
-                                                </ul>
-                                            </div>
+                            <section id="pagination-items">
+                                <div class="container-fluid px-0 mt-2 mb-2">
+                                    <div class="row">
+                                        <div class="col">
+                                            <ul class="pagination justify-content-center mb-0">
+                                                <li th:if="${mapPointVo.thisPage > 1}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${mapPointVo.thisPage - 1})" th:attr="onclick=|goList('${mapPointVo.thisPage - 1}')|"><i class="fa fa-caret-left"></i></a></li>
+                                                <li th:each="num: ${#numbers.sequence(1, mapPointVo.totalPages)}" th:classappend="${num eq mapPointVo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
+                                                <li th:if="${mapPointVo.thisPage < mapPointVo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${mapPointVo.thisPage + 1}')|"><i class="fa fa-caret-right"></i></a></li>
+                                            </ul>
                                         </div>
                                     </div>
-                                </section>
-
+                                </div>
+                            </section>
                         </div>
-                        <!--end col-md-8 / left side -->
                         <div class="col-md-4 navbar-expand-md">
                             <button class="btn bg-white mb-4 w-100 d-block d-md-none" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false"
                                     aria-label="Toggle navigation">
@@ -238,68 +177,42 @@
                                         <i class="fa fa-plus small ts-opacity__30"></i>
                                     </span>
                             </button>
-                          
                             <aside id="sidebar" class="ts-sidebar collapse navbar-collapse">
                                 <section id="review-form">
                                     <h2>댓글 작성</h2>
-
-                                    <!--Form-->
                                     <form id="form-contact" method="post" class="clearfix ts-form ts-form-email" action="/v1/review/reviewXdmInst">
-                                        <!--Message-->
                                         <div class="form-group">
                                             <textarea  class="form-control" id="mrComment" rows="4" name="mrComment" placeholder="댓글을 작성해주세요." required></textarea>
                                         </div>
-
-                                        <!--Submit button-->
                                         <div class="form-group clearfix">
                                             <button type="button" onclick="insertComment(event)" class="btn btn-primary float-right" id="form-contact-submit">댓글 등록
                                             </button>
                                         </div>
-
                                         <div class="form-contact-status"></div>
-
                                     </form>
-                                    <!--end form-contact -->
-
                                 </section>
                                 <section id="reviews">
                                 	<div id="reviewsContainer">
-
-                                        <!--Slide-->
                                         <div class="slide" th:each="rvList :${rvList}">
-                                            <!--Review-->
                                             <div class="ts-box mb-4 ts-has-talk-arrow">
                                                 <p class="mb-0" th:text="${rvList.mrComment}"></p>
-                                                
                                             </div>
                                              <button type="button" onclick="deleteComment(event)" th:if="${session.sessSeqUsr == rvList.member_mmSeq}"><i class="fa fa-trash"></i></button>
-
-                                            <!--Author-->
                                             <div class="mx-2 ts-center__vertical">
                                                 <div class="ts-circle p-4 mr-3"></div>
                                                 <div>
                                                     <h6 class="mb-0"><strong th:text="${rvList.mmName}"></strong></h6>
                                                     <input type="hidden" id="mrSeq" th:value="${rvList.mrSeq}">
-                                                    
                                                     <small class="ts-opacity__30">
                                                         <i class="fa fa-map-marker" th:text="${rvList.mrRegDate}"></i>
                                                     </small>
                                                 </div>
                                             </div>
-                                            
                                         </div>
-                                        <!--end slide-->
-                                    <!--end owl-carousel-->
 									</div>
-									
                                 </section>
-                                
-
                             </aside>
-                            <!--end #sidebar-->
                         </div>
-                        <!--end Right Side / col-md-4-->
-
                     </div>
                 </div>
             </section>

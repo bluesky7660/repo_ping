@@ -22,7 +22,6 @@
 <body>
 <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
-
     <main id="ts-main">
         <section id="breadcrumb">
             <div class="container">
@@ -44,31 +43,22 @@
         <section id="login-register">
             <div class="container">
                 <div class="row">
-
                     <div class="offset-md-2 col-md-8 offset-lg-3 col-lg-6">
                         <div class="tab-content">
                             <div class="tab-pane active" id="register" role="tabpanel" aria-labelledby="register_tab">
-
-                                <!--Register tab-->
                                 <form class="ts-form" id="form-register">
-
-                                    <!--Name-->
                                     <div class="form-group register_item">
                                         <label for="register_name">이름</label>
-                                        <div>a
+                                        <div>
                                             <input type="text" class="form-control validate-this valid-user-name" id="register_name" name="mmName" placeholder="한글로만 이름을 입력해주세요." required>
                                         </div>
                                     </div>
-
-                                    <!--Email-->
                                     <div class="form-group register_item">
                                         <label for="register_email">이메일[아이디]</label>
                                         <div>
                                             <input type="email" class="form-control validate-this valid-email" id="register_email" name="mmEmail" placeholder="ex) example@gmail.com" required>
                                         </div>
                                     </div>
-
-                                    <!--Password-->
                                     <div class="ts-has-password-toggle register_item">
                                         <label for="register_passwd">비밀번호</label>
                                         <div class="input-group">
@@ -79,11 +69,8 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        
                                     </div>
                                     <p class="ts-text-small">※ 8~15자 사이여야 하며, 최소 1개의 숫자, 영문자, 특수문자를 포함해야 합니다.</p>
-
-                                    <!--Repeat Password-->
                                     <div class="ts-has-password-toggle register_item">
                                         <label for="register_passwdChk">비밀번호 확인</label>
                                         <div class="input-group">
@@ -95,8 +82,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!--Gender-->
                                     <div class="form-group register_item">
                                         <label for="register_gender">성별</label>
                                         <div>
@@ -106,56 +91,29 @@
                                             </select>
                                         </div>
                                     </div>
-
-                                    <!--Tel-->
                                     <div class="form-group register_item">
                                         <label for="register_tel">핸드폰 번호</label>
                                         <div>
                                             <input type="text" class="form-control validate-this valid-phone-num" id="register_tel" name="mmTel" placeholder="ex) 01012345678" required>
                                         </div>
                                     </div>
-
-                                    <!--BirthDay-->
                                     <div class="form-group register_item">
                                         <label for="register_birthDay">생년월일</label>
                                         <div>
                                             <input type="text" class="form-control signup_dateOfBirth valid-birth-num form-control validate-this" id="register_birthDay" name="mmBirthDay" placeholder="ex) 1999-11-11" required>
                                         </div>
                                     </div>
-
-                                    <!--Checkbox-->
-                                    <!-- <div class="custom-control custom-checkbox mb-4">
-                                        <input type="checkbox" class="custom-control-input" id="register_check" required>
-                                        <label class="custom-control-label" for="register_check">I Agree With <a href="ja" class="btn-link">Terms and Conditions</a></label>
-                                    </div> -->
-
-                                    <!--Submit button-->
                                     <button id="signupBtn" type="button" class="btn btn-primary">회원가입</button>
-
                                 </form>
-
                             </div>
-                            <!--end #register.tab-pane-->
                         </div>
-                        <!--end tab-content-->
-
                     </div>
-                    <!--end offset-4.col-md-4-->
-
                 </div>
-                <!--end row-->
             </div>
-            <!--end container-->
         </section>
-
-    </main>
-    <!--end #ts-main-->    
+    </main> 
     <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
-    <!--end #ts-footer-->
-
 </div>
-<!--end page-->
-
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>

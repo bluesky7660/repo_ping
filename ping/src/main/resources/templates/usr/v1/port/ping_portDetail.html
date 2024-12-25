@@ -68,8 +68,6 @@
                         <div class="col-md-8 row">
 
                             <div class="py-4 col-8">
-
-                                <!--Title-->
                                 <div class="ts-title mb-2">
                                     <h2 class="mb-1" th:text="${item.ptName}"></h2>
                                     <h5>
@@ -77,8 +75,6 @@
                                         <span th:text="${item.ptAddress}"></span>
                                     </h5>
                                 </div>
-
-                                <!--Row-->
                                 <div class="row">
 
                                     <div class="col-md-7">
@@ -88,7 +84,6 @@
 
                                 
                                 </div>
-                                <!--end row-->
                             </div>
                             <!--end p-4-->
                             <div class="col-4 ts-map ts-map__detail ts-border-radius__sm ts-shadow__sm" id="ts-map-simple"
@@ -112,7 +107,6 @@
                 <!--end ts-box-->
 
             </div>
-            <!--end container-->
         </section>
         <!--end #agency-info-->
         <section id="items-listing-and-search">
@@ -168,14 +162,11 @@
                                     <!--end container-->
                                 </section>
                                 <section id="port_shipList">
-                                    <!--Item-->
                                     <div class="card ts-item ts-item__list ts-card" th:each="shipList:${ships}">
                                         <a th:href="@{/v1/ship/shipDetail(spSeq=${shipList.spSeq})}">
                                             
-                                            <!--Card Image-->
                                             <div class="card-img" th:data-bg-image="${shipList.path}"></div>
 
-                                            <!--Card Body-->
                                             <div class="card-body">
 
                                                 <figure class="ts-item__info">
@@ -204,8 +195,6 @@
                                                     </dl>
                                                 </div>
                                             </div>
-
-                                            <!--Card Footer-->
                                             <div class="card-footer">
                                                 <span class="ts-btn-arrow">자세히보기</span>
                                             </div>
@@ -301,7 +290,6 @@
                                         <!--end col-md-3-->
 
                                     </div>
-                                    <!--end row-->
                                 </section>
                                 <section id="pagination-items">
                                     <div class="container-fluid px-0 mt-2 mb-2">
@@ -321,8 +309,6 @@
                             <!--end #agents-->
 
                         </div>
-                        <!--end tab-content-->
-
 
                         <hr class="my-5">
 
@@ -456,14 +442,8 @@
             </div>
         </section>
 
-    </main>
-    <!--end #ts-main-->    
-    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
-    <!--end #ts-footer-->
-
-</div>
-<!--end page-->
-<script type="text/javascript">
+    </main> 
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> </div><script type="text/javascript">
     window.onload = function() {
         goList = function (thisPage) {
             const listContainer = document.getElementById('port_shipList');
@@ -499,18 +479,13 @@
                         var shipItem = `
                         <div class="card ts-item ts-item__list ts-card">
                             <a href="/v1/ship/shipDetail?spSeq=${ship.spSeq}">
-                                <!--Ribbon-->
                                 <div class="ts-ribbon">
                                     <i class="fa fa-thumbs-up"></i>
                                 </div>
                                 <div class="ts-ribbon-corner">
                                     <span>Updated</span>
                                 </div>
-
-                                <!--Card Image-->
                                 <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg" style="background-image: url('/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg');"></div>
-
-                                <!--Card Body-->
                                 <div class="card-body">
 
                                     <figure class="ts-item__info">
@@ -540,8 +515,6 @@
                                         </dl>
                                     </div>
                                 </div>
-
-                                <!--Card Footer-->
                                 <div class="card-footer">
                                     <span class="ts-btn-arrow">자세히보기</span>
                                 </div>
