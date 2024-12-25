@@ -17,6 +17,8 @@ public class MemberDto {
     private Boolean mmDelNy;
     private Date mmRegDate;
     private Date mmModDate;
+    
+    private String mmPasswdChk;
 //------------------------------------
 	public String getMmSeq() {
 		return mmSeq;
@@ -83,5 +85,11 @@ public class MemberDto {
 	}
 	public void setMmModDate(Date mmModDate) {
 		this.mmModDate = mmModDate;
+	}
+	public String getMmPasswdChk() {
+		return mmPasswdChk;
+	}
+	public void setMmPasswdChk(String mmPasswdChk) {
+		this.mmPasswdChk = mmPasswdChk;
 	}
 }

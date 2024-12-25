@@ -35,13 +35,9 @@
             <div class="container">
                 <div class="row">
                     <div th:replace="~{usr/v1/etc/userSide :: side}"></div>
-                    <!--end col-md-4-->
                     <div class="col-md-8">
                    
-
-                        <!--Title-->
                         <h3>예약목록</h3>
-                            <!--Row-->
                             <label class="row card ts-item ts-item__list ts-card"  th:each="list:${list}">
                                 <!--Card Image-->
                                 <div class="card-img" th:data-bg-image="${list.path}">
@@ -84,8 +80,6 @@
                         
                      <!--end form-contact -->
                     </div>
-                    <!--end col-md-8-->
-
                 </div>
             </div>
         </section>

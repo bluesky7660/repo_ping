@@ -131,14 +131,29 @@
     </insert>
     <update id="updateMember">
         UPDATE member
-        SET
-	        mmName = #{mmName},
-	        <!-- mmPasswd = #{mmPasswd}, -->
-	        mmTel = #{mmTel},
-	        mmBirthDay = #{mmBirthDay},
-<!-- 	        mmDept = #{mmDept}, -->
-	        mmEmail = #{mmEmail},
-	        mmGender = #{mmGender}
+        <set>
+	        <if test="mmName != null and mmName != ''">
+	            mmName = #{mmName},
+	        </if>
+	        <if test="mmTel != null and mmTel != ''">
+	            mmTel = #{mmTel},
+	        </if>
+	        <if test="mmBirthDay != null and mmBirthDay != ''">
+	            mmBirthDay = #{mmBirthDay},
+	        </if>
+	        <if test="mmEmail != null and mmEmail != ''">
+	            mmEmail = #{mmEmail},
+	        </if>
+	        <if test="mmGender != null and mmGender != ''">
+	            mmGender = #{mmGender},
+	        </if>
+	    </set>
+        WHERE mmSeq = #{mmSeq}
+    </update>
+    <update id="updatePasswd">
+        UPDATE member
+		set
+		mmPasswd = #{mmPasswd}
         WHERE mmSeq = #{mmSeq}
     </update>
     <delete id="deleteMember">

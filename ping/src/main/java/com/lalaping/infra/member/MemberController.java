@@ -176,7 +176,27 @@ public class MemberController {
 		model.addAttribute("item", memberService.selectOne(memberDto));
 		return "usr/v1/member/ping_editMember";
 	}
-	
+	@RequestMapping(value = "memberUpdate")
+	public String memberUpdate(MemberDto memberDto) {
+		int updt = memberService.updateMember(memberDto);
+//		System.out.println("memberService.updateMember(memberDto): " + updt);
+		return "redirect:/v1/member/editMember";
+	}
+	@RequestMapping(value = "passWdUpdate")
+	@ResponseBody
+	public Map<String, Object> passWdUpdate(MemberDto memberDto) {
+
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		if(matchesBcrypt(memberDto.getMmPasswd(), memberDto.getMmPasswd(), 10)) {
+			int updt = memberService.updatePasswd(memberDto);
+			returnMap.put("rt", "success");
+		}else {
+			returnMap.put("rt", "fail");
+		}
+		
+		return returnMap;
+	}
 	
 	@ResponseBody
 	@RequestMapping(value = "loginUsrProc")

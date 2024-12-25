@@ -22,7 +22,6 @@
 <body>
 <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
-
     <main id="ts-main">
         <section id="page-title">
             <div class="container">
@@ -35,93 +34,80 @@
             <div class="container">
                 <div class="row">
                     <div th:replace="~{usr/v1/etc/userSide :: side}"></div>
-                    <!--end col-md-4-->
                     <div class="col-md-8">
-
-                        <!--Title-->
                         <h3>내정보 수정</h3>
-                        
                         <div class="row">
-
-                            <!--Name-->
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label for="form-contact-name">이름</label>
-                                  <p class="ts-text-color-black" th:text="${item.mmName}">김선우<p>
+                                  <p class="ts-text-color-black" th:text="${item.mmName}"><p>
                                 </div>
                             </div>
-                            <!--Email-->
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <label for="form-contact-email">생년월일</label>
+                                    <label for="form-contact-birthDay">생년월일</label>
                                     <p class="ts-text-color-black" th:text="${#dates.format(item.mmBirthDay,'yyyy년MM월dd일')}"><p>
                                 </div>
                             </div>
                         </div>
-                            <!--Row-->
-                            <div class="row">
-
-                                <!--Name-->
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="form-contact-name">이메일</label>
-                                        <input type="text" class="form-control" id="form-contact-name" name="name" placeholder="변경할 이메일명" required>
+                        <form class="row ts-form user_info_form" method="post" autocomplete="off" action="/memberUpdate">
+                            <input type="hidden" id="mmSeq" name="mmSeq" th:value="${item.mmSeq}">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group edit_info">
+                                    <label for="form-contact-email">이메일</label>
+                                    <div>
+                                        <input type="text" class="form-control validate-this valid-email" id="form-contact-email" name="mmEmail" th:value="${item.mmEmail}" placeholder="변경할 이메일명" required>
                                     </div>
                                 </div>
-
-                                <!--Email-->
-                                <div class="col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="form-contact-email">전화번호</label>
-                                        <input type="email" class="form-control" id="form-contact-email" name="email" placeholder="변경할 전화번호" required>
-                                    </div>
-                                </div>
-
                             </div>
-                            <!--end row -->
-                            <!--Submit button-->
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group edit_info">
+                                    <label for="form-contact-tel">전화번호</label>
+                                    <div>
+                                        <input type="tel" class="form-control validate-this valid-phone-num" id="form-contact-tel" name="mmTel" th:value="${item.mmTel}" placeholder="변경할 전화번호" required>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group clearfix">
-                                <button type="submit" class="btn btn-primary" id="form-contact-submit">
+                                <button type="button" class="btn btn-primary" id="user_info_submit">
                                     변경하기
                                 </button>
                             </div>
-
-                            <div class="form-contact-status"></div>
-                            <hr class="my-5">
-                            <div>
-                                <!-- heading -->
-                                <h3>비밀번호 변경</h3>
-                                <form method="" action="" class="row row-cols-1 row-cols-lg-2">
-                                    <!-- input -->
-                                    <div class="mb-4 col">
+                        </form>
+                        <hr class="my-5">
+                        <div>
+                            <h3>비밀번호 변경</h3>
+                            <form method="post" action="/">
+                                <div class="row">
+                                    <div class="mb-4 col-md-6 col-sm-12">
+                                        <label class="form-label">현재 비밀번호</label>
+                                        <input type="password" class="form-control" placeholder="" >
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-4 col-md-6 col-sm-12">
                                         <label class="form-label">새로운 비밀번호설정</label>
                                         <input type="password" class="form-control" placeholder="" name="mmPasswd">
                                     </div>
-                                    <!-- input -->
-                                    <div class="mb-4 col">
-                                        <label class="form-label">비밀번호 재입력</label>
+                                    <div class="mb-4 col-md-6 col-sm-12">
+                                        <label class="form-label">새로운 비밀번호 재입력</label>
                                         <input type="password" class="form-control" placeholder="">
                                     </div>
-                                    <!-- input -->
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary" id="form-contact-submit">
-                                            비밀번호 변경
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-
-                      
-                        <!--end form-contact -->
+                                </div>
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-primary" id="password_submit">
+                                        비밀번호 변경
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <!--end col-md-8-->
-
                 </div>
             </div>
         </section>
-
     </main> 
-    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> </div>
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div>
+</div>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
@@ -129,6 +115,74 @@
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
 <script src="/usr/v1/js/script.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
+<script>
+    window.addEventListener('load', function() {
+        const inputNullText = "내용을 적어주세요.";
+        const selectNullText = "내용을 선택해주세요.";
+        const userInfo = document.getElementById("user_info_submit");
 
+        userInfo.onclick = function (){
+            var objs = document.querySelectorAll(".validate-this");
+            var i= 0;
+            var validateChk = false;
+            for(let element of objs){
+                var objValue = element.value.trim();
+                let elementBox;
+                if(element.closest("td")){
+                    elementBox = element.closest("td");
+                }else if (element.closest("li")) {
+                    elementBox = element.closest("li");
+                }else if (element.closest(".edit_info")) {
+                    elementBox = element.closest(".edit_info");
+                }
+                const feedbackBox = document.createElement("div");
+                const feedbackChild = document.createElement("div");
+                const feedbackinner = document.createElement("div");
+                feedbackBox.className  = "invalid-box mb-3";
+                feedbackChild.className  = "invalid-child";
+                feedbackinner.className  = "invalid-feedback";
+                feedbackinner.id  = "invalid-feedback";
+                feedbackBox.appendChild(feedbackChild);
+                feedbackBox.appendChild(feedbackinner);
+                elementBox.appendChild(feedbackBox);
+                const feedbackChk = elementBox.querySelector(".invalid-child");
+                const feedback = elementBox.querySelector(".invalid-feedback");
+                if (objValue == "" || objValue == null) {
+                    if(element.tagName ==='INPUT'){
+                        feedback.textContent = inputNullText;
+                    }else if(element.tagName ==='SELECT'){
+                        feedback.textContent = selectNullText;
+                    }
+                    if(i==0){
+                        element.focus();
+                    }
+                    i++;
+                    validateChk = false;
+                    element.classList.add('is-invalid');
+                } else {
+                    //by pass
+                    var val  = RegExps(element,objValue,feedback);
+                    if(val == true){
+                        validateChk = true;
+                        element.classList.remove('is-invalid');
+                        element.classList.add('is-valid');
+                    }else{
+                        if(i==0){
+                            element.focus();
+                        }
+                        i++;
+                        validateChk = false;
+                        element.classList.add('is-invalid');
+                    }
+                    
+                }
+            };
+            if(validateChk == false){
+                return false;
+            }
+            userInfo.closest(".user_info_form").submit();
+        }
+    })
+</script>
 </body>
 </html>

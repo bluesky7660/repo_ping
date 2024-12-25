@@ -216,16 +216,9 @@
                     </div>
                 </div>
             </section>
-
         </main>
-        <!--end #ts-main-->
-
         <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
-        <!--end #ts-footer-->
-
     </div>
-    <!--end page-->
-
     <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
     <script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
     <script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
@@ -249,7 +242,6 @@
                 const params = new URLSearchParams(window.location.search);
 
                 const mpSeq = params.get('mpSeq');
-                // document.querySelector("input[name=thisPage]").value = thisPage;
                 $.ajax({
                     url: '/nearMapPointList', // 서버의 페이지네이션 엔드포인트
                     type: 'post',
@@ -389,7 +381,7 @@
 	     // 댓글 목록을 가져오는 함수
 	     function getCommentList() {
 	    	 $.ajax({
-	    		    url: "/reviewList",  // 서버에서 리뷰 목록을 가져오는 URL
+	    		    url: "/reviewList",
 	    		    type: 'get',
 	    		    dataType: 'json',
 	    		    data: { 
@@ -398,9 +390,8 @@
 	    		        "mpSeq" : $("#mapPoint_mpSeq").val()
 	    		    },
 	    		    success: function(response) {
-	    		        var reviewsHtml = "";  // 댓글 HTML을 저장할 변수
+	    		        var reviewsHtml = "";
 
-	    		        // 서버에서 받은 댓글 데이터를 반복하여 HTML 생성
 	    		        $.each(response.rvList, function(index, rvList) {
 	    		            var date = new Date(rvList.mrRegDate);
 	    		            var formattedDate = date.toLocaleString("ko-KR", {
@@ -434,10 +425,8 @@
 	    		            `;
 	    		        });
 
-// 	    		        #reviewsContainer의 .owl-carousel에 새로운 HTML 삽입
 	    		        $("#reviewsContainer").html(reviewsHtml);
 
-// 	    		        Owl Carousel 초기화
 	    		        $("#reviewsContainer .owl-carousel").owlCarousel({
 	    		            items: 1,
 	    		            dots: true,
