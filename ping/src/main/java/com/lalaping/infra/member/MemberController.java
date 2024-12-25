@@ -184,12 +184,14 @@ public class MemberController {
 	}
 	@RequestMapping(value = "passWdUpdate")
 	@ResponseBody
-	public Map<String, Object> passWdUpdate(MemberDto memberDto) {
+	public Map<String, Object> passWdUpdate(MemberDto memberDto ,HttpSession session) {
 
 		Map<String, Object> returnMap = new HashMap<>();
-		
-		if(matchesBcrypt(memberDto.getMmPasswd(), memberDto.getMmPasswd(), 10)) {
-			int updt = memberService.updatePasswd(memberDto);
+		String sessSeqUsr = String.valueOf(session.getAttribute("sessSeqUsr"));
+		memberDto.setMmSeq(sessSeqUsr);
+		MemberDto rtMember = memberService.selectOne(memberDto);
+		if(matchesBcrypt(memberDto.getMmPasswdChk(), rtMember.getMmPasswd(), 10)) {
+//			int updt = memberService.updatePasswd(memberDto);
 			returnMap.put("rt", "success");
 		}else {
 			returnMap.put("rt", "fail");
