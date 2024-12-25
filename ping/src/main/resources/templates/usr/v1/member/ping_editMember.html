@@ -77,21 +77,27 @@
                         <hr class="my-5">
                         <div>
                             <h3>비밀번호 변경</h3>
-                            <form method="post" action="/">
+                            <form class="password_edit_form" method="post" autocomplete="off" action="/passWdUpdate">
                                 <div class="row">
-                                    <div class="mb-4 col-md-6 col-sm-12">
+                                    <div class="mb-4 col-md-6 col-sm-12 passWd_input" id="passWdChk">
                                         <label class="form-label">현재 비밀번호</label>
-                                        <input type="password" class="form-control" placeholder="" >
+                                        <div>
+                                            <input type="password" id="input_mmPasswdChk" class="form-control validate-this valid-userPasswordCk" placeholder="현재 비밀번호를 입력해주세요" name="mmPasswdChk">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="mb-4 col-md-6 col-sm-12">
+                                    <div class="mb-4 col-md-6 col-sm-12 passWd_input">
                                         <label class="form-label">새로운 비밀번호설정</label>
-                                        <input type="password" class="form-control" placeholder="" name="mmPasswd">
+                                        <div>
+                                            <input type="password" id="input_mmPasswd" class="form-control validate-this valid-password" placeholder="변경할 비밀번호를 입력력해주세요" name="mmPasswd">
+                                        </div>
                                     </div>
-                                    <div class="mb-4 col-md-6 col-sm-12">
+                                    <div class="mb-4 col-md-6 col-sm-12 passWd_input">
                                         <label class="form-label">새로운 비밀번호 재입력</label>
-                                        <input type="password" class="form-control" placeholder="">
+                                        <div>
+                                            <input type="password" class="form-control validate-this valid-passwordCk" placeholder="변경할 비밀번호를 재입력력해주세요">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -120,6 +126,7 @@
         const inputNullText = "내용을 적어주세요.";
         const selectNullText = "내용을 선택해주세요.";
         const userInfo = document.getElementById("user_info_submit");
+        const passwordSubmit = document.getElementById("password_submit");
 
         userInfo.onclick = function (){
             var objs = document.querySelectorAll(".validate-this");
@@ -141,7 +148,7 @@
                 feedbackBox.className  = "invalid-box mb-3";
                 feedbackChild.className  = "invalid-child";
                 feedbackinner.className  = "invalid-feedback";
-                feedbackinner.id  = "invalid-feedback";
+                feedbackinner.id  = "invalid-feedback_"+i;
                 feedbackBox.appendChild(feedbackChild);
                 feedbackBox.appendChild(feedbackinner);
                 elementBox.appendChild(feedbackBox);
@@ -181,6 +188,89 @@
                 return false;
             }
             userInfo.closest(".user_info_form").submit();
+        }
+        passwordSubmit.onclick = function (){
+            var objs = document.querySelectorAll(".validate-this");
+            var i= 0;
+            var validateChk = false;
+            for(let element of objs){
+                var objValue = element.value.trim();
+                let elementBox;
+                if(element.closest("td")){
+                    elementBox = element.closest("td");
+                }else if (element.closest("li")) {
+                    elementBox = element.closest("li");
+                }else if (element.closest(".passWd_input")) {
+                    elementBox = element.closest(".passWd_input");
+                }
+                const feedbackBox = document.createElement("div");
+                const feedbackChild = document.createElement("div");
+                const feedbackinner = document.createElement("div");
+                feedbackBox.className  = "invalid-box mb-3";
+                feedbackChild.className  = "invalid-child";
+                feedbackinner.className  = "invalid-feedback";
+                feedbackinner.id  = "invalid-feedback_"+i;
+                feedbackBox.appendChild(feedbackChild);
+                feedbackBox.appendChild(feedbackinner);
+                elementBox.appendChild(feedbackBox);
+                const feedbackChk = elementBox.querySelector(".invalid-child");
+                const feedback = elementBox.querySelector(".invalid-feedback");
+                if (objValue == "" || objValue == null) {
+                    if(element.tagName ==='INPUT'){
+                        feedback.textContent = inputNullText;
+                    }else if(element.tagName ==='SELECT'){
+                        feedback.textContent = selectNullText;
+                    }
+                    if(i==0){
+                        element.focus();
+                    }
+                    i++;
+                    validateChk = false;
+                    element.classList.add('is-invalid');
+                } else {
+                    //by pass
+                    var val  = RegExps(element,objValue,feedback);
+                    if(val == true){
+                        validateChk = true;
+                        element.classList.remove('is-invalid');
+                        element.classList.add('is-valid');
+                    }else{
+                        if(i==0){
+                            element.focus();
+                        }
+                        i++;
+                        validateChk = false;
+                        element.classList.add('is-invalid');
+                    }
+                    
+                }
+            };
+            if(validateChk == false){
+                return false;
+            }
+            // userInfo.closest(".password_edit_form").submit();
+            $.ajax({
+                async: true 
+                ,cache: false
+                ,type: "post"
+                ,url: userInfo.closest(".password_edit_form").action
+                ,data : { 
+                    "mmPasswdChk" : document.getElementById("input_mmPasswdChk").value.trim(),
+                    "mmPasswd" : document.getElementById("input_mmPasswd").value.trim(),
+                }
+                ,success: function(response) {
+                    if(response.rt == "success") {
+                        // window.location.href = "/v1/login";
+                        alert("비밀번호 변경 성공!")
+                    } else {
+                        document.getElementById("passWdChk").querySelector(".invalid-feedback").textContent = "현재 비밀번호가 틀렸습니다. 다시 입력해주세요.";
+                        document.getElementById("input_mmPasswdChk").classList.add('is-invalid');
+                    }
+                }
+                ,error : function(jqXHR, textStatus, errorThrown){
+                    alert("비밀번호 변경에서 " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+                }
+            });
         }
     })
 </script>

@@ -133,6 +133,18 @@ function RegExps(element,objValue,feedback) {
                 
                 return true;
             }
+        }else if (element.classList.contains('valid-userPasswordCk')) {
+            console.log("현재비밀번호형식");
+            if(!passwordRegExp.test(objValue)){
+                var text = "비밀번호는 8~15자 사이여야 하며, 최소 1개의 숫자, 영문자, 특수문자를 포함해야 합니다.";
+                feedback.textContent = text;
+                element.focus();
+                return false;
+            } else {
+    // 	    	by pass
+                
+                return true;
+            }
         }
         else if (element.classList.contains('valid-phone-num')) {
             console.log("핸드폰번호 숫자만");
@@ -445,7 +457,7 @@ window.addEventListener('load', function() {
                 feedbackBox.className  = "invalid-box mb-3";
                 feedbackChild.className  = "invalid-child";
                 feedbackinner.className  = "invalid-feedback";
-                feedbackinner.id  = "invalid-feedback";
+                feedbackinner.id  = "invalid-feedback_"+i;
                 feedbackBox.appendChild(feedbackChild);
                 feedbackBox.appendChild(feedbackinner);
                 elementBox.appendChild(feedbackBox);
