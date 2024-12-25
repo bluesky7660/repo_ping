@@ -33,42 +33,24 @@
         <div class="ts-full-screen ts-has-horizontal-results w-1001 d-flex1 flex-column1">
             <div class="ts-map ts-shadow__sm">
                 <div class="ts-form__map-search ts-z-index__2">
-                    <!--Form-->
                     <form class="ts-form" id="mapPoint_search_form" method="post" action="" autocomplete="off">
-
-                        <!--Collapse button-->
                         <a href=".ts-form-collapse" data-toggle="collapse" class="ts-center__vertical justify-content-between">
                             <h5 class="mb-0">검색 필터</h5>
                         </a>
-
-                        <!--Form-->
                         <div class="ts-form-collapse ts-xs-hide-collapse collapse show">
-
-                            <!--Keyword-->
                             <div class="form-group my-2 pt-2">
                                 <input type="text" class="form-control" id="keyword" name="shMpValue" th:value="${mapPointVo.shMpValue}" placeholder="포인트 이름, 주소">
                             </div>
-
-                            <!--Submit button-->
                             <div class="form-group mt-2 mb-3">
                                 <button type="button" class="btn btn-primary w-100" id="mapPoint_search_btn">검색</button>
                             </div>
-
-                            <!--More Options Button-->
                             <a href="#more-options-collapse" class="collapsed w-100 d-inline-block" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="more-options-collapse">
                                 <i class="fa fa-plus-circle ts-text-color-primary mr-2 ts-visible-on-collapsed"></i>
                                 <i class="fa fa-minus-circle ts-text-color-primary mr-2 ts-visible-on-uncollapsed"></i>
                                 어종 검색 조건 추가
                             </a>
-
-                            <!--Hidden Form-->
                             <div class="collapse" id="more-options-collapse">
-
-                                <!--Padding-->
                                 <div class="pt-4">
-
-                                    <!--Checkboxes-->
-                                   
                                     <div id="fishList-checkboxes"  class="w-100 fishList-checkboxes">
                                         <h6 class="mb-3">어종</h6>
                                         <aside class="mb-3">최대 선택 3개 제한</aside>
@@ -77,60 +59,33 @@
                                                 <input type="checkbox" class="custom-control-input" th:id="${'ch_'+fishsStat.count}" name="fsSeqList" th:value="${fishs.fsSeq}" th:checked="${mapPointVo.fsSeqList != null and #lists.contains(mapPointVo.fsSeqList, fishs.fsSeq)}">
                                                 <label class="custom-control-label" th:for="${'ch_'+fishsStat.count}" th:text="${fishs.fsName}"></label>
                                             </div>
-
                                         </div>
-                                        <!--end ts-column-count-3-->
-
                                     </div>
-                                    <!--end #features-checkboxes-->
-
                                 </div>
-                                <!--end Padding-->
                             </div>
-                            <!--end more-options-collapse-->
-
                         </div>
-                        <!--end ts-form-collapse-->
-
                     </form>
-                    <!--end ts-form-->
                 </div>
-                <!--end ts-form__map-search-->
                 <div id="map" class="h-100 ts-z-index__1"></div>
-
             </div>
             <div id="ts-results" class="ts-results__horizontal scrollbar-inner dragscroll">
                 <div class="ts-results-wrapper"></div>
             </div>
-
         </div>
-        <!--end full-screen-->
-
     </section>
-    <!--end ts-hero-->
-
     <main id="ts-main">
         <section id="featured-properties" class="featured-properties ts-block pt-5">
             <div class="container">
-
-                <!--Title-->
                 <div class="ts-title text-center">
                     <h2>추천 선상낚시</h2>
                 </div>
-
                 <div class="row">
-
-                    <!--Item-->
                     <div th:class="${shipsStat.count == 1} ? 'col-md-6 col-lg-4' : 'col-sm-6 col-lg-4'" th:each="ships:${ships}">
-
                         <div class="card ts-item ts-card ts-item__lg">
                             <a th:href="@{/v1/ship/shipDetail(spSeq=${ships.spSeq})}">
-                                <!--Ribbon-->
                                 <div class="ts-ribbon">
                                     <i class="fa fa-thumbs-up"></i>
                                 </div>
-
-                                <!--Card Image-->
                                 <div class="card-img ts-item__image" th:data-bg-image="${ships.path != null ? ships.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}">
                                     <div class="ts-item__info-badge" th:text="${#numbers.formatInteger(ships.spPrice,1,'COMMA') + ' 원'}"></div>
                                     <figure class="ts-item__info">
@@ -141,8 +96,6 @@
                                         </aside>
                                     </figure>
                                 </div>
-
-                                <!--Card Body-->
                                 <div class="card-body ts-item__body">
                                     <div class="ts-description-lists d-flex flex-wrap justify-content-between">
                                         <dl>
@@ -175,29 +128,20 @@
                                         
                                     </div>
                                 </div>
-
-                                <!--Card Footer-->
                                 <div class="card-footer">
                                     <span class="ts-btn-arrow">자세히 보기</span>
                                 </div>
                             </a>
                         </div>
-                        <!--end ts-item-->
                     </div>
-                    <!--end Item col-md-4-->
-                </div>    
-                <!--All properties button-->
+                </div>
                 <div class="text-center mt-3">
                     <a href="/v1/ship/shipList" class="btn btn-outline-dark">모든 선상낚시 보러가기</a>
                 </div>
-
             </div>
-            <!--end container-->
         </section>
         <section id="season_point" class="ts-block season_point">
             <div class="container">
-
-                <!--Title-->
                 <div class="ts-title">
                     <h2>제철 낚시 포인트</h2>
                 </div>
@@ -244,14 +188,10 @@
                         </li>
                     </ul>
                 </div>
-
-                <!--Row-->
                 <div class="row" id="season_pointList">
                     <div class="col-sm-6 col-lg-3" th:each="sessPoint:${sessPoint}">
                         <div class="card ts-item ts-card">
                             <a th:href="@{/v1/mapPoint/mapPointDetail(mpSeq=${sessPoint.mpSeq})}">
-
-                                <!--Card Image-->
                                 <div class="card-img ts-item__image" th:data-bg-image="${sessPoint.path != null ? sessPoint.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}">
                                     <figure class="ts-item__info">
                                         <h4 th:text="${sessPoint.mpTitle}"></h4>
@@ -261,8 +201,6 @@
                                         </aside>
                                     </figure>
                                 </div>
-
-                                <!--Card Body-->
                                 <div class="card-body">
                                     <div class="ts-description-lists">
                                         <dl>
@@ -275,17 +213,13 @@
                                         </dl>
                                     </div>
                                 </div>
-
-                                <!--Card Footer-->
                                 <div href="/v1/mapPoint/mapPointDetail" class="card-footer">
                                     <span class="ts-btn-arrow">자세히 보기</span>
                                 </div>
                             </a>
                         </div>
-                        <!--end ts-item-->
                     </div>
                 </div>
-                <!--end row-->
                 <section id="pagination-items">
                     <div class="container-fluid px-0 mt-2 mb-2">
                         <div class="row">
@@ -300,24 +234,15 @@
                     </div>
                 </section>
             </div>
-            <!--end container-->
         </section>
         <section id="fishing_point" class="ts-block" data-bg-pattern="/usr/v1/template/themeforest-v1.0/assets/img/bg-pattern-dot.png">
             <div class="container">
-                <!--Title-->
                 <div class="ts-title text-center">
                     <h2>낚시 포인트</h2>
                 </div>
-
-                <!--Carousel-->
                 <div class="owl-carousel ts-items-carousel" data-owl-items="4" data-owl-dots="1">
-
-                    <!--Item-->
                     <div class="slide" th:each="mapPoint:${allmapPoint}">
-
                         <div class="card ts-item ts-card ts-item__lg">
-
-                                <!--Card Image-->
                                 <div class="card-img ts-item__image" th:data-bg-image="${mapPoint.path != null ? mapPoint.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}">
                                     <figure class="ts-item__info">
                                         <h4 th:text="${mapPoint.mpTitle}"></h4>
@@ -327,8 +252,6 @@
                                         </aside>
                                     </figure>
                                 </div>
-
-                                <!--Card Body-->
                                 <div class="card-body">
                                     <div class="ts-description-lists">
                                         <dl>
@@ -341,27 +264,16 @@
                                         </dl>
                                     </div>
                                 </div>
-
-                                <!--Card Footer-->
                                 <a th:href="@{/v1/mapPoint/mapPointDetail(mpSeq=${mapPoint.mpSeq})}" class="card-footer">
                                     <span class="ts-btn-arrow">자세히 보기</span>
                                 </a>
                         </div>
-                        <!--end ts-item-->
                     </div>
-                    <!--end slide-->
                 </div>
             </div>
-            
         </section>
-        <!--end ts-block-->
     </main>    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
-    <!--end #ts-footer-->
-
-
 </div>
-<!--end page-->
-
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>

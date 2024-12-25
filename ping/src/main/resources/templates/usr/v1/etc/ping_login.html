@@ -33,20 +33,13 @@
         <section id="login-register">
             <div class="container">
                 <div class="row">
-
                     <div class="offset-md-2 col-md-8 offset-lg-3 col-lg-6">
                         <div class="tab-content">
                             <div class="tab-pane active" id="login" role="tabpanel" aria-labelledby="login-tab">
-
-                                <!--로그인 form-->
                                 <form class="ts-form" id="form-login">
-
-                                    <!--Email-->
                                     <div class="form-group">
                                         <input type="email" class="form-control" id="login_email" placeholder="Email" value="sky7660@gmail.com" required>
                                     </div>
-
-                                    <!--Password-->
                                     <div class="input-group ts-has-password-toggle">
                                         <input type="password" class="form-control" id="login_password" placeholder="Password" value="123456abc@!" required>
                                         <div class="input-group-append">
@@ -61,36 +54,20 @@
                                             아이디(이메일) 또는 비밀번호가 잘못 되었습니다. 아이디와 비밀번호를 정확히 입력해 주세요.
                                         </div>
                                     </div>
-                                    <!--Checkbox and Submit button-->
                                     <div class="ts-center__vertical justify-content-between">
-
-                                        <!--Submit button-->
                                         <button type="button" class="btn btn-primary" id="loginBtn">로그인</button>
-
                                     </div>
-
                                     <hr>
-
                                 </form>
-
                             </div>
-                            <!--end #login.tab-pane-->
                         </div>
-                        <!--end tab-content-->
-
                     </div>
-                    <!--end offset-4.col-md-4-->
-
                 </div>
-                <!--end row-->
             </div>
-            <!--end container-->
         </section>
-
     </main>
     <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div>
 </div>
-<!--end page-->
 <!-- modals -->
 <div class="modal fade" id="modalAlert" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
