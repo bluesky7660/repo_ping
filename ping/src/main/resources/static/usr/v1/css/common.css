@@ -72,6 +72,9 @@ img[alt="날씨이미지"]{
 .ts-has-password-toggle .input-group{
     margin-bottom: 0;
 }
+.user_info_form .invalid-feedback{
+    display: block;
+}
 
 
 /*index 제철 낚시 포인트*/

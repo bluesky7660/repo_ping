@@ -41,6 +41,9 @@ public class MemberService {
     public int updateMember(MemberDto memberDto) {
         return memberDao.updateMember(memberDto);
     }
+    public int updatePasswd(MemberDto memberDto) {
+        return memberDao.updatePasswd(memberDto);
+    }
     public int deleteMember(MemberDto memberDto) {
         return memberDao.deleteMember(memberDto);
     }
