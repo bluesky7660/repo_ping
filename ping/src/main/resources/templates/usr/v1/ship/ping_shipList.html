@@ -27,22 +27,18 @@
 <body>
 <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
-
     <main id="ts-main">
         <section id="page-title">
             <div class="container">
-
                 <div class="ts-title">
                     <h1>배</h1>
                 </div>
-
             </div>
         </section>
         <section id="items-grid-and-sidebar">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 navbar-expand-md">
-
                         <!-- <button class="btn bg-white mb-4 w-100 d-block d-md-none" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="float-left">
                                     <i class="fa fa-search mr-2"></i>
@@ -52,17 +48,13 @@
                                     <i class="fa fa-plus small ts-opacity__30"></i>
                                 </span>
                         </button> -->
-
                         <aside id="sidebar" class="ts-sidebar collapse navbar-collapse">
                             <section id="sidebar-search-form">
-
                                 <h3 th:text="${vo.totalRows}+' 건의 검색'"></h3>
-
                                 <form method="post" action="/v1/ship/shipList" id="form_search" class="ts-form" autocomplete="off">
                                     <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
                                     <input type="hidden" id="sortOrderH" name="sortOrder" th:value="${vo.sortOrder}" default="1"/>
                                     <input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
-                                    <!--Keyword-->
                                     <div class="form-group">
                                         <label>배이름 검색</label>
                                         <input type="text" class="form-control" id="keyword" name="shName" th:value="${vo.shName}" placeholder="">
@@ -71,8 +63,6 @@
                                         <label>항구 검색</label>
                                         <input type="text" class="form-control" id="keyword" name="shport" th:value="${vo.shport}" placeholder="">
                                     </div>
-
-                                    <!--Status-->
                                     <div class="form-group">
                                         <label>인원</label>
                                         <select class="custom-select" id="status" name="shRemain" >
@@ -84,11 +74,9 @@
                                             <option th:selected ="${vo.shRemain == 5}" value="5">5 이상</option>
                                         </select>
                                     </div>
-                                    <!--Row - Min price & Max price-->
                                     <div class="row">
                                         <label>가격</label>
                                         <div class="row">
-                                            <!--Min Price-->
                                             <div class="col-sm-6">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control border-right-0" id="min-price" name="shmin_price" th:value="${vo.shmin_price}" placeholder="최소가격">
@@ -97,8 +85,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <!--Max Price-->
                                             <div class="col-sm-6">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control border-right-0" id="max-price" name="shmax_price" th:value="${vo.shmax_price}"  placeholder="최대가격">
@@ -109,18 +95,14 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="row">
                                         <label>출발일</label>
                                         <div class="row">
-                                            <!--Bedrooms-->
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" id="inputDateStart" name="shDateStart" th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="날짜선택" value="">
                                                 </div>
                                             </div>
-
-                                            <!--Bathrooms-->
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" id="inputDateEnd" name="shDateEnd" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="날짜선택" value="">
@@ -128,8 +110,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!--Submit button-->
                                     <div class="form-group my-2">
                                         <button type="submit" class="btn btn-primary w-100" id="search-btn">검색</button>
                                     </div>
@@ -139,10 +119,8 @@
                                     </a>
                                     <div class="collapse" id="more-options-collapse" style="max-height: none; overflow-y: hidden;">
                                         <div class="py-4">
-                                            <!--Checkboxes-->
                                             <div id="features-checkboxes" class="w-100">
                                                 <h6 class="mb-3"></h6>
-
                                                 <div class="">
                                                     <label>제공서비스</label>
                                                     <div class="ts-column-count-2">
@@ -150,14 +128,12 @@
                                                             <input type="checkbox" class="custom-control-input" id="ch_1" name="shEatNy" th:checked="${vo.shEatNy}" value="1">
                                                             <label class="custom-control-label" for="ch_1">식사제공</label>
                                                         </div>
-
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input" id="ch_2" name="shRentalNy" th:checked="${vo.shRentalNy}" value="1">
                                                             <label class="custom-control-label" for="ch_2">낚시대 대여</label>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!--end ts-column-count-3-->
                                                 <div class="">
                                                     <label>대상어종</label>
                                                     <div class="ts-column-count-2">
@@ -167,20 +143,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
-                                            <!--end #features-checkboxes-->
-
                                         </div>
                                     </div>
                                 </form>
                             </section>
-
-                            
                         </aside>
-                    </div>                    <div class="col-md-8">
+                    </div>
+                    <div class="col-md-8">
                         <section id="display-control" class="clearfix">
-                            <!--Display selector on the right-->
                             <div class="float-none float-sm-right pl-2 ts-center__vertical">
 							    <label for="sorting" class="mb-0 mr-2 text-nowrap">Sort by:</label>
 							    <select class="custom-select bg-transparent" id="sortOrder" name="sortOrder">
@@ -189,19 +160,12 @@
 							        <option value="6" th:selected="${vo.sortOrder == 6}">가까운날짜</option>
 							    </select>
 							</div>
-
                         </section>
-				 					
                         <section id="ts-items-list">
-
-                            <!--Item-->
                             <div class="card ts-item ts-item__list ts-card" th:each="list:${list}">
                                 <a th:href="@{/v1/ship/shipDetail(spSeq=${list.spSeq})}">
-                                    <!--Card Image-->
                                     <div class="card-img" th:data-bg-image="${list.path != null? list.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}"></div>
-                                    <!--Card Body-->
                                     <div class="card-body">
-
                                         <figure class="ts-item__info">
                                             <h4 th:text="${list.spName}"></h4>
                                             <aside>
@@ -209,9 +173,7 @@
                                                 <span th:text="${list.ptName}">항구 주소</span>
                                             </aside>
                                         </figure>
-
                                         <div class="ts-item__info-badge" th:text="${#numbers.formatInteger(list.spPrice,1,'COMMA') + ' 원'}"></div>
-
                                         <div class="ts-description-lists">
                                             <dl>
                                                 <dt>최대인원</dt>
@@ -231,14 +193,11 @@
                                             </dl>
                                         </div>
                                     </div>
-
-                                    <!--Card Footer-->
                                     <div  class="card-footer">
                                         <span class="ts-btn-arrow">자세히보기</span>
                                     </div>
                                 </a>
                             </div>
-
                         </section>
 		                <section id="pagination">
 		                    <div class="container-fluid px-0 mt-2 mb-2">
@@ -253,18 +212,24 @@
 								</div>
 							</div>
 		                </section>
-
-
                     </div>
-                    <!--end Right Side / col-md-8-->
-
                 </div>
             </div>
         </section>
-        <!--end #items-list-->
-
     </main> 
-    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> </div>
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div>
+</div>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="http://maps.google.com/maps/api/js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script src="/usr/v1/js/script.js"></script>
+<script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
+
+<!-- by developer -->
+<script src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript">
 			
 	window.addEventListener('load',function() {
@@ -310,21 +275,6 @@
 	});
 	
 </script>
-<script>
-</script>
-
-<script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
-<script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
-<script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="http://maps.google.com/maps/api/js"></script>
-<script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script>
-<script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
-<script src="/usr/v1/js/script.js"></script>
-<script src="/usr/v1/template/themeforest-v1.0/assets/js/map-leaflet.js"></script>
-
-<!-- by developer -->
-<script src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
-
 </body>
 </html>
 

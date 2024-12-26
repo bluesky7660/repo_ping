@@ -77,7 +77,7 @@
                         <hr class="my-5">
                         <div>
                             <h3>비밀번호 변경</h3>
-                            <form class="password_edit_form" method="post" autocomplete="off" action="/passWdUpdate">
+                            <form id="password_edit_form" class="password_edit_form" method="post" autocomplete="off" action="/passWdUpdate">
                                 <div class="row">
                                     <div class="mb-4 col-md-6 col-sm-12 passWd_input" id="passWdChk">
                                         <label class="form-label">현재 비밀번호</label>
@@ -131,7 +131,7 @@
         userInfo.onclick = function (){
             var objs = document.querySelectorAll(".validate-this");
             var i= 0;
-            var validateChk = false;
+            var validateChk = [];
             for(let element of objs){
                 var objValue = element.value.trim();
                 let elementBox;
@@ -163,23 +163,27 @@
                     if(i==0){
                         element.focus();
                     }
+                    validateChk[i] = false;
                     i++;
-                    validateChk = false;
                     element.classList.add('is-invalid');
+                    feedbackChk.classList.add('is-invalid');
                 } else {
                     //by pass
                     var val  = RegExps(element,objValue,feedback);
                     if(val == true){
-                        validateChk = true;
+                        validateChk[i] = true;
+                        i++;
                         element.classList.remove('is-invalid');
                         element.classList.add('is-valid');
+                        feedbackChk.classList.remove('is-invalid');
                     }else{
                         if(i==0){
                             element.focus();
                         }
+                        validateChk[i] = false;
                         i++;
-                        validateChk = false;
                         element.classList.add('is-invalid');
+                        feedbackChk.classList.add('is-invalid');
                     }
                     
                 }
@@ -189,10 +193,10 @@
             }
             userInfo.closest(".user_info_form").submit();
         }
-        passwordSubmit.onclick = function (){
-            var objs = document.querySelectorAll(".validate-this");
+        function handleSubmit(){
+            var objs = document.getElementById("password_edit_form").querySelectorAll(".validate-this");
             var i= 0;
-            var validateChk = false;
+            var validateChk = [];
             for(let element of objs){
                 var objValue = element.value.trim();
                 let elementBox;
@@ -202,6 +206,10 @@
                     elementBox = element.closest("li");
                 }else if (element.closest(".passWd_input")) {
                     elementBox = element.closest(".passWd_input");
+                }
+                const invalidBoxChk = elementBox.querySelector(".invalid-box");
+                if(invalidBoxChk){
+                    elementBox.querySelector(".invalid-box").remove();
                 }
                 const feedbackBox = document.createElement("div");
                 const feedbackChild = document.createElement("div");
@@ -224,44 +232,48 @@
                     if(i==0){
                         element.focus();
                     }
+                    validateChk[i] = false;
                     i++;
-                    validateChk = false;
                     element.classList.add('is-invalid');
+                    feedbackChk.classList.add('is-invalid');
                 } else {
                     //by pass
                     var val  = RegExps(element,objValue,feedback);
                     if(val == true){
-                        validateChk = true;
+                        validateChk[i] = true;
+                        i++;
                         element.classList.remove('is-invalid');
                         element.classList.add('is-valid');
+                        feedbackChk.classList.remove('is-invalid');
                     }else{
                         if(i==0){
                             element.focus();
                         }
+                        validateChk[i] = false;
                         i++;
-                        validateChk = false;
                         element.classList.add('is-invalid');
+                        feedbackChk.classList.add('is-invalid');
                     }
-                    
                 }
             };
-            if(validateChk == false){
+            if(validateChk.includes(false)){
                 return false;
             }
             // userInfo.closest(".password_edit_form").submit();
+            console.log("action:",passwordSubmit.closest("form").action);
             $.ajax({
                 async: true 
                 ,cache: false
                 ,type: "post"
-                ,url: userInfo.closest(".password_edit_form").action
+                ,url: passwordSubmit.closest("form").action
                 ,data : { 
                     "mmPasswdChk" : document.getElementById("input_mmPasswdChk").value.trim(),
                     "mmPasswd" : document.getElementById("input_mmPasswd").value.trim(),
                 }
                 ,success: function(response) {
                     if(response.rt == "success") {
-                        // window.location.href = "/v1/login";
-                        alert("비밀번호 변경 성공!")
+                        alert("비밀번호 변경 성공!");
+                        window.location.href = "/v1/member/editMember";
                     } else {
                         document.getElementById("passWdChk").querySelector(".invalid-feedback").textContent = "현재 비밀번호가 틀렸습니다. 다시 입력해주세요.";
                         document.getElementById("input_mmPasswdChk").classList.add('is-invalid');
@@ -272,6 +284,14 @@
                 }
             });
         }
+        document.getElementById("password_edit_form").addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // 기본 동작 방지 (폼 제출 등)
+                handleSubmit();
+            }
+        }); 
+        passwordSubmit.onclick = handleSubmit;
+        
     })
 </script>
 </body>

@@ -21,7 +21,6 @@
 <body>
 <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
-
     <main id="ts-main">
         <section id="breadcrumb">
             <div class="container">
@@ -35,16 +34,13 @@
         </section>
         <section id="page-title">
             <div class="container">
-
                 <div class="ts-title">
                     <a href="/v1/port/portList"><h1>항구</h1></a>
                 </div>
-
             </div>
         </section>
         <section id="search-form">
             <div class="container">
-
                <form name ="formList" method = "post" action = "/v1/port/portList" autocomplete="off">
 					<input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
 					<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
@@ -55,8 +51,6 @@
                                     <input type="text" class="form-control" id="keyword" name="shPtName" th:value="${vo.shPtName}" placeholder="항구이름">
                                 </div>
                             </div>
-
-                            <!--Other inputs-->
                             <div class="col-md-8">
                                 <div class="form-row">
                                     <div class="col-sm-3">
@@ -68,50 +62,31 @@
 											<option value="24" th:selected ="${vo.shPtArea == 24}">경북</option>
                                         </select>
                                     </div>
-                                    <!--Submit button-->
                                     <div class="col-sm-3">
                                         <div class="form-group my-2">
                                             <button type="submit" class="btn btn-primary w-100" id="search-btn">Search
                                             </button>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
-                        <!--end form-row-->
-                        
-                        <!--end ts-bg-light-->
                     </section>
-
                 </form>
-                <!--end #form-search-->
-
             </div>
         </section>
-        <!--end #search-form-->
         <section id="items-grid">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-lg-4" th:each="list2 : ${list2}">
-
                         <div class="card ts-item ts-card ts-item__lg">
-
-                           
-
-                            <!--Card Image-->
                             <a th:href="@{/v1/port/portDetail(ptSeq=${list2.ptSeq})}" class="card-img" th:data-bg-image="${list2.path != null ? list2.path :'/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}">
-                               
                                 <figure class="ts-item__info">
                                     <h4 th:text="${list2.ptName}">인천항</h4>
                                 </figure>
                             </a>
-
-                            <!--Card Body-->
                             <div class="card-body">
                                 <div class="ts-description-lists">
-                                
                                 	<dl>
                                         <dt>주소</dt>
                                         <dd><span th:text="${list2.ptAddress}"></span></dd>
@@ -120,45 +95,40 @@
                                     </dl>
                                 </div>
                             </div>
-
-                            <!--Card Footer-->
                             <a th:href="@{/v1/port/portDetail(ptSeq=${list2.ptSeq})}" class="card-footer">
                                 <span class="ts-btn-arrow">상세정보</span>
                             </a>
-
                         </div>
                     </div>
                 </div>
             </div>
         </section>
          <section id="pagination">
-           <div class="container-fluid px-0 mt-2 mb-2">
+            <div class="container-fluid px-0 mt-2 mb-2">
 				<div class="row">
 					<div class="col">
 						<ul class="pagination justify-content-center mb-0">
 							<li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}')|"><i class="fa fa-caret-left"></i></a></li>
-						<li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
-						<li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|"><i class="fa fa-caret-right"></i></a></li>
+                            <li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
+                            <li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|"><i class="fa fa-caret-right"></i></a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
-          </section>
+        </section>
     </main>
-    <!--end #ts-main-->
-    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> </div><script type="text/javascript">
-	goList = function (thisPage) {
-    document.querySelector("input[name=thisPage]").value = thisPage;
-    document.querySelector("form[name=formList]").action = "/v1/port/portList";
-    document.querySelector("form[name=formList]").submit();
-	}
-</script>
-
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div>
+</div>
 <script type="text/javascript">
+	goList = function (thisPage) {
+        document.querySelector("input[name=thisPage]").value = thisPage;
+        document.querySelector("form[name=formList]").action = "/v1/port/portList";
+        document.querySelector("form[name=formList]").submit();
+	}
 	document.getElementById("changeRowNum").onchange = function () {
-    document.getElementById("rowNumToShow").value = document.getElementById("changeRowNum").value;
-    form.action = goUrlXdmList;
-    form.submit();
+        document.getElementById("rowNumToShow").value = document.getElementById("changeRowNum").value;
+        form.action = goUrlXdmList;
+        form.submit();
 	}
 </script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>

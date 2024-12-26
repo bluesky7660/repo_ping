@@ -136,7 +136,7 @@ function RegExps(element,objValue,feedback) {
         }else if (element.classList.contains('valid-userPasswordCk')) {
             console.log("현재비밀번호형식");
             if(!passwordRegExp.test(objValue)){
-                var text = "비밀번호는 8~15자 사이여야 하며, 최소 1개의 숫자, 영문자, 특수문자를 포함해야 합니다.";
+                var text = "현재 비밀번호는 8~15자 사이여야 하며, 최소 1개의 숫자, 영문자, 특수문자를 포함해야 합니다.";
                 feedback.textContent = text;
                 element.focus();
                 return false;

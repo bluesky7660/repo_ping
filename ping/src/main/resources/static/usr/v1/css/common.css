@@ -72,7 +72,7 @@ img[alt="날씨이미지"]{
 .ts-has-password-toggle .input-group{
     margin-bottom: 0;
 }
-.user_info_form .invalid-feedback{
+.user_info_form .invalid-feedback, .password_edit_form .invalid-feedback{
     display: block;
 }
 

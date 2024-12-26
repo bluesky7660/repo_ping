@@ -28,7 +28,6 @@
 <body>
 <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
-
     <main id="ts-main">
         <section id="page-title">
             <div class="container">
@@ -38,17 +37,12 @@
             </div>
         </section>
         <section id="map-address">
-
             <div class="container mb-5">
                 <div class="ts-contact-map ts-map ts-shadow__sm position-relative">
-
-                    <!--Address on map-->
                     <address class="position-absolute ts-bottom__0 ts-left__0 text-white m-3 p-4 ts-z-index__2" data-bg-color="rgba(0,0,0,.8)">
                         <strong th:text="${item.mpTitle}"></strong><br>
                         <span th:text="${item.mpAddress}"></span>
                     </address>
-
-                    <!--Map-->
                     <div class="ts-map h-100 ts-z-index__1" id="ts-map-simple"
                         data-ts-map-zoom="8"
                         th:data-ts-map-center-latitude="${item.mpLatitude}"
@@ -58,21 +52,17 @@
                         th:data-ts-map-Name="${item.mpTitle}"></div>
                 </div>
             </div>
-
         </section>
         <section id="contact-form">
             <div class="container">
                 <div class="row">
                     <div class="col-md-2">
                         <div class="sticky-top weather_menu">
-                            <!--Title-->
                             <h3 th:text="${item.mpTitle}">물왕저수지</h3>
-
                             <p th:text="${item.mpAddress}">
                                 경기 시흥시 동서로857번길 28-13 (물왕동)
                             </p>
                             <ul class="nav nav-pills flex-column" >
-                                <!--로그인 tab-->
                                 <li class="nav-item" th:if="${item.mpType == 5}">
                                     <a class="nav-link" id="main-tab" href="#main_weather">
                                         <h3>물 때표</h3>
@@ -98,8 +88,6 @@
                     </div>
                     <div class="col-md-10" data-bs-spy="scroll" data-bs-offset="0" tabindex="0">
                         <h3>날씨 정보</h3>
-                       
-                        <!--row-->
                         <div id="weather_area" class="weather_area">
                             <div class="" id="main_weather" th:if="${item.mpType == 5}">
                                 <h4>물때 표</h4>
@@ -158,9 +146,7 @@
                                         </td>
                                     </tr>
                                 </table>
-	
                             </div>
-                            <!--end row -->
                             <div class="row" id="sea_weather" th:if="${item.mpType == 5}">
                                 <h4>바다 날씨</h4>
                                 <p>경기북부앞바다</p>
@@ -374,7 +360,6 @@
                                     </tr>
                                 </table>
                             </div>
-                            <!--end row -->
                             <div class="row" id="local_weather">
                                 <h4>지역 날씨</h4>
                                 <table class="table">
@@ -480,16 +465,14 @@
                                     </div>
                                 </div>
                             </div> -->
-                            <!--end row -->
                         </div>
-                        <!--end form-contact -->
                     </div>
                 </div>
             </div>
         </section>
-
     </main> 
-    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> </div>
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div>
+</div>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
