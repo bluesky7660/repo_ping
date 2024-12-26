@@ -22,7 +22,6 @@
 <body>
 <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
-
     <main id="ts-main">
         <section id="page-title">
             <div class="container">
@@ -36,15 +35,12 @@
                 <div class="row">
                     <div th:replace="~{usr/v1/etc/userSide :: side}"></div>
                     <div class="col-md-8">
-                    <form method="post" action="/v1/member/orderUelete">
-                        <h3>환불목록</h3>
+                        <form method="post" action="/v1/member/orderUelete">
+                            <h3>환불목록</h3>
                             <label class="row card ts-item ts-item__list ts-card"  th:each="list:${list}">
-                                <!--Card Image-->
                                 <div class="card-img" th:data-bg-image="${list.path}">
                                 </div>
-                                
                                 <div class="card-body">
-
                                     <figure class="ts-item__info">
                                         <a th:href="@{/v1/ship/shipDetail(spSeq=${list.spSeq})}"><h4 th:text="${list.spName}"></h4></a>
                                     </figure>
@@ -70,23 +66,17 @@
                                             <dd th:text="${#dates.format(list.odModDate,'yyyy-MM-dd / HH:mm')}"></dd>
                                         </dl>
                                     </div>
-                                      <input type="hidden" th:value="${list.odReturnNy}">
-                                        
-                                </div>  
-<!--                                <button type="submit" class="card-footer"> -->
-<!--                                     <span class="ts-btn-arrow">환불하기</span> -->
-<!--                                </button> -->
-                             
-                        </label>
-                        
-                    </form>    <!--end form-contact -->
+                                        <input type="hidden" th:value="${list.odReturnNy}">
+                                </div>
+                            </label>
+                        </form>
                     </div>
                 </div>
             </div>
         </section>
-
     </main> 
-    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> </div>
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div>
+</div>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>

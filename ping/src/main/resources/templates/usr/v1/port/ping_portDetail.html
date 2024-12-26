@@ -25,7 +25,6 @@
 <body>
 <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
-
     <main id="ts-main">
         <section id="breadcrumb">
             <div class="container">
@@ -39,34 +38,21 @@
         </section>
         <section id="page-title">
             <div class="container">
-
                 <div class="ts-title">
                     <h1>항구</h1>
                 </div>
-
             </div>
         </section>
         <section id="agency-info">
             <div class="container">
-
-                <!--Box-->
                 <div class="ts-box">
-
-                    <!--Ribbon-->
-                   
-                    <!--Row-->
                     <div class="row">
-
-                        <!--Brand-->
                         <div class="col-md-4 ts-center__both">
                             <div class="ts-circle__xxl ts-shadow__md">
                                 <img th:src="${item.path != null ? item.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}" alt="${item.ptName+' 이미지'}">
                             </div>
                         </div>
-
-                        <!--Description-->
                         <div class="col-md-8 row">
-
                             <div class="py-4 col-8">
                                 <div class="ts-title mb-2">
                                     <h2 class="mb-1" th:text="${item.ptName}"></h2>
@@ -76,68 +62,50 @@
                                     </h5>
                                 </div>
                                 <div class="row">
-
                                     <div class="col-md-7">
                                         <p th:text="${item.ptDesc}">
                                         </p>
                                     </div>
-
-                                
                                 </div>
                             </div>
-                            <!--end p-4-->
                             <div class="col-4 ts-map ts-map__detail ts-border-radius__sm ts-shadow__sm" id="ts-map-simple"
                                  data-ts-map-zoom="7"
                                  th:data-ts-map-Name="${item.ptName}"
                                  th:data-ts-map-center-latitude="${item.ptLatitude}"
                                  th:data-ts-map-center-longitude="${item.ptLongitude}"
                                  data-ts-map-scroll-wheel="0"
-                                 data-ts-map-controls="0"></div>
-
+                                 data-ts-map-controls="0">
+                            </div>
                             <div class="col-7 ts-bg-light p-3 ts-border-radius__md d-block d-sm-flex ts-center__vertical justify-content-between ts-xs-text-center">
                                 <p class="d-sm-inline-block mb-2 mb-sm-0" th:text="${shipCount+'건이 검색되었습니다'}"></p>
-                               
                             </div>
-
                         </div>
-                        <!--end col-md-8-->
                     </div>
-                    <!--end row-->
                 </div>
-                <!--end ts-box-->
-
             </div>
         </section>
-        <!--end #agency-info-->
         <section id="items-listing-and-search">
             <div class="container">
                 <div class="row flex-wrap-reverse">
                     <div class="col-md-8">
                         <section id="ships-mapPoint-tab" class="pb-2 mb-3">
                             <ul class="nav nav-tabs mb-1" id="login-register-tabs" role="tablist">
-
-                                <!--Properties tab-->
                                 <li class="nav-item">
                                     <a class="nav-link active" id="ships-tab" data-toggle="tab" href="#ships" role="tab" aria-controls="ships" aria-selected="true">
                                         <h3>배</h3>
                                     </a>
                                 </li>
-
-                                <!--Agents tab-->
                                 <li class="nav-item">
                                     <a class="nav-link" id="mapPoint-tab" data-toggle="tab" href="#mapPoint" role="tab" aria-controls="mapPoint" aria-selected="false">
                                         <h3>주변 낚시포인트</h3>
                                     </a>
                                 </li>
-
                             </ul>
                         </section>
                         <div class="tab-content">
                             <div class="tab-pane active" id="ships" role="tabpanel" aria-labelledby="ships-tab">
                                 <section id="display-control-items">
                                     <div class="clearfix">
-
-                                        <!--Display selector on the left-->
                                         <div class="float-left">
                                             <a href="#" class="btn btn-outline-secondary px-3 mr-2 mb-2 ts-btn-border-muted">
                                                 <i class="fa fa-th-large"></i>
@@ -146,8 +114,6 @@
                                                 <i class="fa fa-th-list"></i>
                                             </a>
                                         </div>
-
-                                        <!--Display selector on the right-->
                                         <div class="float-none float-sm-right pl-2 ts-center__vertical">
                                             <label for="sorting" class="mb-0 mr-2 text-nowrap">Sort by:</label>
                                             <select class="custom-select bg-transparent" id="sorting" name="sorting">
@@ -157,18 +123,13 @@
                                                 <option value="3">Distance</option>
                                             </select>
                                         </div>
-
                                     </div>
-                                    <!--end container-->
                                 </section>
                                 <section id="port_shipList">
                                     <div class="card ts-item ts-item__list ts-card" th:each="shipList:${ships}">
                                         <a th:href="@{/v1/ship/shipDetail(spSeq=${shipList.spSeq})}">
-                                            
                                             <div class="card-img" th:data-bg-image="${shipList.path}"></div>
-
                                             <div class="card-body">
-
                                                 <figure class="ts-item__info">
                                                     <h4 th:text="${shipList.spName}"></h4>
                                                     <aside>
@@ -176,10 +137,8 @@
                                                         <span th:text="${#dates.format(shipList.spStart,'yyyy-MM-dd')}"></span>
                                                     </aside>
                                                 </figure>
-
                                                 <div class="ts-item__info-badge" th:text="${#numbers.formatInteger(shipList.spPrice,1,'COMMA') + ' 원'}">
                                                 </div>
-
                                                 <div class="ts-description-lists">
                                                     <dl>
                                                         <dt>대상해역</dt>
@@ -206,22 +165,18 @@
                                          <div class="row">
                                              <div class="col">
                                                  <ul class="pagination justify-content-center mb-0">
-                                                     <li th:if="${shipVo.thisPage > 1}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${shipVo.thisPage - 1})" th:attr="onclick=|goList('${shipVo.thisPage - 1}')|"><i class="fa fa-caret-left"></i></a></li>
-                                                     <li th:each="num: ${#numbers.sequence(1, shipVo.totalPages)}" th:classappend="${num eq shipVo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
-                                                     <li th:if="${shipVo.thisPage < shipVo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${shipVo.thisPage + 1}')|"><i class="fa fa-caret-right"></i></a></li>
-                                                 </ul>
-                                             </div>
-                                         </div>
+                                                    <li th:if="${shipVo.thisPage > 1}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${shipVo.thisPage - 1})" th:attr="onclick=|goList('${shipVo.thisPage - 1}')|"><i class="fa fa-caret-left"></i></a></li>
+                                                    <li th:each="num: ${#numbers.sequence(1, shipVo.totalPages)}" th:classappend="${num eq shipVo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
+                                                    <li th:if="${shipVo.thisPage < shipVo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${shipVo.thisPage + 1}')|"><i class="fa fa-caret-right"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                      </div>
-                                 </section>
-
+                                </section>
                             </div>
-                            <!--end #properties-->
                             <div class="tab-pane" id="mapPoint" role="tabpanel" aria-labelledby="mapPoint-tab">
                                 <section id="display-control-agents">
                                     <div class="d-flex justify-content-between">
-
-                                        <!--Display selector on the left-->
                                         <!-- <div class="float-left">
                                              <a href="#" class="btn btn-outline-secondary active px-3 mr-2 mb-2 ts-btn-border-muted">
                                                 <i class="fa fa-th-large"></i>
@@ -233,8 +188,6 @@
                                             
                                         </div> -->
                                         <p class="">주변 낚시포인트는 50km 범위내에 있는 데이터 입니다.</p>
-
-                                        <!--Display selector on the right-->
                                         <div class="float-none float-sm-right pl-2 ts-center__vertical">
                                             <label for="sorting" class="mb-0 mr-2 text-nowrap">Sort by:</label>
                                             <select class="custom-select bg-transparent" id="sorting-agents" name="sorting">
@@ -244,20 +197,15 @@
                                                 <option value="3">Distance</option>
                                             </select>
                                         </div>
-
                                     </div>
-                                    <!--end container-->
                                 </section>
                                 <section id="mapPointList">
                                     <div class="row">
-
                                         <div class="col-sm-6" th:if="${#lists.isEmpty(mapPoint)}">
                                             <p>범위내의 낚시포인트의 데이터가 없습니다.</p>
                                         </div>
                                         <div class="col-md-6" th:each="mapPoint:${mapPoint}">
                                             <a th:href="@{/v1/mapPoint/mapPointDetail(mpSeq=${mapPoint.mpSeq})}" class="card ts-item ts-card">
-
-                                                <!--Image-->
                                                 <div class="ts-item__image ts-item card-img" th:data-bg-image="${mapPoint.path != null ? mapPoint.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}">
                                                     <figure class="ts-item__info mb-2 pt-2 pb-2">
                                                         <h4 th:text="${mapPoint.mpTitle}"></h4>
@@ -267,8 +215,6 @@
                                                         </aside>
                                                     </figure>
                                                 </div>
-
-                                                <!--Body-->
                                                 <div class="card-body">
                                                     <dl class="mb-0">
                                                         <dt>지역</dt>
@@ -279,16 +225,11 @@
                                                         <dd th:text="${mapPoint.distanceIn >= 1000 ? #numbers.formatDecimal(mapPoint.distanceIn / 1000, 2, 2) + 'km' : #numbers.formatDecimal(mapPoint.distanceIn,2,0) + 'm'}"></dd>
                                                     </dl>
                                                 </div>
-
-                                                <!--Footer-->
                                                 <div  class="card-footer">
                                                     <span class="ts-btn-arrow">자세히 보기</span>
                                                 </div>
-
                                             </a>
                                         </div>
-                                        <!--end col-md-3-->
-
                                     </div>
                                 </section>
                                 <section id="pagination-items">
@@ -304,45 +245,30 @@
                                         </div>
                                     </div>
                                 </section>
-
                             </div>
-                            <!--end #agents-->
-
                         </div>
-
                         <hr class="my-5">
-
-                       
-
                     </div>
-                    <!--end col-md-8 / left side -->
                     <div class="col-md-4 navbar-expand-md">
-
                         <button class="btn bg-white mb-4 w-100 d-block d-md-none" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="float-left">
-                                    <i class="fa fa-search mr-2"></i>
-                                    Search
-                                </span>
+                            <span class="float-left">
+                                <i class="fa fa-search mr-2"></i>
+                                검색
+                            </span>
                             <span class="float-right">
-                                    <i class="fa fa-plus small ts-opacity__30"></i>
-                                </span>
+                                <i class="fa fa-plus small ts-opacity__30"></i>
+                            </span>
                         </button>
-
                         <aside id="sidebar" class="ts-sidebar collapse navbar-collapse">
                             <section id="sidebar-search-form">
-
                                 <h3 th:text="${shipVo.totalRows}+' 건의 검색'"></h3>
-
                                 <form id="form-search" method="post" action="/v1/port/portDetail" name="formList" class="ts-form" autocomplete="off">
 									<input type="hidden" name="thisPage" th:value="${shipVo.thisPage}" default="1"/>
 									<input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${shipVo.rowNumToShow}"/>
-                                    <!--Keyword-->
                                     <div class="form-group">
                                         <label for="bedrooms">배이름</label>
                                         <input type="text" class="form-control" id="keyword" name="shName" th:value="${shipVo.shName}" placeholder="배이름검색">
                                     </div>
-
-                                    <!--Type-->
                                     <div class="form-group">
                                          <select class="custom-select" id="status" name="shRemain" >
                                             <option value="">인원</option>
@@ -358,11 +284,7 @@
                                             <option th:selected ="${shipVo.shRemain == 10}" value="10">10명 이상</option>
                                         </select>
                                     </div>
-
-                                    <!--Row - Min price & Max price-->
                                     <div class="row">
-
-                                        <!--Min Price-->
                                         <div class="col-sm-6">
                                             <div class="input-group">
                                                 <input type="text" class="form-control border-right-0" id="min-price" name="shmin_price" th:value="${shipVo.shmin_price}" placeholder="최소가격">
@@ -371,8 +293,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <!--Max Price-->
                                         <div class="col-sm-6">
                                             <div class="input-group">
                                                 <input type="text" class="form-control border-right-0" id="max-price"name="shmax_price" th:value="${shipVo.shmax_price}" placeholder="최대가격">
@@ -381,69 +301,44 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-                                    
-
-                                    <!--Submit button-->
                                     <div class="form-group my-2">
                                         <button type="submit" class="btn btn-primary w-100" id="search-btn">Search
                                         </button>
                                     </div>
-
-                                    <!--More Options Button-->
                                     <a href="#more-options-collapse" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="more-options-collapse">
                                         <i class="fa fa-plus-circle ts-text-color-primary mr-2"></i>
                                         날짜로검색
                                     </a>
-
-                                    <!--Hidden Form-->
                                     <div class="collapse" id="more-options-collapse">
-
-                                        <!--Padding-->
                                         <div class="py-4">
-
-                                            <!--Row-->
                                             <div class="row">
-                                                <!--Bedrooms-->
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                        <label class="visually-hidden" for="inputDateStart">시작일</label>
 														<input type="text" class="form-control" id="inputDateStart" name="shDateStart" th:value="${#strings.substring(shipVo.shDateStart, 0, 10)}" placeholder="날짜선택" value="">
                                                     </div>
                                                 </div>
-
-                                                <!--Bathrooms-->
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label class="visually-hidden" for="inputDateEnd">종료일</label>
 														<input type="text" class="form-control" id="inputDateEnd" name="shDateEnd" th:value="${#strings.substring(shipVo.shDateEnd, 0, 10)}" placeholder="날짜선택" value="">
                                                     </div>
                                                 </div>
-
                                             </div>
-                                            <!--end row-->
-
                                         </div>
-                                        <!--end Padding-->
                                     </div>
-                                    <!--end more-options-collapse-->
-
                                 </form>
-                                <!--end #form-search-->
                             </section>
-                            <!--end #sidebar-search-form-->
                         </aside>
-                        <!--end #sidebar-->
                     </div>
-                    <!--end Right Side / col-md-4-->
-
                 </div>
             </div>
         </section>
-
     </main> 
-    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> </div><script type="text/javascript">
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div>
+</div>
+<script type="text/javascript">
     window.onload = function() {
         goList = function (thisPage) {
             const listContainer = document.getElementById('port_shipList');

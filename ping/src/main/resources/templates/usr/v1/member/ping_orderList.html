@@ -22,7 +22,6 @@
 <body>
 <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
-
     <main id="ts-main">
         <section id="page-title">
             <div class="container">
@@ -36,17 +35,13 @@
                 <div class="row">
                     <div th:replace="~{usr/v1/etc/userSide :: side}"></div>
                     <div class="col-md-8">
-                   
                         <h3>예약목록</h3>
                             <label class="row card ts-item ts-item__list ts-card"  th:each="list:${list}">
-                                <!--Card Image-->
                                 <div class="card-img" th:data-bg-image="${list.path}">
                                     <input type="radio" name="odSeq" th:value="${list.odSeq}"
                                      th:if="${list.spStart != null and list.spStart.after(new java.util.Date())}" />
                                 </div>
-                                
                                 <div class="card-body">
-
                                     <figure class="ts-item__info">
                                         <a th:href="@{/v1/ship/shipDetail(spSeq=${list.spSeq})}"><h4 th:text="${list.spName}"></h4></a>
                                     </figure>
@@ -69,24 +64,21 @@
                                         </dl>
                                     </div>
                                       <input type="hidden" th:value="${list.odReturnNy}">
-                                        
                                 </div>  
                                <button type="button" class="card-footer" data-toggle="modal" data-target="#refundModal" th:if="${list.spStart != null and list.spStart.after(new java.util.Date())}" >
                                     <span class="ts-btn-arrow"
                                     >환불하기</span>
                                </button>
-                             
                         </label>
-                        
-                     <!--end form-contact -->
                     </div>
                 </div>
             </div>
         </section>
-
     </main> 
-    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> </div><!-- Refund Modal -->
- <form method="post" action="/v1/member/orderUelete">
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div>
+</div>
+<!-- Refund Modal -->
+<form method="post" action="/v1/member/orderUelete">
 	<div class="modal fade" id="refundModal" tabindex="-1" role="dialog" aria-labelledby="refundModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
