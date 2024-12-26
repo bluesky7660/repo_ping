@@ -22,14 +22,10 @@
 <body>
 <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
-
     <main id="ts-main">
         <section id="page-title">
             <div class="container">
-
                 <div class="d-block d-sm-flex justify-content-between">
-
-                    <!--Title-->
                     <div class="ts-title mb-0">
                         <h1 th:text="${item.spName}"></h1>
                         <h5 class="ts-opacity__90">
@@ -37,21 +33,15 @@
                             <a th:href="@{/v1/port/portDetail(ptSeq=${item.port_ptSeq})}" th:text="${item.ptName}"></a>
                         </h5>
                     </div>
-
-                    <!--Price-->
                      <div class="col-sm-2">
                         <h3 class="col-1">
                             <a th:href="@{/v1/checkout/ping_checkout(spSeq=${item.spSeq})}"><span class="badge badge-primary p-3 font-weight-normal ts-shadow__sm">예약하기</span></a>
                         </h3>
                     </div> 
-                    
-
                 </div>
-
             </div>
         </section>
         <section id="gallery-carousel">
-
             <div class="owl-carousel ts-gallery-carousel ts-gallery-carousel__multi" data-owl-dots="1" data-owl-items="3" data-owl-center="1" data-owl-loop="1">
                 <div class="slide" th:each="list : ${list}">
                     <div class="ts-image" th:data-bg-image="${list.path}">
@@ -59,7 +49,6 @@
                     </div>
                 </div>
             </div>
-
         </section>
         <section id="content">
             <div class="container">
@@ -67,59 +56,40 @@
                     <div class="col-md-7 col-lg-8">
                         <section id="quick-info">
                             <h3>정보</h3>
-
-                            <!--Quick Info-->
                             <div class="ts-quick-info ts-box">
                                 <div class="row no-gutters">
-
-                                    <!--Bathrooms-->
                                     <div class="col-sm-3">
                                         <div class="ts-quick-info__item" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/icon-quick-info-shower.png">
                                             <h6>최대인원</h6>
                                             <figure th:text="${item.spTotal}"></figure>
                                         </div>
                                     </div>
-
-                                    <!--Bedrooms-->
                                     <div class="col-sm-3">
                                         <div class="ts-quick-info__item" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/icon-quick-info-bed.png">
                                             <h6>남은자리</h6>
                                             <figure th:text="${item.spRemain}"></figure>
                                         </div>
                                     </div>
-
-                                    <!--Area-->
                                     <div class="col-sm-3">
                                         <div class="ts-quick-info__item" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/icon-quick-info-area.png">
                                             <h6>출조비용 1인당</h6>
                                             <figure th:text="${#numbers.formatInteger(item.spPrice,1,'COMMA') + ' 원'}"></figure>
                                         </div>
                                     </div>
-
-                                    <!--Garages-->
                                     <div class="col-sm-3">
                                         <div class="ts-quick-info__item" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/icon-quick-info-garages.png">
                                             <h6>어종</h6>
                                             <figure th:text="${item.fsNameList}" style="font-size: 1rem;"></figure>
                                         </div>
                                     </div>
-
                                 </div>
-
                             </div>
-                            <!--end ts-quick-info-->
-
                         </section>
                         <section id="description">
-
                             <h3>출항시간</h3>
-	
-                            <p th:text="${#dates.format(item.spStart,'yyyy-MM-dd / HH:mm')}">
-                            </p>
-
+                            <p th:text="${#dates.format(item.spStart,'yyyy-MM-dd / HH:mm')}"></p>
                         </section>
                         <section id="map-location">
-
                             <h3>위치</h3>
                             <div class="ts-map ts-map__detail ts-border-radius__sm ts-shadow__sm" id="ts-map-simple"
                                  data-ts-map-zoom="5"
@@ -127,23 +97,18 @@
                                  th:data-ts-map-center-latitude="${item.ptLatitude}"
                                  th:data-ts-map-center-longitude="${item.ptLongitude}"
                                  data-ts-map-scroll-wheel="0"
-                                 data-ts-map-controls="0"></div>
-
+                                 data-ts-map-controls="0">
+                            </div>
                         </section>
                         <section id="amenities">
-
                             <h3>추가제공서비스</h3>
-
                             <ul class="ts-list-colored-bullets ts-text-color-light ts-column-count-3 ts-column-count-md-2">
                                 <li th:if="${item.spEatNy == 1}">식사제공</li>
                                 <li th:unless="${item.spEatNy == 1}">식사제공</li>
                                 <li th:if="${item.spRentalNy == 1}">낚시대 대여</li>
                                 <li th:unless="${item.spRentalNy == 1}">낚시대 대여</li>
-                               
                             </ul>
-
                         </section>
-
                     </div>
                 </div>
             </div>
@@ -151,21 +116,12 @@
         <section id="similar-properties">
             <div class="container">
                 <div class="row justify-content-center">
-                    <!-- 이 div를 col-lg-8로 설정하여 가운데 정렬 유지 -->
                     <div class="col-sm-12 col-lg-8">
-        
                         <hr class="mb-5">
                         <h3 th:text="${item.ptName+'의 다른 배'}"></h3>
-        
-                        <!-- 첫 번째 아이템 -->
                         <a th:href="@{/v1/ship/shipDetail(spSeq=${other.spSeq})}" class="card ts-item ts-item__list ts-card" th:each="other:${other}">
-
-                            <!--Card Image-->
                             <div class="card-img" th:data-bg-image="${other.path}"></div>
-
-                            <!--Card Body-->
                             <div class="card-body">
-
                                 <figure class="ts-item__info">
                                     <h4 th:text="${other.spName}"></h4>
                                     <aside>
@@ -174,7 +130,6 @@
                                     </aside>
                                 </figure>
                                 <div class="ts-item__info-badge" th:text="${#numbers.formatInteger(other.spPrice,1,'COMMA') + '원'}"></div>
-
                                 <div class="ts-description-lists">
                                     <dl>
                                         <dt>최대인원</dt>
@@ -194,22 +149,17 @@
                                     </dl>
                                 </div>
                             </div>
-
-                            <!--Card Footer-->
                             <div class="card-footer">
                                 <span class="ts-btn-arrow">자세히보기</span>
                             </div>
-
                         </a>
-
                     </div>
-
                 </div>
             </div>
         </section>
-
     </main> 
-    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> </div>
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div>
+</div>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
