@@ -1,13 +1,18 @@
 package com.lalaping.mall.weather;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.lalaping.mall.mapPoint.MapPointDto;
@@ -15,11 +20,14 @@ import com.lalaping.mall.mapPoint.MapPointService;
 
 @Controller
 public class WeatherController {
-//	@Value("${khoa.api.key}")
-//    private String API_KEY;
+	@Value("${khoa.api.key}")
+    private String API_KEY;
 	
 	@Autowired
 	MapPointService mapPointService;
+	
+	@Autowired
+	WeatherService weatherService;
 	
 	@RequestMapping(value = "/v1/weather/weatherApi")
 	public String weatherApi(){
@@ -253,12 +261,26 @@ public class WeatherController {
 	    }
 	}
 	/*물떄*/
-//	@RequestMapping(value = "/v1/weather/khoa")
-//	public String khoa(){
-//		String OBS_CODE = "";
-//		String DATE = "";
-//		String apiUrl = "http://www.khoa.go.kr/api/oceangrid/DataType/search.do?ServiceKey=" + API_KEY +
-//                "&ObsCode=" + OBS_CODE + "&Date=" + DATE + "&ResultType=json";
-//		return "usr/v1/weather/ping_weatherPoint";
-//	}
+	@RequestMapping(value = "/v1/weather/khoa")
+	@ResponseBody
+	public String khoa(@RequestBody MapPointDto mapPointDto, WeatherVo weatherVo){
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String OBS_CODE = "";
+		String DATE = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
+		
+		weatherVo.setBaseMpLatitude(mapPointDto.getMpLatitude());
+		weatherVo.setBaseMpLongitude(mapPointDto.getMpLongitude());
+		WeatherDto closestStation = weatherService.observationStationNear(weatherVo); 
+		if (closestStation != null) {
+	        OBS_CODE = closestStation.getOsStationId();
+	    } else {
+	        return "가까운 관측소를 찾을 수 없습니다.";
+	    }
+		String apiUrl = "http://www.khoa.go.kr/api/oceangrid/DataType/search.do?ServiceKey=" + API_KEY +
+                "&ObsCode=" + OBS_CODE + "&Date=" + DATE + "&ResultType=json";
+		ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
+		System.out.println("response.getBody():"+response.getBody());
+		return response.getBody();
+	}
 }
