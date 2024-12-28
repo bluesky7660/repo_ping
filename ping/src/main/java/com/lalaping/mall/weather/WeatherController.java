@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -35,11 +37,44 @@ public class WeatherController {
 	}
 	
 	@RequestMapping(value = "/v1/weather/weatherPoint")
-	public String weatherPoint(Model model, MapPointDto mapPointDto) {
+	public String weatherPoint(Model model, MapPointDto mapPointDto ,WeatherVo weatherVo) {
 		MapPointDto mapPointItem =  mapPointService.selectOne(mapPointDto);
 	    model.addAttribute("item", mapPointItem);
 	    
 	    RestTemplate restTemplate = new RestTemplate();
+		String OBS_CODE = "";
+		String DATE = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
+		
+		weatherVo.setBaseMpLatitude(mapPointItem.getMpLatitude());
+		weatherVo.setBaseMpLongitude(mapPointItem.getMpLongitude());
+		WeatherDto closestStation = weatherService.observationStationNear(weatherVo); 
+		if (closestStation != null) {
+	        OBS_CODE = closestStation.getOsStationId();
+	    } else {
+	        return "가까운 관측소를 찾을 수 없습니다.";
+	    }
+		String obApiUrl = "http://www.khoa.go.kr/api/oceangrid/tideObsPreTab/search.do?ServiceKey=" + API_KEY +
+                "&ObsCode=" + OBS_CODE + "&Date=" + DATE + "&ResultType=json";
+		System.out.println("obApiUrl:"+obApiUrl);
+		ResponseEntity<String> obResponse = restTemplate.getForEntity(obApiUrl, String.class);
+		
+		System.out.println("response.getBody():"+obResponse.getBody());
+		String jsonResponse = obResponse.getBody();
+//		try {
+//            
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+		JSONObject jsonObject = new JSONObject(obResponse.getBody());
+        JSONObject result = jsonObject.getJSONObject("result");
+        System.out.println("result:"+result);
+        JSONArray data = result.getJSONArray("data");
+        System.out.println("data:"+data);
+
+        model.addAttribute("OBSData", data.toString());
+		
+		
 	    String longitude = String.valueOf(mapPointService.selectOne(mapPointDto).getMpLongitude());
 	    String latitude = String.valueOf(mapPointService.selectOne(mapPointDto).getMpLatitude());
 
