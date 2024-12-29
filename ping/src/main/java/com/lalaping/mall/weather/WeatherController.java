@@ -3,10 +3,10 @@ package com.lalaping.mall.weather;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lalaping.mall.mapPoint.MapPointDto;
 import com.lalaping.mall.mapPoint.MapPointService;
 
@@ -42,38 +44,44 @@ public class WeatherController {
 	    model.addAttribute("item", mapPointItem);
 	    
 	    RestTemplate restTemplate = new RestTemplate();
-		String OBS_CODE = "";
-		String DATE = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
-		
-		weatherVo.setBaseMpLatitude(mapPointItem.getMpLatitude());
-		weatherVo.setBaseMpLongitude(mapPointItem.getMpLongitude());
-		WeatherDto closestStation = weatherService.observationStationNear(weatherVo); 
-		if (closestStation != null) {
-	        OBS_CODE = closestStation.getOsStationId();
-	    } else {
-	        return "가까운 관측소를 찾을 수 없습니다.";
-	    }
-		String obApiUrl = "http://www.khoa.go.kr/api/oceangrid/tideObsPreTab/search.do?ServiceKey=" + API_KEY +
-                "&ObsCode=" + OBS_CODE + "&Date=" + DATE + "&ResultType=json";
-		System.out.println("obApiUrl:"+obApiUrl);
-		ResponseEntity<String> obResponse = restTemplate.getForEntity(obApiUrl, String.class);
-		
-		System.out.println("response.getBody():"+obResponse.getBody());
-		String jsonResponse = obResponse.getBody();
-//		try {
-//            
+//		String OBS_CODE = "";
+//		String DATE = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
+//		
+//		weatherVo.setBaseMpLatitude(mapPointItem.getMpLatitude());
+//		weatherVo.setBaseMpLongitude(mapPointItem.getMpLongitude());
+//		WeatherDto closestStation = weatherService.observationStationNear(weatherVo); 
+//		if (closestStation != null) {
+//	        OBS_CODE = closestStation.getOsStationId();
+//	    } else {
+//	        return "가까운 관측소를 찾을 수 없습니다.";
+//	    }
+//		String obApiUrl = "http://www.khoa.go.kr/api/oceangrid/tideObsPreTab/search.do?ServiceKey=" + API_KEY +
+//                "&ObsCode=" + OBS_CODE + "&Date=" + DATE + "&ResultType=json";
+//		System.out.println("obApiUrl:"+obApiUrl);
+//		ResponseEntity<String> obResponse = restTemplate.getForEntity(obApiUrl, String.class);
+//		
+//		System.out.println("response.getBody():"+obResponse.getBody());
+//		String jsonResponse = obResponse.getBody();
 //
-//        } catch (Exception e) {
-//            e.printStackTrace();
+//        model.addAttribute("OBSData", obResponse.getBody());
+//        JSONObject jsonObject = new JSONObject(jsonResponse);
+//        List<JSONObject> highTideList = new ArrayList<>();
+//        List<JSONObject> lowTideList = new ArrayList<>();
+//
+//        // 필터링
+//        JSONArray data = jsonObject.getJSONObject("result").getJSONArray("data");
+//        for (int i = 0; i < data.length(); i++) {
+//            JSONObject item = data.getJSONObject(i);
+//            if ("고조".equals(item.getString("hl_code"))) {
+//                highTideList.add(item);
+//            } else if ("저조".equals(item.getString("hl_code"))) {
+//                lowTideList.add(item);
+//            }
 //        }
-		JSONObject jsonObject = new JSONObject(obResponse.getBody());
-        JSONObject result = jsonObject.getJSONObject("result");
-        System.out.println("result:"+result);
-        JSONArray data = result.getJSONArray("data");
-        System.out.println("data:"+data);
-
-        model.addAttribute("OBSData", data.toString());
-		
+//        
+//        // 고조와 저조 데이터를 모델에 추가
+//        model.addAttribute("highTideData", highTideList.toString());
+//        model.addAttribute("lowTideData", lowTideList.toString());
 		
 	    String longitude = String.valueOf(mapPointService.selectOne(mapPointDto).getMpLongitude());
 	    String latitude = String.valueOf(mapPointService.selectOne(mapPointDto).getMpLatitude());
@@ -299,11 +307,17 @@ public class WeatherController {
 	@RequestMapping(value = "/v1/weather/khoa")
 	@ResponseBody
 	public String khoa(@RequestBody MapPointDto mapPointDto, WeatherVo weatherVo){
-		
 		RestTemplate restTemplate = new RestTemplate();
 		String OBS_CODE = "";
-		String DATE = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
-		
+//		String DATE = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
+		LocalDate today = LocalDate.now();
+	    List<String> dates = new ArrayList<>();
+
+	    for (int i = -1; i <= 5; i++) {
+	        dates.add(today.plusDays(i).format(DateTimeFormatter.BASIC_ISO_DATE));
+	    }
+		System.out.println("mapPointDto.getMpLatitude():"+mapPointDto.getMpLatitude());
+		System.out.println("mapPointDto.getMpLongitude():"+mapPointDto.getMpLongitude());
 		weatherVo.setBaseMpLatitude(mapPointDto.getMpLatitude());
 		weatherVo.setBaseMpLongitude(mapPointDto.getMpLongitude());
 		WeatherDto closestStation = weatherService.observationStationNear(weatherVo); 
@@ -312,10 +326,57 @@ public class WeatherController {
 	    } else {
 	        return "가까운 관측소를 찾을 수 없습니다.";
 	    }
-		String apiUrl = "http://www.khoa.go.kr/api/oceangrid/DataType/search.do?ServiceKey=" + API_KEY +
-                "&ObsCode=" + OBS_CODE + "&Date=" + DATE + "&ResultType=json";
-		ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
-		System.out.println("response.getBody():"+response.getBody());
-		return response.getBody();
+//		String result = "";
+//	    for (String date : dates) {
+//	        String apiUrl = "http://www.khoa.go.kr/api/oceangrid/tideObsPreTab/search.do?ServiceKey=" + API_KEY +
+//	                "&ObsCode=" + OBS_CODE + "&Date=" + date + "&ResultType=json";
+//	        System.out.println("obApiUrl:" + apiUrl);
+//	        try {
+//	            ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
+//	            System.out.println("response.getBody() for date " + date + ":" + response.getBody());
+//	            result += "Date: " + date + "\n" + response.getBody() + "\n\n";
+//	        } catch (Exception e) {
+//	            System.err.println("Error fetching data for date " + date + ": " + e.getMessage());
+//	            result += "Date: " + date + " - Error fetching data\n";
+//	        }
+//	    }
+//	    return result;
+		// 날짜별 데이터를 저장할 Map 객체
+	    Map<String, JsonNode> resultMap = new LinkedHashMap<>();
+	    ObjectMapper objectMapper = new ObjectMapper();
+
+	    // 여러 날짜의 데이터를 가져오기
+	    for (String date : dates) {
+	        String apiUrl = "http://www.khoa.go.kr/api/oceangrid/tideObsPreTab/search.do?ServiceKey=" + API_KEY +
+	                "&ObsCode=" + OBS_CODE + "&Date=" + date + "&ResultType=json";
+	        System.out.println("obApiUrl:" + apiUrl);
+
+	        try {
+	            ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
+	            System.out.println("response.getBody() for date " + date + ":" + response.getBody());
+
+	            // 응답을 JSON 형식으로 파싱하여 resultMap에 저장
+	            JsonNode responseJson = objectMapper.readTree(response.getBody());
+	            resultMap.put(date, responseJson);  // 날짜를 키로 사용하고, JSON 데이터를 값으로 저장
+	        } catch (Exception e) {
+	            System.err.println("Error fetching data for date " + date + ": " + e.getMessage());
+	            // 오류 발생 시 Map에 오류 메시지 저장
+	            resultMap.put(date, objectMapper.createObjectNode().put("error", "Error fetching data"));
+	        }
+	    }
+
+	    // 최종 결과를 JSON 형식으로 반환
+	    try {
+	        return objectMapper.writeValueAsString(resultMap);  // Map을 JSON 형식으로 반환
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return "Error converting result to JSON";
+	    }
+//		String apiUrl = "http://www.khoa.go.kr/api/oceangrid/tideObsPreTab/search.do?ServiceKey=" + API_KEY +
+//                "&ObsCode=" + OBS_CODE + "&Date=" + DATE + "&ResultType=json";
+//		System.out.println("obApiUrl:"+apiUrl);
+//		ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
+//		System.out.println("response.getBody():"+response.getBody());
+//		return response.getBody();
 	}
 }

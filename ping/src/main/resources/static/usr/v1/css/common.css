@@ -157,6 +157,13 @@ img[alt="날씨이미지"]{
     transition: all .1s linear;
 }
 
+.tideTable thead th{
+    white-space: nowrap;
+}
+#main_weather .tideTable tbody tr *{
+    text-align: left;
+}
+
 @media (min-width: 576px) {
     #fishing_point .container {
         max-width: 540px;
