@@ -92,59 +92,61 @@
                             <div class="" id="main_weather" th:if="${item.mpType == 5}">
                                 <h4>물때 표</h4>
                                 <p class="ts-text-small">2주단위로 나옵니다.</p>
-                                <table class="table">
-                                    <tr>
-                                        <th>요일</th>
-                                        <th>년도 / 월 / 일</th>
-                                        <th>월령</th>
-                                        <th>물때/물흐름</th>
-                                        <th>만조시각</th>
-                                        <th>간조시각</th>
-                                        <th>일출/일몰</th>
-                                        <th>월출/월몰</th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p><span>월</span></p>
-                                        </td>
-                                        <td >
-                                            <p><span>2024</span> / <span>10</span> / <span>9</span></p>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <img src="/usr/v1/template/themeforest-v1.0/assets/img/moon_09.png" alt="달이미지">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>무시</span></p>
-                                                <div class="water_flow">
-                                                    <div class="progress" style="height: 30px;">
-                                                        <div id="waterFlow" class="progress-bar progress-bar-striped progress-bar-animated progress-bar-water" role="progressbar" style="width: 0%; background-color: aqua;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
+                                <table class="table tideTable" id="tideTable">
+                                    <thead>
+                                        <tr>
+                                            <th>요일</th>
+                                            <th>년도 / 월 / 일</th>
+                                            <th>월령</th>
+                                            <th>물때 / 물흐름</th>
+                                            <th>만조시각</th>
+                                            <th>간조시각</th>
+                                            <th>일출/일몰</th>
+                                            <th>월출/월몰</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <p><span>월</span></p>
+                                            </td>
+                                            <td >
+                                                <p><span>2024</span> / <span>10</span> / <span>9</span></p>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/moon_09.png" alt="달이미지">
                                                 </div>
-
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>07:02</span> <span>(717)</span> ▲+<span>532</span></p>
-                                                <p><span>19:28</span> <span>(808)</span> ▲+<span>709</span></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <p><span>02:38</span> <span>(264)</span> ▼-<span>511</span></p>
-                                                <p><span>14:35</span> <span>(178)</span> ▼-<span>466</span></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p><span>07:06</span> / <span>17:29</span></p>
-                                        </td>
-                                        <td>
-                                            <p><span>13:08</span> / <span>22:54</span></p>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <p><span>무시</span></p>
+                                                    <div class="water_flow">
+                                                        <div class="progress" style="height: 30px;">
+                                                            <div id="waterFlow" class="progress-bar progress-bar-striped progress-bar-animated progress-bar-water" role="progressbar" style="width: 0%; background-color: aqua;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+    
+                                                </div>
+                                            </td>
+                                            <td class="highTideTime" id="highTideTime">
+                                                <div>
+                                                </div>
+                                            </td>
+                                            <td class="lowTideTime" id="lowTideTime">
+                                                <div>
+                                                    <p><span>02:38</span> <span>(264)</span> ▼-<span>511</span></p>
+                                                    <p><span>14:35</span> <span>(178)</span> ▼-<span>466</span></p>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p><span>07:06</span> / <span>17:29</span></p>
+                                            </td>
+                                            <td>
+                                                <p><span>13:08</span> / <span>22:54</span></p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
                             <div class="row" id="sea_weather" th:if="${item.mpType == 5}">
@@ -462,8 +464,157 @@
 <script src="/usr/v1/js/map-kakao.js"></script>
 <script th:inline="javascript" type="text/javascript">
     var OBSData = /*[[${OBSData}]]*/[];
-    console.log("OBS:",OBSData);
-    
+    var highTideData = /*[[${highTideData}]]*/[];
+    console.log("highTideData:",JSON.parse(highTideData));
+    console.log("OBS:",JSON.parse(OBSData));
+    var item = /*[[${item}]]*/[];
+</script>
+<script>
+    // window.addEventListener('DOMContentLoaded',function() {
+        $.ajax({
+            async : true, 
+            cache : false, 
+            type: 'POST',
+            url: '/v1/weather/khoa',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "mpLatitude":item.mpLatitude,
+                "mpLongitude":item.mpLongitude,
+            }),
+            success: function (response) {
+                console.log("response:",response);
+                response = JSON.parse(response);
+                console.log("response2:",response);
+                // const data = JSON.parse(response);
+                // console.log("data:",response.result.data);
+                // const tideData = data.result.data;
+                // const highTideData = data.result.data.filter(item => item.hl_code === "고조");
+                // console.log("highTideData:",highTideData);
+                // const lowTideData = data.result.data.filter(item => item.hl_code === "저조");
+                // console.log("lowTideData:",lowTideData);
+                // tideData.forEach((item, index) => {
+                //     if (item.hl_code === "고조" && index > 0 && tideData[index - 1].hl_code === "저조") {
+                //         // 간조 이후 만조의 차이 계산
+                //         const previousItem = tideData[index - 1];
+                //         const tideDifference = parseFloat(item.tph_level) - parseFloat(previousItem.tph_level);
+                //         item.tideDifference = `▲+${tideDifference.toFixed(2)}`; // 만조(고조)에서 차오른 해수면 높이 차이
+                //     } else if (item.hl_code === "저조" && index > 0 && tideData[index - 1].hl_code === "고조") {
+                //         // 만조 이후 간조의 차이 계산
+                //         const previousItem = tideData[index - 1];
+                //         const tideDifference = parseFloat(previousItem.tph_level) - parseFloat(item.tph_level);
+                //         item.tideDifference = `▼-${tideDifference.toFixed(2)}`; // 간조(저조)에서 빠진 해수면 높이 차이
+                //     }
+                // });
+
+                // const highTideContainer = document.getElementById('highTideTime').querySelector('div');
+                // highTideContainer.innerHTML = tideData.filter(item => item.hl_code === "고조")
+                // .map(item => `
+                //     <p>
+                //         <span>${new Date(item.tph_time).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false })}</span>
+                //         (<span>${item.tph_level}</span>) ▲ +
+                //         ${item.tideDifference !== null ? `<span>${item.tideDifference}</span>` : ""}
+                //     </p>
+                // `).join('');
+                // const lowTideContainer = document.getElementById('lowTideTime').querySelector('div');
+                // lowTideContainer.innerHTML = tideData.filter(item => item.hl_code === "저조")
+                // .map(item => `
+                //     <p>
+                //         <span>${new Date(item.tph_time).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false })}</span>
+                //         (<span>${item.tph_level}</span>) ▼ -
+                //         ${item.tideDifference !== null ? `<span>${item.tideDifference}</span>` : ""}
+                //     </p>
+                // `).join('');
+                // console.log("response:", response);
+
+                // 날짜 목록 가져오기
+                    // 날짜를 키로 갖는 배열을 가져옴
+                // const data = JSON.parse(response);
+                // console.log("data:",data);
+                const dates = Object.keys(response);
+                const tableBody = document.querySelector("#tideTable tbody");
+                tableBody.innerHTML= "";
+
+                dates.forEach(date => {
+                    console.log("date:",date);
+                    console.log("data:",response[date]);
+                    const dayData = response[date].result.data;
+                    console.log(`data for ${date}:`, dayData);
+
+                    
+                    const row = document.createElement("tr");
+                    dayData.forEach((item, index) => {
+                        if (index > 0) {
+                            const previousItem = dayData[index - 1];
+
+                            if (item.hl_code === "고조" && previousItem.hl_code === "저조") {
+                                const tideDifference = parseFloat(item.tph_level) - parseFloat(previousItem.tph_level);
+                                item.tideDifference = `▲ + ${tideDifference.toFixed(0)}`; // 만조(고조)에서 차오른 해수면 높이 차이
+                            } else if (item.hl_code === "저조" && previousItem.hl_code === "고조") {
+                                const tideDifference = parseFloat(previousItem.tph_level) - parseFloat(item.tph_level);
+                                item.tideDifference = `▼ - ${tideDifference.toFixed(0)}`; // 간조(저조)에서 빠진 해수면 높이 차이
+                            }
+                        }
+                    });
+                    
+                    const formattedDate = date.slice(0, 4) + "-" + date.slice(4, 6) + "-" + date.slice(6, 8);
+                    console.log("formattedDate:",formattedDate);
+                    const dayOfWeek = new Date(formattedDate).toLocaleDateString("ko-KR", { weekday: "short" }); 
+                    
+                    row.innerHTML = `
+                        <td><p><span>${dayOfWeek}</span></p></td>
+                        <td><p><span>${date.slice(0, 4)}</span> / <span>${date.slice(4, 6)}</span> / <span>${date.slice(6, 8)}</span></p></td>
+                        <td>
+                            <div>
+                                <img src="/usr/v1/template/themeforest-v1.0/assets/img/moon_09.png" alt="달이미지">
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <p><span>무시</span></p>
+                                <div class="water_flow">
+                                    <div class="progress" style="height: 30px;">
+                                        <div id="waterFlow" class="progress-bar progress-bar-striped progress-bar-animated progress-bar-water" role="progressbar" style="width: 50%; background-color: aqua;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="highTideTime" id="highTideTime-${date}">
+                            <div>
+                                ${dayData.filter(item => item.hl_code === "고조").map(item => `
+                                    <p>
+                                        <span>${new Date(item.tph_time).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false })}</span>
+                                        (<span>${item.tph_level}</span>) ${item.tideDifference}
+                                    </p>
+                                `).join('')}
+                            </div>
+                        </td>
+                        <td class="lowTideTime" id="lowTideTime-${date}">
+                            <div>
+                                ${dayData.filter(item => item.hl_code === "저조").map(item => `
+                                    <p>
+                                        <span>${new Date(item.tph_time).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false })}</span>
+                                        (<span>${item.tph_level}</span>) ${item.tideDifference}
+                                    </p>
+                                `).join('')}
+                            </div>
+                        </td>
+                        <td>
+                            <p><span>07:06</span> / <span>17:29</span></p>
+                        </td>
+                        <td>
+                            <p><span>13:08</span> / <span>22:54</span></p>
+                        </td>
+                    `;
+
+                    // 테이블에 추가
+                    tableBody.appendChild(row);
+                });
+            },
+            error: function () {
+                alert("서버 요청 실패");
+            }
+        })
+    // })
 </script>
 <!-- khoa 해양 api -->
 <!-- <script src="http://www.khoa.go.kr/oceanmap/js/proj4js-1.1.0/lib/proj4js.js" type="text/javascript"></script>-->
