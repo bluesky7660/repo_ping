@@ -3,10 +3,13 @@ package com.lalaping.mall.weather;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lalaping.mall.mapPoint.MapPointDto;
 import com.lalaping.mall.mapPoint.MapPointService;
@@ -26,6 +28,9 @@ import com.lalaping.mall.mapPoint.MapPointService;
 public class WeatherController {
 	@Value("${khoa.api.key}")
     private String API_KEY;
+	
+	@Value("${data.api.key}")
+    private String Weather_API_KEY;
 	
 	@Autowired
 	MapPointService mapPointService;
@@ -43,6 +48,10 @@ public class WeatherController {
 		MapPointDto mapPointItem =  mapPointService.selectOne(mapPointDto);
 	    model.addAttribute("item", mapPointItem);
 	    
+	    Coordinate coordinate = dfs_xy_conv("toXY", mapPointItem.getMpLatitude(), mapPointItem.getMpLongitude());
+	    List<Map<String, String>> shortTerm = weatherForecast(coordinate.x, coordinate.y);
+	    System.out.println("ShortTerm:"+shortTerm);
+	    model.addAttribute("shortTerm", shortTerm);
 	    RestTemplate restTemplate = new RestTemplate();
 //		String OBS_CODE = "";
 //		String DATE = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
@@ -303,17 +312,138 @@ public class WeatherController {
 	        default: return "wi wi-na"; // 알 수 없음
 	    }
 	}
+	public static class Coordinate {
+	    public int x;
+	    public int y;
+
+	    public Coordinate() {}
+	    
+	    public Coordinate(int x, int y) {
+	        this.x = x;
+	        this.y = y;
+	    }
+	}
+	public static Coordinate dfs_xy_conv(String code, double v1, double v2) {
+	    // 기상청의 LCC DFS 좌표 변환 공식
+	    double RE = 6371.00877; // 지구 반경(km)
+	    double GRID = 5.0; // 격자 간격(km)
+	    double SLAT1 = 30.0; // 투영 위도1(degree)
+	    double SLAT2 = 60.0; // 투영 위도2(degree)
+	    double OLON = 126.0; // 기준점 경도(degree)
+	    double OLAT = 38.0; // 기준점 위도(degree)
+	    int XO = 43; // 기준점 X좌표(GRID)
+	    int YO = 136; // 기준점 Y좌표(GRID)
+	    
+	    double DEGRAD = Math.PI / 180.0;
+	    double RADDEG = 180.0 / Math.PI;
+
+	    double re = RE / GRID;
+	    double slat1 = SLAT1 * DEGRAD;
+	    double slat2 = SLAT2 * DEGRAD;
+	    double olon = OLON * DEGRAD;
+	    double olat = OLAT * DEGRAD;
+
+	    double sn = Math.tan(Math.PI * 0.25 + slat2 * 0.5) / Math.tan(Math.PI * 0.25 + slat1 * 0.5);
+	    sn = Math.log(Math.cos(slat1) / Math.cos(slat2)) / Math.log(sn);
+	    double sf = Math.tan(Math.PI * 0.25 + slat1 * 0.5);
+	    sf = Math.pow(sf, sn) * Math.cos(slat1) / sn;
+	    double ro = Math.tan(Math.PI * 0.25 + olat * 0.5);
+	    ro = re * sf / Math.pow(ro, sn);
+
+	    Coordinate rs = new Coordinate();
+	    
+	    if (code.equals("toXY")) {
+	        double ra = Math.tan(Math.PI * 0.25 + (v1) * DEGRAD * 0.5);
+	        ra = re * sf / Math.pow(ra, sn);
+	        double theta = v2 * DEGRAD - olon;
+	        if (theta > Math.PI) theta -= 2.0 * Math.PI;
+	        if (theta < -Math.PI) theta += 2.0 * Math.PI;
+	        theta *= sn;
+
+	        rs.x = (int) Math.floor(ra * Math.sin(theta) + XO + 0.5);
+	        rs.y = (int) Math.floor(ro - ra * Math.cos(theta) + YO + 0.5);
+	    }
+	    
+	    return rs;
+	}
+	
+	public List<Map<String, String>> weatherForecast(Integer Latitude,Integer Longitude){
+		String baseUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
+        
+        String serviceKey = Weather_API_KEY;
+        String pageNo = "1";
+        String numOfRows = "1000";
+        String dataType = "JSON";
+        String baseDate = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
+        String baseTime = "0500";
+        String nx = Latitude.toString();
+        String ny = Longitude.toString();
+
+        String urlString = baseUrl + "?serviceKey=" + serviceKey
+                + "&pageNo=" + pageNo
+                + "&numOfRows=" + numOfRows
+                + "&dataType=" + dataType
+                + "&base_date=" + baseDate
+                + "&base_time=" +baseTime
+                + "&nx=" + nx
+                + "&ny=" + ny;
+        System.out.println("urlString:"+urlString);
+        RestTemplate restTemplate2 = new RestTemplate();
+
+        ResponseEntity<String> response = restTemplate2.getForEntity(urlString, String.class);
+
+        System.out.println("응답 코드: " + response.getStatusCodeValue());
+
+        System.out.println("응답 본문: " + response.getBody());
+//        Map<String, String> forecastMap = new HashMap<>();
+//        for (WeatherResponse.Forecast forecast : filteredForecasts) {
+//            String key = "fcstTime_" + forecast.getFcstTime();
+//            String value = "Category: " + forecast.getCategory() + ", Value: " + forecast.getFcstValue();
+//            forecastMap.put(key, value);
+//        }
+//        Map<String, String> forecastMap = new HashMap<>();
+//        if() {
+        	JSONObject jsonResponses = new JSONObject(response.getBody());
+            JSONObject jsonResponse = jsonResponses.getJSONObject("response");
+            JSONObject body = jsonResponse.getJSONObject("body");
+            JSONArray items = body.getJSONObject("items").getJSONArray("item");
+
+            List<Map<String, String>> forecastList = new ArrayList<>();
+
+            for (int i = 0; i < items.length(); i++) {
+                JSONObject forecast = items.getJSONObject(i);
+                String fcstTime = forecast.getString("fcstTime");
+                String fcstDate = forecast.getString("baseDate");
+                if ("0600".equals(fcstTime) || "1300".equals(fcstTime)) {
+                    Map<String, String> entry = new HashMap<>();
+                    entry.put("fcstDate", fcstDate);
+                    entry.put("fcstTime", fcstTime);
+                    entry.put("category", forecast.getString("category"));
+                    entry.put("fcstValue", forecast.getString("fcstValue"));
+                    forecastList.add(entry);
+                }
+            }
+//        }
+//        else {
+//        	forecastMap.put("type","fail");
+//        }
+        
+
+        return forecastList;
+	}
 	/*물떄*/
 	@RequestMapping(value = "/v1/weather/khoa")
 	@ResponseBody
-	public String khoa(@RequestBody MapPointDto mapPointDto, WeatherVo weatherVo){
+	public Map<String, Object> khoa(@RequestBody MapPointDto mapPointDto, WeatherVo weatherVo){
 		RestTemplate restTemplate = new RestTemplate();
+		Map<String, Object> resultMap = new LinkedHashMap<>();
+		
 		String OBS_CODE = "";
 //		String DATE = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
 		LocalDate today = LocalDate.now();
 	    List<String> dates = new ArrayList<>();
 
-	    for (int i = -1; i <= 5; i++) {
+	    for (int i = -1; i <= 6; i++) {
 	        dates.add(today.plusDays(i).format(DateTimeFormatter.BASIC_ISO_DATE));
 	    }
 		System.out.println("mapPointDto.getMpLatitude():"+mapPointDto.getMpLatitude());
@@ -324,7 +454,8 @@ public class WeatherController {
 		if (closestStation != null) {
 	        OBS_CODE = closestStation.getOsStationId();
 	    } else {
-	        return "가까운 관측소를 찾을 수 없습니다.";
+	    	resultMap.put("error", "가까운 관측소를 찾을 수 없습니다.");
+	    	return resultMap;
 	    }
 //		String result = "";
 //	    for (String date : dates) {
@@ -342,7 +473,7 @@ public class WeatherController {
 //	    }
 //	    return result;
 		// 날짜별 데이터를 저장할 Map 객체
-	    Map<String, JsonNode> resultMap = new LinkedHashMap<>();
+	    
 	    ObjectMapper objectMapper = new ObjectMapper();
 
 	    // 여러 날짜의 데이터를 가져오기
@@ -356,21 +487,22 @@ public class WeatherController {
 	            System.out.println("response.getBody() for date " + date + ":" + response.getBody());
 
 	            // 응답을 JSON 형식으로 파싱하여 resultMap에 저장
-	            JsonNode responseJson = objectMapper.readTree(response.getBody());
-	            resultMap.put(date, responseJson);  // 날짜를 키로 사용하고, JSON 데이터를 값으로 저장
+//	            JsonNode responseJson = objectMapper.readTree(response.getBody());
+	            resultMap.put(date, response.getBody());  // 날짜를 키로 사용하고, JSON 데이터를 값으로 저장
 	        } catch (Exception e) {
 	            System.err.println("Error fetching data for date " + date + ": " + e.getMessage());
 	            // 오류 발생 시 Map에 오류 메시지 저장
-	            resultMap.put(date, objectMapper.createObjectNode().put("error", "Error fetching data"));
+	            resultMap.put(date, "Error fetching data for date");
 	        }
 	    }
 
 	    // 최종 결과를 JSON 형식으로 반환
 	    try {
-	        return objectMapper.writeValueAsString(resultMap);  // Map을 JSON 형식으로 반환
+	        return resultMap;  // Map을 JSON 형식으로 반환
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        return "Error converting result to JSON";
+	        resultMap.put("error", "Error converting result to JSON");
+	        return resultMap;
 	    }
 //		String apiUrl = "http://www.khoa.go.kr/api/oceangrid/tideObsPreTab/search.do?ServiceKey=" + API_KEY +
 //                "&ObsCode=" + OBS_CODE + "&Date=" + DATE + "&ResultType=json";

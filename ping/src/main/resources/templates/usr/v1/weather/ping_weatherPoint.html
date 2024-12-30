@@ -53,7 +53,7 @@
                 </div>
             </div>
         </section>
-        <section id="contact-form">
+        <section id="weather_wrapper" class="weather_wrapper">
             <div class="container">
                 <div class="row">
                     <div class="col-md-2">
@@ -86,32 +86,27 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-10" data-bs-spy="scroll" data-bs-offset="0" tabindex="0">
+                    <!-- <div class="col-md-10" data-bs-spy="scroll" data-bs-offset="0" tabindex="0"> -->
+                    <div class="col-md-10">
                         <h3>날씨 정보</h3>
                         <div id="weather_area" class="weather_area">
                             <div class="" id="main_weather" th:if="${item.mpType == 5}">
-                                <h4>물때 표</h4>
-                                <p class="ts-text-small">2주단위로 나옵니다.</p>
+                                <h4 class="mb-3">물때 표</h4>
+                                <p>기준: <span class="obs_name"></span> 1주단위로 나옵니다.</p>
                                 <table class="table tideTable" id="tideTable">
                                     <thead>
                                         <tr>
-                                            <th>요일</th>
-                                            <th>년도 / 월 / 일</th>
+                                            <th>년도 / 월 / 일 (요일)</th>
                                             <th>월령</th>
                                             <th>물때 / 물흐름</th>
                                             <th>만조시각</th>
                                             <th>간조시각</th>
-                                            <th>일출/일몰</th>
-                                            <th>월출/월몰</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>
-                                                <p><span>월</span></p>
-                                            </td>
                                             <td >
-                                                <p><span>2024</span> / <span>10</span> / <span>9</span></p>
+                                                <p><span>2024</span>-<span>10</span>-<span>9</span> (<span>월</span>)</p>
                                             </td>
                                             <td>
                                                 <div>
@@ -139,18 +134,12 @@
                                                     <p><span>14:35</span> <span>(178)</span> ▼-<span>466</span></p>
                                                 </div>
                                             </td>
-                                            <td>
-                                                <p><span>07:06</span> / <span>17:29</span></p>
-                                            </td>
-                                            <td>
-                                                <p><span>13:08</span> / <span>22:54</span></p>
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="row" id="sea_weather" th:if="${item.mpType == 5}">
-                                <h4>바다 날씨</h4>
+                            <div class="row sea_weather" id="sea_weather" th:if="${item.mpType == 5}">
+                                <h4 class="mb-3">바다 날씨</h4>
                                 <p>경기북부앞바다</p>
                                 <table class="table">
                                     <tr>
@@ -163,8 +152,10 @@
                                     <tr>
                                         <td>
                                             <div class="d-flex align-items-center gap-3">
-                                                <p>11일(월)</p>
-                                                <div>
+                                                <div class="col-6">
+                                                    <span>11일(월)</span>
+                                                </div>
+                                                <div class="col-6">
                                                     <div>오전</div>
                                                     <div>오후</div>
                                                 </div>
@@ -176,24 +167,25 @@
                                                 <div>
                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
-                                                <p>맑음</p>
+                                                <span>맑음</span>
                                             </div>
                                         </td>
                                         <td>
-                                            <div>
-                                                <p><span>북</span>-<span>북동</span></p>
-                                                <p><span>북</span>-<span>북동</span></p>
+                                            <div class="row flex-column align-items-center gap-3">
+                                                <div><span>북</span>-<span>북동</span></div>
+                                                <div><span>북</span>-<span>북동</span></div>
                                             </div>
                                         </td>
                                         <td>
-                                            <div>
-                                                <p><span>3</span>-<span>7</span></p>
-                                                <p><span>3</span>-<span>7</span></p>
+                                            <div class="row flex-column align-items-center gap-3">
+                                                <div><span>3</span>-<span>7</span></div>
+                                                <div><span>3</span>-<span>7</span></div>
                                             </div>
-                                        </td><td>
-                                            <div>
-                                                <p><span>0.5</span>-<span>0.5</span></p>
-                                                <p><span>0.5</span>-<span>0.5</span></p>
+                                        </td>
+                                        <td>
+                                            <div class="row flex-column align-items-center gap-3">
+                                                <div><span>0.5</span>-<span>0.5</span></div>
+                                                <div><span>0.5</span>-<span>0.5</span></div>
                                             </div>
                                         </td>
                                     </tr>
@@ -363,7 +355,7 @@
                                 </table>
                             </div>
                             <div class="row" id="local_weather">
-                                <h4>지역 날씨</h4>
+                                <h4 class="mb-3">지역 날씨</h4>
                                 <table class="table">
                                     <tr>
                                         <th th:text="${#dates.format(new java.util.Date(), 'MM.dd')}"></th>
@@ -465,13 +457,15 @@
 <script th:inline="javascript" type="text/javascript">
     var OBSData = /*[[${OBSData}]]*/[];
     var highTideData = /*[[${highTideData}]]*/[];
-    console.log("highTideData:",JSON.parse(highTideData));
-    console.log("OBS:",JSON.parse(OBSData));
+    // console.log("highTideData:",JSON.parse(highTideData));
+    // console.log("OBS:",JSON.parse(OBSData));
     var item = /*[[${item}]]*/[];
+    var shortTerm = /*[[${shortTerm}]]*/[];
+    console.log("shortTerm:",shortTerm);
 </script>
 <script>
     // window.addEventListener('DOMContentLoaded',function() {
-        $.ajax({
+        /*$.ajax({
             async : true, 
             cache : false, 
             type: 'POST',
@@ -482,9 +476,9 @@
                 "mpLongitude":item.mpLongitude,
             }),
             success: function (response) {
-                console.log("response:",response);
-                response = JSON.parse(response);
-                console.log("response2:",response);
+                // console.log("response:",response);
+                // response = JSON.parse(response);
+                // console.log("response2:",response);
                 // const data = JSON.parse(response);
                 // console.log("data:",response.result.data);
                 // const tideData = data.result.data;
@@ -530,39 +524,108 @@
                     // 날짜를 키로 갖는 배열을 가져옴
                 // const data = JSON.parse(response);
                 // console.log("data:",data);
+                
                 const dates = Object.keys(response);
                 const tableBody = document.querySelector("#tideTable tbody");
                 tableBody.innerHTML= "";
 
+                const currentDate = new Date();
+                const currentFormattedDate = new Date(currentDate.toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
+                const formattedDateKST = currentFormattedDate.getFullYear() + '-' +
+                ('0' + (currentFormattedDate.getMonth() + 1)).slice(-2) + '-' +
+                ('0' + currentFormattedDate.getDate()).slice(-2);
+
+                // 어제 날짜 계산 (한국시간 반영)
+                const yesterdayDate = new Date(currentFormattedDate);
+                yesterdayDate.setDate(currentFormattedDate.getDate() - 1);
+                const formattedYesterdayKST = yesterdayDate.getFullYear() + '-' +
+                ('0' + (yesterdayDate.getMonth() + 1)).slice(-2) + '-' +
+                ('0' + yesterdayDate.getDate()).slice(-2);
+
+                console.log('현재 날짜 (한국시간):', formattedDateKST);
+                console.log('어제 날짜 (한국시간):', formattedYesterdayKST);
+ 
+                let lastLowTide = null;
+                let lastHighTide = null;
+
                 dates.forEach(date => {
-                    console.log("date:",date);
-                    console.log("data:",response[date]);
-                    const dayData = response[date].result.data;
-                    console.log(`data for ${date}:`, dayData);
+                    // console.log("this date:",date);
+                    const formattedDate = date.slice(0, 4) + "-" + date.slice(4, 6) + "-" + date.slice(6, 8);
+                    // console.log("formattedDate:",formattedDate);
+                    // console.log("response[date].result.data:",JSON.parse(response[date]).result.data);
+                    if (formattedDate === formattedYesterdayKST) {
+                        const dayData = JSON.parse(response[date]).result.data;
+                        dayData.forEach(item => {
+                            if (item.hl_code === "고조") {
+                                lastHighTide = item.tph_level;
+                            }else if (item.hl_code === "저조") {
+                                lastLowTide = item.tph_level;
+                            }
+                        });
+                        
+                        // console.log("어제");
+                        return; 
+                    }
+                    // console.log("통과");
+                    // console.log("date:",date);
+                    // console.log("data:",response[date]);
+                    const dayData = JSON.parse(response[date]).result.data;
+                    // console.log(`data for ${date}:`, dayData);
 
                     
                     const row = document.createElement("tr");
+                    
+                    
+
+                    // const yesterdayDate = new Date();
+                    // yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+                    // const formattedYesterday = yesterdayDate.toISOString().slice(0, 10); 
+
+                    // formattedYesterday를 사용해서 날짜를 비교
+                    // if (formattedDate === formattedYesterday) {
+                    //     // 어제 날짜에 대한 처리
+                    //     dayData.forEach(item => {
+                    //         if (item.hl_code === "저조") {
+                    //             lastLowTide = item.tph_level; 
+                    //         }
+                    //     });
+                    //     return;
+                    // }
+                    
+                    dayData.sort((a, b) => new Date(a.tph_time) - new Date(b.tph_time));
+                    // console.log("dayData:",dayData);
                     dayData.forEach((item, index) => {
-                        if (index > 0) {
+                        if( index == 0) {
+                            if (item.hl_code === "고조" && lastLowTide !== null) {
+                                const tideDifference = parseFloat(item.tph_level) - parseFloat(lastLowTide);
+                                item.tideDifference = `▲ + ${tideDifference.toFixed(0)}`;
+                            }
+                            if (item.hl_code === "저조" && lastHighTide !== null) {
+                                const tideDifference = parseFloat(item.tph_level) - parseFloat(lastHighTide);
+                                item.tideDifference = `▲ - ${tideDifference.toFixed(0)}`;
+                            }
+                        } else if ( index > 0) {
                             const previousItem = dayData[index - 1];
 
                             if (item.hl_code === "고조" && previousItem.hl_code === "저조") {
                                 const tideDifference = parseFloat(item.tph_level) - parseFloat(previousItem.tph_level);
-                                item.tideDifference = `▲ + ${tideDifference.toFixed(0)}`; // 만조(고조)에서 차오른 해수면 높이 차이
+                                item.tideDifference = `▲ + ${tideDifference.toFixed(0)}`; 
                             } else if (item.hl_code === "저조" && previousItem.hl_code === "고조") {
                                 const tideDifference = parseFloat(previousItem.tph_level) - parseFloat(item.tph_level);
-                                item.tideDifference = `▼ - ${tideDifference.toFixed(0)}`; // 간조(저조)에서 빠진 해수면 높이 차이
+                                item.tideDifference = `▼ - ${tideDifference.toFixed(0)}`; 
                             }
+                        } 
+
+                        if (item.hl_code === "저조") {
+                            lastLowTide = item.tph_level;
                         }
                     });
                     
-                    const formattedDate = date.slice(0, 4) + "-" + date.slice(4, 6) + "-" + date.slice(6, 8);
-                    console.log("formattedDate:",formattedDate);
+                    // console.log("formattedDate:",formattedDate);
                     const dayOfWeek = new Date(formattedDate).toLocaleDateString("ko-KR", { weekday: "short" }); 
                     
                     row.innerHTML = `
-                        <td><p><span>${dayOfWeek}</span></p></td>
-                        <td><p><span>${date.slice(0, 4)}</span> / <span>${date.slice(4, 6)}</span> / <span>${date.slice(6, 8)}</span></p></td>
+                        <td><p><span>${date.slice(0, 4)}</span>-<span>${date.slice(4, 6)}</span>-<span>${date.slice(6, 8)}</span> <span>(${dayOfWeek})</span></p></td>
                         <td>
                             <div>
                                 <img src="/usr/v1/template/themeforest-v1.0/assets/img/moon_09.png" alt="달이미지">
@@ -581,39 +644,36 @@
                         <td class="highTideTime" id="highTideTime-${date}">
                             <div>
                                 ${dayData.filter(item => item.hl_code === "고조").map(item => `
-                                    <p>
+                                    <div>
                                         <span>${new Date(item.tph_time).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false })}</span>
                                         (<span>${item.tph_level}</span>) ${item.tideDifference}
-                                    </p>
+                                    </div>
                                 `).join('')}
                             </div>
                         </td>
                         <td class="lowTideTime" id="lowTideTime-${date}">
                             <div>
                                 ${dayData.filter(item => item.hl_code === "저조").map(item => `
-                                    <p>
+                                    <div>
                                         <span>${new Date(item.tph_time).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false })}</span>
                                         (<span>${item.tph_level}</span>) ${item.tideDifference}
-                                    </p>
+                                    </div>
                                 `).join('')}
                             </div>
                         </td>
-                        <td>
-                            <p><span>07:06</span> / <span>17:29</span></p>
-                        </td>
-                        <td>
-                            <p><span>13:08</span> / <span>22:54</span></p>
-                        </td>
                     `;
 
-                    // 테이블에 추가
                     tableBody.appendChild(row);
+                    // console.log("JSON.parse(response[date]).meta:",JSON.parse(response[date]).result.meta);
+                    document.querySelector(".obs_name").textContent = JSON.parse(response[date]).result.meta.obs_post_name;
+                    
                 });
+                
             },
             error: function () {
                 alert("서버 요청 실패");
             }
-        })
+        })*/
     // })
 </script>
 <!-- khoa 해양 api -->
