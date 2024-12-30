@@ -157,11 +157,22 @@ img[alt="날씨이미지"]{
     transition: all .1s linear;
 }
 
+
+/*날씨*/
+.weather_wrapper td{
+    vertical-align: middle;
+}
+.weather_wrapper td .gap-3{
+    gap: 1rem !important;
+}
 .tideTable thead th{
     white-space: nowrap;
 }
 #main_weather .tideTable tbody tr *{
-    text-align: left;
+    /* text-align: left; */
+}
+.sea_weather td{
+    border: 1px solid #dee2e6;
 }
 
 @media (min-width: 576px) {
