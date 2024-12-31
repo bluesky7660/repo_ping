@@ -1,11 +1,18 @@
 package com.lalaping.mall.weather;
 
+import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -49,7 +56,8 @@ public class WeatherController {
 	    model.addAttribute("item", mapPointItem);
 	    
 	    Coordinate coordinate = dfs_xy_conv("toXY", mapPointItem.getMpLatitude(), mapPointItem.getMpLongitude());
-	    List<Map<String, String>> shortTerm = weatherForecast(coordinate.x, coordinate.y);
+	    List<Map<String, Object>> shortTerm = weatherForecast(coordinate.x, coordinate.y);
+//	    String shortTerm = weatherForecast(coordinate.x, coordinate.y);
 	    System.out.println("ShortTerm:"+shortTerm);
 	    model.addAttribute("shortTerm", shortTerm);
 	    RestTemplate restTemplate = new RestTemplate();
@@ -312,6 +320,42 @@ public class WeatherController {
 	        default: return "wi wi-na"; // 알 수 없음
 	    }
 	}
+	public String convertWeatherShortTermCodeToKorean(int skycode, int PTYcode) {
+	    if (PTYcode == 0) {
+	        switch (skycode) {
+	            case 1: return "맑음";  		    // 맑음
+	            case 3: return "구름 많음";        // 구름많이 
+	            case 4: return "흐림";     		// 흐림
+	            default: return "알 수 없음";		// 알 수 없음
+	        }
+	    } else {
+	        switch (PTYcode) {
+	            case 1: return "비";       // 비
+	            case 2: return "비 / 눈";   // 비 또는 눈
+	            case 3: return "눈";       // 눈
+	            case 4: return "소나기";    // 소나기
+	            default: return "알 수 없음";        // 알 수 없음
+	        }
+	    }
+	}
+	public String convertWeatherShortTermCodeToIcon(int skycode, int PTYcode) {
+		if (PTYcode == 0) {
+	        switch (skycode) {
+	            case 1: return "wi wi-day-sunny";  // 맑음
+	            case 3: return "wi wi-cloud";      // 구름많이
+	            case 4: return "wi wi-cloudy";     // 흐림
+	            default: return "wi wi-na";		   // 알 수 없음
+	        }
+	    } else {
+	        switch (PTYcode) {
+	            case 1: return "wi wi-rain";       // 비
+	            case 2: return "wi wi-rain-mix";   // 비 또는 눈
+	            case 3: return "wi wi-snow";       // 눈
+	            case 4: return "wi wi-showers";    // 소나기
+	            default: return "wi wi-na";        // 알 수 없음
+	        }
+	    }
+	}
 	public static class Coordinate {
 	    public int x;
 	    public int y;
@@ -366,20 +410,27 @@ public class WeatherController {
 	    
 	    return rs;
 	}
-	
-	public List<Map<String, String>> weatherForecast(Integer Latitude,Integer Longitude){
+//	public String weatherForecast(Integer Latitude,Integer Longitude){
+	public List<Map<String, Object>> weatherForecast(Integer Latitude,Integer Longitude){
 		String baseUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
         
-        String serviceKey = Weather_API_KEY;
+		String serviceKey = Weather_API_KEY; // 원래 인증키
+	    String encodedServiceKey = "";
+	    try {
+	        encodedServiceKey = URLEncoder.encode(serviceKey, StandardCharsets.UTF_8.toString()); // URL 인코딩된 인증키
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
         String pageNo = "1";
         String numOfRows = "1000";
         String dataType = "JSON";
         String baseDate = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
-        String baseTime = "0500";
+        String baseTime = "0200";
         String nx = Latitude.toString();
         String ny = Longitude.toString();
 
-        String urlString = baseUrl + "?serviceKey=" + serviceKey
+        String urlString = baseUrl + "?serviceKey=" + encodedServiceKey
                 + "&pageNo=" + pageNo
                 + "&numOfRows=" + numOfRows
                 + "&dataType=" + dataType
@@ -389,47 +440,111 @@ public class WeatherController {
                 + "&ny=" + ny;
         System.out.println("urlString:"+urlString);
         RestTemplate restTemplate2 = new RestTemplate();
+        final URI uri = URI.create(urlString);
+        System.out.println("Request URI: " + uri);
+        ResponseEntity<String> response = restTemplate2.getForEntity(uri, String.class);
 
-        ResponseEntity<String> response = restTemplate2.getForEntity(urlString, String.class);
-
-        System.out.println("응답 코드: " + response.getStatusCodeValue());
+//        System.out.println("응답 코드: " + response.getStatusCodeValue());
 
         System.out.println("응답 본문: " + response.getBody());
-//        Map<String, String> forecastMap = new HashMap<>();
-//        for (WeatherResponse.Forecast forecast : filteredForecasts) {
-//            String key = "fcstTime_" + forecast.getFcstTime();
-//            String value = "Category: " + forecast.getCategory() + ", Value: " + forecast.getFcstValue();
-//            forecastMap.put(key, value);
-//        }
-//        Map<String, String> forecastMap = new HashMap<>();
-//        if() {
-        	JSONObject jsonResponses = new JSONObject(response.getBody());
-            JSONObject jsonResponse = jsonResponses.getJSONObject("response");
-            JSONObject body = jsonResponse.getJSONObject("body");
-            JSONArray items = body.getJSONObject("items").getJSONArray("item");
-
-            List<Map<String, String>> forecastList = new ArrayList<>();
-
-            for (int i = 0; i < items.length(); i++) {
-                JSONObject forecast = items.getJSONObject(i);
-                String fcstTime = forecast.getString("fcstTime");
-                String fcstDate = forecast.getString("baseDate");
-                if ("0600".equals(fcstTime) || "1300".equals(fcstTime)) {
-                    Map<String, String> entry = new HashMap<>();
-                    entry.put("fcstDate", fcstDate);
-                    entry.put("fcstTime", fcstTime);
-                    entry.put("category", forecast.getString("category"));
-                    entry.put("fcstValue", forecast.getString("fcstValue"));
-                    forecastList.add(entry);
-                }
-            }
-//        }
-//        else {
-//        	forecastMap.put("type","fail");
-//        }
+        System.out.println("Request URI: " + uri);
+        JSONObject jsonResponses = new JSONObject(response.getBody());
+        JSONObject jsonResponse = jsonResponses.getJSONObject("response");
+        JSONObject body = jsonResponse.getJSONObject("body");
+        JSONArray items = body.getJSONObject("items").getJSONArray("item");
         
+        Map<String, List<Map<String, String>>> groupedByDate = new HashMap<>();
+        Integer skycode = null;
+        Integer PTYcode = null;
+        for (int i = 0; i < items.length(); i++) {
+            JSONObject forecast = items.getJSONObject(i);
+            String fcstTime = forecast.getString("fcstTime");
+            String fcstDate = forecast.getString("fcstDate") ;
+//            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+//            Date fcstDate = inputFormat.parse(forecast.getString("fcstDate"));
+            String category = forecast.getString("category");
+//            if(fcstDate = ) {
+//            	
+//            }
 
-        return forecastList;
+            if (
+            		("0600".equals(fcstTime) || "1500".equals(fcstTime)) && 
+            		("SKY".equals(category) || "PTY".equals(category) || "WAV".equals(category) || "VEC".equals(category) || "WSD".equals(category))) {
+                Map<String, String> entry = new HashMap<>();
+                entry.put("fcstDate", fcstDate);
+                entry.put("fcstTime", fcstTime);
+                entry.put("category", category);
+                if("SKY".equals(category)||"PTY".equals(category)) {
+                	if(skycode==null || PTYcode==null) {
+                		if("SKY".equals(category)) {
+                			if("0".equals(forecast.getString("fcstValue"))) {
+                				skycode = 0 ;
+                			}else {
+                				skycode = Integer.parseInt(forecast.getString("fcstValue"));
+                			}
+                			
+                			System.out.println("skycode:"+skycode);
+                			
+                		}else if("PTY".equals(category)){
+                			if("0".equals(forecast.getString("fcstValue"))) {
+                				PTYcode = 0 ;
+                			}else {
+                				PTYcode = Integer.parseInt(forecast.getString("fcstValue"));
+                			}
+                			
+                			System.out.println("PTYcode:"+PTYcode);
+                		}
+                	}
+                	System.out.println("skycode:"+skycode);
+                	System.out.println("PTYcode:"+PTYcode);
+                	if(skycode!=null && PTYcode!=null) {
+                		String weatherIcon = convertWeatherShortTermCodeToIcon(skycode,PTYcode);
+                		String weatherCode = convertWeatherShortTermCodeToKorean(skycode,PTYcode);
+                		entry.put("weatherCode", weatherCode);
+                		entry.put("weatherIcon", weatherIcon);
+                		skycode = null;
+                        PTYcode = null;
+                	}
+                	
+                	entry.put("fcstValue", forecast.getString("fcstValue"));
+                	
+                	
+                }else if("VEC".equals(category)) {
+                	String vecValue = convertDirectionToKorean(Double.parseDouble(forecast.getString("fcstValue")));
+                	String vecIcon = convertDirectionToIcon(Double.parseDouble(forecast.getString("fcstValue")));
+                	entry.put("vecIcon", vecIcon);
+                	entry.put("fcstValue", vecValue);
+                }else {
+                	entry.put("fcstValue", forecast.getString("fcstValue"));
+                }
+                
+
+                groupedByDate
+                        .computeIfAbsent(fcstDate, k -> new ArrayList<>())
+                        .add(entry);
+            }
+        }
+
+        List<Map<String, Object>> result = new ArrayList<>();
+        for (String date : groupedByDate.keySet()) {
+            Map<String, Object> dateForecast = new HashMap<>();
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+            try {
+                // 문자열을 Date로 변환
+                Date fcstDate = inputFormat.parse(date);
+                dateForecast.put("fcstDate", fcstDate);
+            } catch (ParseException e) {
+                // 예외 처리: 날짜 형식 오류 시, 예외 메시지 출력
+                System.out.println("날짜 파싱 오류: " + e.getMessage());
+                dateForecast.put("fcstDate", date);  // 파싱 실패 시 원래 문자열 그대로 사용
+            }
+//            dateForecast.put("fcstDate", fcstDate);
+            dateForecast.put("forecastData", groupedByDate.get(date));
+            result.add(dateForecast);
+        }
+
+        return result;
+//        return response.getBody();
 	}
 	/*물떄*/
 	@RequestMapping(value = "/v1/weather/khoa")
