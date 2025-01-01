@@ -229,11 +229,11 @@
                                 <table class="table">
                                     <tr>
                                         <th></th>
-                                        <th>11일(월)</th>
-                                        <th>12일(화)</th>
-                                        <th>13일(수)</th>
-                                        <th>14일(목)</th>
-                                        <th>15일(금)</th>
+                                        <th th:text="${#dates.format(longTerm.date4, 'M/d') + '(' + #dates.format(longTerm.date4, 'E') + ')'}">11일(월)</th>
+                                        <th th:text="${#dates.format(longTerm.date5, 'M/d') + '(' + #dates.format(longTerm.date5, 'E') + ')'}">12일(화)</th>
+                                        <th th:text="${#dates.format(longTerm.date6, 'M/d') + '(' + #dates.format(longTerm.date6, 'E') + ')'}">13일(수)</th>
+                                        <th th:text="${#dates.format(longTerm.date7, 'M/d') + '(' + #dates.format(longTerm.date7, 'E') + ')'}">14일(목)</th>
+                                        <th th:text="${#dates.format(longTerm.date8, 'M/d') + '(' + #dates.format(longTerm.date8, 'E') + ')'}">15일(금)</th>
                                     </tr>
                                     <tr>
                                         <th>
