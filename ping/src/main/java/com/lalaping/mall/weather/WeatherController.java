@@ -55,11 +55,7 @@ public class WeatherController {
 		MapPointDto mapPointItem =  mapPointService.selectOne(mapPointDto);
 	    model.addAttribute("item", mapPointItem);
 	    
-	    Coordinate coordinate = dfs_xy_conv("toXY", mapPointItem.getMpLatitude(), mapPointItem.getMpLongitude());
-	    List<Map<String, Object>> shortTerm = weatherForecast(coordinate.x, coordinate.y);
-//	    String shortTerm = weatherForecast(coordinate.x, coordinate.y);
-	    System.out.println("ShortTerm:"+shortTerm);
-	    model.addAttribute("shortTerm", shortTerm);
+	    
 	    RestTemplate restTemplate = new RestTemplate();
 //		String OBS_CODE = "";
 //		String DATE = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
@@ -118,7 +114,17 @@ public class WeatherController {
 	    WeatherResponse weatherData2 = response2.getBody();
 	    WeatherResponse weatherData = response.getBody();
 	    if(mapPointItem.getMpType()==5) {
-	    	if (weatherData != null && weatherData.getHourly() != null && weatherData2 != null && weatherData2.getHourly() != null) {
+	    	Coordinate coordinate = dfs_xy_conv("toXY", mapPointItem.getMpLatitude(), mapPointItem.getMpLongitude());
+		    List<Map<String, Object>> shortTerm = weatherForecast(coordinate.x, coordinate.y);
+//		    String shortTerm = weatherForecast(coordinate.x, coordinate.y);
+
+		    System.out.println("ShortTerm:"+shortTerm);
+		    model.addAttribute("shortTerm", shortTerm);
+		    
+		    Map<String, Object> longTerm = weatherMidSeaFcst(mapPointItem.getMpLatitude(), mapPointItem.getMpLongitude());
+		    System.out.println("longTerm:"+longTerm);
+		    model.addAttribute("longTerm", longTerm);
+		    if (weatherData != null && weatherData.getHourly() != null && weatherData2 != null && weatherData2.getHourly() != null) {
 		        //기존날씨
 		    	List<WeatherDataDto> weatherDataEntries2 = new ArrayList<>();
 		        
@@ -410,6 +416,68 @@ public class WeatherController {
 	    
 	    return rs;
 	}
+	public String getSeaAreaText(double latitude, double longitude) {
+        if (latitude >= 35 && latitude <= 37 && longitude >= 125 && longitude <= 127) {
+            return "서해중부";
+        } else if (latitude >= 34 && latitude <= 35 && longitude >= 126 && longitude <= 127) {
+            return "서해남부";
+        } else if (latitude >= 33 && latitude <= 34 && longitude >= 126 && longitude <= 128) {
+            return "남해서부";
+        } else if (latitude >= 34 && latitude <= 36 && longitude >= 128 && longitude <= 130) {
+            return "남해동부";
+        } else if (latitude >= 35 && latitude <= 37 && longitude >= 128 && longitude <= 130) {
+            return "동해남부";
+        } else if (latitude >= 37 && latitude <= 38 && longitude >= 129 && longitude <= 130) {
+            return "동해중부";
+        } else if (latitude >= 38 && latitude <= 40 && longitude >= 130 && longitude <= 132) {
+            return "동해북부";
+        } else if (latitude >= 37 && latitude <= 38 && longitude >= 124 && longitude <= 125) {
+            return "서해북부";
+        } else if (latitude >= 33 && latitude <= 34 && longitude >= 126 && longitude <= 127) {
+            return "제주도";
+        } else if (latitude >= 34 && latitude <= 35 && longitude >= 130 && longitude <= 132) {
+            return "대화퇴";
+        } else if (latitude >= 27 && latitude <= 32 && longitude >= 122 && longitude <= 127) {
+            return "동중국해";
+        } else if (latitude >= 30 && latitude <= 32 && longitude >= 129 && longitude <= 131) {
+            return "규슈";
+        } else if (latitude >= 42 && latitude <= 45 && longitude >= 133 && longitude <= 135) {
+            return "연해주";
+        } else {
+            return "알 수 없는 해역";
+        }
+    }
+	public String getSeaAreaCode(double latitude, double longitude) {
+		if (latitude >= 35 && latitude <= 37 && longitude >= 125 && longitude <= 127) {
+            return "12A20000";  // 서해중부
+        } else if (latitude >= 34 && latitude <= 35 && longitude >= 126 && longitude <= 127) {
+            return "12A30000";  // 서해남부
+        } else if (latitude >= 33 && latitude <= 34 && longitude >= 126 && longitude <= 128) {
+            return "12B10000";  // 남해서부
+        } else if (latitude >= 34 && latitude <= 36 && longitude >= 128 && longitude <= 130) {
+            return "12B20000";  // 남해동부
+        } else if (latitude >= 35 && latitude <= 37 && longitude >= 128 && longitude <= 130) {
+            return "12C10000";  // 동해남부
+        } else if (latitude >= 37 && latitude <= 38 && longitude >= 129 && longitude <= 130) {
+            return "12C20000";  // 동해중부
+        } else if (latitude >= 38 && latitude <= 40 && longitude >= 130 && longitude <= 132) {
+            return "12C30000";  // 동해북부
+        } else if (latitude >= 37 && latitude <= 38 && longitude >= 124 && longitude <= 125) {
+            return "12A10000";  // 서해북부
+        } else if (latitude >= 33 && latitude <= 34 && longitude >= 126 && longitude <= 127) {
+            return "12B10500";  // 제주도
+        } else if (latitude >= 34 && latitude <= 35 && longitude >= 130 && longitude <= 132) {
+            return "12D00000";  // 대화퇴
+        } else if (latitude >= 27 && latitude <= 32 && longitude >= 122 && longitude <= 127) {
+            return "12E00000";  // 동중국해
+        } else if (latitude >= 30 && latitude <= 32 && longitude >= 129 && longitude <= 131) {
+            return "12F00000";  // 규슈
+        } else if (latitude >= 42 && latitude <= 45 && longitude >= 133 && longitude <= 135) {
+            return "12G00000";  // 연해주
+        } else {
+            return "알 수 없는 코드";  // 예외처리
+        }
+    }
 //	public String weatherForecast(Integer Latitude,Integer Longitude){
 	public List<Map<String, Object>> weatherForecast(Integer Latitude,Integer Longitude){
 		String baseUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
@@ -545,6 +613,58 @@ public class WeatherController {
 
         return result;
 //        return response.getBody();
+	}
+	public Map<String, Object> weatherMidSeaFcst(Double Latitude,Double Longitude){
+		String baseUrl = "http://apis.data.go.kr/1360000/MidFcstInfoService/getMidSeaFcst";
+        
+		String serviceKey = Weather_API_KEY; // 원래 인증키
+	    String encodedServiceKey = "";
+	    try {
+	        encodedServiceKey = URLEncoder.encode(serviceKey, StandardCharsets.UTF_8.toString()); // URL 인코딩된 인증키
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+        String pageNo = "1";
+        String numOfRows = "10";
+        String dataType = "JSON";
+        String regId = getSeaAreaCode(Latitude,Longitude);
+        String baseDate = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
+        String baseTime = "0600";
+        String tmFc = baseDate+baseTime;
+        
+
+        String urlString2 = baseUrl + "?serviceKey=" + encodedServiceKey
+                + "&pageNo=" + pageNo
+                + "&numOfRows=" + numOfRows
+                + "&dataType=" + dataType
+                + "&regId=" + regId
+                + "&tmFc=" + tmFc;
+        System.out.println("urlString:"+urlString2);
+        RestTemplate restTemplate3 = new RestTemplate();
+        final URI uri2 = URI.create(urlString2);
+        System.out.println("Request URI: " + uri2);
+        ResponseEntity<String> response = restTemplate3.getForEntity(uri2, String.class);
+
+//        System.out.println("응답 코드: " + response.getStatusCodeValue());
+
+        System.out.println("중기 응답 본문: " + response.getBody());
+        System.out.println("중기 Request URI: " + uri2);
+        JSONObject jsonResponses = new JSONObject(response.getBody());
+        JSONObject jsonResponse = jsonResponses.getJSONObject("response");
+        JSONObject body = jsonResponse.getJSONObject("body");
+        JSONArray items = body.getJSONObject("items").getJSONArray("item");
+        System.out.println("items: " + items.toString());
+        Map<String,String> datas = new HashMap<>();
+        JSONObject item = items.getJSONObject(0);
+        for (String key : item.keySet()) {
+            datas.put(key, item.get(key).toString());
+        }
+        Map<String, Object> resultMap = new LinkedHashMap<>();
+        resultMap.put("seaName", getSeaAreaText(Latitude,Longitude));
+        resultMap.put("data", datas);
+//        return result;
+        return resultMap;
 	}
 	/*물떄*/
 	@RequestMapping(value = "/v1/weather/khoa")

@@ -145,6 +145,9 @@ img[alt="날씨이미지"]{
     font-size: 30px;
     color: #EFCC00;
 }
+.weatherIcon i{
+    font-size: 30px;
+}
 
 .ts-marker .ts-marker__image:before{
     height: 100%;
