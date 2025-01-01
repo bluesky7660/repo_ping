@@ -135,7 +135,7 @@
                             </div>
                             <div class="row sea_weather" id="sea_weather" th:if="${item.mpType == 5}">
                                 <h4 class="mb-3">바다 날씨</h4>
-                                <p>경기북부앞바다</p>
+                                <p th:text="${longTerm.seaName}"></p>
                                 <table class="table ">
                                     <tr>
                                         <th colspan="2">구분</th>
@@ -246,7 +246,7 @@
                                                 <div>
                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
-                                                <p>맑음</p>
+                                                <p th:text="${longTerm.data.wf4Am}">맑음</p>
                                             </div>
                                         </td>
                                         <td>
@@ -254,7 +254,7 @@
                                                 <div>
                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
-                                                <p>맑음</p>
+                                                <p th:text="${longTerm.data.wf5Am}">맑음</p>
                                             </div>
                                         </td>
                                         <td>
@@ -262,7 +262,7 @@
                                                 <div>
                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
-                                                <p>맑음</p>
+                                                <p th:text="${longTerm.data.wf6Am}">맑음</p>
                                             </div>
                                         </td>
                                         <td>
@@ -270,7 +270,7 @@
                                                 <div>
                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
-                                                <p>맑음</p>
+                                                <p th:text="${longTerm.data.wf7Am}">맑음</p>
                                             </div>
                                         </td>
                                         <td>
@@ -278,7 +278,7 @@
                                                 <div>
                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
                                                 </div>
-                                                <p>맑음</p>
+                                                <p th:text="${longTerm.data.wf8}">맑음</p>
                                             </div>
                                         </td>
                                     </tr>
@@ -290,27 +290,27 @@
                                         </th>
                                         <td>
                                             <div>
-                                                <p>1-1</p>
+                                                <p><span th:text="${longTerm.data.wh4AAm}"></span> - <span th:text="${longTerm.data.wh4BPm}"></span></p>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p>1-1</p>
+                                                <p><span th:text="${longTerm.data.wh5AAm}"></span> - <span th:text="${longTerm.data.wh5BPm}"></span></p>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p>1-1</p>
+                                                <p><span th:text="${longTerm.data.wh6AAm}"></span> - <span th:text="${longTerm.data.wh6BPm}"></span></p>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p>1-1</p>
+                                                <p><span th:text="${longTerm.data.wh7AAm}"></span> - <span th:text="${longTerm.data.wh7BPm}"></span></p>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p>1-1</p>
+                                                <p><span th:text="${longTerm.data.wh8A}"></span> - <span th:text="${longTerm.data.wh8B}"></span></p>
                                             </div>
                                         </td>
                                     </tr>
@@ -424,6 +424,8 @@
     var item = /*[[${item}]]*/[];
     var shortTerm = /*[[${shortTerm}]]*/[];
     console.log("shortTerm:",shortTerm);
+    var longTerm = /*[[${longTerm}]]*/[];
+    console.log("longTerm:",longTerm);
 </script>
 <script>
     window.addEventListener('load',function() {
