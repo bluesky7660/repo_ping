@@ -58,24 +58,24 @@
                 <div class="row">
                     <div class="col-md-2">
                         <div class="sticky-top weather_menu">
-                            <h3 th:text="${item.mpTitle}">물왕저수지</h3>
-                            <p th:text="${item.mpAddress}">
-                                경기 시흥시 동서로857번길 28-13 (물왕동)
-                            </p>
+                            <div class="weather_menu_header">
+                                <h2 th:text="${item.mpTitle}"></h2>
+                                <p th:text="${item.mpAddress}"></p>
+                            </div>
                             <ul class="nav nav-pills flex-column" >
                                 <li class="nav-item" th:if="${item.mpType == 5}" data-link="main_weather">
                                     <a class="nav-link" id="main-tab" href="javascript:void(0)">
-                                        <h3>물 때표</h3>
+                                        <h4>물 때표</h4>
                                     </a>
                                 </li>
                                 <li class="nav-item" th:if="${item.mpType == 5}" data-link="sea_weather">
                                     <a class="nav-link" id="sea-tab" href="javascript:void(0)">
-                                        <h3>바다 날씨</h3>
+                                        <h4>바다 날씨</h4>
                                     </a>
                                 </li>
                                 <li class="nav-item" data-link="local_weather">
                                     <a class="nav-link" id="local-tab" href="javascript:void(0)">
-                                        <h3>지역 날씨</h3>
+                                        <h4>지역 날씨</h4>
                                     </a>
                                 </li>
                             </ul>
@@ -85,14 +85,16 @@
                     <div class="col-md-10">
                         <h3>날씨 정보</h3>
                         <div id="weather_area" class="weather_area">
-                            <div class="" id="main_weather" th:if="${item.mpType == 5}">
-                                <h4 class="mb-3">물때 표</h4>
-                                <p>기준: <span class="obs_name"></span> 1주단위로 나옵니다.</p>
-                                <table class="table tideTable" id="tideTable">
+                            <div class="weathers main_weather" id="main_weather" th:if="${item.mpType == 5}">
+                                <div class="table_header d-flex justify-content-between">
+                                    <h4 class="mb-3">물때 표</h4>
+                                    <p>기준: <span class="obs_name"></span> 1주단위로 나옵니다.</p>
+                                </div>
+                                <table class="weather_table tideTable" id="tideTable">
                                     <thead>
                                         <tr>
                                             <th>년도 / 월 / 일 (요일)</th>
-                                            <th>월령</th>
+                                            <!-- <th>월령</th> -->
                                             <th>물때 / 물흐름</th>
                                             <th>만조시각</th>
                                             <th>간조시각</th>
@@ -103,11 +105,11 @@
                                             <td >
                                                 <p><span>2024</span>-<span>10</span>-<span>9</span> (<span>월</span>)</p>
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <div>
                                                     <img src="/usr/v1/template/themeforest-v1.0/assets/img/moon_09.png" alt="달이미지">
                                                 </div>
-                                            </td>
+                                            </td> -->
                                             <td>
                                                 <div>
                                                     <p><span>무시</span></p>
@@ -120,23 +122,25 @@
                                                 </div>
                                             </td>
                                             <td class="highTideTime" id="highTideTime">
-                                                <div>
-                                                </div>
+                                                <!-- <div>
+                                                </div> -->
                                             </td>
                                             <td class="lowTideTime" id="lowTideTime">
-                                                <div>
+                                                <!-- <div>
                                                     <p><span>02:38</span> <span>(264)</span> ▼-<span>511</span></p>
                                                     <p><span>14:35</span> <span>(178)</span> ▼-<span>466</span></p>
-                                                </div>
+                                                </div> -->
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="row sea_weather" id="sea_weather" th:if="${item.mpType == 5}">
-                                <h4 class="mb-3">바다 날씨</h4>
-                                <p th:text="${longTerm.seaName}"></p>
-                                <table class="table ">
+                            <div class="weathers sea_weather" id="sea_weather" th:if="${item.mpType == 5}">
+                                <div class="table_header d-flex justify-content-between">
+                                    <h4 class="mb-3">바다 날씨</h4>
+                                    <p th:text="${longTerm.seaName}"></p>
+                                </div>
+                                <table class="weather_table shortTerm">
                                     <tr>
                                         <th colspan="2">구분</th>
                                         <th>날씨</th>
@@ -152,7 +156,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="p-0">
                                             <table class="w-100 border-0">
                                                 <tr>
                                                     <td>
@@ -166,7 +170,7 @@
                                                 </tr>
                                             </table>
                                         </td>
-                                        <td colspan="4">
+                                        <td colspan="4" class="p-0">
                                             <table class="w-100 border-0">
                                                 <colgroup>
                                                     <col class="w-25">
@@ -226,98 +230,126 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <table class="table">
+                                <table class="weather_table longTerm" >
                                     <tr>
                                         <th></th>
-                                        <th>11일(월)</th>
-                                        <th>12일(화)</th>
-                                        <th>13일(수)</th>
-                                        <th>14일(목)</th>
-                                        <th>15일(금)</th>
+                                        <th th:text="${#dates.format(longTerm.date4, 'M/d') + '(' + #dates.format(longTerm.date4, 'E') + ')'}">11일(월)</th>
+                                        <th th:text="${#dates.format(longTerm.date5, 'M/d') + '(' + #dates.format(longTerm.date5, 'E') + ')'}">12일(화)</th>
+                                        <th th:text="${#dates.format(longTerm.date6, 'M/d') + '(' + #dates.format(longTerm.date6, 'E') + ')'}">13일(수)</th>
+                                        <th th:text="${#dates.format(longTerm.date7, 'M/d') + '(' + #dates.format(longTerm.date7, 'E') + ')'}">14일(목)</th>
+                                        <th th:text="${#dates.format(longTerm.date8, 'M/d') + '(' + #dates.format(longTerm.date8, 'E') + ')'}">15일(금)</th>
                                     </tr>
                                     <tr>
                                         <th>
-                                            <div >
-                                                <p>날씨</p>
-                                            </div>
+                                            날씨
                                         </th>
                                         <td>
                                             <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
+                                                <div class="icon_box weatherIcon">
+                                                    <i th:class="${longTerm.data.wf4Am.contains('맑음')? 'wi wi-day-sunny':
+                                                    longTerm.data.wf4Am.contains('비/눈')? 'wi wi-rain-mix':
+                                                    longTerm.data.wf4Am.contains('비')? 'wi wi-rain':
+                                                    longTerm.data.wf4Am.contains('눈')? 'wi wi-snow':
+                                                    longTerm.data.wf4Am.contains('소나기')? 'wi wi-showers':
+                                                    longTerm.data.wf4Am.contains('구름')? 'wi wi-cloud':
+                                                    longTerm.data.wf4Am.contains('흐림')? 'wi wi-cloudy':''}"></i>
                                                 </div>
-                                                <p th:text="${longTerm.data.wf4Am}">맑음</p>
+                                                <span th:text="${longTerm.data.wf4Am}"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
+                                                <div class="icon_box weatherIcon">
+                                                    <i th:class="${longTerm.data.wf4Am.contains('맑음')? 'wi wi-day-sunny':
+                                                    longTerm.data.wf4Am.contains('비/눈')? 'wi wi-rain-mix':
+                                                    longTerm.data.wf4Am.contains('비')? 'wi wi-rain':
+                                                    longTerm.data.wf4Am.contains('눈')? 'wi wi-snow':
+                                                    longTerm.data.wf4Am.contains('소나기')? 'wi wi-showers':
+                                                    longTerm.data.wf4Am.contains('구름')? 'wi wi-cloud':
+                                                    longTerm.data.wf4Am.contains('흐림')? 'wi wi-cloudy':''}"></i>
                                                 </div>
-                                                <p th:text="${longTerm.data.wf5Am}">맑음</p>
+                                                <span th:text="${longTerm.data.wf5Am}"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
+                                                <div class="icon_box weatherIcon">
+                                                    <i th:class="${longTerm.data.wf4Am.contains('맑음')? 'wi wi-day-sunny':
+                                                    longTerm.data.wf4Am.contains('비/눈')? 'wi wi-rain-mix':
+                                                    longTerm.data.wf4Am.contains('비')? 'wi wi-rain':
+                                                    longTerm.data.wf4Am.contains('눈')? 'wi wi-snow':
+                                                    longTerm.data.wf4Am.contains('소나기')? 'wi wi-showers':
+                                                    longTerm.data.wf4Am.contains('구름')? 'wi wi-cloud':
+                                                    longTerm.data.wf4Am.contains('흐림')? 'wi wi-cloudy':''}"></i>
                                                 </div>
-                                                <p th:text="${longTerm.data.wf6Am}">맑음</p>
+                                                <span th:text="${longTerm.data.wf6Am}"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
+                                                <div class="icon_box weatherIcon">
+                                                    <i th:class="${longTerm.data.wf4Am.contains('맑음')? 'wi wi-day-sunny':
+                                                    longTerm.data.wf4Am.contains('비/눈')? 'wi wi-rain-mix':
+                                                    longTerm.data.wf4Am.contains('비')? 'wi wi-rain':
+                                                    longTerm.data.wf4Am.contains('눈')? 'wi wi-snow':
+                                                    longTerm.data.wf4Am.contains('소나기')? 'wi wi-showers':
+                                                    longTerm.data.wf4Am.contains('구름')? 'wi wi-cloud':
+                                                    longTerm.data.wf4Am.contains('흐림')? 'wi wi-cloudy':''}"></i>
                                                 </div>
-                                                <p th:text="${longTerm.data.wf7Am}">맑음</p>
+                                                <span th:text="${longTerm.data.wf7Am}"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <div>
-                                                    <img src="/usr/v1/template/themeforest-v1.0/assets/img/wether_sunny.png" alt="날씨이미지"/>
+                                                <div class="icon_box weatherIcon">
+                                                    <i th:class="${longTerm.data.wf4Am.contains('맑음')? 'wi wi-day-sunny':
+                                                    longTerm.data.wf4Am.contains('비/눈')? 'wi wi-rain-mix':
+                                                    longTerm.data.wf4Am.contains('비')? 'wi wi-rain':
+                                                    longTerm.data.wf4Am.contains('눈')? 'wi wi-snow':
+                                                    longTerm.data.wf4Am.contains('소나기')? 'wi wi-showers':
+                                                    longTerm.data.wf4Am.contains('구름')? 'wi wi-cloud':
+                                                    longTerm.data.wf4Am.contains('흐림')? 'wi wi-cloudy':''}"></i>
                                                 </div>
-                                                <p th:text="${longTerm.data.wf8}">맑음</p>
+                                                <span th:text="${longTerm.data.wf8}"></span>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>
-                                            <div >
-                                                <p>파고</p>
-                                            </div>
+                                            파고
                                         </th>
                                         <td>
                                             <div>
-                                                <p><span th:text="${longTerm.data.wh4AAm}"></span> - <span th:text="${longTerm.data.wh4BPm}"></span></p>
+                                                <div><span th:text="${longTerm.data.wh4AAm}"></span> - <span th:text="${longTerm.data.wh4BPm}"></span></div>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p><span th:text="${longTerm.data.wh5AAm}"></span> - <span th:text="${longTerm.data.wh5BPm}"></span></p>
+                                                <div><span th:text="${longTerm.data.wh5AAm}"></span> - <span th:text="${longTerm.data.wh5BPm}"></span></div>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p><span th:text="${longTerm.data.wh6AAm}"></span> - <span th:text="${longTerm.data.wh6BPm}"></span></p>
+                                                <div><span th:text="${longTerm.data.wh6AAm}"></span> - <span th:text="${longTerm.data.wh6BPm}"></span></div>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p><span th:text="${longTerm.data.wh7AAm}"></span> - <span th:text="${longTerm.data.wh7BPm}"></span></p>
+                                                <div><span th:text="${longTerm.data.wh7AAm}"></span> - <span th:text="${longTerm.data.wh7BPm}"></span></div>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p><span th:text="${longTerm.data.wh8A}"></span> - <span th:text="${longTerm.data.wh8B}"></span></p>
+                                                <div><span th:text="${longTerm.data.wh8A}"></span> - <span th:text="${longTerm.data.wh8B}"></span></div>
                                             </div>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                            <div class="row" id="local_weather">
-                                <h4 class="mb-3">지역 날씨</h4>
+                            <div class="weathers local_weather" id="local_weather">
+                                <div class="table_header d-flex justify-content-between">
+                                    <h4 class="mb-3">지역 날씨</h4>
+                                </div>
                                 <table class="table">
                                     <tr>
                                         <th th:text="${#dates.format(new java.util.Date(), 'MM.dd')}"></th>
@@ -335,7 +367,7 @@
                                     <tr th:each="weather:${weatherData}">
                                         <td>
                                             <div>
-                                                <p th:text="${#strings.substring(weather.time, 11,13)+'시'}"></p>
+                                                <span th:text="${#strings.substring(weather.time, 11,13)+'시'}"></span>
                                             </div>
                                         </td>
                                         <td>
@@ -343,12 +375,12 @@
                                                 <div class="icon_box weatherIcon">
                                                     <i th:class="${weather.weatherIcon}"></i>
                                                 </div>
-                                                <p th:text="${weather.weatherName}"></p>
+                                                <span th:text="${weather.weatherName}"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p><span th:text="${weather.temperature}"></span> °C</p>
+                                                <span><span th:text="${weather.temperature}"></span> °C</span>
                                             </div>
                                         </td>
                                         <td>
@@ -356,17 +388,17 @@
                                                 <div class="icon_box windDirectionIcon">
                                                     <i th:class="${weather.windDirectionIcon}"></i>
                                                 </div>
-                                                <p th:text="${weather.windDirection}"></p>
+                                                <span th:text="${weather.windDirection}"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p><span th:text="${weather.windSpeed}"></span> m/s</p>
+                                                <span><span th:text="${weather.windSpeed}"></span> m/s</span>
                                             </div>
                                         </td>
                                         <td th:if="${weather.waveHeight != null}">
                                             <div>
-                                                <p><span th:text="${weather.waveHeight != null ? weather.waveHeight : ''}"></span> m</p>
+                                                <span><span th:text="${weather.waveHeight != null ? weather.waveHeight : ''}"></span> m</span>
                                             </div>
                                         </td>
                                         <td th:if="${weather.waveDirectionIcon != null}">
@@ -374,27 +406,27 @@
                                                 <div class="icon_box waveDirectionIcon">
                                                     <i th:class="${weather.waveDirectionIcon != null ? weather.waveDirectionIcon : ''}"></i>
                                                 </div>
-                                                <p th:text="${weather.waveDirection}"></p>
+                                                <span th:text="${weather.waveDirection}"></span>
                                             </div>
                                         </td>
                                         <td th:if="${weather.wavePeriod != null}">
                                             <div>
-                                                <p><span th:text="${weather.wavePeriod != null ? weather.wavePeriod : ''}"></span> /s</p>
+                                                <span><span th:text="${weather.wavePeriod != null ? weather.wavePeriod : ''}"></span> /s</span>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p><span th:text="${weather.precipitationProbability}"></span> %</p>
+                                                <span><span th:text="${weather.precipitationProbability}"></span> %</span>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p><span th:text="${weather.precipitation!=null? weather.precipitation+'mm':'-'}"></span></p>
+                                                <span><span th:text="${weather.precipitation!=null? weather.precipitation+'mm':'-'}"></span></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <p><span th:text="${weather.relativeHumidity}"></span> %</p>
+                                                <span><span th:text="${weather.relativeHumidity}"></span> %</span>
                                             </div>
                                         </td>
                                     </tr>
@@ -440,8 +472,9 @@
                 });
             });
         });
-    // window.addEventListener('DOMContentLoaded',function() {
-        /*$.ajax({
+    });
+    window.addEventListener('DOMContentLoaded',function() {
+        $.ajax({
             async : true, 
             cache : false, 
             type: 'POST',
@@ -604,11 +637,6 @@
                         <td><p><span>${date.slice(0, 4)}</span>-<span>${date.slice(4, 6)}</span>-<span>${date.slice(6, 8)}</span> <span>(${dayOfWeek})</span></p></td>
                         <td>
                             <div>
-                                <img src="/usr/v1/template/themeforest-v1.0/assets/img/moon_09.png" alt="달이미지">
-                            </div>
-                        </td>
-                        <td>
-                            <div>
                                 <p><span>무시</span></p>
                                 <div class="water_flow">
                                     <div class="progress" style="height: 30px;">
@@ -622,7 +650,7 @@
                                 ${dayData.filter(item => item.hl_code === "고조").map(item => `
                                     <div>
                                         <span>${new Date(item.tph_time).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false })}</span>
-                                        (<span>${item.tph_level}</span>) ${item.tideDifference}
+                                        (<span>${item.tph_level}</span>) <span class="higher">${item.tideDifference}</span>
                                     </div>
                                 `).join('')}
                             </div>
@@ -632,7 +660,7 @@
                                 ${dayData.filter(item => item.hl_code === "저조").map(item => `
                                     <div>
                                         <span>${new Date(item.tph_time).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false })}</span>
-                                        (<span>${item.tph_level}</span>) ${item.tideDifference}
+                                        (<span>${item.tph_level}</span>) <span class="lower">${item.tideDifference}</span>
                                     </div>
                                 `).join('')}
                             </div>
@@ -649,7 +677,7 @@
             error: function () {
                 alert("서버 요청 실패");
             }
-        })*/
+        })
     })
 </script>
 <!-- khoa 해양 api -->

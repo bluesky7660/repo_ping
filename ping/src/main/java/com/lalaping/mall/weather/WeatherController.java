@@ -662,7 +662,26 @@ public class WeatherController {
         }
         Map<String, Object> resultMap = new LinkedHashMap<>();
         resultMap.put("seaName", getSeaAreaText(Latitude,Longitude));
+        String nowdate =LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+        try {
+            // 문자열을 Date로 변환
+            Date longDate = inputFormat.parse(nowdate);
+            System.out.println("nowdate: " + longDate);
+            resultMap.put("nowdate", longDate);
+            resultMap.put("date4", inputFormat.parse(LocalDate.now().plusDays(4).format(DateTimeFormatter.BASIC_ISO_DATE)));
+            resultMap.put("date5", inputFormat.parse(LocalDate.now().plusDays(5).format(DateTimeFormatter.BASIC_ISO_DATE)));
+            resultMap.put("date6", inputFormat.parse(LocalDate.now().plusDays(6).format(DateTimeFormatter.BASIC_ISO_DATE)));
+            resultMap.put("date7", inputFormat.parse(LocalDate.now().plusDays(7).format(DateTimeFormatter.BASIC_ISO_DATE)));
+            resultMap.put("date8", inputFormat.parse(LocalDate.now().plusDays(8).format(DateTimeFormatter.BASIC_ISO_DATE)));
+        } catch (ParseException e) {
+            // 예외 처리: 날짜 형식 오류 시, 예외 메시지 출력
+            System.out.println("날짜 파싱 오류: " + e.getMessage());
+            resultMap.put("nowdate", nowdate);  // 파싱 실패 시 원래 문자열 그대로 사용
+        }
+        
         resultMap.put("data", datas);
+        System.out.println("resultMap: " + resultMap);
 //        return result;
         return resultMap;
 	}
