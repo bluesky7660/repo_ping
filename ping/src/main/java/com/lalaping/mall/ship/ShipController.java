@@ -79,7 +79,7 @@ public class ShipController {
 	            break;
 	        }
 	        default: {
-	            vo.setSortOrderString("spPrice ASC"); // 기본적으로 낮은 가격 순 정렬
+	            vo.setSortOrderString("spPrice ASC"); 
 	            break;
 	        }
 	    }
@@ -98,14 +98,12 @@ public class ShipController {
 		    System.out.println("Ship Capacity: " + ship.getSpTotal());
 		    System.out.println("Fish: " + ship.getFsNameList());
 
-		    // fsSeqList와 fsNameList가 null이거나 비어있는지 체크
 		    if (ship.getFsSeqList() != null && !ship.getFsSeqList().isEmpty()) {
 		        System.out.println("Fish Sequence: " + ship.getFsSeqList());
 		    } else {
 		        System.out.println("No Fish Available");
 		    }
 
-		    // fsNameList가 null이거나 비어있는지 체크
 		    if (ship.getFsNameList() != null && !ship.getFsNameList().isEmpty()) {
 		        System.out.println("Fish Names: " + ship.getFsNameList());
 		    } else {

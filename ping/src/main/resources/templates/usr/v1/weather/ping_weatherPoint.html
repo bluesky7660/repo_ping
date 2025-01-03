@@ -95,7 +95,7 @@
                                         <tr>
                                             <th>년도 / 월 / 일 (요일)</th>
                                             <!-- <th>월령</th> -->
-                                            <th>물때 / 물흐름</th>
+                                            <th>물때</th>
                                             <th>만조시각</th>
                                             <th>간조시각</th>
                                         </tr>
@@ -103,7 +103,7 @@
                                     <tbody>
                                         <tr>
                                             <td >
-                                                <p><span>2024</span>-<span>10</span>-<span>9</span> (<span>월</span>)</p>
+                                                <div><span>2024</span>-<span>10</span>-<span>9</span> (<span>월</span>)</div>
                                             </td>
                                             <!-- <td>
                                                 <div>
@@ -115,10 +115,9 @@
                                                     <p><span>무시</span></p>
                                                     <div class="water_flow">
                                                         <div class="progress" style="height: 30px;">
-                                                            <div id="waterFlow" class="progress-bar progress-bar-striped progress-bar-animated progress-bar-water" role="progressbar" style="width: 0%; background-color: aqua;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            <div id="waterFlow" class="progress-bar progress-bar-striped progress-bar-animated progress-bar-water" role="progressbar" style="width: 50%; background-color: aqua;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                                         </div>
                                                     </div>
-    
                                                 </div>
                                             </td>
                                             <td class="highTideTime" id="highTideTime">
@@ -138,7 +137,7 @@
                             <div class="weathers sea_weather" id="sea_weather" th:if="${item.mpType == 5}">
                                 <div class="table_header d-flex justify-content-between">
                                     <h4 class="mb-3">바다 날씨</h4>
-                                    <p th:text="${longTerm.seaName}"></p>
+                                    <p th:text="'관측 해상구역: '+${longTerm.seaName}"></p>
                                 </div>
                                 <table class="weather_table shortTerm">
                                     <tr>
@@ -445,6 +444,7 @@
 <script src="/usr/v1/template/themeforest-v1.0/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/leaflet.js"></script>
 <script src="/usr/v1/template/themeforest-v1.0/assets/js/custom.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/korean-lunar-calendar/dist/korean-lunar-calendar.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&libraries=services,clusterer"></script>
 <script src="/usr/v1/js/script.js"></script>
 <script src="/usr/v1/js/map-kakao.js"></script>
@@ -611,7 +611,7 @@
                             }
                             if (item.hl_code === "저조" && lastHighTide !== null) {
                                 const tideDifference = parseFloat(item.tph_level) - parseFloat(lastHighTide);
-                                item.tideDifference = `▲ - ${tideDifference.toFixed(0)}`;
+                                item.tideDifference = `▼ ${tideDifference.toFixed(0)}`;
                             }
                         } else if ( index > 0) {
                             const previousItem = dayData[index - 1];
@@ -632,17 +632,54 @@
                     
                     // console.log("formattedDate:",formattedDate);
                     const dayOfWeek = new Date(formattedDate).toLocaleDateString("ko-KR", { weekday: "short" }); 
-                    
+                    const calendar = new KoreanLunarCalendar();
+
+                    console.log(date.slice(0, 4), parseInt(date.slice(4, 6)), parseInt(date.slice(6, 8)));
+                    calendar.setSolarDate(date.slice(0, 4), parseInt(date.slice(4, 6)), parseInt(date.slice(6, 8)));
+                    console.log(calendar.getLunarCalendar());
+                    console.log(calendar.getLunarCalendar().day);
+                    const day = calendar.getLunarCalendar().day
+                    let dateText = "";
+                    if (day === 15 || day === 30) {
+                        dateText = "6 물";
+                    } else if (day === 9 || day === 24) {
+                        dateText = "무시";
+                    } else if (day === 8 || day === 23) {
+                        dateText = "조금";
+                    } else if (day === 10 || day === 15) {
+                        dateText = "1 물";
+                    } else if (day === 11 || day === 26) {
+                        dateText = "2 물";
+                    } else if (day === 12 || day === 27) {
+                        dateText = "3 물";
+                    } else if (day === 13 || day === 28) {
+                        dateText = "4 물";
+                    } else if (day === 14 || day === 29) {
+                        dateText = "5 물";
+                    } else if (day === 16 || day === 1) {
+                        dateText = "7 물";
+                    } else if (day === 17 || day === 2) {
+                        dateText = "8 물";
+                    } else if (day === 18 || day === 3) {
+                        dateText = "9 물";
+                    } else if (day === 19 || day === 4) {
+                        dateText = "10 물";
+                    } else if (day === 20 || day === 5) {
+                        dateText = "11 물";
+                    } else if (day === 21 || day === 6) {
+                        dateText = "12 물";
+                    } else if (day === 22 || day === 7) {
+                        dateText = "13 물";
+                    }
                     row.innerHTML = `
-                        <td><p><span>${date.slice(0, 4)}</span>-<span>${date.slice(4, 6)}</span>-<span>${date.slice(6, 8)}</span> <span>(${dayOfWeek})</span></p></td>
                         <td>
                             <div>
-                                <p><span>무시</span></p>
-                                <div class="water_flow">
-                                    <div class="progress" style="height: 30px;">
-                                        <div id="waterFlow" class="progress-bar progress-bar-striped progress-bar-animated progress-bar-water" role="progressbar" style="width: 50%; background-color: aqua;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
+                                <span>${date.slice(0, 4)}</span>-<span>${date.slice(4, 6)}</span>-<span>${date.slice(6, 8)}</span> <span>(${dayOfWeek})</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <div><span>${dateText}</span></div>
                             </div>
                         </td>
                         <td class="highTideTime" id="highTideTime-${date}">
