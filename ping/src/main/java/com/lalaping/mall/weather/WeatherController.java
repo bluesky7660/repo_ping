@@ -512,8 +512,6 @@ public class WeatherController {
         System.out.println("Request URI: " + uri);
         ResponseEntity<String> response = restTemplate2.getForEntity(uri, String.class);
 
-//        System.out.println("응답 코드: " + response.getStatusCodeValue());
-
         System.out.println("응답 본문: " + response.getBody());
         System.out.println("Request URI: " + uri);
         JSONObject jsonResponses = new JSONObject(response.getBody());
@@ -610,9 +608,20 @@ public class WeatherController {
             dateForecast.put("forecastData", groupedByDate.get(date));
             result.add(dateForecast);
         }
+        result.sort((o1, o2) -> {
+            Object date1 = o1.get("fcstDate");
+            Object date2 = o2.get("fcstDate");
+            if (date1 instanceof Date && date2 instanceof Date) {
+                long time1 = ((Date) date1).getTime();
+                long time2 = ((Date) date2).getTime();
+                return Long.compare(time1, time2);
+            } else if (date1 instanceof String && date2 instanceof String) {
+                return date1.toString().compareTo(date2.toString());
+            }
+            return 0; 
+        });
 
         return result;
-//        return response.getBody();
 	}
 	public Map<String, Object> weatherMidSeaFcst(Double Latitude,Double Longitude){
 		String baseUrl = "http://apis.data.go.kr/1360000/MidFcstInfoService/getMidSeaFcst";
@@ -645,8 +654,6 @@ public class WeatherController {
         final URI uri2 = URI.create(urlString2);
         System.out.println("Request URI: " + uri2);
         ResponseEntity<String> response = restTemplate3.getForEntity(uri2, String.class);
-
-//        System.out.println("응답 코드: " + response.getStatusCodeValue());
 
         System.out.println("중기 응답 본문: " + response.getBody());
         System.out.println("중기 Request URI: " + uri2);
@@ -682,7 +689,6 @@ public class WeatherController {
         
         resultMap.put("data", datas);
         System.out.println("resultMap: " + resultMap);
-//        return result;
         return resultMap;
 	}
 	/*물떄*/
@@ -693,7 +699,6 @@ public class WeatherController {
 		Map<String, Object> resultMap = new LinkedHashMap<>();
 		
 		String OBS_CODE = "";
-//		String DATE = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
 		LocalDate today = LocalDate.now();
 	    List<String> dates = new ArrayList<>();
 

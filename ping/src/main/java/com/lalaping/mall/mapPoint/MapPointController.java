@@ -143,18 +143,17 @@ public class MapPointController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-//		fishMappointService.mappointFishInsert(fishMappointDto);
-//		System.out.println("인서트 mpSeq:"+mapPointDto.getMpSeq());
 		return "redirect:/v1/mapPoint/mapPointDetail?mpSeq="+mapPointDto.getMpSeq();
 	}
+	
 	@RequestMapping(value = "reviewList")
 	@ResponseBody
-	 public Map<String, Object> reviewList(Model model,MapPointDto mapPointDto,ReviewDto reviewDto){
+	public Map<String, Object> reviewList(Model model,MapPointDto mapPointDto,ReviewDto reviewDto){
 		List<ReviewDto> rvList = reviewService.rvSelectListUsr(reviewDto);
 		Map<String, Object> response = new HashMap<>();
 		response.put("rvList", rvList);
 		System.out.println(response);
 		return response;
-		}
+	}
 
 }
