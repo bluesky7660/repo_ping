@@ -57,6 +57,7 @@ public class WeatherController {
 	    
 	    
 	    RestTemplate restTemplate = new RestTemplate();
+	    model.addAttribute("khoaData", khoaWeather(mapPointItem.getMpLatitude(),mapPointItem.getMpLongitude(), weatherVo));
 //		String OBS_CODE = "";
 //		String DATE = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
 //		
@@ -690,6 +691,51 @@ public class WeatherController {
         return resultMap;
 	}
 	/*물떄*/
+	public Map<String, Object> khoaWeather( Double Latitude ,Double Longitude ,WeatherVo weatherVo){
+		RestTemplate khoaRestTemplate = new RestTemplate();
+		Map<String, Object> resultMap = new LinkedHashMap<>();
+		
+		String OBS_CODE = "";
+		LocalDate today = LocalDate.now();
+	    List<String> dates = new ArrayList<>();
+
+	    for (int i = -1; i <= 6; i++) {
+	        dates.add(today.plusDays(i).format(DateTimeFormatter.BASIC_ISO_DATE));
+	    }
+		weatherVo.setBaseMpLatitude(Latitude);
+		weatherVo.setBaseMpLongitude(Longitude);
+		WeatherDto closestStation = weatherService.observationStationNear(weatherVo); 
+		if (closestStation != null) {
+	        OBS_CODE = closestStation.getOsStationId();
+	    } else {
+	    	resultMap.put("error", "가까운 관측소를 찾을 수 없습니다.");
+	    	return resultMap;
+	    }
+	    
+	    ObjectMapper objectMapper = new ObjectMapper();
+
+	    for (String date : dates) {
+	        String apiUrl = "http://www.khoa.go.kr/api/oceangrid/tideObsPreTab/search.do?ServiceKey=" + API_KEY +
+	                "&ObsCode=" + OBS_CODE + "&Date=" + date + "&ResultType=json";
+
+	        try {
+	            ResponseEntity<String> response = khoaRestTemplate.getForEntity(apiUrl, String.class);
+	            resultMap.put(date, response.getBody());  // 날짜를 키로 사용하고, JSON 데이터를 값으로 저장
+	        } catch (Exception e) {
+	            System.err.println("Error fetching data for date " + date + ": " + e.getMessage());
+	            // 오류 발생 시 Map에 오류 메시지 저장
+	            resultMap.put(date, "Error fetching data for date");
+	        }
+	    }
+
+	    try {
+	        return resultMap; 
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        resultMap.put("error", "Error converting result to JSON");
+	        return resultMap;
+	    }
+	}
 	@RequestMapping(value = "/v1/weather/khoa")
 	@ResponseBody
 	public Map<String, Object> khoa(@RequestBody MapPointDto mapPointDto, WeatherVo weatherVo){
