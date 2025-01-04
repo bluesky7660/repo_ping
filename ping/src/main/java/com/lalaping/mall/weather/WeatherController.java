@@ -672,7 +672,6 @@ public class WeatherController {
         String nowdate =LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
         try {
-            // 문자열을 Date로 변환
             Date longDate = inputFormat.parse(nowdate);
             System.out.println("nowdate: " + longDate);
             resultMap.put("nowdate", longDate);
@@ -682,7 +681,6 @@ public class WeatherController {
             resultMap.put("date7", inputFormat.parse(LocalDate.now().plusDays(7).format(DateTimeFormatter.BASIC_ISO_DATE)));
             resultMap.put("date8", inputFormat.parse(LocalDate.now().plusDays(8).format(DateTimeFormatter.BASIC_ISO_DATE)));
         } catch (ParseException e) {
-            // 예외 처리: 날짜 형식 오류 시, 예외 메시지 출력
             System.out.println("날짜 파싱 오류: " + e.getMessage());
             resultMap.put("nowdate", nowdate);  // 파싱 실패 시 원래 문자열 그대로 사용
         }
@@ -735,7 +733,6 @@ public class WeatherController {
 	    
 	    ObjectMapper objectMapper = new ObjectMapper();
 
-	    // 여러 날짜의 데이터를 가져오기
 	    for (String date : dates) {
 	        String apiUrl = "http://www.khoa.go.kr/api/oceangrid/tideObsPreTab/search.do?ServiceKey=" + API_KEY +
 	                "&ObsCode=" + OBS_CODE + "&Date=" + date + "&ResultType=json";
@@ -745,7 +742,6 @@ public class WeatherController {
 	            ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
 	            System.out.println("response.getBody() for date " + date + ":" + response.getBody());
 
-	            // 응답을 JSON 형식으로 파싱하여 resultMap에 저장
 //	            JsonNode responseJson = objectMapper.readTree(response.getBody());
 	            resultMap.put(date, response.getBody());  // 날짜를 키로 사용하고, JSON 데이터를 값으로 저장
 	        } catch (Exception e) {
@@ -755,19 +751,12 @@ public class WeatherController {
 	        }
 	    }
 
-	    // 최종 결과를 JSON 형식으로 반환
 	    try {
-	        return resultMap;  // Map을 JSON 형식으로 반환
+	        return resultMap; 
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        resultMap.put("error", "Error converting result to JSON");
 	        return resultMap;
 	    }
-//		String apiUrl = "http://www.khoa.go.kr/api/oceangrid/tideObsPreTab/search.do?ServiceKey=" + API_KEY +
-//                "&ObsCode=" + OBS_CODE + "&Date=" + DATE + "&ResultType=json";
-//		System.out.println("obApiUrl:"+apiUrl);
-//		ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
-//		System.out.println("response.getBody():"+response.getBody());
-//		return response.getBody();
 	}
 }

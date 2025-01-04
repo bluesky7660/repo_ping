@@ -37,9 +37,6 @@ public class MemberController {
 	// Member 영역
 	@RequestMapping(value = "/v1/member/memberXdmList")
 	public String memberXdmList(@ModelAttribute("vo") MemberVo memberVo, Model model) {
-		System.out.println("시작날: " + memberVo.getShDateStart());
-		System.out.println("마감날: " + memberVo.getShDateEnd());
-
 		memberVo.setShDateStart(
 				memberVo.getShDateStart() == null || memberVo.getShDateStart().isEmpty() ? null
 						: UtilDateTime.add00TimeString(memberVo.getShDateStart()));
@@ -66,31 +63,23 @@ public class MemberController {
 	// CRUD
 	@RequestMapping(value = "/v1/member/memberXdmInst")
 	public String memberXdmInst(MemberDto memberDto) {
-		System.out.println("MemberDto.getsfName(): " + memberDto.getMmSeq());
 		memberDto.setMmPasswd(encodeBcrypt(memberDto.getMmPasswd(), 10));
 		int inst = memberService.insertMember(memberDto);
-		System.out.println("memberService.insertMember(memberDto): " + inst);
 		return "redirect:/v1/member/memberXdmList";
 	}
 	@RequestMapping(value = "/v1/member/memberXdmUpdate")
 	public String memberXdmUpdate(MemberDto memberDto) {
-		System.out.println("MemberDto.getsfSeq(): " + memberDto.getMmSeq());
 		int updt = memberService.updateMember(memberDto);
-		System.out.println("memberService.updateMember(memberDto): " + updt);
 		return "redirect:/v1/member/memberXdmList";
 	}
 	@RequestMapping(value = "/v1/member/memberXdmDelete")
 	public String memberXdmDelete(MemberDto memberDto) {
-		System.out.println("MemberDto.getsfSeq(): " + memberDto.getMmSeq());
 		int delt = memberService.deleteMember(memberDto);
-		System.out.println("memberService.deleteMember(memberDto): " + delt);
 		return "redirect:/v1/member/memberXdmList";
 	}
 	@RequestMapping(value = "/v1/member/memberXdmUelete")
 	public String memberXdmUelete(MemberDto memberDto) {
-		System.out.println("MemberDto.getsfSeq(): " + memberDto.getMmSeq());
 		int uelt = memberService.ueleteMember(memberDto);
-		System.out.println("memberService.ueleteMember(memberDto): " + uelt);
 		return "redirect:/v1/member/memberXdmList";
 	}
 	//로그인
@@ -107,16 +96,9 @@ public class MemberController {
 	@RequestMapping(value = "/v1/infra/loginXdmProc")
 	public Map<String, Object> loginXdmProc(MemberDto memberDto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>(); 
-		System.out.println("로그인 요청 - ID: " + memberDto.getMmEmail() + ", PW: " + memberDto.getMmPasswd());
-
 		MemberDto rtLogin = memberService.selectOneLogin(memberDto); 
-		System.out.println("rtLogin : " +  memberService.selectOneLogin(memberDto));
-		System.out.println("sessIdXdm : " +  rtLogin.getMmEmail());
-		System.out.println("sessSeqXdm : " +  rtLogin.getMmSeq());
-		System.out.println("sessNameXdm : " +  rtLogin.getMmName());
-		System.out.println("로그인 정보 조회 결과: " + rtLogin);
 
-		if (rtLogin != null) { 
+		if(rtLogin != null) { 
 			if(matchesBcrypt(memberDto.getMmPasswd(), rtLogin.getMmPasswd(), 10)) {
 				httpSession.setMaxInactiveInterval(60 * 30); 
 				httpSession.setAttribute("sessIdXdm", rtLogin.getMmEmail()); 
@@ -127,13 +109,7 @@ public class MemberController {
 			}else {
 				returnMap.put("rt", "fail");
 			}
-//			httpSession.setMaxInactiveInterval(60 * 30); 
-//			httpSession.setAttribute("sessIdXdm", rtLogin.getMmEmail()); 
-//			httpSession.setAttribute("sessSeqXdm", rtLogin.getMmSeq()); 
-//			httpSession.setAttribute("sessNameXdm", rtLogin.getMmName());
-//			returnMap.put("rt", "success"); 
-		} else { 
-			System.out.println("로그인 실패: " + memberDto.getMmEmail()); 
+		}else{ 
 			returnMap.put("rt", "fail"); 
 		} 
 		return returnMap; 
@@ -162,7 +138,6 @@ public class MemberController {
 	@RequestMapping(value = "registerInst")
 	@ResponseBody
 	public Map<String, Object> registerInst(MemberDto memberDto) {
-		
 		Map<String, Object> returnMap = new HashMap<>();
 		memberDto.setMmPasswd(encodeBcrypt(memberDto.getMmPasswd(), 10));
 		memberService.insertMember(memberDto);
@@ -178,8 +153,7 @@ public class MemberController {
 	}
 	@RequestMapping(value = "memberUpdate")
 	public String memberUpdate(MemberDto memberDto) {
-		int updt = memberService.updateMember(memberDto);
-//		System.out.println("memberService.updateMember(memberDto): " + updt);
+		memberService.updateMember(memberDto);
 		return "redirect:/v1/member/editMember";
 	}
 	@RequestMapping(value = "passWdUpdate")
@@ -193,7 +167,7 @@ public class MemberController {
 		MemberDto rtMember = memberService.selectOneLogin(memberDto);
 		if(matchesBcrypt(memberDto.getMmPasswdChk(), rtMember.getMmPasswd(), 10)) {
 			memberDto.setMmPasswd(encodeBcrypt(memberDto.getMmPasswd(), 10));
-			int updt = memberService.updatePasswd(memberDto);
+			memberService.updatePasswd(memberDto);
 			returnMap.put("rt", "success");
 		}else {
 			returnMap.put("rt", "fail");
@@ -205,35 +179,23 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value = "loginUsrProc")
 	public Map<String, Object> loginUsrProc(MemberDto memberDto, HttpSession httpSession,HttpServletRequest request) throws Exception {
-		
-		System.out.println("loginUsrProc");
 		Map<String, Object> returnMap = new HashMap<>();
-		
 		MemberDto rtMember = memberService.selectOneLogin(memberDto);
-		System.out.println("rtMember: " + rtMember);
 		if (rtMember != null) {
 			if(matchesBcrypt(memberDto.getMmPasswd(), rtMember.getMmPasswd(), 10)) {
-//			if(true) {
 				httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
 				httpSession.setAttribute("sessSeqUsr", rtMember.getMmSeq());
 				httpSession.setAttribute("sessIdUsr", rtMember.getMmEmail());
 				httpSession.setAttribute("sessNameUsr", rtMember.getMmName());
-//				httpSession.setAttribute("loginType", "usr");
-				
 				String prevPage = (String) httpSession.getAttribute("prevPage");
-				System.out.println("주소테스트: "+prevPage);
 				httpSession.removeAttribute("prevPage"); 
 				returnMap.put("redirectUrl", prevPage != null ? prevPage : "/v1/index");
-				
-				System.out.println("성공");
-				
 				returnMap.put("rt", "success");
 			}else {
 				returnMap.put("rt", "fail");
 			}
 			
 		} else {
-			System.out.println("실패");
 			returnMap.put("rt", "fail");
 		}
 		return returnMap;
@@ -241,7 +203,6 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value = "logoutUsrProc")
 	public Map<String, Object> logoutUsrProc(HttpSession httpSession) throws Exception {
-		System.out.println("logoutUsrProc");
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		httpSession.invalidate();
 		returnMap.put("rt", "success");

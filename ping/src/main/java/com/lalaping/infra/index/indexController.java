@@ -57,14 +57,12 @@ public class indexController {
 		mapPointVo.setParamsPaging(mapPointService.selectUsrCount(mapPointVo));
 		model.addAttribute("sessPoint",mapPointService.selectUsrList(mapPointVo));
 		if (usrList != null && !usrList.isEmpty()) {
-		    // 리스트의 각 항목을 순회하며 season_ssSeq 값을 출력
 		    for (MapPointDto mapPoint : usrList) {
 		        System.out.println("시즌:"+mapPoint.getSeason_ssSeq());
 		    }
 		} else {
 		    System.out.println("리스트가 비어있거나 null입니다.");
 		}
-		
 		
 		
 		shipVo.setRowNumToShow(3);
@@ -76,10 +74,7 @@ public class indexController {
 	@RequestMapping(value = "/v1/mapPoint/getSeasonalData")
 	@ResponseBody
 	public Map<String, Object> getSeasonalData(MapPointDto mapPointDto,@RequestBody MapPointVo mapPointVo
-//			,@RequestParam(name = "shSeason", defaultValue = "0")String shSeason
 			){
-		System.out.println("mapPointVo.getThisPage():"+mapPointVo.getThisPage());
-		System.out.println("shSeason:"+mapPointVo.getShSeason());
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		List<MapPointDto> rtPoint = new ArrayList<>();
 		mapPointVo.setRowNumToShow(8);
@@ -112,13 +107,10 @@ public class indexController {
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}  // 계산된 값 추가
+				} 
 			}
 	        points.add(pointData);
 	    }
-	    System.out.println("성공");
-	    System.out.println("mapPointVo.getThisPage():"+mapPointVo.getThisPage());
-	    System.out.println("mapPointVo.getTotalPages():"+mapPointVo.getTotalPages());
 	    returnMap.put("data", points);
 	    returnMap.put("thisPage", mapPointVo.getThisPage()); 
 	    returnMap.put("totalPages", mapPointVo.getTotalPages()); 

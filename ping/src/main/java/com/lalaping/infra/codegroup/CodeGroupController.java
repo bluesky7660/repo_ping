@@ -16,16 +16,10 @@ public class CodeGroupController {
 	
 	@RequestMapping(value = "/v1/infra/codegroup/codeGroupXdmList")
 	public String codeGroupXdmList(@ModelAttribute("vo") CodeGroupVo codeGroupVo, Model model) {
-		System.out.println("시작날:"+codeGroupVo.getShDateStart());
-		System.out.println("마감날:"+codeGroupVo.getShDateEnd());
 		codeGroupVo.setShDateStart(codeGroupVo.getShDateStart() == null || codeGroupVo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(codeGroupVo.getShDateStart()));
 		codeGroupVo.setShDateEnd(codeGroupVo.getShDateEnd() == null || codeGroupVo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(codeGroupVo.getShDateEnd()));
 		codeGroupVo.setParamsPaging(codeGroupService.listCount(codeGroupVo));
-		System.out.println("nqonoifqs");
 		model.addAttribute("list", codeGroupService.selectList(codeGroupVo));
-//		for(CodeGroupDto item : codeGroupService.selectList(codeGroupVo)) {
-//			System.out.println("리스트seq: " + item.get );
-//		}
 		model.addAttribute("formLink", "codeGroupXdmForm");
 		return "xdm/v1/infra/codegroup/codeGroupXdmList";
 	}
