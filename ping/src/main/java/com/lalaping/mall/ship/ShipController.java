@@ -64,7 +64,6 @@ public class ShipController {
 	/*usr*/
 	@RequestMapping(value = "/v1/ship/shipList")
 	public String shipList(Model model,@ModelAttribute("vo") ShipVo vo ,@ModelAttribute("fishVo") FishVo fishVo){
-		System.out.println("테스트: " + vo.getSortOrder());
 		switch (vo.getSortOrder()) {
 	        case 4: {
 	            vo.setSortOrderString("spPrice ASC");
@@ -84,19 +83,11 @@ public class ShipController {
 	        }
 	    }
 		vo.setParamsPaging(shipService.listCount(vo));
-		System.out.println(vo.getStartPage());
-		System.out.println(vo.getThisPage());
-		System.out.println(vo.getPageNumToShow());
-		System.out.println(vo.getTotalRows());
-		System.out.println(vo.getTotalPages());
 		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
 		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
 		model.addAttribute("list",shipService.selectUsrList3(vo));	
 		List<ShipDto> shipList = shipService.selectUsrList3(vo);
 		for (ShipDto ship : shipList) {
-		    System.out.println("Ship Name: " + ship.getSpName());
-		    System.out.println("Ship Capacity: " + ship.getSpTotal());
-		    System.out.println("Fish: " + ship.getFsNameList());
 
 		    if (ship.getFsSeqList() != null && !ship.getFsSeqList().isEmpty()) {
 		        System.out.println("Fish Sequence: " + ship.getFsSeqList());
@@ -116,7 +107,6 @@ public class ShipController {
 	}
 	@RequestMapping(value = "/v1/ship/shipDetail")
 	public String shipDetail(Model model,ShipDto shipDto,ShipVo shipVo){
-		System.out.println("sadfgfgdfgfdssss");
 		model.addAttribute("list", shipService.selectUsrList2(shipVo));	
 		model.addAttribute("item",shipService.selectOne(shipDto));
 		shipVo.setBaseSpSeq(shipService.selectOne(shipDto).getSpSeq());

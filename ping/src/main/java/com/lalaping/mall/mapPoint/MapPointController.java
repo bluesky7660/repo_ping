@@ -48,12 +48,6 @@ public class MapPointController {
 		model.addAttribute("listLink", "mapPointXdmList");
 		return "xdm/v1/mapPoint/mapPointXdmForm";
 	}
-//	@RequestMapping(value = "/v1/mapPoint/mapPointXdmInst")
-//	public String mapPointXdmInst(MapPointDto mapPointDto) {
-//		mapPointService.insert(mapPointDto);
-//		
-//		return "redirect:/v1/mapPoint/mapPointXdmList";
-//	}
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmMFom")
 	public String mapPointXdmMFom(Model model,MapPointDto mapPointDto) {
 		model.addAttribute("item",mapPointService.selectOne(mapPointDto));
@@ -85,14 +79,12 @@ public class MapPointController {
 		model.addAttribute("rvList", reviewService.rvSelectListUsr(reviewDto));
 		mapPointVo.setBaseMpLatitude(mapPointService.selectUsrOne(mapPointDto).getMpLatitude());
 		mapPointVo.setBaseMpLongitude(mapPointService.selectUsrOne(mapPointDto).getMpLongitude());
-		System.out.println("mapPointVo.thispage:"+mapPointVo.getThisPage());
 		mapPointVo.setParamsPaging(mapPointService.nearCount(mapPointVo));
 		model.addAttribute("nearList", mapPointService.nearList(mapPointVo));
 		return "usr/v1/mapPoint/ping_mapPointDetail";
 	}
 	@RequestMapping(value = "/v1/mapPoint/mapPointAdd")
 	public String mapPointAdd(Model model,FishVo fishVo){
-//		model.addAttribute("list",mapPointService.selectList(vo));
 		model.addAttribute("fishList",fishService.allOneList(fishVo));
 		return "usr/v1/mapPoint/ping_mapPoint_add";
 	}
@@ -108,7 +100,6 @@ public class MapPointController {
 		}
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		List<MapPointDto> rtPoint = mapPointService.selectSearchList(mapPointVo);
-		System.out.println("성공");
 		
 	    returnMap.put("data", rtPoint);
 		return returnMap;
@@ -117,12 +108,9 @@ public class MapPointController {
 	@RequestMapping(value = "/nearMapPointList")
 	@ResponseBody
 	public Map<String, Object> nearMapPointList(@RequestBody MapPointDto mapPointDto,MapPointVo mapPointVo){
-		System.out.println("mpseq:"+mapPointDto.getMpSeq());
-		
 		mapPointVo.setBaseMpLatitude(mapPointService.selectUsrOne(mapPointDto).getMpLatitude());
 		mapPointVo.setBaseMpLongitude(mapPointService.selectUsrOne(mapPointDto).getMpLongitude());
 		
-		System.out.println("near:"+mapPointService.nearCount(mapPointVo));
 		mapPointVo.setParamsPaging(mapPointService.nearCount(mapPointVo));
 		List<MapPointDto> rtPoint = mapPointService.nearList(mapPointVo);
 		
@@ -136,8 +124,6 @@ public class MapPointController {
 	
 	@RequestMapping(value = "/mapPointInst")
 	public String mapPointInst(MapPointDto mapPointDto,FishMappointDto fishMappointDto){
-		System.out.println("mapPointInst");
-		System.out.println("multipartFiles:"+mapPointDto.getUploadFiles());
 		try {
 			mapPointService.insert(mapPointDto,fishMappointDto);
 		} catch (Exception e) {
@@ -152,7 +138,6 @@ public class MapPointController {
 		List<ReviewDto> rvList = reviewService.rvSelectListUsr(reviewDto);
 		Map<String, Object> response = new HashMap<>();
 		response.put("rvList", rvList);
-		System.out.println(response);
 		return response;
 	}
 

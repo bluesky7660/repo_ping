@@ -94,12 +94,6 @@ public class PortController {
 		PortDto item = portService.selectOne(portDto);
 		shipVo.setPort_ptSeq(item.getPtSeq());
 		shipVo.setParamsPaging(shipService.portListCount(shipVo));
-		System.out.println("thisPage:"+shipVo.getThisPage());
-		System.out.println("startPage:"+shipVo.getStartPage());
-		System.out.println("endPage:"+shipVo.getEndPage());
-		System.out.println("totalPages:"+shipVo.getTotalPages());
-		System.out.println("totalRows:"+shipVo.getTotalRows());
-		
 		model.addAttribute("item",item);
 		model.addAttribute("shipCount", shipService.portListCount(shipVo));
 		model.addAttribute("ships", shipService.portSelectList(shipVo));
@@ -107,11 +101,6 @@ public class PortController {
 		mapPointVo.setBaseMpLatitude(item.getPtLatitude());
 		mapPointVo.setBaseMpLongitude(item.getPtLongitude());
 		mapPointVo.setParamsPaging(mapPointService.portNearCount(mapPointVo));
-		System.out.println("mapPointVo thisPage:"+mapPointVo.getThisPage());
-		System.out.println("mapPointVo startPage:"+mapPointVo.getStartPage());
-		System.out.println("mapPointVo endPage:"+mapPointVo.getEndPage());
-		System.out.println("mapPointVo totalPages:"+mapPointVo.getTotalPages());
-		System.out.println("mapPointVo totalRows:"+mapPointVo.getTotalRows());
 		model.addAttribute("mapPoint",mapPointService.portNearList(mapPointVo));
 		return "usr/v1/port/ping_portDetail";
 	}
@@ -119,15 +108,8 @@ public class PortController {
 	@ResponseBody
 	@RequestMapping(value = "portShipList")
     public Map<String, Object> portShipList(@RequestBody ShipVo shipVo) {
-		System.out.println("portShipList");
 		shipVo.setPort_ptSeq(shipVo.getPort_ptSeq());
 		shipVo.setParamsPaging(shipService.portListCount(shipVo));
-		System.out.println("seq:"+shipVo.getPort_ptSeq());
-		System.out.println("thisPage:"+shipVo.getThisPage());
-		System.out.println("startPage:"+shipVo.getStartPage());
-		System.out.println("endPage:"+shipVo.getEndPage());
-		System.out.println("totalPages:"+shipVo.getTotalPages());
-		System.out.println("totalRows:"+shipVo.getTotalRows());
 		List<ShipDto> ships = shipService.portSelectList(shipVo);
 
 	    Map<String, Object> responseMap = new HashMap<>();
@@ -145,16 +127,12 @@ public class PortController {
 		mapPointVo.setBaseMpLatitude(item.getPtLatitude());
 		mapPointVo.setBaseMpLongitude(item.getPtLongitude());
 		mapPointVo.setParamsPaging(mapPointService.portNearCount(mapPointVo));
-		System.out.println("mapPointVo.getRowNumToShow():"+mapPointVo.getRowNumToShow());
 		List<MapPointDto> mapPoint = mapPointService.portNearList(mapPointVo);
 
 	    Map<String, Object> responseMap = new HashMap<>();
 	    responseMap.put("mpPointList", mapPoint);
 	    responseMap.put("thisPage", mapPointVo.getThisPage()); 
 	    responseMap.put("totalPages", mapPointVo.getTotalPages()); 
-	    System.out.println(responseMap);
-	    System.out.println("mapPointVo.getThisPage:"+mapPointVo.getThisPage());
-	    System.out.println("mapPointVo.getTotalPages:"+mapPointVo.getTotalPages());
         return responseMap; 
     }
 
