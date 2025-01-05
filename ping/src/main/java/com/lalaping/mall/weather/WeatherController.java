@@ -45,11 +45,6 @@ public class WeatherController {
 	@Autowired
 	WeatherService weatherService;
 	
-	@RequestMapping(value = "/v1/weather/weatherApi")
-	public String weatherApi(){
-		return"";
-	}
-	
 	@RequestMapping(value = "/v1/weather/weatherPoint")
 	public String weatherPoint(Model model, MapPointDto mapPointDto ,WeatherVo weatherVo) {
 		MapPointDto mapPointItem =  mapPointService.selectOne(mapPointDto);
@@ -58,45 +53,7 @@ public class WeatherController {
 	    
 	    RestTemplate restTemplate = new RestTemplate();
 	    model.addAttribute("khoaData", khoaWeather(mapPointItem.getMpLatitude(),mapPointItem.getMpLongitude(), weatherVo));
-//		String OBS_CODE = "";
-//		String DATE = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
-//		
-//		weatherVo.setBaseMpLatitude(mapPointItem.getMpLatitude());
-//		weatherVo.setBaseMpLongitude(mapPointItem.getMpLongitude());
-//		WeatherDto closestStation = weatherService.observationStationNear(weatherVo); 
-//		if (closestStation != null) {
-//	        OBS_CODE = closestStation.getOsStationId();
-//	    } else {
-//	        return "가까운 관측소를 찾을 수 없습니다.";
-//	    }
-//		String obApiUrl = "http://www.khoa.go.kr/api/oceangrid/tideObsPreTab/search.do?ServiceKey=" + API_KEY +
-//                "&ObsCode=" + OBS_CODE + "&Date=" + DATE + "&ResultType=json";
-//		System.out.println("obApiUrl:"+obApiUrl);
-//		ResponseEntity<String> obResponse = restTemplate.getForEntity(obApiUrl, String.class);
-//		
-//		System.out.println("response.getBody():"+obResponse.getBody());
-//		String jsonResponse = obResponse.getBody();
-//
-//        model.addAttribute("OBSData", obResponse.getBody());
-//        JSONObject jsonObject = new JSONObject(jsonResponse);
-//        List<JSONObject> highTideList = new ArrayList<>();
-//        List<JSONObject> lowTideList = new ArrayList<>();
-//
-//        // 필터링
-//        JSONArray data = jsonObject.getJSONObject("result").getJSONArray("data");
-//        for (int i = 0; i < data.length(); i++) {
-//            JSONObject item = data.getJSONObject(i);
-//            if ("고조".equals(item.getString("hl_code"))) {
-//                highTideList.add(item);
-//            } else if ("저조".equals(item.getString("hl_code"))) {
-//                lowTideList.add(item);
-//            }
-//        }
-//        
-//        // 고조와 저조 데이터를 모델에 추가
-//        model.addAttribute("highTideData", highTideList.toString());
-//        model.addAttribute("lowTideData", lowTideList.toString());
-		
+
 	    String longitude = String.valueOf(mapPointService.selectOne(mapPointDto).getMpLongitude());
 	    String latitude = String.valueOf(mapPointService.selectOne(mapPointDto).getMpLatitude());
 
@@ -104,11 +61,8 @@ public class WeatherController {
 	            "&longitude=" + longitude + 
 	            "&hourly=wave_height,wave_direction,wave_period&forecast_days=1&temporal_resolution=native&timezone=Asia/Seoul";
 
-	    System.out.println("api:" + apiUrl);
-	    
 	    String apiUrl2 = "https://api.open-meteo.com/v1/forecast?latitude="+latitude+"&longitude="+longitude+
 	    		"&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,precipitation,weather_code,wind_speed_10m,wind_direction_10m&forecast_days=1&temporal_resolution=native&timezone=Asia/Seoul";
-	    System.out.println("api2:" + apiUrl2);
 	    
 	    ResponseEntity<WeatherResponse> response2 = restTemplate.getForEntity(apiUrl2,WeatherResponse.class);
 	    ResponseEntity<WeatherResponse> response = restTemplate.getForEntity(apiUrl, WeatherResponse.class);
@@ -117,13 +71,9 @@ public class WeatherController {
 	    if(mapPointItem.getMpType()==5) {
 	    	Coordinate coordinate = dfs_xy_conv("toXY", mapPointItem.getMpLatitude(), mapPointItem.getMpLongitude());
 		    List<Map<String, Object>> shortTerm = weatherForecast(coordinate.x, coordinate.y);
-//		    String shortTerm = weatherForecast(coordinate.x, coordinate.y);
-
-		    System.out.println("ShortTerm:"+shortTerm);
 		    model.addAttribute("shortTerm", shortTerm);
 		    
 		    Map<String, Object> longTerm = weatherMidSeaFcst(mapPointItem.getMpLatitude(), mapPointItem.getMpLongitude());
-		    System.out.println("longTerm:"+longTerm);
 		    model.addAttribute("longTerm", longTerm);
 		    if (weatherData != null && weatherData.getHourly() != null && weatherData2 != null && weatherData2.getHourly() != null) {
 		        //기존날씨
@@ -145,7 +95,6 @@ public class WeatherController {
 		        List<Integer> weatherCodes = weatherData2.getHourly().getWeather_code();
 
 		        for (int i = 0; i < times.size(); i++) {
-		        	System.out.println("waveDirections:"+waveDirections.get(i));
 		            String waveDirectionKorean = convertDirectionToKorean(waveDirections.get(i));
 		            String windDirectionKorean = convertDirectionToKorean(precipitationProbabilitys.get(i));
 		            String weaherName = convertWeatherCodeToKorean(weatherCodes.get(i));
@@ -170,7 +119,6 @@ public class WeatherController {
 		            ));
 		        }
 
-		        // 모델에 데이터 추가
 		        model.addAttribute("weatherData", weatherDataEntries);
 		    } else {
 		        System.out.println("Weather data is null or does not contain hourly data.");
@@ -211,7 +159,6 @@ public class WeatherController {
 		            ));
 		        }
 
-		        // 모델에 데이터 추가
 		        model.addAttribute("weatherData", weatherDataEntries);
 		    } else {
 		        System.out.println("Weather data is null or does not contain hourly data.");
@@ -479,7 +426,6 @@ public class WeatherController {
             return "알 수 없는 코드";  // 예외처리
         }
     }
-//	public String weatherForecast(Integer Latitude,Integer Longitude){
 	public List<Map<String, Object>> weatherForecast(Integer Latitude,Integer Longitude){
 		String baseUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
         
@@ -507,14 +453,10 @@ public class WeatherController {
                 + "&base_time=" +baseTime
                 + "&nx=" + nx
                 + "&ny=" + ny;
-        System.out.println("urlString:"+urlString);
         RestTemplate restTemplate2 = new RestTemplate();
         final URI uri = URI.create(urlString);
-        System.out.println("Request URI: " + uri);
         ResponseEntity<String> response = restTemplate2.getForEntity(uri, String.class);
 
-        System.out.println("응답 본문: " + response.getBody());
-        System.out.println("Request URI: " + uri);
         JSONObject jsonResponses = new JSONObject(response.getBody());
         JSONObject jsonResponse = jsonResponses.getJSONObject("response");
         JSONObject body = jsonResponse.getJSONObject("body");
@@ -527,13 +469,7 @@ public class WeatherController {
             JSONObject forecast = items.getJSONObject(i);
             String fcstTime = forecast.getString("fcstTime");
             String fcstDate = forecast.getString("fcstDate") ;
-//            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
-//            Date fcstDate = inputFormat.parse(forecast.getString("fcstDate"));
             String category = forecast.getString("category");
-//            if(fcstDate = ) {
-//            	
-//            }
-
             if (
             		("0600".equals(fcstTime) || "1500".equals(fcstTime)) && 
             		("SKY".equals(category) || "PTY".equals(category) || "WAV".equals(category) || "VEC".equals(category) || "WSD".equals(category))) {
@@ -549,21 +485,14 @@ public class WeatherController {
                 			}else {
                 				skycode = Integer.parseInt(forecast.getString("fcstValue"));
                 			}
-                			
-                			System.out.println("skycode:"+skycode);
-                			
                 		}else if("PTY".equals(category)){
                 			if("0".equals(forecast.getString("fcstValue"))) {
                 				PTYcode = 0 ;
                 			}else {
                 				PTYcode = Integer.parseInt(forecast.getString("fcstValue"));
                 			}
-                			
-                			System.out.println("PTYcode:"+PTYcode);
                 		}
                 	}
-                	System.out.println("skycode:"+skycode);
-                	System.out.println("PTYcode:"+PTYcode);
                 	if(skycode!=null && PTYcode!=null) {
                 		String weatherIcon = convertWeatherShortTermCodeToIcon(skycode,PTYcode);
                 		String weatherCode = convertWeatherShortTermCodeToKorean(skycode,PTYcode);
@@ -575,7 +504,6 @@ public class WeatherController {
                 	
                 	entry.put("fcstValue", forecast.getString("fcstValue"));
                 	
-                	
                 }else if("VEC".equals(category)) {
                 	String vecValue = convertDirectionToKorean(Double.parseDouble(forecast.getString("fcstValue")));
                 	String vecIcon = convertDirectionToIcon(Double.parseDouble(forecast.getString("fcstValue")));
@@ -585,7 +513,6 @@ public class WeatherController {
                 	entry.put("fcstValue", forecast.getString("fcstValue"));
                 }
                 
-
                 groupedByDate
                         .computeIfAbsent(fcstDate, k -> new ArrayList<>())
                         .add(entry);
@@ -597,15 +524,12 @@ public class WeatherController {
             Map<String, Object> dateForecast = new HashMap<>();
             SimpleDateFormat inputFormat = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
             try {
-                // 문자열을 Date로 변환
                 Date fcstDate = inputFormat.parse(date);
                 dateForecast.put("fcstDate", fcstDate);
             } catch (ParseException e) {
-                // 예외 처리: 날짜 형식 오류 시, 예외 메시지 출력
                 System.out.println("날짜 파싱 오류: " + e.getMessage());
-                dateForecast.put("fcstDate", date);  // 파싱 실패 시 원래 문자열 그대로 사용
+                dateForecast.put("fcstDate", date);
             }
-//            dateForecast.put("fcstDate", fcstDate);
             dateForecast.put("forecastData", groupedByDate.get(date));
             result.add(dateForecast);
         }
@@ -650,19 +574,14 @@ public class WeatherController {
                 + "&dataType=" + dataType
                 + "&regId=" + regId
                 + "&tmFc=" + tmFc;
-        System.out.println("urlString:"+urlString2);
         RestTemplate restTemplate3 = new RestTemplate();
         final URI uri2 = URI.create(urlString2);
-        System.out.println("Request URI: " + uri2);
         ResponseEntity<String> response = restTemplate3.getForEntity(uri2, String.class);
 
-        System.out.println("중기 응답 본문: " + response.getBody());
-        System.out.println("중기 Request URI: " + uri2);
         JSONObject jsonResponses = new JSONObject(response.getBody());
         JSONObject jsonResponse = jsonResponses.getJSONObject("response");
         JSONObject body = jsonResponse.getJSONObject("body");
         JSONArray items = body.getJSONObject("items").getJSONArray("item");
-        System.out.println("items: " + items.toString());
         Map<String,String> datas = new HashMap<>();
         JSONObject item = items.getJSONObject(0);
         for (String key : item.keySet()) {
@@ -674,7 +593,6 @@ public class WeatherController {
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
         try {
             Date longDate = inputFormat.parse(nowdate);
-            System.out.println("nowdate: " + longDate);
             resultMap.put("nowdate", longDate);
             resultMap.put("date4", inputFormat.parse(LocalDate.now().plusDays(4).format(DateTimeFormatter.BASIC_ISO_DATE)));
             resultMap.put("date5", inputFormat.parse(LocalDate.now().plusDays(5).format(DateTimeFormatter.BASIC_ISO_DATE)));
@@ -683,7 +601,7 @@ public class WeatherController {
             resultMap.put("date8", inputFormat.parse(LocalDate.now().plusDays(8).format(DateTimeFormatter.BASIC_ISO_DATE)));
         } catch (ParseException e) {
             System.out.println("날짜 파싱 오류: " + e.getMessage());
-            resultMap.put("nowdate", nowdate);  // 파싱 실패 시 원래 문자열 그대로 사용
+            resultMap.put("nowdate", nowdate); 
         }
         
         resultMap.put("data", datas);
@@ -720,79 +638,9 @@ public class WeatherController {
 
 	        try {
 	            ResponseEntity<String> response = khoaRestTemplate.getForEntity(apiUrl, String.class);
-	            resultMap.put(date, response.getBody());  // 날짜를 키로 사용하고, JSON 데이터를 값으로 저장
+	            resultMap.put(date, response.getBody()); 
 	        } catch (Exception e) {
 	            System.err.println("Error fetching data for date " + date + ": " + e.getMessage());
-	            // 오류 발생 시 Map에 오류 메시지 저장
-	            resultMap.put(date, "Error fetching data for date");
-	        }
-	    }
-
-	    try {
-	        return resultMap; 
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        resultMap.put("error", "Error converting result to JSON");
-	        return resultMap;
-	    }
-	}
-	@RequestMapping(value = "/v1/weather/khoa")
-	@ResponseBody
-	public Map<String, Object> khoa(@RequestBody MapPointDto mapPointDto, WeatherVo weatherVo){
-		RestTemplate restTemplate = new RestTemplate();
-		Map<String, Object> resultMap = new LinkedHashMap<>();
-		
-		String OBS_CODE = "";
-		LocalDate today = LocalDate.now();
-	    List<String> dates = new ArrayList<>();
-
-	    for (int i = -1; i <= 6; i++) {
-	        dates.add(today.plusDays(i).format(DateTimeFormatter.BASIC_ISO_DATE));
-	    }
-		System.out.println("mapPointDto.getMpLatitude():"+mapPointDto.getMpLatitude());
-		System.out.println("mapPointDto.getMpLongitude():"+mapPointDto.getMpLongitude());
-		weatherVo.setBaseMpLatitude(mapPointDto.getMpLatitude());
-		weatherVo.setBaseMpLongitude(mapPointDto.getMpLongitude());
-		WeatherDto closestStation = weatherService.observationStationNear(weatherVo); 
-		if (closestStation != null) {
-	        OBS_CODE = closestStation.getOsStationId();
-	    } else {
-	    	resultMap.put("error", "가까운 관측소를 찾을 수 없습니다.");
-	    	return resultMap;
-	    }
-//		String result = "";
-//	    for (String date : dates) {
-//	        String apiUrl = "http://www.khoa.go.kr/api/oceangrid/tideObsPreTab/search.do?ServiceKey=" + API_KEY +
-//	                "&ObsCode=" + OBS_CODE + "&Date=" + date + "&ResultType=json";
-//	        System.out.println("obApiUrl:" + apiUrl);
-//	        try {
-//	            ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
-//	            System.out.println("response.getBody() for date " + date + ":" + response.getBody());
-//	            result += "Date: " + date + "\n" + response.getBody() + "\n\n";
-//	        } catch (Exception e) {
-//	            System.err.println("Error fetching data for date " + date + ": " + e.getMessage());
-//	            result += "Date: " + date + " - Error fetching data\n";
-//	        }
-//	    }
-//	    return result;
-		// 날짜별 데이터를 저장할 Map 객체
-	    
-	    ObjectMapper objectMapper = new ObjectMapper();
-
-	    for (String date : dates) {
-	        String apiUrl = "http://www.khoa.go.kr/api/oceangrid/tideObsPreTab/search.do?ServiceKey=" + API_KEY +
-	                "&ObsCode=" + OBS_CODE + "&Date=" + date + "&ResultType=json";
-	        System.out.println("obApiUrl:" + apiUrl);
-
-	        try {
-	            ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
-	            System.out.println("response.getBody() for date " + date + ":" + response.getBody());
-
-//	            JsonNode responseJson = objectMapper.readTree(response.getBody());
-	            resultMap.put(date, response.getBody());  // 날짜를 키로 사용하고, JSON 데이터를 값으로 저장
-	        } catch (Exception e) {
-	            System.err.println("Error fetching data for date " + date + ": " + e.getMessage());
-	            // 오류 발생 시 Map에 오류 메시지 저장
 	            resultMap.put(date, "Error fetching data for date");
 	        }
 	    }
