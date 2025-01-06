@@ -38,7 +38,6 @@ public class CodeService {
 	@PostConstruct
 	public void selectListCachedCodeArrayList() throws Exception {
 		List<CodeDto> codeListFromDb = (ArrayList<CodeDto>) codeDao.selectListCachedCodeArrayList();
-//		codeListFromDb = (ArrayList<Code>) codeDao.selectListCachedCodeArrayList();
 		CodeDto.cachedCodeArrayList.clear(); 
 		CodeDto.cachedCodeArrayList.addAll(codeListFromDb);
 		System.out.println("cachedCodeArrayList: " + CodeDto.cachedCodeArrayList.size() + " chached !");
@@ -66,7 +65,6 @@ public class CodeService {
 		String rt = "";
 		for(CodeDto codeRow : CodeDto.cachedCodeArrayList) {
 			if (codeRow.getCdSeq().equals(Integer.toString(code))) {
-//				System.out.println("selectOneCachedCode :" + codeRow.getCdName());
 				rt = codeRow.getCdName();
 			} else {
 				// by pass

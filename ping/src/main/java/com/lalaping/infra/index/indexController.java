@@ -24,9 +24,6 @@ import com.lalaping.mall.mapPoint.MapPointVo;
 import com.lalaping.mall.ship.ShipService;
 import com.lalaping.mall.ship.ShipVo;
 
-
-
-
 @Controller
 public class indexController {
 	@Autowired
@@ -41,11 +38,6 @@ public class indexController {
 	@RequestMapping(value = "/v1/index")
 //	@ResponseBody
 	public String index(Model model, FishVo vo, @ModelAttribute("mapPointVo") MapPointVo mapPointVo, ShipVo shipVo){
-		if (mapPointVo.getFsSeqList() != null) {
-		    System.out.println("fsSeqList: " + mapPointVo.getFsSeqList().toString());
-		} else {
-		    System.out.println("fsSeqList is null");
-		}
 		model.addAttribute("fishList",fishService.allOneList(vo));
 		model.addAttribute("mapPointSearch",mapPointService.selectSearchList(mapPointVo));
 		model.addAttribute("mapPoint",mapPointService.selectSearchList(mapPointVo));
@@ -64,10 +56,8 @@ public class indexController {
 		    System.out.println("리스트가 비어있거나 null입니다.");
 		}
 		
-		
 		shipVo.setRowNumToShow(3);
 		model.addAttribute("ships",shipService.selectUsrList(shipVo));
-		System.out.println("index - shMpValue:"+mapPointVo.getShMpValue());
 		return "usr/v1/etc/ping_index";
 	}
 	
@@ -79,11 +69,9 @@ public class indexController {
 		List<MapPointDto> rtPoint = new ArrayList<>();
 		mapPointVo.setRowNumToShow(8);
 		if(mapPointVo.getShSeason().equals("0")) {
-			System.out.println("연중");
 			mapPointVo.setParamsPaging(mapPointService.selectUsrCount(mapPointVo));
 			rtPoint = mapPointService.selectUsrList(mapPointVo);
 		}else {
-			System.out.println("연중아님");
 			mapPointVo.setSeason_ssSeq(mapPointVo.getShSeason());
 			mapPointVo.setParamsPaging(mapPointService.sessSelectCount(mapPointVo));
 			rtPoint = mapPointService.sessSelectList(mapPointVo);

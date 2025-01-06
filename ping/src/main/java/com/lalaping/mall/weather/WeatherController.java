@@ -470,9 +470,7 @@ public class WeatherController {
             String fcstTime = forecast.getString("fcstTime");
             String fcstDate = forecast.getString("fcstDate") ;
             String category = forecast.getString("category");
-            if (
-            		("0600".equals(fcstTime) || "1500".equals(fcstTime)) && 
-            		("SKY".equals(category) || "PTY".equals(category) || "WAV".equals(category) || "VEC".equals(category) || "WSD".equals(category))) {
+            if (("0600".equals(fcstTime) || "1500".equals(fcstTime)) && ("SKY".equals(category) || "PTY".equals(category) || "WAV".equals(category) || "VEC".equals(category) || "WSD".equals(category))) {
                 Map<String, String> entry = new HashMap<>();
                 entry.put("fcstDate", fcstDate);
                 entry.put("fcstTime", fcstTime);
@@ -567,7 +565,6 @@ public class WeatherController {
         String baseTime = "0600";
         String tmFc = baseDate+baseTime;
         
-
         String urlString2 = baseUrl + "?serviceKey=" + encodedServiceKey
                 + "&pageNo=" + pageNo
                 + "&numOfRows=" + numOfRows
