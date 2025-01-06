@@ -79,7 +79,6 @@ public class PortController {
 	}
 	
 	/*usr*/
-	
 	@RequestMapping(value = "/v1/port/portList")
 	public String portList(Model model,@ModelAttribute("vo") PortVo vo) {
 		vo.setRowNumToShow(6);

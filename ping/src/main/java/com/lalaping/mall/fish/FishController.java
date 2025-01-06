@@ -20,7 +20,6 @@ public class FishController {
 		vo.setParamsPaging(fishService.listCount(vo));
 		model.addAttribute("list",fishService.selectList(vo));
 		model.addAttribute("formLink", "fishXdmForm");
-		
 		return "xdm/v1/fish/fishXdmList";
 	}
 	@RequestMapping(value = "/v1/fish/fishXdmForm")

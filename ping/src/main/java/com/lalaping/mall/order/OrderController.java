@@ -22,12 +22,11 @@ public class OrderController {
 	@Autowired
 	public ShipService shipService;
 	
-//	xdm
+	//	xdm
 	@RequestMapping(value = "/v1/order/orderXdmList")
 	public String orderXdmList(Model model,@ModelAttribute("vo") OrderVo vo) {
 		vo.setParamsPaging(orderService.listCount(vo));
 		model.addAttribute("list", orderService.selectXdmListOrder(vo));
-		
 		return "xdm/v1/order/orderXdmList";
 	}
 	@RequestMapping(value = "/v1/order/orderXdmMFom")
@@ -36,9 +35,7 @@ public class OrderController {
 		return "xdm/v1/order/orderXdmMFom";
 	}
 	
-	
-	
-//	usr
+	//	usr
 	@RequestMapping(value = "/v1/checkout/ping_checkout")
 	public String ping_checkout(Model model,OrderDto orderDto, HttpSession session, MemberDto memberDto) {
 		String sessSeqUsr = (String) session.getAttribute("sessSeqUsr");
