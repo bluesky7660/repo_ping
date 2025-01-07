@@ -177,16 +177,6 @@
                             <div class="tab-pane" id="mapPoint" role="tabpanel" aria-labelledby="mapPoint-tab">
                                 <section id="display-control-agents">
                                     <div class="d-flex justify-content-between">
-                                        <!-- <div class="float-left">
-                                             <a href="#" class="btn btn-outline-secondary active px-3 mr-2 mb-2 ts-btn-border-muted">
-                                                <i class="fa fa-th-large"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-outline-secondary px-3 mb-2 ts-btn-border-muted">
-                                                <i class="fa fa-th-list"></i>
-                                            </a> 
-                                            
-                                            
-                                        </div> -->
                                         <p class="">주변 낚시포인트는 50km 범위내에 있는 데이터 입니다.</p>
                                         <div class="float-none float-sm-right pl-2 ts-center__vertical">
                                             <label for="sorting" class="mb-0 mr-2 text-nowrap">Sort by:</label>
@@ -358,10 +348,8 @@
                 contentType: 'application/json', // JSON 형식으로 데이터 전송
                 data: JSON.stringify({ thisPage: thisPage ,port_ptSeq:ptSeq}),
                 success: function(response) {
-
                     $('#port_shipList').empty(); 
                     $.each(response.shipList, function(index, ship) {
-                        console.log("ship.port_ptSeq:",ship.port_ptSeq);
                         const areaMap = {
                             18: '동해',
                             19: '서해',
@@ -417,7 +405,6 @@
                         </div>`;
                         $('#port_shipList').append(shipItem);
                     });
-                    // 페이징 정보 업데이트
                     const paginationContainer = document.querySelector('#ships #pagination-items .pagination');
                     const index = '';
                     updatePagination(response.thisPage, response.totalPages,paginationContainer ,index);
@@ -430,23 +417,21 @@
         goList2 = function (thisPage) {
             const listContainer = document.getElementById('mapPointList');
             if (listContainer) {
-                const listPosition = listContainer.getBoundingClientRect().top + window.pageYOffset; // 페이지 상단에서 요소까지의 거리
+                const listPosition = listContainer.getBoundingClientRect().top + window.pageYOffset; 
                 window.scrollTo({
-                    top: listPosition - 200, // 200px 위로 스크롤
-                    behavior: 'smooth' // 부드럽게 스크롤
+                    top: listPosition - 200, 
+                    behavior: 'smooth'
                 });
             }
             const params = new URLSearchParams(window.location.search);
 
             const ptSeq = params.get('ptSeq');
-            console.log("ptSeq2:"+ptSeq);
             $.ajax({
-                url: '/portMapPointList', // 서버의 페이지네이션 엔드포인트
+                url: '/portMapPointList',
                 type: 'post',
-                contentType: 'application/json', // JSON 형식으로 데이터 전송
+                contentType: 'application/json', 
                 data: JSON.stringify({ thisPage: thisPage ,ptSeq:ptSeq}),
                 success: function(response) {
-
                     $('#mapPointList .row').empty(); 
                     $.each(response.mpPointList, function(index, mapPoint) {
                         var distance = mapPoint.distanceIn >= 1000 ? (mapPoint.distanceIn / 1000).toFixed(2) + 'km'  
@@ -454,7 +439,6 @@
                         var shipItem = `
                         <div class="col-md-6">
                             <a href="/v1/mapPoint/mapPointDetail?mpSeq=${mapPoint.mpSeq}" class="card ts-item ts-card">
-                               
                                 <div class="ts-item__image ts-item card-img" data-bg-image="${mapPoint.path != null ? mapPoint.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}" style="background-image: url(${mapPoint.path != null ? mapPoint.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'})">
                                     <figure class="ts-item__info pt-2 pb-2">
                                         <h4>${mapPoint.mpTitle}</h4>
@@ -464,7 +448,6 @@
                                         </aside>
                                     </figure>
                                 </div>
-
                                 <div class="card-body">
                                     <dl class="mb-0">
                                         <dt>지역</dt>
@@ -475,7 +458,6 @@
                                         <dd>${distance}</dd>
                                     </dl>
                                 </div>
-
                                 <div class="card-footer">
                                     <span class="ts-btn-arrow">자세히 보기</span>
                                 </div>
@@ -483,7 +465,6 @@
                         </div>`;
                         $('#mapPointList .row').append(shipItem);
                     });
-                    // 페이징 정보 업데이트
                     const paginationContainer =  document.querySelector('#mapPoint #pagination-items .pagination');
                     const index = '2';
                     updatePagination(response.thisPage, response.totalPages,paginationContainer,index);

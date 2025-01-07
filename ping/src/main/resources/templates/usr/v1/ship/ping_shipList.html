@@ -244,7 +244,6 @@
 		var url = form.action;
 		function updatePageSize() {
 			if (form && pageSizeSelect) {
-				// 선택된 pageSizes 값을 가져옵니다.
 				var pageSizes = pageSizeSelect.value;
 				rowNumToShow.value = pageSizes;
 				form.action = url;
@@ -254,21 +253,16 @@
 			}
 		}
 
-		console.log('value: ');
-		
 		if (pageSizeSelect) {
 			pageSizeSelect.addEventListener('change', updatePageSize);
 		}
 
 		goList = function (thisPage) {
-			console.log("값: "+thisPage);
 			document.querySelector("input[name=thisPage]").value = thisPage;
-			console.log("thisPage값: "+document.querySelector("input[name=thisPage]").value);
 			form.action = url;
 			form.submit();
 		}
         document.getElementById("sortOrder").addEventListener('change', function() {
-            console.log("this.value:",this.value);
             document.getElementById("sortOrderH").value = this.value;
             document.getElementById("form_search").submit();
         });

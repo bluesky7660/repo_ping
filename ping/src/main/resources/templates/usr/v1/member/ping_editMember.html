@@ -168,7 +168,6 @@
                     element.classList.add('is-invalid');
                     feedbackChk.classList.add('is-invalid');
                 } else {
-                    //by pass
                     var val  = RegExps(element,objValue,feedback);
                     if(val == true){
                         validateChk[i] = true;
@@ -259,8 +258,6 @@
             if(validateChk.includes(false)){
                 return false;
             }
-            // userInfo.closest(".password_edit_form").submit();
-            console.log("action:",passwordSubmit.closest("form").action);
             $.ajax({
                 async: true 
                 ,cache: false
@@ -286,7 +283,7 @@
         }
         document.getElementById("password_edit_form").addEventListener("keydown", function (event) {
             if (event.key === "Enter") {
-                event.preventDefault(); // 기본 동작 방지 (폼 제출 등)
+                event.preventDefault(); 
                 handleSubmit();
             }
         }); 

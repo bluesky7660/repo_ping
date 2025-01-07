@@ -1447,6 +1447,7 @@ button {
     display: block;
     height: 15rem;
     position: relative;
+    background-size: cover;
     z-index: 1;
 }
 

@@ -463,9 +463,7 @@
                 
             });
         });
-        console.log("khoaData:",khoaData);
         const response = khoaData;
-        console.log("response:",response);
         const dates = Object.keys(response);
         const tableBody = document.querySelector("#tideTable tbody");
         tableBody.innerHTML= "";
@@ -481,9 +479,6 @@
         const formattedYesterdayKST = yesterdayDate.getFullYear() + '-' +
         ('0' + (yesterdayDate.getMonth() + 1)).slice(-2) + '-' +
         ('0' + yesterdayDate.getDate()).slice(-2);
-
-        console.log('현재 날짜 (한국시간):', formattedDateKST);
-        console.log('어제 날짜 (한국시간):', formattedYesterdayKST);
 
         let lastLowTide = null;
         let lastHighTide = null;

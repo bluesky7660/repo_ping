@@ -11,6 +11,7 @@ public class MapPointVo extends BaseVo {
 	private Double baseMpLongitude;
 	private Double baseMpLatitude;
 	private String shMpValue;
+	private String mpSeq;
 	
 	private String ptSeq;
 	private String shSeason;
@@ -79,6 +80,14 @@ public class MapPointVo extends BaseVo {
 
 	public void setShSeason(String shSeason) {
 		this.shSeason = shSeason;
+	}
+
+	public String getMpSeq() {
+		return mpSeq;
+	}
+
+	public void setMpSeq(String mpSeq) {
+		this.mpSeq = mpSeq;
 	}
 
 
