@@ -70,8 +70,6 @@
                                             <p th:text="${item.mpText}">
                                             </p>
                                         </div>
-                                        <!-- <div class="col-md-5 ts-opacity__50">
-                                        </div> -->
                                     </div>
                                 </div>
                                 <div class="ts-bg-light p-3 ts-border-radius__md d-block d-sm-flex ts-center__vertical justify-content-between ts-xs-text-center">
@@ -105,10 +103,6 @@
                                     </a>
                                 </div>
                             </section>
-                            <!-- <section id="display-control-agents">
-                                <div class="clearfix">
-                                </div>
-                            </section> -->
                             <section id="near_mappoint">
                                 <div class="d-flex justify-content-between">
                                     <h3 class="mb-2">주변 낚시포인트</h3>
@@ -118,7 +112,7 @@
                                     <div class="col-sm-6" th:if="${#lists.isEmpty(nearList)}">
                                         <p>범위내의 낚시포인트의 데이터가 없습니다.</p>
                                     </div>
-                                    <div class="col-sm-6" th:each="near : ${nearList}">
+                                    <div class="nearItem col-sm-6" th:each="near : ${nearList}">
                                         <a th:href="@{/v1/mapPoint/mapPointDetail(mpSeq=${near.mpSeq})}" class="card ts-item ts-card ts-item__lg">
                                             <div class="card-img" th:data-bg-image="${near.path != null ? near.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}">
                                                 <figure class="ts-item__info">
@@ -233,85 +227,97 @@
             goList = function (thisPage) {
                 const listContainer = document.getElementById('near_mappoint');
                 if (listContainer) {
-                    const listPosition = listContainer.getBoundingClientRect().top + window.pageYOffset; // 페이지 상단에서 요소까지의 거리
+                    const listPosition = listContainer.getBoundingClientRect().top + window.pageYOffset; 
                     window.scrollTo({
-                        top: listPosition - 200, // 200px 위로 스크롤
-                        behavior: 'smooth' // 부드럽게 스크롤
+                        top: listPosition - 200,
+                        behavior: 'smooth'
                     });
                 }
                 const params = new URLSearchParams(window.location.search);
 
                 const mpSeq = params.get('mpSeq');
                 $.ajax({
-                    url: '/nearMapPointList', // 서버의 페이지네이션 엔드포인트
+                    url: '/nearMapPointList',
                     type: 'post',
-                    contentType: 'application/json', // JSON 형식으로 데이터 전송
-                    data: JSON.stringify({ thisPage: thisPage ,mpSeq:mpSeq}),
+                    contentType: 'application/json',
+                    data: JSON.stringify({ "thisPage": thisPage ,"mpSeq":mpSeq}),
                     success: function(response) {
-                        console.log("response:",response);
-                        console.log("response.data:",response.data);
-                        console.log("thisPage:",response.thisPage);
-                        console.log("totalPages:",response.totalPages);
-                        // $('#near_mappoint .row').empty(); 
-                        // $.each(response.mapPointList, function(index, mapPoint) {
-                            
-                        //     var shipItem = `
-                        //     <div class="card ts-item ts-item__list ts-card">
-                        //         <a href="/v1/ship/shipDetail?spSeq=${ship.spSeq}">
-                        //             <!--Ribbon-->
-                        //             <div class="ts-ribbon">
-                        //                 <i class="fa fa-thumbs-up"></i>
-                        //             </div>
-                        //             <div class="ts-ribbon-corner">
-                        //                 <span>Updated</span>
-                        //             </div>
-
-                        //             <!--Card Image-->
-                        //             <div class="card-img" data-bg-image="/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg" style="background-image: url('/usr/v1/template/themeforest-v1.0/assets/img/img-item-thumb-01.jpg');"></div>
-
-                        //             <!--Card Body-->
-                        //             <div class="card-body">
-
-                        //                 <figure class="ts-item__info">
-                        //                     <h4>${ship.spName}</h4>
-                        //                     <aside>
-                        //                         <i class="fa fa-ship"></i>
-                        //                         <span>${formattedDate}</span>
-                        //                     </aside>
-                        //                 </figure>
-
-                        //                 <div class="ts-item__info-badge">
-                        //                     ${formattedPrice} 원
-                        //                 </div>
-
-                        //                 <div class="ts-description-lists">
-                        //                     <dl>
-                        //                         <dt>대상해역</dt>
-                        //                         <dd>${areaMap[ship.spArea]}</dd>
-                        //                     </dl>
-                        //                     <dl>
-                        //                         <dt>최대인원</dt>
-                        //                         <dd>${ship.spTotal}</dd>
-                        //                     </dl>
-                        //                     <dl>
-                        //                         <dt>예약가능인원</dt>
-                        //                         <dd>${ship.spRemain}</dd>
-                        //                     </dl>
-                        //                 </div>
-                        //             </div>
-
-                        //             <!--Card Footer-->
-                        //             <div class="card-footer">
-                        //                 <span class="ts-btn-arrow">자세히보기</span>
-                        //             </div>
-                        //         </a>
-                        //     </div>`;
-                        //     $('#port_shipList').append(shipItem);
-                        // });
-                        // // 페이징 정보 업데이트
-                        // const paginationContainer = document.querySelector('#ships #pagination-items .pagination');
-                        // const index = '';
-                        // updatePagination(response.thisPage, response.totalPages,paginationContainer ,index);
+                        const nearMappoint = document.querySelector('#near_mappoint .row')
+                        nearMappoint.innerHTML=""; 
+                        $.each(response.mapPointList, function(index, mapPoint) {
+                            const mapPointItem = document.createElement('div');
+                            mapPointItem.className = 'nearItem col-sm-6';
+                            mapPointItem.innerHTML = `
+                                <a href="/v1/mapPoint/mapPointDetail?mpSeq=${mapPoint.mpSeq}" class="card ts-item ts-card ts-item__lg">
+                                    <div class="card-img" style="background-image: url('${mapPoint.path ? mapPoint.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}')">
+                                        <figure class="ts-item__info">
+                                            <h4>${mapPoint.mpTitle}</h4>
+                                            <aside>
+                                                <i class="fa fa-map-marker mr-2"></i>
+                                                <span>${mapPoint.mpAddress}</span>
+                                            </aside>
+                                        </figure>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="ts-description-lists">
+                                            <dl>
+                                                <dt>지역</dt>
+                                                <dd>${mapPoint.mpAddress.split(' ')[0]}</dd>
+                                            </dl>
+                                            <dl>
+                                                <dt>대상어종</dt>
+                                                <dd>${mapPoint.fsNameList || '정보 없음'}</dd>
+                                            </dl>
+                                            <dl>
+                                                <dt>대상과의 거리</dt>
+                                                <dd>${(mapPoint.distanceIn / 1000).toFixed(2)}km</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <span class="ts-btn-arrow">상세정보</span>
+                                    </div>
+                                </a>
+                            `;
+                            // var mapPointItem = `
+                            // <div class="nearItem col-sm-6">
+                            //     <a href="/v1/mapPoint/mapPointDetail?mpSeq=${mapPoint.mpSeq}" class="card ts-item ts-card ts-item__lg">
+                            //         <div class="card-img" style="background-image: url('${mapPoint.path != null ? mapPoint.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}')">
+                            //             <figure class="ts-item__info">
+                            //                 <h4>${mapPoint.mpTitle}</h4>
+                            //                 <aside>
+                            //                     <i class="fa fa-map-marker mr-2"></i>
+                            //                     <span>${mapPoint.mpAddress}</span>
+                            //                 </aside>
+                            //             </figure>
+                            //         </div>
+                            //         <div class="card-body">
+                            //             <div class="ts-description-lists">
+                            //                 <dl>
+                            //                     <dt>지역</dt>
+                            //                     <dd>${mapPoint.mpAddress.split(' ')[0]}</dd>
+                            //                 </dl>
+                            //                 <dl>
+                            //                     <dt>대상어종</dt>
+                            //                     <dd>${mapPoint.fsNameList}</dd>
+                            //                 </dl>
+                            //                 <dl>
+                            //                     <dt>대상과의 거리</dt>
+                            //                     <dd>${(mapPoint.distanceIn / 1000).toFixed(2)}km</dd>
+                            //                 </dl>
+                            //             </div>
+                            //         </div>
+                            //         <div class="card-footer">
+                            //             <span class="ts-btn-arrow">상세정보</span>
+                            //         </div>
+                            //     </a>
+                            // </div>
+                            // `;
+                            nearMappoint.appendChild(mapPointItem);
+                        });
+                        const paginationContainer = document.querySelector('#pagination-items .pagination');
+                        const index = '';
+                        updatePagination(response.thisPage, response.totalPages,paginationContainer ,index);
                     },
                     error: function() {
                         alert('데이터를 불러오는 데 오류가 발생했습니다.');

@@ -76,6 +76,7 @@ public class MapPointController {
 	public String mapPointDetail(Model model,ReviewDto reviewDto,MapPointDto mapPointDto,@ModelAttribute("mapPointVo") MapPointVo mapPointVo){
 		model.addAttribute("item",mapPointService.selectUsrOne(mapPointDto));
 		model.addAttribute("rvList", reviewService.rvSelectListUsr(reviewDto));
+		mapPointVo.setRowNumToShow(2);
 		mapPointVo.setBaseMpLatitude(mapPointService.selectUsrOne(mapPointDto).getMpLatitude());
 		mapPointVo.setBaseMpLongitude(mapPointService.selectUsrOne(mapPointDto).getMpLongitude());
 		mapPointVo.setParamsPaging(mapPointService.nearCount(mapPointVo));
@@ -106,16 +107,19 @@ public class MapPointController {
 	
 	@RequestMapping(value = "/nearMapPointList")
 	@ResponseBody
-	public Map<String, Object> nearMapPointList(@RequestBody MapPointDto mapPointDto,MapPointVo mapPointVo){
+	public Map<String, Object> nearMapPointList(MapPointDto mapPointDto,@RequestBody MapPointVo mapPointVo){
+		mapPointVo.setRowNumToShow(2);
+		mapPointDto.setMpSeq(mapPointVo.getMpSeq());
 		mapPointVo.setBaseMpLatitude(mapPointService.selectUsrOne(mapPointDto).getMpLatitude());
 		mapPointVo.setBaseMpLongitude(mapPointService.selectUsrOne(mapPointDto).getMpLongitude());
-		
 		mapPointVo.setParamsPaging(mapPointService.nearCount(mapPointVo));
 		List<MapPointDto> rtPoint = mapPointService.nearList(mapPointVo);
 		
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
-	    returnMap.put("data", rtPoint);
+		System.out.println("thisPage:"+ mapPointVo.getThisPage());
+		System.out.println("totalPages:"+ mapPointVo.getTotalPages());
+	    returnMap.put("mapPointList", rtPoint);
 	    returnMap.put("thisPage", mapPointVo.getThisPage()); 
 	    returnMap.put("totalPages", mapPointVo.getTotalPages());
 		return returnMap;
