@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fasterxml.jackson.annotation.JacksonInject.Value;
+import com.lalaping.common.util.UtilDateTime;
 import com.lalaping.infra.member.MemberDto;
 import com.lalaping.infra.member.MemberService;
 import com.lalaping.mall.ship.ShipService;
@@ -22,9 +23,11 @@ public class OrderController {
 	@Autowired
 	public ShipService shipService;
 	
-	//	xdm
+	//xdm
 	@RequestMapping(value = "/v1/order/orderXdmList")
 	public String orderXdmList(Model model,@ModelAttribute("vo") OrderVo vo) {
+		vo.setShDateStart(vo.getShDateStart() == null || vo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(vo.getShDateStart()));
+		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
 		vo.setParamsPaging(orderService.listCount(vo));
 		model.addAttribute("list", orderService.selectXdmListOrder(vo));
 		return "xdm/v1/order/orderXdmList";
