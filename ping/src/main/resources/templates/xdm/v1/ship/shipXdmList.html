@@ -20,10 +20,6 @@
 		<!-- Title -->
 		<title>배</title>
 
-
-		<!-- *************
-			************ Common Css Files *************
-		************ -->
 		<!-- Animated css -->
 		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/css/animate.css">
 
@@ -32,11 +28,6 @@
 
 		<!-- Main css -->
 		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/css/main.min.css">
-
-
-		<!-- *************
-			************ Vendor Css Files *************
-		************ -->
 
 		<!-- Scrollbar CSS -->
 		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/vendor/overlay-scroll/OverlayScrollbars.min.css">
@@ -111,11 +102,18 @@
 														</select>
 													</div>
 													<div class="col-12 col-md-6 col-lg-4 col-xl">
+														<label class="visually-hidden" for="selectShArea">해역</label>
+														<select class="form-select" id="selectShArea" name="shArea">
+															<option value="" selected>해역을 선택해주세요</option>
+															<option th:each="spArea : ${@codeService.selectListCachedCode(4)}" th:value="${spArea.cdSeq}" th:text="${spArea.cdName}" th:selected="${vo.shArea == spArea.cdSeq}"></option>
+														</select>
+													</div>
+													<div class="col-12 col-md-6 col-lg-4 col-xl">
 														<label class="visually-hidden" for="selectDateType">검색날짜 종류</label>
 														<select class="form-select" id="selectDateType" name="shOptionDate">
 															<option value="" selected>날짜종류 선택하세요</option>
 															<option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option>
-															<option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
+															<option value="2" th:selected="${vo.shOptionDate == 2}">출발일</option>
 														</select>
 													</div>
 													<div class="col-12 col-md-6 col-lg-4 col-xl">
@@ -126,11 +124,9 @@
 														<label class="visually-hidden" for="inputDateEnd">종료일</label>
 														<input type="text" class="form-control" id="inputDateEnd" name="shDateEnd" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="종료일을 선택하세요" value="">
 													</div>
-													<div class="col-12 col-md-6 col-lg-4 col-xl">
-													</div>
 												</div>
 												<div class="row gy-3 mt-0">
-												<div class="col-12 col-md-6 col-lg-4 col-xl ">
+													<div class="col-12 col-md-6 col-lg-4 col-xl ">
 														<label class="visually-hidden" for="selecteatNy">식사제공</label>
 														<select class="form-select" id="selecteatNy" name="shEatNy">
 															<option value="" selected>식사제공여부 선택</option>

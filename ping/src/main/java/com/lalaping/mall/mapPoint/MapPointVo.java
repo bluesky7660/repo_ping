@@ -5,7 +5,7 @@ import java.util.List;
 import com.lalaping.common.base.BaseVo;
 
 public class MapPointVo extends BaseVo {
-	private Integer shType;
+	private String shType;
 	private String season_ssSeq;
 	private List<String> fsSeqList;
 	private Double baseMpLongitude;
@@ -17,16 +17,16 @@ public class MapPointVo extends BaseVo {
 	private String shSeason;
 //	------------------------------------
 
-	public Integer getShType() {
+	public String getSeason_ssSeq() {
+		return season_ssSeq;
+	}
+
+	public String getShType() {
 		return shType;
 	}
 
-	public void setShType(Integer shType) {
+	public void setShType(String shType) {
 		this.shType = shType;
-	}
-
-	public String getSeason_ssSeq() {
-		return season_ssSeq;
 	}
 
 	public void setSeason_ssSeq(String season_ssSeq) {

@@ -43,6 +43,9 @@
         <if test="port_ptSeq != null and !port_ptSeq.equals('')">
        		AND a.port_ptSeq = #{port_ptSeq}
         </if>
+        <if test="shArea != null and !shArea.equals('')">
+        	AND a.spArea = #{shArea}
+        </if>
         <if test="shValue != null and !shValue.equals('')">
             <choose>
                 <when test="shOption == null">
@@ -82,12 +85,11 @@
 		<if
 			test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
 			<choose>
-				<when test="shOptionDate == 1"> AND a.spRegDate BETWEEN #{shDateStart} AND
-					#{shDateEnd}</when>
+				<when test="shOptionDate == 1"> AND a.spRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				<when test="shOptionDate == 2"> AND a.spStart BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 			</choose>
 		</if>
-		<if
-			test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
+		<if test="(shDateStart != null and !shDateStart.equals('')) and (shDateEnd != null and !shDateEnd.equals(''))">
 			AND a.spStart BETWEEN #{shDateStart} AND #{shDateEnd}
 		</if>
 

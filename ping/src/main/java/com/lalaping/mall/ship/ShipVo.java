@@ -5,7 +5,7 @@ import com.lalaping.common.base.BaseVo;
 public class ShipVo extends BaseVo {
 	private Integer shEatNy;
 	private Integer shRentalNy;
-	private Integer shArea;
+	private String shArea;
 	private String shName;
 	private String shport;
 	private Integer shRemain;
@@ -52,10 +52,10 @@ public class ShipVo extends BaseVo {
 	public void setShRentalNy(Integer shRentalNy) {
 		this.shRentalNy = shRentalNy;
 	}
-	public Integer getShArea() {
+	public String getShArea() {
 		return shArea;
 	}
-	public void setShArea(Integer shArea) {
+	public void setShArea(String shArea) {
 		this.shArea = shArea;
 	}
 	public String getPort_ptSeq() {
