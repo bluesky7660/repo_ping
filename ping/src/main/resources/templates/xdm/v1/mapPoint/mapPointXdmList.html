@@ -20,10 +20,6 @@
 		<!-- Title -->
 		<title>낚시포인트</title>
 
-
-		<!-- *************
-			************ Common Css Files *************
-		************ -->
 		<!-- Animated css -->
 		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/css/animate.css">
 
@@ -32,11 +28,6 @@
 
 		<!-- Main css -->
 		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/css/main.min.css">
-
-
-		<!-- *************
-			************ Vendor Css Files *************
-		************ -->
 
 		<!-- Scrollbar CSS -->
 		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/vendor/overlay-scroll/OverlayScrollbars.min.css">
@@ -200,18 +191,10 @@
 														</select>
 													</div>
 													<div class="col-12 col-md-6 col-lg-4 col-xl">
-														<label class="visually-hidden" for="selectPtArea">사용검색</label>
+														<label class="visually-hidden" for="selectPtArea">포인트종류</label>
 														<select class="form-select" id="selectMpType" name="shType">
-															<option value="" selected>지역을 선택해주세요</option>
-															<option value="1" th:selected="${vo.shType == 1}">경기도</option>
-															<option value="0" th:selected="${vo.shType == 0}">대구</option>
-															<option value="0" th:selected="${vo.shType == 0}">인천</option>
-															<option value="0" th:selected="${vo.shType == 0}">울산</option>
-															<option value="0" th:selected="${vo.shType == 0}">광주</option>
-															<option value="0" th:selected="${vo.shType == 0}">전라남도</option>
-															<option value="0" th:selected="${vo.shType == 0}">경상남도</option>
-															<option value="0" th:selected="${vo.shType == 0}">경상북도</option>
-															<option value="0" th:selected="${vo.shType == 0}">제주도</option>
+															<option value="" selected>포인트종류를 선택해주세요</option>
+															<option th:each="mpType : ${@codeService.selectListCachedCode(2)}" th:value="${mpType.cdSeq}" th:text="${mpType.cdName}" th:selected="${vo.shType == mpType.cdSeq}"></option>
 														</select>
 													</div>
 													<div class="col-12 col-md-6 col-lg-4 col-xl">
@@ -279,7 +262,7 @@
 														<th><span>#</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">포인트번호</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">포인트제목</span></th>
-														<th class="sorting sorting_asc"><span class="dataTable-sorter">포인트지역</span></th>
+														<th class="sorting sorting_asc"><span class="dataTable-sorter">포인트종류</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">포인트주소</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">삭제</span></th>
 														<th class="sorting sorting_asc"><span class="dataTable-sorter">등록일</span></th>
@@ -308,7 +291,6 @@
 										
 										<div class="dataTable-bottom">
 											<nav class="dataTable-pagination mt-5" aria-label="dataTable-pagination">
-												<!-- paging s  -->
 												
 												<ul class="dataTable-pagination-list pagination pagination-primary justify-content-center">
 													<li class="paginate_button page-item" th:classappend="${vo.thisPage > 1} ? '' : 'disabled'">
@@ -362,7 +344,6 @@
 														</a>
 													</li>
 												</ul>
-												<!-- paging e  -->	
 											</nav>
 										</div>
 										<div th:replace="~{xdm/v1/infra/include/link :: list-link}"></div>
@@ -384,75 +365,30 @@
 
 				</div>
 				<!-- Content wrapper scroll end -->
-				<!-- modals -->
-				<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="deleteModalLabel">데이터 삭제</h5>
-								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-							</div>
-							<div class="modal-body">
-								<span>선택한 데이터를 삭제하시겠습니까?</span>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-dark" data-bs-dismiss="modal">취소</button>
-								<button type="button" class="btn btn-success" data-bs-dismiss="modal">삭제 실행</button>
-							</div>
-						</div>
+			</div>
+		</div>
+		<!-- modals -->
+		<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="deleteModalLabel">데이터 삭제</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<span>선택한 데이터를 삭제하시겠습니까?</span>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-dark" data-bs-dismiss="modal">취소</button>
+						<button type="button" class="btn btn-success" data-bs-dismiss="modal">삭제 실행</button>
 					</div>
 				</div>
 			</div>
-
 		</div>
 		<!-- Page wrapper end -->
 
-		
-		
-		<script type="text/javascript">
-			
-			window.addEventListener('load',function() {
-				$.datetimepicker.setLocale('ko');
-				$("#inputDateStart,#inputDateEnd").datetimepicker({
-					timepicker:false,
-					format:'Y-m-d'
-				});
-				var form = document.querySelector("form");
-				var pageSizeSelect = document.getElementById('rowNumToShowSelect');
-				var rowNumToShow = document.querySelector("input[name=rowNumToShow]");
-				var url = form.action;
-				function updatePageSize() {
-					if (form && pageSizeSelect) {
-						// 선택된 pageSizes 값을 가져옵니다.
-						var pageSizes = pageSizeSelect.value;
-						rowNumToShow.value = pageSizes;
-						form.action = url;
-						form.submit();
-					} else {
-						console.error('Form or pageSizeSelect element not found.');
-					}
-				}
-
-				console.log('value: ');
-				
-				if (pageSizeSelect) {
-					pageSizeSelect.addEventListener('change', updatePageSize);
-				}
-
-				goList = function (thisPage) {
-					console.log("값: "+thisPage);
-					document.querySelector("input[name=thisPage]").value = thisPage;
-					console.log("thisPage값: "+document.querySelector("input[name=thisPage]").value);
-					form.action = url;
-					form.submit();
-				}
-			});
-			
-		</script>
-		
 		<!-- Required jQuery first, then Bootstrap Bundle JS -->
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/jquery.min.js"></script>
-		<!-- <script src="/xdm/v1/jquery/jquery/jquery-3.7.1.min.js"></script> -->
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/bootstrap.bundle.min.js"></script>
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/modernizr.js"></script>
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/moment.js"></script>
@@ -478,6 +414,44 @@
 		<!-- by developer -->
 		<script src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
 		<script src="/xdm/v1/js/commonXdm.js"></script>
+
+		<script type="text/javascript">
+			window.addEventListener('load',function() {
+				$.datetimepicker.setLocale('ko');
+				$("#inputDateStart,#inputDateEnd").datetimepicker({
+					timepicker:false,
+					format:'Y-m-d'
+				});
+				var form = document.querySelector("form");
+				var pageSizeSelect = document.getElementById('rowNumToShowSelect');
+				var rowNumToShow = document.querySelector("input[name=rowNumToShow]");
+				var url = form.action;
+				function updatePageSize() {
+					if (form && pageSizeSelect) {
+						// 선택된 pageSizes 값을 가져옵니다.
+						var pageSizes = pageSizeSelect.value;
+						rowNumToShow.value = pageSizes;
+						form.action = url;
+						form.submit();
+					} else {
+						console.error('Form or pageSizeSelect element not found.');
+					}
+				}
+
+				if (pageSizeSelect) {
+					pageSizeSelect.addEventListener('change', updatePageSize);
+				}
+
+				goList = function (thisPage) {
+					console.log("값: "+thisPage);
+					document.querySelector("input[name=thisPage]").value = thisPage;
+					console.log("thisPage값: "+document.querySelector("input[name=thisPage]").value);
+					form.action = url;
+					form.submit();
+				}
+			});
+			
+		</script>
 	</body>
 
 </html>
