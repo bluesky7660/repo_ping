@@ -72,73 +72,45 @@
 											<div class="row">
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
-														<label for="inputName" class="form-label">배번호</label>
-														<input type="text" class="form-control" id="inputCgSeq" name="spSeq" placeholder="자동생성" readonly="readonly">
-													</div>
-												</div>
-												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-													<div class="mb-3">	
-														<label for="inputUseNy" class="form-label">식사</label>
-														<select class="form-select validate-this" id="inputspEatNy" name="spEatNy" required>
-															<option value="" selected disabled>선택하세요</option>
-															<option value="1">Y</option>
-															<option value="0">N</option>
-														</select>
-														<div class="invalid-feedback">
-															사용여부을 선택해주세요.
-														</div>
-													</div>
-												</div>
-												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-													<div class="mb-3">	
-														<label for="inputUseNy" class="form-label">낚시대대여</label>
-														<select class="form-select validate-this" id="inputspRentalNy" name="spRentalNy" required>
-															<option value="" selected disabled>선택하세요</option>
-															<option value="1">Y</option>
-															<option value="0">N</option>
-														</select>
-														<div class="invalid-feedback">
-															사용여부을 선택해주세요.
-														</div>
+														<label for="inputSpSeq" class="form-label">배번호</label>
+														<input type="text" class="form-control" id="inputSpSeq" name="spSeq" placeholder="자동생성" readonly="readonly">
 													</div>
 												</div>
 											</div>
-											
 											<div class="row">
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
-														<label for="inputCodeName" class="form-label">배이름</label>
+														<label for="inputSpName" class="form-label">배이름</label>
 														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputSpName" name="spName" placeholder="한글, 영대소문자, 숫자" required>
 														<div class="invalid-feedback">
-															코드이름을 적어주세요.
+															배이름을 적어주세요.
 														</div>
 													</div>
 												</div>
-												
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
-														<label for="inputCodeName" class="form-label">가격</label>
+														<label for="inputspPrice" class="form-label">가격</label>
 														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputspPrice" name="spPrice" placeholder="숫자임의입력" required>
 														<div class="invalid-feedback">
-															코드이름을 적어주세요.
+															가격을 적어주세요.
 														</div>
 													</div>
 												</div>
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
-														<label for="inputCodeOrder" class="form-label">총인원</label>
+														<label for="inputspTotal" class="form-label">총인원</label>
 														<input type="text" class="form-control" id="inputspTotal" name="spTotal" placeholder="총인원" required>
 														<div class="invalid-feedback">
-															순서를 적어주세요.
+															총인원을 적어주세요.
 														</div>
 													</div>
 												</div>
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
-														<label for="inputCodeOrder" class="form-label">출발일</label>
-														<input type="" class="form-control" id="inputspStart" name="spStart" placeholder="출발일" required>
+														<label for="inputspStart" class="form-label">출발일</label>
+														<input type="text" class="form-control" id="inputspStart" name="spStart" placeholder="출발일" required>
 														<div class="invalid-feedback">
-															순서를 적어주세요.
+															출발일를 적어주세요.
 														</div>
 													</div>
 												</div>
@@ -146,8 +118,7 @@
 											<div class="row">
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
-														<label for="inputCodeOrder" class="form-label">지역</label>
-<!-- 														<input type="text" class="form-control" id="inputspArea" name="spArea" placeholder="지역" required> -->
+														<label for="inputspArea" class="form-label">지역</label>
 														<select class="form-select validate-this valid-gender" id="inputspArea" name="spArea" required>
 															<option value="" selected disabled>지역을 선택하세요</option>
 															<option th:each="list : ${@codeService.selectListCachedCode(5)}" th:value="${list.cdSeq}" th:text="${list.cdName}"></option>
@@ -159,27 +130,43 @@
 												</div>
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
-														<label for="inputCodeOrder" class="form-label">항구명</label>
-<!-- 														<input type="text" class="form-control" id="inputport_ptSeq" name="port_ptSeq" th:value="${item.port_ptSeq}" placeholder="항구명" required> -->
-														<select class="form-select" id="inputport_ptSeq" name="spSeq" required>
+														<label for="inputport_ptSeq" class="form-label">항구명</label>
+														<select class="form-select" id="inputport_ptSeq" name="ptSeq" required>
 															<option value="" selected disabled>선택하세요</option>
-															<option th:each="list : ${list.spSeq}" th:value="${list.spSeq}" th:text="${list.ptName}"></option>
+															<option th:each="port : ${list}" th:value="${port.ptSeq}" th:text="${port.ptName}"></option>
 														</select>
-														
 														<div class="invalid-feedback">
 															항구명을 선택해주세요.
 														</div>
 													</div>
 												</div>
-											</div>
-											<!-- <div class="row">
-												<div class="col-xl-6 col-md-8 col-12">
-													<div class="mb-3">
-														<label for="inputCodeDesc" class="form-label">설명</label>
-														<textarea class="form-control exclude-validation" id="inputPtDesc" name="ptDesc" placeholder="" rows="3"></textarea>
+												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+													<div class="mb-3">	
+														<label for="inputspEatNy" class="form-label">식사</label>
+														<select class="form-select validate-this" id="inputspEatNy" name="spEatNy" required>
+															<option value="" selected disabled>선택하세요</option>
+															<option value="1">Y</option>
+															<option value="0">N</option>
+														</select>
+														<div class="invalid-feedback">
+															식사 여부을 선택해주세요.
+														</div>
 													</div>
 												</div>
-											</div> -->
+												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+													<div class="mb-3">	
+														<label for="inputspRentalNy" class="form-label">낚시대대여</label>
+														<select class="form-select validate-this" id="inputspRentalNy" name="spRentalNy" required>
+															<option value="" selected disabled>선택하세요</option>
+															<option value="1">Y</option>
+															<option value="0">N</option>
+														</select>
+														<div class="invalid-feedback">
+															낚시대대여 여부을 선택해주세요.
+														</div>
+													</div>
+												</div>
+											</div>
 											<div th:replace="~{xdm/v1/infra/include/link :: form-link}"></div>
 										</form>
 									</div>
@@ -217,9 +204,6 @@
 			window.addEventListener('load',function() {
 				$.datetimepicker.setLocale('ko');
 				$("#inputspStart").datetimepicker({
-// 					timepicker:false,
-// 					format:'Y-m-d'
-					
 					timepicker:true,
 					format:'Y-m-d H:i',
 					step:30,

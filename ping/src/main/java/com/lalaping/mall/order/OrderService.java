@@ -40,7 +40,9 @@ public class OrderService {
 	public int listCount(OrderVo vo) {
 		return orderDao.listCount(vo);
 	}
-	
+	public List<OrderDto> previewList(){
+		return orderDao.previewList();
+	}
 	public List<OrderDto> allListOrder(){
 		return orderDao.allListOrder();
 	}

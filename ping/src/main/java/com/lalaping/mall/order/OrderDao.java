@@ -15,7 +15,7 @@ public interface OrderDao {
 	public int delete(OrderDto orderDto);
 	public List<OrderDto> selectListReturn(OrderDto orderDto);
 	public List<OrderDto> orderList(OrderDto orderDto);
-	
+	public List<OrderDto> previewList();
 	public List<OrderDto> allListOrder();
 	
 	public int allListOrderCount();
