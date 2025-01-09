@@ -33,11 +33,13 @@ public class ReviewController {
 	@RequestMapping(value = "v1/review/reviewXdmForm")
 	public String reviewXdmForm(Model model,ReviewVo reviewVo) {
 		model.addAttribute("list", reviewService.rvSelectList(reviewVo));
+		model.addAttribute("listLink", "reviewXdmList");
 		return "xdm/v1/review/reviewXdmForm";
 	}
 	@RequestMapping(value = "v1/review/reviewXdmMFom2")
 	public String reviewXdmMFom(ReviewDto reviewDto, Model model) {
 		model.addAttribute("item", reviewService.rvSelectOne(reviewDto));
+		model.addAttribute("listLink", "reviewXdmList");
 		return "xdm/v1/review/reviewXdmMFom2";
 	}
 	@RequestMapping(value = "v1/review/reviewXdmUpdt")

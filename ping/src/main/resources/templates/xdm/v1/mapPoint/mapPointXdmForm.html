@@ -56,18 +56,6 @@
 						<div class="page-title">
 							<div>
 								<div class="pb-4">
-									<!-- Breadcrumb start -->
-									<ol class="breadcrumb d-md-flex order-md-1 order-2">
-										<li class="breadcrumb-item">
-											<i class="bi bi-house"></i>
-											<a href="../../infra/index/indexXdmView">Home</a>
-										</li>
-										<li class="breadcrumb-item">Page</li>
-										<li class="breadcrumb-item breadcrumb-active" aria-current="page">Form</li>
-									</ol>
-									<!-- Breadcrumb end -->
-								</div>
-								<div class="pb-4">
 									<h2>낚시포인트 추가</h2>
 								</div>
 							</div>
@@ -103,17 +91,22 @@
 														<label for="inputCodeName" class="form-label">포인트종류</label>
 														<select class="form-select validate-this valid-gender" id="inputMpType" name="mpType" required>
 															<option value="" selected disabled>선택하세요</option>
-															<option th:each="list : ${@codeService.selectListCachedCode(4)}" th:value="${list.cdSeq}" th:text="${list.cdName}"></option>
+															<option th:each="list : ${@codeService.selectListCachedCode(2)}" th:value="${list.cdSeq}" th:text="${list.cdName}"></option>
 														</select>
 														<div class="invalid-feedback">
 															포인트종류를 적어주세요.
 														</div>
 													</div>
 												</div>
-												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+												<div class="required col-xxl-6 col-xl-6 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
-														<label for="inputCodeOrder" class="form-label">주소</label>
-														<input type="text" class="form-control" id="inputMpAddress" name="mpAddress" placeholder="주소입력" required>
+														<label for="sample5_address" class="form-label">주소</label>
+														<div class="input-group">
+															<input type="text" class="form-control border-right-0" id="sample5_address" name="mpAddress" placeholder="주소" readonly>
+															<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+															<input type="hidden" id="mpLatitude" name="mpLatitude" >
+															<input type="hidden" id="mpLongitude" name="mpLongitude">
+														</div>
 														<div class="invalid-feedback">
 															주소를 적어주세요.
 														</div>
@@ -124,8 +117,11 @@
 												<div class="col-xl-6 col-md-8 col-12">
 													<div class="mb-3">
 														<label for="inputCodeDesc" class="form-label">포인트글</label>
-														<textarea class="form-control exclude-validation" id="inputMpText" name="mpText" placeholder="" rows="5"></textarea>
+														<textarea class="form-control exclude-validation" id="inputMpText" name="mpText" placeholder="포인트 설명, 글" rows="5"></textarea>
 													</div>
+												</div>
+												<div class="col-xl-6 col-md-8 col-12">
+													<div id="map" style="height:300px; border:1px solid #aaa"></div>
 												</div>
 											</div>
 											<div th:replace="~{xdm/v1/infra/include/link :: form-link}"></div>
@@ -155,11 +151,209 @@
 		<!-- Main Js Required -->
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/main.js"></script>
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/validations.js"></script>
-		<script>
-			
-		</script>
 		<!-- by developer -->
 		<script src="/xdm/v1/js/commonXdm.js"></script>
+		<!-- kakao 우편번호Api -->
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<!-- Map 영역 -->
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e202c150f42daab8c05bb9a37caa8d&libraries=services,clusterer"></script>
+		<script th:inline="javascript" type="text/javascript"> 
+			// ***** Map 클릭시 마커로 주소표시 *****
+			
+			// 처음 지도에 띄울 위도, 경도
+			/*<![CDATA[*/
+			
+			var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
+			var address_view = document.getElementById("sample5_address"); 
+			var mapOption = {
+				center: new kakao.maps.LatLng(37,127), // 지도의 중심좌표
+				level: 5 // 지도의 확대 레벨
+			};  
+
+			//지도를 생성합니다    
+			var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+			//주소-좌표 변환 객체를 생성합니다
+			var geocoder = new kakao.maps.services.Geocoder();
+
+			var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
+			infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+			// let init = true;
+			// if(init){
+			// 	var markerPosition  = new kakao.maps.LatLng(37,127); 
+
+			// 	var marker = new kakao.maps.Marker({
+			// 		position: markerPosition
+			// 	});
+
+			// 	marker.setMap(map);
+			// 	init = false;
+			// }
+			
+			//현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
+			searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+
+			//지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
+			kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+				searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+					if (status === kakao.maps.services.Status.OK) {
+						var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
+						detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+						
+						var content = '<div class="bAddr">' +
+										'<span class="title">포인트 주소정보</span>' + 
+										detailAddr + 
+									'</div>';
+
+						// 마커를 클릭한 위치에 표시합니다 
+						marker.setPosition(mouseEvent.latLng);
+						var mpLatitude = document.getElementById("mpLatitude");
+						var mpLongitude = document.getElementById("mpLongitude");
+						
+						// 바닐라js
+						mpLatitude.value = mouseEvent.latLng.getLat();
+						mpLongitude.value = mouseEvent.latLng.getLng();
+
+						console.log("latLng :",mouseEvent.latLng);
+						console.log("latLng.qa :",mouseEvent.latLng.qa);
+						console.log("위도(Lat) :",mouseEvent.latLng.getLat());
+						console.log("경도(Lng) :",mouseEvent.latLng.getLng());
+						marker.setMap(map);
+						address_view.value = !!result[0].road_address ? result[0].road_address.address_name:result[0].address.address_name;
+						// 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+						infowindow.setContent(content);
+						infowindow.open(map, marker);
+					}   
+				});
+			});
+			
+			//중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
+			kakao.maps.event.addListener(map, 'idle', function() {
+			searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+			});
+
+			function searchAddrFromCoords(coords, callback) {
+			// 좌표로 행정동 주소 정보를 요청합니다
+			geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+			}
+
+			function searchDetailAddrFromCoords(coords, callback) {
+			// 좌표로 법정동 상세 주소 정보를 요청합니다
+			geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+			}
+
+			//지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+			function displayCenterInfo(result, status) {
+			if (status === kakao.maps.services.Status.OK) {
+				// var infoDiv = document.getElementById('centerAddr');
+				
+				for(var i = 0; i < result.length; i++) {
+					// 행정동의 region_type 값은 'H' 이므로
+					if (result[i].region_type === 'H') {
+						// infoDiv.innerHTML = result[i].address_name;
+						break;
+					}
+				}
+			}    
+			}
+			// *************************** 우편번호 Api ******************************
+			function sample5_execDaumPostcode() {
+				new daum.Postcode({
+					oncomplete: function(data) {
+						var addr = data.address; // 최종 주소 변수
+
+						// 주소 정보를 해당 필드에 넣는다.
+						document.getElementById("sample5_address").value = addr;
+						// 주소로 상세 정보를 검색
+						geocoder.addressSearch(data.address, function(results, status) {
+							// 정상적으로 검색이 완료됐으면
+							if (status === daum.maps.services.Status.OK) {
+
+								var result = results[0]; //첫번째 결과의 값을 활용
+
+								// 해당 주소에 대한 좌표를 받아서
+								var coords = new daum.maps.LatLng(result.y, result.x);
+								
+								var mpLatitude = document.getElementById("mpLatitude");
+								var mpLongitude = document.getElementById("mpLongitude");
+							
+								// 바닐라js
+								mpLatitude.value = coords.getLat();
+								mpLongitude.value = coords.getLng();
+								
+								// *** 위도, 경도 값 ***
+								console.log("위도,경도 확인 : " + coords);
+								console.log("위도 : " + coords.getLat());
+								console.log("경도 : " + coords.getLng());
+								
+								// 지도를 보여준다.
+								mapContainer.style.display = "block";
+								map.relayout();
+								
+								// 지도 중심을 변경한다.
+								map.setCenter(coords);
+								
+								// 마커를 결과값으로 받은 위치로 옮긴다.
+								marker.setPosition(coords)
+								marker.setMap(map);
+							}
+						});
+					}
+				}).open();
+			}
+			
+			// ************************* Map 검색 영역 ***************************
+			// 주소로 좌표를 검색합니다
+			geocoder.addressSearch('sample5_address', function(result, status) {
+
+				// 정상적으로 검색이 완료됐으면 
+				if (status === kakao.maps.services.Status.OK) {
+
+					var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+					// 결과값으로 받은 위치를 마커로 표시합니다
+					var addressMarker = new kakao.maps.Marker({
+						map: map,
+						position: coords
+					});
+
+					// 인포윈도우로 장소에 대한 설명을 표시합니다
+					var infowindow = new kakao.maps.InfoWindow({
+						content: '<div style="width:150px;text-align:center;padding:6px 0;">검색주소 위치</div>'
+					});
+					infowindow.open(map, addressMarker);
+
+					// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+					map.setCenter(coords);
+				} 
+			});    
+			
+			// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+			function displayMarker(locPosition, message) {
+
+				// 마커를 생성합니다
+				var marker = new kakao.maps.Marker({  
+					map: map, 
+					position: locPosition
+				}); 
+				
+				// 인포윈도우에 표시할 내용
+				var iwContent = message, 
+					iwRemoveable = true;
+
+				// 인포윈도우를 생성합니다
+				var infowindow = new kakao.maps.InfoWindow({
+					content : iwContent,
+					removable : iwRemoveable
+				});
+				
+				// 인포윈도우를 마커위에 표시합니다 
+				infowindow.open(map, marker);
+				
+				// 지도 중심좌표를 접속위치로 변경합니다
+				map.setCenter(locPosition);      
+			}       
+		</script>
 	</body>
 
 </html>

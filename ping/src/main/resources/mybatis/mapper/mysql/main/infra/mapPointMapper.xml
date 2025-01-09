@@ -187,7 +187,7 @@
             left join fish c on c.fsSeq = b.fish_fsSeq
             left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
         WHERE 1=1
-        	and ST_Distance_Sphere(POINT(#{baseMpLongitude},#{baseMpLatitude}), POINT(a.mpLongitude, a.mpLatitude)) &lt; 100000
+        	and ST_Distance_Sphere(POINT(#{baseMpLongitude},#{baseMpLatitude}), POINT(a.mpLongitude, a.mpLatitude)) &lt; 50000
         	AND ST_Distance_Sphere(POINT(#{baseMpLongitude}, #{baseMpLatitude}), POINT(a.mpLongitude, a.mpLatitude)) != 0
    		ORDER BY
      	a.mpRegDate DESC
@@ -210,7 +210,7 @@
             left join fish c on c.fsSeq = b.fish_fsSeq
             left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
         WHERE 1=1
-        	and ST_Distance_Sphere(POINT(#{baseMpLongitude},#{baseMpLatitude}), POINT(a.mpLongitude, a.mpLatitude)) &lt; 100000
+        	and ST_Distance_Sphere(POINT(#{baseMpLongitude},#{baseMpLatitude}), POINT(a.mpLongitude, a.mpLatitude)) &lt; 50000
         	AND ST_Distance_Sphere(POINT(#{baseMpLongitude}, #{baseMpLatitude}), POINT(a.mpLongitude, a.mpLatitude)) != 0
    		GROUP BY a.mpSeq
    		ORDER BY
@@ -393,7 +393,7 @@
 		AND mpSeq = #{mpSeq}
     </update>
     
-    <delete id="delect">
+    <delete id="delete">
     	 DELETE FROM mappoint
         WHERE mpSeq = #{mpSeq}
     </delete>

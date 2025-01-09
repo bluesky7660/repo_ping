@@ -12,6 +12,7 @@ public interface OrderDao {
 	public List<OrderDto> selectListOrder(OrderDto orderDto);
 	public List<OrderDto> selectXdmListOrder(OrderVo vo);
 	public int ueleteOrder(OrderDto orderDto);
+	public int delete(OrderDto orderDto);
 	public List<OrderDto> selectListReturn(OrderDto orderDto);
 	public List<OrderDto> orderList(OrderDto orderDto);
 	
