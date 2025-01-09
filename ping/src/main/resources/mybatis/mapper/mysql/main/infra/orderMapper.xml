@@ -157,6 +157,10 @@
 		WHERE 1=1
 		AND odSeq = #{odSeq}
     </update>
+    <delete id="delete">
+    	 DELETE FROM orders
+        WHERE odSeq = #{odSeq}
+    </delete>
     
     <select id="selectListReturn" resultMap="resultMapObj">
     	SELECT

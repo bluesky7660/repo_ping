@@ -28,6 +28,9 @@ public class OrderService {
 	public int ueleteOrder(OrderDto orderDto) {
 		return orderDao.ueleteOrder(orderDto);
 	}
+	public int delete(OrderDto orderDto) {
+		return orderDao.delete(orderDto);
+	}
 	public List<OrderDto> selectListReturn(OrderDto orderDto){
 		 return orderDao.selectListReturn(orderDto);
 	}

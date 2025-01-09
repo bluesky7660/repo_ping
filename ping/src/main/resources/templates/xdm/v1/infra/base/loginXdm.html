@@ -34,10 +34,6 @@
 	</head>
 
 	<body class="login-container">
-
-
-
-		<!-- Login box start -->
 		<form name="form" method="post" action="loginXdmProc" class="needs-validation" novalidate>
 			<div class="login-box">
 				<div class="login-form">
@@ -57,7 +53,6 @@
 							<a href="forgot-password" class="btn-link ml-auto">Forgot password?</a>
 						</div>
 						<input id="userPassword" type="password" class="form-control valid-password validate-this" name="userPassword" value="123456abc@!" required>
-						
 					</div>
 					<div class="invalid-box mb-3">
 						<div class="invalid-child"></div>
@@ -66,31 +61,11 @@
 						</div>
 					</div>
 					<div class="login-form-actions">
-						
 						<button type="button" id="loginBtn" class="btn"> 
 							<span class="icon"> <i class="bi bi-arrow-right-circle"></i> </span>
-							로그인loginBtn
+							로그인
 						</button>
-						<!-- <button type="button" id="btnSubmit" class="btn"> 
-							<span class="icon"> <i class="bi bi-arrow-right-circle"></i> </span>
-							로그인btnSubmit
-						</button> -->
 					</div>
-					<!-- <div class="login-form-actions">
-						<button type="button" id="googleLoginBtn" class="btn"> 
-							<img src="/xdm/v1/template/arise-v1.0/assets/images/google.svg" class="login-icon"
-								alt="Login with Google">
-							구글 로그인
-						</button>
-						<button type="button" id="kakaoLoginBtn" class="btn"> 
-							<img src="/xdm/v1/template/arise-v1.0/assets/images/kakao.svg" class="login-icon"
-								alt="Login with Kakao">
-							카카오 로그인
-						</button>
-						<button type="submit" class="btn"> <img src="/xdm/v1/template/arise-v1.0/assets/images/facebook.svg" class="login-icon"
-								alt="Login with Facebook">
-							Login with Facebook</button>
-					</div> -->
 					<div class="login-form-footer">
 						<div class="additional-link">
 							아직 계정이 없으신가요? <a href="/v1/signupXdm"> 회원가입</a>
@@ -99,7 +74,6 @@
 				</div>
 			</div>
 		</form>
-		<!-- Login box end -->
 		<!-- modals -->
 		<div class="modal fade" id="modalAlert" tabindex="-1" aria-hidden="true">
 			<div class="modal-dialog">
@@ -125,33 +99,13 @@
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/modernizr.js"></script>
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/moment.js"></script>
 
-		<!-- *************
-			************ Vendor Js Files *************
-		************* -->
+
 
 		<!-- Main Js Required -->
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/main.js"></script>
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/validations.js"></script>
 		<!-- by developer -->
 		<script src="/xdm/v1/js/commonXdm.js"></script>
-		<script>
-// 		document.getElementById("loginBtn").onclick = function() {
-// 			// 		alert(document.getElementById("ifcgName").value);
-// 			// 로그인 유효성 검사
-// 			validateAndSubmit(); // 추가한 영역 시작
-// 		}
-		
-// 			window.addEventListener('load', function() {
-// 				var ifcgNameRegExp = /^[ㄱ-ㅎ가-힣A-Za-z0-9]+$/;
-// 				if(!ifcgNameRegExp.test(ifcgNameValue)){
-// 					alert("이름은 한국, 영대소문자, 숮자만 입력해 주세요");
-// 					ifcgName.focus();
-// 					return false;
-// 				} else {
-// 					//by pass
-// 				}
-// 			})
-		</script>
 	</body>
 
 </html>

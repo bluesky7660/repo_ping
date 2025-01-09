@@ -35,6 +35,7 @@ public class OrderController {
 	@RequestMapping(value = "/v1/order/orderXdmMFom")
 	public String orderXdmMFom(Model model,OrderDto orderDto) {
 		model.addAttribute("item", orderService.selectOne(orderDto));
+		model.addAttribute("listLink", "orderXdmList");
 		return "xdm/v1/order/orderXdmMFom";
 	}
 	
@@ -65,6 +66,11 @@ public class OrderController {
 	@RequestMapping(value = "/v1/member/orderUelete")
 	public String orderUelete(OrderDto orderDto) {
 		orderService.ueleteOrder(orderDto);
+		return "redirect:/v1/member/orderReturn";
+	}
+	@RequestMapping(value = "/v1/member/orderDelete")
+	public String orderDelete(OrderDto orderDto) {
+		orderService.delete(orderDto);
 		return "redirect:/v1/member/orderReturn";
 	}
 	@RequestMapping(value = "/v1/member/orderReturn")
