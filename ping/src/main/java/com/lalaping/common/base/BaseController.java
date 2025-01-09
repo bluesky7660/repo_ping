@@ -36,7 +36,7 @@ public class BaseController {
 		
 		mapPointDto.setMpSeq(Integer.toString(mapPointService.listCount(mapPointVo)));
 		model.addAttribute("lastMapPoint", mapPointService.selectOne(mapPointDto));
-		model.addAttribute("orderList", orderService.allListOrder());
+		model.addAttribute("orderList", orderService.previewList());
 		model.addAttribute("commentList", reviewService.rvSelectList(reviewVo));
 		model.addAttribute("lastPoint", mapPointService.lastPoint());
 		
