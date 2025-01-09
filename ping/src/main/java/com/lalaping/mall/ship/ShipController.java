@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.lalaping.common.util.UtilDateTime;
 import com.lalaping.mall.fish.FishService;
 import com.lalaping.mall.fish.FishVo;
+import com.lalaping.mall.port.PortService;
+import com.lalaping.mall.port.PortVo;
 
 @Controller
 public class ShipController {
 	@Autowired
 	public ShipService shipService;
+	@Autowired
+	public PortService portService;
 	@Autowired
 	FishService fishService;
 	
@@ -29,8 +33,8 @@ public class ShipController {
 		return "xdm/v1/ship/shipXdmList";
 	}
 	@RequestMapping(value = "/v1/ship/shipXdmForm")
-	public String shipXdmForm(Model model,ShipVo shipVo) {
-		model.addAttribute("list", shipService.selectList(shipVo));
+	public String shipXdmForm(Model model,PortVo portVo) {
+		model.addAttribute("list", portService.selectList(portVo));
 		model.addAttribute("listLink", "shipXdmList");
 		return "xdm/v1/ship/shipXdmForm";
 	}
