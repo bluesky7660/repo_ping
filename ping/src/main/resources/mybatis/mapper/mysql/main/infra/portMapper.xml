@@ -63,6 +63,23 @@
         SELECT COUNT(DISTINCT a.ptSeq) 
         <include refid="selectCommon"/>
     </select>
+    <select id="allList" resultMap="resultMapObj">
+		SELECT
+			a.ptSeq
+			,a.ptArea
+			,a.ptName
+			,a.ptDesc
+			,a.ptAddress
+			,a.ptLatitude
+			,a.ptLongitude
+			,a.ptDelNy
+			,a.ptRegDate
+			,p.path
+	FROM port a
+        LEFT JOIN imginsert_port p on p.pSeq = a.ptSeq
+	 ORDER BY
+     	a.ptRegDate DESC
+	</select>
 	<insert id="insert">
 		INSERT INTO port(
 			ptArea

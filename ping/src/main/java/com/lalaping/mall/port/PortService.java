@@ -27,6 +27,9 @@ public class PortService {
 	public List<PortDto> selectList(PortVo vo) {
 		return portDao.selectList(vo);
 	}
+	public List<PortDto> allList() {
+		return portDao.allList();
+	}
 	public int insert(PortDto portDto) {
 		return portDao.insert(portDto);
 	}

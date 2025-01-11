@@ -9,6 +9,7 @@ import com.lalaping.mall.ship.ShipDto;
 @Repository
 public interface PortDao {
 	public List<PortDto> selectList(PortVo vo);
+	public List<PortDto> allList();
 	public int insert(PortDto portDto);
 	public PortDto selectOne(PortDto portDto);
 	public int update(PortDto portDto);

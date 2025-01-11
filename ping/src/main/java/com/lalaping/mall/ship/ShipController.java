@@ -46,6 +46,7 @@ public class ShipController {
 	@RequestMapping(value = "/v1/ship/shipXdmMFom")
 	public String shipXdmMFom(Model model,ShipDto shipDto) {
 		model.addAttribute("item",shipService.selectOne(shipDto));
+		model.addAttribute("port",portService.allList());
 		model.addAttribute("listLink", "shipXdmList");
 		return "xdm/v1/ship/shipXdmMFom";
 	}
