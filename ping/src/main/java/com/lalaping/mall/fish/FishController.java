@@ -35,6 +35,8 @@ public class FishController {
 	@RequestMapping(value = "/v1/fish/fishXdmMFom")
 	public String fishXdmMFom(Model model,FishDto fishDto) {
 		model.addAttribute("item",fishService.selectOne(fishDto));
+		System.out.println("seasonsSeqList:"+fishService.selectOne(fishDto).getSeasonsSeqList());
+		System.out.println("getSeasonsName:"+fishService.selectOne(fishDto).getSeasonsName());
 		model.addAttribute("listLink", "fishXdmList");
 		return "xdm/v1/fish/fishXdmMFom";
 	}

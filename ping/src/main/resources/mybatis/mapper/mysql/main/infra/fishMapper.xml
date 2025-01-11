@@ -53,8 +53,7 @@
             ,GROUP_CONCAT(b.season_ssSeq ORDER BY a.fsSeq) AS seasonsSeq
             ,GROUP_CONCAT(c.cdName ORDER BY b.season_ssSeq) AS seasonsName
         FROM fish a
-		LEFT JOIN seasonandfish b 
-		ON a.fsSeq = b.fish_fsSeq
+		LEFT JOIN seasonandfish b ON a.fsSeq = b.fish_fsSeq
 		left join commoncode c on c.cdSeq = b.season_ssSeq
 		<include refid="selectCommon"/>
 		group by
@@ -140,7 +139,12 @@
 			,a.fsSeason
 			,a.fsDelNy
 			,a.fsRegDate
+			,b.fish_fsSeq
+            ,GROUP_CONCAT(b.season_ssSeq ORDER BY a.fsSeq) AS seasonsSeq
+            ,GROUP_CONCAT(c.cdName ORDER BY b.season_ssSeq) AS seasonsName
 		FROM fish a
+		LEFT JOIN seasonandfish b ON a.fsSeq = b.fish_fsSeq
+		left join commoncode c on c.cdSeq = b.season_ssSeq
 		WHERE 1=1
 		AND fsSeq = #{fsSeq}
 	</select>
