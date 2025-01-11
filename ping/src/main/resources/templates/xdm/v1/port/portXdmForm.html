@@ -71,7 +71,7 @@
 											<div class="row">
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
-														<label for="inputName" class="form-label">항구번호</label>
+														<label for="ptSeq" class="form-label">항구번호</label>
 														<input type="text" class="form-control" id="inputCgSeq" name="ptSeq" placeholder="자동생성" readonly="readonly">
 													</div>
 												</div>
@@ -79,53 +79,34 @@
 											<div class="row">
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
-														<label for="inputCodeName" class="form-label">항구이름</label>
+														<label for="inputptName" class="form-label">항구이름</label>
 														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputptName" name="ptName" placeholder="한글, 영대소문자, 숫자" required>
 														<div class="invalid-feedback">
-															코드이름을 적어주세요.
+															항구이름을 적어주세요.
 														</div>
 													</div>
 												</div>
-												<!-- <div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
-													<div class="mb-3">	
-														<label for="inputUseNy" class="form-label">사용여부</label>
-														<select class="form-select validate-this" id="inputUseNy" name="cgUseNy" required>
-															<option value="" selected disabled>선택하세요</option>
-															<option value="1">사용</option>
-															<option value="0">사용안함</option>
-														</select>
-														<div class="invalid-feedback">
-															사용여부을 선택해주세요.
-														</div>
-													</div>
-												</div> -->
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
-														<label for="inputCodeName" class="form-label">항구지역</label>
-<!-- 														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputPtArea" name="ptArea" placeholder="숫자임의입력" required> -->
+														<label for="inputPtArea" class="form-label">항구지역</label>
 														<select class="form-select validate-this valid-gender" id="inputPtArea" name="ptArea" required>
 															<option value="" selected disabled>선택하세요</option>
 															<option th:each="list : ${@codeService.selectListCachedCode(5)}" th:value="${list.cdSeq}" th:text="${list.cdName}"></option>
 														</select>
 														<div class="invalid-feedback">
-															코드이름을 적어주세요.
+															항구지역을 선택해주세요.
 														</div>
 													</div>
 												</div>
-												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+												<div class="required col-xxl-6 col-xl-6 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
-														<label for="inputCodeOrder" class="form-label">주소</label>
-														<!--주소 검색-->
-					                                       <div class="input-group">
-															<!-- <label for="sample5_address">주소</label> -->
-					                                           <input type="text" class="form-control border-right-0" id="inputPtAddress" name="ptAddress" placeholder="주소" readonly>
-					                                           <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
-															<!-- <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div> -->
-					                                       </div>
-
-														<!-- <input type="text" class="form-control" id="inputPtAddress" name="ptAddress" th:value="${item.ptAddress}" placeholder="주소입력" required> -->
+														<label for="inputPtAddress" class="form-label">주소</label>
+														<div class="input-group">
+															<input type="text" class="form-control border-right-0" id="inputPtAddress" name="ptAddress" placeholder="주소" readonly>
+															<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+														</div>
 														<div class="invalid-feedback">
-															순서를 적어주세요.
+															주소를 적어주세요.
 														</div>
 													</div>
 												</div>
@@ -133,13 +114,12 @@
 											<div class="row">
 												<div class="col-xl-6 col-md-8 col-12">
 													<div class="mb-3">
-														<label for="inputCodeDesc" class="form-label">설명</label>
-														<textarea class="form-control exclude-validation" id="inputPtDesc" name="ptDesc" placeholder="" rows="3"></textarea>
+														<label for="inputPtDesc" class="form-label">설명</label>
+														<textarea class="form-control exclude-validation" id="inputPtDesc" name="ptDesc" placeholder="항구 코멘트" rows="5"></textarea>
 													</div>
 												</div>
 												<div class="col-xl-6 col-md-8 col-12">
-													<!-- 지도를 표시 DIV, 지도 크기 설정 -->
-													<div id="map" style="width:300px;height:300px;"></div>
+													<div id="map" style="height:300px; border:1px solid #aaa"></div>
 												</div>
 											</div>
 											<div th:replace="~{xdm/v1/infra/include/link :: form-link}"></div>
