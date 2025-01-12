@@ -76,6 +76,8 @@
 														<input type="text" class="form-control" id="inputSpSeq" name="spSeq" th:value="${item.spSeq}" placeholder="자동생성" readonly="readonly">
 													</div>
 												</div>
+											</div>
+											<div class="row">
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputSpName" class="form-label">배이름</label>
@@ -102,12 +104,11 @@
 															<option th:each="port : ${port}" th:value="${port.ptSeq}" th:text="${port.ptName}" th:selected="${item.port_ptSeq} == ${port.ptSeq}"></option>
 														</select>
 													</div>
-														<div class="invalid-feedback">
-															항구명을 적어주세요
-														</div>
+													<div class="invalid-feedback">
+														항구명을 적어주세요
 													</div>
 												</div>
-											
+											</div>
 											<div class="row">
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
