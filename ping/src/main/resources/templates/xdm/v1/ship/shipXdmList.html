@@ -41,8 +41,6 @@
 		<!-- by developer -->
 		<link rel="stylesheet" href="/xdm/v1/css/datetimepicker/jquery.datetimepicker.min.css">
 		<link rel="stylesheet" href="/xdm/v1/css/commonXdm.css">
-		<style>
-		</style>
 	</head>
 
 	<body>
@@ -131,8 +129,6 @@
 														<button type="submit" class="btn btn-info"><i class="bi bi-search"></i></button>
 														<button type="button" class="btn btn-info float-md-none float-end"><i class="bi bi-arrow-clockwise"></i></button>
 													</div> 
-													
-													
 												</div>
 											</form>
 										</div>
@@ -173,36 +169,35 @@
 													</tr>
 												</thead>
 												<tbody>
-												<tr th:if="${#lists.isEmpty(list)}" class="nodata">
-													<td colspan="12">
-														<p>There are no data</p>
-													</td>
-												</tr>
-												
-												<tr th:if="${!#lists.isEmpty(list)}" th:each="list : ${list}">
-													<td>
-														<input class="form-check-input" type="checkbox"
-														value="" id="flexCheckDefault">
-													</td>
-													<td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}" class="align-middle"></td>
-													<td th:text="${list.spSeq}"></td>
-													<td class="td_spotlight">
-														<a th:href="@{/v1/ship/shipXdmMFom(spSeq=${list.spSeq})}" th:text="${list.spName}"></a>
-													</td> 
-													<td th:text="${#numbers.formatInteger(list.spPrice, 3, 'COMMA') + '원'}">
-													<td th:text = "${list.spTotal + '명'}"></td>
-													<td th:text="${#dates.format(list.spStart, 'yyyy-MM-dd HH:mm')}"></td>
-													<td th:text="${@codeService.selectOneCachedCode(list.spArea)}"></td>
-													<td th:text="${list.ptName}"></td>
-													<td th:if="${list.spEatNy eq false }">N</td>
-													<td th:unless ="${list.spEatNy eq false }">Y</td>
-													<td th:if="${list.spRentalNy eq false }">N</td>
-													<td th:unless ="${list.spRentalNy eq false }">Y</td>
-													<td th:if="${list.spDelNy eq false }">N</td>
-													<td th:unless ="${list.spDelNy eq false }">Y</td>
-													<td th:text="${#dates.format(list.spRegDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-												</tr>
-											</tbody>
+													<tr th:if="${#lists.isEmpty(list)}" class="nodata">
+														<td colspan="12">
+															<p>There are no data</p>
+														</td>
+													</tr>
+													<tr th:if="${!#lists.isEmpty(list)}" th:each="list : ${list}">
+														<td>
+															<input class="form-check-input" type="checkbox"
+															value="" id="flexCheckDefault">
+														</td>
+														<td th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}" class="align-middle"></td>
+														<td th:text="${list.spSeq}"></td>
+														<td class="td_spotlight">
+															<a th:href="@{/v1/ship/shipXdmMFom(spSeq=${list.spSeq})}" th:text="${list.spName}"></a>
+														</td> 
+														<td th:text="${#numbers.formatInteger(list.spPrice, 3, 'COMMA') + '원'}">
+														<td th:text = "${list.spTotal + '명'}"></td>
+														<td th:text="${#dates.format(list.spStart, 'yyyy-MM-dd HH:mm')}"></td>
+														<td th:text="${@codeService.selectOneCachedCode(list.spArea)}"></td>
+														<td th:text="${list.ptName}"></td>
+														<td th:if="${list.spEatNy eq false }">N</td>
+														<td th:unless ="${list.spEatNy eq false }">Y</td>
+														<td th:if="${list.spRentalNy eq false }">N</td>
+														<td th:unless ="${list.spRentalNy eq false }">Y</td>
+														<td th:if="${list.spDelNy eq false }">N</td>
+														<td th:unless ="${list.spDelNy eq false }">Y</td>
+														<td th:text="${#dates.format(list.spRegDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+													</tr>
+												</tbody>
 											</table>
 										</div>
 										<div class="dataTable-bottom">
@@ -263,13 +258,15 @@
 										</div>
 										<div th:replace="~{xdm/v1/infra/include/link :: list-link}"></div>
 									</div>
-								</div>							</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="app-footer">
 						<span>© Arise admin 2023</span>
 					</div>
-				</div>				</div>
+				</div>
+			</div>
 		</div>
 		<!-- modals -->
 		<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -289,11 +286,8 @@
 				</div>
 			</div>
 		</div>
-
-		
 		
 		<script type="text/javascript">
-			
 			window.addEventListener('load',function() {
 				$.datetimepicker.setLocale('ko');
 				$("#inputDateStart,#inputDateEnd").datetimepicker({
@@ -306,7 +300,6 @@
 				var url = form.action;
 				function updatePageSize() {
 					if (form && pageSizeSelect) {
-						// 선택된 pageSizes 값을 가져옵니다.
 						var pageSizes = pageSizeSelect.value;
 						rowNumToShow.value = pageSizes;
 						form.action = url;
@@ -315,27 +308,21 @@
 						console.error('Form or pageSizeSelect element not found.');
 					}
 				}
-
-				console.log('value: ');
 				
 				if (pageSizeSelect) {
 					pageSizeSelect.addEventListener('change', updatePageSize);
 				}
 
 				goList = function (thisPage) {
-					console.log("값: "+thisPage);
 					document.querySelector("input[name=thisPage]").value = thisPage;
-					console.log("thisPage값: "+document.querySelector("input[name=thisPage]").value);
 					form.action = url;
 					form.submit();
 				}
 			});
-			
 		</script>
 		
 		<!-- Required jQuery first, then Bootstrap Bundle JS -->
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/jquery.min.js"></script>
-		<!-- <script src="/xdm/v1/jquery/jquery/jquery-3.7.1.min.js"></script> -->
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/bootstrap.bundle.min.js"></script>
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/modernizr.js"></script>
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/moment.js"></script>
