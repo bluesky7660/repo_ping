@@ -92,20 +92,6 @@ public class ShipController {
 		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
 		model.addAttribute("list",shipService.selectUsrList3(vo));	
 		List<ShipDto> shipList = shipService.selectUsrList3(vo);
-		for (ShipDto ship : shipList) {
-
-		    if (ship.getFsSeqList() != null && !ship.getFsSeqList().isEmpty()) {
-		        System.out.println("Fish Sequence: " + ship.getFsSeqList());
-		    } else {
-		        System.out.println("No Fish Available");
-		    }
-
-		    if (ship.getFsNameList() != null && !ship.getFsNameList().isEmpty()) {
-		        System.out.println("Fish Names: " + ship.getFsNameList());
-		    } else {
-		        System.out.println("No Fish Available");
-		    }
-		}
 
 		model.addAttribute("fishList",fishService.allOneList(fishVo));
 		return "usr/v1/ship/ping_shipList";

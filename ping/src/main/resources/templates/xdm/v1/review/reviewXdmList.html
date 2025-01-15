@@ -262,7 +262,6 @@
 		</div>
 		
 		<script type="text/javascript">
-			
 			window.addEventListener('load',function() {
 				$.datetimepicker.setLocale('ko');
 				$("#inputDateStart,#inputDateEnd").datetimepicker({
@@ -275,7 +274,6 @@
 				var url = form.action;
 				function updatePageSize() {
 					if (form && pageSizeSelect) {
-						// 선택된 pageSizes 값을 가져옵니다.
 						var pageSizes = pageSizeSelect.value;
 						rowNumToShow.value = pageSizes;
 						form.action = url;
@@ -285,26 +283,20 @@
 					}
 				}
 
-				console.log('value: ');
-				
 				if (pageSizeSelect) {
 					pageSizeSelect.addEventListener('change', updatePageSize);
 				}
 
 				goList = function (thisPage) {
-					console.log("값: "+thisPage);
 					document.querySelector("input[name=thisPage]").value = thisPage;
-					console.log("thisPage값: "+document.querySelector("input[name=thisPage]").value);
 					form.action = url;
 					form.submit();
 				}
 			});
-			
 		</script>
 		
 		<!-- Required jQuery first, then Bootstrap Bundle JS -->
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/jquery.min.js"></script>
-		<!-- <script src="/xdm/v1/jquery/jquery/jquery-3.7.1.min.js"></script> -->
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/bootstrap.bundle.min.js"></script>
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/modernizr.js"></script>
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/moment.js"></script>

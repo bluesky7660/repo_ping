@@ -52,7 +52,6 @@ public class MapPointController {
 	public String mapPointXdmMFom(Model model,MapPointDto mapPointDto) {
 		model.addAttribute("item",mapPointService.selectOne(mapPointDto));
 		model.addAttribute("listLink", "mapPointXdmList");
-		System.out.println("위도 값 확인 : " + mapPointDto.getMpLatitude());
 		return "xdm/v1/mapPoint/mapPointXdmMFom";
 	}
 	@RequestMapping(value="/v1/mapPoint/mapPointXdmUpdt")
@@ -92,12 +91,6 @@ public class MapPointController {
 	@RequestMapping(value = "/v1/mapPoint/mapPointSearchList")
 	@ResponseBody
 	public Map<String, Object> mapPointSearchList(MapPointDto mapPointDto,MapPointVo mapPointVo){
-		System.out.println("shMpValue:"+mapPointVo.getShMpValue());
-		if (mapPointVo.getFsSeqList() != null) {
-		    System.out.println("fsSeqList2: " + mapPointVo.getFsSeqList().toString());
-		} else {
-		    System.out.println("fsSeqList2 is null");
-		}
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		List<MapPointDto> rtPoint = mapPointService.selectSearchList(mapPointVo);
 		
@@ -117,8 +110,6 @@ public class MapPointController {
 		
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
-		System.out.println("thisPage:"+ mapPointVo.getThisPage());
-		System.out.println("totalPages:"+ mapPointVo.getTotalPages());
 	    returnMap.put("mapPointList", rtPoint);
 	    returnMap.put("thisPage", mapPointVo.getThisPage()); 
 	    returnMap.put("totalPages", mapPointVo.getTotalPages());
