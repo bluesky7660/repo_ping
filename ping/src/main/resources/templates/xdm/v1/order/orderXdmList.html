@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-
 	<head>
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
@@ -43,7 +42,6 @@
 		<link rel="stylesheet" href="/xdm/v1/css/commonXdm.css">
 		
 	</head>
-
 	<body>
 		<div class="page-wrapper">
 			<div th:replace="~{xdm/v1/infra/include/head :: sidebar-wrapper}"></div>
@@ -258,7 +256,7 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-			window.addEventListener('load',function() {
+			window.addEventListener('load',function(){
 				$.datetimepicker.setLocale('ko');
 				$("#inputDateStart,#inputDateEnd").datetimepicker({
 					timepicker:false,
@@ -279,8 +277,6 @@
 					}
 				}
 
-				console.log('value: ');
-				
 				if (pageSizeSelect) {
 					pageSizeSelect.addEventListener('change', updatePageSize);
 				}
@@ -291,9 +287,7 @@
 					form.submit();
 				}
 			});
-			
 		</script>
-		
 		<!-- Required jQuery first, then Bootstrap Bundle JS -->
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/jquery.min.js"></script>
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/bootstrap.bundle.min.js"></script>
@@ -322,5 +316,4 @@
 		<script src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
 		<script src="/xdm/v1/js/commonXdm.js"></script>
 	</body>
-
 </html>
