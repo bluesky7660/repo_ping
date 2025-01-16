@@ -298,21 +298,16 @@
 					}
 				}
 
-				console.log('value: ');
-				
 				if (pageSizeSelect) {
 					pageSizeSelect.addEventListener('change', updatePageSize);
 				}
 
 				goList = function (thisPage) {
-					console.log("값: "+thisPage);
 					document.querySelector("input[name=thisPage]").value = thisPage;
-					console.log("thisPage값: "+document.querySelector("input[name=thisPage]").value);
 					form.action = url;
 					form.submit();
 				}
 			});
-			
 		</script>
 		
 		<!-- Required jQuery first, then Bootstrap Bundle JS -->
