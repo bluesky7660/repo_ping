@@ -82,14 +82,5 @@ public class ReviewDto extends BaseVo {
 		this.mmEmail = mmEmail;
 	}
 	
-	
-	
-	
-	
-
-	
-	
-	
-	
 
 }
