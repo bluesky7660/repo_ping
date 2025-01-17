@@ -92,7 +92,6 @@ public class ShipController {
 		vo.setShDateEnd(vo.getShDateEnd() == null || vo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(vo.getShDateEnd()));
 		model.addAttribute("list",shipService.selectUsrList3(vo));	
 		List<ShipDto> shipList = shipService.selectUsrList3(vo);
-
 		model.addAttribute("fishList",fishService.allOneList(fishVo));
 		return "usr/v1/ship/ping_shipList";
 	}
