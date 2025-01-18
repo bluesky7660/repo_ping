@@ -13,7 +13,8 @@ window.addEventListener('load', function() {
     const inputNullText = "내용을 적어주세요.";
     const selectNullText = "내용을 선택해주세요.";
     const alphaNumRegExpText = "영대소문자, 숫자만 입력해 주세요";
-    const numNullText = "순서를 적어주세요.";
+    const orderNullText = "순서를 적어주세요.";
+    const numNullText = "숫자를 적어주세요.";
     const numRegExpText = "정수형 숫자만 입력해 주세요";
     const userId = document.getElementById("userId");
     const userPassword = document.getElementById("userPassword");
@@ -280,11 +281,38 @@ window.addEventListener('load', function() {
             
             var objs = document.querySelectorAll(".validate-this");
             var i= 0;
-            var validateChk = false;
+            // var validateChk = false;
+            var validateChk = [];
             for(let element of objs){
-                console.log("element:",element);
                 var objValue = element.value.trim();
-                const feedback = element.parentElement.querySelector(".invalid-feedback");
+                // const feedback = element.parentElement.querySelector(".invalid-feedback");
+                let elementBox;
+                if(element.closest("td")){
+                    elementBox = element.closest("td");
+                }else if (element.closest("li")) {
+                    elementBox = element.closest("li");
+                }else if (element.closest(".required")) {
+                    elementBox = element.closest(".required");
+                }
+                const invalidBoxChk = elementBox.querySelector(".invalid-box");
+                if(invalidBoxChk){
+                    elementBox.querySelector(".invalid-box").remove();
+                }
+                elementBox.querySelector("div:not(.invalid-box)").classList.remove("mb-3");
+                console.log("elementBox:",elementBox);
+                const feedbackBox = document.createElement("div");
+                const feedbackChild = document.createElement("div");
+                const feedbackinner = document.createElement("div");
+                feedbackBox.className  = "invalid-box mb-3";
+                feedbackChild.className  = "invalid-child";
+                feedbackinner.className  = "invalid-feedback";
+                feedbackinner.id  = "invalid-feedback_"+i;
+                feedbackBox.appendChild(feedbackChild);
+                feedbackBox.appendChild(feedbackinner);
+                elementBox.appendChild(feedbackBox);
+                
+                const feedbackChk = elementBox.querySelector(".invalid-child");
+                const feedback = elementBox.querySelector(".invalid-feedback");
                 if (objValue == "" || objValue == null) {
                     // var waring = feedback.textContent.trim();
                     if(element.tagName ==='INPUT'){
@@ -293,6 +321,7 @@ window.addEventListener('load', function() {
                         feedback.textContent = inputNullText;
                         // alert(inputNullText);
                     }else if(element.tagName ==='SELECT'){
+                        console.log("SELECT:"+feedback);
                         feedback.textContent = selectNullText;
                         // alert(selectNullText);
                     }
@@ -301,34 +330,39 @@ window.addEventListener('load', function() {
                     if(i==0){
                         element.focus();
                     }
+                    validateChk[i] = false;
                     i++;
-                    validateChk = false;
                     element.classList.add('is-invalid');
+                    feedbackChk.classList.add('is-invalid');
                 } else {
                     //by pass
                     var val  = RegExps(element,objValue,feedback);
                     console.log("체크");
                     if(val == true){
-                        validateChk = true;
+                        validateChk[i] = true;
+                        i++;
                         element.classList.remove('is-invalid');
                         element.classList.add('is-valid');
+                        feedbackChk.classList.remove('is-invalid');
+                        elementBox.querySelector("div:not(.invalid-box)").classList.add("mb-3");
+                        elementBox.querySelector(".invalid-box").remove();
                     }else{
                         // feedback.textContent = codeRegExpText;
                         if(i==0){
                             element.focus();
                         }
+                        validateChk[i] = false;
                         i++;
-                        validateChk = false;
                         element.classList.add('is-invalid');
+                        feedbackChk.classList.add('is-invalid');
                     }
                     
                 }
             };
-            if(validateChk == false){
+            if(validateChk.includes(false)){
                 alert("검사실패");
                 return false;
             }
-            // alert("통과!");
             form.action = formUrl;
             form.submit();
 
