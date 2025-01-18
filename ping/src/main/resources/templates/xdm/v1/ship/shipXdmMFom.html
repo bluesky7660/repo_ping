@@ -90,25 +90,23 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="selectspArea" class="form-label">해역</label>
-														<select class="form-select" id="selectspArea" name="spArea" required>
+														<select class="form-select validate-this" id="selectspArea" name="spArea" required>
 															<option value="" selected>해역을 선택하세요</option>
 															<option th:each="list : ${@codeService.selectListCachedCode(4)}" th:value="${list.cdSeq}" th:text="${list.cdName}" th:selected="${list.cdSeq} == ${item.spArea}"></option>
 														</select>
 													</div>
-													<div class="invalid-feedback">
-														해역을 적어주세요
-													</div>
+													
 												</div>
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="selectptArea" class="form-label">항구명</label>
-														<select class="form-select" id="selectptArea" name="port_ptSeq" required>
+														<select class="form-select validate-this" id="selectptArea" name="port_ptSeq" required>
 															<option value="" selected>항구명을 선택하세요</option>
 															<option th:each="port : ${port}" th:value="${port.ptSeq}" th:text="${port.ptName}" th:selected="${item.port_ptSeq} == ${port.ptSeq}"></option>
 														</select>
-													</div>
-													<div class="invalid-feedback">
-														항구명을 적어주세요
+														<div class="invalid-feedback">
+															항구명을 적어주세요
+														</div>
 													</div>
 												</div>
 											</div>
@@ -116,7 +114,7 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputspPrice" class="form-label">가격</label>
-														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputspPrice" name="spPrice" th:value="${item.spPrice}" placeholder="숫자임의입력" required>
+														<input type="text" class="valid-numeric form-control validate-this" id="inputspPrice" name="spPrice" th:value="${item.spPrice}" placeholder="숫자임의입력" required>
 														<div class="invalid-feedback">
 															가격을 적어주세요.
 														</div>
@@ -125,7 +123,7 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputspTotal" class="form-label">총인원</label>
-														<input type="text" class="form-control" id="inputspTotal" name="spTotal" th:value="${item.spTotal}" placeholder="총인원" required>
+														<input type="text" class="valid-numeric form-control validate-this" id="inputspTotal" name="spTotal" th:value="${item.spTotal}" placeholder="총인원" required>
 														<div class="invalid-feedback">
 															총인원를 적어주세요.
 														</div>
@@ -134,7 +132,7 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputspRemain" class="form-label">남은인원</label>
-														<input type="text" class="form-control" id="inputspRemain" name="spRemain" th:value="${item.spRemain}" placeholder="남은인원" required>
+														<input type="text" class="valid-numeric form-control validate-this" id="inputspRemain" name="spRemain" th:value="${item.spRemain}" placeholder="남은인원" required>
 														<div class="invalid-feedback">
 															남은인원를 적어주세요.
 														</div>
