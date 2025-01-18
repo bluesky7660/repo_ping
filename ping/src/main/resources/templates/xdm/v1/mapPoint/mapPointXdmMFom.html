@@ -199,9 +199,7 @@
 		<!-- Main Js Required -->
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/main.js"></script>
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/validations.js"></script>
-		<script>
-			
-		</script>
+		
 		<!-- by developer -->
 		<script src="/xdm/v1/js/commonXdm.js"></script>
 		<!-- kakao 우편번호Api -->
@@ -269,10 +267,6 @@
 						mpLatitude.value = mouseEvent.latLng.getLat();
 						mpLongitude.value = mouseEvent.latLng.getLng();
 
-						console.log("latLng :",mouseEvent.latLng);
-						console.log("latLng.qa :",mouseEvent.latLng.qa);
-						console.log("위도(Lat) :",mouseEvent.latLng.getLat());
-						console.log("경도(Lng) :",mouseEvent.latLng.getLng());
 						marker.setMap(map);
 						address_view.value = !!result[0].road_address ? result[0].road_address.address_name:result[0].address.address_name;
 						// 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
@@ -326,6 +320,7 @@
 
 								var result = results[0]; //첫번째 결과의 값을 활용
 
+								// *** 위도, 경도 값 ***
 								// 해당 주소에 대한 좌표를 받아서
 								var coords = new daum.maps.LatLng(result.y, result.x);
 								
@@ -335,11 +330,6 @@
 								// 바닐라js
 								mpLatitude.value = coords.getLat();
 								mpLongitude.value = coords.getLng();
-								
-								// *** 위도, 경도 값 ***
-								console.log("위도,경도 확인 : " + coords);
-								console.log("위도 : " + coords.getLat());
-								console.log("경도 : " + coords.getLng());
 								
 								// 지도를 보여준다.
 								mapContainer.style.display = "block";

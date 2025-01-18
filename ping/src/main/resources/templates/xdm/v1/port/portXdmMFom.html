@@ -225,9 +225,7 @@
 			// 처음 지도에 띄울 위도, 경도
 			/*<![CDATA[*/
 			var ptLatitude1 = /*[[${item.ptLatitude}]]*/ 'ptLatitude1';
-			console.log("지도에 표시할 위도 : " + ptLatitude1);
 			var ptLongitude1 = /*[[${item.ptLongitude}]]*/ 'ptLongitude1';
-			console.log("지도에 표시할 경도 : " + ptLongitude1);
 			
 			var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
 			var address_view = document.getElementById("sample5_address");
@@ -262,13 +260,13 @@
 			}
 
 			function searchAddrFromCoords(coords, callback) {
-			// 좌표로 행정동 주소 정보를 요청합니다
-			geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+				// 좌표로 행정동 주소 정보를 요청합니다
+				geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
 			}
 
 			function searchDetailAddrFromCoords(coords, callback) {
-			// 좌표로 법정동 상세 주소 정보를 요청합니다
-			geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+				// 좌표로 법정동 상세 주소 정보를 요청합니다
+				geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
 			}
 
 			// *************************** 우편번호 Api ******************************
@@ -295,11 +293,6 @@
 								// 바닐라js
 								ptLatitude.value = coords.getLat();
 								ptLongitude.value = coords.getLng();
-								
-								// *** 위도, 경도 값 ***
-								console.log("위도,경도 확인 : " + coords);
-								console.log("위도 : " + coords.getLat());
-								console.log("경도 : " + coords.getLng());
 								
 								// 지도를 보여준다.
 								mapContainer.style.display = "block";

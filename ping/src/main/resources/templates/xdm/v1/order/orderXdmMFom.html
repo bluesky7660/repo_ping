@@ -80,27 +80,27 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputNumber" class="form-label">선상이름</label>
-														<input type="text" class="form-control valid-korean-alpha-num validate-this" id="inputNumber" name="spName" th:value="${item.spName}" placeholder="한글, 영대소문자, 숫자" required>
+														<input type="text" class="form-control valid-korean-alpha-num validate-this" id="inputNumber" name="spName" th:value="${item.spName}" placeholder="한글, 영대소문자, 숫자" required readonly>
 														<div class="invalid-feedback">
-															코드이름을 적어주세요.
+															선상이름을 적어주세요.
 														</div>
 													</div>
 												</div>
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputNumber" class="form-label">총가격</label>
-														<input type="text" class="form-control valid-korean-alpha-num validate-this" id="inputNumber" name="odTotalPrice" th:value="${item.odTotalPrice}" placeholder="한글, 영대소문자, 숫자" required>
+														<input type="text" class="form-control valid-korean-alpha-num validate-this" id="inputNumber" name="odTotalPrice" th:value="${item.odTotalPrice}" placeholder="숫자" required readonly>
 														<div class="invalid-feedback">
-															코드이름을 적어주세요.
+															총가격을 적어주세요.
 														</div>
 													</div>
 												</div>
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputProvince" class="form-label">예약인원</label>
-														<input type="text" class="form-control valid-numeric validate-this" id="inputProvince" name="odCount" th:value="${item.odCount}" placeholder="숫자만" required>
+														<input type="text" class="form-control valid-numeric validate-this" id="inputProvince" name="odCount" th:value="${item.odCount}" placeholder="숫자만" required readonly>
 														<div class="invalid-feedback">
-															순서를 적어주세요.
+															예약인원를 적어주세요.
 														</div>
 													</div>
 												</div>
@@ -118,9 +118,9 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputProvince" class="form-label">출발날짜</label>
-														<input type="text" class="form-control valid-numeric validate-this" id="inputProvince" th:value="${#dates.format(item?.spStart, 'yyyy-MM-dd HH:mm:ss')}" name="spStart"  placeholder="숫자만" required>
+														<input type="text" class="form-control valid-numeric validate-this" id="inputProvince" th:value="${#dates.format(item?.spStart, 'yyyy-MM-dd HH:mm:ss')}" name="spStart"  placeholder="숫자만" required readonly>
 														<div class="invalid-feedback">
-															순서를 적어주세요.
+															출발날짜를 적어주세요.
 														</div>
 													</div>
 												</div>
