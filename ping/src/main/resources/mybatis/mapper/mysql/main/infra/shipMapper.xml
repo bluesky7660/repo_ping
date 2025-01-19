@@ -126,7 +126,7 @@
 		<include refid="selectCommon" />
 	</select>
 	<select id="portListCount" resultType="int">
-		SELECT COUNT(*)
+		SELECT COUNT(DISTINCT a.spSeq)
 		<include refid="selectCommonPort" />
 		and a.port_ptSeq = #{port_ptSeq}
 	</select>
@@ -214,7 +214,8 @@
 		and a.port_ptSeq = #{port_ptSeq}
 		GROUP BY a.spSeq
 		ORDER BY
-		a.spRegDate DESC
+		<!-- a.spRegDate DESC -->
+		${sortOrderString}
 		<include refid="base.selectListLowerForMysql" />
 	</select>
 	<select id="otherPortSelectList">

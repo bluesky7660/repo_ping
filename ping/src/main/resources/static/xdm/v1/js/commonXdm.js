@@ -5,7 +5,6 @@ window.addEventListener('load', function() {
     if(form){
         formUrl = form.action;
     }
-    
 
     //밸리데이션 변수
     const codeNullText = "코드이름을 적어주세요.";
@@ -238,11 +237,7 @@ window.addEventListener('load', function() {
         })
     }
     
-    
-
     //데이터삭제 js
-    
-    // var form = document.querySelector("form");
     if(document.getElementById("ueleteBtn")||document.getElementById("deleteBtn")){
         var currentAction = form.action;
         var newAction = currentAction.slice(0, -4);
@@ -257,7 +252,6 @@ window.addEventListener('load', function() {
         document.getElementById("deleteBtn").onclick = del;
         document.getElementById("ueleteBtn").onclick = uel;
     }
-    
 
     //밸리데이션
     // const codeNullText = "코드이름을 적어주세요.";
@@ -272,13 +266,10 @@ window.addEventListener('load', function() {
     // feedbackList.forEach(element => {
     //     feedbackText.push(element.textContent.trim());
     // });
-    console.log(feedbackText);
-    
     //제출버튼
     const btnSubmit = document.getElementById("btnSubmit");
     if (btnSubmit) {
         btnSubmit.onclick = function (){
-            
             var objs = document.querySelectorAll(".validate-this");
             var i= 0;
             // var validateChk = false;
@@ -325,7 +316,6 @@ window.addEventListener('load', function() {
                         feedback.textContent = selectNullText;
                         // alert(selectNullText);
                     }
-                    
                     
                     if(i==0){
                         element.focus();
@@ -395,7 +385,6 @@ window.addEventListener('load', function() {
             });
         }
     }
-    
     
     function RegExps(element,objValue,feedback) {
         console.log("태그: "+element.id);
@@ -533,9 +522,6 @@ window.addEventListener('load', function() {
     sidebarDropdown.forEach(function(link) {
         link.addEventListener("contextmenu", function(event) {
             event.preventDefault(); // 오른쪽 클릭 메뉴 방지
-            // alert("오른쪽 클릭이 방지되었습니다.");
         });
     });
-    
-    
 });
