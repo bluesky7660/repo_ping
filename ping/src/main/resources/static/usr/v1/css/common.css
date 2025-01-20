@@ -260,6 +260,15 @@ img[alt="날씨이미지"]{
     color:rgb(30, 42, 174)
 }
 
+/*항구상세*/
+#port_shipList .card-img{
+    border: 1px solid #dee2e6;
+}
+#port_shipList .card-img::before{
+    /* display: none; */
+    background: rgba(0, 0, 0, 0.1);
+}
+
 @media (min-width: 576px) {
     #fishing_point .container {
         max-width: 540px;
