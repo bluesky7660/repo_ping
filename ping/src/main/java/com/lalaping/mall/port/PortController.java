@@ -88,6 +88,32 @@ public class PortController {
 	}
 	@RequestMapping(value = "/v1/port/portDetail")
 	public String portDetail(Model model, PortDto portDto, ShipVo shipVo,MapPointVo mapPointVo ){	
+		switch (shipVo.getSortOrder()) {
+			case 1: {
+	        	shipVo.setSortOrderString("spName ASC");
+	            break;
+	        }
+			case 2: {
+	        	shipVo.setSortOrderString("spName DESC");
+	            break;
+	        }
+	        case 3: {
+	        	shipVo.setSortOrderString("spPrice ASC");
+	            break;
+	        }
+	        case 4: {
+	        	shipVo.setSortOrderString("spPrice DESC");
+	            break;
+	        }
+	        case 5: {
+	        	shipVo.setSortOrderString("spStart ASC");
+	            break;
+	        }
+	        default: {
+	        	shipVo.setSortOrderString("spRegDate DESC"); 
+	            break;
+	        }
+	    }
 		shipVo.setRowNumToShow(3);
 		shipVo.setShDateStart(shipVo.getShDateStart() == null || shipVo.getShDateStart() == "" ? null : UtilDateTime.add00TimeString(shipVo.getShDateStart()));
 		shipVo.setShDateEnd(shipVo.getShDateEnd() == null || shipVo.getShDateEnd() == "" ? null : UtilDateTime.add59TimeString(shipVo.getShDateEnd()));
@@ -109,31 +135,31 @@ public class PortController {
 	@RequestMapping(value = "portShipList")
     public Map<String, Object> portShipList(@RequestBody ShipVo shipVo) {
 		switch (shipVo.getSortOrder()) {
-		case 2: {
-        	shipVo.setSortOrderString("spName ASC");
-            break;
-        }
-		case 3: {
-        	shipVo.setSortOrderString("spName DESC");
-            break;
-        }
-        case 4: {
-        	shipVo.setSortOrderString("spPrice ASC");
-            break;
-        }
-        case 5: {
-        	shipVo.setSortOrderString("spPrice DESC");
-            break;
-        }
-        case 6: {
-        	shipVo.setSortOrderString("spStart ASC");
-            break;
-        }
-        default: {
-        	shipVo.setSortOrderString("spPrice ASC"); 
-            break;
-        }
-    }
+			case 1: {
+	        	shipVo.setSortOrderString("spName ASC");
+	            break;
+	        }
+			case 2: {
+	        	shipVo.setSortOrderString("spName DESC");
+	            break;
+	        }
+	        case 3: {
+	        	shipVo.setSortOrderString("spPrice ASC");
+	            break;
+	        }
+	        case 4: {
+	        	shipVo.setSortOrderString("spPrice DESC");
+	            break;
+	        }
+	        case 5: {
+	        	shipVo.setSortOrderString("spStart ASC");
+	            break;
+	        }
+	        default: {
+	        	shipVo.setSortOrderString("spRegDate DESC"); 
+	            break;
+	        }
+	    }
 		shipVo.setRowNumToShow(3);
 		shipVo.setPort_ptSeq(shipVo.getPort_ptSeq());
 		shipVo.setParamsPaging(shipService.portListCount(shipVo));
