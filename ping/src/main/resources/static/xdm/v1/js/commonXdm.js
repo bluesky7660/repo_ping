@@ -252,20 +252,6 @@ window.addEventListener('load', function() {
         document.getElementById("deleteBtn").onclick = del;
         document.getElementById("ueleteBtn").onclick = uel;
     }
-
-    //밸리데이션
-    // const codeNullText = "코드이름을 적어주세요.";
-    // const codeRegExpText = "이름은 한글, 영대소문자, 숫자만 입력해 주세요";
-    // const inputNullText = "내용을 적어주세요.";
-    // const selectNullText = "내용을 선택해주세요.";
-    // const alphaNumRegExpText = "영대소문자, 숫자만 입력해 주세요";
-    // const numNullText = "순서를 적어주세요.";
-    // const numRegExpText = "정수형 숫자만 입력해 주세요";
-    // var feedbackText = [];
-    // const feedbackList = document.querySelectorAll(".invalid-feedback");
-    // feedbackList.forEach(element => {
-    //     feedbackText.push(element.textContent.trim());
-    // });
     //제출버튼
     const btnSubmit = document.getElementById("btnSubmit");
     if (btnSubmit) {
