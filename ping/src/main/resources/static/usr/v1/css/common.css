@@ -268,6 +268,24 @@ img[alt="날씨이미지"]{
     /* display: none; */
     background: rgba(0, 0, 0, 0.1);
 }
+.ptTitle{
+    /* font-weight: bold; */
+}
+.ptDescArea{
+
+}
+.ptDescText{
+    font-size: 18px;
+    color:#000;
+    line-height: 25px;
+    overflow: hidden;
+    /* white-space: normal; */
+    white-space: pre-wrap;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
 
 @media (min-width: 576px) {
     #fishing_point .container {

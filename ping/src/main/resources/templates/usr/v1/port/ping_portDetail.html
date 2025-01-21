@@ -30,7 +30,7 @@
             <div class="container">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/v1/index">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Port</li>
                     </ol>
                 </nav>
@@ -47,24 +47,31 @@
             <div class="container">
                 <div class="ts-box">
                     <div class="row">
-                        <div class="col-md-4 ts-center__both">
+                        <div class="ts-center__both">
                             <div class="ts-circle__xxl ts-shadow__md">
                                 <img th:src="${item.path != null ? item.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}" alt="${item.ptName+' 이미지'}">
                             </div>
                         </div>
-                        <div class="col-md-8 row">
-                            <div class="py-4 col-8">
-                                <div class="ts-title mb-2">
-                                    <h2 class="mb-1" th:text="${item.ptName}"></h2>
-                                    <h5>
-                                        <i class="fa fa-map-marker mr-2"></i>
-                                        <span th:text="${item.ptAddress}"></span>
-                                    </h5>
+                        <div class="col row">
+                            <div class="col-8 d-flex flex-column">
+                                <div>
+                                    <div class="ts-title pb-0 mb-2">
+                                        <h2 class="mb-1 ptTitle" th:text="${item.ptName}"></h2>
+                                        <h5>
+                                            <i class="fa fa-map-marker mr-2"></i>
+                                            <span th:text="${item.ptAddress}"></span>
+                                        </h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col ptDescArea">
+                                            <p class="ptDescText" th:text="${item.ptDesc}">
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <p th:text="${item.ptDesc}">
-                                        </p>
+                                <div class="row mt-auto">
+                                    <div class="col ts-bg-light p-3 ts-border-radius__md d-block d-sm-flex ts-center__vertical justify-content-between ts-xs-text-center">
+                                        <p class="d-sm-inline-block mb-2 mb-sm-0" th:text="${shipCount+'건이 검색되었습니다'}"></p>
                                     </div>
                                 </div>
                             </div>
@@ -76,9 +83,7 @@
                                  data-ts-map-scroll-wheel="0"
                                  data-ts-map-controls="0">
                             </div>
-                            <div class="col-7 ts-bg-light p-3 ts-border-radius__md d-block d-sm-flex ts-center__vertical justify-content-between ts-xs-text-center">
-                                <p class="d-sm-inline-block mb-2 mb-sm-0" th:text="${shipCount+'건이 검색되었습니다'}"></p>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -106,14 +111,6 @@
                             <div class="tab-pane active show" id="ships" role="tabpanel" aria-labelledby="ships-tab">
                                 <section id="display-control-items">
                                     <div class="clearfix">
-                                        <!-- <div class="float-left">
-                                            <a href="#" class="btn btn-outline-secondary px-3 mr-2 mb-2 ts-btn-border-muted">
-                                                <i class="fa fa-th-large"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-outline-secondary active px-3 mb-2 ts-btn-border-muted">
-                                                <i class="fa fa-th-list"></i>
-                                            </a>
-                                        </div> -->
                                         <div class="float-none float-sm-right pl-2 ts-center__vertical">
                                             <label for="sortOrder" class="mb-0 mr-2 text-nowrap">정렬: </label>
                                             <div class="float-none float-sm-right pl-2 ts-center__vertical">
@@ -324,8 +321,8 @@
 </div>
 <script type="text/javascript">
     function shipSearchEvent(thisPageNum) {
-        console.log("실행");
         const ships = document.getElementById("ships");
+
         if(!ships.classList.contains("active")&&!ships.classList.contains("show")){
             ships.classList.add("active");
             ships.classList.add("show");
@@ -338,7 +335,6 @@
         const params = new URLSearchParams(window.location.search);
 
         const ptSeq = params.get('ptSeq');
-        console.log("sortOrder:",document.querySelector("select[name=sortOrder]").value);
         $.ajax({
             url: '/portShipList', // 서버의 페이지네이션 엔드포인트
             type: 'post',
@@ -413,7 +409,6 @@
                 alert('데이터를 불러오는 데 오류가 발생했습니다.');
             }
         });
-        
     }
     window.onload = function() {
         
@@ -427,81 +422,6 @@
                 });
             }
             shipSearchEvent(thisPage);
-            // const params = new URLSearchParams(window.location.search);
-
-            // const ptSeq = params.get('ptSeq');
-            // $.ajax({
-            //     url: '/portShipList', // 서버의 페이지네이션 엔드포인트
-            //     type: 'post',
-            //     contentType: 'application/json', // JSON 형식으로 데이터 전송
-            //     data: JSON.stringify({ thisPage: thisPage
-            //         ,port_ptSeq:ptSeq
-            //         ,shName:document.querySelector("input[name=shName]").value
-            //         ,shRemain:document.querySelector("#status[name=shRemain]").value
-            //         ,shmin_price:document.querySelector("input[name=shmin_price]").value
-            //         ,shmax_price:document.querySelector("input[name=shmax_price]").value
-            //         ,shDateStart:document.querySelector("input[name=shDateStart]").value
-            //         ,shDateEnd:document.querySelector("input[name=shDateEnd]").value
-            //     }),
-            //     success: function(response) {
-            //         $('#port_shipList').empty(); 
-            //         $.each(response.shipList, function(index, ship) {
-            //             const areaMap = {
-            //                 18: '동해',
-            //                 19: '서해',
-            //                 20: '제주'
-            //             };
-            //             const date = new Date(ship.spStart);
-            //             const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-            //             const formattedPrice = new Intl.NumberFormat('ko-KR').format(ship.spPrice);
-                        
-            //             var shipItem = `
-            //             <div class="card ts-item ts-item__list ts-card">
-            //                 <a href="/v1/ship/shipDetail?spSeq=${ship.spSeq}">
-            //                     <div class="card-img" data-bg-image="${ship.path != null ? ship.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}" style="background-image: url('${ship.path != null ? ship.path : '/usr/v1/template/themeforest-v1.0/assets/img/FishOn_default.png'}');"></div>
-            //                     <div class="card-body">
-            //                         <figure class="ts-item__info">
-            //                             <h4>${ship.spName}</h4>
-            //                             <aside>
-            //                                 <i class="fa fa-ship"></i>
-            //                                 <span>${formattedDate}</span>
-            //                             </aside>
-            //                         </figure>
-
-            //                         <div class="ts-item__info-badge">
-            //                             ${formattedPrice} 원
-            //                         </div>
-
-            //                         <div class="ts-description-lists">
-            //                             <dl>
-            //                                 <dt>대상해역</dt>
-            //                                 <dd>${areaMap[ship.spArea]}</dd>
-            //                             </dl>
-            //                             <dl>
-            //                                 <dt>최대인원</dt>
-            //                                 <dd>${ship.spTotal}</dd>
-            //                             </dl>
-            //                             <dl>
-            //                                 <dt>예약가능인원</dt>
-            //                                 <dd>${ship.spRemain}</dd>
-            //                             </dl>
-            //                         </div>
-            //                     </div>
-            //                     <div class="card-footer">
-            //                         <span class="ts-btn-arrow">자세히보기</span>
-            //                     </div>
-            //                 </a>
-            //             </div>`;
-            //             $('#port_shipList').append(shipItem);
-            //         });
-            //         const paginationContainer = document.querySelector('#ships #pagination-items .pagination');
-            //         const index = '';
-            //         updatePagination(response.thisPage, response.totalPages,paginationContainer ,index);
-            //     },
-            //     error: function() {
-            //         alert('데이터를 불러오는 데 오류가 발생했습니다.');
-            //     }
-            // });
         }
         goList2 = function (thisPage) {
             const listContainer = document.getElementById('mapPointList');
@@ -588,7 +508,6 @@
         inputFields.forEach(selector => {
             document.querySelector(selector).addEventListener("keydown", function(event) {
                 if (event.key === "Enter") {
-                    console.log("Enter");
                     shipSearchEvent(1); 
                 }
             });
