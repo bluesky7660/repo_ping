@@ -28,6 +28,16 @@
 <div class="ts-page-wrapper ts-has-bokeh-bg" id="page-top">
     <div th:replace="~{usr/v1/etc/head :: page-header}"></div>
     <main id="ts-main">
+        <section id="breadcrumb">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/v1/index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">배</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
         <section id="page-title">
             <div class="container">
                 <div class="ts-title">
@@ -39,15 +49,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 navbar-expand-md">
-                        <!-- <button class="btn bg-white mb-4 w-100 d-block d-md-none" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="float-left">
-                                    <i class="fa fa-search mr-2"></i>
-                                    Redefine Search
-                                </span>
-                            <span class="float-right">
-                                    <i class="fa fa-plus small ts-opacity__30"></i>
-                                </span>
-                        </button> -->
                         <aside id="sidebar" class="ts-sidebar collapse navbar-collapse">
                             <section id="sidebar-search-form">
                                 <h3 th:text="${vo.totalRows}+' 건의 검색'"></h3>
