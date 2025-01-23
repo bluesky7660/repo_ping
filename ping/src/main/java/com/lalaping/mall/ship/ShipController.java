@@ -39,7 +39,7 @@ public class ShipController {
 		return "xdm/v1/ship/shipXdmForm";
 	}
 	@RequestMapping(value = "/v1/ship/shipXdmInst")
-	public String shipXdmInst(ShipDto shipDto) {
+	public String shipXdmInst(ShipDto shipDto)throws Exception {
 		shipService.insert(shipDto);
 		return "redirect:/v1/ship/shipXdmList";
 	}

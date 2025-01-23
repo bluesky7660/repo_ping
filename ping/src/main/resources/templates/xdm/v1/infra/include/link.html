@@ -10,6 +10,14 @@
         </div>
     </div>
 </th:block>
+<th:block th:fragment="not-list-link">
+    <div class="btn-toolbar mt-5 justify-content-between">
+        <div>
+            <a href="javascript:void(0);" class="btn btn-danger"><i class="bi bi-x-lg"></i></a>
+            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash"></i></button>
+        </div>
+    </div>
+</th:block>
 <th:block th:fragment="form-link">
     <div class="btn-toolbar mt-5 justify-content-between">
         <div>
