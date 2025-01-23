@@ -59,6 +59,12 @@ public class MapPointController {
 		mapPointService.update(mapPointDto);
 		return "redirect:/v1/mapPoint/mapPointXdmList";
 	}
+	
+	@RequestMapping(value="/v1/mapPoint/mapPointXdmInst")
+	public String mapPointXdmInst(MapPointDto mapPointDto ,FishMappointDto fishMappointDto) throws Exception{
+		mapPointService.insert(mapPointDto, fishMappointDto);
+		return "redirect:/v1/mapPoint/mapPointXdmList";
+	}
 	@RequestMapping(value="/v1/mapPoint/mapPointXdmUelt")
 	public String mapPointXdmUelt(MapPointDto mapPointDto) {
 		mapPointService.uelete(mapPointDto);

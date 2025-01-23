@@ -47,7 +47,12 @@ public class PortController {
 	}
 	@RequestMapping(value = "/v1/port/portXdmInst")
 	public String portXdmInst(PortDto portDto) {
-		portService.insert(portDto);
+		try {
+			portService.insert(portDto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "redirect:/v1/port/portXdmList";
 	}
 	@RequestMapping(value = "/v1/port/portXdmMFom")
