@@ -102,6 +102,7 @@
 		FROM fishandship b
             join fish a on b.fish_fsSeq = a.fsSeq
         WHERE 1=1
+        GROUP BY a.fsSeq
 	 	ORDER BY
      		a.fsRegDate DESC
 	</select>

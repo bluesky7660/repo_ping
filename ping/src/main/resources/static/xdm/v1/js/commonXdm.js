@@ -10,6 +10,7 @@ window.addEventListener('load', function() {
     const codeNullText = "코드이름을 적어주세요.";
     const codeRegExpText = "이름은 한글, 영대소문자, 숫자만 입력해 주세요";
     const inputNullText = "내용을 적어주세요.";
+    const checkboxNullText = "한개 이상 선택해주세요.";
     const selectNullText = "내용을 선택해주세요.";
     const alphaNumRegExpText = "영대소문자, 숫자만 입력해 주세요";
     const orderNullText = "순서를 적어주세요.";
@@ -260,6 +261,7 @@ window.addEventListener('load', function() {
             var i= 0;
             // var validateChk = false;
             var validateChk = [];
+            var checkboxSelected = [];
             for(let element of objs){
                 var objValue = element.value.trim();
                 // const feedback = element.parentElement.querySelector(".invalid-feedback");
@@ -271,10 +273,14 @@ window.addEventListener('load', function() {
                 }else if (element.closest(".required")) {
                     elementBox = element.closest(".required");
                 }
+                if(document.querySelector(".checkboxArea")){
+                    elementBox = document.querySelector(".checkboxArea").closest(".required");
+                }
                 const invalidBoxChk = elementBox.querySelector(".invalid-box");
                 if(invalidBoxChk){
                     elementBox.querySelector(".invalid-box").remove();
                 }
+                
                 elementBox.querySelector("div:not(.invalid-box)").classList.remove("mb-3");
                 console.log("elementBox:",elementBox);
                 const feedbackBox = document.createElement("div");
@@ -290,13 +296,27 @@ window.addEventListener('load', function() {
                 
                 const feedbackChk = elementBox.querySelector(".invalid-child");
                 const feedback = elementBox.querySelector(".invalid-feedback");
-                if (objValue == "" || objValue == null) {
+                console.log("objValue:",objValue);
+                if (element.tagName === 'INPUT' && element.type === 'checkbox') {
+                    if (!element.checked) {
+                        checkboxSelected[i] = false;  
+                    } else {
+                        checkboxSelected[i] = true; 
+                    }
+                }
+
+                if (objValue == "" || objValue == null||(!element.checked && element.type === "checkbox")) {
                     // var waring = feedback.textContent.trim();
                     if(element.tagName ==='INPUT'){
-                        console.log("테스트:",inputNullText);
-                        console.log("feedback:"+feedback);
-                        feedback.textContent = inputNullText;
-                        // alert(inputNullText);
+                        if(element.type =="checkbox"){
+                            console.log("checkbox:",objValue);
+                            console.log("objValue:",objValue);
+                            feedback.textContent = checkboxNullText;
+                        }else{
+                            console.log("테스트:",inputNullText);
+                            console.log("feedback:"+feedback);
+                            feedback.textContent = inputNullText;
+                        }
                     }else if(element.tagName ==='SELECT'){
                         console.log("SELECT:"+feedback);
                         feedback.textContent = selectNullText;
@@ -317,8 +337,10 @@ window.addEventListener('load', function() {
                     if(val == true){
                         validateChk[i] = true;
                         i++;
+                        if(!(element.type =="checkbox")){
+                            element.classList.add('is-valid');
+                        }
                         element.classList.remove('is-invalid');
-                        element.classList.add('is-valid');
                         feedbackChk.classList.remove('is-invalid');
                         elementBox.querySelector("div:not(.invalid-box)").classList.add("mb-3");
                         elementBox.querySelector(".invalid-box").remove();
@@ -335,6 +357,22 @@ window.addEventListener('load', function() {
                     
                 }
             };
+            if (!checkboxSelected.includes(true)) {
+                alert("체크박스를 하나 이상 선택해주세요.");
+                // element.classList.add('is-invalid');
+                // feedbackChk.classList.add('is-invalid');
+                // document.querySelector(".checkboxArea ").closest(".required").querySelector(".invalid-child").classList.add('is-invalid');
+                return false;
+            }else{
+                const elementBox = document.querySelector(".checkboxArea ").closest(".required");
+                elementBox.querySelector(".invalid-child").classList.remove('is-invalid');
+                elementBox.querySelector("div:not(.invalid-box)").classList.add("mb-3");
+                elementBox.querySelector(".invalid-box").remove();
+                const checkboxes = elementBox.querySelectorAll('input[type="checkbox"]');
+                for(let j = 0; j < checkboxes.length; j++){
+                    checkboxes[j].classList.remove('is-invalid');
+                }
+            }
             if(validateChk.includes(false)){
                 alert("검사실패");
                 return false;
