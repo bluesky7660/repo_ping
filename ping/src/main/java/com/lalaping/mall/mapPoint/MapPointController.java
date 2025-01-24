@@ -44,7 +44,8 @@ public class MapPointController {
 		return "xdm/v1/mapPoint/mapPointXdmList";
 	}
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmForm")
-	public String mapPointXdmForm(Model model) {
+	public String mapPointXdmForm(Model model, FishVo fishVo) {
+		model.addAttribute("fishList",fishService.allList(fishVo));
 		model.addAttribute("listLink", "mapPointXdmList");
 		return "xdm/v1/mapPoint/mapPointXdmForm";
 	}

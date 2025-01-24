@@ -118,6 +118,15 @@
 														<label for="inputCodeDesc" class="form-label">포인트글</label>
 														<textarea class="form-control exclude-validation" id="inputMpText" name="mpText" placeholder="포인트 설명, 글" rows="5"></textarea>
 													</div>
+													<div class="required mb-3">
+														<label for="FishList" class="form-label">잡히는 어종</label>
+														<div class="FishList checkboxArea d-flex flex-wrap justify-content-between row-gap-3 mb-3">
+															<div class="FishItem d-flex gap-1 flex-grow-1 w-25" th:each="fish : ${fishList}">
+																<input type="checkbox" name="fsSeqList" class="form-check-input validate-this" th:id="${'ch_'+fishStat.count}" th:value="${fish.fsSeq}">
+																<label th:for="${'ch_'+fishStat.count}" th:text="${fish.fsName}" style="white-space: nowrap;"></label>
+															</div>
+														</div>
+													</div>
 												</div>
 												<div class="col-xl-6 col-md-8 col-12">
 													<div id="map" style="height:300px; border:1px solid #aaa"></div>

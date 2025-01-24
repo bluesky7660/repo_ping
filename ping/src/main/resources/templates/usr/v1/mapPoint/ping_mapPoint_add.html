@@ -108,7 +108,8 @@
                                 <h3 class="text-muted border-bottom">추가 정보</h3>
                                 <div id="fishList-checkboxes" class="fishList-checkboxes">
                                     <h6 class="mb-3">잡히는 어종</h6>
-                                    <aside class="mb-3">최대 선택 3개 제한</aside> <div class="ts-column-count-3">
+                                    <aside class="mb-3">최대 선택 3개 제한</aside> 
+                                    <div class="ts-column-count-3">
                                         <div class="custom-control custom-checkbox" th:each="fishList:${fishList}">
                                             <input type="checkbox" class="custom-control-input" th:id="${'ch_'+fishListStat.count}" name="fsSeqList" th:value="${fishList.fsSeq}">
                                             <label class="custom-control-label" th:for="${'ch_'+fishListStat.count}" th:text="${fishList.fsName}"></label>
