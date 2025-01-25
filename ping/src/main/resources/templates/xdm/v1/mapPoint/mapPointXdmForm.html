@@ -101,7 +101,7 @@
 													<div class="mb-3">
 														<label for="sample5_address" class="form-label">주소</label>
 														<div class="input-group">
-															<input type="text" class="form-control border-right-0" id="sample5_address" name="mpAddress" placeholder="주소" readonly>
+															<input type="text" class="form-control validate-this border-right-0" id="sample5_address" name="mpAddress" placeholder="주소" readonly>
 															<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 															<input type="hidden" id="mpLatitude" name="mpLatitude" >
 															<input type="hidden" id="mpLongitude" name="mpLongitude">
@@ -114,13 +114,16 @@
 											</div>
 											<div class="row">
 												<div class="col-xl-6 col-md-8 col-12">
-													<div class="mb-3">
-														<label for="inputCodeDesc" class="form-label">포인트글</label>
-														<textarea class="form-control exclude-validation" id="inputMpText" name="mpText" placeholder="포인트 설명, 글" rows="5"></textarea>
+													<div class="required mb-3">
+														<label for="inputCodeDesc" class="form-label">포인트설명 / 글</label>
+														<textarea class="form-control validate-this" id="inputMpText" name="mpText" placeholder="포인트 설명, 글" rows="5"></textarea>
+														<div class="invalid-feedback">
+															포인트설명 / 글을 적어주세요.
+														</div>
 													</div>
 													<div class="required mb-3">
 														<label for="FishList" class="form-label">잡히는 어종</label>
-														<div class="FishList checkboxArea d-flex flex-wrap justify-content-between row-gap-3 mb-3">
+														<div class="FishList checkboxArea d-flex flex-wrap justify-content-between row-gap-3 mb-3 p-3">
 															<div class="FishItem d-flex gap-1 flex-grow-1 w-25" th:each="fish : ${fishList}">
 																<input type="checkbox" name="fsSeqList" class="form-check-input validate-this" th:id="${'ch_'+fishStat.count}" th:value="${fish.fsSeq}">
 																<label th:for="${'ch_'+fishStat.count}" th:text="${fish.fsName}" style="white-space: nowrap;"></label>
