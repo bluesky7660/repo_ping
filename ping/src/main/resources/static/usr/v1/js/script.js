@@ -598,7 +598,7 @@ window.addEventListener('load', function() {
                 const selectedCount = Array.from(checkboxes).filter((cb) => cb.checked).length;
     
                 if (selectedCount > maxSelection) {
-                    alert(`You can only select up to ${maxSelection} options.`);
+                    alert(`어종은 최대 ${maxSelection}종류 까지만 선택해주세요.`);
                     checkbox.checked = false; // 선택을 취소
                 }
             });

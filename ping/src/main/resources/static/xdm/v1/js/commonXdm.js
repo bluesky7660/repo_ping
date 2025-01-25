@@ -259,6 +259,7 @@ window.addEventListener('load', function() {
         btnSubmit.onclick = function (){
             var objs = document.querySelectorAll(".validate-this");
             var i= 0;
+            let j= 0;
             // var validateChk = false;
             var validateChk = [];
             var checkboxSelected = [];
@@ -299,53 +300,35 @@ window.addEventListener('load', function() {
                 console.log("objValue:",objValue);
                 if (element.tagName === 'INPUT' && element.type === 'checkbox') {
                     if (!element.checked) {
-                        checkboxSelected[i] = false;  
+                        checkboxSelected[j] = false;
+                        j++;
                     } else {
-                        checkboxSelected[i] = true; 
+                        checkboxSelected[j] = true;
+                        j++;
                     }
                 }
-
-                if (objValue == "" || objValue == null||(!element.checked && element.type === "checkbox")) {
-                    // var waring = feedback.textContent.trim();
-                    if(element.tagName ==='INPUT'){
-                        if(element.type =="checkbox"){
-                            console.log("checkbox:",objValue);
-                            console.log("objValue:",objValue);
-                            feedback.textContent = checkboxNullText;
-                        }else{
+                if(!(element.type === "checkbox")){
+                    if (objValue == "" || objValue == null) {
+                        // var waring = feedback.textContent.trim();
+                        if(element.tagName ==='INPUT'){
+                            // if(element.type =="checkbox"){
+                            //     console.log("checkbox:",objValue);
+                            //     console.log("objValue:",objValue);
+                            //     feedback.textContent = checkboxNullText;
+                            // }else{
+                            //     console.log("테스트:",inputNullText);
+                            //     console.log("feedback:"+feedback);
+                            //     feedback.textContent = inputNullText;
+                            // }
                             console.log("테스트:",inputNullText);
                             console.log("feedback:"+feedback);
                             feedback.textContent = inputNullText;
+                        }else if(element.tagName ==='SELECT'){
+                            console.log("SELECT:"+feedback);
+                            feedback.textContent = selectNullText;
+                            // alert(selectNullText);
                         }
-                    }else if(element.tagName ==='SELECT'){
-                        console.log("SELECT:"+feedback);
-                        feedback.textContent = selectNullText;
-                        // alert(selectNullText);
-                    }
-                    
-                    if(i==0){
-                        element.focus();
-                    }
-                    validateChk[i] = false;
-                    i++;
-                    element.classList.add('is-invalid');
-                    feedbackChk.classList.add('is-invalid');
-                } else {
-                    //by pass
-                    var val  = RegExps(element,objValue,feedback);
-                    console.log("체크");
-                    if(val == true){
-                        validateChk[i] = true;
-                        i++;
-                        if(!(element.type =="checkbox")){
-                            element.classList.add('is-valid');
-                        }
-                        element.classList.remove('is-invalid');
-                        feedbackChk.classList.remove('is-invalid');
-                        elementBox.querySelector("div:not(.invalid-box)").classList.add("mb-3");
-                        elementBox.querySelector(".invalid-box").remove();
-                    }else{
-                        // feedback.textContent = codeRegExpText;
+                        
                         if(i==0){
                             element.focus();
                         }
@@ -353,26 +336,104 @@ window.addEventListener('load', function() {
                         i++;
                         element.classList.add('is-invalid');
                         feedbackChk.classList.add('is-invalid');
+                    } else {
+                        //by pass
+                        var val  = RegExps(element,objValue,feedback);
+                        console.log("체크");
+                        if(val == true){
+                            validateChk[i] = true;
+                            i++;
+                            if(!(element.type =="checkbox")){
+                                element.classList.add('is-valid');
+                            }
+                            element.classList.remove('is-invalid');
+                            feedbackChk.classList.remove('is-invalid');
+                            elementBox.querySelector("div:not(.invalid-box)").classList.add("mb-3");
+                            elementBox.querySelector(".invalid-box").remove();
+                        }else{
+                            // feedback.textContent = codeRegExpText;
+                            if(i==0){
+                                element.focus();
+                            }
+                            validateChk[i] = false;
+                            i++;
+                            element.classList.add('is-invalid');
+                            feedbackChk.classList.add('is-invalid');
+                        }
+                        
                     }
-                    
                 }
             };
+            console.log("i:",i);
             if (!checkboxSelected.includes(true)) {
                 alert("체크박스를 하나 이상 선택해주세요.");
-                // element.classList.add('is-invalid');
-                // feedbackChk.classList.add('is-invalid');
-                // document.querySelector(".checkboxArea ").closest(".required").querySelector(".invalid-child").classList.add('is-invalid');
+                const elementBox = document.querySelector(".checkboxArea ").closest(".required");
+
+                const checkboxes = elementBox.querySelectorAll('input[type="checkbox"]');
+                for(let k = 0; k < checkboxes.length; k++){
+                    checkboxes[k].classList.add('is-invalid');
+                }
+
+                elementBox.querySelector(".invalid-feedback").textContent = checkboxNullText;
+                if(document.querySelector(".invalid-icon")){
+                    document.querySelector(".invalid-icon").remove();
+                }
+                if(document.querySelector(".valid-icon")){
+                    document.querySelector(".valid-icon").remove();
+                }
+                const formLabel = elementBox.querySelector(".form-label");
+                const imageBox = document.createElement("span");
+                imageBox.className = "invalid-icon";
+                imageBox.style.marginLeft = "10px";
+                imageBox.style.display = "inline-block";
+                imageBox.style.width = "17px";
+                imageBox.style.height = "17px";
+                imageBox.style.backgroundImage = "url('data:image/svg+xml,%3csvg%20xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox=%270%200%2012%2012%27%20width=%2712%27%20height=%2712%27%20fill=%27none%27%20stroke=%27%23f87957%27%3e%3ccircle%20cx=%276%27%20cy=%276%27%20r=%274.5%27/%3e%3cpath%20stroke-linejoin=%27round%27%20d=%27M5.8%203.6h.4L6%206.5z%27/%3e%3ccircle%20cx=%276%27%20cy=%278.2%27%20r=%27.6%27%20fill=%27%23f87957%27%20stroke=%27none%27/%3e%3c/svg%3e')";
+                imageBox.style.backgroundRepeat = "no-repeat";
+                imageBox.style.backgroundSize = "calc(0.75em + 0.375rem) calc(0.75em + 0.375rem)";
+                formLabel.insertAdjacentElement('afterend', imageBox);
+                validateChk[i] = false;
                 return false;
             }else{
                 const elementBox = document.querySelector(".checkboxArea ").closest(".required");
+                if(document.querySelector(".invalid-icon")){
+                    document.querySelector(".invalid-icon").remove();
+                }
+                if(elementBox.querySelector(".valid-icon")){
+                    document.querySelector(".valid-icon").remove();
+                }
+                if(elementBox.querySelector(".invalid-icon")){
+                    elementBox.querySelector(".invalid-icon").style.backgroundImage = "url('data:image/svg+xml,%3csvg%20xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox=%270%200%208%208%27%3e%3cpath%20fill=%27%2326ba4f%27%20d=%27M2.3%206.73.6%204.53c-.4-1.04.46-1.4%201.1-.8l1.1%201.4%203.4-3.8c.6-.63%201.6-.27%201.2.7l-4%204.6c-.43.5-.8.4-1.1.1z%27/%3e%3c/svg%3e')";
+                    elementBox.querySelector(".invalid-icon").className = "valid-icon";
+                }else{
+                    const formLabel = elementBox.querySelector(".form-label");
+                    const imageBox = document.createElement("span");
+                    imageBox.className = "valid-icon";
+                    imageBox.style.marginLeft = "10px";
+                    imageBox.style.display = "inline-block";
+                    imageBox.style.width = "17px";
+                    imageBox.style.height = "17px";
+                    imageBox.style.backgroundImage = "url('data:image/svg+xml,%3csvg%20xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox=%270%200%208%208%27%3e%3cpath%20fill=%27%2326ba4f%27%20d=%27M2.3%206.73.6%204.53c-.4-1.04.46-1.4%201.1-.8l1.1%201.4%203.4-3.8c.6-.63%201.6-.27%201.2.7l-4%204.6c-.43.5-.8.4-1.1.1z%27/%3e%3c/svg%3e')";
+                    imageBox.style.backgroundRepeat = "no-repeat";
+                    imageBox.style.backgroundSize = "calc(0.75em + 0.375rem) calc(0.75em + 0.375rem)";
+                    formLabel.insertAdjacentElement('afterend', imageBox);
+                }
+                
                 elementBox.querySelector(".invalid-child").classList.remove('is-invalid');
                 elementBox.querySelector("div:not(.invalid-box)").classList.add("mb-3");
-                elementBox.querySelector(".invalid-box").remove();
-                const checkboxes = elementBox.querySelectorAll('input[type="checkbox"]');
-                for(let j = 0; j < checkboxes.length; j++){
-                    checkboxes[j].classList.remove('is-invalid');
+                if(elementBox.querySelector(".invalid-box")){
+                    elementBox.querySelector(".invalid-box").remove();
                 }
+                const checkboxes = elementBox.querySelectorAll('input[type="checkbox"]');
+                for(let k = 0; k < checkboxes.length; k++){
+                    checkboxes[k].classList.remove('is-invalid');
+                }
+                // if(document.querySelector(".invalid-icon")){
+                //     document.querySelector(".invalid-icon").remove();
+                // }
+                validateChk[i] = true;
             }
+            console.log("validateChk:",validateChk);
             if(validateChk.includes(false)){
                 alert("검사실패");
                 return false;
@@ -548,4 +609,20 @@ window.addEventListener('load', function() {
             event.preventDefault(); // 오른쪽 클릭 메뉴 방지
         });
     });
+
+    /*체크 박스[어종 선택제한 최대 3개] */
+    const checkboxes = document.querySelectorAll('input[name="fsSeqList"]');
+    const maxSelection = 3;
+    if(checkboxes){
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener("change", () => {
+                const selectedCount = Array.from(checkboxes).filter((cb) => cb.checked).length;
+    
+                if (selectedCount > maxSelection) {
+                    alert(`어종은 최대 ${maxSelection}종류 까지만 선택해주세요.`);
+                    checkbox.checked = false; // 선택을 취소
+                }
+            });
+        });
+    }
 });

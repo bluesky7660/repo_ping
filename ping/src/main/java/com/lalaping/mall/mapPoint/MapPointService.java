@@ -104,9 +104,6 @@ public class MapPointService {
 				String path = pathModule + "/" + type + "/" + pathDate + "/";
 				System.out.println("Final Path: " + path);
 
-//				String pathForView = Constants.UPLOADED_PATH_PREFIX_FOR_VIEW_LOCAL + "/" + pathModule + "/" + type + "/" + pathDate + "/";
-				
-				
 		        ObjectMetadata metadata = new ObjectMetadata();
 		        metadata.setContentLength(multipartFiles[i].getSize());
 		        metadata.setContentType(multipartFiles[i].getContentType());
@@ -144,7 +141,6 @@ public class MapPointService {
 			fishMappointDto.setFish_fsSeq(fsSeq);
 			fishMappointDao.mappointFishInsert(fishMappointDto);
 		}
-		
 		
 		return a;
 	}
