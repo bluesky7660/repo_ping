@@ -11,6 +11,7 @@ import com.lalaping.infra.code.CodeVo;
 public interface FishDao {
 	public List<FishDto> selectList(FishVo vo);
 	public List<FishDto> shipFishList(FishVo vo);
+	public List<FishDto> mapFishList(FishVo vo);
 	public List<FishDto> allList(FishVo vo);
 	public List<FishDto> allOneList(FishVo vo);
 	public int insert(FishDto fishDto);

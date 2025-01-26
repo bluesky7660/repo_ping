@@ -16,6 +16,7 @@ public class MapPointDto extends FileDto {
 	private Date mpRegDate;
 	
 	private String fsNameList;
+	private String fsSeqList;
 	private String season_ssSeq;
 	private Double distanceIn;
 //	---------------------------------
@@ -91,6 +92,12 @@ public class MapPointDto extends FileDto {
 	}
 	public void setDistanceIn(Double distanceIn) {
 		this.distanceIn = distanceIn;
+	}
+	public String getFsSeqList() {
+		return fsSeqList;
+	}
+	public void setFsSeqList(String fsSeqList) {
+		this.fsSeqList = fsSeqList;
 	}
 
 }
