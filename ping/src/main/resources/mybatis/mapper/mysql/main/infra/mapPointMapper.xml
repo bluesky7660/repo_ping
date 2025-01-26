@@ -337,7 +337,7 @@
     </insert>
     
     <select id="selectOne">
-    	SELECT
+    	<!-- SELECT
     		a.mpSeq
     		,a.mpTitle
     		,a.mpText
@@ -348,6 +348,23 @@
     		,a.mpLatitude
     		,a.mpLongitude
    		FROM mappoint a
+   		WHERE 1=1
+   		AND mpSeq = #{mpSeq} -->
+   		SELECT
+    		a.mpSeq
+    		,a.mpTitle
+    		,a.mpText
+    		,a.mpAddress
+    		,a.mpType
+    		,a.mpDelNy
+    		,a.mpRegDate
+    		,a.mpLatitude
+    		,a.mpLongitude
+    		,GROUP_CONCAT(b.fish_fsSeq ORDER BY b.fish_fsSeq) AS fsSeqList
+    		,p.path
+   		FROM mappoint a
+   		left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
+   		left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
    		WHERE 1=1
    		AND mpSeq = #{mpSeq}
     </select>

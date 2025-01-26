@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lalaping.common.util.UtilDateTime;
+import com.lalaping.mall.fish.FishDto;
 import com.lalaping.mall.fish.FishService;
 import com.lalaping.mall.fish.FishVo;
 import com.lalaping.mall.fishMappoint.FishMappointDao;
@@ -50,8 +51,11 @@ public class MapPointController {
 		return "xdm/v1/mapPoint/mapPointXdmForm";
 	}
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmMFom")
-	public String mapPointXdmMFom(Model model,MapPointDto mapPointDto) {
+	public String mapPointXdmMFom(Model model,MapPointDto mapPointDto, FishVo fishVo) {
 		model.addAttribute("item",mapPointService.selectOne(mapPointDto));
+//		model.addAttribute("selectFish",mapPointService.selectOne(mapPointDto).getFsSeqList());
+		System.out.println("fsSeqList:"+mapPointService.selectOne(mapPointDto).getFsSeqList());
+		model.addAttribute("fishList",fishService.allList(fishVo));
 		model.addAttribute("listLink", "mapPointXdmList");
 		return "xdm/v1/mapPoint/mapPointXdmMFom";
 	}
