@@ -433,7 +433,6 @@ window.addEventListener('load', function() {
                 if(invalidBoxChk){
                     elementBox.querySelector(".invalid-box").remove();
                 }
-                // console.log("elementBox:" +elementBox.outerHTML);
                 const feedbackBox = document.createElement("div");
                 const feedbackChild = document.createElement("div");
                 const feedbackinner = document.createElement("div");

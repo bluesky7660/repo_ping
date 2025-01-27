@@ -53,8 +53,6 @@ public class MapPointController {
 	@RequestMapping(value = "/v1/mapPoint/mapPointXdmMFom")
 	public String mapPointXdmMFom(Model model,MapPointDto mapPointDto, FishVo fishVo) {
 		model.addAttribute("item",mapPointService.selectOne(mapPointDto));
-//		model.addAttribute("selectFish",mapPointService.selectOne(mapPointDto).getFsSeqList());
-		System.out.println("fsSeqList:"+mapPointService.selectOne(mapPointDto).getFsSeqList());
 		model.addAttribute("fishList",fishService.allList(fishVo));
 		model.addAttribute("listLink", "mapPointXdmList");
 		return "xdm/v1/mapPoint/mapPointXdmMFom";

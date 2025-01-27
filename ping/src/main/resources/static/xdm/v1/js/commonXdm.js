@@ -364,7 +364,6 @@ window.addEventListener('load', function() {
                     }
                 }
             };
-            console.log("i:",i);
             if (!checkboxSelected.includes(true)) {
                 alert("체크박스를 하나 이상 선택해주세요.");
                 const elementBox = document.querySelector(".checkboxArea ").closest(".required");
@@ -428,9 +427,6 @@ window.addEventListener('load', function() {
                 for(let k = 0; k < checkboxes.length; k++){
                     checkboxes[k].classList.remove('is-invalid');
                 }
-                // if(document.querySelector(".invalid-icon")){
-                //     document.querySelector(".invalid-icon").remove();
-                // }
                 validateChk[i] = true;
             }
             console.log("validateChk:",validateChk);
@@ -450,7 +446,6 @@ window.addEventListener('load', function() {
     if (logoutBtn) {
         logoutBtn.onclick = function (){
             //ajax 로그아웃
-           
             $.ajax({
                 async : true, 
                 cache : false, 
@@ -476,9 +471,7 @@ window.addEventListener('load', function() {
         console.log("클래스: "+element.classList);
         if (element.classList.contains('valid-korean-alpha-num')) {
             console.log("특문빼고");
-            
             if(!krAlphaNumRegExp.test(objValue)){
-                // alert(codeRegExpText);
                 feedback.textContent = codeRegExpText;
                 element.focus();
                 return false;
@@ -488,9 +481,7 @@ window.addEventListener('load', function() {
             }
         } else if (element.classList.contains('valid-alpha-num')) {
             console.log("한글빼고");
-            
             if(!alphaNumRegExp.test(objValue)){
-                alert(alphaNumRegExpText);
                 feedback.textContent = alphaNumRegExpText;
                 element.focus();
                 return false;
@@ -500,9 +491,7 @@ window.addEventListener('load', function() {
             }
         } else if (element.classList.contains('valid-numeric')) {
             console.log("숫자만");
-            
             if(!numericRegExp.test(objValue)){
-                alert(numRegExpText);
                 feedback.textContent = numRegExpText;
                 element.focus();
                 return false;
@@ -513,29 +502,19 @@ window.addEventListener('load', function() {
         }
         else if (element.classList.contains('valid-email')) {
             console.log("이메일만");
-            
-            //정규식
-            //https://choijying21.tistory.com/entry/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%9E%90%EC%A3%BC-%EC%93%B0%EB%8A%94-%EC%A0%95%EA%B7%9C%EC%8B%9D-%EB%AA%A8%EC%9D%8C-%EC%9D%B4%EB%A9%94%EC%9D%BC-%ED%95%B8%EB%93%9C%ED%8F%B0-%EC%A3%BC%EB%AF%BC%EB%B2%88%ED%98%B8-%EB%93%B1
-
             if(!emailRegExp.test(objValue)){
                 var text = "이메일 형식에 따라 정확히 입력해주세요";
-                //alert(text);
                 feedback.textContent = text;
                 element.focus();
                 return false;
             } else {
     // 	    	by pass
-                //alert("정규식 통과");
                 return true;
             }
         } else if (element.classList.contains('valid-birth-num')) {
             console.log("생년월일만");
-            
-//출처: https://choijying21.tistory.com/entry/자바스크립트-자주-쓰는-정규식-모음-이메일-핸드폰-주민번호-등 [JDevelog:티스토리]
-            console.log("생일: "+objValue);
             if(!birthRegExp.test(objValue)){
                 var text = "정확한 생년월일 8자리를 입력해주세요";
-                //alert(text);
                 feedback.textContent = text;
                 element.focus();
                 return false;
@@ -548,7 +527,6 @@ window.addEventListener('load', function() {
             console.log("아이디형식");
             if(!idRegExp.test(objValue)){
                 var text = "아이디는 5~15자의 영대소문자와 숫자만 포함해야 합니다.";
-                //alert(text);
                 feedback.textContent = text;
                 element.focus();
                 return false;
@@ -558,7 +536,6 @@ window.addEventListener('load', function() {
             }
         }else if (element.classList.contains('valid-user-name')) {
             console.log("한글만");
-            
             if(!krNameRegExp.test(objValue)){
                 var text = "최소 2자 이상, 최대 4자의 한글만 입력해주세요";
                 feedback.textContent = text;
@@ -571,10 +548,8 @@ window.addEventListener('load', function() {
         }
         else if (element.classList.contains('valid-phone-num')) {
             console.log("핸드폰번호 숫자만");
-            
             if(!phoneRegExp.test(objValue)){
                 var text = "정확한 핸드폰번호를 입력해주세요: - 제외";
-                //alert(text);
                 feedback.textContent = text;
                 element.focus();
                 return false;
@@ -584,10 +559,8 @@ window.addEventListener('load', function() {
             }
         }else if (element.classList.contains('valid-dateTime')) {
             console.log("년-월-일 시:분만 입력");
-            
             if(!dateTimeRegExp.test(objValue)){
                 var text = "정확한 년-월-일 시:분 형식 입력해주세요";
-                //alert(text);
                 feedback.textContent = text;
                 element.focus();
                 return false;
@@ -599,7 +572,6 @@ window.addEventListener('load', function() {
             console.log("else 통과");
             return true;
         }
-    
     }
 
     const sidebarDropdown = document.querySelectorAll(".sidebar-dropdown > a");
