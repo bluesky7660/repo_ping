@@ -90,7 +90,7 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputspPrice" class="form-label">가격</label>
-														<input type="text" class="valid-korean-alpha-num form-control validate-this" id="inputspPrice" name="spPrice" placeholder="숫자임의입력" required>
+														<input type="text" class="form-control validate-this valid-numeric" id="inputspPrice" name="spPrice" placeholder="숫자만" required>
 														<div class="invalid-feedback">
 															가격을 적어주세요.
 														</div>
@@ -99,7 +99,7 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputspTotal" class="form-label">총인원</label>
-														<input type="text" class="form-control" id="inputspTotal" name="spTotal" placeholder="총인원" required>
+														<input type="text" class="form-control validate-this valid-numeric" id="inputspTotal" name="spTotal" placeholder="숫자만" required>
 														<div class="invalid-feedback">
 															총인원을 적어주세요.
 														</div>
@@ -108,7 +108,7 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputspStart" class="form-label">출발일</label>
-														<input type="text" class="form-control" id="inputspStart" name="spStart" placeholder="출발일" required>
+														<input type="text" class="form-control validate-this valid-dateTime" id="inputspStart" name="spStart" placeholder="출발일" required>
 														<div class="invalid-feedback">
 															출발일를 적어주세요.
 														</div>
@@ -119,9 +119,9 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputspArea" class="form-label">해역</label>
-														<select class="form-select validate-this valid-gender" id="inputspArea" name="spArea" required>
+														<select class="form-select validate-this" id="inputspArea" name="spArea" required>
 															<option value="" selected disabled>해역을 선택하세요</option>
-															<option th:each="list : ${@codeService.selectListCachedCode(5)}" th:value="${list.cdSeq}" th:text="${list.cdName}"></option>
+															<option th:each="list : ${@codeService.selectListCachedCode(4)}" th:value="${list.cdSeq}" th:text="${list.cdName}"></option>
 														</select>
 														<div class="invalid-feedback">
 															해역을 선택해주세요.
@@ -131,7 +131,7 @@
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">
 														<label for="inputport_ptSeq" class="form-label">항구명</label>
-														<select class="form-select" id="inputport_ptSeq" name="ptSeq" required>
+														<select class="form-select validate-this" id="inputport_ptSeq" name="ptSeq" required>
 															<option value="" selected disabled>선택하세요</option>
 															<option th:each="port : ${list}" th:value="${port.ptSeq}" th:text="${port.ptName}"></option>
 														</select>
@@ -142,7 +142,7 @@
 												</div>
 												<div class="required col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
 													<div class="mb-3">	
-														<label for="inputspEatNy" class="form-label">식사</label>
+														<label for="inputspEatNy" class="form-label">식사제공</label>
 														<select class="form-select validate-this" id="inputspEatNy" name="spEatNy" required>
 															<option value="" selected disabled>선택하세요</option>
 															<option value="1">Y</option>
@@ -168,6 +168,17 @@
 												</div>
 											</div>
 											<div class="row">
+												<div class="col-xl-6 col-md-8 col-12">
+													<div class="required mb-3">
+														<label for="FishList" class="form-label">잡히는 어종</label>
+														<div class="FishList checkboxArea d-flex flex-wrap justify-content-between row-gap-3 mb-3 p-3">
+															<div class="FishItem d-flex gap-1 flex-grow-1 w-25" th:each="fish : ${fishList}">
+																<input type="checkbox" name="fsSeqList" class="form-check-input validate-this" th:id="${'ch_'+fishStat.count}" th:value="${fish.fsSeq}">
+																<label th:for="${'ch_'+fishStat.count}" th:text="${fish.fsName}" style="white-space: nowrap;"></label>
+															</div>
+														</div>
+													</div>
+												</div>
 												<div class="col-xl-6 col-md-8 col-12">
 													<label for="uploadFiles" class="form-label fs--1">file</label>
 													<input type="file" id="uploadFiles" name="uploadFiles" multiple class="form-control"/>

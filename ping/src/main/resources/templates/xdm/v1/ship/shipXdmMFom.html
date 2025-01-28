@@ -178,6 +178,17 @@
 											</div>
 											<div class="row">
 												<div class="col-xl-6 col-md-8 col-12">
+													<div class="required mb-3">
+														<label for="FishList" class="form-label">잡히는 어종</label>
+														<div class="FishList checkboxArea d-flex flex-wrap justify-content-between row-gap-3 mb-3 p-3">
+															<div class="FishItem d-flex gap-1 flex-grow-1 w-25" th:each="fish : ${fishList}">
+																<input type="checkbox" name="fsSeqList" class="form-check-input validate-this" th:id="${'ch_'+fishStat.count}" th:value="${fish.fsSeq}" th:checked="${#lists.contains(item.fsSeqList, fish.fsSeq)}">
+																<label th:for="${'ch_'+fishStat.count}" th:text="${fish.fsName}" style="white-space: nowrap;"></label>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-xl-6 col-md-8 col-12">
 													<label for="uploadFiles" class="form-label fs--1">file</label>
 													<input type="file" id="uploadFiles" name="uploadFiles" multiple class="form-control"/>
 													<div class="invalid-feedback" id="uploadFilesFeedback"></div>

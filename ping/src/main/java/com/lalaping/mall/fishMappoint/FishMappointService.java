@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.lalaping.mall.fish.FishDao;
 import com.lalaping.mall.mapPoint.MapPointDao;
-import com.lalaping.mall.mapPoint.MapPointDto;
 
 @Service
 public class FishMappointService {
