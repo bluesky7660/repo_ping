@@ -292,6 +292,7 @@
 		,d.ptName
 		,d.ptLatitude
 		,d.ptLongitude
+		,GROUP_CONCAT(DISTINCT c.fsSeq ORDER BY c.fsSeq) AS fsSeqList
 		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
 		FROM ship a
 		left join fishandship b on b.ship_spSeq = a.spSeq
@@ -313,7 +314,6 @@
 		,spArea = #{spArea}
 		,spEatNy = #{spEatNy}
 		,spRentalNy = #{spRentalNy}
-		,spRegDate = #{spRegDate}
 		,port_ptSeq = #{port_ptSeq}
 		WHERE 1=1
 		AND spSeq = #{spSeq}

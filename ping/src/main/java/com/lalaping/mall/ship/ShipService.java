@@ -106,6 +106,19 @@ public class ShipService {
 				
 				shipDao.insertUploaded(shipDto);
 			}
+			
+		}
+		fishMappointDto.setMapPoint_mpSeq(mapPointDto.getMpSeq());
+		int i=0;
+		for(String fsSeq :fishMappointDto.getFsSeqList()) {
+			i=+1;
+			System.out.println("fsOrder:"+i);
+			System.out.println("fish_fsSeq[getFsSeqList]:"+fsSeq);
+			System.out.println("delNy:"+0);
+			System.out.println("mapPoint_mpSeq:"+fishMappointDto.getMapPoint_mpSeq());
+			fishMappointDto.setFsOrder(i);
+			fishMappointDto.setFish_fsSeq(fsSeq);
+			fishMappointDao.mappointFishInsert(fishMappointDto);
 		}
 		return result;
 	}

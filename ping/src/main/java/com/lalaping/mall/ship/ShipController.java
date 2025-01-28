@@ -33,8 +33,9 @@ public class ShipController {
 		return "xdm/v1/ship/shipXdmList";
 	}
 	@RequestMapping(value = "/v1/ship/shipXdmForm")
-	public String shipXdmForm(Model model,PortVo portVo) {
+	public String shipXdmForm(Model model,PortVo portVo, FishVo fishVo) {
 		model.addAttribute("list", portService.selectList(portVo));
+		model.addAttribute("fishList",fishService.allList(fishVo));
 		model.addAttribute("listLink", "shipXdmList");
 		return "xdm/v1/ship/shipXdmForm";
 	}
@@ -44,8 +45,9 @@ public class ShipController {
 		return "redirect:/v1/ship/shipXdmList";
 	}
 	@RequestMapping(value = "/v1/ship/shipXdmMFom")
-	public String shipXdmMFom(Model model,ShipDto shipDto) {
+	public String shipXdmMFom(Model model,ShipDto shipDto, FishVo fishVo) {
 		model.addAttribute("item",shipService.selectOne(shipDto));
+		model.addAttribute("fishList",fishService.allList(fishVo));
 		model.addAttribute("port",portService.allList());
 		model.addAttribute("listLink", "shipXdmList");
 		return "xdm/v1/ship/shipXdmMFom";
