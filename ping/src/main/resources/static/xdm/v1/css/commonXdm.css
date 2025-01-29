@@ -236,6 +236,14 @@ table .td_spotlight a:hover{
 #kakaoLoginBtn{
     background-color: rgba(254, 229, 0,0.5);
 }
+
+/*회원가입*/
+.signup-box{
+    margin: 50px auto;
+}
+.signup-area{
+    margin-top: 200px;
+}
  
 /*페이징관련*/
 .page-item .page-link {

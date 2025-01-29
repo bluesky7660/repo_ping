@@ -30,11 +30,11 @@
 		<link rel="stylesheet" href="/xdm/v1/template/arise-v1.0/assets/css/main.min.css">
 		<!-- by developer -->
 		<link rel="stylesheet" href="/xdm/v1/css/commonXdm.css">
-
+		<link rel="stylesheet" href="/xdm/v1/css/datetimepicker/jquery.datetimepicker.min.css">
 	</head>
 
 	<body class="login-container signup-container">
-		<form method="post" action="/v1/member/staffMemberXdmInst" class="needs-validation" novalidate>
+		<form method="post" action="/v1/member/staffMemberXdmInst" class="needs-validation signup-area" novalidate >
 			<div class="login-box signup-box">
 				<div class="login-form signup-form">
 					<div class="login-logo signup-logo" onclick="window.location.href='/v1/dashboard'">
@@ -62,8 +62,8 @@
 					<div class="mb-3">
 						<label class="form-label" for="register_gender">성별</label>
 						<div>
-							<select class="custom-select validate-this valid-gender" id="register_gender" name="gender" required>
-								<option value="">성별을 선택하세요.</option>
+							<select class="form-select validate-this valid-gender" id="register_gender" name="gender" required>
+								<option value="" disabled>성별을 선택하세요.</option>
 								<option th:each="gender: ${@codeService.selectListCachedCode(1)}" th:value="${gender.cdSeq}" th:text="${gender.cdName}"></option>
 							</select>
 						</div>
@@ -99,7 +99,17 @@
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/main.js"></script>
 		<script src="/xdm/v1/template/arise-v1.0/assets/js/validations.js"></script>
 		<!-- by developer -->
+		<script src="/xdm/v1/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
 		<script src="/xdm/v1/js/commonXdm.js"></script>
+		<script>
+			window.addEventListener('load',function() {
+				$.datetimepicker.setLocale('ko');
+				$("#register_birthDay").datetimepicker({
+					timepicker:false,
+					format:'Y-m-d'
+				});
+			})
+		</script>
 	</body>
 
 </html>
