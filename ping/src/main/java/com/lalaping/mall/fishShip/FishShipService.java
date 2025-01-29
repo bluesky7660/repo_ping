@@ -18,15 +18,6 @@ public class FishShipService {
 	FishShipDao fishShipDao;
 	
 	public int ShipFishInsert(FishShipDto fishShipDto) {
-		int i= 0;
-		for (String fsSeq:fishShipDto.getFsSeqList()) {
-			i=+1;
-			System.out.println("fsOrder:"+i);
-			System.out.println("fish_fsSeq[getFsSeqList]:"+fsSeq);
-			System.out.println("delNy:"+0);
-			System.out.println("ship_spSeq:"+fishShipDto.getShip_spSeq());
-		}
-		
 		int a = fishShipDao.ShipFishInsert(fishShipDto);
 		return a;
 	}

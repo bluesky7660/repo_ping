@@ -67,6 +67,12 @@ public class MemberController {
 		int inst = memberService.insertMember(memberDto);
 		return "redirect:/v1/member/memberXdmList";
 	}
+	@RequestMapping(value = "/v1/member/staffMemberXdmInst")
+	public String staffMemberXdmInst(MemberDto memberDto) {
+		memberDto.setMmPasswd(encodeBcrypt(memberDto.getMmPasswd(), 10));
+		int inst = memberService.staffMemberXdmInst(memberDto);
+		return "redirect:/v1/member/memberXdmList";
+	}
 	@RequestMapping(value = "/v1/member/memberXdmUpdate")
 	public String memberXdmUpdate(MemberDto memberDto) {
 		int updt = memberService.updateMember(memberDto);

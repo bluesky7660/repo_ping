@@ -118,7 +118,35 @@
 	        #{mmName},
 	        #{mmTel},
 	        #{mmBirthDay},
-	        #{mmAdminNy},
+	        0,
+	        0,
+	        now(),
+	        now(),
+	        #{mmEmail},
+	        #{mmGender}
+        )
+        <selectKey resultType="String" keyProperty="mmSeq" order="AFTER">
+            SELECT last_insert_id()
+        </selectKey>
+    </insert>
+    <insert id="staffMemberXdmInst">
+        INSERT INTO member (
+	        mmPasswd,
+	        mmName,
+	        mmTel,
+	        mmBirthDay,
+	        mmAdminNy,
+	        mmDelNy,
+	        mmRegDate,
+	        mmModDate,
+	        mmEmail,
+	        mmGender
+        ) VALUES (
+	        #{mmPasswd},
+	        #{mmName},
+	        #{mmTel},
+	        #{mmBirthDay},
+	        1,
 	        0,
 	        now(),
 	        now(),
