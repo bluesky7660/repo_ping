@@ -44,16 +44,35 @@
 						다시 오신 것을 환영합니다. <br/>귀하의 Arise 관리 계정을 생성해 주세요.
 					</div>
 					<div class="mb-3">
-						<label class="form-label">Email</label>
-						<input type="email" class="form-control valid-email" required>
+						<label class="form-label" for="register_name">이름</label>
+						<input type="text" class="form-control valid-user-name validate-this" id="register_name" name="mmName" required>
 					</div>
 					<div class="mb-3">
-						<label class="form-label">Username</label>
-						<input type="text" class="form-control " required>
+						<label class="form-label" for="register_email">Email</label>
+						<input type="email" class="form-control valid-email validate-this" id="register_email" name="mmEmail" required>
 					</div>
 					<div class="mb-3">
-						<label class="form-label">Password</label>
-						<input type="password" class="form-control valid-password" required>
+						<label class="form-label" for="register_tel">휴대폰번호</label>
+						<input type="tel" class="form-control valid-phone-num validate-this" id="register_tel" name="mmTel" required>
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="register_passwd">비밀번호</label>
+						<input type="password" class="form-control valid-password validate-this" id="register_passwd" name="mmPasswd" required>
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="register_gender">성별</label>
+						<div>
+							<select class="custom-select validate-this valid-gender" id="register_gender" name="gender" required>
+								<option value="">성별을 선택하세요.</option>
+								<option th:each="gender: ${@codeService.selectListCachedCode(1)}" th:value="${gender.cdSeq}" th:text="${gender.cdName}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="register_birthDay">생년월일</label>
+						<div>
+							<input type="text" class="form-control signup_dateOfBirth valid-birth-num form-control validate-this" id="register_birthDay" name="mmBirthDay" placeholder="ex) 1999-11-11" required>
+						</div>
 					</div>
 					<div class="signup-form-actions">
 						<button id="btnSubmit" type="button" class="btn"> 

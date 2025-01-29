@@ -16,6 +16,7 @@ public interface MemberDao {
 	public int listAllCount();
 
 	public int insertMember(MemberDto memberDto);
+	public int staffMemberXdmInst(MemberDto memberDto);
 	public int updateMember(MemberDto memberDto);
 	public int updatePasswd(MemberDto memberDto);
 	public int ueleteMember(MemberDto memberDto);

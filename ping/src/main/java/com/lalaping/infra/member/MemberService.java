@@ -38,6 +38,9 @@ public class MemberService {
     public int insertMember(MemberDto memberDto) {
         return memberDao.insertMember(memberDto);
     }
+    public int staffMemberXdmInst(MemberDto memberDto) {
+        return memberDao.staffMemberXdmInst(memberDto);
+    }
     public int updateMember(MemberDto memberDto) {
         return memberDao.updateMember(memberDto);
     }
