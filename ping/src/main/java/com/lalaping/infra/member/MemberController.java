@@ -59,6 +59,16 @@ public class MemberController {
 		model.addAttribute("listLink", "memberXdmList");
 		return "xdm/v1/infra/member/memberXdmMFom";
 	}
+	@RequestMapping(value = "/v1/member/resetPassword")
+	public String resetPassword(Model model) {
+		model.addAttribute("listLink", "memberXdmList");
+		return "xdm/v1/infra/base/resetPassword";
+	}
+	@RequestMapping(value = "/v1/member/forgotPassword")
+	public String forgotPassword(Model model) {
+		model.addAttribute("listLink", "memberXdmList");
+		return "xdm/v1/infra/base/forgotPassword";
+	}
 
 	// CRUD
 	@RequestMapping(value = "/v1/member/memberXdmInst")
@@ -71,10 +81,11 @@ public class MemberController {
 	public String staffMemberXdmInst(MemberDto memberDto) {
 		memberDto.setMmPasswd(encodeBcrypt(memberDto.getMmPasswd(), 10));
 		int inst = memberService.staffMemberXdmInst(memberDto);
-		return "redirect:/v1/member/memberXdmList";
+		return "redirect:/v1/loginXdm";
 	}
 	@RequestMapping(value = "/v1/member/memberXdmUpdate")
 	public String memberXdmUpdate(MemberDto memberDto) {
+		System.out.println("생일:"+memberDto.getMmBirthDay());
 		int updt = memberService.updateMember(memberDto);
 		return "redirect:/v1/member/memberXdmList";
 	}
@@ -87,6 +98,16 @@ public class MemberController {
 	public String memberXdmUelete(MemberDto memberDto) {
 		int uelt = memberService.ueleteMember(memberDto);
 		return "redirect:/v1/member/memberXdmList";
+	}
+	@RequestMapping(value = "/v1/member/resetPW")
+	public String resetPW(MemberDto memberDto) {
+		int uelt = memberService.ueleteMember(memberDto);
+		return "redirect:/v1/loginXdm";
+	}
+	@RequestMapping(value = "/v1/member/searchUser")
+	public String searchUser(MemberDto memberDto) {
+		int uelt = memberService.ueleteMember(memberDto);
+		return "redirect:/v1/loginXdm";
 	}
 	//로그인
 	@RequestMapping(value = "/v1/loginXdm")

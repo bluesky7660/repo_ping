@@ -277,12 +277,19 @@ window.addEventListener('load', function() {
                 if(document.querySelector(".checkboxArea")){
                     elementBox = document.querySelector(".checkboxArea").closest(".required");
                 }
-                const invalidBoxChk = elementBox.querySelector(".invalid-box");
-                if(invalidBoxChk){
-                    elementBox.querySelector(".invalid-box").remove();
+                if(elementBox){
+                    const invalidBoxChk = elementBox.querySelector(".invalid-box");
+                    if(invalidBoxChk){
+                        elementBox.querySelector(".invalid-box").remove();
+                    }
                 }
+                // if(elementBox.querySelector(".invalid-box")){
+                    
+                // }
                 
-                elementBox.querySelector("div:not(.invalid-box)").classList.remove("mb-3");
+                if(elementBox.querySelector("div:not(.invalid-box)")&&elementBox.querySelector("div:not(.invalid-box)").classList.contains("mb-3")){
+                    elementBox.querySelector("div:not(.invalid-box)").classList.remove("mb-3");
+                }
                 console.log("elementBox:",elementBox);
                 const feedbackBox = document.createElement("div");
                 const feedbackChild = document.createElement("div");
@@ -364,7 +371,7 @@ window.addEventListener('load', function() {
                     }
                 }
             };
-            if (!checkboxSelected.includes(true)) {
+            if (checkboxSelected.length > 0&&!checkboxSelected.includes(true)) {
                 alert("체크박스를 하나 이상 선택해주세요.");
                 const elementBox = document.querySelector(".checkboxArea ").closest(".required");
 
@@ -394,39 +401,43 @@ window.addEventListener('load', function() {
                 validateChk[i] = false;
                 return false;
             }else{
-                const elementBox = document.querySelector(".checkboxArea ").closest(".required");
+                if(document.querySelector(".checkboxArea ")){
+                    const elementBox = document.querySelector(".checkboxArea ").closest(".required");
+
+                    if(elementBox.querySelector(".invalid-icon")){
+                        elementBox.querySelector(".invalid-icon").style.backgroundImage = "url('data:image/svg+xml,%3csvg%20xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox=%270%200%208%208%27%3e%3cpath%20fill=%27%2326ba4f%27%20d=%27M2.3%206.73.6%204.53c-.4-1.04.46-1.4%201.1-.8l1.1%201.4%203.4-3.8c.6-.63%201.6-.27%201.2.7l-4%204.6c-.43.5-.8.4-1.1.1z%27/%3e%3c/svg%3e')";
+                        elementBox.querySelector(".invalid-icon").className = "valid-icon";
+                    }else{
+                        const formLabel = elementBox.querySelector(".form-label");
+                        const imageBox = document.createElement("span");
+                        imageBox.className = "valid-icon";
+                        imageBox.style.marginLeft = "10px";
+                        imageBox.style.display = "inline-block";
+                        imageBox.style.width = "17px";
+                        imageBox.style.height = "17px";
+                        imageBox.style.backgroundImage = "url('data:image/svg+xml,%3csvg%20xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox=%270%200%208%208%27%3e%3cpath%20fill=%27%2326ba4f%27%20d=%27M2.3%206.73.6%204.53c-.4-1.04.46-1.4%201.1-.8l1.1%201.4%203.4-3.8c.6-.63%201.6-.27%201.2.7l-4%204.6c-.43.5-.8.4-1.1.1z%27/%3e%3c/svg%3e')";
+                        imageBox.style.backgroundRepeat = "no-repeat";
+                        imageBox.style.backgroundSize = "calc(0.75em + 0.375rem) calc(0.75em + 0.375rem)";
+                        formLabel.insertAdjacentElement('afterend', imageBox);
+                    }
+                    
+                    elementBox.querySelector(".invalid-child").classList.remove('is-invalid');
+                    elementBox.querySelector("div:not(.invalid-box)").classList.add("mb-3");
+                    if(elementBox.querySelector(".invalid-box")){
+                        elementBox.querySelector(".invalid-box").remove();
+                    }
+                    const checkboxes = elementBox.querySelectorAll('input[type="checkbox"]');
+                    for(let k = 0; k < checkboxes.length; k++){
+                        checkboxes[k].classList.remove('is-invalid');
+                    }
+                    if(elementBox.querySelector(".valid-icon")){
+                        document.querySelector(".valid-icon").remove();
+                    }
+                }
                 if(document.querySelector(".invalid-icon")){
                     document.querySelector(".invalid-icon").remove();
                 }
-                if(elementBox.querySelector(".valid-icon")){
-                    document.querySelector(".valid-icon").remove();
-                }
-                if(elementBox.querySelector(".invalid-icon")){
-                    elementBox.querySelector(".invalid-icon").style.backgroundImage = "url('data:image/svg+xml,%3csvg%20xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox=%270%200%208%208%27%3e%3cpath%20fill=%27%2326ba4f%27%20d=%27M2.3%206.73.6%204.53c-.4-1.04.46-1.4%201.1-.8l1.1%201.4%203.4-3.8c.6-.63%201.6-.27%201.2.7l-4%204.6c-.43.5-.8.4-1.1.1z%27/%3e%3c/svg%3e')";
-                    elementBox.querySelector(".invalid-icon").className = "valid-icon";
-                }else{
-                    const formLabel = elementBox.querySelector(".form-label");
-                    const imageBox = document.createElement("span");
-                    imageBox.className = "valid-icon";
-                    imageBox.style.marginLeft = "10px";
-                    imageBox.style.display = "inline-block";
-                    imageBox.style.width = "17px";
-                    imageBox.style.height = "17px";
-                    imageBox.style.backgroundImage = "url('data:image/svg+xml,%3csvg%20xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox=%270%200%208%208%27%3e%3cpath%20fill=%27%2326ba4f%27%20d=%27M2.3%206.73.6%204.53c-.4-1.04.46-1.4%201.1-.8l1.1%201.4%203.4-3.8c.6-.63%201.6-.27%201.2.7l-4%204.6c-.43.5-.8.4-1.1.1z%27/%3e%3c/svg%3e')";
-                    imageBox.style.backgroundRepeat = "no-repeat";
-                    imageBox.style.backgroundSize = "calc(0.75em + 0.375rem) calc(0.75em + 0.375rem)";
-                    formLabel.insertAdjacentElement('afterend', imageBox);
-                }
                 
-                elementBox.querySelector(".invalid-child").classList.remove('is-invalid');
-                elementBox.querySelector("div:not(.invalid-box)").classList.add("mb-3");
-                if(elementBox.querySelector(".invalid-box")){
-                    elementBox.querySelector(".invalid-box").remove();
-                }
-                const checkboxes = elementBox.querySelectorAll('input[type="checkbox"]');
-                for(let k = 0; k < checkboxes.length; k++){
-                    checkboxes[k].classList.remove('is-invalid');
-                }
                 validateChk[i] = true;
             }
             console.log("validateChk:",validateChk);
@@ -434,8 +445,8 @@ window.addEventListener('load', function() {
                 alert("검사실패");
                 return false;
             }
-            form.action = formUrl;
-            form.submit();
+            btnSubmit.closest("form").action = btnSubmit.closest("form").action;
+            btnSubmit.closest("form").submit();
 
         }
     }
