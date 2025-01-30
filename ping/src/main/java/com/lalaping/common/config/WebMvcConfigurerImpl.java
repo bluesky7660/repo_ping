@@ -25,7 +25,8 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer{
 						"/v1/loginXdm",
 						"/v1/signupXdm",
 						"/v1/infra/loginXdmProc",
-						"/loginUsrProc"
+						"/loginUsrProc",
+						"/v1/member/staffMemberXdmInst"
 						);
 		registry.addInterceptor(new UsrCheckLoginSessionInterceptor())
 		

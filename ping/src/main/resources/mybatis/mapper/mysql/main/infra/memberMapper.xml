@@ -166,9 +166,9 @@
 	        <if test="mmTel != null and mmTel != ''">
 	            mmTel = #{mmTel},
 	        </if>
-	        <if test="mmBirthDay != null and mmBirthDay != ''">
-	            mmBirthDay = #{mmBirthDay},
-	        </if>
+	        <if test="mmBirthDay != null">
+			    mmBirthDay = #{mmBirthDay},
+			</if>
 	        <if test="mmEmail != null and mmEmail != ''">
 	            mmEmail = #{mmEmail},
 	        </if>
