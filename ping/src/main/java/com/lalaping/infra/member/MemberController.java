@@ -1,9 +1,12 @@
 package com.lalaping.infra.member;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,17 +25,27 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private JavaMailSender javaMailSender;
 
-	//인코딩  
+	//암호화  
 	public String encodeBcrypt(String planeText, int strength) {
 		  return new BCryptPasswordEncoder(strength).encode(planeText);
 	}
-
 			
 	public boolean matchesBcrypt(String planeText, String hashValue, int strength) {
 	  BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(strength);
 	  return passwordEncoder.matches(planeText, hashValue);
 	}
+	
+	public static String encodeBase64(String input) {
+        return Base64.getUrlEncoder().encodeToString(input.getBytes());
+    }
+
+    public static String decodeBase64(String encoded) {
+        return new String(Base64.getUrlDecoder().decode(encoded));
+    }
 	
 	// Member 영역
 	@RequestMapping(value = "/v1/member/memberXdmList")
@@ -60,13 +73,15 @@ public class MemberController {
 		return "xdm/v1/infra/member/memberXdmMFom";
 	}
 	@RequestMapping(value = "/v1/member/resetPassword")
-	public String resetPassword(Model model) {
-		model.addAttribute("listLink", "memberXdmList");
+	public String resetPassword(Model model, MemberDto memberDto) {
+		byte[] decodedBytes = Base64.getDecoder().decode(memberDto.getMmSeq());
+	    String decodedMmSeq = new String(decodedBytes);
+	    memberDto.setMmSeq(decodedMmSeq);
+		System.out.println("memberDto.getMmSeq():"+decodedMmSeq);
 		return "xdm/v1/infra/base/resetPassword";
 	}
 	@RequestMapping(value = "/v1/member/forgotPassword")
 	public String forgotPassword(Model model) {
-		model.addAttribute("listLink", "memberXdmList");
 		return "xdm/v1/infra/base/forgotPassword";
 	}
 
@@ -101,12 +116,23 @@ public class MemberController {
 	}
 	@RequestMapping(value = "/v1/member/resetPW")
 	public String resetPW(MemberDto memberDto) {
-		int uelt = memberService.ueleteMember(memberDto);
 		return "redirect:/v1/loginXdm";
 	}
 	@RequestMapping(value = "/v1/member/searchUser")
 	public String searchUser(MemberDto memberDto) {
-		int uelt = memberService.ueleteMember(memberDto);
+		MemberDto rtUser = memberService.selectOneLogin(memberDto); 
+		
+		if(rtUser != null) {
+			String encryptedSeq = encodeBase64(String.valueOf(rtUser.getMmSeq()));
+			String resetUrl = "http://localhost:8082/v1/member/resetPassword?mmSeq=" + encryptedSeq;
+			SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+	    	
+	    	simpleMailMessage.setTo(rtUser.getMmEmail());
+	    	simpleMailMessage.setSubject("[ FishOn - Admin ]"+rtUser.getMmName()+"님의 계정 비밀번호 재설정");
+	    	simpleMailMessage.setText("비밀번호 재설정을 위해 아래 링크를 클릭하세요:\n\n" + resetUrl);
+
+	    	javaMailSender.send(simpleMailMessage);
+		}
 		return "redirect:/v1/loginXdm";
 	}
 	//로그인
