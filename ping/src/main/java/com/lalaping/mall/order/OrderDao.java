@@ -22,5 +22,6 @@ public interface OrderDao {
 	public int orderListCount(OrderDto orderDto);
 	public int listCount(OrderVo vo);
 	public OrderDto selectOne(OrderDto orderDto);
+	public int revenue();
 
 }

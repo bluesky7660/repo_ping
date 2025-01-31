@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.lalaping.common.util.UtilDateTime;
 import com.lalaping.mall.fish.FishService;
 import com.lalaping.mall.fish.FishVo;
+import com.lalaping.mall.fishShip.FishShipDto;
 import com.lalaping.mall.port.PortService;
 import com.lalaping.mall.port.PortVo;
 
@@ -40,8 +41,8 @@ public class ShipController {
 		return "xdm/v1/ship/shipXdmForm";
 	}
 	@RequestMapping(value = "/v1/ship/shipXdmInst")
-	public String shipXdmInst(ShipDto shipDto)throws Exception {
-		shipService.insert(shipDto);
+	public String shipXdmInst(ShipDto shipDto, FishShipDto fishShipDto)throws Exception {
+		shipService.insert(shipDto,fishShipDto);
 		return "redirect:/v1/ship/shipXdmList";
 	}
 	@RequestMapping(value = "/v1/ship/shipXdmMFom")
@@ -53,8 +54,8 @@ public class ShipController {
 		return "xdm/v1/ship/shipXdmMFom";
 	}
 	@RequestMapping(value="/v1/ship/shipXdmUpdt")
-	public String shipXdmUpdt(ShipDto shipDto)throws Exception {
-		shipService.update(shipDto);
+	public String shipXdmUpdt(ShipDto shipDto, FishShipDto fishShipDto)throws Exception {
+		shipService.update(shipDto, fishShipDto);
 		return "redirect:/v1/ship/shipXdmList";
 	}
 	@RequestMapping(value="/v1/ship/shipXdmUelt")

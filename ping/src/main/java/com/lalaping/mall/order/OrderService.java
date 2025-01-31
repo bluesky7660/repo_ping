@@ -55,6 +55,8 @@ public class OrderService {
 	}
 	public OrderDto selectOne(OrderDto orderDto) {
 		return orderDao.selectOne(orderDto);
-
+	}
+	public int revenue() {
+		return orderDao.revenue();
 	}
 }

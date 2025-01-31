@@ -12,11 +12,16 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.lalaping.common.config.S3Config;
 import com.lalaping.common.util.UtilDateTime;
+import com.lalaping.mall.fishShip.FishShipDao;
+import com.lalaping.mall.fishShip.FishShipDto;
 
 @Service
 public class ShipService {
 	@Autowired
 	public ShipDao shipDao;
+	
+	@Autowired
+	public FishShipDao fishShipDao;
 	
 	@Autowired
 	S3Config s3Config;
@@ -42,7 +47,7 @@ public class ShipService {
 	public int portListCount(ShipVo vo) {
 		return shipDao.portListCount(vo);
 	}
-	public int insert(ShipDto shipDto) throws Exception {
+	public int insert(ShipDto shipDto, FishShipDto fishShipDto) throws Exception {
 		int result =shipDao.insert(shipDto);
 		MultipartFile[] multipartFiles = shipDto.getUploadFiles();
 		int maxNumber = multipartFiles.length;
@@ -108,24 +113,24 @@ public class ShipService {
 			}
 			
 		}
-		fishShipDto.setMapPoint_mpSeq(mapPointDto.getMpSeq());
+		fishShipDto.setShip_spSeq(shipDto.getSpSeq());
 		int i=0;
 		for(String fsSeq :fishShipDto.getFsSeqList()) {
 			i=+1;
 			System.out.println("fsOrder:"+i);
 			System.out.println("fish_fsSeq[getFsSeqList]:"+fsSeq);
 			System.out.println("delNy:"+0);
-			System.out.println("mapPoint_mpSeq:"+fishShipDto.getMapPoint_mpSeq());
+			System.out.println("Ship_spSeq:"+fishShipDto.getShip_spSeq());
 			fishShipDto.setFsOrder(i);
 			fishShipDto.setFish_fsSeq(fsSeq);
-			fishMappointDao.mappointFishInsert(fishShipDto);
+			fishShipDao.ShipFishInsert(fishShipDto);
 		}
 		return result;
 	}
 	public ShipDto selectOne(ShipDto shipDto) {
 		return shipDao.selectOne(shipDto);
 	}
-	public int update(ShipDto shipDto) throws Exception {
+	public int update(ShipDto shipDto, FishShipDto fishShipDto) throws Exception {
 		int result =shipDao.update(shipDto);
 		MultipartFile[] multipartFiles = shipDto.getUploadFiles();
 		int maxNumber = multipartFiles.length;
@@ -189,6 +194,18 @@ public class ShipService {
 				
 				shipDao.insertUploaded(shipDto);
 			}
+		}
+		fishShipDto.setShip_spSeq(shipDto.getSpSeq());
+		int i=0;
+		for(String fsSeq :fishShipDto.getFsSeqList()) {
+			i=+1;
+			System.out.println("fsOrder:"+i);
+			System.out.println("fish_fsSeq[getFsSeqList]:"+fsSeq);
+			System.out.println("delNy:"+0);
+			System.out.println("Ship_spSeq:"+fishShipDto.getShip_spSeq());
+			fishShipDto.setFsOrder(i);
+			fishShipDto.setFish_fsSeq(fsSeq);
+			fishShipDao.ShipFishInsert(fishShipDto);
 		}
 		return result;
 	}

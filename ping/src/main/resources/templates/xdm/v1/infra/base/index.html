@@ -54,47 +54,40 @@
 				<div class="content-wrapper-scroll">
 					<div class="content-wrapper">
 						<div class="row">
-							<div class="col-xxl-3 col-sm-6 col-12">
+							<div class="col-xxl-4 col-sm-6 col-12">
 								<div class="stats-tile">
 									<div class="sale-icon shade-red">
 										<i class="bi bi-pie-chart"></i>
 									</div>
 									<div class="sale-details">
-										<p class="text-red" th:text="${orderListCount+' 건'}"></p>
-										<h3>총 선상낚시 예약</h3>
+										<p class="text-red" th:text="${#numbers.formatInteger(revenue,3,'COMMA')+'원'}"></p>
+										<h3>수익</h3>
 									</div>
 								</div>
 							</div>
-							<div class="col-xxl-3 col-sm-6 col-12">
-								<div class="stats-tile">
-									<div class="sale-icon shade-blue">
-										<i class="bi bi-emoji-smile"></i>
+							<div class="col-xxl-8 col-sm-8 col-12">
+								<div class="row">
+									<div class="col-xxl-6 col-sm-6 col-12">
+										<div class="stats-tile">
+											<div class="sale-icon shade-yellow">
+												<i class="bi bi-box-seam"></i>
+											</div>
+											<div class="sale-details">
+												<p class="text-yellow" th:text="${mapPointCount+' 개'}"></p>
+												<h3>총 맵 포인트</h3>
+											</div>
+										</div>
 									</div>
-									<div class="sale-details">
-										<p class="text-blue" th:text="${memberCount+' 명'}"></p>
-										<h3>총 회원</h3>
-									</div>
-								</div>
-							</div>
-							<div class="col-xxl-3 col-sm-6 col-12">
-								<div class="stats-tile">
-									<div class="sale-icon shade-yellow">
-										<i class="bi bi-box-seam"></i>
-									</div>
-									<div class="sale-details">
-										<p class="text-yellow" th:text="${mapPointCount+' 개'}"></p>
-										<h3>총 맵 포인트</h3>
-									</div>
-								</div>
-							</div>
-							<div class="col-xxl-3 col-sm-6 col-12">
-								<div class="stats-tile">
-									<div class="sale-icon shade-green">
-										<i class="bi bi-handbag"></i>
-									</div>
-									<div class="sale-details">
-										<p class="text-green" th:text="${shipListCount+' 척'}"></p>
-										<h3>총 선상낚시 배</h3>
+									<div class="col-xxl-6 col-sm-6 col-12">
+										<div class="stats-tile">
+											<div class="sale-icon shade-green">
+												<i class="bi bi-handbag"></i>
+											</div>
+											<div class="sale-details">
+												<p class="text-green" th:text="${shipListCount+' 척'}"></p>
+												<h3>총 선상낚시 배</h3>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -109,29 +102,29 @@
 													<div class="reports-summary-block">
 														<i class="bi bi-circle-fill text-primary me-2"></i>
 														<div class="d-flex flex-column">
-															<h6>총 낚시 포인트 댓글</h6>
-															<h5 th:text="${commentListCount+' 건'}"></h5>
+															<h5>총 선상낚시 예약</h5>
+															<p class="fs-6" th:text="${'- '+orderListCount+' 건'}"></p>
 														</div>
 													</div>
 													<div class="reports-summary-block">
 														<i class="bi bi-circle-fill text-success me-2"></i>
 														<div class="d-flex flex-column">
-															<h6>선상낚시 예약 완료</h6>
-															<h5 th:text="${orderCompletion+' 건'}"></h5>
+															<h5>예약 신청</h5>
+															<p class="fs-6" th:text="${'- '+orderCompletion+' 건'}"></p>
 														</div>
 													</div>
 													<div class="reports-summary-block">
 														<i class="bi bi-circle-fill text-danger me-2"></i>
 														<div class="d-flex flex-column">
-															<h6>선상낚시 예약 이용</h6>
-															<h5 th:text="${orderUse+' 건'}"></h5>
+															<h5>예약 이용완료</h5>
+															<p class="fs-6" th:text="${'- '+orderUse+' 건'}"></p>
 														</div>
 													</div>
 													<div class="reports-summary-block">
 														<i class="bi bi-circle-fill text-warning me-2"></i>
 														<div class="d-flex flex-column">
-															<h6>선상낚시 예약 환불</h6>
-															<h5 th:text="${orderRefund+' 건'}"></h5>
+															<h5>예약 환불</h5>
+															<p class="fs-6" th:text="${'- '+orderRefund+' 건'}"></p>
 														</div>
 													</div>
 												</div>

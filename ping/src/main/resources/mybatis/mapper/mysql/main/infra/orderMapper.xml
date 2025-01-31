@@ -147,6 +147,13 @@
 		AND !(g.odReturnNy = 28)
 		AND s.sort = 1
     </select>
+    <select id="revenue" resultType="int">
+    	SELECT
+    		sum(g.odTotalPrice) as totalAmount
+   		FROM orders g
+		WHERE 1=1
+		AND !(g.odReturnNy = 28)
+    </select>
     <select id="selectXdmListOrder" resultMap="resultMapObj">
     	<include refid="base.selectListUpperForMysql" />
     	SELECT
