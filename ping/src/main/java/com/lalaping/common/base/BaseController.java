@@ -51,7 +51,8 @@ public class BaseController {
 		model.addAttribute("memberCount", memberService.listAllCount());
 		model.addAttribute("orderListCount", orderService.allListOrderCount());
 		model.addAttribute("shipListCount", shipService.listCount(shipVo));
-		model.addAttribute("commentListCount", reviewService.rvSelectListCount(reviewVo));
+		model.addAttribute("revenue", orderService.revenue());
+//		model.addAttribute("commentListCount", reviewService.rvSelectListCount(reviewVo));
 		//선상낚시 예약 관련 카운트 3개 model로 반환?
 		return "xdm/v1/infra/base/index";
 	}

@@ -77,7 +77,6 @@ public class MemberController {
 		byte[] decodedBytes = Base64.getDecoder().decode(memberDto.getMmSeq());
 	    String decodedMmSeq = new String(decodedBytes);
 	    memberDto.setMmSeq(decodedMmSeq);
-		System.out.println("memberDto.getMmSeq():"+decodedMmSeq);
 		return "xdm/v1/infra/base/resetPassword";
 	}
 	@RequestMapping(value = "/v1/member/forgotPassword")
@@ -116,24 +115,74 @@ public class MemberController {
 	}
 	@RequestMapping(value = "/v1/member/resetPW")
 	public String resetPW(MemberDto memberDto) {
+		memberDto.setMmPasswd(encodeBcrypt(memberDto.getMmPasswd(), 10));
+		int updt = memberService.updatePasswd(memberDto);
 		return "redirect:/v1/loginXdm";
 	}
+//	@RequestMapping(value = "resetPW")
+//	@ResponseBody
+//	public Map<String, Object> resetPW(MemberDto memberDto) {
+//		Map<String, Object> returnMap = new HashMap<>();
+//		if(matchesBcrypt(memberDto.getMmPasswdChk(), memberDto.getMmPasswd(), 10)) {
+//			memberDto.setMmPasswd(encodeBcrypt(memberDto.getMmPasswd(), 10));
+//			memberService.updatePasswd(memberDto);
+//			returnMap.put("rt", "success");
+//		}else {
+//			returnMap.put("rt", "fail");
+//		}
+//		
+//		return returnMap;
+//	}
+//	@RequestMapping(value = "/v1/member/searchUser")
+//	public String searchUser(MemberDto memberDto) {
+//		MemberDto rtUser = memberService.selectOneLogin(memberDto); 
+//		
+//		if(rtUser != null) {
+//			String encryptedSeq = encodeBase64(String.valueOf(rtUser.getMmSeq()));
+//			String resetUrl = "http://localhost:8082/v1/member/resetPassword?mmSeq=" + encryptedSeq;
+//			Thread thread = new Thread(new Runnable() {
+//				@Override
+//				public void run() {
+//					SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+//			    	
+//			    	simpleMailMessage.setTo(rtUser.getMmEmail());
+//			    	simpleMailMessage.setSubject("[ FishOn - Admin ]"+rtUser.getMmName()+"님의 계정 비밀번호 재설정");
+//			    	simpleMailMessage.setText("비밀번호 재설정을 위해 아래 링크를 클릭하세요:\n\n" + resetUrl);
+//
+//			    	javaMailSender.send(simpleMailMessage);
+//				}
+//			});
+//			thread.start();
+//		}
+//		return "redirect:/v1/loginXdm";
+//	}
 	@RequestMapping(value = "/v1/member/searchUser")
-	public String searchUser(MemberDto memberDto) {
+	@ResponseBody
+	public Map<String, Object> searchUser(MemberDto memberDto) {
+		Map<String, Object> returnMap = new HashMap<>();
 		MemberDto rtUser = memberService.selectOneLogin(memberDto); 
 		
 		if(rtUser != null) {
 			String encryptedSeq = encodeBase64(String.valueOf(rtUser.getMmSeq()));
 			String resetUrl = "http://localhost:8082/v1/member/resetPassword?mmSeq=" + encryptedSeq;
-			SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-	    	
-	    	simpleMailMessage.setTo(rtUser.getMmEmail());
-	    	simpleMailMessage.setSubject("[ FishOn - Admin ]"+rtUser.getMmName()+"님의 계정 비밀번호 재설정");
-	    	simpleMailMessage.setText("비밀번호 재설정을 위해 아래 링크를 클릭하세요:\n\n" + resetUrl);
+			Thread thread = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+			    	
+			    	simpleMailMessage.setTo(rtUser.getMmEmail());
+			    	simpleMailMessage.setSubject("[ FishOn - Admin ]"+rtUser.getMmName()+"님의 계정 비밀번호 재설정");
+			    	simpleMailMessage.setText("비밀번호 재설정을 위해 아래 링크를 클릭하세요:\n\n" + resetUrl);
 
-	    	javaMailSender.send(simpleMailMessage);
+			    	javaMailSender.send(simpleMailMessage);
+				}
+			});
+			thread.start();
+			returnMap.put("rt", "success");
+		}else {
+			returnMap.put("rt", "fail");
 		}
-		return "redirect:/v1/loginXdm";
+		return returnMap;
 	}
 	//로그인
 	@RequestMapping(value = "/v1/loginXdm")
