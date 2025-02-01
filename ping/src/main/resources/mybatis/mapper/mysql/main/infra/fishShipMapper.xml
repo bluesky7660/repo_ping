@@ -5,6 +5,18 @@
 <!-- xml에서 주석 단축키 : ctrl + shift + c -->
 
 	<resultMap type="com.lalaping.mall.fishShip.FishShipDto" id="resultMapObj"></resultMap>
+	<select id="FishShipOneSelectList" resultMap="resultMapObj">
+		select 
+			a.fish_fsSeq
+			,a.ship_spSeq
+			,a.delNy
+			,a.fsOrder
+			from
+				fishandship a 
+				left join ship b on a.ship_spSeq = b.spSeq
+			where 1 = 1
+				and b.spSeq = #{spSeq}
+	</select>
 	<insert id="ShipFishInsert">
 		INSERT INTO fishandship(
 			fsOrder
@@ -18,5 +30,31 @@
 			,#{fish_fsSeq}
 		)
 	</insert>
+	<update id="uelete">
+		UPDATE fishandship
+		SET
+		fsOrder = 0,
+		delNy = 1
+		WHERE 1=1
+		AND ship_spSeq = #{ship_spSeq}
+		AND fish_fsSeq = #{fish_fsSeq}
+	</update>
+	<update id="update">
+		UPDATE fishandship
+		SET
+		fsOrder = #{fsOrder},
+		delNy = 0
+		WHERE 1=1
+		AND ship_spSeq = #{ship_spSeq}
+		AND fish_fsSeq = #{fish_fsSeq}
+	</update>
+	<update id="orderUpdate">
+		UPDATE fishandship
+		SET
+		fsOrder = #{fsOrder},
+		WHERE 1=1
+		AND ship_spSeq = #{ship_spSeq}
+		AND fish_fsSeq = #{fish_fsSeq}
+	</update>
 </mapper>
 	
