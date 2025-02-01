@@ -295,7 +295,7 @@
 		,GROUP_CONCAT(DISTINCT c.fsSeq ORDER BY c.fsSeq) AS fsSeqList
 		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
 		FROM ship a
-		left join fishandship b on b.ship_spSeq = a.spSeq
+		left join fishandship b on b.ship_spSeq = a.spSeq and delNy = 0
 		left join fish c on c.fsSeq = b.fish_fsSeq
 		left join port d on d.ptSeq = a.port_ptSeq
 		WHERE 1=1
