@@ -58,8 +58,8 @@ public class MapPointController {
 		return "xdm/v1/mapPoint/mapPointXdmMFom";
 	}
 	@RequestMapping(value="/v1/mapPoint/mapPointXdmUpdt")
-	public String mapPointXdmUpdt(MapPointDto mapPointDto) throws Exception{
-		mapPointService.update(mapPointDto);
+	public String mapPointXdmUpdt(MapPointDto mapPointDto,FishMappointDto fishMappointDto) throws Exception{
+		mapPointService.update(mapPointDto, fishMappointDto);
 		return "redirect:/v1/mapPoint/mapPointXdmList";
 	}
 	

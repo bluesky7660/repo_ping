@@ -203,30 +203,21 @@ public class ShipService {
 		//추가
 		int j = 0;
 		for(String fishSeq:fishSeqs) {
-			System.out.println("----------------------------------------------------");
-			System.out.println("현재어종번호: "+fishSeq+"번");
 			j++;
 			fishShipDto.setShip_spSeq(shipDto.getSpSeq());
 	        fishShipDto.setFish_fsSeq(fishSeq);
 	        fishShipDto.setFsOrder(j);
 			fishShipDao.update(fishShipDto);
-			System.out.println("j: "+j);
 			boolean isExist = false;
 			
 			for(FishShipDto fish: fishLists) {
-				System.out.println("FishShipDto.seq: "+fish.getShip_spSeq());
-
-				System.out.println("어종번호: "+fish.getFish_fsSeq());
 				if(fish.getDelNy() ==0) {
 					if(fishSeq.equals(fish.getFish_fsSeq())) {
-						System.out.println("어종존재");
 						isExist = true;
 						break;
 					}
-					System.out.println("getDelNy:1");
 				}else if(fish.getDelNy() ==1){
 					if(fishSeq.equals(fish.getFish_fsSeq())) {
-						System.out.println("어종존재 DelNy:1");
 						isExist = true;
 						fishShipDto.setShip_spSeq(shipDto.getSpSeq());
 				        fishShipDto.setFish_fsSeq(fish.getFish_fsSeq());
@@ -234,18 +225,12 @@ public class ShipService {
 						fishShipDao.update(fishShipDto);
 						break;
 					}
-					System.out.println("어종없음 DelNy:1");
 				}
-
-				System.out.println("어종없음");	
-
 			}
 			if (!isExist) {
-				System.out.println("배번호: "+shipDto.getSpSeq());
 				fishShipDto.setShip_spSeq(shipDto.getSpSeq());
 		        fishShipDto.setFish_fsSeq(fishSeq);
 		        fishShipDto.setFsOrder(j);
-		        System.out.println(fishSeq + "번 어종 추가");
 		        fishShipDao.ShipFishInsert(fishShipDto);
 		    }
 		}
@@ -262,11 +247,8 @@ public class ShipService {
 		    }
 
 		    if (!isExist) {
-		    	System.out.println("배번호: "+fishShipDto.getShip_spSeq());
 		    	fishShipDto.setSpSeq(shipDto.getSpSeq());  
 		    	fishShipDto.setFish_fsSeq(fish.getFish_fsSeq()); 
-
-		        System.out.println(fish.getFish_fsSeq() + "번 어종 제외");
 		        fishShipDao.uelete(fishShipDto);
 		    }
 		}
