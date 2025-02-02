@@ -153,7 +153,7 @@ public class MapPointService {
 	public MapPointDto selectUsrOne(MapPointDto mapPointDto) {
 		return mapPointDao.selectUsrOne(mapPointDto);
 	}
-	public int update(MapPointDto mapPointDto) throws Exception{
+	public int update(MapPointDto mapPointDto, FishMappointDto fishMappointDto) throws Exception{
 		int result =mapPointDao.update(mapPointDto);
 		MultipartFile[] multipartFiles = mapPointDto.getUploadFiles();
 		int maxNumber = multipartFiles.length;
@@ -220,6 +220,63 @@ public class MapPointService {
 				
 				mapPointDao.insertUploaded(mapPointDto);
 			}
+		}
+		fishMappointDto.setMapPoint_mpSeq(mapPointDto.getMpSeq());
+		List<String> mpSeqs = fishMappointDto.getFsSeqList();
+		fishMappointDto.setMpSeq(mapPointDto.getMpSeq());
+		List<FishMappointDto> mpLists	= fishMappointDao.FishMapOneSelectList(fishMappointDto);
+		
+		//추가
+		int j = 0;
+		for(String mpSeq:mpSeqs) {
+			j++;
+			fishMappointDto.setMapPoint_mpSeq(mapPointDto.getMpSeq());
+	        fishMappointDto.setFish_fsSeq(mpSeq);
+	        fishMappointDto.setFsOrder(j);
+			fishMappointDao.update(fishMappointDto);
+			boolean isExist = false;
+			
+			for(FishMappointDto mapPoint: mpLists) {
+				if(mapPoint.getDelNy() ==0) {
+					if(mpSeq.equals(mapPoint.getFish_fsSeq())) {
+						isExist = true;
+						break;
+					}
+				}else if(mapPoint.getDelNy() ==1){
+					if(mpSeq.equals(mapPoint.getFish_fsSeq())) {
+						isExist = true;
+						fishMappointDto.setMapPoint_mpSeq(mapPointDto.getMpSeq());
+				        fishMappointDto.setFish_fsSeq(mapPoint.getFish_fsSeq());
+				        fishMappointDto.setFsOrder(j);
+						fishMappointDao.update(fishMappointDto);
+						break;
+					}
+				}
+			}
+			if (!isExist) {
+				fishMappointDto.setMapPoint_mpSeq(mapPointDto.getMpSeq());
+		        fishMappointDto.setFish_fsSeq(mpSeq);
+		        fishMappointDto.setFsOrder(j);
+		        fishMappointDao.mappointFishInsert(fishMappointDto);
+		    }
+		}
+		
+		//삭제
+		for (FishMappointDto mapPoint : mpLists) {
+		    boolean isExist = false;
+
+		    for (String mpSeq : mpSeqs) {
+		        if (mapPoint.getFish_fsSeq().equals(mpSeq)) {
+		        	isExist = true;
+		            break;
+		        }
+		    }
+
+		    if (!isExist) {
+		    	fishMappointDto.setMpSeq(mapPointDto.getMpSeq());  
+		    	fishMappointDto.setFish_fsSeq(mapPoint.getFish_fsSeq()); 
+		        fishMappointDao.uelete(fishMappointDto);
+		    }
 		}
 		return result;
 	}

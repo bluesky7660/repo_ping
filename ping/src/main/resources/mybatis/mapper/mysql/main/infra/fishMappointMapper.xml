@@ -5,6 +5,18 @@
 <!-- xml에서 주석 단축키 : ctrl + shift + c -->
 
 	<resultMap type="com.lalaping.mall.fishMappoint.FishMappointDto" id="resultMapObj"></resultMap>
+	<select id="FishMapOneSelectList" resultMap="resultMapObj">
+		select 
+			a.fish_fsSeq
+			,a.mapPoint_mpSeq
+			,a.delNy
+			,a.fsOrder
+			from
+				fishandmappoint a 
+				left join mappoint b on a.mapPoint_mpSeq = b.mpSeq
+			where 1 = 1
+				and b.mpSeq = #{mapPoint_mpSeq}
+	</select>
 	<insert id="mappointFishInsert">
 		INSERT INTO fishandmappoint(
 			fsOrder
@@ -18,5 +30,23 @@
 			,#{fish_fsSeq}
 		)
 	</insert>
+	<update id="uelete">
+		UPDATE fishandmappoint
+		SET
+		fsOrder = 0,
+		delNy = 1
+		WHERE 1=1
+		AND mapPoint_mpSeq = #{mapPoint_mpSeq}
+		AND fish_fsSeq = #{fish_fsSeq}
+	</update>
+	<update id="update">
+		UPDATE fishandmappoint
+		SET
+		fsOrder = #{fsOrder},
+		delNy = 0
+		WHERE 1=1
+		AND mapPoint_mpSeq = #{mapPoint_mpSeq}
+		AND fish_fsSeq = #{fish_fsSeq}
+	</update>
 </mapper>
 	
