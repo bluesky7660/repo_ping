@@ -5,16 +5,6 @@
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-		<!-- Meta -->
-		<meta name="description" content="Best Bootstrap Admin Dashboards">
-		<meta name="author" content="Bootstrap Gallery" />
-		<link rel="canonical" href="https://www.bootstrap.gallery/">
-		<meta property="og:url" content="https://www.bootstrap.gallery">
-		<meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
-		<meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
-		<meta property="og:type" content="Website">
-		<meta property="og:site_name" content="Bootstrap Gallery">
 		<link rel="shortcut icon" href="/xdm/v1/template/arise-v1.0/assets/images/favicon.svg">
 
 		<!-- Title -->
@@ -91,7 +81,7 @@
 														<label for="FsSeasonList" class="form-label">시즌</label>
 														<div class="FsSeasonList d-flex flex-wrap justify-content-between row-gap-3 ">
 															<div class="FsSeasonItem d-flex gap-1 flex-grow-1 w-25" th:each="season : ${@codeService.selectListCachedCode(3)}">
-																<input type="checkbox" name="season_ssSeq" class="form-check-input" th:id="${'FsSeason'+seasonStat.count}">
+																<input type="checkbox" name="seasonsSeqList" class="form-check-input" th:id="${'FsSeason'+seasonStat.count}">
 																<label th:for="${'FsSeason'+seasonStat.count}" th:text="${season.cdName}" style="white-space: nowrap;"></label>
 															</div>
 														</div>

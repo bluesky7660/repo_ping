@@ -74,9 +74,7 @@ public class MemberController {
 	}
 	@RequestMapping(value = "/v1/member/resetPassword")
 	public String resetPassword(Model model, MemberDto memberDto) {
-		byte[] decodedBytes = Base64.getDecoder().decode(memberDto.getMmSeq());
-	    String decodedMmSeq = new String(decodedBytes);
-	    memberDto.setMmSeq(decodedMmSeq);
+		
 		return "xdm/v1/infra/base/resetPassword";
 	}
 	@RequestMapping(value = "/v1/member/forgotPassword")
@@ -115,6 +113,9 @@ public class MemberController {
 	}
 	@RequestMapping(value = "/v1/member/resetPW")
 	public String resetPW(MemberDto memberDto) {
+		byte[] decodedBytes = Base64.getDecoder().decode(memberDto.getMmSeq());
+	    String decodedMmSeq = new String(decodedBytes);
+	    memberDto.setMmSeq(decodedMmSeq);
 		memberDto.setMmPasswd(encodeBcrypt(memberDto.getMmPasswd(), 10));
 		int updt = memberService.updatePasswd(memberDto);
 		return "redirect:/v1/loginXdm";
@@ -160,7 +161,7 @@ public class MemberController {
 	@ResponseBody
 	public Map<String, Object> searchUser(MemberDto memberDto) {
 		Map<String, Object> returnMap = new HashMap<>();
-		MemberDto rtUser = memberService.selectOneLogin(memberDto); 
+		MemberDto rtUser = memberService.selectOneAdmin(memberDto); 
 		
 		if(rtUser != null) {
 			String encryptedSeq = encodeBase64(String.valueOf(rtUser.getMmSeq()));
@@ -198,7 +199,7 @@ public class MemberController {
 	@RequestMapping(value = "/v1/infra/loginXdmProc")
 	public Map<String, Object> loginXdmProc(MemberDto memberDto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>(); 
-		MemberDto rtLogin = memberService.selectOneLogin(memberDto); 
+		MemberDto rtLogin = memberService.selectOneAdmin(memberDto); 
 
 		if(rtLogin != null) { 
 			if(matchesBcrypt(memberDto.getMmPasswd(), rtLogin.getMmPasswd(), 10)) {
@@ -266,7 +267,7 @@ public class MemberController {
 		String sessSeqUsr = String.valueOf(session.getAttribute("sessSeqUsr"));
 		memberDto.setMmEmail(sessIdUsr);
 		memberDto.setMmSeq(sessSeqUsr);
-		MemberDto rtMember = memberService.selectOneLogin(memberDto);
+		MemberDto rtMember = memberService.selectOneAdmin(memberDto);
 		if(matchesBcrypt(memberDto.getMmPasswdChk(), rtMember.getMmPasswd(), 10)) {
 			memberDto.setMmPasswd(encodeBcrypt(memberDto.getMmPasswd(), 10));
 			memberService.updatePasswd(memberDto);

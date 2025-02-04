@@ -53,7 +53,7 @@
             ,GROUP_CONCAT(b.season_ssSeq ORDER BY a.fsSeq) AS seasonsSeq
             ,GROUP_CONCAT(c.cdName ORDER BY b.season_ssSeq) AS seasonsName
         FROM fish a
-		LEFT JOIN seasonandfish b ON a.fsSeq = b.fish_fsSeq
+		LEFT JOIN seasonandfish b ON a.fsSeq = b.fish_fsSeq and b.delNy = 0
 		left join commoncode c on c.cdSeq = b.season_ssSeq
 		<include refid="selectCommon"/>
 		group by
@@ -65,22 +65,6 @@
 	     	a.fsRegDate DESC
 		<include refid="base.selectListLowerForMysql"/>
 	</select>
-	<!-- <select id="shipFishList" resultMap="resultMapObj">
-		SELECT
-			a.fsSeq
-			,a.fsName
-			,a.fsSeason
-			,a.fsDelNy
-			,a.fsRegDate
-		FROM fish a
-			join fishandship b on b.fish_fsSeq = a.fsSeq
-            join ship c on c.spSeq = b.ship_spSeq
-        WHERE 1=1
-			and b.ship_spSeq = #{spSeq}
-	 	ORDER BY
-     		a.fsRegDate DESC
-
-	</select> -->
 	<select id="shipFishList" resultMap="resultMapObj">
 		SELECT
 			a.fsSeq
@@ -122,12 +106,10 @@
 	<insert id="insert">
 		INSERT INTO fish(
 			fsName
-			,fsSeason
 			,fsDelNy
 			,fsRegDate
 		)values(
 			#{fsName}
-			,#{fsSeason}
 			,0
 			,now()	
 		)	
@@ -144,7 +126,7 @@
             ,GROUP_CONCAT(b.season_ssSeq ORDER BY a.fsSeq) AS seasonsSeq
             ,GROUP_CONCAT(c.cdName ORDER BY b.season_ssSeq) AS seasonsName
 		FROM fish a
-		LEFT JOIN seasonandfish b ON a.fsSeq = b.fish_fsSeq
+		LEFT JOIN seasonandfish b ON a.fsSeq = b.fish_fsSeq and b.delNy = 0
 		left join commoncode c on c.cdSeq = b.season_ssSeq
 		WHERE 1=1
 		AND fsSeq = #{fsSeq}
@@ -154,7 +136,6 @@
 		UPDATE fish
 		SET
 			fsName = #{fsName}
-			,fsSeason = #{fsSeason}
 		WHERE 1=1
 		AND fsSeq = #{fsSeq}
 	</update>
@@ -173,18 +154,49 @@
         AND fsSeq = #{fsSeq}
 	</delete>
 	
-	<insert id="mappointFishInsert">
-		INSERT INTO fishandmappoint(
-			fsOrder
-			,mapPoint_mpSeq
-			,delNy
+	<!-- season -->
+	<select id="FishSeasonOneSelectList" resultMap="resultMapObj">
+		select 
+			a.fish_fsSeq
+			,a.season_ssSeq
+			,a.delNy
+			,a.sfOrder
+			from
+				seasonandfish a 
+				left join fish b on a.fish_fsSeq = b.fsSeq
+			where 1 = 1
+				and b.fsSeq = #{fish_fsSeq}
+	</select>
+	<insert id="insertSeason">
+		INSERT INTO seasonandfish(
+			season_ssSeq
 			,fish_fsSeq
+			,delNy
+			,sfOrder
 		)values(
-			#{fsOrder}
-			,#{mapPoint_mpSeq}
-			,0
+			#{season_ssSeq}
 			,#{fish_fsSeq}
-		)	
+			,0
+			,#{sfOrder}
+		)
 	</insert>
+	<update id="updateSeason">
+		UPDATE seasonandfish
+		SET
+		sfOrder = #{sfOrder},
+		delNy = 0
+		WHERE 1=1
+		AND season_ssSeq = #{season_ssSeq}
+		AND fish_fsSeq = #{fish_fsSeq}
+	</update>
+	<update id="ueleteSeason">
+		UPDATE seasonandfish
+		SET
+		sfOrder = 0,
+		delNy = 1
+		WHERE 1=1
+		AND season_ssSeq = #{season_ssSeq}
+		AND fish_fsSeq = #{fish_fsSeq}
+	</update>
 	
 </mapper>

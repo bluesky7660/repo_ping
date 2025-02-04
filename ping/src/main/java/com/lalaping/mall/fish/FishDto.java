@@ -21,6 +21,9 @@ public class FishDto {
 	private String seasonsName;
 	private String seasonsSeq;
 	private List<String> seasonsSeqList;
+	private Integer delNy;
+	
+	private Integer sfOrder;
 	
 	//for cache
 	public static List<FishDto> cachedFishArrayList = new ArrayList<FishDto>();
@@ -113,5 +116,18 @@ public class FishDto {
 	public void setSeasonsSeqList(List<String> seasonsSeqList) {
 		this.seasonsSeqList = seasonsSeqList;
 	}
+	public Integer getSfOrder() {
+		return sfOrder;
+	}
+	public void setSfOrder(Integer sfOrder) {
+		this.sfOrder = sfOrder;
+	}
+	public Integer getDelNy() {
+		return delNy;
+	}
+	public void setDelNy(Integer delNy) {
+		this.delNy = delNy;
+	}
+
 
 }

@@ -21,5 +21,9 @@ public interface FishDao {
 	public int delete(FishDto fishDto);
 	public int listCount(FishVo vo);
 
+	public List<FishDto> FishSeasonOneSelectList(FishDto fishDto);
+	public int insertSeason(FishDto fishDto);
+	public int updateSeason(FishDto fishDto);
+	public int ueleteSeason(FishDto fishDto);
 
 }

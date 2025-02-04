@@ -396,6 +396,7 @@ public class WeatherController {
         }
     }
 	public String getSeaAreaCode(double latitude, double longitude) {
+		System.out.println("latitude:"+latitude+",longitude:"+longitude);
 		if (latitude >= 35 && latitude <= 37 && longitude >= 125 && longitude <= 127) {
             return "12A20000";  // 서해중부
         } else if (latitude >= 34 && latitude <= 35 && longitude >= 126 && longitude <= 127) {

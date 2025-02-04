@@ -58,5 +58,8 @@ public class MemberService {
     public MemberDto selectOneLogin(MemberDto memberDto) {
 		return memberDao.selectOneLogin(memberDto);
 	}
+    public MemberDto selectOneAdmin(MemberDto memberDto) {
+		return memberDao.selectOneAdmin(memberDto);
+	}
 
 }

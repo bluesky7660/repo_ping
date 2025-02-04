@@ -205,6 +205,18 @@
 		WHERE 1=1
 			and a.mmEmail = #{mmEmail}
 	</select>
+	<select id="selectOneAdmin" resultMap="resultMapObj">
+		SELECT
+		a.mmEmail
+		,a.mmPasswd
+		,a.mmName
+		,a.mmSeq
+		FROM
+		member a
+		WHERE 1=1
+			and a.mmAdminNy = 1
+			and a.mmEmail = #{mmEmail}
+	</select>
     <select id="selectOneCount" resultType="Integer">
 		SELECT COUNT(*)
 		<include refid="selectCommon" />
