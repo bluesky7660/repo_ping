@@ -25,5 +25,6 @@ public interface MemberDao {
 	public int selectOneCount(MemberVo memberVo);
 	
 	public MemberDto selectOneLogin(MemberDto memberDto); 
+	public MemberDto selectOneAdmin(MemberDto memberDto);
 	
 }

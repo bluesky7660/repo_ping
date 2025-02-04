@@ -91,7 +91,7 @@
 														<label for="FsSeasonList" class="form-label">시즌</label>
 														<div class="FsSeasonList d-flex flex-wrap justify-content-between row-gap-3 ">
 															<div class="FsSeasonItem d-flex gap-1 flex-grow-1 w-25" th:each="season : ${@codeService.selectListCachedCode(3)}">
-																<input type="checkbox" name="season_ssSeq" class="form-check-input" th:id="${'FsSeason'+seasonStat.count}" th:checked="${#lists.contains(item.seasonsSeqList, season.cdSeq)}">
+																<input type="checkbox" name="seasonsSeqList" class="form-check-input" th:id="${'FsSeason'+seasonStat.count}" th:value="${season.cdSeq}" th:checked="${#lists.contains(item.seasonsSeqList, season.cdSeq)}">
 																<label th:for="${'FsSeason'+seasonStat.count}" th:text="${season.cdName}" style="white-space: nowrap;"></label>
 															</div>
 														</div>
@@ -111,6 +111,49 @@
 					</div>
 					<div class="app-footer">
 						<span>© Arise admin 2023</span>
+					</div>
+				</div>
+				<!-- delete modals -->
+				<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<form method="post" autocomplete="off" action="/v1/fish/fishXdmDelt">
+								<div class="modal-header">
+									<h5 class="modal-title" id="deleteModalLabel">데이터 완전 삭제</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-square	"></i></button>
+								</div>
+								<div class="modal-body">
+									<span>데이터를 삭제후 <strong>복구할수 없습니다</strong>.</span><br>
+									<span>그래도 삭제하시겠습니까?</span>
+									<input type="hidden" name="fsSeq" th:value="${item.fsSeq}">
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-dark" data-bs-dismiss="modal">취소</button>
+									<button type="submit" class="btn btn-success">삭제 실행</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- uelete modals -->
+				<div class="modal fade" id="ueleteModal" tabindex="-1" aria-labelledby="ueleteModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<form method="post" autocomplete="off" action="/v1/fish/fishXdmUelt">
+								<div class="modal-header">
+									<h5 class="modal-title" id="ueleteModalLabel">데이터 삭제</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-square"></i></button>
+								</div>
+								<div class="modal-body">
+									<span>데이터를 삭제하시겠습니까?</span>
+									<input type="hidden" name="fsSeq" th:value="${item.fsSeq}">
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-dark" data-bs-dismiss="modal">취소</button>
+									<button type="submit" class="btn btn-success">삭제 실행</button>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>

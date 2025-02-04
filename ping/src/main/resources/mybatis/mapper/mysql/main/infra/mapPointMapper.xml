@@ -5,7 +5,7 @@
 	
 	<sql id="selectCommon">
         FROM mappoint a
-        	left join fishandmappoint b on b.mappoint_mpSeq = a.mpSeq
+        	left join fishandmappoint b on b.mappoint_mpSeq = a.mpSeq and b.delNy = 0
             left join fish c on c.fsSeq = b.fish_fsSeq
         WHERE 1=1
         <if test="shValue != null and !shValue.equals('')">
@@ -75,7 +75,7 @@
     		,p.path
     		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
    		FROM mappoint a
-        	left join fishandmappoint b on b.mappoint_mpSeq = a.mpSeq
+        	left join fishandmappoint b on b.mappoint_mpSeq = a.mpSeq and b.delNy = 0
             left join fish c on c.fsSeq = b.fish_fsSeq
             left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
    		GROUP BY a.mpSeq
@@ -88,39 +88,11 @@
     	SELECT
     		Count(DISTINCT a.mpSeq)
    		FROM mappoint a
-        	left join fishandmappoint b on b.mappoint_mpSeq = a.mpSeq
+        	left join fishandmappoint b on b.mappoint_mpSeq = a.mpSeq and b.delNy = 0
             left join fish c on c.fsSeq = b.fish_fsSeq
             left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
     </select>
     <select id="selectSearchList" resultMap="resultMapObj">
-    	<!-- SELECT
-    		a.mpSeq
-    		,a.mpTitle
-    		,a.mpText
-    		,a.mpAddress
-    		,a.mpType
-    		,a.mpLatitude
-    		,a.mpLongitude
-    		,a.mpDelNy
-    		,a.mpRegDate
-    		,(SELECT GROUP_CONCAT(c.fsName ORDER BY c.fsSeq)
-			 FROM fishandmappoint b
-			 LEFT JOIN fish c ON c.fsSeq = b.fish_fsSeq
-			 WHERE b.mapPoint_mpSeq = a.mpSeq
-			) AS fsNameList
-   		FROM mappoint a
-        	left join fishandmappoint b on b.mappoint_mpSeq = a.mpSeq
-            left join fish c on c.fsSeq = b.fish_fsSeq
-        WHERE 1=1
-        	<if test="fsSeqList != null and !fsSeqList.isEmpty()">
-        		and
-	    		<foreach item="item" collection="fsSeqList" open="(" separator=" AND " close=")">
-		            c.fsSeq = #{item}
-		        </foreach>
-	        </if>
-   		GROUP BY a.mpSeq
-   		ORDER BY
-     	a.mpRegDate DESC -->
      	SELECT
 		    a.mpSeq,
 		    a.mpTitle,
@@ -133,12 +105,12 @@
 		    a.mpRegDate,
 		    (SELECT GROUP_CONCAT(c.fsName ORDER BY c.fsSeq)
 		     FROM fish c 
-		     LEFT JOIN fishandmappoint b ON c.fsSeq = b.fish_fsSeq
+		     LEFT JOIN fishandmappoint b ON c.fsSeq = b.fish_fsSeq and b.delNy = 0
 		     WHERE b.mapPoint_mpSeq = a.mpSeq
 		    ) AS fsNameList
 		    ,p.path
 		FROM mappoint a
-			LEFT JOIN fishandmappoint b ON b.mappoint_mpSeq = a.mpSeq
+			LEFT JOIN fishandmappoint b ON b.mappoint_mpSeq = a.mpSeq and b.delNy = 0
 			LEFT JOIN fish c ON c.fsSeq = b.fish_fsSeq
 			left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
 		Where 1=1
@@ -172,7 +144,7 @@
     		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
     		,p.path
    		FROM mappoint a
-        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
+        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq and b.delNy = 0
             left join fish c on c.fsSeq = b.fish_fsSeq
             left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
    		GROUP BY a.mpSeq
@@ -183,7 +155,7 @@
     	SELECT
     		COUNT(DISTINCT a.mpSeq)
    		FROM mappoint a
-        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
+        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq and b.delNy = 0
             left join fish c on c.fsSeq = b.fish_fsSeq
             left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
         WHERE 1=1
@@ -220,7 +192,7 @@
     <select id="portNearCount" resultType="int">
     	 SELECT COUNT(DISTINCT a.mpSeq) 
     	 FROM mappoint a
-        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
+        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq and b.delNy = 0
             left join fish c on c.fsSeq = b.fish_fsSeq
         WHERE 1=1
         	and ST_Distance_Sphere(POINT(#{baseMpLongitude},#{baseMpLatitude}), POINT(a.mpLongitude, a.mpLatitude)) &lt; 50000
@@ -242,7 +214,7 @@
     		,ST_Distance_Sphere(POINT(#{baseMpLongitude}, #{baseMpLatitude}), POINT(a.mpLongitude, a.mpLatitude)) AS distanceIn
    			,p.path
    		FROM mappoint a
-        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
+        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq and b.delNy = 0
             left join fish c on c.fsSeq = b.fish_fsSeq
             left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
         WHERE 1=1
@@ -266,9 +238,9 @@
             ,d.season_ssSeq
             ,p.path
         FROM mappoint a
-        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
+        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq and b.delNy = 0
             left join fish c on c.fsSeq = b.fish_fsSeq
-            join seasonandfish d on d.fish_fsSeq = c.fsSeq
+            join seasonandfish d on d.fish_fsSeq = c.fsSeq and d.delNy = 0
             left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
         WHERE 1=1
         	and d.season_ssSeq = #{season_ssSeq}
@@ -282,9 +254,9 @@
     	SELECT
     		Count(DISTINCT a.mpSeq)
         FROM mappoint a
-        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
+        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq and b.delNy = 0
             left join fish c on c.fsSeq = b.fish_fsSeq
-            join seasonandfish d on d.fish_fsSeq = c.fsSeq
+            join seasonandfish d on d.fish_fsSeq = c.fsSeq and d.delNy = 0
             left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
         WHERE 1=1
         	and d.season_ssSeq = #{season_ssSeq}
@@ -302,7 +274,7 @@
 	        a.mpRegDate
 	        ,p.path
 	    FROM mappoint a
-		    LEFT JOIN fishandmappoint b ON b.mappoint_mpSeq = a.mpSeq
+		    LEFT JOIN fishandmappoint b ON b.mappoint_mpSeq = a.mpSeq and b.delNy = 0
 		    LEFT JOIN fish c ON c.fsSeq = b.fish_fsSeq
 			left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
 	    WHERE 1=1
@@ -337,19 +309,6 @@
     </insert>
     
     <select id="selectOne">
-    	<!-- SELECT
-    		a.mpSeq
-    		,a.mpTitle
-    		,a.mpText
-    		,a.mpAddress
-    		,a.mpType
-    		,a.mpDelNy
-    		,a.mpRegDate
-    		,a.mpLatitude
-    		,a.mpLongitude
-   		FROM mappoint a
-   		WHERE 1=1
-   		AND mpSeq = #{mpSeq} -->
    		SELECT
     		a.mpSeq
     		,a.mpTitle
@@ -363,7 +322,7 @@
     		,GROUP_CONCAT(b.fish_fsSeq ORDER BY b.fish_fsSeq) AS fsSeqList
     		,p.path
    		FROM mappoint a
-   		left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
+   		left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq and b.delNy = 0
    		left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
    		WHERE 1=1
    		AND mpSeq = #{mpSeq}
@@ -382,7 +341,7 @@
     		,GROUP_CONCAT(c.fsName ORDER BY c.fsSeq) AS fsNameList
     		,p.path
    		FROM mappoint a
-        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq
+        	left join fishandmappoint b on b.mapPoint_mpSeq = a.mpSeq and b.delNy = 0
             left join fish c on c.fsSeq = b.fish_fsSeq
             left join imginsert_mappoint p on p.pseq = a.mpSeq and p.sort = 1
    		WHERE 1=1
