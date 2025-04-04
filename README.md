@@ -4,6 +4,27 @@
 USER URL – http://3.35.53.81:8082/v1/index<br/>
 ADMIN URL - http://3.35.53.81:8082/v1/loginXdm
 
+-사용한 기술들: html5,css3,javascript,aws,mysql,spring,github
+- 팀인원수 3명<br/>
+  <table>
+    <tr>
+      <th>이름</th>
+      <th>깃허브</th>
+    </tr>
+    <tr>
+      <td>이창훈</td>
+      <td>https://github.com/bluesky7660</td>
+    </tr>
+    <tr>
+      <td>김선우</td>
+      <td>https://github.com/kimsumwoo</td>
+    </tr>
+    <tr>
+      <td>배정환</td>
+      <td>https://github.com/baejunghwan</td>
+    </tr>
+  </table>
+
 메인화면 - 카카오맵을 이용한 지도에 낚시포인트표시
 
 ![2024-12-18 12 07 03](https://github.com/user-attachments/assets/30d26b1f-08cf-47d5-bd3f-8892ecb80d32)
