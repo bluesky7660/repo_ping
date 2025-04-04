@@ -1,11 +1,15 @@
+## 🎣피쉬온(FishOn)
+![image](https://github.com/user-attachments/assets/f0aff1eb-c755-46b0-8ba7-a94d9fb411ed)
 
-팀프 : 낚시 정보사이트 - FishOn<br/><br/>
+## 💻 프로젝트 소개 
+
+낚시 포인트 추가, 검색, 날씨 정보 확인, 선상 낚시 예약 등의 기능을 제공하는 낚시 정보 사이트.
 
 USER URL – http://3.35.53.81:8082/v1/index<br/>
 ADMIN URL - http://3.35.53.81:8082/v1/loginXdm
 
--사용한 기술들: html5,css3,javascript,aws,mysql,spring,github
-- 팀인원수 3명<br/>
+## 👥 Team [라라핑]<br/>
+인원수 3명
   <table>
     <tr>
       <th>이름</th>
@@ -24,6 +28,25 @@ ADMIN URL - http://3.35.53.81:8082/v1/loginXdm
       <td>https://github.com/baejunghwan</td>
     </tr>
   </table>
+
+## ⚙️ 기술 스택
+
+### Frontend
+<img src="https://img.shields.io/badge/HTML-%23E34F26.svg?style=flat&logo=html5&logoColor=white" alt="HTML5" height="40"/>  <img src="https://img.shields.io/badge/CSS-%231572B6.svg?style=flat&logo=css3&logoColor=white" alt="CSS3" height="40"/>
+<img src="https://img.shields.io/badge/JavaScript-%23323330.svg?style=flat&logo=javascript&logoColor=F7DF1E" alt="JavaScript" height="40"/> <img src="https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery" alt="jQuery" height="40"/> <img src="https://img.shields.io/badge/Bootstrapap-7952B3?style=flat-square&logo=bootstrap&logoColor=white" alt="Bootstrap" height="40"/>  
+
+### Backend
+<img src="https://img.shields.io/badge/Spring-%6DB33F.svg?style=flat&logo=spring&logoColor=white" alt="Spring" height="40"/> <img src="https://img.shields.io/badge/Java-f26522.svg?style=flat&logo=java&logoColor=white" alt="Java"  height="40"/>  
+
+### Database
+<img src="https://img.shields.io/badge/MySQL-%234F78A1.svg?style=flat&logo=mysql&logoColor=white" alt="MySQL" height="40"/>  
+
+### Tools & Platforms
+<img src="https://img.shields.io/badge/GitHub-%23121011.svg?style=flat&logo=github&logoColor=white" alt="GitHub" height="40"/>  <img src="https://img.shields.io/badge/Amazon%20Web%20Services-FF9900?style=for-the-badge&logo=amazonwebservices" alt="AWS" height="40"/>  
+
+### Api
+<img src="https://img.shields.io/badge/Kakao Map-FFCC00.svg?style=flat&logo=kakao&logoColor=white" alt="Kakao Map api" height="40"/> <img src="https://img.shields.io/badge/Kakao 우편검색-FFCC00.svg?style=flat&logo=kakao&logoColor=white" alt="Kakao 우편검색 api" height="40"/> <img src="https://img.shields.io/badge/Kakao Pay-FFCC00.svg?style=flat&logo=kakao&logoColor=white" alt="Kakao Pay api" height="40"/>  <img src="https://img.shields.io/badge/Khoa%20API-007BFF.svg?style=flat&logo=api&logoColor=white" alt="Khoa API" height="40"/> <img src="https://img.shields.io/badge/기상청API-0099FF.svg?style=flat&logo=cloud&logoColor=white" alt="기상청API" height="40"/> <img src="https://img.shields.io/badge/Open%20Meteo%20API-FF8C00.svg?style=flat&logo=sun&logoColor=white" alt="Open Meteo API" height="40"/>
+<br /><br /><br />
 
 메인화면 - 카카오맵을 이용한 지도에 낚시포인트표시
 
