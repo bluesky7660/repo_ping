@@ -2140,7 +2140,7 @@ select [value=""] {
 #ts-footer {
     background-color: #fff;
     box-shadow: 0 .1875rem .9375rem rgba(0, 0, 0, .15);
-    margin-top: 7rem;
+    margin-top: 3rem;
 }
 
 #ts-footer address {

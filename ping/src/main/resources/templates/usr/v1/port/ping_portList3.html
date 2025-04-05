@@ -102,7 +102,7 @@
                     <div class="container-fluid px-0 mt-2 mb-2">
 						<div class="row">
 							<div class="col">
-								<ul class="pagination justify-content-center mb-0">
+								<ul class="pagination justify-content-center mb-0 mt-0">
 									<li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}')|"><i class="fa fa-caret-left"></i></a></li>
 								<li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
 								<li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|"><i class="fa fa-caret-right"></i></a></li>
@@ -115,7 +115,7 @@
         </section>
     </main>
 	</form>
-    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
+    <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div>
 </div>
     
 <script type="text/javascript">

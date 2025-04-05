@@ -148,7 +148,7 @@
                                 <div class="container-fluid px-0 mt-2 mb-2">
                                     <div class="row">
                                         <div class="col">
-                                            <ul class="pagination justify-content-center mb-0">
+                                            <ul class="pagination justify-content-center mb-0 mt-0">
                                                 <li th:if="${mapPointVo.thisPage > 1}" class="page-item" style="cursor: pointer;"><a class="page-link" href="javascript:goList(${mapPointVo.thisPage - 1})" th:attr="onclick=|goList('${mapPointVo.thisPage - 1}')|"><i class="fa fa-caret-left"></i></a></li>
                                                 <li th:each="num: ${#numbers.sequence(1, mapPointVo.totalPages)}" th:classappend="${num eq mapPointVo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"><!-- ${i.index} --></a></li>
                                                 <li th:if="${mapPointVo.thisPage < mapPointVo.totalPages}" class="page-item" style="cursor: pointer;"><a class="page-link" th:attr="onclick=|goList('${mapPointVo.thisPage + 1}')|"><i class="fa fa-caret-right"></i></a></li>
@@ -209,7 +209,7 @@
                 </div>
             </section>
         </main>
-        <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div> 
+        <div th:replace="~{usr/v1/etc/footer :: page-footer}"></div>
     </div>
     <script src="/usr/v1/template/themeforest-v1.0/assets/js/jquery-3.3.1.min.js"></script>
     <script src="/usr/v1/template/themeforest-v1.0/assets/js/popper.min.js"></script>

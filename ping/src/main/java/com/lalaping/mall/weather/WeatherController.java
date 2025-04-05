@@ -60,7 +60,6 @@ public class WeatherController {
 	    String apiUrl = "https://marine-api.open-meteo.com/v1/marine?latitude=" + latitude + 
 	            "&longitude=" + longitude + 
 	            "&hourly=wave_height,wave_direction,wave_period&forecast_days=1&temporal_resolution=native&timezone=Asia/Seoul";
-
 	    String apiUrl2 = "https://api.open-meteo.com/v1/forecast?latitude="+latitude+"&longitude="+longitude+
 	    		"&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,precipitation,weather_code,wind_speed_10m,wind_direction_10m&forecast_days=1&temporal_resolution=native&timezone=Asia/Seoul";
 	    
@@ -93,8 +92,7 @@ public class WeatherController {
 		        List<Double> precipitations = weatherData2.getHourly().getPrecipitation();
 		        List<Double> precipitationProbabilitys = weatherData2.getHourly().getPrecipitation_probability();
 		        List<Integer> weatherCodes = weatherData2.getHourly().getWeather_code();
-
-		        for (int i = 0; i < times.size(); i++) {
+		        for (int i = 0; i < 8; i++) {
 		            String waveDirectionKorean = convertDirectionToKorean(waveDirections.get(i));
 		            String windDirectionKorean = convertDirectionToKorean(precipitationProbabilitys.get(i));
 		            String weaherName = convertWeatherCodeToKorean(weatherCodes.get(i));
@@ -118,7 +116,7 @@ public class WeatherController {
 		                    weatherIcon
 		            ));
 		        }
-
+		        
 		        model.addAttribute("weatherData", weatherDataEntries);
 		    } else {
 		        System.out.println("Weather data is null or does not contain hourly data.");
@@ -140,7 +138,7 @@ public class WeatherController {
 		        List<Double> precipitationProbabilitys = weatherData2.getHourly().getPrecipitation_probability();
 		        List<Integer> weatherCodes = weatherData2.getHourly().getWeather_code();
 
-		        for (int i = 0; i < times.size(); i++) {
+		        for (int i = 0; i < 8; i++) {
 		            String windDirectionKorean = convertDirectionToKorean(precipitationProbabilitys.get(i));
 		            String weaherName = convertWeatherCodeToKorean(weatherCodes.get(i));
 		            String windDirectionIcon = convertDirectionToIcon(precipitationProbabilitys.get(i));
@@ -208,9 +206,27 @@ public class WeatherController {
 	        case 1: return "구름 조금";
 	        case 2: return "구름 많음";
 	        case 3: return "흐림";
+	        case 45: return "안개";
+	        case 48: return "서리 안개";
+	        case 51: return "이슬비";
+	        case 53: return "이슬비";
+	        case 55: return "이슬비";
+	        case 56: return "얼음 이슬비";
+	        case 57: return "얼음 이슬비";
 	        case 61: return "비";
 	        case 63: return "소나기";
+	        case 65: return "비";
+	        case 71: return "눈";
+	        case 73: return "눈";
+	        case 75: return "눈";
 	        case 80: return "소나기";
+	        case 81: return "소나기";
+	        case 82: return "소나기";
+	        case 85: return "눈소나기";
+	        case 86: return "눈소나기";
+	        case 95: return "뇌우";
+	        case 96: return "우박";
+	        case 99: return "우박 뇌우";
 	        case 100: return "눈";
 	        case 200: return "눈 또는 비";
 	        case 201: return "눈 또는 비 (소량)";
@@ -262,9 +278,27 @@ public class WeatherController {
 	        case 1: return "wi wi-day-cloudy"; // 구름 조금
 	        case 2: return "wi wi-cloud"; // 구름 많음
 	        case 3: return "wi wi-cloudy"; // 흐림
+	        case 45: return "wi-fog"; //안개
+	        case 48: return "wi-fog"; //안개
+	        case 51: return "wi wi-rain"; // 이슬비
+	        case 53: return "wi wi-rain"; // 이슬비
+	        case 55: return "wi wi-rain"; // 이슬비
+	        case 56: return "wi-sleet"; //얼음 이슬비
+	        case 57: return "wi-sleet"; //얼음 이슬비
 	        case 61: return "wi wi-rain"; // 비
 	        case 63: return "wi wi-showers"; // 소나기
+	        case 65: return "wi wi-rain"; // 비
+	        case 71: return "wi wi-snow"; // 눈
+	        case 73: return "wi wi-snow"; // 눈
+	        case 75: return "wi wi-snow"; // 눈
 	        case 80: return "wi wi-showers"; // 소나기
+	        case 81: return "wi wi-showers"; // 소나기
+	        case 82: return "wi wi-showers"; // 소나기
+	        case 85: return "wi-rain-mix";	// 눈소나기
+	        case 86: return "wi-rain-mix";	// 눈소나기
+	        case 95: return "wi-thunderstorm";	//뇌우
+	        case 96: return "wi-hail"; //우박
+	        case 99: return "wi-storm-showers"; //뇌우
 	        case 100: return "wi wi-snow"; // 눈
 	        case 200: return "wi wi-snow"; // 눈 또는 비
 	        case 201: return "wi wi-snow"; // 눈 또는 비 (소량)
