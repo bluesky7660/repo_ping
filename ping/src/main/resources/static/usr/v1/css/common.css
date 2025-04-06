@@ -2,6 +2,11 @@
     padding: .5rem 1rem;
     font-size: 1rem;
 }
+.ts-page-wrapper{
+    position: relative;
+    min-height: 100vh;
+}
+
 
 /*custom*/
 .navbar-brand,.brand{
